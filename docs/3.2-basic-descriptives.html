@@ -24,7 +24,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2022-01-19" />
+<meta name="date" content="2022-01-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -188,7 +188,11 @@ div.csl-indent {
 <li class="chapter" data-level="3" data-path="3-chapter-3.html"><a href="3-chapter-3.html"><i class="fa fa-check"></i><b>3</b> Describing Longitudinal Data</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="3.1-example-data-1.html"><a href="3.1-example-data-1.html"><i class="fa fa-check"></i><b>3.1</b> Example Data</a></li>
-<li class="chapter" data-level="3.2" data-path="3.2-basic-descriptives.html"><a href="3.2-basic-descriptives.html"><i class="fa fa-check"></i><b>3.2</b> Basic Descriptives</a></li>
+<li class="chapter" data-level="3.2" data-path="3.2-basic-descriptives.html"><a href="3.2-basic-descriptives.html"><i class="fa fa-check"></i><b>3.2</b> Basic Descriptives</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="3.2-basic-descriptives.html"><a href="3.2-basic-descriptives.html#verbal-ability-all-persons-and-occasions"><i class="fa fa-check"></i><b>3.2.1</b> Verbal Ability (All Persons and Occasions)</a></li>
+<li class="chapter" data-level="3.2.2" data-path="3.2-basic-descriptives.html"><a href="3.2-basic-descriptives.html#verbal-ability-across-time"><i class="fa fa-check"></i><b>3.2.2</b> Verbal Ability (Across Time)</a></li>
+</ul></li>
 <li class="chapter" data-level="3.3" data-path="3.3-references.html"><a href="3.3-references.html"><i class="fa fa-check"></i><b>3.3</b> References</a></li>
 </ul></li>
 <li class="divider"></li>
@@ -255,6 +259,114 @@ div.csl-indent {
 ## grade    -1.43 0.07
 ## verb      0.33 0.42
 ## perfo    -0.43 0.56</code></pre>
+<div id="verbal-ability-all-persons-and-occasions" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Verbal Ability (All Persons and Occasions)</h3>
+<p>Let’s focus on the repeated measures of verbal ability. This step is useful to get a general view of what verbal ability scores look like across persons and occasions, but note that we are <em>ignoring Time</em>. In doing so we are not considering how the repeated measures are nested within individuals.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="3.2-basic-descriptives.html#cb6-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(wisclong<span class="sc">$</span>verb)</span></code></pre></div>
+<pre><code>##    vars   n  mean    sd median trimmed   mad  min   max range skew kurtosis
+## X1    1 816 30.34 11.86  28.46   29.39 11.33 3.33 72.59 69.26 0.71     0.33
+##      se
+## X1 0.42</code></pre>
+<p>In addition to the descriptive statistics we can look at a boxplot of verbal ability scores across persons and occasions. Here we will start to use the <code>ggplot2</code> <span class="citation">(Wickham 2016)</span> package.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="3.2-basic-descriptives.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb8-2"><a href="3.2-basic-descriptives.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> wisclong, <span class="fu">aes</span>(<span class="at">x=</span>verb, <span class="at">y=</span>..density..)) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="3.2-basic-descriptives.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">2.5</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb8-4"><a href="3.2-basic-descriptives.html#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="3.2-basic-descriptives.html#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Verbal Ability Score (across persons and occasions)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="3.2-basic-descriptives.html#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Ability (Grade 1 to 6)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="3.2-basic-descriptives.html#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Density&quot;</span>) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="3.2-basic-descriptives.html#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb8-9"><a href="3.2-basic-descriptives.html#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb8-10"><a href="3.2-basic-descriptives.html#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb8-11"><a href="3.2-basic-descriptives.html#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb8-12"><a href="3.2-basic-descriptives.html#cb8-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="verbal-ability-across-time" class="section level3" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Verbal Ability (Across Time)</h3>
+<p>Note that our variable is actually “multivariate” because we have repeated measures. We should really consider the time-dependence when we are looking at descriptive statistics and plots. Let’s now look at <strong>verbal ability scores across time collapsed across individuals</strong>. This can be done using the either the <code>describe()</code> function and the wide data or the <code>describeBy()</code> function and the long data.</p>
+<p>Let’s look at descriptives using the wide data.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="3.2-basic-descriptives.html#cb9-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(wiscwide[,<span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>,<span class="st">&quot;verb2&quot;</span>,<span class="st">&quot;verb4&quot;</span>,<span class="st">&quot;verb6&quot;</span>)])</span></code></pre></div>
+<pre><code>##       vars   n  mean    sd median trimmed   mad   min   max range  skew
+## verb1    1 204 19.59  5.81  19.34   19.50  5.41  3.33 35.15 31.82  0.13
+## verb2    2 204 25.42  6.11  25.98   25.40  6.57  5.95 39.85 33.90 -0.06
+## verb4    3 204 32.61  7.32  32.82   32.42  7.18 12.60 52.84 40.24  0.23
+## verb6    4 204 43.75 10.67  42.55   43.46 11.30 17.35 72.59 55.24  0.24
+##       kurtosis   se
+## verb1    -0.05 0.41
+## verb2    -0.34 0.43
+## verb4    -0.08 0.51
+## verb6    -0.36 0.75</code></pre>
+<p>Identical results can be obtained using the long data.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="3.2-basic-descriptives.html#cb11-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describeBy</span>(wisclong[,<span class="fu">c</span>(<span class="st">&quot;verb&quot;</span>)],<span class="at">group=</span>wisclong<span class="sc">$</span>grade)</span></code></pre></div>
+<pre><code>## 
+##  Descriptive statistics by group 
+## group: 1
+##    vars   n  mean   sd median trimmed  mad  min   max range skew kurtosis   se
+## X1    1 204 19.59 5.81  19.34    19.5 5.41 3.33 35.15 31.82 0.13    -0.05 0.41
+## ------------------------------------------------------------ 
+## group: 2
+##    vars   n  mean   sd median trimmed  mad  min   max range  skew kurtosis   se
+## X1    1 204 25.42 6.11  25.98    25.4 6.57 5.95 39.85  33.9 -0.06    -0.34 0.43
+## ------------------------------------------------------------ 
+## group: 4
+##    vars   n  mean   sd median trimmed  mad  min   max range skew kurtosis   se
+## X1    1 204 32.61 7.32  32.82   32.42 7.18 12.6 52.84 40.24 0.23    -0.08 0.51
+## ------------------------------------------------------------ 
+## group: 6
+##    vars   n  mean    sd median trimmed  mad   min   max range skew kurtosis
+## X1    1 204 43.75 10.67  42.55   43.46 11.3 17.35 72.59 55.24 0.24    -0.36
+##      se
+## X1 0.75</code></pre>
+<p>We can visualize the distribution of verbal scores across grades in a number of different ways. Here we have a histogram.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="3.2-basic-descriptives.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wisclong, <span class="fu">aes</span>(<span class="at">x=</span>verb)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="3.2-basic-descriptives.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">5</span>, <span class="at">pad =</span> <span class="cn">TRUE</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>, <span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb13-3"><a href="3.2-basic-descriptives.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(grade <span class="sc">~</span> .) <span class="sc">+</span> </span>
+<span id="cb13-4"><a href="3.2-basic-descriptives.html#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Verbal Ability Score (across grades 1, 2, 4, 6)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="3.2-basic-descriptives.html#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Ability Score&quot;</span>) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="3.2-basic-descriptives.html#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Density&quot;</span>) <span class="sc">+</span></span>
+<span id="cb13-7"><a href="3.2-basic-descriptives.html#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb13-8"><a href="3.2-basic-descriptives.html#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb13-9"><a href="3.2-basic-descriptives.html#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb13-10"><a href="3.2-basic-descriptives.html#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb13-11"><a href="3.2-basic-descriptives.html#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb13-12"><a href="3.2-basic-descriptives.html#cb13-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## Warning: Duplicated aesthetics after name standardisation: pad</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>We can create notched boxplots of the within-grade distributions (across individuals). From <a href="https://en.wikipedia.org/wiki/Box_plot">Wikipedia</a>:</p>
+<p>“Notched box plots apply a”notch" or narrowing of the box around the median. Notches are useful in offering a rough guide of the significance of the difference of medians; if the notches of two boxes do not overlap, this can provide evidence of a statistically significant difference between the medians."</p>
+<p>Adding the mean value also gives us some information regarding the skew of the distribution.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="3.2-basic-descriptives.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#boxplot by grade</span></span>
+<span id="cb15-2"><a href="3.2-basic-descriptives.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wisclong, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(grade), <span class="at">y=</span>verb)) <span class="sc">+</span> </span>
+<span id="cb15-3"><a href="3.2-basic-descriptives.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">notch =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="3.2-basic-descriptives.html#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.y=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">shape=</span><span class="dv">23</span>, <span class="at">size=</span><span class="dv">3</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="3.2-basic-descriptives.html#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Verbal Ability Score (across grades 1, 2, 4, 6)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="3.2-basic-descriptives.html#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Verbal Ability Score&quot;</span>) <span class="sc">+</span></span>
+<span id="cb15-7"><a href="3.2-basic-descriptives.html#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span></span>
+<span id="cb15-8"><a href="3.2-basic-descriptives.html#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb15-9"><a href="3.2-basic-descriptives.html#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb15-10"><a href="3.2-basic-descriptives.html#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb15-11"><a href="3.2-basic-descriptives.html#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb15-12"><a href="3.2-basic-descriptives.html#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb15-13"><a href="3.2-basic-descriptives.html#cb15-13" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Finally, we can view overlapping densities of the within-grade distributions of verbal ability scores.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="3.2-basic-descriptives.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wisclong, <span class="fu">aes</span>(<span class="at">x=</span>verb)) <span class="sc">+</span> </span>
+<span id="cb17-2"><a href="3.2-basic-descriptives.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(grade), <span class="at">colour=</span><span class="fu">factor</span>(grade), <span class="at">fill=</span><span class="fu">factor</span>(grade)), <span class="at">alpha=</span><span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="3.2-basic-descriptives.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour=</span><span class="st">&quot;none&quot;</span>,  <span class="at">fill=</span><span class="fu">guide_legend</span>(<span class="at">title=</span><span class="st">&quot;Grade&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="3.2-basic-descriptives.html#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Verbal Ability Score (across grades 1, 2, 4, 6)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="3.2-basic-descriptives.html#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Density&quot;</span>) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="3.2-basic-descriptives.html#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Ability Score&quot;</span>) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="3.2-basic-descriptives.html#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb17-8"><a href="3.2-basic-descriptives.html#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb17-9"><a href="3.2-basic-descriptives.html#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb17-10"><a href="3.2-basic-descriptives.html#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb17-11"><a href="3.2-basic-descriptives.html#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb17-12"><a href="3.2-basic-descriptives.html#cb17-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Notice in these plots how much “change” there is at the sample level across grades. Is that expected?</p>
+</div>
 </div>
             </section>
 

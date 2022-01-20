@@ -31,9 +31,7 @@ This book provides the course notes for HDFS 523. It is currently under developm
 
 ## Why this book? 
 
-There are a few goals of moving from "textbook + slides + exercises" to an ebook. 
-
-* To integrate course content (slides, readings, code, examples, and exercises) into one format, rather than having multiple files to sort through on Canvas.
+There are a few goals of moving from "textbook + slides + exercises" to an ebook. For now, the main goal is to update and integrate code contents from the course into one consistent format, rather than having multiple files to sort through on Canvas.
 
 
 ## Code Folding
@@ -56,4 +54,4 @@ hist(x, col = "#4B9CD3")
 
 ## Acknowledgements
 
-Many people have contributed to the course materials for HDFS 523. Most importantly, the original Powerpoint slides and R exercises were developed by Nilam Ram and Zita Oravecz.
+Many people have contributed to the course materials for HDFS 523. Most importantly, the original R markdown files for the course were developed by Nilam Ram and Zita Oravecz.
