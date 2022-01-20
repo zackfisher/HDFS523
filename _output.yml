@@ -1,0 +1,22 @@
+bookdown::gitbook:
+  css: style.css
+  highlight: default
+  config:
+    toc:
+      collapse: section
+      before: |
+        <li><a href="./">Course notes for HDFS 523</a></li>
+      after: |
+        <li><a href="https://github.com/zackfisher/HDFS523" target="blank">Published with bookdown</a></li>
+    info: true
+    edit:
+      link: https://github.com/zackfisher/HDFS523/edit/master/%s
+      text: "Suggest an edit"
+    download: null
+    sharing: null
+  split_by: section+number
+  #includes:
+  #    in_header: header.html
+
+bookdown::word_document2: default  # for cross-references
+

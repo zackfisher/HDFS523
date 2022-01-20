@@ -1,0 +1,85 @@
+# Describing Longitudinal Data {#chapter-3}
+
+```{r, echo = F}
+button <-  "position: relative; 
+            top: -25px; 
+            left: 85%;   
+            color: white;
+            font-weight: bold;
+            background: #4B9CD3;
+            border: 1px #3079ED solid;
+            box-shadow: inset 0 1px 0 #80B0FB"
+```
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "show", style = button)
+```
+
+In Chapter 3 we will look at some option for describing and visualizing longitudinal data. 
+
+## Example Data
+
+Again we will make use of the WISC data described in Chapter 2. The following commands recreate the wide and long data sets used in this chapter.
+
+```{r}
+filepath <- "https://quantdev.ssri.psu.edu/sites/qdev/files/wisc3raw.csv"
+
+wisc3raw <- read.csv(file=url(filepath),header=TRUE)
+
+var_names_sub <- c(
+  "id", "verb1", "verb2", "verb4", "verb6",
+  "perfo1", "perfo2", "perfo4", "perfo6",
+  "momed", "grad"
+)
+
+wiscraw <- wisc3raw[,var_names_sub]
+
+# reshaping wide to long
+wisclong <- reshape(
+  data = wiscraw,
+  varying = c("verb1", "verb2", "verb4","verb6", "perfo1","perfo2","perfo4","perfo6"),
+  timevar = c("grade"), 
+  idvar = c("id"),
+  direction = "long", 
+  sep = ""
+)
+
+# reorder by id and day 
+wisclong <- wisclong[ order(wisclong$id, wisclong$grade), ]
+
+#reshaping long to wide
+wiscwide <- reshape(
+  data = wisclong, 
+  timevar = c("grade"), 
+  idvar = c("id"),
+  v.names = c("verb","perfo"),
+  direction = "wide", 
+  sep = ""
+)
+
+# reordering columns 
+wiscwide <- wiscwide[, c(
+  "id", "verb1", "verb2", "verb4", "verb6",
+  "perfo1", "perfo2", "perfo4", "perfo6",
+  "momed","grad" 
+)]
+```
+
+## Basic Descriptives
+
+Once the wide and long data sets are in place, we can begin describing and plotting the data. These are some of the most important aspects of data analysis. Some descriptives and plots are produced from wide data, some from long data. Having both in place facilitates learning about the data. Continually keep in mind what portions of the data-box are being described (e.g., persons, variables, occasions). 
+
+We can do a quick look at descriptives using the `describe()` function from the `psych` [@psych] package. Note the `n` in both outputs.
+
+```{r}
+psych::describe(wiscwide)
+```
+
+```{r}
+psych::describe(wisclong)
+```
+
+
+
+
+## References

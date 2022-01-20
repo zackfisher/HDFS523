@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4.2 Basic Descriptives for the Repeated Measures Data | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
+  <meta name="description" content="Course notes for HDFS 523" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4.2 Basic Descriptives for the Repeated Measures Data | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="/images/image1.png" />
+  <meta property="og:description" content="Course notes for HDFS 523" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4.2 Basic Descriptives for the Repeated Measures Data | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  
+  <meta name="twitter:description" content="Course notes for HDFS 523" />
+  <meta name="twitter:image" content="/images/image1.png" />
+
+<meta name="author" content="Zachary F. Fisher" />
+
+
+<meta name="date" content="2022-01-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="null" type="image/x-icon" />
+<link rel="prev" href="4.1-basic-descriptives-of-all-the-data.html"/>
+
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Course notes for HDFS 523</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1.1-why-this-book.html"><a href="1.1-why-this-book.html"><i class="fa fa-check"></i><b>1.1</b> Why this book?</a></li>
+<li class="chapter" data-level="1.2" data-path="1.2-code-folding.html"><a href="1.2-code-folding.html"><i class="fa fa-check"></i><b>1.2</b> Code Folding</a></li>
+<li class="chapter" data-level="1.3" data-path="1.3-acknowledgements.html"><a href="1.3-acknowledgements.html"><i class="fa fa-check"></i><b>1.3</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="2-chapter-2.html"><a href="2-chapter-2.html"><i class="fa fa-check"></i><b>2</b> Basic Data Cleaning</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2.1-example-data.html"><a href="2.1-example-data.html"><i class="fa fa-check"></i><b>2.1</b> Example Data</a></li>
+<li class="chapter" data-level="2.2" data-path="2.2-reading-in-repeated-measures-data.html"><a href="2.2-reading-in-repeated-measures-data.html"><i class="fa fa-check"></i><b>2.2</b> Reading in Repeated Measures Data</a></li>
+<li class="chapter" data-level="2.3" data-path="2.3-familiarize-yourself-with-the-data.html"><a href="2.3-familiarize-yourself-with-the-data.html"><i class="fa fa-check"></i><b>2.3</b> Familiarize Yourself with the Data</a></li>
+<li class="chapter" data-level="2.4" data-path="2.4-look-for-duplicated-ids.html"><a href="2.4-look-for-duplicated-ids.html"><i class="fa fa-check"></i><b>2.4</b> Look for Duplicated IDs</a></li>
+<li class="chapter" data-level="2.5" data-path="2.5-using-table-to-spot-irregularities.html"><a href="2.5-using-table-to-spot-irregularities.html"><i class="fa fa-check"></i><b>2.5</b> Using <code>table()</code> to Spot Irregularities</a></li>
+<li class="chapter" data-level="2.6" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html"><i class="fa fa-check"></i><b>2.6</b> Missing Data</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#generating-example-data"><i class="fa fa-check"></i><b>2.6.1</b> Generating Example Data</a></li>
+<li class="chapter" data-level="2.6.2" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#recoding-values-with-na"><i class="fa fa-check"></i><b>2.6.2</b> Recoding Values with <code>NA</code></a></li>
+<li class="chapter" data-level="2.6.3" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#missing-data-visualization"><i class="fa fa-check"></i><b>2.6.3</b> Missing Data Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="2.7-exporting-data.html"><a href="2.7-exporting-data.html"><i class="fa fa-check"></i><b>2.7</b> Exporting Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-manipulating-the-repeated-measures-data-long-data-and-wide-data.html"><a href="3-manipulating-the-repeated-measures-data-long-data-and-wide-data.html"><i class="fa fa-check"></i><b>3</b> Manipulating the Repeated Measures Data (Long Data and Wide Data)</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3.1-reshape-wide-to-long.html"><a href="3.1-reshape-wide-to-long.html"><i class="fa fa-check"></i><b>3.1</b> Reshape Wide to Long</a></li>
+<li class="chapter" data-level="3.2" data-path="3.2-reshape-long-to-wide.html"><a href="3.2-reshape-long-to-wide.html"><i class="fa fa-check"></i><b>3.2</b> Reshape Long to Wide</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-describing-the-data.html"><a href="4-describing-the-data.html"><i class="fa fa-check"></i><b>4</b> Describing the Data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="4.1-basic-descriptives-of-all-the-data.html"><a href="4.1-basic-descriptives-of-all-the-data.html"><i class="fa fa-check"></i><b>4.1</b> Basic Descriptives of All the Data</a></li>
+<li class="chapter" data-level="4.2" data-path="4.2-basic-descriptives-for-the-repeated-measures-data.html"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html"><i class="fa fa-check"></i><b>4.2</b> Basic Descriptives for the Repeated Measures Data</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="4.2-basic-descriptives-for-the-repeated-measures-data.html"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#sample-level-descriptives-all-persons-and-occasions-verbal-ability"><i class="fa fa-check"></i><b>4.2.1</b> Sample-level descriptives = all persons and occasions (Verbal Ability)</a></li>
+<li class="chapter" data-level="4.2.2" data-path="4.2-basic-descriptives-for-the-repeated-measures-data.html"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#sample-level-descriptives-across-time-verbal-ability"><i class="fa fa-check"></i><b>4.2.2</b> Sample-level descriptives across Time (Verbal Ability)</a></li>
+<li class="chapter" data-level="4.2.3" data-path="4.2-basic-descriptives-for-the-repeated-measures-data.html"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#individual-level-descriptives-across-time-verbal-ability"><i class="fa fa-check"></i><b>4.2.3</b> Individual-level descriptives across Time (Verbal Ability)</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/zackfisher/HDFS523" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">HDFS 523: Strategies for Data Analysis in Developmental Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="basic-descriptives-for-the-repeated-measures-data" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Basic Descriptives for the Repeated Measures Data</h2>
+<p>Now, just concentrating on the repeated measures of verbal ability.</p>
+<div id="sample-level-descriptives-all-persons-and-occasions-verbal-ability" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Sample-level descriptives = all persons and occasions (Verbal Ability)</h3>
+<p>This step is useful to get a general view on what verbal ability scores look like, but note that we are <em>ignoring Time</em>, and not considering how the repeated measures are nested within individuals.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#sample descriptives</span></span>
+<span id="cb26-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(wisclong<span class="sc">$</span>verb)</span></code></pre></div>
+<pre><code>##    vars   n  mean    sd median trimmed   mad  min   max range skew kurtosis
+## X1    1 816 30.34 11.86  28.46   29.39 11.33 3.33 72.59 69.26 0.71     0.33
+##      se
+## X1 0.42</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#histogram</span></span>
+<span id="cb28-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wisclong, <span class="fu">aes</span>(<span class="at">x=</span>verb, <span class="at">y=</span>..density..)) <span class="sc">+</span></span>
+<span id="cb28-3"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">2.5</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>, <span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb28-4"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb28-5"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Ability (Grade 1 to 6)&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+</div>
+<div id="sample-level-descriptives-across-time-verbal-ability" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Sample-level descriptives across Time (Verbal Ability)</h3>
+<p>Note that our variable is actually “multivariate” because we have repeated measures.</p>
+<p>We should really consider the time-splits when we are doing descriptives.</p>
+<p>Thus, we are interested in <strong>Verbal Ability across Time = all persons faceted by grade</strong>.</p>
+<p><em>Note that we start descriptives with MEANS and VARIANCES</em></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#sample descriptives by occasion </span></span>
+<span id="cb29-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#in the wide file</span></span>
+<span id="cb29-3"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(wiscwide[,<span class="fu">c</span>(<span class="st">&quot;verb_1&quot;</span>,<span class="st">&quot;verb_2&quot;</span>,<span class="st">&quot;verb_4&quot;</span>,<span class="st">&quot;verb_6&quot;</span>)])</span></code></pre></div>
+<pre><code>##        vars   n  mean    sd median trimmed   mad   min   max range  skew
+## verb_1    1 204 19.59  5.81  19.34   19.50  5.41  3.33 35.15 31.82  0.13
+## verb_2    2 204 25.42  6.11  25.98   25.40  6.57  5.95 39.85 33.90 -0.06
+## verb_4    3 204 32.61  7.32  32.82   32.42  7.18 12.60 52.84 40.24  0.23
+## verb_6    4 204 43.75 10.67  42.55   43.46 11.30 17.35 72.59 55.24  0.24
+##        kurtosis   se
+## verb_1    -0.05 0.41
+## verb_2    -0.34 0.43
+## verb_4    -0.08 0.51
+## verb_6    -0.36 0.75</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#or in the long file</span></span>
+<span id="cb31-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">describeBy</span>(wisclong[,<span class="fu">c</span>(<span class="st">&quot;verb&quot;</span>)],<span class="at">group=</span>wisclong<span class="sc">$</span>grade)</span></code></pre></div>
+<pre><code>## 
+##  Descriptive statistics by group 
+## group: 1
+##    vars   n  mean   sd median trimmed  mad  min   max range skew kurtosis   se
+## X1    1 204 19.59 5.81  19.34    19.5 5.41 3.33 35.15 31.82 0.13    -0.05 0.41
+## ------------------------------------------------------------ 
+## group: 2
+##    vars   n  mean   sd median trimmed  mad  min   max range  skew kurtosis   se
+## X1    1 204 25.42 6.11  25.98    25.4 6.57 5.95 39.85  33.9 -0.06    -0.34 0.43
+## ------------------------------------------------------------ 
+## group: 4
+##    vars   n  mean   sd median trimmed  mad  min   max range skew kurtosis   se
+## X1    1 204 32.61 7.32  32.82   32.42 7.18 12.6 52.84 40.24 0.23    -0.08 0.51
+## ------------------------------------------------------------ 
+## group: 6
+##    vars   n  mean    sd median trimmed  mad   min   max range skew kurtosis
+## X1    1 204 43.75 10.67  42.55   43.46 11.3 17.35 72.59 55.24 0.24    -0.36
+##      se
+## X1 0.75</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#histogram faceted by grade</span></span>
+<span id="cb33-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wisclong, <span class="fu">aes</span>(<span class="at">x=</span>verb)) <span class="sc">+</span></span>
+<span id="cb33-3"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">5</span>, <span class="at">pad =</span> <span class="cn">TRUE</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>, <span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb33-4"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Ability&quot;</span>) <span class="sc">+</span></span>
+<span id="cb33-5"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(grade <span class="sc">~</span> .)</span></code></pre></div>
+<pre><code>## Warning: Duplicated aesthetics after name standardisation: pad</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#boxplot by grade</span></span>
+<span id="cb35-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(<span class="at">x=</span><span class="fu">factor</span>(grade), <span class="at">y=</span>verb, <span class="at">data=</span>wisclong, <span class="at">geom=</span><span class="st">&quot;boxplot&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Verbal Ability&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;Grade&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-20-2.png" width="672" /></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#use factor() to convert &quot;time&quot; from numeric to categorical</span></span>
+<span id="cb36-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co">#boxplot by grade</span></span>
+<span id="cb36-4"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wisclong, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(grade), <span class="at">y=</span>verb)) <span class="sc">+</span> </span>
+<span id="cb36-5"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">notch =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb36-6"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.y=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">shape=</span><span class="dv">23</span>, <span class="at">size=</span><span class="dv">3</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb36-7"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Grade&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Verbal Ability&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-20-3.png" width="672" /></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Density distribution by grade</span></span>
+<span id="cb38-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wisclong, <span class="fu">aes</span>(<span class="at">x=</span>verb)) <span class="sc">+</span> </span>
+<span id="cb38-3"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(grade), <span class="at">colour=</span><span class="fu">factor</span>(grade), <span class="at">fill=</span><span class="fu">factor</span>(grade)), <span class="at">alpha=</span><span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb38-4"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour=</span><span class="cn">FALSE</span>,</span>
+<span id="cb38-5"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb38-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill=</span><span class="fu">guide_legend</span>(<span class="at">title=</span><span class="st">&quot;Grade&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb38-6"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Verbal Ability&quot;</span>, <span class="at">y=</span><span class="st">&quot;Density&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =
+## &quot;none&quot;)` instead.</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-20-4.png" width="672" /></p>
+<p>Notice in these plots how much “change” there is at the sample level across grades.</p>
+<p>Is that expected?</p>
+<p><em>Then to the COVARIANCES (Correlations)</em></p>
+<p>Above, we looked at the means and variances. Because these are repeated measures, we also have covariances.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlations </span></span>
+<span id="cb40-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(wiscwide[,<span class="fu">c</span>(<span class="st">&quot;verb_1&quot;</span>,<span class="st">&quot;verb_2&quot;</span>,<span class="st">&quot;verb_4&quot;</span>,<span class="st">&quot;verb_6&quot;</span>)], <span class="at">use=</span><span class="st">&quot;complete.obs&quot;</span>,<span class="at">method=</span><span class="st">&quot;spearman&quot;</span>)</span></code></pre></div>
+<pre><code>##           verb_1    verb_2    verb_4    verb_6
+## verb_1 1.0000000 0.7184755 0.7336648 0.6563948
+## verb_2 0.7184755 1.0000000 0.7552318 0.7386984
+## verb_4 0.7336648 0.7552318 1.0000000 0.8016574
+## verb_6 0.6563948 0.7386984 0.8016574 1.0000000</code></pre>
+<p>see … <a href="http://stats.stackexchange.com/questions/8071/how-to-choose-between-pearson-and-spearman-correlation" class="uri">http://stats.stackexchange.com/questions/8071/how-to-choose-between-pearson-and-spearman-correlation</a> … Spearman is monotonic (i.e., ranks), Pearson is linear.</p>
+<p>Corresponding plot …</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Correlations plot</span></span>
+<span id="cb42-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(wiscwide[,<span class="fu">c</span>(<span class="st">&quot;verb_1&quot;</span>,<span class="st">&quot;verb_2&quot;</span>,<span class="st">&quot;verb_4&quot;</span>,<span class="st">&quot;verb_6&quot;</span>)])</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#in the psych library</span></span>
+<span id="cb43-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs.panels</span>(wiscwide[,<span class="fu">c</span>(<span class="st">&quot;verb_1&quot;</span>,<span class="st">&quot;verb_2&quot;</span>,<span class="st">&quot;verb_4&quot;</span>,<span class="st">&quot;verb_6&quot;</span>)])</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-22-2.png" width="672" /></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#see also ...</span></span>
+<span id="cb44-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co">#http://gettinggeneticsdone.blogspot.com/2011/07/scatterplot-matrices-in-r.html</span></span>
+<span id="cb44-3"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co">#look for ggally or gpairs</span></span>
+<span id="cb44-4"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co">#from library(car)</span></span>
+<span id="cb44-6"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="fu">scatterplotMatrix</span>(<span class="sc">~</span> verb_1 <span class="sc">+</span> verb_2 <span class="sc">+</span> verb_4 <span class="sc">+</span> verb_6, </span>
+<span id="cb44-7"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb44-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data=</span>wiscwide)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-22-3.png" width="672" /></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#from library(GGally)</span></span>
+<span id="cb45-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(wiscwide[,<span class="fu">c</span>(<span class="st">&quot;verb_1&quot;</span>,<span class="st">&quot;verb_2&quot;</span>,<span class="st">&quot;verb_4&quot;</span>,<span class="st">&quot;verb_6&quot;</span>)])</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-22-4.png" width="672" /></p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">#nice, but needs some aesthetic clean-up</span></span></code></pre></div>
+<p><em>Note that none of these plots show mean or variance differences - all do automatic, data-based ranges.</em></p>
+</div>
+<div id="individual-level-descriptives-across-time-verbal-ability" class="section level3" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Individual-level descriptives across Time (Verbal Ability)</h3>
+<p>Note that our interest is often in <em>individual</em> development, rather than sample development.
+We need to consider how each individual is changing over time.</p>
+<p>Thus, we are interested in <strong>Verbal Ability across Time = individual persons</strong>.</p>
+<p><em>Note that we tend to do this visually rather than by looking at numbers (a collection of individual vectors).</em></p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using library(lattice)</span></span>
+<span id="cb47-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Plotting intraindividual change</span></span>
+<span id="cb47-3"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">xyplot</span>(verb <span class="sc">~</span> grade, <span class="at">groups=</span>id, </span>
+<span id="cb47-4"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb47-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">data=</span>wisclong, <span class="at">type=</span><span class="st">&quot;l&quot;</span>,</span>
+<span id="cb47-5"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb47-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">main=</span><span class="st">&quot;Verbal Ability Trajectories&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using library(ggplot2) ... see also http://ggplot.yhathq.com/docs/index.html</span></span>
+<span id="cb48-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Plotting intraindividual change</span></span>
+<span id="cb48-3"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> wisclong, <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> verb, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb48-4"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb48-5"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb48-6"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb48-7"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb48-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Verbal Ability&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">80</span>) <span class="sc">+</span></span>
+<span id="cb48-8"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb48-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
+<p>Sometimes the “blob” gets too dense. This can be fixed by selecting only a subset of persons.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot a random subsample</span></span>
+<span id="cb49-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="co">#set seed for easy replication</span></span>
+<span id="cb49-3"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb49-4"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co">#select sample, n=20</span></span>
+<span id="cb49-5"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb49-5" aria-hidden="true" tabindex="-1"></a>smallsamp <span class="ot">&lt;-</span> <span class="fu">sample</span>(wisclong<span class="sc">$</span>id,<span class="dv">20</span>)</span>
+<span id="cb49-6"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb49-6" aria-hidden="true" tabindex="-1"></a>smallsamp</span></code></pre></div>
+<pre><code>##  [1]  71  26 156 162 100  25  26 182 151  82  20  68  96  46 144   1 166 138  53
+## [20]  49</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb51-1" aria-hidden="true" tabindex="-1"></a>wisclong_randsub <span class="ot">&lt;-</span> wisclong[wisclong<span class="sc">$</span>id <span class="sc">%in%</span> smallsamp, ]</span>
+<span id="cb51-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Plotting intraindividual change</span></span>
+<span id="cb51-3"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> wisclong_randsub, <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> verb, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb51-4"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb51-5"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb51-6"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb51-7"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb51-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Verbal Ability&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">80</span>) <span class="sc">+</span></span>
+<span id="cb51-8"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb51-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot the people with id&lt;=20, in this case it is 20 persons</span></span>
+<span id="cb52-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> wisclong[<span class="fu">which</span>(wisclong<span class="sc">$</span>id <span class="sc">&lt;=</span><span class="dv">20</span>),], <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> verb, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb52-3"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb52-4"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>wisclong[<span class="fu">which</span>(wisclong<span class="sc">$</span>id <span class="sc">&lt;=</span> <span class="dv">20</span> <span class="sc">&amp;</span> wisclong<span class="sc">$</span>verb <span class="sc">!=</span><span class="st">&quot;NA&quot;</span>),]) <span class="sc">+</span></span>
+<span id="cb52-5"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb52-6"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Verbal Ability&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">80</span>) <span class="sc">+</span></span>
+<span id="cb52-7"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-24-2.png" width="672" /></p>
+<p>Let’s clean up the aesthetics a bit.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> wisclong[<span class="fu">which</span>(wisclong<span class="sc">$</span>id <span class="sc">&lt;=</span><span class="dv">20</span>),], <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> verb, <span class="at">group =</span> id, <span class="at">color=</span><span class="fu">factor</span>(id))) <span class="sc">+</span></span>
+<span id="cb53-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb53-3"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>wisclong[<span class="fu">which</span>(wisclong<span class="sc">$</span>id <span class="sc">&lt;=</span> <span class="dv">20</span> <span class="sc">&amp;</span> wisclong<span class="sc">$</span>verb <span class="sc">!=</span><span class="st">&quot;NA&quot;</span>),]) <span class="sc">+</span></span>
+<span id="cb53-4"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb53-5"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Verbal Ability&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">80</span>) <span class="sc">+</span></span>
+<span id="cb53-6"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb53-7"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb53-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =
+## &quot;none&quot;)` instead.</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>It is also sometimes useful to look at the collection of individual-level plots.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">#old-school style using library(lattice)</span></span>
+<span id="cb55-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">xyplot</span>(verb<span class="sc">~</span>grade<span class="sc">|</span>id, <span class="at">data=</span>wisclong_randsub, <span class="at">as.table=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ggplot2 style</span></span>
+<span id="cb56-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> wisclong[<span class="fu">which</span>(wisclong<span class="sc">$</span>id <span class="sc">&lt;=</span><span class="dv">20</span>),], <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> verb, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb56-3"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb56-4"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb56-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>wisclong[<span class="fu">which</span>(wisclong<span class="sc">$</span>id <span class="sc">&lt;=</span> <span class="dv">20</span> <span class="sc">&amp;</span> wisclong<span class="sc">$</span>verb <span class="sc">!=</span><span class="st">&quot;NA&quot;</span>),]) <span class="sc">+</span></span>
+<span id="cb56-5"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb56-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb56-6"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb56-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Verbal Ability&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">80</span>) <span class="sc">+</span></span>
+<span id="cb56-7"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb56-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb56-8"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb56-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> id)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-26-2.png" width="672" /></p>
+<p>Some other aesthetics to get to the formal APA style (note: publication data viz is evolving).</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ggplot version .. see also http://ggplot.yhathq.com/docs/index.html</span></span>
+<span id="cb57-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> wisclong_randsub, <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> verb, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb57-3"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb57-4"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb57-5"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb57-6"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb57-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;WISC Verbal Score&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="sc">+</span></span>
+<span id="cb57-7"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb57-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb57-8"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb57-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#title</span></span>
+<span id="cb57-9"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb57-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Intraindividual Change in Verbal Ability&quot;</span>) <span class="sc">+</span></span>
+<span id="cb57-10"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb57-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">#theme with white background</span></span>
+<span id="cb57-11"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb57-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
+<span id="cb57-12"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb57-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">#increase font size of axis and point labels</span></span>
+<span id="cb57-13"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb57-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">rel</span>(<span class="fl">1.5</span>)),</span>
+<span id="cb57-14"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb57-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">rel</span>(<span class="fl">1.2</span>)),</span>
+<span id="cb57-15"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb57-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p>Saving the plot file. See also … <a href="http://www.cookbook-r.com/Graphs/Output_to_a_file/" class="uri">http://www.cookbook-r.com/Graphs/Output_to_a_file/</a></p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ggsave(filename = default_name(plot), plot = last_plot(), device = default_device(filename), </span></span>
+<span id="cb58-2"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="co">#       path = NULL, scale = 1, width = par(&quot;din&quot;)[1], height = par(&quot;din&quot;)[2], </span></span>
+<span id="cb58-3"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="co">#       units = c(&quot;in&quot;, &quot;cm&quot;, &quot;mm&quot;), dpi = 300, limitsize = TRUE, ...)</span></span>
+<span id="cb58-4"><a href="4.2-basic-descriptives-for-the-repeated-measures-data.html#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">&quot;wiscverbal.png&quot;</span>, <span class="at">width =</span> <span class="dv">5</span>, <span class="at">height =</span> <span class="dv">5</span>, <span class="at">dpi=</span><span class="dv">300</span>)</span></code></pre></div>
+<p>Now we have a good set of strategies to apply when looking at new longitudinal data.</p>
+<p><em>Assignment 2 is going be so much fun!</em></p>
+<p><strong>Thank You For Playing!</strong></p>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+McArdle, J. J. 1988. <span>“Dynamic but Structural Equation Modeling of Repeated Measures Data.”</span> In <em>Handbook of Multivariate Experimental Psychology, 2nd Ed</em>, 561–614. Perspectives on Individual Differences. <span>New York, NY, US</span>: <span>Plenum Press</span>. <a href="https://doi.org/10.1007/978-1-4613-0893-5_17">https://doi.org/10.1007/978-1-4613-0893-5_17</a>.
+</div>
+<div class="csl-entry">
+Mcardle, J. J., and MARK S. Aber. 1990. <span>“Chapter 5 - <span>Patterns</span> of <span>Change</span> Within <span>Latent Variable Structural Equation Models</span>.”</span> In <em>Statistical <span>Methods</span> in <span>Longitudinal Research</span></em>, edited by Alexander von Eye, 1:151–224. Statistical <span>Modeling</span> and <span>Decision Science</span>. <span>San Diego</span>: <span>Academic Press</span>. <a href="https://doi.org/10.1016/B978-0-12-724960-5.50010-X">https://doi.org/10.1016/B978-0-12-724960-5.50010-X</a>.
+</div>
+<div class="csl-entry">
+McArdle, J. J., and David Epstein. 1987. <span>“Latent Growth Curves Within Developmental Structural Equation Models.”</span> <em>Child Development</em> 58 (1): 110–33. <a href="https://doi.org/10.2307/1130295">https://doi.org/10.2307/1130295</a>.
+</div>
+<div class="csl-entry">
+McArdle, J. J., and John R. Nesselroade. 1994. <span>“Using Multivariate Data to Structure Developmental Change.”</span> In <em>Life-Span Developmental Psychology: <span>Methodological</span> Contributions</em>, 223–67. The <span>West Virginia University</span> Conferences on Life-Span Developmental Psychology. <span>Hillsdale, NJ, US</span>: <span>Lawrence Erlbaum Associates, Inc</span>.
+</div>
+<div class="csl-entry">
+Osborne, R. T., and D. E. Suddick. 1972. <span>“A Longitudinal Investigation of the Intellectual Differentiation Hypothesis.”</span> <em>The Journal of Genetic Psychology: Research and Theory on Human Development</em> 121 (1): 83–89. <a href="https://doi.org/10.1080/00221325.1972.10533131">https://doi.org/10.1080/00221325.1972.10533131</a>.
+</div>
+<div class="csl-entry">
+Tierney, Nicholas, Di Cook, Miles McBain, and Colin Fay. 2021. <em>Naniar: Data Structures, Summaries, and Visualisations for Missing Data</em>. <a href="https://CRAN.R-project.org/package=naniar">https://CRAN.R-project.org/package=naniar</a>.
+</div>
+</div>
+</div>
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="4.1-basic-descriptives-of-all-the-data.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/zackfisher/HDFS523/edit/master/02_basic_data_wrangling.Rmd",
+"text": "Suggest an edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+},
+"info": true
+});
+});
+</script>
+
+</body>
+
+</html>

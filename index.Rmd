@@ -1,0 +1,59 @@
+--- 
+title: "HDFS 523: Strategies for Data Analysis in Developmental Research"
+author: "Zachary F. Fisher"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+description: |
+  Course notes for HDFS 523
+link-citations: no
+github-repo: zackfisher/HDFS523
+cover-image: images/image1.png
+favicon: null
+---
+
+# About This Book
+
+```{r, echo = F}
+button_css <-  "position: relative; 
+                top: -25px; 
+                left: 85%;   
+                color: white;
+                font-weight: bold;
+                background: #4B9CD3;
+                border: 1px #3079ED solid;
+                box-shadow: inset 0 1px 0 #80B0FB"
+```
+
+
+This book provides the course notes for HDFS 523. It is currently under development, so any feedback is appreciated (e.g., during class,  via email, or the edit link in the header). This first chapter is just about how to use the book -- the course content starts in Chapter \@ref(chapter-2).   
+
+## Why this book? 
+
+There are a few goals of moving from "textbook + slides + exercises" to an ebook. 
+
+* To integrate course content (slides, readings, code, examples, and exercises) into one format, rather than having multiple files to sort through on Canvas.
+
+
+## Code Folding
+
+```{r codefolder, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", 
+                     style = button_css)
+```
+
+
+The book combines lecture slides and R coding examples. It is often convenient to hide code when introducing new material. This is accomplished using code folding. An example of code folding is given on this page. Below, a histogram integrated into the text. By clicking on the button called "Show Code" on the top of the page, the R code that produced the histogram will also be visible. Notice that you may need to scroll horizontally to see all of the text in the code window. Also notice that when you hover your mouse over the code window, an icon appears in the top right corner -- this lets you copy the block of code with one click. 
+
+
+```{r}
+# Here is some R code. You don't have to look at it when reading the book, but it is here when you need it
+x <- rnorm(200)
+hist(x, col = "#4B9CD3")
+```
+
+
+## Acknowledgements
+
+Many people have contributed to the course materials for HDFS 523. Most importantly, the original Powerpoint slides and R exercises were developed by Nilam Ram and Zita Oravecz.
