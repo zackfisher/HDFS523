@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4.4 Matrix Inversion | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
+  <meta name="description" content="Course notes for HDFS 523" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4.4 Matrix Inversion | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="/images/image1.png" />
+  <meta property="og:description" content="Course notes for HDFS 523" />
+  <meta name="github-repo" content="zackfisher/HDFS523" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4.4 Matrix Inversion | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  
+  <meta name="twitter:description" content="Course notes for HDFS 523" />
+  <meta name="twitter:image" content="/images/image1.png" />
+
+<meta name="author" content="Zachary F. Fisher" />
+
+
+<meta name="date" content="2022-01-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="null" type="image/x-icon" />
+<link rel="prev" href="4.3-matrix-multiplication.html"/>
+<link rel="next" href="5-chapter-5.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Course notes for HDFS 523</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1.1-why-this-book.html"><a href="1.1-why-this-book.html"><i class="fa fa-check"></i><b>1.1</b> Why this book?</a></li>
+<li class="chapter" data-level="1.2" data-path="1.2-code-folding.html"><a href="1.2-code-folding.html"><i class="fa fa-check"></i><b>1.2</b> Code Folding</a></li>
+<li class="chapter" data-level="1.3" data-path="1.3-acknowledgements.html"><a href="1.3-acknowledgements.html"><i class="fa fa-check"></i><b>1.3</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="2-chapter-2.html"><a href="2-chapter-2.html"><i class="fa fa-check"></i><b>2</b> Data Cleaning</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2.1-example-data.html"><a href="2.1-example-data.html"><i class="fa fa-check"></i><b>2.1</b> Example Data</a></li>
+<li class="chapter" data-level="2.2" data-path="2.2-reading-in-repeated-measures-data.html"><a href="2.2-reading-in-repeated-measures-data.html"><i class="fa fa-check"></i><b>2.2</b> Reading in Repeated Measures Data</a></li>
+<li class="chapter" data-level="2.3" data-path="2.3-familiarize-yourself-with-the-data.html"><a href="2.3-familiarize-yourself-with-the-data.html"><i class="fa fa-check"></i><b>2.3</b> Familiarize Yourself with the Data</a></li>
+<li class="chapter" data-level="2.4" data-path="2.4-look-for-duplicated-ids.html"><a href="2.4-look-for-duplicated-ids.html"><i class="fa fa-check"></i><b>2.4</b> Look for Duplicated IDs</a></li>
+<li class="chapter" data-level="2.5" data-path="2.5-using-table-to-spot-irregularities.html"><a href="2.5-using-table-to-spot-irregularities.html"><i class="fa fa-check"></i><b>2.5</b> Using <code>table()</code> to Spot Irregularities</a></li>
+<li class="chapter" data-level="2.6" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html"><i class="fa fa-check"></i><b>2.6</b> Missing Data</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#generating-example-data"><i class="fa fa-check"></i><b>2.6.1</b> Generating Example Data</a></li>
+<li class="chapter" data-level="2.6.2" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#recoding-values-with-na"><i class="fa fa-check"></i><b>2.6.2</b> Recoding Values with <code>NA</code></a></li>
+<li class="chapter" data-level="2.6.3" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#missing-data-visualization"><i class="fa fa-check"></i><b>2.6.3</b> Missing Data Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="2.7-exporting-data.html"><a href="2.7-exporting-data.html"><i class="fa fa-check"></i><b>2.7</b> Exporting Data</a></li>
+<li class="chapter" data-level="2.8" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html"><i class="fa fa-check"></i><b>2.8</b> Reshaping Repeated Measures Data</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html#reshape-wide-to-long"><i class="fa fa-check"></i><b>2.8.1</b> Reshape Wide to Long</a></li>
+<li class="chapter" data-level="2.8.2" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html#reshape-long-to-wide"><i class="fa fa-check"></i><b>2.8.2</b> Reshape Long to Wide</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-chapter-3.html"><a href="3-chapter-3.html"><i class="fa fa-check"></i><b>3</b> Describing Longitudinal Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3.1-example-data-1.html"><a href="3.1-example-data-1.html"><i class="fa fa-check"></i><b>3.1</b> Example Data</a></li>
+<li class="chapter" data-level="3.2" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html"><i class="fa fa-check"></i><b>3.2</b> Describing Means and Variances</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html#verbal-ability-all-persons-and-occasions"><i class="fa fa-check"></i><b>3.2.1</b> Verbal Ability (All Persons and Occasions)</a></li>
+<li class="chapter" data-level="3.2.2" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html#verbal-ability-across-time"><i class="fa fa-check"></i><b>3.2.2</b> Verbal Ability (Across Time)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="3.3-describing-covariances.html"><a href="3.3-describing-covariances.html"><i class="fa fa-check"></i><b>3.3</b> Describing Covariances</a></li>
+<li class="chapter" data-level="3.4" data-path="3.4-individual-level-descriptives.html"><a href="3.4-individual-level-descriptives.html"><i class="fa fa-check"></i><b>3.4</b> Individual-Level Descriptives</a></li>
+<li class="chapter" data-level="3.5" data-path="3.5-references.html"><a href="3.5-references.html"><i class="fa fa-check"></i><b>3.5</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-chapter-4.html"><a href="4-chapter-4.html"><i class="fa fa-check"></i><b>4</b> Matrix Algebra</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html"><i class="fa fa-check"></i><b>4.1</b> Types of matrices</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#square"><i class="fa fa-check"></i><b>4.1.1</b> Square</a></li>
+<li class="chapter" data-level="4.1.2" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#symmetric"><i class="fa fa-check"></i><b>4.1.2</b> Symmetric</a></li>
+<li class="chapter" data-level="4.1.3" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#diagonal"><i class="fa fa-check"></i><b>4.1.3</b> Diagonal</a></li>
+<li class="chapter" data-level="4.1.4" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#identity"><i class="fa fa-check"></i><b>4.1.4</b> Identity</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html"><i class="fa fa-check"></i><b>4.2</b> Operations on Matrices</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-transpose"><i class="fa fa-check"></i><b>4.2.1</b> Matrix Transpose</a></li>
+<li class="chapter" data-level="4.2.2" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-trace"><i class="fa fa-check"></i><b>4.2.2</b> Matrix Trace</a></li>
+<li class="chapter" data-level="4.2.3" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#addition"><i class="fa fa-check"></i><b>4.2.3</b> Addition</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="4.3-matrix-multiplication.html"><a href="4.3-matrix-multiplication.html"><i class="fa fa-check"></i><b>4.3</b> Matrix multiplication</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="4.3-matrix-multiplication.html"><a href="4.3-matrix-multiplication.html#matrix-scalar-multiplication"><i class="fa fa-check"></i><b>4.3.1</b> Matrix-Scalar Multiplication</a></li>
+<li class="chapter" data-level="4.3.2" data-path="4.3-matrix-multiplication.html"><a href="4.3-matrix-multiplication.html#matrix-matrix-multiplication"><i class="fa fa-check"></i><b>4.3.2</b> Matrix-Matrix Multiplication</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="4.4-matrix-inversion.html"><a href="4.4-matrix-inversion.html"><i class="fa fa-check"></i><b>4.4</b> Matrix Inversion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-chapter-5.html"><a href="5-chapter-5.html"><i class="fa fa-check"></i><b>5</b> Linear Regression</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="5.1-linear-regression-model.html"><a href="5.1-linear-regression-model.html"><i class="fa fa-check"></i><b>5.1</b> Linear Regression Model</a></li>
+<li class="chapter" data-level="5.2" data-path="5.2-regression-and-matrix-notation.html"><a href="5.2-regression-and-matrix-notation.html"><i class="fa fa-check"></i><b>5.2</b> Regression and Matrix Notation</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="5.2-regression-and-matrix-notation.html"><a href="5.2-regression-and-matrix-notation.html#an-intercept-only-model"><i class="fa fa-check"></i><b>5.2.1</b> An Intercept-Only Model</a></li>
+<li class="chapter" data-level="5.2.2" data-path="5.2-regression-and-matrix-notation.html"><a href="5.2-regression-and-matrix-notation.html#intercept-only-model-in-matrix-form"><i class="fa fa-check"></i><b>5.2.2</b> Intercept-Only Model in Matrix Form</a></li>
+<li class="chapter" data-level="5.2.3" data-path="5.2-regression-and-matrix-notation.html"><a href="5.2-regression-and-matrix-notation.html#simple-regression-in-matrix-form"><i class="fa fa-check"></i><b>5.2.3</b> Simple Regression in Matrix Form</a></li>
+<li class="chapter" data-level="5.2.4" data-path="5.2-regression-and-matrix-notation.html"><a href="5.2-regression-and-matrix-notation.html#multiple-regression-in-matrix-form"><i class="fa fa-check"></i><b>5.2.4</b> Multiple Regression in Matrix Form</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="5.3-solving-the-regression-equation.html"><a href="5.3-solving-the-regression-equation.html"><i class="fa fa-check"></i><b>5.3</b> Solving the Regression Equation</a></li>
+<li class="chapter" data-level="5.4" data-path="5.4-example-data-2.html"><a href="5.4-example-data-2.html"><i class="fa fa-check"></i><b>5.4</b> Example Data</a></li>
+<li class="chapter" data-level="5.5" data-path="5.5-section.html"><a href="5.5-section.html"><i class="fa fa-check"></i><b>5.5</b> </a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/zackfisher/HDFS523" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">HDFS 523: Strategies for Data Analysis in Developmental Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="matrix-inversion" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Matrix Inversion</h2>
+<p>How did it do that? A bit of detail <a href="https://www.varsitytutors.com/hotmath/hotmath_help/topics/solving-systems-of-linear-equations-using-matrices">here</a>. In this case, if <span class="math inline">\(\mathbf{A}\)</span> is square (equal number of rows and columns) and all of the rows are independent (i.e., no two equations are the same or multiples of each other), we can solve this system by using the inverse of the <span class="math inline">\(\mathbf{A}\)</span> matrix, <span class="math inline">\(\mathbf{A}^{-1}\)</span>:</p>
+<p>More specifically,</p>
+<p><span class="math display">\[
+\mathbf{w} = \mathbf{A^{-1}b}
+\]</span></p>
+<p>We will largely avoid the details of inverting matrices in this class. However, the important conceptual point is that the inverse of a square matrix is another matrix of the same size that when multiplied with the original matrix yields an identity matrix (i.e., 1s on the diagonal, 0s elsewhere).</p>
+<p><span class="math display">\[\mathbf{A}^{-1}\mathbf{A}=\mathbf{I}\]</span></p>
+<p>For example, if <span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(n \times n\)</span> and <span class="math inline">\(n = 5\)</span>, then multiplying <span class="math inline">\(A\)</span> by its inverse <span class="math inline">\(A^{-1}\)</span> yields</p>
+<p><span class="math display">\[\mathbf{I} = \begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \\
+\end{bmatrix}
+\]</span></p>
+<p>Notice how this is akin to the idea that any number multiplied by its inverse equals one:</p>
+<p><span class="math display">\[x \cdot \frac{1}{x} = 1\]</span></p>
+
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="4.3-matrix-multiplication.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="5-chapter-5.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/zackfisher/HDFS523/edit/master/04_matrix_algebra.Rmd",
+"text": "Suggest an edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+},
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
