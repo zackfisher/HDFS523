@@ -122,11 +122,16 @@ model2 <- lm(verb2 ~ 1 + verb1,
 summary(model2)
 ```
 
+#### Interpreting Model Parameters
+
 How do we interpret the parameters here? 
 
 The intercept, $b_0$, is the expected value for the outcome variable when all of the predictor variables equal zero. So, we would expect a child to have a Grade 2 verbal score of 10.62965 *if* they have a Grade 1 verbal score of 0.
 
 The slope, $b_1$ is the expected difference in the outcome variable for each 1-unit difference in the predictor variable. So, *across children*, for each 1-point difference in a child's Grade 1 verbal score, we would expect a 0.75495 point difference in the Grade 2 verbal score. 
+
+
+#### Plot Regression Line
 
 We can plot the relation between 'verb1' and 'verb2', and include the predicted line from the analysis.
 ```{r}
@@ -175,9 +180,11 @@ model3 <- lm(verb2 ~ 1 + verb1_star,
 summary(model3)
 ```
 
+#### Interpreting Model Parameters
+
 Note that the estimate for the slope $b_1$ stays the same, but the estimate for the intercept is different. This is because the variable 'verb1_star' equals 0 when a child has an average 1st grade verbal score. Therefore the expected value for the 2nd grade verbal score, for *a child with an average 1st grade verbal score*, is 25.41534. 
 
-Let's plot this:
+#### Plotting Regression Line
 
 ```{r}
 ggplot(data=wiscsub, aes(x=verb1_star,y=verb2)) +
@@ -250,11 +257,15 @@ summary(model4)
 ```
 Now we have an intercept and two slopes. 
 
+#### Interpreting Model Parameters
+
 $b_0$ is the expected value of the outcome variable when all other variables are 0. Therefore, in this case, $b_0$ is the expected Grade 2 verbal score for a child with an average Grade 1 verbal score (i.e. $verb^{*}_{1i}$ = 0) *and* whose mother had an average education (i.e. $momed^{*}_{i}$ = 0, $\bar{momed_{i}}$ = 10.81 years of education. 
 
 $b_1$ is the expected difference in the outcome for a 1-unit difference in $x_{1i}$. In this example (i.e. 'model4'), $b_1$ is the expected difference in Grade 2 verbal score (outcome variable, $y_i$ = $verb_{2i}$) for a 1 point difference in the Grade 1 verbal score ($x_{1i}$ = $verb^{*}_{1i}$), assuming average level of mother's education.
 
 $b_2$ is the expected difference in the outcome for a 1-unit difference in $x_{2i}$. For this example (i.e. 'model4'), $b_2$ is the expected difference in Grade 2 verbal score (outcome variable, $y_i$ = $verb_{2i}$) for each year difference in mother's education ($x_{2i}$ = $momed^{*}_i$).
+
+#### Plotting Regression Surface
 
 To better understand the implied relation between $verb_{2i}$, $verb^{*}_{1i}$, and $momed^{*}_i$, we can plot the predicted values implied by the model. This will be a 3-dimensional plot because we are interested in the relations among three variables: $\left\{verb_{2i}, verb^{*}_{1i}, momed^{*}_{i}\right\}$
 
