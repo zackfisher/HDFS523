@@ -75,6 +75,15 @@ The output indicates that $b_0$ = 25.4153, and its standard error = 0.4275.
 
 The intercept reflects the expected value of the outcome variable when all of the predictor variables (i.e. $\left\{ x_{1i}, ..., x_{qi}\right\}$) = 0. So, in the absence of any additional information other than the descriptive statistics of $verb_{2i}$, what is our best guess for a person's $verb_{2i}$ score? It is the mean of $verb_{2i}$. The regression above confirms this notion; regressing the outcome on a vector of 1s allows us to 'recover' the mean.
 
+Notice we can confirm this finding using matrix algebra, as well.
+
+$$
+verb_{2i} = b_01_i + \epsilon_{i} \\
+\mathbb{E}(verb_{2i}) = \mathbb{E}(b_01_i + \epsilon_{i}) \\
+\mathbb{E}(verb_{2i}) = b_01_i + \mathbb{E}(\epsilon_{i}) \\
+\mathbb{E}(verb_{2i}) = b_0
+$$
+
 ```{r}
 mean(wiscsub$verb2)
 ```

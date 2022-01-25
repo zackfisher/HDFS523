@@ -320,6 +320,13 @@ This is helpful for explicit translation into the R code, specifically the <code
 <p>Note that we used <code>na.exclude</code> instead of <code>na.omit</code> (default); practically speaking <code>na.omit</code> deletes missing data entries while <code>na.exclude</code> just excludes from the analysis.Therefore with <code>na.exclude</code>, in the residuals and fitted values, <code>NA</code> will show up where there were missing values.</p>
 <p>The output indicates that <span class="math inline">\(b_0\)</span> = 25.4153, and its standard error = 0.4275.</p>
 <p>The intercept reflects the expected value of the outcome variable when all of the predictor variables (i.e. <span class="math inline">\(\left\{ x_{1i}, ..., x_{qi}\right\}\)</span>) = 0. So, in the absence of any additional information other than the descriptive statistics of <span class="math inline">\(verb_{2i}\)</span>, what is our best guess for a person’s <span class="math inline">\(verb_{2i}\)</span> score? It is the mean of <span class="math inline">\(verb_{2i}\)</span>. The regression above confirms this notion; regressing the outcome on a vector of 1s allows us to ‘recover’ the mean.</p>
+<p>Notice we can confirm this finding using matrix algebra, as well.</p>
+<p><span class="math display">\[
+verb_{2i} = b_01_i + \epsilon_{i} \\
+\mathbb{E}(verb_{2i}) = \mathbb{E}(b_01_i + \epsilon_{i}) \\
+\mathbb{E}(verb_{2i}) = b_01_i + \mathbb{E}(\epsilon_{i}) \\
+\mathbb{E}(verb_{2i}) = b_0
+\]</span></p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="6.2-intercept-only-model.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(wiscsub<span class="sc">$</span>verb2)</span></code></pre></div>
 <pre><code>## [1] 25.41534</code></pre>
 <p>Yes - we recovered the <em>mean</em>, but we did not attempt to explain any of the <em>variance</em>. It thus makes sense that we get 0 as the R-square. With an intercept only model there is only residual variability; there is no variability due to the regression model itself because there are no predictors.</p>
