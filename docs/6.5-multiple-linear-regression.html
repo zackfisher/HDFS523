@@ -24,7 +24,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2022-01-25" />
+<meta name="date" content="2022-01-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
 <link rel="prev" href="6.4-mean-centering-predictors.html"/>
-<link rel="next" href="6.6-interactions.html"/>
+<link rel="next" href="6.6-categorical-variable-interaction.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -247,16 +247,51 @@ div.csl-indent {
 <li class="chapter" data-level="5.6.3" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#simple-regression-in-matrix-form"><i class="fa fa-check"></i><b>5.6.3</b> Simple Regression in Matrix Form</a></li>
 <li class="chapter" data-level="5.6.4" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#multiple-regression-in-matrix-form"><i class="fa fa-check"></i><b>5.6.4</b> Multiple Regression in Matrix Form</a></li>
 </ul></li>
-<li class="chapter" data-level="5.7" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html"><i class="fa fa-check"></i><b>5.7</b> Solving the Regression Equation</a></li>
+<li class="chapter" data-level="5.7" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html"><i class="fa fa-check"></i><b>5.7</b> Solving the Regression Equation</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html#matrix-multiplication-and-transpose"><i class="fa fa-check"></i><b>5.7.1</b> Matrix Multiplication and Transpose</a></li>
+<li class="chapter" data-level="5.7.2" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html#matrix-inverse"><i class="fa fa-check"></i><b>5.7.2</b> Matrix Inverse</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html"><i class="fa fa-check"></i><b>5.8</b> The Linear Probability Model</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html#advantages-of-the-lpm"><i class="fa fa-check"></i><b>5.8.1</b> Advantages of the LPM</a></li>
+<li class="chapter" data-level="5.8.2" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html#disadvantages-of-the-lpm"><i class="fa fa-check"></i><b>5.8.2</b> Disadvantages of the LPM</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="6-chapter-6.html"><a href="6-chapter-6.html"><i class="fa fa-check"></i><b>6</b> Linear Regression in R</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="6.1-example-data-2.html"><a href="6.1-example-data-2.html"><i class="fa fa-check"></i><b>6.1</b> Example Data</a></li>
-<li class="chapter" data-level="6.2" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html"><i class="fa fa-check"></i><b>6.2</b> Intercept-Only Model</a></li>
-<li class="chapter" data-level="6.3" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html"><i class="fa fa-check"></i><b>6.3</b> Simple Linear Regression</a></li>
-<li class="chapter" data-level="6.4" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html"><i class="fa fa-check"></i><b>6.4</b> Mean Centering Predictors</a></li>
-<li class="chapter" data-level="6.5" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html"><i class="fa fa-check"></i><b>6.5</b> Multiple Linear Regression</a></li>
-<li class="chapter" data-level="6.6" data-path="6.6-interactions.html"><a href="6.6-interactions.html"><i class="fa fa-check"></i><b>6.6</b> Interactions</a></li>
+<li class="chapter" data-level="6.2" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html"><i class="fa fa-check"></i><b>6.2</b> Intercept-Only Model</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-equation"><i class="fa fa-check"></i><b>6.2.1</b> Intercept-Only Equation</a></li>
+<li class="chapter" data-level="6.2.2" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-model-in-r"><i class="fa fa-check"></i><b>6.2.2</b> Intercept-Only Model in R</a></li>
+<li class="chapter" data-level="6.2.3" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-as-mean-of-outcome"><i class="fa fa-check"></i><b>6.2.3</b> Intercept as Mean of Outcome</a></li>
+<li class="chapter" data-level="6.2.4" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-model-r2"><i class="fa fa-check"></i><b>6.2.4</b> Intercept-Only Model <span class="math inline">\(R^2\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html"><i class="fa fa-check"></i><b>6.3</b> Simple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#regression-equation-and-model-fitting"><i class="fa fa-check"></i><b>6.3.1</b> Regression Equation and Model Fitting</a></li>
+<li class="chapter" data-level="6.3.2" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#interpreting-model-parameters"><i class="fa fa-check"></i><b>6.3.2</b> Interpreting Model Parameters</a></li>
+<li class="chapter" data-level="6.3.3" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#plotting-regression-line"><i class="fa fa-check"></i><b>6.3.3</b> Plotting Regression Line</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html"><i class="fa fa-check"></i><b>6.4</b> Mean Centering Predictors</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html#interpreting-model-parameters-1"><i class="fa fa-check"></i><b>6.4.1</b> Interpreting Model Parameters</a></li>
+<li class="chapter" data-level="6.4.2" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html#plotting-regression-line-1"><i class="fa fa-check"></i><b>6.4.2</b> Plotting Regression Line</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html"><i class="fa fa-check"></i><b>6.5</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#regression-equation"><i class="fa fa-check"></i><b>6.5.1</b> Regression Equation</a></li>
+<li class="chapter" data-level="6.5.2" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#fit-model-in-r"><i class="fa fa-check"></i><b>6.5.2</b> Fit Model in R</a></li>
+<li class="chapter" data-level="6.5.3" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#a-note-on-interpretation"><i class="fa fa-check"></i><b>6.5.3</b> A Note on Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html"><i class="fa fa-check"></i><b>6.6</b> Categorical Variable Interaction</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#interaction-as-moderation"><i class="fa fa-check"></i><b>6.6.1</b> Interaction as Moderation</a></li>
+<li class="chapter" data-level="6.6.2" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#moderation-by-categorical-variable"><i class="fa fa-check"></i><b>6.6.2</b> Moderation by Categorical Variable</a></li>
+<li class="chapter" data-level="6.6.3" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#interpretation"><i class="fa fa-check"></i><b>6.6.3</b> Interpretation</a></li>
+<li class="chapter" data-level="6.6.4" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#fit-regression-model-in-r"><i class="fa fa-check"></i><b>6.6.4</b> Fit Regression Model in R</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/zackfisher/HDFS523" target="blank">Published with bookdown</a></li>
@@ -291,7 +326,7 @@ div.csl-indent {
 <span id="cb75-5"><a href="6.5-multiple-linear-regression.html#cb75-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Count&quot;</span>) <span class="sc">+</span></span>
 <span id="cb75-6"><a href="6.5-multiple-linear-regression.html#cb75-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
 <pre><code>## Warning: Removed 2 rows containing missing values (geom_bar).</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-57-1.png" width="672" />
+<p><img src="_main_files/figure-html/unnamed-chunk-58-1.png" width="672" />
 And the relation between Grade 2 verbal scores and momed.</p>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="6.5-multiple-linear-regression.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wiscsub, <span class="fu">aes</span>(<span class="at">x=</span>momed, <span class="at">y =</span> verb2)) <span class="sc">+</span> </span>
 <span id="cb77-2"><a href="6.5-multiple-linear-regression.html#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -299,14 +334,19 @@ And the relation between Grade 2 verbal scores and momed.</p>
 <span id="cb77-4"><a href="6.5-multiple-linear-regression.html#cb77-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">50</span>) <span class="sc">+</span></span>
 <span id="cb77-5"><a href="6.5-multiple-linear-regression.html#cb77-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Mother&#39;s Education (Years)&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Verbal Ability Grade 2&quot;</span>) <span class="sc">+</span></span>
 <span id="cb77-6"><a href="6.5-multiple-linear-regression.html#cb77-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<div id="regression-equation" class="section level3" number="6.5.1">
+<h3><span class="header-section-number">6.5.1</span> Regression Equation</h3>
 <p>Our model now becomes</p>
 <p><span class="math display">\[ verb_{2i} = b_01_{i} + b_1verb^{*}_{1i} + b_2momed^{*}_{i} + \epsilon_{i}\]</span></p>
-<p>where <span class="math inline">\(verb^{*}_{1i}\)</span> is the sample-centered version of <span class="math inline">\(verb_{1i}\)</span>, and <span class="math inline">\(momed^{*}_{i}\)</span> is the sample-centered version of <span class="math inline">\(momed_{i}\)</span> – again, this makes things easier to interpret. The slope, <span class="math inline">\(b_2\)</span> is the expected difference in grade 2 verbal score for each 1 year difference in the mom’s education.</p>
-<p>Calculate centered momed variable.</p>
+<p>where <span class="math inline">\(verb^{*}_{1i}\)</span> is the sample-centered version of <span class="math inline">\(verb_{1i}\)</span>, and <span class="math inline">\(momed^{*}_{i}\)</span> is the sample-centered version of <span class="math inline">\(momed_{i}\)</span>.</p>
+<p>The slope, <span class="math inline">\(b_2\)</span> is the expected difference in grade 2 verbal score for each 1 year difference in mother’s education.</p>
+<p>We can also center the <code>momed</code> variable.</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="6.5-multiple-linear-regression.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate mean-centered version of mother&#39;s education variable</span></span>
 <span id="cb78-2"><a href="6.5-multiple-linear-regression.html#cb78-2" aria-hidden="true" tabindex="-1"></a>wiscsub<span class="sc">$</span>momed_star <span class="ot">&lt;-</span> wiscsub<span class="sc">$</span>momed <span class="sc">-</span> <span class="fu">mean</span>(wiscsub<span class="sc">$</span>momed)</span></code></pre></div>
-<p>Fit model to the data.</p>
+</div>
+<div id="fit-model-in-r" class="section level3" number="6.5.2">
+<h3><span class="header-section-number">6.5.2</span> Fit Model in R</h3>
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="6.5-multiple-linear-regression.html#cb79-1" aria-hidden="true" tabindex="-1"></a>model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(verb2 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> verb1_star <span class="sc">+</span> momed_star,</span>
 <span id="cb79-2"><a href="6.5-multiple-linear-regression.html#cb79-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> wiscsub,</span>
 <span id="cb79-3"><a href="6.5-multiple-linear-regression.html#cb79-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">na.action =</span> na.exclude)</span>
@@ -332,33 +372,28 @@ And the relation between Grade 2 verbal scores and momed.</p>
 ## Multiple R-squared:  0.5422, Adjusted R-squared:  0.5377 
 ## F-statistic: 119.1 on 2 and 201 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Now we have an intercept and two slopes.</p>
+<div id="interpreting-model-parameters-2" class="section level4" number="6.5.2.1">
+<h4><span class="header-section-number">6.5.2.1</span> Interpreting Model Parameters</h4>
 <p><span class="math inline">\(b_0\)</span> is the expected value of the outcome variable when all other variables are 0. Therefore, in this case, <span class="math inline">\(b_0\)</span> is the expected Grade 2 verbal score for a child with an average Grade 1 verbal score (i.e. <span class="math inline">\(verb^{*}_{1i}\)</span> = 0) <em>and</em> whose mother had an average education (i.e. <span class="math inline">\(momed^{*}_{i}\)</span> = 0, <span class="math inline">\(\bar{momed_{i}}\)</span> = 10.81 years of education.</p>
-<p><span class="math inline">\(b_1\)</span> is the expected difference in the outcome for a 1-unit difference in <span class="math inline">\(x_{1i}\)</span>. In this example (i.e. ‘model4’), <span class="math inline">\(b_1\)</span> is the expected difference in Grade 2 verbal score (outcome variable, <span class="math inline">\(y_i\)</span> = <span class="math inline">\(verb_{2i}\)</span>) for a 1 point difference in the Grade 1 verbal score (<span class="math inline">\(x_{1i}\)</span> = <span class="math inline">\(verb^{*}_{1i}\)</span>), assuming average level of mother’s education.</p>
-<p><span class="math inline">\(b_2\)</span> is the expected difference in the outcome for a 1-unit difference in <span class="math inline">\(x_{2i}\)</span>. For this example (i.e. ‘model4’), <span class="math inline">\(b_2\)</span> is the expected difference in Grade 2 verbal score (outcome variable, <span class="math inline">\(y_i\)</span> = <span class="math inline">\(verb_{2i}\)</span>) for each year difference in mother’s education (<span class="math inline">\(x_{2i}\)</span> = <span class="math inline">\(momed^{*}_i\)</span>).</p>
-<p>To better understand the implied relation between <span class="math inline">\(verb_{2i}\)</span>, <span class="math inline">\(verb^{*}_{1i}\)</span>, and <span class="math inline">\(momed^{*}_i\)</span>, we can plot the predicted values implied by the model. This will be a 3-dimensional plot because we are interested in the relations among three variables: <span class="math inline">\(\left\{verb_{2i}, verb^{*}_{1i}, momed^{*}_{i}\right\}\)</span></p>
-<p>To make a 3-d plot, we create a matrix of the ‘decision space.’ The rows correspond to levels of one predictor variable <span class="math inline">\((verb^{*}_{1i})\)</span>, the columns of the other predictor variable <span class="math inline">\((momed^{*}_{i})\)</span>, and the value at the intersections is the predicted value of <span class="math inline">\(verb_{2i}\)</span>.</p>
-<p>The range of observed values of <span class="math inline">\((momed^{*}_{i})\)</span> is [-5, 7], and the range of observed values of <span class="math inline">\((verb^{*}_{1i})\)</span> is [-15, 16]. This implies a 32 row (for the integer values of <span class="math inline">\((verb^{*}_{1i})\)</span>) by 13 columns (for the integer values of <span class="math inline">\((momed^{*}_{i})\)</span>) matrix decision space.</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="6.5-multiple-linear-regression.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create an empty matrix for the predicted scores</span></span>
-<span id="cb81-2"><a href="6.5-multiple-linear-regression.html#cb81-2" aria-hidden="true" tabindex="-1"></a>pred_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> <span class="dv">32</span>, <span class="at">ncol =</span> <span class="dv">13</span>)</span>
-<span id="cb81-3"><a href="6.5-multiple-linear-regression.html#cb81-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-4"><a href="6.5-multiple-linear-regression.html#cb81-4" aria-hidden="true" tabindex="-1"></a><span class="co">#fill in all the cells of the matrix </span></span>
-<span id="cb81-5"><a href="6.5-multiple-linear-regression.html#cb81-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(momed <span class="cf">in</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span><span class="sc">:</span><span class="dv">7</span>)){</span>
-<span id="cb81-6"><a href="6.5-multiple-linear-regression.html#cb81-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(verb <span class="cf">in</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">15</span><span class="sc">:</span><span class="dv">16</span>)){</span>
-<span id="cb81-7"><a href="6.5-multiple-linear-regression.html#cb81-7" aria-hidden="true" tabindex="-1"></a>        curr_row <span class="ot">&lt;-</span> verb <span class="sc">+</span> <span class="dv">16</span> <span class="co"># the index should start at 1, shifting here</span></span>
-<span id="cb81-8"><a href="6.5-multiple-linear-regression.html#cb81-8" aria-hidden="true" tabindex="-1"></a>        curr_col <span class="ot">&lt;-</span> momed <span class="sc">+</span> <span class="dv">6</span></span>
-<span id="cb81-9"><a href="6.5-multiple-linear-regression.html#cb81-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">#prediction equation</span></span>
-<span id="cb81-10"><a href="6.5-multiple-linear-regression.html#cb81-10" aria-hidden="true" tabindex="-1"></a>        pred_matrix[curr_row, curr_col] <span class="ot">=</span> <span class="fl">25.41534</span> <span class="sc">+</span> <span class="fl">0.66786</span><span class="sc">*</span>(verb) <span class="sc">+</span> <span class="fl">0.41454</span><span class="sc">*</span>(momed)</span>
-<span id="cb81-11"><a href="6.5-multiple-linear-regression.html#cb81-11" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb81-12"><a href="6.5-multiple-linear-regression.html#cb81-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb81-13"><a href="6.5-multiple-linear-regression.html#cb81-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-14"><a href="6.5-multiple-linear-regression.html#cb81-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Making 3-d perspective plot</span></span>
-<span id="cb81-15"><a href="6.5-multiple-linear-regression.html#cb81-15" aria-hidden="true" tabindex="-1"></a><span class="fu">persp</span>(<span class="at">x =</span> <span class="sc">-</span><span class="dv">15</span><span class="sc">:</span><span class="dv">16</span>, <span class="at">y =</span> <span class="sc">-</span><span class="dv">5</span><span class="sc">:</span><span class="dv">7</span>, <span class="at">z =</span> pred_matrix,</span>
-<span id="cb81-16"><a href="6.5-multiple-linear-regression.html#cb81-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">col=</span><span class="st">&quot;lightblue&quot;</span>, <span class="at">shade=</span>.<span class="dv">7</span>, <span class="at">border =</span> <span class="cn">NA</span>, <span class="at">expand =</span> .<span class="dv">5</span>,</span>
-<span id="cb81-17"><a href="6.5-multiple-linear-regression.html#cb81-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab=</span><span class="st">&quot;Grade 1 Verbal &quot;</span>,<span class="at">ylab=</span><span class="st">&quot;Years of Mom Ed&quot;</span>,<span class="at">zlab=</span><span class="st">&quot;Grade 2 Verbal&quot;</span>,</span>
-<span id="cb81-18"><a href="6.5-multiple-linear-regression.html#cb81-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&quot;Prediction Surface for Grade 2 Verbal&quot;</span>,</span>
-<span id="cb81-19"><a href="6.5-multiple-linear-regression.html#cb81-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">theta=</span><span class="sc">-</span><span class="dv">30</span>,<span class="at">phi=</span><span class="dv">30</span>,<span class="at">d=</span><span class="dv">5</span>) <span class="co"># this part defines the viewing direction, theta and phi are angles</span></span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-61-1.png" width="672" />
-Along the right face of the cube one can see the linear relation between Grade 1 verbal score and Grade 2 verbal score. Along the left face one can see the linear relation between years of mother’s education and Grade 2 verbal score. The surface of the plane indicates how the two variables contribute to the Grade 2 verbal scores.</p>
+<p><span class="math inline">\(b_1\)</span> is the expected difference in the outcome for a 1-unit difference in <span class="math inline">\(x_{1i}\)</span>. In this example (i.e. ‘model4’), <span class="math inline">\(b_1\)</span> is the expected difference in Grade 2 verbal score (outcome variable, <span class="math inline">\(y_i\)</span> = <span class="math inline">\(verb_{2i}\)</span>) for a 1 point difference in the Grade 1 verbal score (<span class="math inline">\(x_{1i}\)</span> = <span class="math inline">\(verb^{*}_{1i}\)</span>), holding constant the level of mother’s education.</p>
+<p><span class="math inline">\(b_2\)</span> is the expected difference in the outcome for a 1-unit difference in <span class="math inline">\(x_{2i}\)</span>. For this example (i.e. ‘model4’), <span class="math inline">\(b_2\)</span> is the expected difference in Grade 2 verbal score (outcome variable, <span class="math inline">\(y_i\)</span> = <span class="math inline">\(verb_{2i}\)</span>) for each year difference in mother’s education (<span class="math inline">\(x_{2i}\)</span> = <span class="math inline">\(momed^{*}_i\)</span>), holding constant in Grade 1 verbal score.</p>
+</div>
+</div>
+<div id="a-note-on-interpretation" class="section level3" number="6.5.3">
+<h3><span class="header-section-number">6.5.3</span> A Note on Interpretation</h3>
+<p>The distinguishing feature for interpretation in linear models without interactions or higher-order terms is that <strong>the effect of a given change in an independent variable is the same regardless of the value of that variable (at the start of its change) and regardless of the level of the other variables in the model.</strong></p>
+<p>Interpretation only needs to specify which variable is changing, by how much, and that other variables are being held constant.</p>
+<p>In regard to our last example, years of mother’s education does impact the relationship between Grade 1 and 2 verbal scores. Likewise, the effect of mother’s education on Grade 1 verbal scores does not depend on Grade 1 verbal scores. Said in a different way, no matter what a child’s Grade 1 verbal score was, the effect of mother’s education on Grade 2 verbal scores is the same.</p>
+<p>Consider another model with categorical and continuous predictors, <code>grad</code> and <code>verb1_star</code>, respectively.</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="6.5-multiple-linear-regression.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;ggiraphExtra&quot;</span>)</span>
+<span id="cb81-2"><a href="6.5-multiple-linear-regression.html#cb81-2" aria-hidden="true" tabindex="-1"></a>model4b <span class="ot">&lt;-</span> <span class="fu">lm</span>(verb2 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> verb1_star <span class="sc">+</span> grad,</span>
+<span id="cb81-3"><a href="6.5-multiple-linear-regression.html#cb81-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> wiscsub,</span>
+<span id="cb81-4"><a href="6.5-multiple-linear-regression.html#cb81-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">na.action =</span> na.exclude)</span>
+<span id="cb81-5"><a href="6.5-multiple-linear-regression.html#cb81-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggPredict</span>(model4b,<span class="at">se=</span><span class="cn">TRUE</span>,<span class="at">interactive=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+<p>Notice in the plot, whether a student’s mother graduated HS does not impact the relationship between Grade 1 and 2 verbal scores. Differences in Grade 1 and 2 verbal scores are not dependent on whether or not the mother graduated HS.</p>
+<p><strong>Most importantly, using the coefficients themselves we can easily interpret the model parameters.</strong></p>
+</div>
 </div>
             </section>
 
@@ -366,7 +401,7 @@ Along the right face of the cube one can see the linear relation between Grade 1
         </div>
       </div>
 <a href="6.4-mean-centering-predictors.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="6.6-interactions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="6.6-categorical-variable-interaction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

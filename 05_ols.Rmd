@@ -131,9 +131,11 @@ Now that we have reviewed the assumptions of OLS, let's return to the linear reg
 ### An Intercept-Only Model
 
 First, let's take a simpler form of the model, an intercept-only model where
-$$ y_i =  \beta_0 1_{i} + \epsilon_i$$. Note that we have made the "silent" 1 explicit. This will become important later (e.g., when fitting growth models). It is worthwhile to look at regression model without predictors to understand what it can tell us about the nature of the intercept (or constant).
+$$ y_i =  \beta_0 1_{i} + \epsilon_i.$$ Note that we have made the "silent" 1 explicit. This will become important later (e.g., when fitting growth models). It is worthwhile to look at regression model without predictors to understand what it can tell us about the nature of the intercept (or constant).
 
-So here we have no predictors, what is $\beta_0$? Here, $\beta_0$ is the mean of the response variable, and we can show this with some algebra,
+So here we have no predictors, what is $\beta_0$? 
+
+Here, $\beta_0$ is the mean of the response variable, and we can show this with some algebra,
 
 $$\mathbb{E}(y_i)=\mathbb{E}(\beta_0 1_{i} + \epsilon_i)=\beta_0 1_{i} +\mathbb{E}( \epsilon_i)=\beta_0$$
 where $\mathbb{E}( \epsilon_i)=0$ (Assumption 1).
@@ -252,6 +254,9 @@ Assuming the model is correct, the expected value of $\boldsymbol{\epsilon}$ is 
 $$ \boldsymbol{Y} = \boldsymbol{X}\boldsymbol{\beta}$$
 Then we just need to solve for $\boldsymbol{\beta}$. We can think back about some of the matrix operations we discussed earlier.
 
+
+### Matrix Multiplication and Transpose
+
 Our goal is to isolate $\boldsymbol{\beta}$. One initial idea might be to multiple each side of the equation by $\mathbf{X}^{-1}$ in an attempt to remove
 $\mathbf{X}$ from the right hand side, and isolate $\boldsymbol{\beta}$. Why won't this work?
 
@@ -261,7 +266,9 @@ $$ \boldsymbol{X'}\boldsymbol{Y} = \boldsymbol{X'}\boldsymbol{X}\boldsymbol{\bet
 
 This gets us a quantity, $\left(\boldsymbol{X'}\boldsymbol{X}\right)$, a square matrix containing information about the relations among the $\mathbf{x}$s.
 
-Now, since $\boldsymbol{X'}\boldsymbol{X}$ is a square matrix and preseeumabely has an inverse (e.g. no perfect collinearity), we can premultiply both sides by $\left(\boldsymbol{X'}\boldsymbol{X}\right)^{-1}$, to obtain
+### Matrix Inverse
+
+Now, since $\boldsymbol{X'}\boldsymbol{X}$ is a square matrix and presumabely has an inverse (e.g. no perfect collinearity), we can premultiply both sides by $\left(\boldsymbol{X'}\boldsymbol{X}\right)^{-1}$, to obtain
 
 $$ \left(\boldsymbol{X'}\boldsymbol{X}\right)^{-1} \left( \boldsymbol{X'}\boldsymbol{Y}\right) = \left(\boldsymbol{X'}\boldsymbol{X}\right)^{-1} (\boldsymbol{X'}\boldsymbol{X}) \boldsymbol{\beta} $$
 Remembering our assumptions that a matrix multiplied by its inverse equals the identity matrix, $(\boldsymbol{X'}\boldsymbol{X})^{-1} (\boldsymbol{X'}\boldsymbol{X})=\mathbf{I}$ the equation simplifies to 
@@ -274,4 +281,58 @@ $$ \left(\boldsymbol{X'}\boldsymbol{X}\right)^{-1}\left(\boldsymbol{X'}\boldsymb
 We've now isolated the unknowns, $\boldsymbol{\beta}$ onto one side of the equation and figured out how to use matrix algebra to obtain the regression coefficients. Quite literally, this algebra is what allows for estimation of the parameters when fitting a regression model to data.
 
 We will now work through some practical examples - staying aware that this kind of matrix algebra is being done in the background. 
+
+
+## The Linear Probability Model
+
+While we are discussing the assumptions of OLS it is worth pausing to consider a model for dichotomous outcomes: the *linear probability model* (LPM).
+
+In the LPM we don't do anything fancy with a binary outcome variable. Instead, we simply apply OLS as we would with a continuous out come variable. Since we aren't considering the normality of our outcome you might be curious how our assumptions would hold. 
+
+Remembering the assumptions of OLS: 
+
+1. $\mathbb{E}(\epsilon_{i}) = 0$
+2. $\mathbb{E}(\epsilon_{i}^2) = \sigma^2$ for all $i$ (homoscedasticity)
+3. $\mathbb{E}(\epsilon_{i}\epsilon_{j}) = 0$ for all $i \neq j$
+4. No perfect collinearity among $x$ variables
+5. $\mathbb{C}(\epsilon_{i},x_{qi}) = 0$ for all $i$ and $k$
+
+**Which assumptions are needed for consistency and asymptotic unbiasedness?**
+
+4. No perfect collinearity among $x$ variables
+5. Errors uncorrelated with all $x$ variables.
+
+In regard to (4) having a dependent variable valued at $0,1$ does not cause any problems. In regard to (5), again no, nothing about a dichotomous outcome violates this assumption.
+
+Therefore, in this model $\mathbf{\hat\beta}$ is still consistent and asymptotically unbiased.
+
+**What about the remaining assumptions?**
+
+2. Homoscedasticity
+
+Here, *a dichotomous outcome does inherently violate the assumption of homoskedasticity.*
+
+Why is this case? It can be shown that $\mathbb{V}(\epsilon_{i})$ now directly depends on the value of $x$ that is taken. If the $ith$ person has one set of values for the $x$ variables, and another individual $j$ has another set, the estimates of $\mathbb{V}(\epsilon_{i})$ and $\mathbb{V}(\epsilon_{j})$ will differ. This can be seem by looking at the variacne of a Bernoulli random variable.
+
+This means estimate of variance of $\mathbf{\hat\beta}$ is no longer reliable, SEs and significance tests possibly inaccurate. However, this could be addressed using robust standard errors.
+
+It is common to look at plots of predicted values vs residuals to diagnose heteroskedasticity. Generally one would like to see a random blob of points without any discernible pattern. Here is an example of what that plot might look like for an LPM model. Each line represents a different outcome, $y=0$, or $y=1$.
+
+![](imgs/lpmhetero.png)
+
+### Advantages of the LPM
+
+1. Simplicity.
+2. Regression coefficients give impact of $x$ on $P(y_{i}=1|x)$.
+3. Effect same regardless of value of $x$ or values of other $x$s.
+4. Can extend with traditional methods easily (interactions, quadratic terms).
+
+### Disadvantages of the LPM
+
+1. Functional form unlikely accurate at extreme lows & highs
+2. Binary dependent variable creates heteroscedasticity
+3. Some regression diagnostics assume homoscedastic error
+4. Predicted probabilities not restricted to 0 to 1 range
+
+![](imgs/lpm.jpeg)
 

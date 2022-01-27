@@ -11,6 +11,7 @@ link-citations: no
 github-repo: zackfisher/HDFS523
 cover-image: images/image1.png
 favicon: null
+always_allow_html: true
 ---
 
 # About This Book
