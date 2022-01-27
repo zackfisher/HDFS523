@@ -161,6 +161,14 @@ summary(model2)
 ```
 
 
+### Path Diagram
+
+We might also be interested in a graphical depiction of our model. This can be accomplished with the `semPaths` package.
+
+```{r}
+semPlot::semPaths(model2, what = "paths")
+```
+
 ### Interpreting Model Parameters
 
 How do we interpret the parameters here? 
@@ -222,6 +230,8 @@ summary(model3)
 ```
 
 **Note**: Mean centering should be used to aid interpretation. Historically, it has been suggested that mean centering will reduce multicollinearity, however this is not the case. See ![Olvera & Kroc (2018)](https://journals.sagepub.com/doi/full/10.1177/0013164418817801) for more information.
+
+
 
 ### Interpreting Model Parameters
 
@@ -304,6 +314,15 @@ model4 <- lm(verb2 ~ 1 + verb1_star + momed_star,
 summary(model4)
 ```
 Now we have an intercept and two slopes. 
+
+
+### Path Diagram
+
+
+```{r}
+semPlot::semPaths(model4, what = "paths")
+```
+
 
 #### Interpreting Model Parameters
 
@@ -404,6 +423,13 @@ model5 <- lm(verb2 ~ 1 + verb1_star + grad + I(verb1_star*grad),
               data = wiscsub,
               na.action = na.exclude)
 summary(model5)
+```
+
+
+### Path Diagram
+
+```{r}
+semPlot::semPaths(model5, what = "paths")
 ```
 
 The parameter estimates from this model indicate that, for children whose mother did not graduate high school, the expected Grade 2 verbal score for a child that earned an average 1st grade verbal score equals 25.2663 ($b_0$). 

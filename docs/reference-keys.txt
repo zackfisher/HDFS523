@@ -74,6 +74,7 @@ intercept-as-mean-of-outcome
 intercept-only-model-r2
 simple-linear-regression
 regression-equation-and-model-fitting
+path-diagram
 interpreting-model-parameters
 plotting-regression-line
 mean-centering-predictors
@@ -82,6 +83,7 @@ plotting-regression-line-1
 multiple-linear-regression
 regression-equation
 fit-model-in-r
+path-diagram-1
 interpreting-model-parameters-2
 a-note-on-interpretation
 categorical-variable-interaction
@@ -91,3 +93,4 @@ moderation-by-categorical-variable
 rewriting-equation
 interpretation
 fit-regression-model-in-r
+path-diagram-2
