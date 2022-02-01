@@ -24,7 +24,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2022-01-27" />
+<meta name="date" content="2022-02-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
 <link rel="prev" href="7.3-link-functions-and-families.html"/>
-<link rel="next" href="7.5-logistic-regression-empirical-example-with-a-binomial-bernoulli-binary-distributed-outcome-variable.html"/>
+<link rel="next" href="7.5-example-data-3.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -120,28 +120,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -252,6 +230,11 @@ div.csl-indent {
 <li class="chapter" data-level="5.7.1" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html#matrix-multiplication-and-transpose"><i class="fa fa-check"></i><b>5.7.1</b> Matrix Multiplication and Transpose</a></li>
 <li class="chapter" data-level="5.7.2" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html#matrix-inverse"><i class="fa fa-check"></i><b>5.7.2</b> Matrix Inverse</a></li>
 </ul></li>
+<li class="chapter" data-level="5.8" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html"><i class="fa fa-check"></i><b>5.8</b> The Linear Probability Model</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html#advantages-of-the-lpm"><i class="fa fa-check"></i><b>5.8.1</b> Advantages of the LPM</a></li>
+<li class="chapter" data-level="5.8.2" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html#disadvantages-of-the-lpm"><i class="fa fa-check"></i><b>5.8.2</b> Disadvantages of the LPM</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="6-chapter-6.html"><a href="6-chapter-6.html"><i class="fa fa-check"></i><b>6</b> Linear Regression in R</a>
 <ul>
@@ -266,8 +249,9 @@ div.csl-indent {
 <li class="chapter" data-level="6.3" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html"><i class="fa fa-check"></i><b>6.3</b> Simple Linear Regression</a>
 <ul>
 <li class="chapter" data-level="6.3.1" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#regression-equation-and-model-fitting"><i class="fa fa-check"></i><b>6.3.1</b> Regression Equation and Model Fitting</a></li>
-<li class="chapter" data-level="6.3.2" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#interpreting-model-parameters"><i class="fa fa-check"></i><b>6.3.2</b> Interpreting Model Parameters</a></li>
-<li class="chapter" data-level="6.3.3" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#plotting-regression-line"><i class="fa fa-check"></i><b>6.3.3</b> Plotting Regression Line</a></li>
+<li class="chapter" data-level="6.3.2" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#path-diagram"><i class="fa fa-check"></i><b>6.3.2</b> Path Diagram</a></li>
+<li class="chapter" data-level="6.3.3" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#interpreting-model-parameters"><i class="fa fa-check"></i><b>6.3.3</b> Interpreting Model Parameters</a></li>
+<li class="chapter" data-level="6.3.4" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#plotting-regression-line"><i class="fa fa-check"></i><b>6.3.4</b> Plotting Regression Line</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html"><i class="fa fa-check"></i><b>6.4</b> Mean Centering Predictors</a>
 <ul>
@@ -278,25 +262,37 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="6.5.1" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#regression-equation"><i class="fa fa-check"></i><b>6.5.1</b> Regression Equation</a></li>
 <li class="chapter" data-level="6.5.2" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#fit-model-in-r"><i class="fa fa-check"></i><b>6.5.2</b> Fit Model in R</a></li>
-<li class="chapter" data-level="6.5.3" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#plotting-regression-surface"><i class="fa fa-check"></i><b>6.5.3</b> Plotting Regression Surface</a></li>
+<li class="chapter" data-level="6.5.3" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#path-diagram-1"><i class="fa fa-check"></i><b>6.5.3</b> Path Diagram</a></li>
+<li class="chapter" data-level="6.5.4" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#a-note-on-interpretation"><i class="fa fa-check"></i><b>6.5.4</b> A Note on Interpretation</a></li>
 </ul></li>
 <li class="chapter" data-level="6.6" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html"><i class="fa fa-check"></i><b>6.6</b> Categorical Variable Interaction</a>
 <ul>
 <li class="chapter" data-level="6.6.1" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#interaction-as-moderation"><i class="fa fa-check"></i><b>6.6.1</b> Interaction as Moderation</a></li>
 <li class="chapter" data-level="6.6.2" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#moderation-by-categorical-variable"><i class="fa fa-check"></i><b>6.6.2</b> Moderation by Categorical Variable</a></li>
 <li class="chapter" data-level="6.6.3" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#interpretation"><i class="fa fa-check"></i><b>6.6.3</b> Interpretation</a></li>
+<li class="chapter" data-level="6.6.4" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#fit-regression-model-in-r"><i class="fa fa-check"></i><b>6.6.4</b> Fit Regression Model in R</a></li>
+<li class="chapter" data-level="6.6.5" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#path-diagram-2"><i class="fa fa-check"></i><b>6.6.5</b> Path Diagram</a></li>
 </ul></li>
-<li class="chapter" data-level="6.7" data-path="6.7-fit-regression-model-in-r.html"><a href="6.7-fit-regression-model-in-r.html"><i class="fa fa-check"></i><b>6.7</b> Fit Regression Model in R</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="7-chapter-7.html"><a href="7-chapter-7.html"><i class="fa fa-check"></i><b>7</b> Generalized Linear Model in R</a>
+<li class="chapter" data-level="7" data-path="7-chapter-7.html"><a href="7-chapter-7.html"><i class="fa fa-check"></i><b>7</b> Logistic Regression</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="7.1-example-data-3.html"><a href="7.1-example-data-3.html"><i class="fa fa-check"></i><b>7.1</b> Example Data</a></li>
-<li class="chapter" data-level="7.2" data-path="7.2-the-linear-probability-model.html"><a href="7.2-the-linear-probability-model.html"><i class="fa fa-check"></i><b>7.2</b> The Linear Probability Model</a></li>
+<li class="chapter" data-level="7.1" data-path="7.1-categorical-data-in-the-social-sciences.html"><a href="7.1-categorical-data-in-the-social-sciences.html"><i class="fa fa-check"></i><b>7.1</b> Categorical Data in the Social Sciences</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="7.1-categorical-data-in-the-social-sciences.html"><a href="7.1-categorical-data-in-the-social-sciences.html#examples-of-categorical-data"><i class="fa fa-check"></i><b>7.1.1</b> Examples of Categorical Data</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html"><i class="fa fa-check"></i><b>7.2</b> Introduction to GLMs</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#linear-regression-as-glm"><i class="fa fa-check"></i><b>7.2.1</b> Linear Regression as GLM</a></li>
+<li class="chapter" data-level="7.2.2" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#logistic-regression-as-glm"><i class="fa fa-check"></i><b>7.2.2</b> Logistic Regression as GLM</a></li>
+<li class="chapter" data-level="7.2.3" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#poisson-regression-as-glm"><i class="fa fa-check"></i><b>7.2.3</b> Poisson Regression as GLM</a></li>
+</ul></li>
 <li class="chapter" data-level="7.3" data-path="7.3-link-functions-and-families.html"><a href="7.3-link-functions-and-families.html"><i class="fa fa-check"></i><b>7.3</b> Link Functions and Families</a></li>
 <li class="chapter" data-level="7.4" data-path="7.4-binary-outcomes.html"><a href="7.4-binary-outcomes.html"><i class="fa fa-check"></i><b>7.4</b> Binary Outcomes</a></li>
-<li class="chapter" data-level="7.5" data-path="7.5-logistic-regression-empirical-example-with-a-binomial-bernoulli-binary-distributed-outcome-variable.html"><a href="7.5-logistic-regression-empirical-example-with-a-binomial-bernoulli-binary-distributed-outcome-variable.html"><i class="fa fa-check"></i><b>7.5</b> <strong>Logistic Regression</strong>: Empirical example with a Binomial (Bernoulli, binary) distributed outcome variable</a></li>
-<li class="chapter" data-level="7.6" data-path="7.6-count-outcomes.html"><a href="7.6-count-outcomes.html"><i class="fa fa-check"></i><b>7.6</b> Count Outcomes</a></li>
-<li class="chapter" data-level="7.7" data-path="7.7-poisson-regression-empirical-example-with-counts-as-outcome-variable.html"><a href="7.7-poisson-regression-empirical-example-with-counts-as-outcome-variable.html"><i class="fa fa-check"></i><b>7.7</b> <strong>Poisson Regression</strong>: Empirical example with counts as outcome variable</a></li>
+<li class="chapter" data-level="7.5" data-path="7.5-example-data-3.html"><a href="7.5-example-data-3.html"><i class="fa fa-check"></i><b>7.5</b> Example Data</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="7.5-example-data-3.html"><a href="7.5-example-data-3.html#variables"><i class="fa fa-check"></i><b>7.5.1</b> Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="7.6-logistic-regression-in-r.html"><a href="7.6-logistic-regression-in-r.html"><i class="fa fa-check"></i><b>7.6</b> Logistic Regression in R</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="8-some-take-home-points.html"><a href="8-some-take-home-points.html"><i class="fa fa-check"></i><b>8</b> Some Take-home Points</a></li>
 <li class="divider"></li>
@@ -324,11 +320,11 @@ div.csl-indent {
 <p>For the expectation of a binary outcome, we can do <em>logit</em> transformation:</p>
 <p><span class="math display">\[g(\cdot) = logit(\cdot) = log_{e}\left(\frac{(\cdot)}{1-(\cdot)}\right)\]</span></p>
 <p>Where <span class="math inline">\(\left(\frac{(\cdot)}{1-(\cdot)}\right)\)</span> is the odds of an event (pr(Y=1)) occuring, and <span class="math inline">\(log_{e}\)</span> is the natural logarithm. Therefore, the parameter estimates from a generalized linear regression using the logistic link function are scaled in ‘log-odds’ units. After application of the link function, our regression equation becomes</p>
-<p><span class="math display">\[log_{e}\left(\frac{(\boldsymbol{Y})}{1-(\boldsymbol{Y})}\right) = \boldsymbol{X}\boldsymbol{b}\]</span></p>
+<p><span class="math display">\[log_{e}\left(\frac{(\mathbf{y})}{1-(\mathbf{y})}\right) = \boldsymbol{X}\boldsymbol{b}\]</span></p>
 <p>The corresponding inverse function for the logit link function is the <em>logistic</em> link
 <span class="math display">\[h(\cdot) = \frac{e^{(\cdot)}}{1+e^{(\cdot)}}\]</span>
 In practice, this transformation is what is used for solving the regression equation, and it is called logistic regression:</p>
-<p><span class="math display">\[\boldsymbol{Y} = \frac{e^{(\boldsymbol{X}\boldsymbol{b})}}{1+e^{(\boldsymbol{X}\boldsymbol{b})}}\]</span></p>
+<p><span class="math display">\[\mathbf{y} = \frac{e^{(\boldsymbol{X}\boldsymbol{b})}}{1+e^{(\boldsymbol{X}\boldsymbol{b})}}\]</span></p>
 <p>This inverse logit-link function puts the outcome variable back in original (binary) units, and the parameters in probability units; a unit that may be easier to communicate from a substantively oriented perspective.</p>
 </div>
             </section>
@@ -337,7 +333,7 @@ In practice, this transformation is what is used for solving the regression equa
         </div>
       </div>
 <a href="7.3-link-functions-and-families.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="7.5-logistic-regression-empirical-example-with-a-binomial-bernoulli-binary-distributed-outcome-variable.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="7.5-example-data-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -358,7 +354,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/zackfisher/HDFS523/edit/master/07_glm_in_r.Rmd",
+"link": "https://github.com/zackfisher/HDFS523/edit/master/07_logistic.Rmd",
 "text": "Suggest an edit"
 },
 "history": {
