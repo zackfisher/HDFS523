@@ -25,7 +25,7 @@ In Chapter 8 we will round out our discussion of the GLM with Poisson regression
 To review, there are three important components to the GLM:
 
 1. *A random component*: The random component of the GLM contains the response variable $\mathbf{Y}$ and its probability distribution (e.g. the binomial distribution of $\mathbf{Y}$ in the binary regression model). 
-2. *A Linear Predictor*: The linear predictor typically takes the form of $\mathbf{X}\boldsymbol{\beta}$ where $\mathbf{X}$ is an $n \times q$ matrix of observations and $\boldsymbol{\beta}$ is an $q \ times 1$ column vector.
+2. *A Linear Predictor*: The linear predictor typically takes the form of $\mathbf{X}\boldsymbol{\beta}$ where $\mathbf{X}$ is an $n \times q$ matrix of observations and $\boldsymbol{\beta}$ is an $q \times 1$ column vector.
 3. *Link Function*: The link function, typically specified as $g()$, is used to relate each component of $\mathbb{E}(\mathbf{Y})$ to the linear predictor, $g[\mathbb{E}(\mathbf{Y})]=\mathbf{X}\boldsymbol{\beta}$.
 
 ### Poisson Regression as GLM
