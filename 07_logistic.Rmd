@@ -83,7 +83,7 @@ $$
 
 1. *A random component*: The distribution of $\mathbf{Y}$ is assumed to be Poisson with mean $\lambda$ $\mathbb{E}(\mathbf{Y})=\pi$. 
 2. *A Linear Predictor*: $\mathbf{X}$ are the continuous or discrete explanatory variables.
-3. *Link Function*: For logistic regression we use the *log link*.
+3. *Link Function*: For Poisson regression the *log link* is used.
 
 ### Additional Remarks
 
@@ -211,10 +211,7 @@ Without wanting to get to detailed we don't need to specify the `logit` link her
 
 ### Interpretation
 
-
-
 #### Intercept Parameter
-
 
 In the intercept-only model, the intercept, $b_0$, reflects 
 
@@ -414,11 +411,13 @@ marginaleffects::plot_cap(model11, condition = c("ProsocialSpending","Income"))
 
 In nonlinear, the marginal effect of one variable is conditional on the value of the other variable. This function draws a plot of the marginal effect of the effect variable for different values of the condition variable.
 
-Let's look at the effect of `PersonalSpending` on the relationship between `ProsocialSpending` and 
+Let's look at the effect of `PersonalSpending` on the relationship between `ProsocialSpending` and `Happy`.
 
 ```{r}
 marginaleffects::plot_cme(model11, effect = "ProsocialSpending", condition = "PersonalSpending")
 ```
+
+In addition, we can look at the effect of `PersonalSpending` on the relationship between `PersonalSpending` and `Happy`.
 
 ```{r}
 marginaleffects::plot_cme(model11, effect = "PersonalSpending", condition = "ProsocialSpending")

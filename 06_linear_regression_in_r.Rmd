@@ -1,4 +1,4 @@
-# Linear Regression in R {#chapter-6}
+# Linear Regression {#chapter-6}
 
 ```{r, echo = F}
 button <-  "position: relative; 

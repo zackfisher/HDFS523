@@ -7,7 +7,7 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 description: |
   Course notes for HDFS 523
-link-citations: no
+link-citations: yes
 github-repo: zackfisher/HDFS523
 cover-image: images/image1.png
 favicon: null

@@ -24,7 +24,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2022-02-01" />
+<meta name="date" content="2022-02-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   <link rel="shortcut icon" href="null" type="image/x-icon" />
 <link rel="prev" href="6.6-categorical-variable-interaction.html"/>
 <link rel="next" href="7.1-categorical-data-in-the-social-sciences.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/header-attrs-2.11.15/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +51,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -159,182 +160,207 @@ div.csl-indent {
 <li><a href="./">Course notes for HDFS 523</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book<span></span></a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="1.1-why-this-book.html"><a href="1.1-why-this-book.html"><i class="fa fa-check"></i><b>1.1</b> Why this book?</a></li>
-<li class="chapter" data-level="1.2" data-path="1.2-code-folding.html"><a href="1.2-code-folding.html"><i class="fa fa-check"></i><b>1.2</b> Code Folding</a></li>
-<li class="chapter" data-level="1.3" data-path="1.3-acknowledgements.html"><a href="1.3-acknowledgements.html"><i class="fa fa-check"></i><b>1.3</b> Acknowledgements</a></li>
+<li class="chapter" data-level="1.1" data-path="1.1-why-this-book.html"><a href="1.1-why-this-book.html"><i class="fa fa-check"></i><b>1.1</b> Why this book?<span></span></a></li>
+<li class="chapter" data-level="1.2" data-path="1.2-code-folding.html"><a href="1.2-code-folding.html"><i class="fa fa-check"></i><b>1.2</b> Code Folding<span></span></a></li>
+<li class="chapter" data-level="1.3" data-path="1.3-acknowledgements.html"><a href="1.3-acknowledgements.html"><i class="fa fa-check"></i><b>1.3</b> Acknowledgements<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="2-chapter-2.html"><a href="2-chapter-2.html"><i class="fa fa-check"></i><b>2</b> Data Cleaning</a>
+<li class="chapter" data-level="2" data-path="2-chapter-2.html"><a href="2-chapter-2.html"><i class="fa fa-check"></i><b>2</b> Data Cleaning<span></span></a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="2.1-example-data.html"><a href="2.1-example-data.html"><i class="fa fa-check"></i><b>2.1</b> Example Data</a></li>
-<li class="chapter" data-level="2.2" data-path="2.2-reading-in-repeated-measures-data.html"><a href="2.2-reading-in-repeated-measures-data.html"><i class="fa fa-check"></i><b>2.2</b> Reading in Repeated Measures Data</a></li>
-<li class="chapter" data-level="2.3" data-path="2.3-familiarize-yourself-with-the-data.html"><a href="2.3-familiarize-yourself-with-the-data.html"><i class="fa fa-check"></i><b>2.3</b> Familiarize Yourself with the Data</a></li>
-<li class="chapter" data-level="2.4" data-path="2.4-look-for-duplicated-ids.html"><a href="2.4-look-for-duplicated-ids.html"><i class="fa fa-check"></i><b>2.4</b> Look for Duplicated IDs</a></li>
-<li class="chapter" data-level="2.5" data-path="2.5-using-table-to-spot-irregularities.html"><a href="2.5-using-table-to-spot-irregularities.html"><i class="fa fa-check"></i><b>2.5</b> Using <code>table()</code> to Spot Irregularities</a></li>
-<li class="chapter" data-level="2.6" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html"><i class="fa fa-check"></i><b>2.6</b> Missing Data</a>
+<li class="chapter" data-level="2.1" data-path="2.1-example-data.html"><a href="2.1-example-data.html"><i class="fa fa-check"></i><b>2.1</b> Example Data<span></span></a></li>
+<li class="chapter" data-level="2.2" data-path="2.2-reading-in-repeated-measures-data.html"><a href="2.2-reading-in-repeated-measures-data.html"><i class="fa fa-check"></i><b>2.2</b> Reading in Repeated Measures Data<span></span></a></li>
+<li class="chapter" data-level="2.3" data-path="2.3-familiarize-yourself-with-the-data.html"><a href="2.3-familiarize-yourself-with-the-data.html"><i class="fa fa-check"></i><b>2.3</b> Familiarize Yourself with the Data<span></span></a></li>
+<li class="chapter" data-level="2.4" data-path="2.4-look-for-duplicated-ids.html"><a href="2.4-look-for-duplicated-ids.html"><i class="fa fa-check"></i><b>2.4</b> Look for Duplicated IDs<span></span></a></li>
+<li class="chapter" data-level="2.5" data-path="2.5-using-table-to-spot-irregularities.html"><a href="2.5-using-table-to-spot-irregularities.html"><i class="fa fa-check"></i><b>2.5</b> Using <code>table()</code> to Spot Irregularities<span></span></a></li>
+<li class="chapter" data-level="2.6" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html"><i class="fa fa-check"></i><b>2.6</b> Missing Data<span></span></a>
 <ul>
-<li class="chapter" data-level="2.6.1" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#generating-example-data"><i class="fa fa-check"></i><b>2.6.1</b> Generating Example Data</a></li>
-<li class="chapter" data-level="2.6.2" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#recoding-values-with-na"><i class="fa fa-check"></i><b>2.6.2</b> Recoding Values with <code>NA</code></a></li>
-<li class="chapter" data-level="2.6.3" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#missing-data-visualization"><i class="fa fa-check"></i><b>2.6.3</b> Missing Data Visualization</a></li>
+<li class="chapter" data-level="2.6.1" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#generating-example-data"><i class="fa fa-check"></i><b>2.6.1</b> Generating Example Data<span></span></a></li>
+<li class="chapter" data-level="2.6.2" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#recoding-values-with-na"><i class="fa fa-check"></i><b>2.6.2</b> Recoding Values with <code>NA</code><span></span></a></li>
+<li class="chapter" data-level="2.6.3" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#missing-data-visualization"><i class="fa fa-check"></i><b>2.6.3</b> Missing Data Visualization<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="2.7-exporting-data.html"><a href="2.7-exporting-data.html"><i class="fa fa-check"></i><b>2.7</b> Exporting Data</a></li>
-<li class="chapter" data-level="2.8" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html"><i class="fa fa-check"></i><b>2.8</b> Reshaping Repeated Measures Data</a>
+<li class="chapter" data-level="2.7" data-path="2.7-exporting-data.html"><a href="2.7-exporting-data.html"><i class="fa fa-check"></i><b>2.7</b> Exporting Data<span></span></a></li>
+<li class="chapter" data-level="2.8" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html"><i class="fa fa-check"></i><b>2.8</b> Reshaping Repeated Measures Data<span></span></a>
 <ul>
-<li class="chapter" data-level="2.8.1" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html#reshape-wide-to-long"><i class="fa fa-check"></i><b>2.8.1</b> Reshape Wide to Long</a></li>
-<li class="chapter" data-level="2.8.2" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html#reshape-long-to-wide"><i class="fa fa-check"></i><b>2.8.2</b> Reshape Long to Wide</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="3-chapter-3.html"><a href="3-chapter-3.html"><i class="fa fa-check"></i><b>3</b> Describing Longitudinal Data</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="3.1-example-data-1.html"><a href="3.1-example-data-1.html"><i class="fa fa-check"></i><b>3.1</b> Example Data</a></li>
-<li class="chapter" data-level="3.2" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html"><i class="fa fa-check"></i><b>3.2</b> Describing Means and Variances</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html#verbal-ability-all-persons-and-occasions"><i class="fa fa-check"></i><b>3.2.1</b> Verbal Ability (All Persons and Occasions)</a></li>
-<li class="chapter" data-level="3.2.2" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html#verbal-ability-across-time"><i class="fa fa-check"></i><b>3.2.2</b> Verbal Ability (Across Time)</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="3.3-describing-covariances.html"><a href="3.3-describing-covariances.html"><i class="fa fa-check"></i><b>3.3</b> Describing Covariances</a></li>
-<li class="chapter" data-level="3.4" data-path="3.4-individual-level-descriptives.html"><a href="3.4-individual-level-descriptives.html"><i class="fa fa-check"></i><b>3.4</b> Individual-Level Descriptives</a></li>
-<li class="chapter" data-level="3.5" data-path="3.5-references.html"><a href="3.5-references.html"><i class="fa fa-check"></i><b>3.5</b> References</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="4-chapter-4.html"><a href="4-chapter-4.html"><i class="fa fa-check"></i><b>4</b> Matrix Algebra Review</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html"><i class="fa fa-check"></i><b>4.1</b> Types of matrices</a>
-<ul>
-<li class="chapter" data-level="4.1.1" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#square"><i class="fa fa-check"></i><b>4.1.1</b> Square</a></li>
-<li class="chapter" data-level="4.1.2" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#symmetric"><i class="fa fa-check"></i><b>4.1.2</b> Symmetric</a></li>
-<li class="chapter" data-level="4.1.3" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#diagonal"><i class="fa fa-check"></i><b>4.1.3</b> Diagonal</a></li>
-<li class="chapter" data-level="4.1.4" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#identity"><i class="fa fa-check"></i><b>4.1.4</b> Identity</a></li>
-</ul></li>
-<li class="chapter" data-level="4.2" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html"><i class="fa fa-check"></i><b>4.2</b> Operations on Matrices</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-transpose"><i class="fa fa-check"></i><b>4.2.1</b> Matrix Transpose</a></li>
-<li class="chapter" data-level="4.2.2" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-trace"><i class="fa fa-check"></i><b>4.2.2</b> Matrix Trace</a></li>
-<li class="chapter" data-level="4.2.3" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#addition"><i class="fa fa-check"></i><b>4.2.3</b> Addition</a></li>
-<li class="chapter" data-level="4.2.4" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#subtraction"><i class="fa fa-check"></i><b>4.2.4</b> Subtraction</a></li>
-<li class="chapter" data-level="4.2.5" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-multiplication"><i class="fa fa-check"></i><b>4.2.5</b> Matrix Multiplication</a></li>
-<li class="chapter" data-level="4.2.6" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-division"><i class="fa fa-check"></i><b>4.2.6</b> Matrix Division</a></li>
+<li class="chapter" data-level="2.8.1" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html#reshape-wide-to-long"><i class="fa fa-check"></i><b>2.8.1</b> Reshape Wide to Long<span></span></a></li>
+<li class="chapter" data-level="2.8.2" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html#reshape-long-to-wide"><i class="fa fa-check"></i><b>2.8.2</b> Reshape Long to Wide<span></span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="5-chapter-5.html"><a href="5-chapter-5.html"><i class="fa fa-check"></i><b>5</b> Ordinary Least Squares Review</a>
+<li class="chapter" data-level="3" data-path="3-chapter-3.html"><a href="3-chapter-3.html"><i class="fa fa-check"></i><b>3</b> Describing Longitudinal Data<span></span></a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="5.1-linear-regression-model.html"><a href="5.1-linear-regression-model.html"><i class="fa fa-check"></i><b>5.1</b> Linear Regression Model</a></li>
-<li class="chapter" data-level="5.2" data-path="5.2-ordinary-least-squares-ols.html"><a href="5.2-ordinary-least-squares-ols.html"><i class="fa fa-check"></i><b>5.2</b> Ordinary Least Squares (OLS)</a></li>
-<li class="chapter" data-level="5.3" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html"><i class="fa fa-check"></i><b>5.3</b> Assumptions of OLS</a>
+<li class="chapter" data-level="3.1" data-path="3.1-example-data-1.html"><a href="3.1-example-data-1.html"><i class="fa fa-check"></i><b>3.1</b> Example Data<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html"><i class="fa fa-check"></i><b>3.2</b> Describing Means and Variances<span></span></a>
 <ul>
-<li class="chapter" data-level="5.3.1" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#assumption-1.-mathbbeepsilon_i-0"><i class="fa fa-check"></i><b>5.3.1</b> Assumption 1. <span class="math inline">\(\mathbb{E}(\epsilon_{i}) = 0\)</span></a></li>
-<li class="chapter" data-level="5.3.2" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#assumption-2.-homoscedasticity"><i class="fa fa-check"></i><b>5.3.2</b> Assumption 2. Homoscedasticity</a></li>
-<li class="chapter" data-level="5.3.3" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#mathbbeepsilon_iepsilon_j-0"><i class="fa fa-check"></i><b>5.3.3</b> 3. <span class="math inline">\(\mathbb{E}(\epsilon_{i}\epsilon_{j}) = 0\)</span></a></li>
-<li class="chapter" data-level="5.3.4" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#no-perfect-collinearity"><i class="fa fa-check"></i><b>5.3.4</b> 4. No Perfect Collinearity</a></li>
-<li class="chapter" data-level="5.3.5" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#mathbbcepsilon_ix_ki-0"><i class="fa fa-check"></i><b>5.3.5</b> 5. <span class="math inline">\(\mathbb{C}(\epsilon_{i},x_{ki}) = 0\)</span></a></li>
+<li class="chapter" data-level="3.2.1" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html#verbal-ability-all-persons-and-occasions"><i class="fa fa-check"></i><b>3.2.1</b> Verbal Ability (All Persons and Occasions)<span></span></a></li>
+<li class="chapter" data-level="3.2.2" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html#verbal-ability-across-time"><i class="fa fa-check"></i><b>3.2.2</b> Verbal Ability (Across Time)<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html"><i class="fa fa-check"></i><b>5.4</b> Properties of the OLS Estimator</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html#consistentcy-of-boldsymbolbeta"><i class="fa fa-check"></i><b>5.4.1</b> 1. Consistentcy of <span class="math inline">\(\boldsymbol{{\beta}}\)</span></a></li>
-<li class="chapter" data-level="5.4.2" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html#asymptotic-normality"><i class="fa fa-check"></i><b>5.4.2</b> 2. Asymptotic Normality</a></li>
-<li class="chapter" data-level="5.4.3" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html#variance-of-hatbeta"><i class="fa fa-check"></i><b>5.4.3</b> Variance of <span class="math inline">\(\hat{\beta}\)</span></a></li>
+<li class="chapter" data-level="3.3" data-path="3.3-describing-covariances.html"><a href="3.3-describing-covariances.html"><i class="fa fa-check"></i><b>3.3</b> Describing Covariances<span></span></a></li>
+<li class="chapter" data-level="3.4" data-path="3.4-individual-level-descriptives.html"><a href="3.4-individual-level-descriptives.html"><i class="fa fa-check"></i><b>3.4</b> Individual-Level Descriptives<span></span></a></li>
+<li class="chapter" data-level="3.5" data-path="3.5-references.html"><a href="3.5-references.html"><i class="fa fa-check"></i><b>3.5</b> References<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="5.5" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html"><i class="fa fa-check"></i><b>5.5</b> Failure to Meet Assumptions</a>
+<li class="chapter" data-level="4" data-path="4-chapter-4.html"><a href="4-chapter-4.html"><i class="fa fa-check"></i><b>4</b> Matrix Algebra<span></span></a>
 <ul>
-<li class="chapter" data-level="5.5.1" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html#failure-of-assumption-1."><i class="fa fa-check"></i><b>5.5.1</b> Failure of Assumption 1.</a></li>
-<li class="chapter" data-level="5.5.2" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html#failure-of-assumption-2-or-3."><i class="fa fa-check"></i><b>5.5.2</b> Failure of Assumption 2 or 3.</a></li>
-<li class="chapter" data-level="5.5.3" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html#failure-of-assumption-5."><i class="fa fa-check"></i><b>5.5.3</b> Failure of Assumption 5.</a></li>
+<li class="chapter" data-level="4.1" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html"><i class="fa fa-check"></i><b>4.1</b> Types of matrices<span></span></a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#square"><i class="fa fa-check"></i><b>4.1.1</b> Square<span></span></a></li>
+<li class="chapter" data-level="4.1.2" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#symmetric"><i class="fa fa-check"></i><b>4.1.2</b> Symmetric<span></span></a></li>
+<li class="chapter" data-level="4.1.3" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#diagonal"><i class="fa fa-check"></i><b>4.1.3</b> Diagonal<span></span></a></li>
+<li class="chapter" data-level="4.1.4" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#identity"><i class="fa fa-check"></i><b>4.1.4</b> Identity<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="5.6" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html"><i class="fa fa-check"></i><b>5.6</b> Regression and Matrix Notation</a>
+<li class="chapter" data-level="4.2" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html"><i class="fa fa-check"></i><b>4.2</b> Operations on Matrices<span></span></a>
 <ul>
-<li class="chapter" data-level="5.6.1" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#an-intercept-only-model"><i class="fa fa-check"></i><b>5.6.1</b> An Intercept-Only Model</a></li>
-<li class="chapter" data-level="5.6.2" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#intercept-only-model-in-matrix-form"><i class="fa fa-check"></i><b>5.6.2</b> Intercept-Only Model in Matrix Form</a></li>
-<li class="chapter" data-level="5.6.3" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#simple-regression-in-matrix-form"><i class="fa fa-check"></i><b>5.6.3</b> Simple Regression in Matrix Form</a></li>
-<li class="chapter" data-level="5.6.4" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#multiple-regression-in-matrix-form"><i class="fa fa-check"></i><b>5.6.4</b> Multiple Regression in Matrix Form</a></li>
-</ul></li>
-<li class="chapter" data-level="5.7" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html"><i class="fa fa-check"></i><b>5.7</b> Solving the Regression Equation</a>
-<ul>
-<li class="chapter" data-level="5.7.1" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html#matrix-multiplication-and-transpose"><i class="fa fa-check"></i><b>5.7.1</b> Matrix Multiplication and Transpose</a></li>
-<li class="chapter" data-level="5.7.2" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html#matrix-inverse"><i class="fa fa-check"></i><b>5.7.2</b> Matrix Inverse</a></li>
-</ul></li>
-<li class="chapter" data-level="5.8" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html"><i class="fa fa-check"></i><b>5.8</b> The Linear Probability Model</a>
-<ul>
-<li class="chapter" data-level="5.8.1" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html#advantages-of-the-lpm"><i class="fa fa-check"></i><b>5.8.1</b> Advantages of the LPM</a></li>
-<li class="chapter" data-level="5.8.2" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html#disadvantages-of-the-lpm"><i class="fa fa-check"></i><b>5.8.2</b> Disadvantages of the LPM</a></li>
+<li class="chapter" data-level="4.2.1" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-transpose"><i class="fa fa-check"></i><b>4.2.1</b> Matrix Transpose<span></span></a></li>
+<li class="chapter" data-level="4.2.2" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-trace"><i class="fa fa-check"></i><b>4.2.2</b> Matrix Trace<span></span></a></li>
+<li class="chapter" data-level="4.2.3" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#addition"><i class="fa fa-check"></i><b>4.2.3</b> Addition<span></span></a></li>
+<li class="chapter" data-level="4.2.4" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#subtraction"><i class="fa fa-check"></i><b>4.2.4</b> Subtraction<span></span></a></li>
+<li class="chapter" data-level="4.2.5" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-multiplication"><i class="fa fa-check"></i><b>4.2.5</b> Matrix Multiplication<span></span></a></li>
+<li class="chapter" data-level="4.2.6" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-division"><i class="fa fa-check"></i><b>4.2.6</b> Matrix Division<span></span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="6-chapter-6.html"><a href="6-chapter-6.html"><i class="fa fa-check"></i><b>6</b> Linear Regression in R</a>
+<li class="chapter" data-level="5" data-path="5-chapter-5.html"><a href="5-chapter-5.html"><i class="fa fa-check"></i><b>5</b> Ordinary Least Squares<span></span></a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="6.1-example-data-2.html"><a href="6.1-example-data-2.html"><i class="fa fa-check"></i><b>6.1</b> Example Data</a></li>
-<li class="chapter" data-level="6.2" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html"><i class="fa fa-check"></i><b>6.2</b> Intercept-Only Model</a>
+<li class="chapter" data-level="5.1" data-path="5.1-linear-regression-model.html"><a href="5.1-linear-regression-model.html"><i class="fa fa-check"></i><b>5.1</b> Linear Regression Model<span></span></a></li>
+<li class="chapter" data-level="5.2" data-path="5.2-ordinary-least-squares-ols.html"><a href="5.2-ordinary-least-squares-ols.html"><i class="fa fa-check"></i><b>5.2</b> Ordinary Least Squares (OLS)<span></span></a></li>
+<li class="chapter" data-level="5.3" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html"><i class="fa fa-check"></i><b>5.3</b> Assumptions of OLS<span></span></a>
 <ul>
-<li class="chapter" data-level="6.2.1" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-equation"><i class="fa fa-check"></i><b>6.2.1</b> Intercept-Only Equation</a></li>
-<li class="chapter" data-level="6.2.2" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-model-in-r"><i class="fa fa-check"></i><b>6.2.2</b> Intercept-Only Model in R</a></li>
-<li class="chapter" data-level="6.2.3" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-as-mean-of-outcome"><i class="fa fa-check"></i><b>6.2.3</b> Intercept as Mean of Outcome</a></li>
-<li class="chapter" data-level="6.2.4" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-model-r2"><i class="fa fa-check"></i><b>6.2.4</b> Intercept-Only Model <span class="math inline">\(R^2\)</span></a></li>
+<li class="chapter" data-level="5.3.1" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#assumption-1.-mathbbeepsilon_i-0"><i class="fa fa-check"></i><b>5.3.1</b> Assumption 1. <span class="math inline">\(\mathbb{E}(\epsilon_{i}) = 0\)</span><span></span></a></li>
+<li class="chapter" data-level="5.3.2" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#assumption-2.-homoscedasticity"><i class="fa fa-check"></i><b>5.3.2</b> Assumption 2. Homoscedasticity<span></span></a></li>
+<li class="chapter" data-level="5.3.3" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#mathbbeepsilon_iepsilon_j-0"><i class="fa fa-check"></i><b>5.3.3</b> 3. <span class="math inline">\(\mathbb{E}(\epsilon_{i}\epsilon_{j}) = 0\)</span><span></span></a></li>
+<li class="chapter" data-level="5.3.4" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#no-perfect-collinearity"><i class="fa fa-check"></i><b>5.3.4</b> 4. No Perfect Collinearity<span></span></a></li>
+<li class="chapter" data-level="5.3.5" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#mathbbcepsilon_ix_ki-0"><i class="fa fa-check"></i><b>5.3.5</b> 5. <span class="math inline">\(\mathbb{C}(\epsilon_{i},x_{ki}) = 0\)</span><span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html"><i class="fa fa-check"></i><b>6.3</b> Simple Linear Regression</a>
+<li class="chapter" data-level="5.4" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html"><i class="fa fa-check"></i><b>5.4</b> Properties of the OLS Estimator<span></span></a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#regression-equation-and-model-fitting"><i class="fa fa-check"></i><b>6.3.1</b> Regression Equation and Model Fitting</a></li>
-<li class="chapter" data-level="6.3.2" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#path-diagram"><i class="fa fa-check"></i><b>6.3.2</b> Path Diagram</a></li>
-<li class="chapter" data-level="6.3.3" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#interpreting-model-parameters"><i class="fa fa-check"></i><b>6.3.3</b> Interpreting Model Parameters</a></li>
-<li class="chapter" data-level="6.3.4" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#plotting-regression-line"><i class="fa fa-check"></i><b>6.3.4</b> Plotting Regression Line</a></li>
+<li class="chapter" data-level="5.4.1" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html#consistentcy-of-boldsymbolbeta"><i class="fa fa-check"></i><b>5.4.1</b> 1. Consistentcy of <span class="math inline">\(\boldsymbol{{\beta}}\)</span><span></span></a></li>
+<li class="chapter" data-level="5.4.2" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html#asymptotic-normality"><i class="fa fa-check"></i><b>5.4.2</b> 2. Asymptotic Normality<span></span></a></li>
+<li class="chapter" data-level="5.4.3" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html#variance-of-hatbeta"><i class="fa fa-check"></i><b>5.4.3</b> Variance of <span class="math inline">\(\hat{\beta}\)</span><span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html"><i class="fa fa-check"></i><b>6.4</b> Mean Centering Predictors</a>
+<li class="chapter" data-level="5.5" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html"><i class="fa fa-check"></i><b>5.5</b> Failure to Meet Assumptions<span></span></a>
 <ul>
-<li class="chapter" data-level="6.4.1" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html#interpreting-model-parameters-1"><i class="fa fa-check"></i><b>6.4.1</b> Interpreting Model Parameters</a></li>
-<li class="chapter" data-level="6.4.2" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html#plotting-regression-line-1"><i class="fa fa-check"></i><b>6.4.2</b> Plotting Regression Line</a></li>
+<li class="chapter" data-level="5.5.1" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html#failure-of-assumption-1."><i class="fa fa-check"></i><b>5.5.1</b> Failure of Assumption 1.<span></span></a></li>
+<li class="chapter" data-level="5.5.2" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html#failure-of-assumption-2-or-3."><i class="fa fa-check"></i><b>5.5.2</b> Failure of Assumption 2 or 3.<span></span></a></li>
+<li class="chapter" data-level="5.5.3" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html#failure-of-assumption-5."><i class="fa fa-check"></i><b>5.5.3</b> Failure of Assumption 5.<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html"><i class="fa fa-check"></i><b>6.5</b> Multiple Linear Regression</a>
+<li class="chapter" data-level="5.6" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html"><i class="fa fa-check"></i><b>5.6</b> Regression and Matrix Notation<span></span></a>
 <ul>
-<li class="chapter" data-level="6.5.1" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#regression-equation"><i class="fa fa-check"></i><b>6.5.1</b> Regression Equation</a></li>
-<li class="chapter" data-level="6.5.2" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#fit-model-in-r"><i class="fa fa-check"></i><b>6.5.2</b> Fit Model in R</a></li>
-<li class="chapter" data-level="6.5.3" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#path-diagram-1"><i class="fa fa-check"></i><b>6.5.3</b> Path Diagram</a></li>
-<li class="chapter" data-level="6.5.4" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#a-note-on-interpretation"><i class="fa fa-check"></i><b>6.5.4</b> A Note on Interpretation</a></li>
+<li class="chapter" data-level="5.6.1" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#an-intercept-only-model"><i class="fa fa-check"></i><b>5.6.1</b> An Intercept-Only Model<span></span></a></li>
+<li class="chapter" data-level="5.6.2" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#intercept-only-model-in-matrix-form"><i class="fa fa-check"></i><b>5.6.2</b> Intercept-Only Model in Matrix Form<span></span></a></li>
+<li class="chapter" data-level="5.6.3" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#simple-regression-in-matrix-form"><i class="fa fa-check"></i><b>5.6.3</b> Simple Regression in Matrix Form<span></span></a></li>
+<li class="chapter" data-level="5.6.4" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#multiple-regression-in-matrix-form"><i class="fa fa-check"></i><b>5.6.4</b> Multiple Regression in Matrix Form<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html"><i class="fa fa-check"></i><b>6.6</b> Categorical Variable Interaction</a>
+<li class="chapter" data-level="5.7" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html"><i class="fa fa-check"></i><b>5.7</b> Solving the Regression Equation<span></span></a>
 <ul>
-<li class="chapter" data-level="6.6.1" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#interaction-as-moderation"><i class="fa fa-check"></i><b>6.6.1</b> Interaction as Moderation</a></li>
-<li class="chapter" data-level="6.6.2" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#moderation-by-categorical-variable"><i class="fa fa-check"></i><b>6.6.2</b> Moderation by Categorical Variable</a></li>
-<li class="chapter" data-level="6.6.3" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#interpretation"><i class="fa fa-check"></i><b>6.6.3</b> Interpretation</a></li>
-<li class="chapter" data-level="6.6.4" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#fit-regression-model-in-r"><i class="fa fa-check"></i><b>6.6.4</b> Fit Regression Model in R</a></li>
-<li class="chapter" data-level="6.6.5" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#path-diagram-2"><i class="fa fa-check"></i><b>6.6.5</b> Path Diagram</a></li>
+<li class="chapter" data-level="5.7.1" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html#matrix-multiplication-and-transpose"><i class="fa fa-check"></i><b>5.7.1</b> Matrix Multiplication and Transpose<span></span></a></li>
+<li class="chapter" data-level="5.7.2" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html#matrix-inverse"><i class="fa fa-check"></i><b>5.7.2</b> Matrix Inverse<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html"><i class="fa fa-check"></i><b>5.8</b> The Linear Probability Model<span></span></a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html#advantages-of-the-lpm"><i class="fa fa-check"></i><b>5.8.1</b> Advantages of the LPM<span></span></a></li>
+<li class="chapter" data-level="5.8.2" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html#disadvantages-of-the-lpm"><i class="fa fa-check"></i><b>5.8.2</b> Disadvantages of the LPM<span></span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="7-chapter-7.html"><a href="7-chapter-7.html"><i class="fa fa-check"></i><b>7</b> Logistic Regression</a>
+<li class="chapter" data-level="6" data-path="6-chapter-6.html"><a href="6-chapter-6.html"><i class="fa fa-check"></i><b>6</b> Linear Regression<span></span></a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="7.1-categorical-data-in-the-social-sciences.html"><a href="7.1-categorical-data-in-the-social-sciences.html"><i class="fa fa-check"></i><b>7.1</b> Categorical Data in the Social Sciences</a>
+<li class="chapter" data-level="6.1" data-path="6.1-example-data-2.html"><a href="6.1-example-data-2.html"><i class="fa fa-check"></i><b>6.1</b> Example Data<span></span></a></li>
+<li class="chapter" data-level="6.2" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html"><i class="fa fa-check"></i><b>6.2</b> Intercept-Only Model<span></span></a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="7.1-categorical-data-in-the-social-sciences.html"><a href="7.1-categorical-data-in-the-social-sciences.html#examples-of-categorical-data"><i class="fa fa-check"></i><b>7.1.1</b> Examples of Categorical Data</a></li>
+<li class="chapter" data-level="6.2.1" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-equation"><i class="fa fa-check"></i><b>6.2.1</b> Intercept-Only Equation<span></span></a></li>
+<li class="chapter" data-level="6.2.2" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-model-in-r"><i class="fa fa-check"></i><b>6.2.2</b> Intercept-Only Model in R<span></span></a></li>
+<li class="chapter" data-level="6.2.3" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-as-mean-of-outcome"><i class="fa fa-check"></i><b>6.2.3</b> Intercept as Mean of Outcome<span></span></a></li>
+<li class="chapter" data-level="6.2.4" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-model-r2"><i class="fa fa-check"></i><b>6.2.4</b> Intercept-Only Model <span class="math inline">\(R^2\)</span><span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html"><i class="fa fa-check"></i><b>7.2</b> Introduction to GLMs</a>
+<li class="chapter" data-level="6.3" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html"><i class="fa fa-check"></i><b>6.3</b> Simple Linear Regression<span></span></a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#linear-regression-as-glm"><i class="fa fa-check"></i><b>7.2.1</b> Linear Regression as GLM</a></li>
-<li class="chapter" data-level="7.2.2" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#logistic-regression-as-glm"><i class="fa fa-check"></i><b>7.2.2</b> Logistic Regression as GLM</a></li>
-<li class="chapter" data-level="7.2.3" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#poisson-regression-as-glm"><i class="fa fa-check"></i><b>7.2.3</b> Poisson Regression as GLM</a></li>
-<li class="chapter" data-level="7.2.4" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#additional-remarks"><i class="fa fa-check"></i><b>7.2.4</b> Additional Remarks</a></li>
+<li class="chapter" data-level="6.3.1" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#regression-equation-and-model-fitting"><i class="fa fa-check"></i><b>6.3.1</b> Regression Equation and Model Fitting<span></span></a></li>
+<li class="chapter" data-level="6.3.2" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#path-diagram"><i class="fa fa-check"></i><b>6.3.2</b> Path Diagram<span></span></a></li>
+<li class="chapter" data-level="6.3.3" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#interpreting-model-parameters"><i class="fa fa-check"></i><b>6.3.3</b> Interpreting Model Parameters<span></span></a></li>
+<li class="chapter" data-level="6.3.4" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#plotting-regression-line"><i class="fa fa-check"></i><b>6.3.4</b> Plotting Regression Line<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="7.3-binary-logistic-regression.html"><a href="7.3-binary-logistic-regression.html"><i class="fa fa-check"></i><b>7.3</b> Binary Logistic Regression</a>
+<li class="chapter" data-level="6.4" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html"><i class="fa fa-check"></i><b>6.4</b> Mean Centering Predictors<span></span></a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="7.3-binary-logistic-regression.html"><a href="7.3-binary-logistic-regression.html#overcoming-lpm"><i class="fa fa-check"></i><b>7.3.1</b> Overcoming LPM</a></li>
-<li class="chapter" data-level="7.3.2" data-path="7.3-binary-logistic-regression.html"><a href="7.3-binary-logistic-regression.html#model"><i class="fa fa-check"></i><b>7.3.2</b> Model</a></li>
+<li class="chapter" data-level="6.4.1" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html#interpreting-model-parameters-1"><i class="fa fa-check"></i><b>6.4.1</b> Interpreting Model Parameters<span></span></a></li>
+<li class="chapter" data-level="6.4.2" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html#plotting-regression-line-1"><i class="fa fa-check"></i><b>6.4.2</b> Plotting Regression Line<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="7.4-example-data-3.html"><a href="7.4-example-data-3.html"><i class="fa fa-check"></i><b>7.4</b> Example Data</a>
+<li class="chapter" data-level="6.5" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html"><i class="fa fa-check"></i><b>6.5</b> Multiple Linear Regression<span></span></a>
 <ul>
-<li class="chapter" data-level="7.4.1" data-path="7.4-example-data-3.html"><a href="7.4-example-data-3.html#variables"><i class="fa fa-check"></i><b>7.4.1</b> Variables</a></li>
+<li class="chapter" data-level="6.5.1" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#regression-equation"><i class="fa fa-check"></i><b>6.5.1</b> Regression Equation<span></span></a></li>
+<li class="chapter" data-level="6.5.2" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#fit-model-in-r"><i class="fa fa-check"></i><b>6.5.2</b> Fit Model in R<span></span></a></li>
+<li class="chapter" data-level="6.5.3" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#path-diagram-1"><i class="fa fa-check"></i><b>6.5.3</b> Path Diagram<span></span></a></li>
+<li class="chapter" data-level="6.5.4" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#a-note-on-interpretation"><i class="fa fa-check"></i><b>6.5.4</b> A Note on Interpretation<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="7.5-intercept-only-model-1.html"><a href="7.5-intercept-only-model-1.html"><i class="fa fa-check"></i><b>7.5</b> Intercept-Only Model</a>
+<li class="chapter" data-level="6.6" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html"><i class="fa fa-check"></i><b>6.6</b> Categorical Variable Interaction<span></span></a>
 <ul>
-<li class="chapter" data-level="7.5.1" data-path="7.5-intercept-only-model-1.html"><a href="7.5-intercept-only-model-1.html#intercept-only-model-in-r-1"><i class="fa fa-check"></i><b>7.5.1</b> Intercept-Only Model in R</a></li>
-<li class="chapter" data-level="7.5.2" data-path="7.5-intercept-only-model-1.html"><a href="7.5-intercept-only-model-1.html#interpretation-1"><i class="fa fa-check"></i><b>7.5.2</b> Interpretation</a></li>
+<li class="chapter" data-level="6.6.1" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#interaction-as-moderation"><i class="fa fa-check"></i><b>6.6.1</b> Interaction as Moderation<span></span></a></li>
+<li class="chapter" data-level="6.6.2" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#moderation-by-categorical-variable"><i class="fa fa-check"></i><b>6.6.2</b> Moderation by Categorical Variable<span></span></a></li>
+<li class="chapter" data-level="6.6.3" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#interpretation"><i class="fa fa-check"></i><b>6.6.3</b> Interpretation<span></span></a></li>
+<li class="chapter" data-level="6.6.4" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#fit-regression-model-in-r"><i class="fa fa-check"></i><b>6.6.4</b> Fit Regression Model in R<span></span></a></li>
+<li class="chapter" data-level="6.6.5" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#path-diagram-2"><i class="fa fa-check"></i><b>6.6.5</b> Path Diagram<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="7.6" data-path="7.6-single-predictor-model.html"><a href="7.6-single-predictor-model.html"><i class="fa fa-check"></i><b>7.6</b> Single Predictor Model</a>
-<ul>
-<li class="chapter" data-level="7.6.1" data-path="7.6-single-predictor-model.html"><a href="7.6-single-predictor-model.html#overdispersion"><i class="fa fa-check"></i><b>7.6.1</b> Overdispersion</a></li>
-<li class="chapter" data-level="7.6.2" data-path="7.6-single-predictor-model.html"><a href="7.6-single-predictor-model.html#coefficients"><i class="fa fa-check"></i><b>7.6.2</b> Coefficients</a></li>
 </ul></li>
-<li class="chapter" data-level="7.7" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html"><i class="fa fa-check"></i><b>7.7</b> Marginal Effects</a>
+<li class="chapter" data-level="7" data-path="7-chapter-7.html"><a href="7-chapter-7.html"><i class="fa fa-check"></i><b>7</b> Logistic Regression<span></span></a>
 <ul>
-<li class="chapter" data-level="7.7.1" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#a-definition-of-marginal-effects"><i class="fa fa-check"></i><b>7.7.1</b> A Definition of Marginal Effects</a></li>
-<li class="chapter" data-level="7.7.2" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#a-few-observations"><i class="fa fa-check"></i><b>7.7.2</b> A Few Observations</a></li>
-<li class="chapter" data-level="7.7.3" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#types-of-marginal-effects"><i class="fa fa-check"></i><b>7.7.3</b> Types of Marginal Effects</a></li>
-<li class="chapter" data-level="7.7.4" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#example-model"><i class="fa fa-check"></i><b>7.7.4</b> Example Model</a></li>
-<li class="chapter" data-level="7.7.5" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#marginal-effects-at-representative-values-mer"><i class="fa fa-check"></i><b>7.7.5</b> Marginal Effects at Representative Values (MER)</a></li>
+<li class="chapter" data-level="7.1" data-path="7.1-categorical-data-in-the-social-sciences.html"><a href="7.1-categorical-data-in-the-social-sciences.html"><i class="fa fa-check"></i><b>7.1</b> Categorical Data in the Social Sciences<span></span></a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="7.1-categorical-data-in-the-social-sciences.html"><a href="7.1-categorical-data-in-the-social-sciences.html#examples-of-categorical-data"><i class="fa fa-check"></i><b>7.1.1</b> Examples of Categorical Data<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html"><i class="fa fa-check"></i><b>7.2</b> Introduction to GLMs<span></span></a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#linear-regression-as-glm"><i class="fa fa-check"></i><b>7.2.1</b> Linear Regression as GLM<span></span></a></li>
+<li class="chapter" data-level="7.2.2" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#logistic-regression-as-glm"><i class="fa fa-check"></i><b>7.2.2</b> Logistic Regression as GLM<span></span></a></li>
+<li class="chapter" data-level="7.2.3" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#poisson-regression-as-glm"><i class="fa fa-check"></i><b>7.2.3</b> Poisson Regression as GLM<span></span></a></li>
+<li class="chapter" data-level="7.2.4" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#additional-remarks"><i class="fa fa-check"></i><b>7.2.4</b> Additional Remarks<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="7.3-binary-logistic-regression.html"><a href="7.3-binary-logistic-regression.html"><i class="fa fa-check"></i><b>7.3</b> Binary Logistic Regression<span></span></a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="7.3-binary-logistic-regression.html"><a href="7.3-binary-logistic-regression.html#overcoming-lpm"><i class="fa fa-check"></i><b>7.3.1</b> Overcoming LPM<span></span></a></li>
+<li class="chapter" data-level="7.3.2" data-path="7.3-binary-logistic-regression.html"><a href="7.3-binary-logistic-regression.html#model"><i class="fa fa-check"></i><b>7.3.2</b> Model<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="7.4-example-data-3.html"><a href="7.4-example-data-3.html"><i class="fa fa-check"></i><b>7.4</b> Example Data<span></span></a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="7.4-example-data-3.html"><a href="7.4-example-data-3.html#variables"><i class="fa fa-check"></i><b>7.4.1</b> Variables<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="7.5-intercept-only-model-1.html"><a href="7.5-intercept-only-model-1.html"><i class="fa fa-check"></i><b>7.5</b> Intercept-Only Model<span></span></a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="7.5-intercept-only-model-1.html"><a href="7.5-intercept-only-model-1.html#intercept-only-model-in-r-1"><i class="fa fa-check"></i><b>7.5.1</b> Intercept-Only Model in R<span></span></a></li>
+<li class="chapter" data-level="7.5.2" data-path="7.5-intercept-only-model-1.html"><a href="7.5-intercept-only-model-1.html#interpretation-1"><i class="fa fa-check"></i><b>7.5.2</b> Interpretation<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="7.6-single-predictor-model.html"><a href="7.6-single-predictor-model.html"><i class="fa fa-check"></i><b>7.6</b> Single Predictor Model<span></span></a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="7.6-single-predictor-model.html"><a href="7.6-single-predictor-model.html#overdispersion"><i class="fa fa-check"></i><b>7.6.1</b> Overdispersion<span></span></a></li>
+<li class="chapter" data-level="7.6.2" data-path="7.6-single-predictor-model.html"><a href="7.6-single-predictor-model.html#coefficients"><i class="fa fa-check"></i><b>7.6.2</b> Coefficients<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html"><i class="fa fa-check"></i><b>7.7</b> Marginal Effects<span></span></a>
+<ul>
+<li class="chapter" data-level="7.7.1" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#a-definition-of-marginal-effects"><i class="fa fa-check"></i><b>7.7.1</b> A Definition of Marginal Effects<span></span></a></li>
+<li class="chapter" data-level="7.7.2" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#a-few-observations"><i class="fa fa-check"></i><b>7.7.2</b> A Few Observations<span></span></a></li>
+<li class="chapter" data-level="7.7.3" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#types-of-marginal-effects"><i class="fa fa-check"></i><b>7.7.3</b> Types of Marginal Effects<span></span></a></li>
+<li class="chapter" data-level="7.7.4" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#example-model"><i class="fa fa-check"></i><b>7.7.4</b> Example Model<span></span></a></li>
+<li class="chapter" data-level="7.7.5" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#marginal-effects-at-representative-values-mer"><i class="fa fa-check"></i><b>7.7.5</b> Marginal Effects at Representative Values (MER)<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="8-chapter-8.html"><a href="8-chapter-8.html"><i class="fa fa-check"></i><b>8</b> Poisson Regression<span></span></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="8.1-poisson-regression.html"><a href="8.1-poisson-regression.html"><i class="fa fa-check"></i><b>8.1</b> Poisson Regression<span></span></a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="8.1-poisson-regression.html"><a href="8.1-poisson-regression.html#poisson-regression-as-glm-1"><i class="fa fa-check"></i><b>8.1.1</b> Poisson Regression as GLM<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="8.2-poisson-distribution.html"><a href="8.2-poisson-distribution.html"><i class="fa fa-check"></i><b>8.2</b> Poisson Distribution<span></span></a></li>
+<li class="chapter" data-level="8.3" data-path="8.3-notes-on-interpretation.html"><a href="8.3-notes-on-interpretation.html"><i class="fa fa-check"></i><b>8.3</b> Notes on Interpretation<span></span></a></li>
+<li class="chapter" data-level="8.4" data-path="8.4-example-data-4.html"><a href="8.4-example-data-4.html"><i class="fa fa-check"></i><b>8.4</b> Example Data<span></span></a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="8.4-example-data-4.html"><a href="8.4-example-data-4.html#dependent-variable"><i class="fa fa-check"></i><b>8.4.1</b> Dependent variable<span></span></a></li>
+<li class="chapter" data-level="8.4.2" data-path="8.4-example-data-4.html"><a href="8.4-example-data-4.html#explanatory-variables"><i class="fa fa-check"></i><b>8.4.2</b> Explanatory Variables<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="8.5-single-predictor-model-1.html"><a href="8.5-single-predictor-model-1.html"><i class="fa fa-check"></i><b>8.5</b> Single Predictor Model<span></span></a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="8.5-single-predictor-model-1.html"><a href="8.5-single-predictor-model-1.html#overdispersion-1"><i class="fa fa-check"></i><b>8.5.1</b> Overdispersion<span></span></a></li>
+<li class="chapter" data-level="8.5.2" data-path="8.5-single-predictor-model-1.html"><a href="8.5-single-predictor-model-1.html#interpretation-2"><i class="fa fa-check"></i><b>8.5.2</b> Interpretation<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="8.6-multiple-predictor-model.html"><a href="8.6-multiple-predictor-model.html"><i class="fa fa-check"></i><b>8.6</b> Multiple Predictor Model<span></span></a></li>
+<li class="chapter" data-level="8.7" data-path="8.7-revisisting-overdispersion.html"><a href="8.7-revisisting-overdispersion.html"><i class="fa fa-check"></i><b>8.7</b> Revisisting Overdispersion<span></span></a>
+<ul>
+<li class="chapter" data-level="8.7.1" data-path="8.7-revisisting-overdispersion.html"><a href="8.7-revisisting-overdispersion.html#quassi-poisson-family"><i class="fa fa-check"></i><b>8.7.1</b> Quassi-Poisson Family<span></span></a></li>
+<li class="chapter" data-level="8.7.2" data-path="8.7-revisisting-overdispersion.html"><a href="8.7-revisisting-overdispersion.html#negative-binomial-regression"><i class="fa fa-check"></i><b>8.7.2</b> Negative Binomial Regression<span></span></a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -357,8 +383,8 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="chapter-7" class="section level1" number="7">
-<h1><span class="header-section-number">Chapter 7</span> Logistic Regression</h1>
+<div id="chapter-7" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Logistic Regression<a href="7-chapter-7.html#chapter-7" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
 <script>
   function codefolder(query) {

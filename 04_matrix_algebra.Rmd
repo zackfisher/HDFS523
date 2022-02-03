@@ -1,4 +1,4 @@
-# Matrix Algebra Review {#chapter-4}
+# Matrix Algebra {#chapter-4}
 
 ```{r, echo = F}
 button <-  "position: relative; 

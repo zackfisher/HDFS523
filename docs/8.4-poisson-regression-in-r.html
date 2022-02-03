@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>8.4 Poisson Regression in R | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
+  <meta name="description" content="Course notes for HDFS 523" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="8.4 Poisson Regression in R | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="/images/image1.png" />
+  <meta property="og:description" content="Course notes for HDFS 523" />
+  <meta name="github-repo" content="zackfisher/HDFS523" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="8.4 Poisson Regression in R | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  
+  <meta name="twitter:description" content="Course notes for HDFS 523" />
+  <meta name="twitter:image" content="/images/image1.png" />
+
+<meta name="author" content="Zachary F. Fisher" />
+
+
+<meta name="date" content="2022-02-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="null" type="image/x-icon" />
+<link rel="prev" href="8.3-example-data-4.html"/>
+
+<script src="libs/header-attrs-2.11.15/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Course notes for HDFS 523</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book<span></span></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1.1-why-this-book.html"><a href="1.1-why-this-book.html"><i class="fa fa-check"></i><b>1.1</b> Why this book?<span></span></a></li>
+<li class="chapter" data-level="1.2" data-path="1.2-code-folding.html"><a href="1.2-code-folding.html"><i class="fa fa-check"></i><b>1.2</b> Code Folding<span></span></a></li>
+<li class="chapter" data-level="1.3" data-path="1.3-acknowledgements.html"><a href="1.3-acknowledgements.html"><i class="fa fa-check"></i><b>1.3</b> Acknowledgements<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="2-chapter-2.html"><a href="2-chapter-2.html"><i class="fa fa-check"></i><b>2</b> Data Cleaning<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2.1-example-data.html"><a href="2.1-example-data.html"><i class="fa fa-check"></i><b>2.1</b> Example Data<span></span></a></li>
+<li class="chapter" data-level="2.2" data-path="2.2-reading-in-repeated-measures-data.html"><a href="2.2-reading-in-repeated-measures-data.html"><i class="fa fa-check"></i><b>2.2</b> Reading in Repeated Measures Data<span></span></a></li>
+<li class="chapter" data-level="2.3" data-path="2.3-familiarize-yourself-with-the-data.html"><a href="2.3-familiarize-yourself-with-the-data.html"><i class="fa fa-check"></i><b>2.3</b> Familiarize Yourself with the Data<span></span></a></li>
+<li class="chapter" data-level="2.4" data-path="2.4-look-for-duplicated-ids.html"><a href="2.4-look-for-duplicated-ids.html"><i class="fa fa-check"></i><b>2.4</b> Look for Duplicated IDs<span></span></a></li>
+<li class="chapter" data-level="2.5" data-path="2.5-using-table-to-spot-irregularities.html"><a href="2.5-using-table-to-spot-irregularities.html"><i class="fa fa-check"></i><b>2.5</b> Using <code>table()</code> to Spot Irregularities<span></span></a></li>
+<li class="chapter" data-level="2.6" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html"><i class="fa fa-check"></i><b>2.6</b> Missing Data<span></span></a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#generating-example-data"><i class="fa fa-check"></i><b>2.6.1</b> Generating Example Data<span></span></a></li>
+<li class="chapter" data-level="2.6.2" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#recoding-values-with-na"><i class="fa fa-check"></i><b>2.6.2</b> Recoding Values with <code>NA</code><span></span></a></li>
+<li class="chapter" data-level="2.6.3" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#missing-data-visualization"><i class="fa fa-check"></i><b>2.6.3</b> Missing Data Visualization<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="2.7-exporting-data.html"><a href="2.7-exporting-data.html"><i class="fa fa-check"></i><b>2.7</b> Exporting Data<span></span></a></li>
+<li class="chapter" data-level="2.8" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html"><i class="fa fa-check"></i><b>2.8</b> Reshaping Repeated Measures Data<span></span></a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html#reshape-wide-to-long"><i class="fa fa-check"></i><b>2.8.1</b> Reshape Wide to Long<span></span></a></li>
+<li class="chapter" data-level="2.8.2" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html#reshape-long-to-wide"><i class="fa fa-check"></i><b>2.8.2</b> Reshape Long to Wide<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-chapter-3.html"><a href="3-chapter-3.html"><i class="fa fa-check"></i><b>3</b> Describing Longitudinal Data<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3.1-example-data-1.html"><a href="3.1-example-data-1.html"><i class="fa fa-check"></i><b>3.1</b> Example Data<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html"><i class="fa fa-check"></i><b>3.2</b> Describing Means and Variances<span></span></a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html#verbal-ability-all-persons-and-occasions"><i class="fa fa-check"></i><b>3.2.1</b> Verbal Ability (All Persons and Occasions)<span></span></a></li>
+<li class="chapter" data-level="3.2.2" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html#verbal-ability-across-time"><i class="fa fa-check"></i><b>3.2.2</b> Verbal Ability (Across Time)<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="3.3-describing-covariances.html"><a href="3.3-describing-covariances.html"><i class="fa fa-check"></i><b>3.3</b> Describing Covariances<span></span></a></li>
+<li class="chapter" data-level="3.4" data-path="3.4-individual-level-descriptives.html"><a href="3.4-individual-level-descriptives.html"><i class="fa fa-check"></i><b>3.4</b> Individual-Level Descriptives<span></span></a></li>
+<li class="chapter" data-level="3.5" data-path="3.5-references.html"><a href="3.5-references.html"><i class="fa fa-check"></i><b>3.5</b> References<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-chapter-4.html"><a href="4-chapter-4.html"><i class="fa fa-check"></i><b>4</b> Matrix Algebra<span></span></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html"><i class="fa fa-check"></i><b>4.1</b> Types of matrices<span></span></a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#square"><i class="fa fa-check"></i><b>4.1.1</b> Square<span></span></a></li>
+<li class="chapter" data-level="4.1.2" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#symmetric"><i class="fa fa-check"></i><b>4.1.2</b> Symmetric<span></span></a></li>
+<li class="chapter" data-level="4.1.3" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#diagonal"><i class="fa fa-check"></i><b>4.1.3</b> Diagonal<span></span></a></li>
+<li class="chapter" data-level="4.1.4" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#identity"><i class="fa fa-check"></i><b>4.1.4</b> Identity<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html"><i class="fa fa-check"></i><b>4.2</b> Operations on Matrices<span></span></a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-transpose"><i class="fa fa-check"></i><b>4.2.1</b> Matrix Transpose<span></span></a></li>
+<li class="chapter" data-level="4.2.2" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-trace"><i class="fa fa-check"></i><b>4.2.2</b> Matrix Trace<span></span></a></li>
+<li class="chapter" data-level="4.2.3" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#addition"><i class="fa fa-check"></i><b>4.2.3</b> Addition<span></span></a></li>
+<li class="chapter" data-level="4.2.4" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#subtraction"><i class="fa fa-check"></i><b>4.2.4</b> Subtraction<span></span></a></li>
+<li class="chapter" data-level="4.2.5" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-multiplication"><i class="fa fa-check"></i><b>4.2.5</b> Matrix Multiplication<span></span></a></li>
+<li class="chapter" data-level="4.2.6" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-division"><i class="fa fa-check"></i><b>4.2.6</b> Matrix Division<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-chapter-5.html"><a href="5-chapter-5.html"><i class="fa fa-check"></i><b>5</b> Ordinary Least Squares<span></span></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="5.1-linear-regression-model.html"><a href="5.1-linear-regression-model.html"><i class="fa fa-check"></i><b>5.1</b> Linear Regression Model<span></span></a></li>
+<li class="chapter" data-level="5.2" data-path="5.2-ordinary-least-squares-ols.html"><a href="5.2-ordinary-least-squares-ols.html"><i class="fa fa-check"></i><b>5.2</b> Ordinary Least Squares (OLS)<span></span></a></li>
+<li class="chapter" data-level="5.3" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html"><i class="fa fa-check"></i><b>5.3</b> Assumptions of OLS<span></span></a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#assumption-1.-mathbbeepsilon_i-0"><i class="fa fa-check"></i><b>5.3.1</b> Assumption 1. <span class="math inline">\(\mathbb{E}(\epsilon_{i}) = 0\)</span><span></span></a></li>
+<li class="chapter" data-level="5.3.2" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#assumption-2.-homoscedasticity"><i class="fa fa-check"></i><b>5.3.2</b> Assumption 2. Homoscedasticity<span></span></a></li>
+<li class="chapter" data-level="5.3.3" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#mathbbeepsilon_iepsilon_j-0"><i class="fa fa-check"></i><b>5.3.3</b> 3. <span class="math inline">\(\mathbb{E}(\epsilon_{i}\epsilon_{j}) = 0\)</span><span></span></a></li>
+<li class="chapter" data-level="5.3.4" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#no-perfect-collinearity"><i class="fa fa-check"></i><b>5.3.4</b> 4. No Perfect Collinearity<span></span></a></li>
+<li class="chapter" data-level="5.3.5" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#mathbbcepsilon_ix_ki-0"><i class="fa fa-check"></i><b>5.3.5</b> 5. <span class="math inline">\(\mathbb{C}(\epsilon_{i},x_{ki}) = 0\)</span><span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html"><i class="fa fa-check"></i><b>5.4</b> Properties of the OLS Estimator<span></span></a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html#consistentcy-of-boldsymbolbeta"><i class="fa fa-check"></i><b>5.4.1</b> 1. Consistentcy of <span class="math inline">\(\boldsymbol{{\beta}}\)</span><span></span></a></li>
+<li class="chapter" data-level="5.4.2" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html#asymptotic-normality"><i class="fa fa-check"></i><b>5.4.2</b> 2. Asymptotic Normality<span></span></a></li>
+<li class="chapter" data-level="5.4.3" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html#variance-of-hatbeta"><i class="fa fa-check"></i><b>5.4.3</b> Variance of <span class="math inline">\(\hat{\beta}\)</span><span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html"><i class="fa fa-check"></i><b>5.5</b> Failure to Meet Assumptions<span></span></a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html#failure-of-assumption-1."><i class="fa fa-check"></i><b>5.5.1</b> Failure of Assumption 1.<span></span></a></li>
+<li class="chapter" data-level="5.5.2" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html#failure-of-assumption-2-or-3."><i class="fa fa-check"></i><b>5.5.2</b> Failure of Assumption 2 or 3.<span></span></a></li>
+<li class="chapter" data-level="5.5.3" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html#failure-of-assumption-5."><i class="fa fa-check"></i><b>5.5.3</b> Failure of Assumption 5.<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html"><i class="fa fa-check"></i><b>5.6</b> Regression and Matrix Notation<span></span></a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#an-intercept-only-model"><i class="fa fa-check"></i><b>5.6.1</b> An Intercept-Only Model<span></span></a></li>
+<li class="chapter" data-level="5.6.2" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#intercept-only-model-in-matrix-form"><i class="fa fa-check"></i><b>5.6.2</b> Intercept-Only Model in Matrix Form<span></span></a></li>
+<li class="chapter" data-level="5.6.3" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#simple-regression-in-matrix-form"><i class="fa fa-check"></i><b>5.6.3</b> Simple Regression in Matrix Form<span></span></a></li>
+<li class="chapter" data-level="5.6.4" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#multiple-regression-in-matrix-form"><i class="fa fa-check"></i><b>5.6.4</b> Multiple Regression in Matrix Form<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html"><i class="fa fa-check"></i><b>5.7</b> Solving the Regression Equation<span></span></a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html#matrix-multiplication-and-transpose"><i class="fa fa-check"></i><b>5.7.1</b> Matrix Multiplication and Transpose<span></span></a></li>
+<li class="chapter" data-level="5.7.2" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html#matrix-inverse"><i class="fa fa-check"></i><b>5.7.2</b> Matrix Inverse<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html"><i class="fa fa-check"></i><b>5.8</b> The Linear Probability Model<span></span></a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html#advantages-of-the-lpm"><i class="fa fa-check"></i><b>5.8.1</b> Advantages of the LPM<span></span></a></li>
+<li class="chapter" data-level="5.8.2" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html#disadvantages-of-the-lpm"><i class="fa fa-check"></i><b>5.8.2</b> Disadvantages of the LPM<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-chapter-6.html"><a href="6-chapter-6.html"><i class="fa fa-check"></i><b>6</b> Linear Regression<span></span></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="6.1-example-data-2.html"><a href="6.1-example-data-2.html"><i class="fa fa-check"></i><b>6.1</b> Example Data<span></span></a></li>
+<li class="chapter" data-level="6.2" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html"><i class="fa fa-check"></i><b>6.2</b> Intercept-Only Model<span></span></a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-equation"><i class="fa fa-check"></i><b>6.2.1</b> Intercept-Only Equation<span></span></a></li>
+<li class="chapter" data-level="6.2.2" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-model-in-r"><i class="fa fa-check"></i><b>6.2.2</b> Intercept-Only Model in R<span></span></a></li>
+<li class="chapter" data-level="6.2.3" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-as-mean-of-outcome"><i class="fa fa-check"></i><b>6.2.3</b> Intercept as Mean of Outcome<span></span></a></li>
+<li class="chapter" data-level="6.2.4" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-model-r2"><i class="fa fa-check"></i><b>6.2.4</b> Intercept-Only Model <span class="math inline">\(R^2\)</span><span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html"><i class="fa fa-check"></i><b>6.3</b> Simple Linear Regression<span></span></a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#regression-equation-and-model-fitting"><i class="fa fa-check"></i><b>6.3.1</b> Regression Equation and Model Fitting<span></span></a></li>
+<li class="chapter" data-level="6.3.2" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#path-diagram"><i class="fa fa-check"></i><b>6.3.2</b> Path Diagram<span></span></a></li>
+<li class="chapter" data-level="6.3.3" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#interpreting-model-parameters"><i class="fa fa-check"></i><b>6.3.3</b> Interpreting Model Parameters<span></span></a></li>
+<li class="chapter" data-level="6.3.4" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#plotting-regression-line"><i class="fa fa-check"></i><b>6.3.4</b> Plotting Regression Line<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html"><i class="fa fa-check"></i><b>6.4</b> Mean Centering Predictors<span></span></a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html#interpreting-model-parameters-1"><i class="fa fa-check"></i><b>6.4.1</b> Interpreting Model Parameters<span></span></a></li>
+<li class="chapter" data-level="6.4.2" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html#plotting-regression-line-1"><i class="fa fa-check"></i><b>6.4.2</b> Plotting Regression Line<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html"><i class="fa fa-check"></i><b>6.5</b> Multiple Linear Regression<span></span></a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#regression-equation"><i class="fa fa-check"></i><b>6.5.1</b> Regression Equation<span></span></a></li>
+<li class="chapter" data-level="6.5.2" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#fit-model-in-r"><i class="fa fa-check"></i><b>6.5.2</b> Fit Model in R<span></span></a></li>
+<li class="chapter" data-level="6.5.3" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#path-diagram-1"><i class="fa fa-check"></i><b>6.5.3</b> Path Diagram<span></span></a></li>
+<li class="chapter" data-level="6.5.4" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#a-note-on-interpretation"><i class="fa fa-check"></i><b>6.5.4</b> A Note on Interpretation<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html"><i class="fa fa-check"></i><b>6.6</b> Categorical Variable Interaction<span></span></a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#interaction-as-moderation"><i class="fa fa-check"></i><b>6.6.1</b> Interaction as Moderation<span></span></a></li>
+<li class="chapter" data-level="6.6.2" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#moderation-by-categorical-variable"><i class="fa fa-check"></i><b>6.6.2</b> Moderation by Categorical Variable<span></span></a></li>
+<li class="chapter" data-level="6.6.3" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#interpretation"><i class="fa fa-check"></i><b>6.6.3</b> Interpretation<span></span></a></li>
+<li class="chapter" data-level="6.6.4" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#fit-regression-model-in-r"><i class="fa fa-check"></i><b>6.6.4</b> Fit Regression Model in R<span></span></a></li>
+<li class="chapter" data-level="6.6.5" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#path-diagram-2"><i class="fa fa-check"></i><b>6.6.5</b> Path Diagram<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="7-chapter-7.html"><a href="7-chapter-7.html"><i class="fa fa-check"></i><b>7</b> Logistic Regression<span></span></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="7.1-categorical-data-in-the-social-sciences.html"><a href="7.1-categorical-data-in-the-social-sciences.html"><i class="fa fa-check"></i><b>7.1</b> Categorical Data in the Social Sciences<span></span></a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="7.1-categorical-data-in-the-social-sciences.html"><a href="7.1-categorical-data-in-the-social-sciences.html#examples-of-categorical-data"><i class="fa fa-check"></i><b>7.1.1</b> Examples of Categorical Data<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html"><i class="fa fa-check"></i><b>7.2</b> Introduction to GLMs<span></span></a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#linear-regression-as-glm"><i class="fa fa-check"></i><b>7.2.1</b> Linear Regression as GLM<span></span></a></li>
+<li class="chapter" data-level="7.2.2" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#logistic-regression-as-glm"><i class="fa fa-check"></i><b>7.2.2</b> Logistic Regression as GLM<span></span></a></li>
+<li class="chapter" data-level="7.2.3" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#poisson-regression-as-glm"><i class="fa fa-check"></i><b>7.2.3</b> Poisson Regression as GLM<span></span></a></li>
+<li class="chapter" data-level="7.2.4" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#additional-remarks"><i class="fa fa-check"></i><b>7.2.4</b> Additional Remarks<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="7.3-binary-logistic-regression.html"><a href="7.3-binary-logistic-regression.html"><i class="fa fa-check"></i><b>7.3</b> Binary Logistic Regression<span></span></a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="7.3-binary-logistic-regression.html"><a href="7.3-binary-logistic-regression.html#overcoming-lpm"><i class="fa fa-check"></i><b>7.3.1</b> Overcoming LPM<span></span></a></li>
+<li class="chapter" data-level="7.3.2" data-path="7.3-binary-logistic-regression.html"><a href="7.3-binary-logistic-regression.html#model"><i class="fa fa-check"></i><b>7.3.2</b> Model<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="7.4-example-data-3.html"><a href="7.4-example-data-3.html"><i class="fa fa-check"></i><b>7.4</b> Example Data<span></span></a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="7.4-example-data-3.html"><a href="7.4-example-data-3.html#variables"><i class="fa fa-check"></i><b>7.4.1</b> Variables<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="7.5-intercept-only-model-1.html"><a href="7.5-intercept-only-model-1.html"><i class="fa fa-check"></i><b>7.5</b> Intercept-Only Model<span></span></a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="7.5-intercept-only-model-1.html"><a href="7.5-intercept-only-model-1.html#intercept-only-model-in-r-1"><i class="fa fa-check"></i><b>7.5.1</b> Intercept-Only Model in R<span></span></a></li>
+<li class="chapter" data-level="7.5.2" data-path="7.5-intercept-only-model-1.html"><a href="7.5-intercept-only-model-1.html#interpretation-1"><i class="fa fa-check"></i><b>7.5.2</b> Interpretation<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="7.6-single-predictor-model.html"><a href="7.6-single-predictor-model.html"><i class="fa fa-check"></i><b>7.6</b> Single Predictor Model<span></span></a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="7.6-single-predictor-model.html"><a href="7.6-single-predictor-model.html#overdispersion"><i class="fa fa-check"></i><b>7.6.1</b> Overdispersion<span></span></a></li>
+<li class="chapter" data-level="7.6.2" data-path="7.6-single-predictor-model.html"><a href="7.6-single-predictor-model.html#coefficients"><i class="fa fa-check"></i><b>7.6.2</b> Coefficients<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html"><i class="fa fa-check"></i><b>7.7</b> Marginal Effects<span></span></a>
+<ul>
+<li class="chapter" data-level="7.7.1" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#a-definition-of-marginal-effects"><i class="fa fa-check"></i><b>7.7.1</b> A Definition of Marginal Effects<span></span></a></li>
+<li class="chapter" data-level="7.7.2" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#a-few-observations"><i class="fa fa-check"></i><b>7.7.2</b> A Few Observations<span></span></a></li>
+<li class="chapter" data-level="7.7.3" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#types-of-marginal-effects"><i class="fa fa-check"></i><b>7.7.3</b> Types of Marginal Effects<span></span></a></li>
+<li class="chapter" data-level="7.7.4" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#example-model"><i class="fa fa-check"></i><b>7.7.4</b> Example Model<span></span></a></li>
+<li class="chapter" data-level="7.7.5" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#marginal-effects-at-representative-values-mer"><i class="fa fa-check"></i><b>7.7.5</b> Marginal Effects at Representative Values (MER)<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="8-chapter-8.html"><a href="8-chapter-8.html"><i class="fa fa-check"></i><b>8</b> Poisson Regression<span></span></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="8.1-glm-components.html"><a href="8.1-glm-components.html"><i class="fa fa-check"></i><b>8.1</b> GLM Components<span></span></a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="8.1-glm-components.html"><a href="8.1-glm-components.html#poisson-distribution"><i class="fa fa-check"></i><b>8.1.1</b> Poisson Distribution<span></span></a></li>
+<li class="chapter" data-level="8.1.2" data-path="8.1-glm-components.html"><a href="8.1-glm-components.html#poisson-regression-as-glm-1"><i class="fa fa-check"></i><b>8.1.2</b> Poisson Regression as GLM<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="8.2-interpretation-2.html"><a href="8.2-interpretation-2.html"><i class="fa fa-check"></i><b>8.2</b> Interpretation<span></span></a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="8.2-interpretation-2.html"><a href="8.2-interpretation-2.html#adjusting-for-rates"><i class="fa fa-check"></i><b>8.2.1</b> Adjusting for Rates<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="8.3-example-data-4.html"><a href="8.3-example-data-4.html"><i class="fa fa-check"></i><b>8.3</b> Example Data<span></span></a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="8.3-example-data-4.html"><a href="8.3-example-data-4.html#dependent-variable"><i class="fa fa-check"></i><b>8.3.1</b> Dependent variable<span></span></a></li>
+<li class="chapter" data-level="8.3.2" data-path="8.3-example-data-4.html"><a href="8.3-example-data-4.html#explanatory-variables"><i class="fa fa-check"></i><b>8.3.2</b> Explanatory Variables<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="8.4-poisson-regression-in-r.html"><a href="8.4-poisson-regression-in-r.html"><i class="fa fa-check"></i><b>8.4</b> Poisson Regression in R<span></span></a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="8.4-poisson-regression-in-r.html"><a href="8.4-poisson-regression-in-r.html#single-predictor-model-1"><i class="fa fa-check"></i><b>8.4.1</b> Single Predictor Model<span></span></a></li>
+<li class="chapter" data-level="8.4.2" data-path="8.4-poisson-regression-in-r.html"><a href="8.4-poisson-regression-in-r.html#interpretation-3"><i class="fa fa-check"></i><b>8.4.2</b> Interpretation<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/zackfisher/HDFS523" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">HDFS 523: Strategies for Data Analysis in Developmental Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="poisson-regression-in-r" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Poisson Regression in R<a href="8.4-poisson-regression-in-r.html#poisson-regression-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="single-predictor-model-1" class="section level3 hasAnchor" number="8.4.1">
+<h3><span class="header-section-number">8.4.1</span> Single Predictor Model<a href="8.4-poisson-regression-in-r.html#single-predictor-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="8.4-poisson-regression-in-r.html#cb2-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb2-2"><a href="8.4-poisson-regression-in-r.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> morbidityw1 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> income_star, </span>
+<span id="cb2-3"><a href="8.4-poisson-regression-in-r.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link=</span>log), </span>
+<span id="cb2-4"><a href="8.4-poisson-regression-in-r.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> ferraro2016</span>
+<span id="cb2-5"><a href="8.4-poisson-regression-in-r.html#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-6"><a href="8.4-poisson-regression-in-r.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = morbidityw1 ~ 1 + income_star, family = poisson(link = log), 
+##     data = ferraro2016)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.4131  -1.2984  -0.4633   0.7192   8.8437  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  1.007472   0.011047  91.195  &lt; 2e-16 ***
+## income_star -0.032445   0.007838  -4.139 3.48e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 8166.6  on 2994  degrees of freedom
+## Residual deviance: 8149.5  on 2993  degrees of freedom
+##   (27 observations deleted due to missingness)
+## AIC: 14986
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<p>A commonly stated rule of thumb for Poisson regression states that the <code>Residual Deviance</code> divided by the <code>degrees of freedom</code> should be approximately 1. This heuristic is based on the fact that the deviance is a measure of how well the model fits the data. If the model fits well, the observed values <span class="math inline">\(Y_{i}\)</span> will be close to their predicted means <span class="math inline">\(\mu_{i}\)</span>, causing the deviance to be small. If this value greatly exceeds one it may be indicative of overdispersion.</p>
+<p>The rationale for this heuristic is based on the fact that the residual deviance is <span class="math inline">\(\chi^2_k\)</span> distributed with mean equal to the degrees of freedom. Instead of using this rule of thumb it is just as simple to formulate a goodness-of-fit test for our model as follows</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="8.4-poisson-regression-in-r.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(<span class="fu">summary</span>(model)<span class="sc">$</span>deviance, <span class="fu">summary</span>(model)<span class="sc">$</span>df.residual )</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<p>The GOF test indicates that the Poisson model fits does not fit the data <span class="math inline">\((p &gt; 0.05)\)</span>. This suggests there may be a problem with overdispersion. <em>Overdispersion indicates there greater variability in a data set than would be expected based on our model.</em> Overdispersion is often encountered when fitting simple Poisson regression models. The Poisson distribution has one free parameter and does not allow for the variance to be adjusted independently of the mean.</p>
+</div>
+<div id="interpretation-3" class="section level3 hasAnchor" number="8.4.2">
+<h3><span class="header-section-number">8.4.2</span> Interpretation<a href="8.4-poisson-regression-in-r.html#interpretation-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="intercept" class="section level4 hasAnchor" number="8.4.2.1">
+<h4><span class="header-section-number">8.4.2.1</span> Intercept<a href="8.4-poisson-regression-in-r.html#intercept" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>This is the Poisson regression estimate when all variables in the model are evaluated at zero. For our model, we have centered the income variable. This mean for an individual with an average income level the log of the expected count for health problems is <span class="math inline">\(1.007\)</span> units. We can exponentiate the intercept, <span class="math inline">\(exp(1.007) = 2.7\)</span> indicating that at Wave 1 follow-up, an individual with an average income level is expected to have approximately <span class="math inline">\(2.7\)</span> health problems</p>
+</div>
+<div id="slope" class="section level4 hasAnchor" number="8.4.2.2">
+<h4><span class="header-section-number">8.4.2.2</span> Slope<a href="8.4-poisson-regression-in-r.html#slope" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Within our single predictor model, <span class="math inline">\(b_1\)</span> is the difference in <em>log</em> number of health problems for a 1-level difference in income bracket. Therefore, we expect a <span class="math inline">\(-0.03\)</span> difference in the log-count of health problems for a 1-level difference in income brackets. This relation may be difficult to conceptualize because the outcome variable is in terms of logarithm units, so a plot may be a more intuitive display of the results.</p>
+<p>Let’s turn to the <code>marginaleffects</code> <span class="citation">(<a href="#ref-bundock" role="doc-biblioref">Arel-Bundock 2022</a>)</span> package to look at the marginal effects of income on health.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="8.4-poisson-regression-in-r.html#cb6-1" aria-hidden="true" tabindex="-1"></a>marginaleffects<span class="sc">::</span><span class="fu">plot_cap</span>(model, <span class="at">condition =</span> <span class="fu">c</span>(<span class="st">&quot;income_star&quot;</span>), <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<!-- We use 'momed_count' as an outcome variable, and use Poisson regression to understand the relation between 'momed' and some predictor variables. -->
+<!-- Forming the 'momed_count' by rounding the variable 'momed'. We do not usually suggest degrading a measurement scale. We only do this here for didactic illustration. -->
+<!-- ```{r} -->
+<!-- wiscsub$momed_count <- round(wiscsub$momed) -->
+<!-- ``` -->
+<!-- Let's look at the distribution for number of years of mother's education -->
+<!-- ```{r} -->
+<!-- ggplot(data=wiscsub, aes(x=momed_count)) +  -->
+<!--   geom_histogram(binwidth = 1, fill = 'white', color = 'black') + -->
+<!--   xlim(0,20) + -->
+<!--   xlab("Number of Years of Mother's Education") +  -->
+<!--   ylab("Count") + -->
+<!--   theme_classic() -->
+<!-- ``` -->
+<!-- Alright, let's start with the simplest model for examining number of years of mother's education. In this case we have -->
+<!-- $$ log_{e}(momedCount_i) = b_0  $$ -->
+<!-- ```{r} -->
+<!-- # Note that the function is glm(), and the code to use it is almost  -->
+<!-- # identical to lm() from before. The only extra option is that we -->
+<!-- # use the option 'family = "poisson" ' at the end to state that -->
+<!-- # the outcome variable is a count variable. -->
+<!-- # Then the glm() function will  invoke the log-link function we -->
+<!-- # described before. -->
+<!-- model6 <- glm(momed_count ~ 1,  -->
+<!--                family = "poisson",  -->
+<!--                data = wiscsub,  -->
+<!--                na.action = na.exclude) -->
+<!-- summary(model6) -->
+<!-- ``` -->
+<!-- For Poisson regression, the intercept has 'log' units for the outcome variable. Therefore, if we want to make better sense of the parameter estimate, we need to exponentiate the coefficient (i.e., the inverse link function is exponentiation).  -->
+<!-- So, to interpret the intercept, we do the following -->
+<!-- $$ e^{b_0} $$ -->
+<!-- ```{r} -->
+<!-- exp(2.41293) -->
+<!-- ``` -->
+<!-- So, according to the model, the expected number of years of mother's education is 11.16663. Let's confirm that the back-transformed parameter from this intercept-only Poisson Regression matches the expectation we get from the descriptives of the raw data (i.e., the mean of the original variable). -->
+<!-- ```{r} -->
+<!-- mean(wiscsub$momed_count) -->
+<!-- ``` -->
+<!-- The expected number of years of education matches through both forms of parameter estimation. -->
+<!-- It is also useful to quantify our confidence in this estimate. For the Poisson regression, 95% confidence intervals for the parameter estimates may be obtained using the 'confint()' function. More specifically, we may use -->
+<!-- ```{r} -->
+<!-- confint(model6) -->
+<!-- ``` -->
+<!-- Ok, now let's include a predictor $verb^{*}_{1i}$ into the model. More specifically, we will have -->
+<!-- $$ log_{e}(momedCount_i) = b_0 + b_1(verb^{*}_{1i}) $$ -->
+<!-- First, let's examine the relation between mothers' education and children's 1st grade verbal scores. But, since we use the log-link function for count outcomes, let's also plot the natural logarithm of the number of years of mothers' education. -->
+<!-- ```{r} -->
+<!-- ggplot(data=wiscsub,  -->
+<!--        aes(x=verb1_star,y=log(momed_count))) + -->
+<!--   geom_jitter()+ -->
+<!--   xlab("Sample-Mean Centered 1st Grade Verbal Score") +  -->
+<!--   ylab("Log Number of Years of Mothers' Education") +  -->
+<!--   theme_bw() -->
+<!-- ``` -->
+<!-- Now, to run the model. -->
+<!-- ```{r} -->
+<!-- model7 <- glm(momed_count ~ 1 + verb1_star,  -->
+<!--                family = "poisson",  -->
+<!--                data = wiscsub,  -->
+<!--                na.action = na.exclude) -->
+<!-- summary(model7) -->
+<!-- ``` -->
+<!-- Within this model the intercept ($b_0$) is the expected 'log' of number of years of education for a child that earned an average 1st grade verbal score. Exponentiate to obtain an estimate on the original 'count' scale. -->
+<!-- ```{r} -->
+<!-- exp(2.407459) -->
+<!-- ``` -->
+<!-- Therefore, a mother is expected to have 11.10571 years of education if their child had an average 1st grade verbal score. -->
+<!-- Within model7, $b_1$ is the difference in 'log' number of years of education for each 1 point difference in their child's first grade verbal score. Therefore, we expect a 0.018020 difference in the log-count of mothers' number of years of education for a 1-point difference in 1st grade verbal score. This relation may be difficult to conceptualize because the outcome variable is in terms of logarithm units, so a plot may be a more intuitive display of the results. -->
+<!-- Again, we may obtain 95% confidence intervals by using the function 'confint'. -->
+<!-- ```{r} -->
+<!-- confint(model7) -->
+<!-- ``` -->
+<!-- Now, let's plot the model prescribed relationship, which follows the form -->
+<!-- $$ log_{e}(momedCount_i) = 2.407459 + 0.018020(verb^{*}_{1i})  $$ -->
+<!-- ```{r} -->
+<!-- ggplot(data=wiscsub,  -->
+<!--        aes(x=verb1_star,y=log(momed_count))) + -->
+<!--   geom_jitter()+ -->
+<!--   xlab("Sample-Mean Centered 1st Grade Verbal Score") +  -->
+<!--   ylab("Log Number of Years of Mothers' Education") +  -->
+<!--   theme_bw()+ -->
+<!--   stat_smooth(method = 'lm', se = TRUE) -->
+<!-- ``` -->
+<!-- <!-- the above is on the transformed scale so we cannot talk about the results in a way that is cohesive with the theoretical hypotheses -- let's backtransform here-->
+<p>–&gt;</p>
+<!-- Now, let's transform back to the relation between the raw count of mother's number of years of education and sample-mean centered 1st grade verbal score. Which follows the form -->
+<!-- $$ momedCount_i = exp(2.407459 + 0.018020(verb^{*}_{1i})) $$ -->
+<!-- ```{r} -->
+<!-- ggplot(data=wiscsub, -->
+<!--       aes(x=verb1_star,y=momed_count)) + -->
+<!--  geom_jitter()+ -->
+<!--  xlab("Sample-Mean Centered 1st Grade Verbal Score") + -->
+<!--  ylab("Number of Years of Mothers' Education") + -->
+<!--  theme_bw()+ -->
+<!--  stat_smooth(method = 'glm', method.args = list(family = "poisson"), se = TRUE) -->
+<!-- ``` -->
+<!-- Notice the slight curvature showing the non-linear relationship. -->
+<!-- Ok, now let's add another variable into the model. Let's examine the relation of gender. Specifically, the variable $female_i$ equals 0 if the child was male, and 1 if the child was a female. Then we have the following Poisson regression (notice that that now female is put in as the first predictor, this way the output order will correspond to the equation coefficient order. -->
+<!-- $$ log_{e}(momedCount_i) = b_0 + b_1(female_i)+ b_2(verb^{*}_{1i})+ b_3(verb^{*}_{1i})(female_i) $$ -->
+<!-- ```{r} -->
+<!-- model8 <- glm(momed_count ~ 1 + female + verb1_star  + I(verb1_star*female),  -->
+<!--                family = "poisson",  -->
+<!--                data = wiscsub,  -->
+<!--                na.action = na.exclude) -->
+<!-- summary(model8) -->
+<!-- ``` -->
+<!-- Coefficients $b_0$ and $b_2$ describe the relation between $verb^{*}_1i$ and $momedCount_i$ for males, and $b_0 + b_1$ and $b_2 + b_3$ describe the relation for females. Note that neither $b_1$ nor $b_3$ are significantly different from zero, so boys and girls have about the same relation between 1st grade verbal scores and the number of years of mothers' education. -->
+<!-- $$ log_{e}(momedCount_i) = 2.4071832 + 0.0008384(female_i)+ 0.0162466(verb^{*}_{1i})+ 0.0039115(verb^{*}_{1i})(female_i) $$ -->
+<!-- Let's visualize this on the 'log' scale -->
+<!-- ```{r} -->
+<!-- ggplot(data=wiscsub,  -->
+<!--        aes(x=verb1_star,y=log(momed_count), color = factor(female))) + -->
+<!--   geom_jitter() + -->
+<!--   stat_smooth(method = 'lm', se = TRUE, fullrange = TRUE) + -->
+<!--   xlab("Sample-Mean Centered 1st Grade Verbal Score") +  -->
+<!--   ylab("Log Number of Years of Mothers' Education") +  -->
+<!--   guides(color=guide_legend(title=paste("Female"))) + -->
+<!--   theme_bw() -->
+<!-- ``` -->
+<!-- And we can also see this relation on the count scale after application of the link function. -->
+<!-- $$ momedCount_i = exp(2.4071832 + 0.0008384(female_i)+ 0.0162466(verb^{*}_{1i})+ 0.0039115(verb^{*}_{1i})(female_i)) $$ -->
+<!-- ```{r} -->
+<!-- ggplot(data=wiscsub, -->
+<!--       aes(x=verb1_star,y=momed_count, color = factor(female))) + -->
+<!--  geom_jitter() + -->
+<!--  stat_smooth(method = 'glm', method.args = list(family = "poisson"), se = TRUE, fullrange=TRUE) +   xlab("Sample-Mean Centered 1st Grade Verbal Score") + -->
+<!--  ylab("Number of Years of Mothers' Education") + -->
+<!--  guides(color=guide_legend(title=paste("Female"))) + -->
+<!--  theme_bw() -->
+<!-- ``` -->
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+Arel-Bundock, Vincent. 2022. <em>Marginaleffects: Marginal Effects, Marginal Means, Predictions, and Contrasts</em>. <a href="https://CRAN.R-project.org/package=marginaleffects">https://CRAN.R-project.org/package=marginaleffects</a>.
+</div>
+<div class="csl-entry">
+Ferraro, Kenneth F., Markus H. Schafer, and Lindsay R. Wilkinson. 2016. <span>“Childhood <span>Disadvantage</span> and <span>Health Problems</span> in <span>Middle</span> and <span>Later Life</span>: <span>Early Imprints</span> on <span>Physical Health</span>?”</span> <em>American Sociological Review</em> 81 (1): 107–33. <a href="https://doi.org/10.1177/0003122415619617">https://doi.org/10.1177/0003122415619617</a>.
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- </div> -->
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-bundock" class="csl-entry">
+Arel-Bundock, Vincent. 2022. <em>Marginaleffects: Marginal Effects, Marginal Means, Predictions, and Contrasts</em>. <a href="https://CRAN.R-project.org/package=marginaleffects">https://CRAN.R-project.org/package=marginaleffects</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="8.3-example-data-4.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/zackfisher/HDFS523/edit/master/08_poisson.Rmd",
+"text": "Suggest an edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+},
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

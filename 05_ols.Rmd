@@ -1,4 +1,4 @@
-# Ordinary Least Squares Review {#chapter-5}
+# Ordinary Least Squares {#chapter-5}
 
 ```{r, echo = F}
 button <-  "position: relative; 
