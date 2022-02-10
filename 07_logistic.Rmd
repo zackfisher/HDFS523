@@ -287,7 +287,7 @@ exp(cbind(OR = coef(model10), confint(model10)))
 
 In other words, the odds of being happy when personal spending is at average levels is  $exp(-0.690890) = 0.5$.
 
-In regard to the slope coefficient, for a $100$ dollar difference in monthly personal spending, we expect to see about $.1\%$ decrease in the odds of being happy.  This decrease does not depend on the value that personap spending is held at. Note this is not significant and we would not report this interpretation in practice. Essentially, if the odds ratio is equal to one, the predictor did not have an impact on the outcome.
+In regard to the slope coefficient, for a $100$ dollar difference in monthly personal spending, we expect to see about $.1\%$ decrease in the odds of being happy.  This decrease does not depend on the value that personal spending is held at. Note this is not significant and we would not report this interpretation in practice. Essentially, if the odds ratio is equal to one, the predictor did not have an impact on the outcome.
 
 
 #### Probability

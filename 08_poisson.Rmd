@@ -120,31 +120,31 @@ The dependent variable for this analysis is health problems at Wave 1 (`morbidit
 
 #### Early Life Disadvantage
 
-*ses*: Childhood SES is a sum score based on standardized measures of (1) the education for the head of household, (2) financial strain and (3) receipt of welfare. 
-*family*:	Family composition is a sum score based on (1) the presence of a male in the household, (2) parental divorce, and (3) death of parent prior to age 16,
-*abuse_rare*:	Physical or Emotional Child abuse by parents is categorized by frequency of abuse.  abuse_rare indicates respondent rarely experience one or both types of abuse. The reference category is never having experienced emotional or physical abuse. 
-*abuse_frequency1*:	abuse_frequency1 indicates respondents  frequently (sometimes or often) experienced one type of abuse during childhood. The reference category is never having experienced emotional or physical abuse.
-*abuse_frequency2*:	abuse_frequency2 indicates respondents frequently experienced both types of abuse during childhood. The reference category is never having experienced emotional or physical abuse.
-*health*:	Adolescent health problems are measured by self-rated physical and mental health at age 16. 
+- *ses*: Childhood SES is a sum score based on standardized measures of (1) the education for the head of household, (2) financial strain and (3) receipt of welfare. 
+- *family*:	Family composition is a sum score based on (1) the presence of a male in the household, (2) parental divorce, and (3) death of parent prior to age 16,
+- *abuse_rare*:	Physical or Emotional Child abuse by parents is categorized by frequency of abuse.  abuse_rare indicates respondent rarely experience one or both types of abuse. The reference category is never having experienced emotional or physical abuse. 
+- *abuse_frequency1*:	abuse_frequency1 indicates respondents  frequently (sometimes or often) experienced one type of abuse during childhood. The reference category is never having experienced emotional or physical abuse.
+- *abuse_frequency2*:	abuse_frequency2 indicates respondents frequently experienced both types of abuse during childhood. The reference category is never having experienced emotional or physical abuse.
+- *health*:	Adolescent health problems are measured by self-rated physical and mental health at age 16. 
 
 #### Adult Characteristics
 
-*age*:	Age at time of Wave 1 interview.
-*nonwhite*:	Race (white or nonwhite).
-*female*:	Gender (female or male).
-*educate*:	Number of years of completed education.
-*catincome*:	Household income adjusted by household size and recoded into five percentile categories (< 21st *percentile, 21st to 40th percentile41st to 60th percentile, 61st to 80th percentile, and > 80th percentile.).
-*a1sj6*: 	Financial strain during adulthood; responses range from 1 (no difficulty paying monthly bills) to 3 (very difficult to pay monthly bills). 
-*smoke_dose*: 	Lifetime smoking is calculated from information reported by respondents: age when started smoking, year stopped (for former smokers), and average number of cigarettes smoked daily. Using a yearly metric, lifetime smoking is the product of years smoked and annual number of cigarettes, divided by 10,000 (see Footnote 11, p. 130). 
-*heavydr2*: 	The measurement of heavy drinking is sex differentiated and tapped respondents’ period of greatest lifetime consumption: five or more drinks per day for men and four or more drinks for women.
-*obese*: 	Obesity, dummy variable coded 1 if body mass index [kg/m2] > 30.
-*fampos*: 	Family support as measured by four items reflecting the presence of positive relationship characteristics.
-*friendpos*: 	Friend support as measured by four items reflecting the presence of positive relationship characteristics.
-*famneg*:	Family strain as measured by four items reflecting the presence of difficult relationship characteristics.
-*friendneg*: 	Friend strain as measured by four items reflecting the presence of difficult relationship characteristics.
-*integration*: 	Social integration as measured by three 7-item Likert–type questions. 
-*ever_divor*: 	Ever divorced, a dummy variable coded 1 if the respondent reported having been divorced.
-*controlw1*:	Average score for a 12-item index of the respondent’s feelings of personal control.
+- *age*:	Age at time of Wave 1 interview.
+- *nonwhite*:	Race (white or nonwhite).
+- *female*:	Gender (female or male).
+- *educate*:	Number of years of completed education.
+- *catincome*:	Household income adjusted by household size and recoded into five percentile categories (< 21st *percentile, 21st to 40th percentile41st to 60th percentile, 61st to 80th percentile, and > 80th percentile.).
+- *a1sj6*: 	Financial strain during adulthood; responses range from 1 (no difficulty paying monthly bills) to 3 (very difficult to pay monthly bills). 
+- *smoke_dose*: 	Lifetime smoking is calculated from information reported by respondents: age when started smoking, year stopped (for former smokers), and average number of cigarettes smoked daily. Using a yearly metric, lifetime smoking is the product of years smoked and annual number of cigarettes, divided by 10,000 (see Footnote 11, p. 130). 
+- *heavydr2*: 	The measurement of heavy drinking is sex differentiated and tapped respondents’ period of greatest lifetime consumption: five or more drinks per day for men and four or more drinks for women.
+- *obese*: 	Obesity, dummy variable coded 1 if body mass index [kg/m2] > 30.
+- *fampos*: 	Family support as measured by four items reflecting the presence of positive relationship characteristics.
+- *friendpos*: 	Friend support as measured by four items reflecting the presence of positive relationship characteristics.
+- *famneg*:	Family strain as measured by four items reflecting the presence of difficult relationship characteristics.
+- *friendneg*: 	Friend strain as measured by four items reflecting the presence of difficult relationship characteristics.
+- *integration*: 	Social integration as measured by three 7-item Likert–type questions. 
+- *ever_divor*: 	Ever divorced, a dummy variable coded 1 if the respondent reported having been divorced.
+- *controlw1*:	Average score for a 12-item index of the respondent’s feelings of personal control.
 
 
 ```{r}
@@ -166,7 +166,7 @@ model1 <- glm(
 summary(model1)
 ```
 
-### Overdispersion
+### Deviance and Goodness of Fit
 
 We can think about the deviance as a measure of how well the model fits the data. If the model fits well, the observed values $Y_{i}$ will be close to their predicted means $\mu_{i}$, causing the deviance to be small. If this value greatly exceeds one it may be indicative of overdispersion. 
 
