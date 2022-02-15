@@ -347,7 +347,7 @@ Some interpretational oddities arise from the autoregressive model that are wort
 **Consider the following situation**: We are studying a weight loss intervention where we measure weight prior to and after an intervention. The mean weight at time 1 is 250 pounds ($\mu_{t1}=150$) and the mean weight at time 2 is 230 pounds ($\mu_{t1}=130$). Now consider two people:
 
 - *Individual 1*: Weight at time 1 was $240lbs$ and weight at time 2 is $240lbs$.
-  - Relative standing has gone down so there is *negative residualized change*.
+  - Relative standing has gone down so there is *positive residualized change*.
 - *Individual 2*: Weight at time 1 was $250lbs$ and weight at time 2 is $230lbs$.
   - Relative standing is the same so there is *no residualized change*.
 
@@ -390,7 +390,7 @@ where
 This has led many to many historical critiques of difference scores. However, other researchers have pointed out this conclusion is based on how one envisions change. If, for example, we have the following theoretical model for change,
 
 $$
-y_{1i} = y_{true,i} + e_{1i}
+y_{1i} = y_{true,i} + e_{1i}\\
 y_{2i} = (y_{1i} + \Delta y_{true,i}) + e_{2i}
 $$
 where
@@ -450,7 +450,7 @@ coef(DIFfit)
 - The two-occasion change models presented in this chapter can be transformed into each other, the goodness-of-fit statistics are not good way to distinguish between them
 - The models discussed here can be distinguished when t > 2 repeated measures are available.
 - Interpretations of change are fundamentally restricted by the choice of model 
-- When choosing one model it is worth considering what change means in each context (e.g. in a weight loss study is $10$lbs of weight loss the same for people with different weights?)
+- When choosing one model it is worth considering what change means in each context (e.g. in a weight loss study is $10$ lbs of weight loss the same for people with different baseline weights?)
 
 If you found all of this to be inherently confusing it is worth thinking about the following quote: **“Two waves of data are better than one, but maybe not much better.”** [@rogosa1982].
 
