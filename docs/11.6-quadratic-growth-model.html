@@ -528,7 +528,7 @@ div.csl-indent {
 <pre><code>##           Model df      AIC      BIC    logLik   Test L.Ratio p-value
 ## fl_rl_fit     1  6 5050.844 5079.071 -2519.422                       
 ## fq_rq_fit     2  7 5226.412 5259.343 -2606.206 1 vs 2 173.568  &lt;.0001</code></pre>
-<p>From the test results we see they are different. This provides a significance test for the variance and covariance (2 degrees of freedom).</p>
+<p>From the test results we see they are different.</p>
 <p>Let’s look at the predicted trajectories.</p>
 <div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="11.6-quadratic-growth-model.html#cb378-1" aria-hidden="true" tabindex="-1"></a>verblong<span class="sc">$</span>pred_fq_rq <span class="ot">&lt;-</span> <span class="fu">predict</span>(fq_rq_fit)</span>
 <span id="cb378-2"><a href="11.6-quadratic-growth-model.html#cb378-2" aria-hidden="true" tabindex="-1"></a>verblong<span class="sc">$</span>resid_fq_rq <span class="ot">&lt;-</span> <span class="fu">residuals</span>(fq_rq_fit)</span>

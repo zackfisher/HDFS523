@@ -542,8 +542,7 @@ Let's test the significance of having random slopes. We compare models by applyi
 anova(fl_rl_fit,fq_rq_fit)
 ```
 
-From the test results we see they are different. This provides a significance test for the variance and covariance (2 degrees of freedom).
-
+From the test results we see they are different. 
 
 
 Let's look at the predicted trajectories.
