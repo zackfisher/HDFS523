@@ -1,0 +1,824 @@
+# Growth Curve Modeling {#chapter-11}
+
+```{r, echo = F}
+button <-  "position: relative; 
+            top: -25px; 
+            left: 85%;   
+            color: white;
+            font-weight: bold;
+            background: #4B9CD3;
+            border: 1px #3079ED solid;
+            box-shadow: inset 0 1px 0 #80B0FB"
+```
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "show", style = button)
+```
+
+## Introduction
+
+In this chapter we work through basics of growth modeling. We describe the data, run some individual level models, and work through no-growth and linear growth modeling examples. We then expand on that model in two ways. We add a predictor - to get the conditional growth model and we change the time-metric - to illustrate how alternative time metrics facilitate different interpretations. 
+
+## Data Preparation and Description
+
+### Loading libraries used in this script.
+
+```{r, warning=FALSE, message=FALSE}
+library(psych)  #for basic functions
+library(ggplot2)  #for plotting
+library(data.table) #for fast data management
+library(nlme) #for mixed effects models
+library(plyr) #for data management
+library(see)
+```
+
+For our examples, we use 4-occasion WISC data. Load the repeated measures data. 
+
+```{r}
+filepath <- "https://quantdev.ssri.psu.edu/sites/qdev/files/wisc3raw.csv"
+wisc3raw <- read.csv(file=url(filepath),header=TRUE)
+```
+
+Subsetting to the variables of interest. Specifically, we include the `id` variable; the repeated measures outcome variables `verb1`, `verb2`, `verb4`, `verb6`; and the predictors `grad` and `momed` variables.
+
+```{r}
+varnames <- c("id","verb1","verb2","verb4","verb6","grad","momed")
+wiscsub <- wisc3raw[ ,varnames]
+describe(wiscsub)
+```
+
+Multilevel modeling analyses typically require a tall (long) data set. So, we reshape from wide to tall:
+
+```{r}
+verblong <- reshape(
+  data=wiscsub, 
+  varying=c("verb1","verb2","verb4","verb6"), 
+  timevar="grade", 
+  idvar="id", 
+  direction="long", 
+  sep=""
+)
+verblong <- verblong[order(verblong$id,verblong$grade),c("id","grade","verb","grad","momed")]
+head(verblong,12)
+```
+
+
+
+## Individual Growth Models
+
+To introduce growth modeling we will begin with data from a single individual. Let's make a dataset with just 1 person of interest, `id = 23`,
+
+```{r}
+verb_id23 <- verblong[which(verblong$id == 23), ]
+```
+
+### Visualizing Individual Change
+
+Let's make a plot of this person's data,
+
+```{r}
+ggplot(data = verb_id23, aes(x = grade, y = verb, group = id)) +
+  geom_point() + 
+  xlab("Grade") + 
+  ylab("WISC Verbal Score") + ylim(0,100) +
+  scale_x_continuous(breaks=seq(1,6,by=1)) +
+  theme_classic()
+```
+
+We could connect the dots to see time-adjacent changes.
+
+```{r}
+ggplot(data = verb_id23, aes(x = grade, y = verb, group = id)) +
+  geom_point() + 
+  geom_line() +
+  xlab("Grade") + 
+  ylab("WISC Verbal Score") + ylim(0,100) +
+  scale_x_continuous(breaks=seq(1,6,by=1)) +
+  theme_classic()
+```
+
+
+We could also *smooth* over the repeated measuring using a line of best fit for this individual.
+
+```{r}
+ggplot(data = verb_id23, aes(x = grade, y = verb, group = id)) +
+  geom_point() + 
+  geom_line() +
+  geom_smooth(method=lm, se=FALSE,colour="red", size=1) +
+  xlab("Grade") + 
+  ylab("WISC Verbal Score") + ylim(0,100) +
+  scale_x_continuous(breaks=seq(1,6,by=1)) +
+  theme_classic()
+```
+
+Notice, we can summarize this line with two pieces of information, (1) an intercept, and (2) a slope, each unique to individual 23. 
+
+### Multiple Individuals
+
+Let's do an individual regression with time as a predictor. Conceptually, this is a model of intraindividual change corresponding to the plot above.
+
+```{r}
+#regress verb on grade 
+linear_id23 <- lm(formula = verb ~ 1 + grade, data = verb_id23, na.action=na.exclude)
+#show results
+summary(linear_id23) 
+```
+
+Let's save the 3 parameters into objects and look at them.
+
+```{r}
+id23_reg_linear <- as.list(coef(linear_id23))
+id23_reg_linear
+```
+
+**Now let's do the same thing for all the persons.**
+
+We do this in a speedy way using the `data.table` package.
+
+```{r}
+#converting to a data.table object
+verblong_dt <- data.table(verblong)
+
+#collecting regression output by id 
+indiv_reg <- verblong_dt[,c(
+  reg_1 = as.list(coef(lm(verb ~ grade)))
+),by=id]
+```
+
+Let's look at the moments of the parameters
+
+```{r}
+#converting back to data.frame 
+names(indiv_reg)
+indiv_reg_data <- as.data.frame(indiv_reg)
+
+#descriptives
+describe(indiv_reg_data[-1])
+#correlations among parameters
+cor(indiv_reg_data[-1], use="complete.obs",method="pearson")
+#pairs in the psych library
+pairs.panels(indiv_reg_data[-1])
+```
+
+Here, each person has 2 *scores* (intercept + slope) from the individual-level regression models. Now, let's plot some of the individual regressions
+
+```{r}
+#making intraindividual change plot
+ggplot(data = verblong[which(verblong$id < 30),], aes(x = grade, y = verb, group = id)) +
+  geom_smooth(method=lm,se=FALSE,colour="red", size=1) +
+  xlab("Grade") + 
+  ylab("WISC Verbal Score") + ylim(0,100) +
+  scale_x_continuous(breaks=seq(1,6,by=1)) +
+  theme_classic()
+```
+
+The characteristics of the latent trajectories are captured in two ways:
+
+1. **Trajectory Means**:
+  - The average value of the parameters governing the growth trajectory, pooled over the all individuals in the sample. This is the mean starting point and mean rate of change for the sample. These are often called fixed effects.
+2. **Trajectory Variances**: 
+  - The variability of individual cases around the mean trajectory parameters. This is the individual variability in starting point and rate of change over time. Larger variances reflect larger variability in growth. These are often called random effects.
+
+To recap, means captures overall values of parameters that define growth. Variances capture individual variability in those parameters. 
+
+
+Let's move to our more familiar framework for handling the analysis of "collections" of regressions.
+
+## Unconditional Means Model
+
+We will begin by fitting the unconditional means model, or *no growth* model to the 4-ocasion WISC data.
+
+We use the `nlme` package for fitting *mixed effects* models, also known as multilevel (MLM) or hierarchical linear models (HLM).
+
+Specifically, we use the `lme()` function to fits the MLMs:
+- The 'fixed' argument takes the fixed model
+- The 'random' argument takes the random model
+- The 'data' argument specifies the data sources
+- The 'na.action' argument specifies how to handle missing data
+
+
+![Baseline Model](imgs/model01.jpg)
+
+The Unconditional Means model contains a fixed and random intercept only. You can use the constant `1` to designate that only intercepts are being modeled.
+
+```{r}
+um_fit <- lme(
+  fixed= verb ~ 1, 
+  random = ~ 1|id, 
+  data = verblong,
+  na.action = na.exclude,
+  method = "ML"
+)
+
+summary(um_fit)
+```
+
+Let's extract the random effects with the `VarCorr()` function
+
+```{r}
+VarCorr(um_fit)
+```
+
+We can compute the intra-class correlation (ICC) as the ratio of the random intercept variance (between-person) to the total variance (between + within), that includes the error.
+
+First let's store the variance estimates, which will be the first column of the `VarCorr` object (see above).
+
+```{r}
+RandomEffects <- as.numeric(VarCorr(um_fit)[,1])
+RandomEffects
+```
+
+Next let's compute the ICC. It is the ratio of the random intercept variance (between-person var) over the total variance (between + within var).
+
+```{r}
+ICC_between <- RandomEffects[1]/(RandomEffects[1]+RandomEffects[2]) 
+ICC_between
+```
+
+From the results we seeM there is lots of within-person variance for us to explain.  
+
+- between-person variance = $9.2\%$   
+- within-person variance = $100 - 9.2 = 91.8\%$   
+ 
+### Predicted Trajectories
+
+Place individual predictions and residuals from the unconditional means model `um_fit` into the dataframe
+
+```{r}
+verblong$pred_um <- predict(um_fit)
+verblong$resid_um <- residuals(um_fit)
+head(verblong)
+```
+
+We can make plots of the model outputs. Here we plot the between-person differences in levels ($9\%$).
+```{r}
+
+ggplot(data = verblong, aes(x = grade, y = pred_um, group = id)) +
+  ggtitle("Unconditional Means Model") +
+#  geom_point() + 
+  geom_line() +
+  xlab("Grade") + 
+  ylab("PREDICTED WISC Verbal Score") + ylim(0,100) +
+  scale_x_continuous(breaks=seq(1,6,by=1)) +
+  theme_classic()
+```
+
+
+Here we plot the between-person differences in levels ($91\%$).
+
+```{r}
+#plotting RESIDUAL intraindividual change
+ggplot(data = verblong, aes(x = grade, y = resid_um, group = id)) +
+  ggtitle("Unconditional Means Model (residuals)") +
+#  geom_point() + 
+  geom_line() +
+  xlab("Grade") + 
+  ylab("RESIDUAL WISC Verbal Score") + #ylim(0,100) + Note the removal of limits on y-axis
+  scale_x_continuous(breaks=seq(1,6,by=1)) +
+  theme_classic()
+```
+
+We cab also plot the predicted intraindividual change alongside the mean trajectory.
+
+```{r}
+fun_um <- function(x) { 30.33951 + 0*x }
+ggplot(data = verblong, aes(x = grade, y = pred_um, group = id)) +
+  ggtitle("Unconditional Means Model") +
+  #  geom_point() + 
+  geom_line() +
+  xlab("Grade") + 
+  ylab("PREDICTED WISC Verbal Score") + ylim(0,100) +
+  scale_x_continuous(breaks=seq(1,6,by=1)) +
+  stat_function(fun=fun_um, color="red", size = 2) +
+  theme_classic()
+```
+
+Since it is often too messy to plot all individuals we can also subset the plot.
+
+```{r}
+randomsample <- sample(verblong$id,20)
+ggplot(data = verblong[verblong$id %in% randomsample,], aes(x = grade, y = pred_um, group = id)) +
+  ggtitle("Unconditional Means Model") +
+  #  geom_point() + 
+  geom_line() +
+  xlab("Grade") + 
+  ylab("PREDICTED WISC Verbal Score") + ylim(0,100) +
+  scale_x_continuous(breaks=seq(1,6,by=1)) +
+  stat_function(fun=fun_um, color="red", size = 2)
+```
+
+
+## Linear Growth Model
+
+Now let's add in `grade` as a (time-varying) predictor. We look at the linear relation between the time variable (grade) and the outcome variable (verb).
+
+
+### Random Intercept Model
+
+My naming convention for objects here is: fixed linear (fl) and random intercept (ri)
+```{r}
+fl_ri_fit <- lme(
+  fixed = verb ~ 1 + grade, 
+  random = ~ 1|id, 
+  data=verblong,
+  na.action = na.exclude,
+  method = "ML"
+)
+summary(fl_ri_fit)
+```
+
+Let's look at the predicted trajectories from this model
+
+```{r}
+#Place individual predictions and residuals into the dataframe
+verblong$pred_fl_ri <- predict(fl_ri_fit)
+verblong$resid_fl_ri <- residuals(fl_ri_fit)
+#Create a function for the mean trajectory
+fun_fl_ri <- function(x) { 15.15099 + 4.67339*x }
+
+#plotting PREDICTED intraindividual change
+ggplot(data = verblong, aes(x = grade, y = pred_fl_ri, group = id)) +
+  ggtitle("Fixed Linear, Random Intercept") +
+  #  geom_point() + 
+  geom_line() +
+  xlab("Grade") + 
+  ylab("PREDICTED WISC Verbal Score") + ylim(0,100) +
+  scale_x_continuous(breaks=seq(1,6,by=1)) + 
+  stat_function(fun=fun_fl_ri, color="red", size = 2) +
+  theme_classic()
+```
+
+Note how all the lines are parallel. This imples individual variability in starting point *but* a constant rate of change over time.
+
+Let's look at the residuals.
+```{r}
+ggplot(data = verblong, aes(x = grade, y = resid_fl_ri, group = id)) +
+  ggtitle("Fixed Linear, Random Intercept") +
+  #  geom_point() + 
+  geom_line() +
+  xlab("Grade") + 
+  ylab("RESIDUAL WISC Verbal Score") + 
+  scale_x_continuous(breaks=seq(1,6,by=1)) +
+  theme_classic()
+```
+
+Note the differences in variance. 
+
+### Random Intercept and Slopes Model
+
+![Linear Growth Model](imgs/model02.jpg)
+
+```{r}
+fl_rl_fit <- lme(
+  fixed = verb ~ 1 + grade, 
+  random = ~ 1 + grade|id, 
+  data=verblong,
+  na.action = na.exclude,
+  method = "ML"
+)
+summary(fl_rl_fit)
+```
+
+We can take a look at the ICCs to see if we are doing any better explaining the within-person variance.
+
+```{r}
+RandomEffects <- as.numeric(VarCorr(fl_rl_fit)[,1])
+ICC_between <- sum(RandomEffects[1:2])/sum(RandomEffects) 
+ICC_between
+```
+
+Let's look at the predicted trajectories from this model. We can start by saving the predicted trajectories and residuals into our dataframe.
+
+```{r}
+verblong$pred_fl_rl <- predict(fl_rl_fit)
+verblong$resid_fl_rl <- residuals(fl_rl_fit)
+```
+
+Next, we make a small function to plot the mean trajectory. Now we use the `fixedf()` function directly rather than type the numbers manually from the output. 
+
+```{r}
+#Create a function for the prototype
+#fun_fl_rl <- function(x) {
+#  15.15099 + 4.67339*x
+#}
+
+fun_fl_rl <- function(x) {
+  fixef(fl_rl_fit)[[1]] + fixef(fl_rl_fit)[[2]]*x
+}
+
+#plotting PREDICTED intraindividual change
+ggplot(data = verblong, aes(x = grade, y = pred_fl_rl, group = id)) +
+  ggtitle("Fixed Linear, Random Linear") +
+  #  geom_point() + 
+  geom_line() +
+  xlab("Grade") + 
+  ylab("PREDICTED WISC Verbal Score") + ylim(0,100) +
+  scale_x_continuous(breaks=seq(1,6,by=1)) + 
+  stat_function(fun=fun_fl_rl, color="red", size = 2) +
+  theme_classic()
+```
+
+Note how the lines are no longer parallel. We now have a model that implies individual variability in the starting point and rate of change.
+
+We can also plot the residuals.
+
+```{r}
+#plotting RESIDUAL intraindividual change
+ggplot(data = verblong, aes(x = grade, y = resid_fl_rl, group = id)) +
+  ggtitle("Fixed Linear, Random Linear") +
+  #  geom_point() + 
+  geom_line() +
+  xlab("Grade") + 
+  ylab("RESIDUAL WISC Verbal Score") + 
+  scale_x_continuous(breaks=seq(1,6,by=1)) +
+  theme_classic()
+```
+
+This model did a bit better on getting the residual variances similar at all grades (in line with assumptions).
+
+### Model Comparison
+
+Let's test the significance of having random slopes. We compare models by applying `anova()` function to examine difference in fit between the two nested models. 
+
+```{r}
+anova(fl_ri_fit, fl_rl_fit)
+```
+
+From the test results we see they are different. This provides a significance test for the variance and covariance (2 degrees of freedom).
+
+
+### MLM and Individual Models
+
+Remember, earlier, we ran individual-level regressions.
+
+```{r}
+head(indiv_reg_data,12) 
+```
+
+Let's also obtain individual-level *estimates* from the MLM model.
+
+```{r}
+FE <- fixef(fl_rl_fit) # fixed effects
+FE
+RE <- ranef(fl_rl_fit) # random effects
+head(RE)
+```
+
+We add the fixed effect and random effect parameters together to get analogues of the individual-level parameters.
+
+```{r}
+#Individual intercepts (MLM model based)
+MLM_intercept <- FE[1] + RE[,1]
+#Individual slopes (MLM model based)
+MLM_grade <- FE[2] + RE[,2]
+```
+
+Let's combine the individual regression intercepts and slopes and the model based intercepts and slopes together in order to compare.
+
+```{r}
+indiv_parm_combined <- cbind(MLM_intercept,MLM_grade,indiv_reg_data[,2:3])
+head(indiv_parm_combined)
+```
+
+Look at the descriptives statistics.
+
+```{r}
+describe(indiv_parm_combined)
+round(cor(indiv_parm_combined),2)
+pairs.panels(indiv_parm_combined)
+```
+
+
+Let's compare the two predictions. What do you notice?
+
+```{r}
+library(see)
+#plotting PREDICTED intraindividual change
+GCMpred = ggplot(data = verblong, aes(x = grade, y = pred_fl_rl, group = id)) +
+  ggtitle("Fixed Linear, Random Linear") +
+  #  geom_point() + 
+  geom_line() +
+  xlab("Grade") + 
+  ylab("PREDICTED WISC Verbal Score") + ylim(0,100) +
+  scale_x_continuous(breaks=seq(1,6,by=1)) + 
+  stat_function(fun=fun_fl_rl, color="red", size = 2) +
+  theme_classic()
+
+#making intraindividual change plot
+IndPred = ggplot(data = verblong, aes(x = grade, y = verb, group = id)) +
+   ggtitle("Individual level regressions only") +
+  geom_smooth(method=lm,se=FALSE,colour="black", size=1) +
+  xlab("Grade") + 
+  ylab("WISC Verbal Score") + ylim(0,100) +
+  scale_x_continuous(breaks=seq(1,6,by=1)) +
+  theme_classic()
+
+plots(GCMpred, IndPred)
+```
+
+
+## Quadratic Growth Model
+
+Quadratic time model (MLM): random intercepts and linear and quadratic slopes. 
+
+![Quadratic Growth Model](imgs/model03.jpg)
+
+```{r}
+verblong$gradeSquared <- (verblong$grade)^2
+
+fq_rq_fit <- lme(
+  fixed = verb ~ 1 + grade + gradeSquared, 
+  random = ~ 1 + grade|id + gradeSquared|id, 
+  data=verblong,
+  na.action = na.exclude,
+  method = "ML"
+)
+summary(fq_rq_fit)
+```
+
+Let's test the significance of having random slopes. We compare models by applying `anova()` function to examine difference in fit between the two nested models. 
+
+```{r}
+anova(fl_rl_fit,fq_rq_fit)
+```
+
+From the test results we see they are different. This provides a significance test for the variance and covariance (2 degrees of freedom).
+
+
+
+Let's look at the predicted trajectories.
+
+```{r}
+verblong$pred_fq_rq <- predict(fq_rq_fit)
+verblong$resid_fq_rq <- residuals(fq_rq_fit)
+
+fun_fq_rq <- function(x) {
+  fixef(fq_rq_fit)[[1]] + fixef(fq_rq_fit)[[2]]*x + fixef(fq_rq_fit)[[3]]*x^2
+}
+
+ggplot(data = verblong, aes(x = grade, y = pred_fq_rq, group = id)) +
+  ggtitle("Fixed Quadratic, Random Quadratic") +
+  geom_line() +
+  xlab("Grade") + 
+  ylab("PREDICTED WISC Verbal Score") + ylim(0,100) +
+  scale_x_continuous(breaks=seq(1,6,by=1)) + 
+  stat_function(fun=fun_fq_rq, color="red", size = 2) +
+  theme_classic()
+```
+
+
+## Conditional Growth Model
+
+Let's go back and look at our data. The data include 2 additional time-invariant covariates, `momed` and `grad`.
+
+Let's add a predictor to our model. In this case we will add
+**Grad as a (categorial) predictor** (which is coded 0,1)
+
+```{r}
+cgm1_fit <- lme(
+  fixed= verb ~ 1 + grade + grad + grade:grad, 
+  random= ~ 1 + grade|id,
+  data=verblong,
+  na.action = na.exclude
+)
+
+summary(cgm1_fit)
+```
+
+Let's make grad ($=1$) and non-grad ($=0$) prototypical trajectories.
+
+```{r}
+#First lets extract the fixed effects
+FE <- fixef(cgm1_fit)
+FE
+```
+
+Create a function for the mean trends.
+
+```{r}
+#for grad = 0
+fun_cgm_grad0 <- function(x) {
+  grad=0
+  FE[1] + FE[2]*x + FE[3]*grad + FE[4]*x*grad
+}
+#for grad = 1
+fun_cgm_grad1 <- function(x) {
+  grad=1
+  FE[1] + FE[2]*x + FE[3]*grad + FE[4]*x*grad
+}
+```
+
+Plot with the mean trends for no-grad (red) and grad (blue) trajectories.
+
+```{r}
+#plotting intraindividual change with overlay of group trends 
+ggplot(data = verblong, aes(x = grade, y = verb, group = id)) +
+  ggtitle("Raw Trajectories + Condition") +
+  #  geom_point() + 
+  geom_line() +
+  xlab("Grade") + 
+  ylab("WISC Verbal Score") + ylim(0,100) +
+  scale_x_continuous(breaks=seq(1,6,by=1)) + 
+  stat_function(fun=fun_cgm_grad0, color="red", size = 2) +
+  stat_function(fun=fun_cgm_grad1, color="blue", size = 2) +
+  theme_classic()
+```
+
+
+Now, let's consider `momed` as a (continuous) predictor. First, we will  center `momed` at sample-level mean. Note this is done using the wide data set.
+
+```{r}
+describe(wiscsub$momed)
+#Calculating the mean 
+momed_mean <- mean(wiscsub$momed)
+momed_mean
+#Calculating the sd for later use in plots
+momed_sd <- sd(wiscsub$momed)
+momed_sd
+
+#Computing centered variable in long data
+verblong$momed_c <- (verblong$momed-momed_mean)
+describe(verblong$momed_c)
+```
+
+Fitting conditional growth model with momed (centered) as predictor
+
+```{r}
+cgm2_fit <- lme(
+  fixed= verb ~ 1 + grade + momed_c + grade:momed_c, 
+  random= ~ 1 + grade|id,
+  data=verblong,
+  na.action = na.exclude
+)
+
+summary(cgm2_fit)
+```
+
+We can extraxt the fixed effects for a prototypical trajectory. 
+
+```{r}
+#Extract the fixed effects
+FE2 <- fixef(cgm2_fit)
+FE2
+```
+
+Now, let's consider `momed` at the mean value, as well as low (-1SD) and high (+1SD) values. 
+
+Low value of `momed`.    
+ 
+```{r}
+fun_cgm_momed_low <- function(x) {
+  momed=0-1*momed_sd
+  FE2[1] + FE2[2]*x + FE2[3]*momed + FE2[4]*x*momed
+}
+```
+
+Average value of `momed`.    
+
+```{r}
+fun_cgm_momed_ave <- function(x) {
+  momed=0
+  FE2[1] + FE2[2]*x + FE2[3]*momed + FE2[4]*x*momed
+}
+```
+
+High value of `momed`.    
+
+```{r}
+fun_cgm_momed_high <- function(x) {
+  momed=0+1*momed_sd
+  FE2[1] + FE2[2]*x + FE2[3]*momed + FE2[4]*x*momed
+}
+```
+
+Plot with the prototypical -1SD (red), prototypical 0SD (magenta) and prototypical +1SD (blue) trajectories.
+
+```{r}
+#plotting intraindividual change with overlay
+ggplot(data = verblong, aes(x = grade, y = verb, group = id)) +
+  ggtitle("Raw Trajectories + Levels of Predictor") +
+  #  geom_point() + 
+  geom_line() +
+  xlab("Grade") + 
+  ylab("WISC Verbal Score") + ylim(0,100) +
+  scale_x_continuous(breaks=seq(1,6,by=1)) + 
+  stat_function(fun=fun_cgm_momed_low, color="red", size = 2) +
+  stat_function(fun=fun_cgm_momed_ave, color="purple", size = 2) +
+  stat_function(fun=fun_cgm_momed_high, color="blue", size = 2) +
+  theme_classic()
+```
+
+
+## Alternative Time Metrics
+
+Let's go back to the simple *linear growth model*, this time being very explicit about the *scaling and centering* of the `time` variable. Time metric = original scores, Grade = 1, 2, 4, 6**. Fitting the linear model with grade (as originally coded)
+
+```{r}
+linear_grade_fit <- lme(
+  fixed= verb ~ 1 + grade, 
+  random= ~ 1 + grade|id, 
+  data=verblong,
+  na.action = na.exclude
+)
+
+summary(linear_grade_fit)
+```
+
+Creating other time metrics:   
+
+$$timenew = (time - c1)/c2$$   
+where      
+- c1 is a centering constant, and     
+- c2 is a scaling constant.
+
+
+**Recentering time metrics**    
+time_cG1 = Grade centered 0-point = grade 1: time_cG1 = 0, 1, 3, 5
+time_cG6 = Grade centered 0-point = grade 6: time_cG6 = -5, -4, -2, 0
+
+```{r}
+verblong$time_cG1 = (verblong$grade - 1)/1
+verblong$time_cG6 = (verblong$grade - 6)/1
+```
+
+**Rescaling time metric**    
+time_cG6 = Grade centered 0-point = grade 6: time_cG6rescale = -1.0, -0.8, -0.4, 0.0
+```{r}
+verblong$time_cG6rescale = (verblong$grade - 6)/5
+```
+
+**Remapping time**    
+assessment = Number of assessments youth have been exposed to: assessment = 1, 2, 3, 4
+Note: the way the mapping is done here only works in this case with no missing data. If have missing data, need to remap in a different way.
+```{r}
+#remapping using plyr 
+verblong$assessment = mapvalues(verblong$grade,from= c(1,2,4,6),to= c(1,2,3,4))
+```
+When ordered ... 
+```{r}
+verblong$counter <- with(verblong, ave(id, id, FUN = seq_along)) #counts the instances of id, grouped by id
+```
+
+Let's look at the models with different time-metrics.
+
+Linear Growth Model   
+
+A. Time metric = grade
+```{r}
+linear_grade_fit <- lme(fixed= verb ~ 1 + grade, 
+                        random= ~ 1 + grade|id, 
+                        data=verblong,
+                        na.action = na.exclude)
+summary(linear_grade_fit)
+```
+
+B. Time metric = grade_cG1
+```{r}
+linear_time_cG1_fit <- lme(fixed= verb ~ 1 + time_cG1, 
+                           random= ~ 1 + time_cG1|id, 
+                           data=verblong,
+                           na.action = na.exclude)
+summary(linear_time_cG1_fit)
+```
+
+C. Time metric = grade_cG6
+```{r}
+linear_time_cG6_fit <- lme(fixed= verb ~ 1 + time_cG6, 
+                           random= ~ 1 + time_cG6|id, 
+                           data=verblong,
+                           na.action = na.exclude)
+summary(linear_time_cG6_fit)
+```
+
+D. Time metric = grade_cG6rescale
+```{r}
+linear_time_cG6rescale_fit <- lme(fixed= verb ~ 1 + time_cG6rescale, 
+                                  random= ~ 1 + time_cG6rescale|id, 
+                                  data=verblong,
+                                  na.action = na.exclude)
+summary(linear_time_cG6rescale_fit)
+```
+
+E. Time metric = assessment
+```{r}
+linear_assessment_fit <- lme(fixed= verb ~ 1 + assessment, 
+                             random= ~ 1 + assessment|id, 
+                             data=verblong,
+                             na.action = na.exclude)
+summary(linear_assessment_fit)
+```
+
+Making plots of the raw data 
+```{r}
+#plotting intraindividual change
+ggplot(data = verblong, aes(x = grade, y = verb, group = id)) +
+  ggtitle("Observed data") +
+#  geom_point() + 
+  geom_line(color="blue") +
+  geom_line(aes(x = time_cG6rescale, y = verb, group = id), color="red") +
+  xlab("?? Time Metric ??") + 
+  ylab("WISC Verbal Score") + 
+  ylim(0,100) + xlim(-5,6)
+```
+
+Always be very careful with interpreting the time metric.

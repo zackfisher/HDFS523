@@ -24,7 +24,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2022-02-15" />
+<meta name="date" content="2022-02-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
 <link rel="prev" href="10.5-repeated-measures-manova.html"/>
-
+<link rel="next" href="11-chapter-11.html"/>
 <script src="libs/header-attrs-2.11.15/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -430,6 +430,33 @@ div.csl-indent {
 <li class="chapter" data-level="10.6.2" data-path="10.6-repeated-measures-manova-unstructed.html"><a href="10.6-repeated-measures-manova-unstructed.html#model-implied-covariance-matrix-3"><i class="fa fa-check"></i><b>10.6.2</b> Model-Implied Covariance Matrix<span></span></a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="11-chapter-11.html"><a href="11-chapter-11.html"><i class="fa fa-check"></i><b>11</b> Growth Curve Modeling<span></span></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="11.1-introduction.html"><a href="11.1-introduction.html"><i class="fa fa-check"></i><b>11.1</b> Introduction<span></span></a></li>
+<li class="chapter" data-level="11.2" data-path="11.2-data-preparation-and-description-1.html"><a href="11.2-data-preparation-and-description-1.html"><i class="fa fa-check"></i><b>11.2</b> Data Preparation and Description<span></span></a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="11.2-data-preparation-and-description-1.html"><a href="11.2-data-preparation-and-description-1.html#loading-libraries-used-in-this-script."><i class="fa fa-check"></i><b>11.2.1</b> Loading libraries used in this script.<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="11.3-individual-growth-models.html"><a href="11.3-individual-growth-models.html"><i class="fa fa-check"></i><b>11.3</b> Individual Growth Models<span></span></a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="11.3-individual-growth-models.html"><a href="11.3-individual-growth-models.html#visualizing-individual-change"><i class="fa fa-check"></i><b>11.3.1</b> Visualizing Individual Change<span></span></a></li>
+<li class="chapter" data-level="11.3.2" data-path="11.3-individual-growth-models.html"><a href="11.3-individual-growth-models.html#multiple-individuals"><i class="fa fa-check"></i><b>11.3.2</b> Multiple Individuals<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="11.4-unconditional-means-model-1.html"><a href="11.4-unconditional-means-model-1.html"><i class="fa fa-check"></i><b>11.4</b> Unconditional Means Model<span></span></a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="11.4-unconditional-means-model-1.html"><a href="11.4-unconditional-means-model-1.html#predicted-trajectories"><i class="fa fa-check"></i><b>11.4.1</b> Predicted Trajectories<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="11.5-linear-growth-model.html"><a href="11.5-linear-growth-model.html"><i class="fa fa-check"></i><b>11.5</b> Linear Growth Model<span></span></a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="11.5-linear-growth-model.html"><a href="11.5-linear-growth-model.html#random-intercept-model"><i class="fa fa-check"></i><b>11.5.1</b> Random Intercept Model<span></span></a></li>
+<li class="chapter" data-level="11.5.2" data-path="11.5-linear-growth-model.html"><a href="11.5-linear-growth-model.html#random-intercept-and-slopes-model"><i class="fa fa-check"></i><b>11.5.2</b> Random Intercept and Slopes Model<span></span></a></li>
+<li class="chapter" data-level="11.5.3" data-path="11.5-linear-growth-model.html"><a href="11.5-linear-growth-model.html#model-comparison"><i class="fa fa-check"></i><b>11.5.3</b> Model Comparison<span></span></a></li>
+<li class="chapter" data-level="11.5.4" data-path="11.5-linear-growth-model.html"><a href="11.5-linear-growth-model.html#mlm-and-individual-models"><i class="fa fa-check"></i><b>11.5.4</b> MLM and Individual Models<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="11.6-quadratic-growth-model.html"><a href="11.6-quadratic-growth-model.html"><i class="fa fa-check"></i><b>11.6</b> Quadratic Growth Model<span></span></a></li>
+<li class="chapter" data-level="11.7" data-path="11.7-conditional-growth-model.html"><a href="11.7-conditional-growth-model.html"><i class="fa fa-check"></i><b>11.7</b> Conditional Growth Model<span></span></a></li>
+<li class="chapter" data-level="11.8" data-path="11.8-alternative-time-metrics.html"><a href="11.8-alternative-time-metrics.html"><i class="fa fa-check"></i><b>11.8</b> Alternative Time Metrics<span></span></a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/zackfisher/HDFS523" target="blank">Published with bookdown</a></li>
 
@@ -587,59 +614,6 @@ div.csl-indent {
 ## timecathet_fit      1  6 3957.310 3983.790 -1972.655                        
 ## timecatunst_fit     2  9 3906.226 3945.947 -1944.113 1 vs 2 57.08328  &lt;.0001</code></pre>
 
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div class="csl-entry">
-Arel-Bundock, Vincent. 2022. <em>Marginaleffects: Marginal Effects, Marginal Means, Predictions, and Contrasts</em>. <a href="https://CRAN.R-project.org/package=marginaleffects">https://CRAN.R-project.org/package=marginaleffects</a>.
-</div>
-<div class="csl-entry">
-Cronbach, Lee J., and Lita Furby. 1970. <span>“How We Should Measure "Change": <span>Or</span> Should We?”</span> <em>Psychological Bulletin</em> 74 (1): 68–80. <a href="https://doi.org/10.1037/h0029382">https://doi.org/10.1037/h0029382</a>.
-</div>
-<div class="csl-entry">
-Ferraro, Kenneth F., Markus H. Schafer, and Lindsay R. Wilkinson. 2016. <span>“Childhood <span>Disadvantage</span> and <span>Health Problems</span> in <span>Middle</span> and <span>Later Life</span>: <span>Early Imprints</span> on <span>Physical Health</span>?”</span> <em>American Sociological Review</em> 81 (1): 107–33. <a href="https://doi.org/10.1177/0003122415619617">https://doi.org/10.1177/0003122415619617</a>.
-</div>
-<div class="csl-entry">
-Fox, John, and Sanford Weisberg. 2019. <em>An <span>R</span> Companion to Applied Regression</em>. Third. Thousand Oaks <span>CA</span>: Sage. <a href="https://socialsciences.mcmaster.ca/jfox/Books/Companion/">https://socialsciences.mcmaster.ca/jfox/Books/Companion/</a>.
-</div>
-<div class="csl-entry">
-MacCallum, Robert C., Duane T. Wegener, Bert N. Uchino, and Leandre R. Fabrigar. 1993. <span>“The Problem of Equivalent Models in Applications of Covariance Structure Analysis.”</span> <em>Psychological Bulletin</em> 114 (1): 185. <a href="https://doi.org/10.1037/0033-2909.114.1.185">https://doi.org/10.1037/0033-2909.114.1.185</a>.
-</div>
-<div class="csl-entry">
-McArdle, J. J. 1988. <span>“Dynamic but Structural Equation Modeling of Repeated Measures Data.”</span> In <em>Handbook of Multivariate Experimental Psychology, 2nd Ed</em>, 561–614. Perspectives on Individual Differences. <span>New York, NY, US</span>: <span>Plenum Press</span>. <a href="https://doi.org/10.1007/978-1-4613-0893-5_17">https://doi.org/10.1007/978-1-4613-0893-5_17</a>.
-</div>
-<div class="csl-entry">
-Mcardle, J. J., and MARK S. Aber. 1990. <span>“Chapter 5 - <span>Patterns</span> of <span>Change</span> Within <span>Latent Variable Structural Equation Models</span>.”</span> In <em>Statistical <span>Methods</span> in <span>Longitudinal Research</span></em>, edited by Alexander von Eye, 1:151–224. Statistical <span>Modeling</span> and <span>Decision Science</span>. <span>San Diego</span>: <span>Academic Press</span>. <a href="https://doi.org/10.1016/B978-0-12-724960-5.50010-X">https://doi.org/10.1016/B978-0-12-724960-5.50010-X</a>.
-</div>
-<div class="csl-entry">
-McArdle, J. J., and David Epstein. 1987. <span>“Latent Growth Curves Within Developmental Structural Equation Models.”</span> <em>Child Development</em> 58 (1): 110–33. <a href="https://doi.org/10.2307/1130295">https://doi.org/10.2307/1130295</a>.
-</div>
-<div class="csl-entry">
-McArdle, J. J., and John R. Nesselroade. 1994. <span>“Using Multivariate Data to Structure Developmental Change.”</span> In <em>Life-Span Developmental Psychology: <span>Methodological</span> Contributions</em>, 223–67. The <span>West Virginia University</span> Conferences on Life-Span Developmental Psychology. <span>Hillsdale, NJ, US</span>: <span>Lawrence Erlbaum Associates, Inc</span>.
-</div>
-<div class="csl-entry">
-Osborne, R. T., and D. E. Suddick. 1972. <span>“A Longitudinal Investigation of the Intellectual Differentiation Hypothesis.”</span> <em>The Journal of Genetic Psychology: Research and Theory on Human Development</em> 121 (1): 83–89. <a href="https://doi.org/10.1080/00221325.1972.10533131">https://doi.org/10.1080/00221325.1972.10533131</a>.
-</div>
-<div class="csl-entry">
-Revelle, William. 2021. <em>Psych: Procedures for Psychological, Psychometric, and Personality Research</em>. Evanston, Illinois: Northwestern University. <a href="https://CRAN.R-project.org/package=psych">https://CRAN.R-project.org/package=psych</a>.
-</div>
-<div class="csl-entry">
-Rogosa, David, David Brandt, and Michele Zimowski. 1982. <span>“A Growth Curve Approach to the Measurement of Change.”</span> <em>Psychological Bulletin</em> 92 (3): 726–48. <a href="https://doi.org/10.1037/0033-2909.92.3.726">https://doi.org/10.1037/0033-2909.92.3.726</a>.
-</div>
-<div class="csl-entry">
-Tierney, Nicholas, Di Cook, Miles McBain, and Colin Fay. 2021. <em>Naniar: Data Structures, Summaries, and Visualisations for Missing Data</em>. <a href="https://CRAN.R-project.org/package=naniar">https://CRAN.R-project.org/package=naniar</a>.
-</div>
-<div class="csl-entry">
-Venables, W. N., and B. D. Ripley. 2002. <em>Modern Applied Statistics with s</em>. Fourth. New York: Springer. <a href="https://www.stats.ox.ac.uk/pub/MASS4/">https://www.stats.ox.ac.uk/pub/MASS4/</a>.
-</div>
-<div class="csl-entry">
-Wechsler, David. 1949. <em>Wechsler <span>Intelligence Scale</span> for <span>Children</span></em>. Wechsler <span>Intelligence Scale</span> for <span>Children</span>. <span>San Antonio, TX, US</span>: <span>Psychological Corporation</span>.
-</div>
-<div class="csl-entry">
-Wickham, Hadley. 2016. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.
-</div>
-<div class="csl-entry">
-———. 2021. <em>Tidyr: Tidy Messy Data</em>. <a href="https://CRAN.R-project.org/package=tidyr">https://CRAN.R-project.org/package=tidyr</a>.
-</div>
-</div>
 </div>
 </div>
 <!-- </div> -->
@@ -648,8 +622,8 @@ Wickham, Hadley. 2016. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. Spr
           </div>
         </div>
       </div>
-<a href="10.5-repeated-measures-manova.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="10.5-repeated-measures-manova.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="11-chapter-11.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
