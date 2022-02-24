@@ -24,7 +24,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2022-02-22" />
+<meta name="date" content="2022-02-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -454,8 +454,19 @@ div.csl-indent {
 <li class="chapter" data-level="11.5.4" data-path="11.5-linear-growth-model.html"><a href="11.5-linear-growth-model.html#mlm-and-individual-models"><i class="fa fa-check"></i><b>11.5.4</b> MLM and Individual Models<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="11.6" data-path="11.6-quadratic-growth-model.html"><a href="11.6-quadratic-growth-model.html"><i class="fa fa-check"></i><b>11.6</b> Quadratic Growth Model<span></span></a></li>
-<li class="chapter" data-level="11.7" data-path="11.7-conditional-growth-model.html"><a href="11.7-conditional-growth-model.html"><i class="fa fa-check"></i><b>11.7</b> Conditional Growth Model<span></span></a></li>
-<li class="chapter" data-level="11.8" data-path="11.8-alternative-time-metrics.html"><a href="11.8-alternative-time-metrics.html"><i class="fa fa-check"></i><b>11.8</b> Alternative Time Metrics<span></span></a></li>
+<li class="chapter" data-level="11.7" data-path="11.7-conditional-growth-model.html"><a href="11.7-conditional-growth-model.html"><i class="fa fa-check"></i><b>11.7</b> Conditional Growth Model<span></span></a>
+<ul>
+<li class="chapter" data-level="11.7.1" data-path="11.7-conditional-growth-model.html"><a href="11.7-conditional-growth-model.html#conditional-growth-equation"><i class="fa fa-check"></i><b>11.7.1</b> Conditional Growth Equation<span></span></a></li>
+<li class="chapter" data-level="11.7.2" data-path="11.7-conditional-growth-model.html"><a href="11.7-conditional-growth-model.html#conditional-growth-model-1"><i class="fa fa-check"></i><b>11.7.2</b> Conditional Growth Model 1<span></span></a></li>
+<li class="chapter" data-level="11.7.3" data-path="11.7-conditional-growth-model.html"><a href="11.7-conditional-growth-model.html#conditional-growth-model-1-1"><i class="fa fa-check"></i><b>11.7.3</b> Conditional Growth Model 1<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11.8" data-path="11.8-alternative-time-metrics.html"><a href="11.8-alternative-time-metrics.html"><i class="fa fa-check"></i><b>11.8</b> Alternative Time Metrics<span></span></a>
+<ul>
+<li class="chapter" data-level="11.8.1" data-path="11.8-alternative-time-metrics.html"><a href="11.8-alternative-time-metrics.html#recentering-time-metrics"><i class="fa fa-check"></i><b>11.8.1</b> Recentering time metrics<span></span></a></li>
+<li class="chapter" data-level="11.8.2" data-path="11.8-alternative-time-metrics.html"><a href="11.8-alternative-time-metrics.html#rescaling-time-metric"><i class="fa fa-check"></i><b>11.8.2</b> Rescaling time metric<span></span></a></li>
+<li class="chapter" data-level="11.8.3" data-path="11.8-alternative-time-metrics.html"><a href="11.8-alternative-time-metrics.html#remapping-time"><i class="fa fa-check"></i><b>11.8.3</b> Remapping Time<span></span></a></li>
+<li class="chapter" data-level="11.8.4" data-path="11.8-alternative-time-metrics.html"><a href="11.8-alternative-time-metrics.html#compare-growth-metrics"><i class="fa fa-check"></i><b>11.8.4</b> Compare Growth Metrics<span></span></a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/zackfisher/HDFS523" target="blank">Published with bookdown</a></li>
@@ -479,9 +490,23 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="conditional-growth-model" class="section level2 hasAnchor" number="11.7">
 <h2><span class="header-section-number">11.7</span> Conditional Growth Model<a href="11.7-conditional-growth-model.html#conditional-growth-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The growth curve modeling framework also allows us to consider other important questions regarding developmental change. For example,</p>
+<ul>
+<li>Are the noted between-person differences in the trajectories of change related to
+other measured between-person difference variables?</li>
+<li>Can the variability we see in in the intercept and slope be explained by one or more time-invariant covariates?</li>
+</ul>
+<div id="conditional-growth-equation" class="section level3 hasAnchor" number="11.7.1">
+<h3><span class="header-section-number">11.7.1</span> Conditional Growth Equation<a href="11.7-conditional-growth-model.html#conditional-growth-equation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="figure">
+<img src="imgs/model04.jpg" alt="" />
+<p class="caption">Conditional Growth Model</p>
+</div>
+</div>
+<div id="conditional-growth-model-1" class="section level3 hasAnchor" number="11.7.2">
+<h3><span class="header-section-number">11.7.2</span> Conditional Growth Model 1<a href="11.7-conditional-growth-model.html#conditional-growth-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s go back and look at our data. The data include 2 additional time-invariant covariates, <code>momed</code> and <code>grad</code>.</p>
-<p>Let’s add a predictor to our model. In this case we will add
-<strong>Grad as a (categorial) predictor</strong> (which is coded 0,1)</p>
+<p>Let’s add a predictor to our model. In this case we will add <code>grad</code> (which is coded 0,1) as a conditional predictor.</p>
 <div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="11.7-conditional-growth-model.html#cb380-1" aria-hidden="true" tabindex="-1"></a>cgm1_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
 <span id="cb380-2"><a href="11.7-conditional-growth-model.html#cb380-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">fixed=</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade <span class="sc">+</span> grad <span class="sc">+</span> grade<span class="sc">:</span>grad, </span>
 <span id="cb380-3"><a href="11.7-conditional-growth-model.html#cb380-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade<span class="sc">|</span>id,</span>
@@ -521,6 +546,8 @@ div.csl-indent {
 ## 
 ## Number of Observations: 816
 ## Number of Groups: 204</code></pre>
+<div id="marginal-effects-1" class="section level4 hasAnchor" number="11.7.2.1">
+<h4><span class="header-section-number">11.7.2.1</span> Marginal Effects<a href="11.7-conditional-growth-model.html#marginal-effects-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Let’s make grad (<span class="math inline">\(=1\)</span>) and non-grad (<span class="math inline">\(=0\)</span>) prototypical trajectories.</p>
 <div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="11.7-conditional-growth-model.html#cb382-1" aria-hidden="true" tabindex="-1"></a><span class="co">#First lets extract the fixed effects</span></span>
 <span id="cb382-2"><a href="11.7-conditional-growth-model.html#cb382-2" aria-hidden="true" tabindex="-1"></a>FE <span class="ot">&lt;-</span> <span class="fu">fixef</span>(cgm1_fit)</span>
@@ -553,32 +580,41 @@ div.csl-indent {
 <pre><code>## Warning: Multiple drawing groups in `geom_function()`. Did you use the correct `group`, `colour`, or `fill` aesthetics?
 ## Multiple drawing groups in `geom_function()`. Did you use the correct `group`, `colour`, or `fill` aesthetics?</code></pre>
 <p><img src="_main_files/figure-html/unnamed-chunk-221-1.png" width="672" /></p>
+<p>Note, we can also use packages designed to produce and plot <em>marginal effects</em>. The <code>ggeffects</code> package is capable of producing marginal effects plots from `<code>lme</code> models. Here we produce the plots above in a single line of code.</p>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="11.7-conditional-growth-model.html#cb387-1" aria-hidden="true" tabindex="-1"></a>pr <span class="ot">&lt;-</span> ggeffects<span class="sc">::</span><span class="fu">ggpredict</span>(cgm1_fit, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>,<span class="st">&quot;grad&quot;</span>))</span>
+<span id="cb387-2"><a href="11.7-conditional-growth-model.html#cb387-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pr)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-222-1.png" width="672" /></p>
+</div>
+</div>
+<div id="conditional-growth-model-1-1" class="section level3 hasAnchor" number="11.7.3">
+<h3><span class="header-section-number">11.7.3</span> Conditional Growth Model 1<a href="11.7-conditional-growth-model.html#conditional-growth-model-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now, let’s consider <code>momed</code> as a (continuous) predictor. First, we will center <code>momed</code> at sample-level mean. Note this is done using the wide data set.</p>
-<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="11.7-conditional-growth-model.html#cb387-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(wiscsub<span class="sc">$</span>momed)</span></code></pre></div>
+<p>Note, it is important to remember that the substantive interpretation of the level-2 regression parameters is affected by the scaling and centering of the time-invariant covariates. As in standard regression models, when time-invariant covariates are centered at their sample level means, the coefficients indicate the expected intercept and slope for an average person rather than for a hypothetical person with scores of zero on all the predictors.</p>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="11.7-conditional-growth-model.html#cb388-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(wiscsub<span class="sc">$</span>momed)</span></code></pre></div>
 <pre><code>##    vars   n  mean  sd median trimmed  mad min max range  skew kurtosis   se
 ## X1    1 204 10.81 2.7   11.5      11 2.97 5.5  18  12.5 -0.36     0.01 0.19</code></pre>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="11.7-conditional-growth-model.html#cb389-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculating the mean </span></span>
-<span id="cb389-2"><a href="11.7-conditional-growth-model.html#cb389-2" aria-hidden="true" tabindex="-1"></a>momed_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(wiscsub<span class="sc">$</span>momed)</span>
-<span id="cb389-3"><a href="11.7-conditional-growth-model.html#cb389-3" aria-hidden="true" tabindex="-1"></a>momed_mean</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="11.7-conditional-growth-model.html#cb390-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculating the mean </span></span>
+<span id="cb390-2"><a href="11.7-conditional-growth-model.html#cb390-2" aria-hidden="true" tabindex="-1"></a>momed_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(wiscsub<span class="sc">$</span>momed)</span>
+<span id="cb390-3"><a href="11.7-conditional-growth-model.html#cb390-3" aria-hidden="true" tabindex="-1"></a>momed_mean</span></code></pre></div>
 <pre><code>## [1] 10.81127</code></pre>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="11.7-conditional-growth-model.html#cb391-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculating the sd for later use in plots</span></span>
-<span id="cb391-2"><a href="11.7-conditional-growth-model.html#cb391-2" aria-hidden="true" tabindex="-1"></a>momed_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(wiscsub<span class="sc">$</span>momed)</span>
-<span id="cb391-3"><a href="11.7-conditional-growth-model.html#cb391-3" aria-hidden="true" tabindex="-1"></a>momed_sd</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="11.7-conditional-growth-model.html#cb392-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculating the sd for later use in plots</span></span>
+<span id="cb392-2"><a href="11.7-conditional-growth-model.html#cb392-2" aria-hidden="true" tabindex="-1"></a>momed_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(wiscsub<span class="sc">$</span>momed)</span>
+<span id="cb392-3"><a href="11.7-conditional-growth-model.html#cb392-3" aria-hidden="true" tabindex="-1"></a>momed_sd</span></code></pre></div>
 <pre><code>## [1] 2.698279</code></pre>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="11.7-conditional-growth-model.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing centered variable in long data</span></span>
-<span id="cb393-2"><a href="11.7-conditional-growth-model.html#cb393-2" aria-hidden="true" tabindex="-1"></a>verblong<span class="sc">$</span>momed_c <span class="ot">&lt;-</span> (verblong<span class="sc">$</span>momed<span class="sc">-</span>momed_mean)</span>
-<span id="cb393-3"><a href="11.7-conditional-growth-model.html#cb393-3" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(verblong<span class="sc">$</span>momed_c)</span></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="11.7-conditional-growth-model.html#cb394-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing centered variable in long data</span></span>
+<span id="cb394-2"><a href="11.7-conditional-growth-model.html#cb394-2" aria-hidden="true" tabindex="-1"></a>verblong<span class="sc">$</span>momed_c <span class="ot">&lt;-</span> (verblong<span class="sc">$</span>momed<span class="sc">-</span>momed_mean)</span>
+<span id="cb394-3"><a href="11.7-conditional-growth-model.html#cb394-3" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(verblong<span class="sc">$</span>momed_c)</span></code></pre></div>
 <pre><code>##    vars   n mean   sd median trimmed  mad   min  max range  skew kurtosis   se
 ## X1    1 816    0 2.69   0.69    0.19 2.97 -5.31 7.19  12.5 -0.36     0.03 0.09</code></pre>
 <p>Fitting conditional growth model with momed (centered) as predictor</p>
-<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="11.7-conditional-growth-model.html#cb395-1" aria-hidden="true" tabindex="-1"></a>cgm2_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
-<span id="cb395-2"><a href="11.7-conditional-growth-model.html#cb395-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">fixed=</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade <span class="sc">+</span> momed_c <span class="sc">+</span> grade<span class="sc">:</span>momed_c, </span>
-<span id="cb395-3"><a href="11.7-conditional-growth-model.html#cb395-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade<span class="sc">|</span>id,</span>
-<span id="cb395-4"><a href="11.7-conditional-growth-model.html#cb395-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
-<span id="cb395-5"><a href="11.7-conditional-growth-model.html#cb395-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
-<span id="cb395-6"><a href="11.7-conditional-growth-model.html#cb395-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb395-7"><a href="11.7-conditional-growth-model.html#cb395-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb395-8"><a href="11.7-conditional-growth-model.html#cb395-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cgm2_fit)</span></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="11.7-conditional-growth-model.html#cb396-1" aria-hidden="true" tabindex="-1"></a>cgm2_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
+<span id="cb396-2"><a href="11.7-conditional-growth-model.html#cb396-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">fixed=</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade <span class="sc">+</span> momed_c <span class="sc">+</span> grade<span class="sc">:</span>momed_c, </span>
+<span id="cb396-3"><a href="11.7-conditional-growth-model.html#cb396-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade<span class="sc">|</span>id,</span>
+<span id="cb396-4"><a href="11.7-conditional-growth-model.html#cb396-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
+<span id="cb396-5"><a href="11.7-conditional-growth-model.html#cb396-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
+<span id="cb396-6"><a href="11.7-conditional-growth-model.html#cb396-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb396-7"><a href="11.7-conditional-growth-model.html#cb396-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb396-8"><a href="11.7-conditional-growth-model.html#cb396-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cgm2_fit)</span></code></pre></div>
 <pre><code>## Linear mixed-effects model fit by REML
 ##   Data: verblong 
 ##        AIC     BIC    logLik
@@ -610,45 +646,53 @@ div.csl-indent {
 ## 
 ## Number of Observations: 816
 ## Number of Groups: 204</code></pre>
-<p>We can extraxt the fixed effects for a prototypical trajectory.</p>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="11.7-conditional-growth-model.html#cb397-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Extract the fixed effects</span></span>
-<span id="cb397-2"><a href="11.7-conditional-growth-model.html#cb397-2" aria-hidden="true" tabindex="-1"></a>FE2 <span class="ot">&lt;-</span> <span class="fu">fixef</span>(cgm2_fit)</span>
-<span id="cb397-3"><a href="11.7-conditional-growth-model.html#cb397-3" aria-hidden="true" tabindex="-1"></a>FE2</span></code></pre></div>
+<div id="marginal-effects-2" class="section level4 hasAnchor" number="11.7.3.1">
+<h4><span class="header-section-number">11.7.3.1</span> Marginal Effects<a href="11.7-conditional-growth-model.html#marginal-effects-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We can extract the fixed effects for a prototypical trajectory.</p>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="11.7-conditional-growth-model.html#cb398-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Extract the fixed effects</span></span>
+<span id="cb398-2"><a href="11.7-conditional-growth-model.html#cb398-2" aria-hidden="true" tabindex="-1"></a>FE2 <span class="ot">&lt;-</span> <span class="fu">fixef</span>(cgm2_fit)</span>
+<span id="cb398-3"><a href="11.7-conditional-growth-model.html#cb398-3" aria-hidden="true" tabindex="-1"></a>FE2</span></code></pre></div>
 <pre><code>##   (Intercept)         grade       momed_c grade:momed_c 
 ##    15.1509929     4.6733898     0.7340657     0.1698381</code></pre>
 <p>Now, let’s consider <code>momed</code> at the mean value, as well as low (-1SD) and high (+1SD) values.</p>
 <p>Low value of <code>momed</code>.</p>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="11.7-conditional-growth-model.html#cb399-1" aria-hidden="true" tabindex="-1"></a>fun_cgm_momed_low <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb399-2"><a href="11.7-conditional-growth-model.html#cb399-2" aria-hidden="true" tabindex="-1"></a>  momed<span class="ot">=</span><span class="dv">0-1</span><span class="sc">*</span>momed_sd</span>
-<span id="cb399-3"><a href="11.7-conditional-growth-model.html#cb399-3" aria-hidden="true" tabindex="-1"></a>  FE2[<span class="dv">1</span>] <span class="sc">+</span> FE2[<span class="dv">2</span>]<span class="sc">*</span>x <span class="sc">+</span> FE2[<span class="dv">3</span>]<span class="sc">*</span>momed <span class="sc">+</span> FE2[<span class="dv">4</span>]<span class="sc">*</span>x<span class="sc">*</span>momed</span>
-<span id="cb399-4"><a href="11.7-conditional-growth-model.html#cb399-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>Average value of <code>momed</code>.</p>
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="11.7-conditional-growth-model.html#cb400-1" aria-hidden="true" tabindex="-1"></a>fun_cgm_momed_ave <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb400-2"><a href="11.7-conditional-growth-model.html#cb400-2" aria-hidden="true" tabindex="-1"></a>  momed<span class="ot">=</span><span class="dv">0</span></span>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="11.7-conditional-growth-model.html#cb400-1" aria-hidden="true" tabindex="-1"></a>fun_cgm_momed_low <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb400-2"><a href="11.7-conditional-growth-model.html#cb400-2" aria-hidden="true" tabindex="-1"></a>  momed<span class="ot">=</span><span class="dv">0-1</span><span class="sc">*</span>momed_sd</span>
 <span id="cb400-3"><a href="11.7-conditional-growth-model.html#cb400-3" aria-hidden="true" tabindex="-1"></a>  FE2[<span class="dv">1</span>] <span class="sc">+</span> FE2[<span class="dv">2</span>]<span class="sc">*</span>x <span class="sc">+</span> FE2[<span class="dv">3</span>]<span class="sc">*</span>momed <span class="sc">+</span> FE2[<span class="dv">4</span>]<span class="sc">*</span>x<span class="sc">*</span>momed</span>
 <span id="cb400-4"><a href="11.7-conditional-growth-model.html#cb400-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>High value of <code>momed</code>.</p>
-<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="11.7-conditional-growth-model.html#cb401-1" aria-hidden="true" tabindex="-1"></a>fun_cgm_momed_high <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb401-2"><a href="11.7-conditional-growth-model.html#cb401-2" aria-hidden="true" tabindex="-1"></a>  momed<span class="ot">=</span><span class="dv">0</span><span class="sc">+</span><span class="dv">1</span><span class="sc">*</span>momed_sd</span>
+<p>Average value of <code>momed</code>.</p>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="11.7-conditional-growth-model.html#cb401-1" aria-hidden="true" tabindex="-1"></a>fun_cgm_momed_ave <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb401-2"><a href="11.7-conditional-growth-model.html#cb401-2" aria-hidden="true" tabindex="-1"></a>  momed<span class="ot">=</span><span class="dv">0</span></span>
 <span id="cb401-3"><a href="11.7-conditional-growth-model.html#cb401-3" aria-hidden="true" tabindex="-1"></a>  FE2[<span class="dv">1</span>] <span class="sc">+</span> FE2[<span class="dv">2</span>]<span class="sc">*</span>x <span class="sc">+</span> FE2[<span class="dv">3</span>]<span class="sc">*</span>momed <span class="sc">+</span> FE2[<span class="dv">4</span>]<span class="sc">*</span>x<span class="sc">*</span>momed</span>
 <span id="cb401-4"><a href="11.7-conditional-growth-model.html#cb401-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>High value of <code>momed</code>.</p>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="11.7-conditional-growth-model.html#cb402-1" aria-hidden="true" tabindex="-1"></a>fun_cgm_momed_high <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb402-2"><a href="11.7-conditional-growth-model.html#cb402-2" aria-hidden="true" tabindex="-1"></a>  momed<span class="ot">=</span><span class="dv">0</span><span class="sc">+</span><span class="dv">1</span><span class="sc">*</span>momed_sd</span>
+<span id="cb402-3"><a href="11.7-conditional-growth-model.html#cb402-3" aria-hidden="true" tabindex="-1"></a>  FE2[<span class="dv">1</span>] <span class="sc">+</span> FE2[<span class="dv">2</span>]<span class="sc">*</span>x <span class="sc">+</span> FE2[<span class="dv">3</span>]<span class="sc">*</span>momed <span class="sc">+</span> FE2[<span class="dv">4</span>]<span class="sc">*</span>x<span class="sc">*</span>momed</span>
+<span id="cb402-4"><a href="11.7-conditional-growth-model.html#cb402-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Plot with the prototypical -1SD (red), prototypical 0SD (magenta) and prototypical +1SD (blue) trajectories.</p>
-<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="11.7-conditional-growth-model.html#cb402-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plotting intraindividual change with overlay</span></span>
-<span id="cb402-2"><a href="11.7-conditional-growth-model.html#cb402-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> verb, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb402-3"><a href="11.7-conditional-growth-model.html#cb402-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Raw Trajectories + Levels of Predictor&quot;</span>) <span class="sc">+</span></span>
-<span id="cb402-4"><a href="11.7-conditional-growth-model.html#cb402-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  geom_point() + </span></span>
-<span id="cb402-5"><a href="11.7-conditional-growth-model.html#cb402-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb402-6"><a href="11.7-conditional-growth-model.html#cb402-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb402-7"><a href="11.7-conditional-growth-model.html#cb402-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;WISC Verbal Score&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="sc">+</span></span>
-<span id="cb402-8"><a href="11.7-conditional-growth-model.html#cb402-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb402-9"><a href="11.7-conditional-growth-model.html#cb402-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>fun_cgm_momed_low, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb402-10"><a href="11.7-conditional-growth-model.html#cb402-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>fun_cgm_momed_ave, <span class="at">color=</span><span class="st">&quot;purple&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb402-11"><a href="11.7-conditional-growth-model.html#cb402-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>fun_cgm_momed_high, <span class="at">color=</span><span class="st">&quot;blue&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb402-12"><a href="11.7-conditional-growth-model.html#cb402-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="11.7-conditional-growth-model.html#cb403-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plotting intraindividual change with overlay</span></span>
+<span id="cb403-2"><a href="11.7-conditional-growth-model.html#cb403-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> verb, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb403-3"><a href="11.7-conditional-growth-model.html#cb403-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Raw Trajectories + Levels of Predictor&quot;</span>) <span class="sc">+</span></span>
+<span id="cb403-4"><a href="11.7-conditional-growth-model.html#cb403-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  geom_point() + </span></span>
+<span id="cb403-5"><a href="11.7-conditional-growth-model.html#cb403-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb403-6"><a href="11.7-conditional-growth-model.html#cb403-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb403-7"><a href="11.7-conditional-growth-model.html#cb403-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;WISC Verbal Score&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="sc">+</span></span>
+<span id="cb403-8"><a href="11.7-conditional-growth-model.html#cb403-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb403-9"><a href="11.7-conditional-growth-model.html#cb403-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>fun_cgm_momed_low, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb403-10"><a href="11.7-conditional-growth-model.html#cb403-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>fun_cgm_momed_ave, <span class="at">color=</span><span class="st">&quot;purple&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb403-11"><a href="11.7-conditional-growth-model.html#cb403-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>fun_cgm_momed_high, <span class="at">color=</span><span class="st">&quot;blue&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb403-12"><a href="11.7-conditional-growth-model.html#cb403-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
 <pre><code>## Warning: Multiple drawing groups in `geom_function()`. Did you use the correct `group`, `colour`, or `fill` aesthetics?
 ## Multiple drawing groups in `geom_function()`. Did you use the correct `group`, `colour`, or `fill` aesthetics?
 ## Multiple drawing groups in `geom_function()`. Did you use the correct `group`, `colour`, or `fill` aesthetics?</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-228-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-229-1.png" width="672" /></p>
+<p>Again, we can obtain a similar plot using packages designed to plot marginal effects.</p>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="11.7-conditional-growth-model.html#cb405-1" aria-hidden="true" tabindex="-1"></a>mydf <span class="ot">&lt;-</span> ggeffects<span class="sc">::</span><span class="fu">ggpredict</span>(cgm2_fit, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>,<span class="st">&quot;momed_c [meansd]&quot;</span>))</span>
+<span id="cb405-2"><a href="11.7-conditional-growth-model.html#cb405-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mydf)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-230-1.png" width="672" /></p>
+</div>
+</div>
 </div>
             </section>
 

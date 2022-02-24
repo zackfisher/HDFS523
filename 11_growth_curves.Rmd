@@ -15,9 +15,20 @@ button <-  "position: relative;
 codefolder::bookdown(init = "show", style = button)
 ```
 
+In this chapter we work through basics of growth modeling. We describe the data, run some individual level models, and work through no-growth and linear growth modeling examples. We then expand on that model in two ways. We add a predictor - to get the conditional growth model and we change the time-metric - to illustrate how alternative time metrics facilitate different interpretations. 
+
 ## Introduction
 
-In this chapter we work through basics of growth modeling. We describe the data, run some individual level models, and work through no-growth and linear growth modeling examples. We then expand on that model in two ways. We add a predictor - to get the conditional growth model and we change the time-metric - to illustrate how alternative time metrics facilitate different interpretations. 
+With growth curve modeling we are typically interested in anwsering some basic questions about change:
+
+- How does the construct change over time/age?
+- Are there interindividual differences in the level of a process? 
+- Are there interindividual differences in the rate of change over time?
+- How is the level of the construct (at a specific time) related to the rate of change?
+- What interindividual characteristic relate to interindividual differences in the level and/or rate of change?
+- How are changes in one variable associated with changes in another variable?
+- Are there time-dependent relationships in the development of two or more variables?
+
 
 ## Data Preparation and Description
 
@@ -30,6 +41,7 @@ library(data.table) #for fast data management
 library(nlme) #for mixed effects models
 library(plyr) #for data management
 library(see)
+library(ggeffects)
 ```
 
 For our examples, we use 4-occasion WISC data. Load the repeated measures data. 
@@ -568,10 +580,22 @@ ggplot(data = verblong, aes(x = grade, y = pred_fq_rq, group = id)) +
 
 ## Conditional Growth Model
 
+The growth curve modeling framework also allows us to consider other important questions regarding developmental change. For example, 
+
+- Are the noted between-person differences in the trajectories of change related to
+other measured between-person difference variables? 
+- Can the variability we see in in the intercept and slope be explained by one or more time-invariant covariates?
+
+### Conditional Growth Equation
+
+![Conditional Growth Model](imgs/model04.jpg)
+
+
+### Conditional Growth Model 1
+
 Let's go back and look at our data. The data include 2 additional time-invariant covariates, `momed` and `grad`.
 
-Let's add a predictor to our model. In this case we will add
-**Grad as a (categorial) predictor** (which is coded 0,1)
+Let's add a predictor to our model. In this case we will add `grad` (which is coded 0,1) as a conditional predictor.
 
 ```{r}
 cgm1_fit <- lme(
@@ -583,6 +607,8 @@ cgm1_fit <- lme(
 
 summary(cgm1_fit)
 ```
+
+#### Marginal Effects
 
 Let's make grad ($=1$) and non-grad ($=0$) prototypical trajectories.
 
@@ -623,8 +649,18 @@ ggplot(data = verblong, aes(x = grade, y = verb, group = id)) +
   theme_classic()
 ```
 
+Note, we can also use packages designed to produce and plot *marginal effects*. The `ggeffects` package is capable of producing marginal effects plots from ``lme` models. Here we produce the plots above in a single line of code. 
+
+```{r}
+pr <- ggeffects::ggpredict(cgm1_fit, terms = c("grade","grad"))
+plot(pr)
+```
+
+### Conditional Growth Model 1
 
 Now, let's consider `momed` as a (continuous) predictor. First, we will  center `momed` at sample-level mean. Note this is done using the wide data set.
+
+Note, it is important to remember that the substantive interpretation of the level-2 regression parameters is affected by the scaling and centering of the time-invariant covariates. As in standard regression models, when time-invariant covariates are centered at their sample level means, the coefficients indicate the expected intercept and slope for an average person rather than for a hypothetical person with scores of zero on all the predictors.
 
 ```{r}
 describe(wiscsub$momed)
@@ -653,7 +689,9 @@ cgm2_fit <- lme(
 summary(cgm2_fit)
 ```
 
-We can extraxt the fixed effects for a prototypical trajectory. 
+#### Marginal Effects
+
+We can extract the fixed effects for a prototypical trajectory. 
 
 ```{r}
 #Extract the fixed effects
@@ -708,9 +746,16 @@ ggplot(data = verblong, aes(x = grade, y = verb, group = id)) +
 ```
 
 
+Again, we can obtain a similar plot using packages designed to plot marginal effects.
+
+```{r}
+mydf <- ggeffects::ggpredict(cgm2_fit, terms = c("grade","momed_c [meansd]"))
+plot(mydf)
+```
+
 ## Alternative Time Metrics
 
-Let's go back to the simple *linear growth model*, this time being very explicit about the *scaling and centering* of the `time` variable. Time metric = original scores, Grade = 1, 2, 4, 6**. Fitting the linear model with grade (as originally coded)
+Let's go back to the simple *linear growth model*, this time being very explicit about the *scaling and centering* of the `time` variable. Time metric = original scores, Grade = 1, 2, 4, 6. Fitting the linear model with grade (as originally coded)
 
 ```{r}
 linear_grade_fit <- lme(
@@ -723,7 +768,15 @@ linear_grade_fit <- lme(
 summary(linear_grade_fit)
 ```
 
-Creating other time metrics:   
+**Important Questions to Ask**
+
+- Where should the *intercept* be located?
+  - Is there a meaningful *zero-time*? (choosing c1)
+    - time since birth, time to death, time since surgery, time since meeting the research staff
+- What should the time units be? (choosing c2)
+  - years, months, minutes, grades, # of psychological events?
+  
+Using these quantities (c1 and c2) and the formula below it is possible to create alternative time metrics that may be more appropriate for the specific change process we are interested in:   
 
 $$timenew = (time - c1)/c2$$   
 where      
@@ -731,7 +784,8 @@ where
 - c2 is a scaling constant.
 
 
-**Recentering time metrics**    
+### Recentering time metrics   
+
 time_cG1 = Grade centered 0-point = grade 1: time_cG1 = 0, 1, 3, 5
 time_cG6 = Grade centered 0-point = grade 6: time_cG6 = -5, -4, -2, 0
 
@@ -740,84 +794,93 @@ verblong$time_cG1 = (verblong$grade - 1)/1
 verblong$time_cG6 = (verblong$grade - 6)/1
 ```
 
-**Rescaling time metric**    
+### Rescaling time metric 
 time_cG6 = Grade centered 0-point = grade 6: time_cG6rescale = -1.0, -0.8, -0.4, 0.0
 ```{r}
 verblong$time_cG6rescale = (verblong$grade - 6)/5
 ```
 
-**Remapping time**    
-assessment = Number of assessments youth have been exposed to: assessment = 1, 2, 3, 4
-Note: the way the mapping is done here only works in this case with no missing data. If have missing data, need to remap in a different way.
+### Remapping Time   
+
+We may also want to remap time based on some other metric. For example, if we wanted to look at the number of assessment as indexing time. Here assessment would be the number of assessments youth have been exposed to: (assessment = 1, 2, 3, 4). Note: the way the mapping is done here only works in this case with no missing data. If have missing data, need to remap in a different way.
+
 ```{r}
 #remapping using plyr 
 verblong$assessment = mapvalues(verblong$grade,from= c(1,2,4,6),to= c(1,2,3,4))
 ```
-When ordered ... 
-```{r}
-verblong$counter <- with(verblong, ave(id, id, FUN = seq_along)) #counts the instances of id, grouped by id
-```
+
+
+
+### Compare Growth Metrics 
 
 Let's look at the models with different time-metrics.
 
-Linear Growth Model   
+#### Time metric = grade
 
-A. Time metric = grade
 ```{r}
-linear_grade_fit <- lme(fixed= verb ~ 1 + grade, 
-                        random= ~ 1 + grade|id, 
-                        data=verblong,
-                        na.action = na.exclude)
+linear_grade_fit <- lme(
+  fixed= verb ~ 1 + grade, 
+  random= ~ 1 + grade|id, 
+  data=verblong,
+  na.action = na.exclude
+)
 summary(linear_grade_fit)
 ```
 
-B. Time metric = grade_cG1
+#### Time metric = grade_cG1
+
+time_cG1 = Grade centered 0-point = grade 1: time_cG1 = 0, 1, 3, 5
+
 ```{r}
-linear_time_cG1_fit <- lme(fixed= verb ~ 1 + time_cG1, 
-                           random= ~ 1 + time_cG1|id, 
-                           data=verblong,
-                           na.action = na.exclude)
+linear_time_cG1_fit <- lme(
+  fixed= verb ~ 1 + time_cG1, 
+  random= ~ 1 + time_cG1|id, 
+  data=verblong,
+  na.action = na.exclude
+)
 summary(linear_time_cG1_fit)
 ```
 
-C. Time metric = grade_cG6
+#### Time metric = grade_cG6
+
+time_cG6 = Grade centered 0-point = grade 6: time_cG6 = -5, -4, -2, 0
+
 ```{r}
-linear_time_cG6_fit <- lme(fixed= verb ~ 1 + time_cG6, 
-                           random= ~ 1 + time_cG6|id, 
-                           data=verblong,
-                           na.action = na.exclude)
+linear_time_cG6_fit <- lme(
+  fixed= verb ~ 1 + time_cG6, 
+  random= ~ 1 + time_cG6|id, 
+  data=verblong,
+  na.action = na.exclude
+)
 summary(linear_time_cG6_fit)
 ```
 
-D. Time metric = grade_cG6rescale
+#### Time metric = grade_cG6rescale
+
+time_cG6 = Grade centered 0-point = grade 6: time_cG6rescale = -1.0, -0.8, -0.4, 0.0
+
 ```{r}
-linear_time_cG6rescale_fit <- lme(fixed= verb ~ 1 + time_cG6rescale, 
-                                  random= ~ 1 + time_cG6rescale|id, 
-                                  data=verblong,
-                                  na.action = na.exclude)
+linear_time_cG6rescale_fit <- lme(
+  fixed= verb ~ 1 + time_cG6rescale, 
+  random= ~ 1 + time_cG6rescale|id, 
+  data=verblong,
+  na.action = na.exclude
+)
 summary(linear_time_cG6rescale_fit)
 ```
 
-E. Time metric = assessment
+#### Time metric = assessment
+
+Assessment = 1, 2, 3, 4
+
 ```{r}
-linear_assessment_fit <- lme(fixed= verb ~ 1 + assessment, 
-                             random= ~ 1 + assessment|id, 
-                             data=verblong,
-                             na.action = na.exclude)
+linear_assessment_fit <- lme(
+  fixed= verb ~ 1 + assessment, 
+  random= ~ 1 + assessment|id, 
+  data=verblong,
+  na.action = na.exclude
+)
 summary(linear_assessment_fit)
 ```
 
-Making plots of the raw data 
-```{r}
-#plotting intraindividual change
-ggplot(data = verblong, aes(x = grade, y = verb, group = id)) +
-  ggtitle("Observed data") +
-#  geom_point() + 
-  geom_line(color="blue") +
-  geom_line(aes(x = time_cG6rescale, y = verb, group = id), color="red") +
-  xlab("?? Time Metric ??") + 
-  ylab("WISC Verbal Score") + 
-  ylim(0,100) + xlim(-5,6)
-```
 
-Always be very careful with interpreting the time metric.
