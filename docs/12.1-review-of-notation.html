@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>12.1 Review of Notation | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
+  <meta name="description" content="Course notes for HDFS 523" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="12.1 Review of Notation | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="/images/image1.png" />
+  <meta property="og:description" content="Course notes for HDFS 523" />
+  <meta name="github-repo" content="zackfisher/HDFS523" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="12.1 Review of Notation | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  
+  <meta name="twitter:description" content="Course notes for HDFS 523" />
+  <meta name="twitter:image" content="/images/image1.png" />
+
+<meta name="author" content="Zachary F. Fisher" />
+
+
+<meta name="date" content="2022-02-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="null" type="image/x-icon" />
+<link rel="prev" href="12-chapter-12.html"/>
+
+<script src="libs/header-attrs-2.11.15/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Course notes for HDFS 523</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book<span></span></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1.1-why-this-book.html"><a href="1.1-why-this-book.html"><i class="fa fa-check"></i><b>1.1</b> Why this book?<span></span></a></li>
+<li class="chapter" data-level="1.2" data-path="1.2-code-folding.html"><a href="1.2-code-folding.html"><i class="fa fa-check"></i><b>1.2</b> Code Folding<span></span></a></li>
+<li class="chapter" data-level="1.3" data-path="1.3-acknowledgements.html"><a href="1.3-acknowledgements.html"><i class="fa fa-check"></i><b>1.3</b> Acknowledgements<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="2-chapter-2.html"><a href="2-chapter-2.html"><i class="fa fa-check"></i><b>2</b> Data Cleaning<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2.1-example-data.html"><a href="2.1-example-data.html"><i class="fa fa-check"></i><b>2.1</b> Example Data<span></span></a></li>
+<li class="chapter" data-level="2.2" data-path="2.2-reading-in-repeated-measures-data.html"><a href="2.2-reading-in-repeated-measures-data.html"><i class="fa fa-check"></i><b>2.2</b> Reading in Repeated Measures Data<span></span></a></li>
+<li class="chapter" data-level="2.3" data-path="2.3-familiarize-yourself-with-the-data.html"><a href="2.3-familiarize-yourself-with-the-data.html"><i class="fa fa-check"></i><b>2.3</b> Familiarize Yourself with the Data<span></span></a></li>
+<li class="chapter" data-level="2.4" data-path="2.4-look-for-duplicated-ids.html"><a href="2.4-look-for-duplicated-ids.html"><i class="fa fa-check"></i><b>2.4</b> Look for Duplicated IDs<span></span></a></li>
+<li class="chapter" data-level="2.5" data-path="2.5-using-table-to-spot-irregularities.html"><a href="2.5-using-table-to-spot-irregularities.html"><i class="fa fa-check"></i><b>2.5</b> Using <code>table()</code> to Spot Irregularities<span></span></a></li>
+<li class="chapter" data-level="2.6" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html"><i class="fa fa-check"></i><b>2.6</b> Missing Data<span></span></a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#generating-example-data"><i class="fa fa-check"></i><b>2.6.1</b> Generating Example Data<span></span></a></li>
+<li class="chapter" data-level="2.6.2" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#recoding-values-with-na"><i class="fa fa-check"></i><b>2.6.2</b> Recoding Values with <code>NA</code><span></span></a></li>
+<li class="chapter" data-level="2.6.3" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#missing-data-visualization"><i class="fa fa-check"></i><b>2.6.3</b> Missing Data Visualization<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="2.7-exporting-data.html"><a href="2.7-exporting-data.html"><i class="fa fa-check"></i><b>2.7</b> Exporting Data<span></span></a></li>
+<li class="chapter" data-level="2.8" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html"><i class="fa fa-check"></i><b>2.8</b> Reshaping Repeated Measures Data<span></span></a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html#reshape-wide-to-long"><i class="fa fa-check"></i><b>2.8.1</b> Reshape Wide to Long<span></span></a></li>
+<li class="chapter" data-level="2.8.2" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html#reshape-long-to-wide"><i class="fa fa-check"></i><b>2.8.2</b> Reshape Long to Wide<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-chapter-3.html"><a href="3-chapter-3.html"><i class="fa fa-check"></i><b>3</b> Describing Longitudinal Data<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3.1-example-data-1.html"><a href="3.1-example-data-1.html"><i class="fa fa-check"></i><b>3.1</b> Example Data<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html"><i class="fa fa-check"></i><b>3.2</b> Describing Means and Variances<span></span></a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html#verbal-ability-all-persons-and-occasions"><i class="fa fa-check"></i><b>3.2.1</b> Verbal Ability (All Persons and Occasions)<span></span></a></li>
+<li class="chapter" data-level="3.2.2" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html#verbal-ability-across-time"><i class="fa fa-check"></i><b>3.2.2</b> Verbal Ability (Across Time)<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="3.3-describing-covariances.html"><a href="3.3-describing-covariances.html"><i class="fa fa-check"></i><b>3.3</b> Describing Covariances<span></span></a></li>
+<li class="chapter" data-level="3.4" data-path="3.4-individual-level-descriptives.html"><a href="3.4-individual-level-descriptives.html"><i class="fa fa-check"></i><b>3.4</b> Individual-Level Descriptives<span></span></a></li>
+<li class="chapter" data-level="3.5" data-path="3.5-references.html"><a href="3.5-references.html"><i class="fa fa-check"></i><b>3.5</b> References<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-chapter-4.html"><a href="4-chapter-4.html"><i class="fa fa-check"></i><b>4</b> Matrix Algebra<span></span></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html"><i class="fa fa-check"></i><b>4.1</b> Types of matrices<span></span></a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#square"><i class="fa fa-check"></i><b>4.1.1</b> Square<span></span></a></li>
+<li class="chapter" data-level="4.1.2" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#symmetric"><i class="fa fa-check"></i><b>4.1.2</b> Symmetric<span></span></a></li>
+<li class="chapter" data-level="4.1.3" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#diagonal"><i class="fa fa-check"></i><b>4.1.3</b> Diagonal<span></span></a></li>
+<li class="chapter" data-level="4.1.4" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#identity"><i class="fa fa-check"></i><b>4.1.4</b> Identity<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html"><i class="fa fa-check"></i><b>4.2</b> Operations on Matrices<span></span></a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-transpose"><i class="fa fa-check"></i><b>4.2.1</b> Matrix Transpose<span></span></a></li>
+<li class="chapter" data-level="4.2.2" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-trace"><i class="fa fa-check"></i><b>4.2.2</b> Matrix Trace<span></span></a></li>
+<li class="chapter" data-level="4.2.3" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#addition"><i class="fa fa-check"></i><b>4.2.3</b> Addition<span></span></a></li>
+<li class="chapter" data-level="4.2.4" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#subtraction"><i class="fa fa-check"></i><b>4.2.4</b> Subtraction<span></span></a></li>
+<li class="chapter" data-level="4.2.5" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-multiplication"><i class="fa fa-check"></i><b>4.2.5</b> Matrix Multiplication<span></span></a></li>
+<li class="chapter" data-level="4.2.6" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-division"><i class="fa fa-check"></i><b>4.2.6</b> Matrix Division<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-chapter-5.html"><a href="5-chapter-5.html"><i class="fa fa-check"></i><b>5</b> Ordinary Least Squares<span></span></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="5.1-linear-regression-model.html"><a href="5.1-linear-regression-model.html"><i class="fa fa-check"></i><b>5.1</b> Linear Regression Model<span></span></a></li>
+<li class="chapter" data-level="5.2" data-path="5.2-ordinary-least-squares-ols.html"><a href="5.2-ordinary-least-squares-ols.html"><i class="fa fa-check"></i><b>5.2</b> Ordinary Least Squares (OLS)<span></span></a></li>
+<li class="chapter" data-level="5.3" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html"><i class="fa fa-check"></i><b>5.3</b> Assumptions of OLS<span></span></a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#assumption-1.-mathbbeepsilon_i-0"><i class="fa fa-check"></i><b>5.3.1</b> Assumption 1. <span class="math inline">\(\mathbb{E}(\epsilon_{i}) = 0\)</span><span></span></a></li>
+<li class="chapter" data-level="5.3.2" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#assumption-2.-homoscedasticity"><i class="fa fa-check"></i><b>5.3.2</b> Assumption 2. Homoscedasticity<span></span></a></li>
+<li class="chapter" data-level="5.3.3" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#mathbbeepsilon_iepsilon_j-0"><i class="fa fa-check"></i><b>5.3.3</b> 3. <span class="math inline">\(\mathbb{E}(\epsilon_{i}\epsilon_{j}) = 0\)</span><span></span></a></li>
+<li class="chapter" data-level="5.3.4" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#no-perfect-collinearity"><i class="fa fa-check"></i><b>5.3.4</b> 4. No Perfect Collinearity<span></span></a></li>
+<li class="chapter" data-level="5.3.5" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#mathbbcepsilon_ix_ki-0"><i class="fa fa-check"></i><b>5.3.5</b> 5. <span class="math inline">\(\mathbb{C}(\epsilon_{i},x_{ki}) = 0\)</span><span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html"><i class="fa fa-check"></i><b>5.4</b> Properties of the OLS Estimator<span></span></a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html#consistentcy-of-boldsymbolbeta"><i class="fa fa-check"></i><b>5.4.1</b> 1. Consistentcy of <span class="math inline">\(\boldsymbol{{\beta}}\)</span><span></span></a></li>
+<li class="chapter" data-level="5.4.2" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html#asymptotic-normality"><i class="fa fa-check"></i><b>5.4.2</b> 2. Asymptotic Normality<span></span></a></li>
+<li class="chapter" data-level="5.4.3" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html#variance-of-hatbeta"><i class="fa fa-check"></i><b>5.4.3</b> Variance of <span class="math inline">\(\hat{\beta}\)</span><span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html"><i class="fa fa-check"></i><b>5.5</b> Failure to Meet Assumptions<span></span></a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html#failure-of-assumption-1."><i class="fa fa-check"></i><b>5.5.1</b> Failure of Assumption 1.<span></span></a></li>
+<li class="chapter" data-level="5.5.2" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html#failure-of-assumption-2-or-3."><i class="fa fa-check"></i><b>5.5.2</b> Failure of Assumption 2 or 3.<span></span></a></li>
+<li class="chapter" data-level="5.5.3" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html#failure-of-assumption-5."><i class="fa fa-check"></i><b>5.5.3</b> Failure of Assumption 5.<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html"><i class="fa fa-check"></i><b>5.6</b> Regression and Matrix Notation<span></span></a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#an-intercept-only-model"><i class="fa fa-check"></i><b>5.6.1</b> An Intercept-Only Model<span></span></a></li>
+<li class="chapter" data-level="5.6.2" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#intercept-only-model-in-matrix-form"><i class="fa fa-check"></i><b>5.6.2</b> Intercept-Only Model in Matrix Form<span></span></a></li>
+<li class="chapter" data-level="5.6.3" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#simple-regression-in-matrix-form"><i class="fa fa-check"></i><b>5.6.3</b> Simple Regression in Matrix Form<span></span></a></li>
+<li class="chapter" data-level="5.6.4" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#multiple-regression-in-matrix-form"><i class="fa fa-check"></i><b>5.6.4</b> Multiple Regression in Matrix Form<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html"><i class="fa fa-check"></i><b>5.7</b> Solving the Regression Equation<span></span></a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html#matrix-multiplication-and-transpose"><i class="fa fa-check"></i><b>5.7.1</b> Matrix Multiplication and Transpose<span></span></a></li>
+<li class="chapter" data-level="5.7.2" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html#matrix-inverse"><i class="fa fa-check"></i><b>5.7.2</b> Matrix Inverse<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html"><i class="fa fa-check"></i><b>5.8</b> The Linear Probability Model<span></span></a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html#advantages-of-the-lpm"><i class="fa fa-check"></i><b>5.8.1</b> Advantages of the LPM<span></span></a></li>
+<li class="chapter" data-level="5.8.2" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html#disadvantages-of-the-lpm"><i class="fa fa-check"></i><b>5.8.2</b> Disadvantages of the LPM<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-chapter-6.html"><a href="6-chapter-6.html"><i class="fa fa-check"></i><b>6</b> Linear Regression<span></span></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="6.1-example-data-2.html"><a href="6.1-example-data-2.html"><i class="fa fa-check"></i><b>6.1</b> Example Data<span></span></a></li>
+<li class="chapter" data-level="6.2" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html"><i class="fa fa-check"></i><b>6.2</b> Intercept-Only Model<span></span></a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-equation"><i class="fa fa-check"></i><b>6.2.1</b> Intercept-Only Equation<span></span></a></li>
+<li class="chapter" data-level="6.2.2" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-model-in-r"><i class="fa fa-check"></i><b>6.2.2</b> Intercept-Only Model in R<span></span></a></li>
+<li class="chapter" data-level="6.2.3" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-as-mean-of-outcome"><i class="fa fa-check"></i><b>6.2.3</b> Intercept as Mean of Outcome<span></span></a></li>
+<li class="chapter" data-level="6.2.4" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-model-r2"><i class="fa fa-check"></i><b>6.2.4</b> Intercept-Only Model <span class="math inline">\(R^2\)</span><span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html"><i class="fa fa-check"></i><b>6.3</b> Simple Linear Regression<span></span></a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#regression-equation-and-model-fitting"><i class="fa fa-check"></i><b>6.3.1</b> Regression Equation and Model Fitting<span></span></a></li>
+<li class="chapter" data-level="6.3.2" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#path-diagram"><i class="fa fa-check"></i><b>6.3.2</b> Path Diagram<span></span></a></li>
+<li class="chapter" data-level="6.3.3" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#interpreting-model-parameters"><i class="fa fa-check"></i><b>6.3.3</b> Interpreting Model Parameters<span></span></a></li>
+<li class="chapter" data-level="6.3.4" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#plotting-regression-line"><i class="fa fa-check"></i><b>6.3.4</b> Plotting Regression Line<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html"><i class="fa fa-check"></i><b>6.4</b> Mean Centering Predictors<span></span></a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html#interpreting-model-parameters-1"><i class="fa fa-check"></i><b>6.4.1</b> Interpreting Model Parameters<span></span></a></li>
+<li class="chapter" data-level="6.4.2" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html#plotting-regression-line-1"><i class="fa fa-check"></i><b>6.4.2</b> Plotting Regression Line<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html"><i class="fa fa-check"></i><b>6.5</b> Multiple Linear Regression<span></span></a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#regression-equation"><i class="fa fa-check"></i><b>6.5.1</b> Regression Equation<span></span></a></li>
+<li class="chapter" data-level="6.5.2" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#fit-model-in-r"><i class="fa fa-check"></i><b>6.5.2</b> Fit Model in R<span></span></a></li>
+<li class="chapter" data-level="6.5.3" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#path-diagram-1"><i class="fa fa-check"></i><b>6.5.3</b> Path Diagram<span></span></a></li>
+<li class="chapter" data-level="6.5.4" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#a-note-on-interpretation"><i class="fa fa-check"></i><b>6.5.4</b> A Note on Interpretation<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html"><i class="fa fa-check"></i><b>6.6</b> Categorical Variable Interaction<span></span></a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#interaction-as-moderation"><i class="fa fa-check"></i><b>6.6.1</b> Interaction as Moderation<span></span></a></li>
+<li class="chapter" data-level="6.6.2" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#moderation-by-categorical-variable"><i class="fa fa-check"></i><b>6.6.2</b> Moderation by Categorical Variable<span></span></a></li>
+<li class="chapter" data-level="6.6.3" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#interpretation"><i class="fa fa-check"></i><b>6.6.3</b> Interpretation<span></span></a></li>
+<li class="chapter" data-level="6.6.4" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#fit-regression-model-in-r"><i class="fa fa-check"></i><b>6.6.4</b> Fit Regression Model in R<span></span></a></li>
+<li class="chapter" data-level="6.6.5" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#path-diagram-2"><i class="fa fa-check"></i><b>6.6.5</b> Path Diagram<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="7-chapter-7.html"><a href="7-chapter-7.html"><i class="fa fa-check"></i><b>7</b> Logistic Regression<span></span></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="7.1-categorical-data-in-the-social-sciences.html"><a href="7.1-categorical-data-in-the-social-sciences.html"><i class="fa fa-check"></i><b>7.1</b> Categorical Data in the Social Sciences<span></span></a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="7.1-categorical-data-in-the-social-sciences.html"><a href="7.1-categorical-data-in-the-social-sciences.html#examples-of-categorical-data"><i class="fa fa-check"></i><b>7.1.1</b> Examples of Categorical Data<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html"><i class="fa fa-check"></i><b>7.2</b> Introduction to GLMs<span></span></a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#linear-regression-as-glm"><i class="fa fa-check"></i><b>7.2.1</b> Linear Regression as GLM<span></span></a></li>
+<li class="chapter" data-level="7.2.2" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#logistic-regression-as-glm"><i class="fa fa-check"></i><b>7.2.2</b> Logistic Regression as GLM<span></span></a></li>
+<li class="chapter" data-level="7.2.3" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#poisson-regression-as-glm"><i class="fa fa-check"></i><b>7.2.3</b> Poisson Regression as GLM<span></span></a></li>
+<li class="chapter" data-level="7.2.4" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#additional-remarks"><i class="fa fa-check"></i><b>7.2.4</b> Additional Remarks<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="7.3-binary-logistic-regression.html"><a href="7.3-binary-logistic-regression.html"><i class="fa fa-check"></i><b>7.3</b> Binary Logistic Regression<span></span></a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="7.3-binary-logistic-regression.html"><a href="7.3-binary-logistic-regression.html#overcoming-lpm"><i class="fa fa-check"></i><b>7.3.1</b> Overcoming LPM<span></span></a></li>
+<li class="chapter" data-level="7.3.2" data-path="7.3-binary-logistic-regression.html"><a href="7.3-binary-logistic-regression.html#model"><i class="fa fa-check"></i><b>7.3.2</b> Model<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="7.4-example-data-3.html"><a href="7.4-example-data-3.html"><i class="fa fa-check"></i><b>7.4</b> Example Data<span></span></a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="7.4-example-data-3.html"><a href="7.4-example-data-3.html#variables"><i class="fa fa-check"></i><b>7.4.1</b> Variables<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="7.5-intercept-only-model-1.html"><a href="7.5-intercept-only-model-1.html"><i class="fa fa-check"></i><b>7.5</b> Intercept-Only Model<span></span></a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="7.5-intercept-only-model-1.html"><a href="7.5-intercept-only-model-1.html#intercept-only-model-in-r-1"><i class="fa fa-check"></i><b>7.5.1</b> Intercept-Only Model in R<span></span></a></li>
+<li class="chapter" data-level="7.5.2" data-path="7.5-intercept-only-model-1.html"><a href="7.5-intercept-only-model-1.html#interpretation-1"><i class="fa fa-check"></i><b>7.5.2</b> Interpretation<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="7.6-single-predictor-model.html"><a href="7.6-single-predictor-model.html"><i class="fa fa-check"></i><b>7.6</b> Single Predictor Model<span></span></a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="7.6-single-predictor-model.html"><a href="7.6-single-predictor-model.html#overdispersion"><i class="fa fa-check"></i><b>7.6.1</b> Overdispersion<span></span></a></li>
+<li class="chapter" data-level="7.6.2" data-path="7.6-single-predictor-model.html"><a href="7.6-single-predictor-model.html#coefficients"><i class="fa fa-check"></i><b>7.6.2</b> Coefficients<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html"><i class="fa fa-check"></i><b>7.7</b> Marginal Effects<span></span></a>
+<ul>
+<li class="chapter" data-level="7.7.1" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#a-definition-of-marginal-effects"><i class="fa fa-check"></i><b>7.7.1</b> A Definition of Marginal Effects<span></span></a></li>
+<li class="chapter" data-level="7.7.2" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#a-few-observations"><i class="fa fa-check"></i><b>7.7.2</b> A Few Observations<span></span></a></li>
+<li class="chapter" data-level="7.7.3" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#types-of-marginal-effects"><i class="fa fa-check"></i><b>7.7.3</b> Types of Marginal Effects<span></span></a></li>
+<li class="chapter" data-level="7.7.4" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#example-model"><i class="fa fa-check"></i><b>7.7.4</b> Example Model<span></span></a></li>
+<li class="chapter" data-level="7.7.5" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#marginal-effects-at-representative-values-mer"><i class="fa fa-check"></i><b>7.7.5</b> Marginal Effects at Representative Values (MER)<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="8-chapter-8.html"><a href="8-chapter-8.html"><i class="fa fa-check"></i><b>8</b> Poisson Regression<span></span></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="8.1-poisson-regression.html"><a href="8.1-poisson-regression.html"><i class="fa fa-check"></i><b>8.1</b> Poisson Regression<span></span></a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="8.1-poisson-regression.html"><a href="8.1-poisson-regression.html#poisson-regression-as-glm-1"><i class="fa fa-check"></i><b>8.1.1</b> Poisson Regression as GLM<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="8.2-poisson-distribution.html"><a href="8.2-poisson-distribution.html"><i class="fa fa-check"></i><b>8.2</b> Poisson Distribution<span></span></a></li>
+<li class="chapter" data-level="8.3" data-path="8.3-notes-on-interpretation.html"><a href="8.3-notes-on-interpretation.html"><i class="fa fa-check"></i><b>8.3</b> Notes on Interpretation<span></span></a></li>
+<li class="chapter" data-level="8.4" data-path="8.4-example-data-4.html"><a href="8.4-example-data-4.html"><i class="fa fa-check"></i><b>8.4</b> Example Data<span></span></a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="8.4-example-data-4.html"><a href="8.4-example-data-4.html#dependent-variable"><i class="fa fa-check"></i><b>8.4.1</b> Dependent variable<span></span></a></li>
+<li class="chapter" data-level="8.4.2" data-path="8.4-example-data-4.html"><a href="8.4-example-data-4.html#explanatory-variables"><i class="fa fa-check"></i><b>8.4.2</b> Explanatory Variables<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="8.5-single-predictor-model-1.html"><a href="8.5-single-predictor-model-1.html"><i class="fa fa-check"></i><b>8.5</b> Single Predictor Model<span></span></a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="8.5-single-predictor-model-1.html"><a href="8.5-single-predictor-model-1.html#deviance-and-goodness-of-fit"><i class="fa fa-check"></i><b>8.5.1</b> Deviance and Goodness of Fit<span></span></a></li>
+<li class="chapter" data-level="8.5.2" data-path="8.5-single-predictor-model-1.html"><a href="8.5-single-predictor-model-1.html#interpretation-2"><i class="fa fa-check"></i><b>8.5.2</b> Interpretation<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="8.6-multiple-predictor-model.html"><a href="8.6-multiple-predictor-model.html"><i class="fa fa-check"></i><b>8.6</b> Multiple Predictor Model<span></span></a></li>
+<li class="chapter" data-level="8.7" data-path="8.7-revisisting-overdispersion.html"><a href="8.7-revisisting-overdispersion.html"><i class="fa fa-check"></i><b>8.7</b> Revisisting Overdispersion<span></span></a>
+<ul>
+<li class="chapter" data-level="8.7.1" data-path="8.7-revisisting-overdispersion.html"><a href="8.7-revisisting-overdispersion.html#quassi-poisson-family"><i class="fa fa-check"></i><b>8.7.1</b> Quassi-Poisson Family<span></span></a></li>
+<li class="chapter" data-level="8.7.2" data-path="8.7-revisisting-overdispersion.html"><a href="8.7-revisisting-overdispersion.html#negative-binomial-regression"><i class="fa fa-check"></i><b>8.7.2</b> Negative Binomial Regression<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="9-chapter-9.html"><a href="9-chapter-9.html"><i class="fa fa-check"></i><b>9</b> Two-Occassion change<span></span></a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="9.1-example-data-5.html"><a href="9.1-example-data-5.html"><i class="fa fa-check"></i><b>9.1</b> Example Data<span></span></a></li>
+<li class="chapter" data-level="9.2" data-path="9.2-inroduction.html"><a href="9.2-inroduction.html"><i class="fa fa-check"></i><b>9.2</b> Inroduction<span></span></a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="9.2-inroduction.html"><a href="9.2-inroduction.html#a-thought-experiment"><i class="fa fa-check"></i><b>9.2.1</b> A Thought Experiment<span></span></a></li>
+<li class="chapter" data-level="9.2.2" data-path="9.2-inroduction.html"><a href="9.2-inroduction.html#examples-of-equivalent-models"><i class="fa fa-check"></i><b>9.2.2</b> Examples of Equivalent Models<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="9.3-residualized-change.html"><a href="9.3-residualized-change.html"><i class="fa fa-check"></i><b>9.3</b> Residualized Change<span></span></a></li>
+<li class="chapter" data-level="9.4" data-path="9.4-raw-change.html"><a href="9.4-raw-change.html"><i class="fa fa-check"></i><b>9.4</b> Raw Change<span></span></a></li>
+<li class="chapter" data-level="9.5" data-path="9.5-autoregressive-models.html"><a href="9.5-autoregressive-models.html"><i class="fa fa-check"></i><b>9.5</b> Autoregressive Models<span></span></a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="9.5-autoregressive-models.html"><a href="9.5-autoregressive-models.html#autoregressive-residuals"><i class="fa fa-check"></i><b>9.5.1</b> Autoregressive Residuals<span></span></a></li>
+<li class="chapter" data-level="9.5.2" data-path="9.5-autoregressive-models.html"><a href="9.5-autoregressive-models.html#autoregressive-model-in-r"><i class="fa fa-check"></i><b>9.5.2</b> Autoregressive Model in R<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="9.6-difference-score-model.html"><a href="9.6-difference-score-model.html"><i class="fa fa-check"></i><b>9.6</b> Difference Score Model<span></span></a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="9.6-difference-score-model.html"><a href="9.6-difference-score-model.html#calculating-difference-scores"><i class="fa fa-check"></i><b>9.6.1</b> Calculating Difference Scores<span></span></a></li>
+<li class="chapter" data-level="9.6.2" data-path="9.6-difference-score-model.html"><a href="9.6-difference-score-model.html#comparison-to-residualized-change"><i class="fa fa-check"></i><b>9.6.2</b> Comparison to Residualized Change<span></span></a></li>
+<li class="chapter" data-level="9.6.3" data-path="9.6-difference-score-model.html"><a href="9.6-difference-score-model.html#a-difference-score-regression-model"><i class="fa fa-check"></i><b>9.6.3</b> A Difference Score Regression Model<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="9.7-critique-of-residualized-change.html"><a href="9.7-critique-of-residualized-change.html"><i class="fa fa-check"></i><b>9.7</b> Critique of Residualized Change<span></span></a></li>
+<li class="chapter" data-level="9.8" data-path="9.8-critique-of-difference-scores.html"><a href="9.8-critique-of-difference-scores.html"><i class="fa fa-check"></i><b>9.8</b> Critique of Difference Scores<span></span></a>
+<ul>
+<li class="chapter" data-level="9.8.1" data-path="9.8-critique-of-difference-scores.html"><a href="9.8-critique-of-difference-scores.html#alternative-interpretation"><i class="fa fa-check"></i><b>9.8.1</b> Alternative Interpretation<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="9.9" data-path="9.9-comparing-models.html"><a href="9.9-comparing-models.html"><i class="fa fa-check"></i><b>9.9</b> Comparing Models<span></span></a></li>
+<li class="chapter" data-level="9.10" data-path="9.10-closing-thoughts.html"><a href="9.10-closing-thoughts.html"><i class="fa fa-check"></i><b>9.10</b> Closing Thoughts<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="10-chapter-10.html"><a href="10-chapter-10.html"><i class="fa fa-check"></i><b>10</b> Introduction to Growth<span></span></a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="10.1-example-data-6.html"><a href="10.1-example-data-6.html"><i class="fa fa-check"></i><b>10.1</b> Example Data<span></span></a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="10.1-example-data-6.html"><a href="10.1-example-data-6.html#data-preparation-and-description"><i class="fa fa-check"></i><b>10.1.1</b> Data Preparation and Description<span></span></a></li>
+<li class="chapter" data-level="10.1.2" data-path="10.1-example-data-6.html"><a href="10.1-example-data-6.html#sample-moments"><i class="fa fa-check"></i><b>10.1.2</b> Sample Moments<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="10.2-a-general-model.html"><a href="10.2-a-general-model.html"><i class="fa fa-check"></i><b>10.2</b> A General Model<span></span></a></li>
+<li class="chapter" data-level="10.3" data-path="10.3-unconditional-means-model.html"><a href="10.3-unconditional-means-model.html"><i class="fa fa-check"></i><b>10.3</b> Unconditional Means Model<span></span></a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="10.3-unconditional-means-model.html"><a href="10.3-unconditional-means-model.html#leve-l"><i class="fa fa-check"></i><b>10.3.1</b> Leve l<span></span></a></li>
+<li class="chapter" data-level="10.3.2" data-path="10.3-unconditional-means-model.html"><a href="10.3-unconditional-means-model.html#level-2"><i class="fa fa-check"></i><b>10.3.2</b> Level 2<span></span></a></li>
+<li class="chapter" data-level="10.3.3" data-path="10.3-unconditional-means-model.html"><a href="10.3-unconditional-means-model.html#single-equation"><i class="fa fa-check"></i><b>10.3.3</b> Single Equation<span></span></a></li>
+<li class="chapter" data-level="10.3.4" data-path="10.3-unconditional-means-model.html"><a href="10.3-unconditional-means-model.html#model-elaboration"><i class="fa fa-check"></i><b>10.3.4</b> Model Elaboration<span></span></a></li>
+<li class="chapter" data-level="10.3.5" data-path="10.3-unconditional-means-model.html"><a href="10.3-unconditional-means-model.html#estimated-quantities"><i class="fa fa-check"></i><b>10.3.5</b> Estimated Quantities<span></span></a></li>
+<li class="chapter" data-level="10.3.6" data-path="10.3-unconditional-means-model.html"><a href="10.3-unconditional-means-model.html#more-notation"><i class="fa fa-check"></i><b>10.3.6</b> More Notation<span></span></a></li>
+<li class="chapter" data-level="10.3.7" data-path="10.3-unconditional-means-model.html"><a href="10.3-unconditional-means-model.html#unconditional-means-model-in-r"><i class="fa fa-check"></i><b>10.3.7</b> Unconditional Means Model in R<span></span></a></li>
+<li class="chapter" data-level="10.3.8" data-path="10.3-unconditional-means-model.html"><a href="10.3-unconditional-means-model.html#intra-class-correlation"><i class="fa fa-check"></i><b>10.3.8</b> Intra-Class Correlation<span></span></a></li>
+<li class="chapter" data-level="10.3.9" data-path="10.3-unconditional-means-model.html"><a href="10.3-unconditional-means-model.html#model-impled-moments"><i class="fa fa-check"></i><b>10.3.9</b> Model-Impled Moments<span></span></a></li>
+<li class="chapter" data-level="10.3.10" data-path="10.3-unconditional-means-model.html"><a href="10.3-unconditional-means-model.html#model-residuals"><i class="fa fa-check"></i><b>10.3.10</b> Model Residuals<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="10.4-repeated-measures-anova.html"><a href="10.4-repeated-measures-anova.html"><i class="fa fa-check"></i><b>10.4</b> Repeated Measures ANOVA<span></span></a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="10.4-repeated-measures-anova.html"><a href="10.4-repeated-measures-anova.html#intra-class-correlation-1"><i class="fa fa-check"></i><b>10.4.1</b> Intra-Class Correlation<span></span></a></li>
+<li class="chapter" data-level="10.4.2" data-path="10.4-repeated-measures-anova.html"><a href="10.4-repeated-measures-anova.html#model-implied-mean-vector"><i class="fa fa-check"></i><b>10.4.2</b> Model-Implied Mean Vector<span></span></a></li>
+<li class="chapter" data-level="10.4.3" data-path="10.4-repeated-measures-anova.html"><a href="10.4-repeated-measures-anova.html#model-implied-covariance-matrix-1"><i class="fa fa-check"></i><b>10.4.3</b> Model-Implied Covariance Matrix<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="10.5-repeated-measures-manova.html"><a href="10.5-repeated-measures-manova.html"><i class="fa fa-check"></i><b>10.5</b> Repeated Measures MANOVA<span></span></a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="10.5-repeated-measures-manova.html"><a href="10.5-repeated-measures-manova.html#model-implied-mean-vector-1"><i class="fa fa-check"></i><b>10.5.1</b> Model-Implied Mean Vector<span></span></a></li>
+<li class="chapter" data-level="10.5.2" data-path="10.5-repeated-measures-manova.html"><a href="10.5-repeated-measures-manova.html#model-implied-covariance-matrix-2"><i class="fa fa-check"></i><b>10.5.2</b> Model-Implied Covariance Matrix<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="10.6-repeated-measures-manova-unstructed.html"><a href="10.6-repeated-measures-manova-unstructed.html"><i class="fa fa-check"></i><b>10.6</b> Repeated Measures MANOVA (Unstructed)<span></span></a>
+<ul>
+<li class="chapter" data-level="10.6.1" data-path="10.6-repeated-measures-manova-unstructed.html"><a href="10.6-repeated-measures-manova-unstructed.html#model-implied-mean-vector-2"><i class="fa fa-check"></i><b>10.6.1</b> Model-Implied Mean Vector<span></span></a></li>
+<li class="chapter" data-level="10.6.2" data-path="10.6-repeated-measures-manova-unstructed.html"><a href="10.6-repeated-measures-manova-unstructed.html#model-implied-covariance-matrix-3"><i class="fa fa-check"></i><b>10.6.2</b> Model-Implied Covariance Matrix<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="11-chapter-11.html"><a href="11-chapter-11.html"><i class="fa fa-check"></i><b>11</b> Growth Curve Modeling<span></span></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="11.1-introduction.html"><a href="11.1-introduction.html"><i class="fa fa-check"></i><b>11.1</b> Introduction<span></span></a></li>
+<li class="chapter" data-level="11.2" data-path="11.2-data-preparation-and-description-1.html"><a href="11.2-data-preparation-and-description-1.html"><i class="fa fa-check"></i><b>11.2</b> Data Preparation and Description<span></span></a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="11.2-data-preparation-and-description-1.html"><a href="11.2-data-preparation-and-description-1.html#loading-libraries-used-in-this-script."><i class="fa fa-check"></i><b>11.2.1</b> Loading libraries used in this script.<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="11.3-individual-growth-models.html"><a href="11.3-individual-growth-models.html"><i class="fa fa-check"></i><b>11.3</b> Individual Growth Models<span></span></a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="11.3-individual-growth-models.html"><a href="11.3-individual-growth-models.html#visualizing-individual-change"><i class="fa fa-check"></i><b>11.3.1</b> Visualizing Individual Change<span></span></a></li>
+<li class="chapter" data-level="11.3.2" data-path="11.3-individual-growth-models.html"><a href="11.3-individual-growth-models.html#multiple-individuals"><i class="fa fa-check"></i><b>11.3.2</b> Multiple Individuals<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="11.4-unconditional-means-model-1.html"><a href="11.4-unconditional-means-model-1.html"><i class="fa fa-check"></i><b>11.4</b> Unconditional Means Model<span></span></a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="11.4-unconditional-means-model-1.html"><a href="11.4-unconditional-means-model-1.html#predicted-trajectories"><i class="fa fa-check"></i><b>11.4.1</b> Predicted Trajectories<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="11.5-linear-growth-model.html"><a href="11.5-linear-growth-model.html"><i class="fa fa-check"></i><b>11.5</b> Linear Growth Model<span></span></a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="11.5-linear-growth-model.html"><a href="11.5-linear-growth-model.html#random-intercept-model"><i class="fa fa-check"></i><b>11.5.1</b> Random Intercept Model<span></span></a></li>
+<li class="chapter" data-level="11.5.2" data-path="11.5-linear-growth-model.html"><a href="11.5-linear-growth-model.html#random-intercept-and-slopes-model"><i class="fa fa-check"></i><b>11.5.2</b> Random Intercept and Slopes Model<span></span></a></li>
+<li class="chapter" data-level="11.5.3" data-path="11.5-linear-growth-model.html"><a href="11.5-linear-growth-model.html#model-comparison"><i class="fa fa-check"></i><b>11.5.3</b> Model Comparison<span></span></a></li>
+<li class="chapter" data-level="11.5.4" data-path="11.5-linear-growth-model.html"><a href="11.5-linear-growth-model.html#mlm-and-individual-models"><i class="fa fa-check"></i><b>11.5.4</b> MLM and Individual Models<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="11.6-quadratic-growth-model.html"><a href="11.6-quadratic-growth-model.html"><i class="fa fa-check"></i><b>11.6</b> Quadratic Growth Model<span></span></a></li>
+<li class="chapter" data-level="11.7" data-path="11.7-conditional-growth-model.html"><a href="11.7-conditional-growth-model.html"><i class="fa fa-check"></i><b>11.7</b> Conditional Growth Model<span></span></a>
+<ul>
+<li class="chapter" data-level="11.7.1" data-path="11.7-conditional-growth-model.html"><a href="11.7-conditional-growth-model.html#conditional-growth-equation"><i class="fa fa-check"></i><b>11.7.1</b> Conditional Growth Equation<span></span></a></li>
+<li class="chapter" data-level="11.7.2" data-path="11.7-conditional-growth-model.html"><a href="11.7-conditional-growth-model.html#conditional-growth-model-1"><i class="fa fa-check"></i><b>11.7.2</b> Conditional Growth Model 1<span></span></a></li>
+<li class="chapter" data-level="11.7.3" data-path="11.7-conditional-growth-model.html"><a href="11.7-conditional-growth-model.html#conditional-growth-model-1-1"><i class="fa fa-check"></i><b>11.7.3</b> Conditional Growth Model 1<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="11.8" data-path="11.8-alternative-time-metrics.html"><a href="11.8-alternative-time-metrics.html"><i class="fa fa-check"></i><b>11.8</b> Alternative Time Metrics<span></span></a>
+<ul>
+<li class="chapter" data-level="11.8.1" data-path="11.8-alternative-time-metrics.html"><a href="11.8-alternative-time-metrics.html#recentering-time-metrics"><i class="fa fa-check"></i><b>11.8.1</b> Recentering time metrics<span></span></a></li>
+<li class="chapter" data-level="11.8.2" data-path="11.8-alternative-time-metrics.html"><a href="11.8-alternative-time-metrics.html#rescaling-time-metric"><i class="fa fa-check"></i><b>11.8.2</b> Rescaling time metric<span></span></a></li>
+<li class="chapter" data-level="11.8.3" data-path="11.8-alternative-time-metrics.html"><a href="11.8-alternative-time-metrics.html#remapping-time"><i class="fa fa-check"></i><b>11.8.3</b> Remapping Time<span></span></a></li>
+<li class="chapter" data-level="11.8.4" data-path="11.8-alternative-time-metrics.html"><a href="11.8-alternative-time-metrics.html#compare-growth-metrics"><i class="fa fa-check"></i><b>11.8.4</b> Compare Growth Metrics<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="12-chapter-12.html"><a href="12-chapter-12.html"><i class="fa fa-check"></i><b>12</b> Nonlinear Growth Curves<span></span></a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="12.1-review-of-notation.html"><a href="12.1-review-of-notation.html"><i class="fa fa-check"></i><b>12.1</b> Review of Notation<span></span></a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="12.1-review-of-notation.html"><a href="12.1-review-of-notation.html#no-growth-model"><i class="fa fa-check"></i><b>12.1.1</b> No Growth Model<span></span></a></li>
+<li class="chapter" data-level="12.1.2" data-path="12.1-review-of-notation.html"><a href="12.1-review-of-notation.html#random-intercept-model-1"><i class="fa fa-check"></i><b>12.1.2</b> Random Intercept Model<span></span></a></li>
+<li class="chapter" data-level="12.1.3" data-path="12.1-review-of-notation.html"><a href="12.1-review-of-notation.html#linear-growth-model-1"><i class="fa fa-check"></i><b>12.1.3</b> Linear Growth Model<span></span></a></li>
+<li class="chapter" data-level="12.1.4" data-path="12.1-review-of-notation.html"><a href="12.1-review-of-notation.html#quadratic-growth-model-1"><i class="fa fa-check"></i><b>12.1.4</b> Quadratic Growth Model<span></span></a></li>
+<li class="chapter" data-level="12.1.5" data-path="12.1-review-of-notation.html"><a href="12.1-review-of-notation.html#equations-3"><i class="fa fa-check"></i><b>12.1.5</b> Equations<span></span></a></li>
+<li class="chapter" data-level="12.1.6" data-path="12.1-review-of-notation.html"><a href="12.1-review-of-notation.html#outline"><i class="fa fa-check"></i><b>12.1.6</b> Outline<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/zackfisher/HDFS523" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">HDFS 523: Strategies for Data Analysis in Developmental Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="review-of-notation" class="section level2 hasAnchor" number="12.1">
+<h2><span class="header-section-number">12.1</span> Review of Notation<a href="12.1-review-of-notation.html#review-of-notation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="no-growth-model" class="section level3 hasAnchor" number="12.1.1">
+<h3><span class="header-section-number">12.1.1</span> No Growth Model<a href="12.1-review-of-notation.html#no-growth-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>First, let’s consider the no growth model</p>
+<div id="plot" class="section level4 hasAnchor" number="12.1.1.1">
+<h4><span class="header-section-number">12.1.1.1</span> Plot<a href="12.1-review-of-notation.html#plot" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="figure">
+<img src="imgs/mod_nogrowth.jpg" alt="" />
+<p class="caption">No Growth Model</p>
+</div>
+</div>
+<div id="equations" class="section level4 hasAnchor" number="12.1.1.2">
+<h4><span class="header-section-number">12.1.1.2</span> Equations<a href="12.1-review-of-notation.html#equations" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><span class="math display">\[\begin{align}
+y_{ti}  = &amp; \beta_{0i} + e_{ti}, &amp; e_{ti} \sim \mathcal{N}(0,\sigma^{2}_{e}) &amp;&amp; \: [\text{Level 1 Equation}] \\
+\beta_{0i}  = &amp; \gamma_{00} + u_{0i}, &amp; u_{0i} \sim \mathcal{N}(0,\sigma^{2}_{u0}) &amp;&amp; \: [\text{Level 2 Equation}] \\
+y_{ti}  = &amp; \gamma_{00} + u_{0i} + e_{ti}, &amp;  &amp;&amp; \: [\text{Combined Equation}]
+\end{align}\]</span></p>
+<p>where</p>
+<ul>
+<li><span class="math inline">\(y_{ti}\)</span> is the repeated measures score for individual <span class="math inline">\(i\)</span> at time <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(\beta_{0i}\)</span> is the random intercept for individual <span class="math inline">\(i\)</span> (person-specific mean)</li>
+<li><span class="math inline">\(e_{ti}\)</span> is the time-specific residual score (within-person deviation)</li>
+<li><span class="math inline">\(\gamma_{00}\)</span> is the sample mean for the intercept (grand mean)</li>
+<li><span class="math inline">\(u_{0i}\)</span> is individual <span class="math inline">\(i\)</span>’s deviation from the sample mean (between person deviation)</li>
+</ul>
+</div>
+<div id="code" class="section level4 hasAnchor" number="12.1.1.3">
+<h4><span class="header-section-number">12.1.1.3</span> Code<a href="12.1-review-of-notation.html#code" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Here, we present code for fitting the no growth model in the <code>nlme</code> package using both <em>compact</em> and <em>detailed</em> model syntax.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="12.1-review-of-notation.html#cb1-1" aria-hidden="true" tabindex="-1"></a>um_nlme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">nlme</span>(</span>
+<span id="cb1-2"><a href="12.1-review-of-notation.html#cb1-2" aria-hidden="true" tabindex="-1"></a>  verb <span class="sc">~</span> gamma_00 <span class="sc">+</span> u_0i,</span>
+<span id="cb1-3"><a href="12.1-review-of-notation.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> verblong,</span>
+<span id="cb1-4"><a href="12.1-review-of-notation.html#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00<span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb1-5"><a href="12.1-review-of-notation.html#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> u_0i<span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb1-6"><a href="12.1-review-of-notation.html#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
+<span id="cb1-7"><a href="12.1-review-of-notation.html#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action=</span><span class="st">&quot;na.omit&quot;</span>,</span>
+<span id="cb1-8"><a href="12.1-review-of-notation.html#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00 =</span> <span class="fu">mean</span>(verblong<span class="sc">$</span>verb))</span>
+<span id="cb1-9"><a href="12.1-review-of-notation.html#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-10"><a href="12.1-review-of-notation.html#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(um_nlme)</span></code></pre></div>
+<pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
+##   Model: verb ~ gamma_00 + u_0i 
+##   Data: verblong 
+##        AIC      BIC    logLik
+##   4683.178 4696.428 -2338.589
+## 
+## Random effects:
+##  Formula: u_0i ~ 1 | id
+##             u_0i Residual
+## StdDev: 4.375574   10.277
+## 
+## Fixed effects:  gamma_00 ~ 1 
+##             Value Std.Error  DF  t-value p-value
+## gamma_00 33.92433 0.5165884 408 65.66995       0
+## 
+## Standardized Within-Group Residuals:
+##        Min         Q1        Med         Q3        Max 
+## -1.9694046 -0.6928255 -0.1495923  0.5495327  3.1085063 
+## 
+## Number of Observations: 612
+## Number of Groups: 204</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="12.1-review-of-notation.html#cb3-1" aria-hidden="true" tabindex="-1"></a>um_lme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">lme</span>(</span>
+<span id="cb3-2"><a href="12.1-review-of-notation.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">fixed=</span> verb <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb3-3"><a href="12.1-review-of-notation.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span><span class="sc">|</span>id, </span>
+<span id="cb3-4"><a href="12.1-review-of-notation.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> verblong,</span>
+<span id="cb3-5"><a href="12.1-review-of-notation.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
+<span id="cb3-6"><a href="12.1-review-of-notation.html#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-7"><a href="12.1-review-of-notation.html#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(um_lme)</span></code></pre></div>
+<pre><code>## Linear mixed-effects model fit by REML
+##   Data: verblong 
+##       AIC      BIC   logLik
+##   4682.66 4695.906 -2338.33
+## 
+## Random effects:
+##  Formula: ~1 | id
+##         (Intercept) Residual
+## StdDev:    4.406063   10.277
+## 
+## Fixed effects:  verb ~ 1 
+##                Value Std.Error  DF  t-value p-value
+## (Intercept) 33.92433 0.5174359 408 65.56238       0
+## 
+## Standardized Within-Group Residuals:
+##        Min         Q1        Med         Q3        Max 
+## -1.9626206 -0.6924771 -0.1481960  0.5511044  3.1026127 
+## 
+## Number of Observations: 612
+## Number of Groups: 204</code></pre>
+</div>
+</div>
+<div id="random-intercept-model-1" class="section level3 hasAnchor" number="12.1.2">
+<h3><span class="header-section-number">12.1.2</span> Random Intercept Model<a href="12.1-review-of-notation.html#random-intercept-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="plot-1" class="section level4 hasAnchor" number="12.1.2.1">
+<h4><span class="header-section-number">12.1.2.1</span> Plot<a href="12.1-review-of-notation.html#plot-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="figure">
+<img src="imgs/mod_intercept.jpg" alt="" />
+<p class="caption">Random Intercept Model</p>
+</div>
+</div>
+<div id="equations-1" class="section level4 hasAnchor" number="12.1.2.2">
+<h4><span class="header-section-number">12.1.2.2</span> Equations<a href="12.1-review-of-notation.html#equations-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><span class="math display">\[\begin{align}
+y_{ti}  = &amp; \beta_{0i} + \beta_{1i}\frac{\text{time}_{}-c_{1}}{c_{2}} + e_{ti}, &amp; e_{ti} \sim \mathcal{N}(0,\sigma^{2}_{e}) &amp;&amp; \: [\text{Level 1}] \\
+\beta_{0i}  = &amp; \gamma_{00} + u_{0i}, &amp; u_{0i} \sim \mathcal{N}(0,\sigma^{2}_{u0}) &amp;&amp; \: [\text{Level 2}] \\
+\beta_{1i}  = &amp; \gamma_{10}, &amp;  &amp;&amp; \:  \\
+y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\frac{\text{time}-c_{1}}{c_{2}} + u_{0i} + e_{ti}, &amp;  &amp;&amp; \: [\text{Combined}]
+\end{align}\]</span></p>
+<p>where</p>
+<p><span class="math display">\[\begin{align}
+u_{0i}  \sim 
+\left(
+\left[\begin{array}{r}
+0 
+\end{array}\right],
+\left[\begin{array}{c}
+\sigma^{2}_{u0} 
+\end{array}\right]\right),
+\end{align}\]</span></p>
+<p>and</p>
+<ul>
+<li><span class="math inline">\(y_{ti}\)</span> is the repeated measures score for individual <span class="math inline">\(i\)</span> at time <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(\beta_{0i}\)</span> is the random intercept for individual <span class="math inline">\(i\)</span>
+<ul>
+<li>predicted score for individual <span class="math inline">\(i\)</span> when <span class="math inline">\(\text{time}=0\)</span></li>
+</ul></li>
+<li><span class="math inline">\(\beta_{1i}\)</span> is the sample-level mean for the slope (<span class="math inline">\(\beta_{1i}=\gamma_{10}\)</span>)
+<ul>
+<li>predicted rate of change for individual <span class="math inline">\(i\)</span> with a 1-unit change in <span class="math inline">\(\text{time}\)</span></li>
+</ul></li>
+<li><span class="math inline">\(\text{time}\)</span> represents time and could be grade, age, year, etc.
+<ul>
+<li>predicted rate of change for individual <span class="math inline">\(i\)</span> with a 1-unit change in <span class="math inline">\(\text{time}\)</span></li>
+</ul></li>
+<li><span class="math inline">\(c_{1}\)</span> constant used to center the intercept
+<ul>
+<li><span class="math inline">\(c_1\)</span> is often set to <span class="math inline">\(1\)</span> to center the intercept at the first occasion</li>
+</ul></li>
+<li><span class="math inline">\(c_{2}\)</span> constant chosen to scale the slope
+<ul>
+<li><span class="math inline">\(c_2\)</span> is often set to <span class="math inline">\(1\)</span> to scale the slope in terms of the units of <span class="math inline">\(\text{time}\)</span></li>
+</ul></li>
+<li><span class="math inline">\(e_{it}\)</span> is the time-specific residual score (within-person deviation)</li>
+<li><span class="math inline">\(\gamma_{00}\)</span> is the sample-level mean for the intercept</li>
+<li><span class="math inline">\(\gamma_{10}\)</span> is the sample-level mean for the slope</li>
+<li><span class="math inline">\(u_{0i}\)</span> is individual <span class="math inline">\(i\)</span>’s deviation from the sample-level mean of the intercept</li>
+</ul>
+</div>
+<div id="code-1" class="section level4 hasAnchor" number="12.1.2.3">
+<h4><span class="header-section-number">12.1.2.3</span> Code<a href="12.1-review-of-notation.html#code-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Here, we present code for fitting the random intercept model in the <code>nlme</code> package using both <em>compact</em> and <em>detailed</em> model syntax.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="12.1-review-of-notation.html#cb5-1" aria-hidden="true" tabindex="-1"></a>ri_nlme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">nlme</span>(</span>
+<span id="cb5-2"><a href="12.1-review-of-notation.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  verb <span class="sc">~</span> (gamma_00 <span class="sc">+</span> u_0i) <span class="sc">+</span> (gamma_10)<span class="sc">*</span>grade,</span>
+<span id="cb5-3"><a href="12.1-review-of-notation.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> verblong,</span>
+<span id="cb5-4"><a href="12.1-review-of-notation.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10<span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb5-5"><a href="12.1-review-of-notation.html#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> u_0i<span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb5-6"><a href="12.1-review-of-notation.html#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
+<span id="cb5-7"><a href="12.1-review-of-notation.html#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action=</span><span class="st">&quot;na.omit&quot;</span>,</span>
+<span id="cb5-8"><a href="12.1-review-of-notation.html#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00 =</span> <span class="dv">30</span>, <span class="at">gamma_10=</span><span class="dv">10</span>)</span>
+<span id="cb5-9"><a href="12.1-review-of-notation.html#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-10"><a href="12.1-review-of-notation.html#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ri_nlme)</span></code></pre></div>
+<pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
+##   Model: verb ~ (gamma_00 + u_0i) + (gamma_10) * grade 
+##   Data: verblong 
+##       AIC      BIC    logLik
+##   4037.21 4054.877 -2014.605
+## 
+## Random effects:
+##  Formula: u_0i ~ 1 | id
+##             u_0i Residual
+## StdDev: 6.867216 4.645176
+## 
+## Fixed effects:  gamma_00 + gamma_10 ~ 1 
+##             Value Std.Error  DF  t-value p-value
+## gamma_00 15.58977 0.6924885 407 22.51268       0
+## gamma_10  4.58364 0.1151736 407 39.79766       0
+##  Correlation: 
+##          gmm_00
+## gamma_10 -0.665
+## 
+## Standardized Within-Group Residuals:
+##        Min         Q1        Med         Q3        Max 
+## -2.4224974 -0.5598651 -0.0439026  0.5104096  3.5676962 
+## 
+## Number of Observations: 612
+## Number of Groups: 204</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="12.1-review-of-notation.html#cb7-1" aria-hidden="true" tabindex="-1"></a>ri_lme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">lme</span>(</span>
+<span id="cb7-2"><a href="12.1-review-of-notation.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">fixed =</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade, </span>
+<span id="cb7-3"><a href="12.1-review-of-notation.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span><span class="sc">|</span>id, </span>
+<span id="cb7-4"><a href="12.1-review-of-notation.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
+<span id="cb7-5"><a href="12.1-review-of-notation.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude,</span>
+<span id="cb7-6"><a href="12.1-review-of-notation.html#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;ML&quot;</span></span>
+<span id="cb7-7"><a href="12.1-review-of-notation.html#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-8"><a href="12.1-review-of-notation.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ri_lme)</span></code></pre></div>
+<pre><code>## Linear mixed-effects model fit by maximum likelihood
+##   Data: verblong 
+##       AIC      BIC    logLik
+##   4037.21 4054.877 -2014.605
+## 
+## Random effects:
+##  Formula: ~1 | id
+##         (Intercept) Residual
+## StdDev:    6.867216 4.645176
+## 
+## Fixed effects:  verb ~ 1 + grade 
+##                Value Std.Error  DF  t-value p-value
+## (Intercept) 15.58977 0.6924885 407 22.51268       0
+## grade        4.58364 0.1151736 407 39.79766       0
+##  Correlation: 
+##       (Intr)
+## grade -0.665
+## 
+## Standardized Within-Group Residuals:
+##        Min         Q1        Med         Q3        Max 
+## -2.4224974 -0.5598651 -0.0439026  0.5104096  3.5676962 
+## 
+## Number of Observations: 612
+## Number of Groups: 204</code></pre>
+</div>
+</div>
+<div id="linear-growth-model-1" class="section level3 hasAnchor" number="12.1.3">
+<h3><span class="header-section-number">12.1.3</span> Linear Growth Model<a href="12.1-review-of-notation.html#linear-growth-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now let’s consider the linear growth model</p>
+<div id="plot-2" class="section level4 hasAnchor" number="12.1.3.1">
+<h4><span class="header-section-number">12.1.3.1</span> Plot<a href="12.1-review-of-notation.html#plot-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="figure">
+<img src="imgs/mod_linear.jpg" alt="" />
+<p class="caption">Linear Growth Model</p>
+</div>
+</div>
+<div id="equations-2" class="section level4 hasAnchor" number="12.1.3.2">
+<h4><span class="header-section-number">12.1.3.2</span> Equations<a href="12.1-review-of-notation.html#equations-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><span class="math display">\[\begin{align}
+y_{ti}  = &amp; \beta_{0i} + \beta_{1i}\text{time} + e_{ti}, &amp; e_{ti} \sim \mathcal{N}(0,\sigma^{2}_{e}) &amp;&amp; \: [\text{Level 1}] \\
+\beta_{0i}  = &amp; \gamma_{00} + u_{0i}, &amp; u_{0i} \sim \mathcal{N}(0,\sigma^{2}_{u0}) &amp;&amp; \: [\text{Level 2}] \\
+\beta_{1i}  = &amp; \gamma_{10} + u_{1i}, &amp; u_{1i} \sim \mathcal{N}(0,\sigma^{2}_{u1}) &amp;&amp; \:  \\
+y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time} + u_{0i} + u_{1i}\text{time} + e_{ti}, &amp;  &amp;&amp; \: [\text{Combined}]
+\end{align}\]</span></p>
+<p>where</p>
+<p><span class="math display">\[\begin{align}
+u_{0i}, u_{1i} \sim 
+\left(
+\left[\begin{array}{r}
+0 \\
+0
+\end{array}\right],
+\left[\begin{array}{c}
+\sigma^{2}_{u0} &amp; \\
+\sigma^{2}_{u1u0} &amp; \sigma^{2}_{u1}
+\end{array}\right]\right),
+\end{align}\]</span></p>
+<p>and</p>
+<ul>
+<li><span class="math inline">\(y_{ti}\)</span> is the repeated measures score for individual <span class="math inline">\(i\)</span> at time <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(\beta_{0i}\)</span> is the random intercept for individual <span class="math inline">\(i\)</span>
+<ul>
+<li>predicted score for individual <span class="math inline">\(i\)</span> when <span class="math inline">\(\text{time}=0\)</span></li>
+</ul></li>
+<li><span class="math inline">\(\beta_{1i}\)</span> is the random slope for individual <span class="math inline">\(i\)</span>
+<ul>
+<li>predicted rate of change for individual <span class="math inline">\(i\)</span> with a 1-unit change in <span class="math inline">\(\text{time}\)</span></li>
+</ul></li>
+<li><span class="math inline">\(\text{time}\)</span> represents time and could be grade, age, year, etc.
+<ul>
+<li>predicted rate of change for individual <span class="math inline">\(i\)</span> with a 1-unit change in <span class="math inline">\(\text{time}\)</span></li>
+</ul></li>
+<li><span class="math inline">\(c_{1}, c_{2}\)</span> have been dropped (set to <span class="math inline">\(1\)</span>) to simplify notation</li>
+<li><span class="math inline">\(e_{it}\)</span> is the time-specific residual score (within-person deviation)</li>
+<li><span class="math inline">\(\gamma_{00}\)</span> is the sample-level mean for the intercept</li>
+<li><span class="math inline">\(\gamma_{10}\)</span> is the sample-level mean for the slope</li>
+<li><span class="math inline">\(u_{0i}\)</span> is individual <span class="math inline">\(i\)</span>’s deviation from the sample-level mean of the intercept</li>
+<li><span class="math inline">\(u_{1i}\)</span> is individual <span class="math inline">\(i\)</span>’s deviation from the sample-level mean of the slope</li>
+</ul>
+</div>
+<div id="code-2" class="section level4 hasAnchor" number="12.1.3.3">
+<h4><span class="header-section-number">12.1.3.3</span> Code<a href="12.1-review-of-notation.html#code-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Here, we present code for fitting the linear growth model in the <code>nlme</code> package using both <em>compact</em> and <em>detailed</em> model syntax.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="12.1-review-of-notation.html#cb9-1" aria-hidden="true" tabindex="-1"></a>lin_nlme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">nlme</span>(</span>
+<span id="cb9-2"><a href="12.1-review-of-notation.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  verb <span class="sc">~</span> (gamma_00 <span class="sc">+</span> u_0i) <span class="sc">+</span> (gamma_10 <span class="sc">+</span> u_1i)<span class="sc">*</span>grade,</span>
+<span id="cb9-3"><a href="12.1-review-of-notation.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> verblong,</span>
+<span id="cb9-4"><a href="12.1-review-of-notation.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10<span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb9-5"><a href="12.1-review-of-notation.html#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> u_0i <span class="sc">+</span> u_1i<span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb9-6"><a href="12.1-review-of-notation.html#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
+<span id="cb9-7"><a href="12.1-review-of-notation.html#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action=</span><span class="st">&quot;na.omit&quot;</span>,</span>
+<span id="cb9-8"><a href="12.1-review-of-notation.html#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00 =</span> <span class="dv">30</span>, <span class="at">gamma_10=</span><span class="dv">10</span>)</span>
+<span id="cb9-9"><a href="12.1-review-of-notation.html#cb9-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-10"><a href="12.1-review-of-notation.html#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lin_nlme)</span></code></pre></div>
+<pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
+##   Model: verb ~ (gamma_00 + u_0i) + (gamma_10 + u_1i) * grade 
+##   Data: verblong 
+##        AIC      BIC    logLik
+##   3918.891 3945.392 -1953.446
+## 
+## Random effects:
+##  Formula: list(u_0i ~ 1, u_1i ~ 1)
+##  Level: id
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##          StdDev   Corr 
+## u_0i     2.299355 u_0i 
+## u_1i     1.264443 0.792
+## Residual 3.896461      
+## 
+## Fixed effects:  gamma_00 + gamma_10 ~ 1 
+##             Value Std.Error  DF  t-value p-value
+## gamma_00 15.58977 0.4474663 407 34.84010       0
+## gamma_10  4.58364 0.1311353 407 34.95351       0
+##  Correlation: 
+##          gmm_00
+## gamma_10 -0.443
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -2.77742559 -0.52830669 -0.03385567  0.53041454  2.98716564 
+## 
+## Number of Observations: 612
+## Number of Groups: 204</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="12.1-review-of-notation.html#cb11-1" aria-hidden="true" tabindex="-1"></a>lin_lme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">lme</span>(</span>
+<span id="cb11-2"><a href="12.1-review-of-notation.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">fixed =</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade, </span>
+<span id="cb11-3"><a href="12.1-review-of-notation.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade<span class="sc">|</span>id, </span>
+<span id="cb11-4"><a href="12.1-review-of-notation.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
+<span id="cb11-5"><a href="12.1-review-of-notation.html#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
+<span id="cb11-6"><a href="12.1-review-of-notation.html#cb11-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-7"><a href="12.1-review-of-notation.html#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lin_lme)</span></code></pre></div>
+<pre><code>## Linear mixed-effects model fit by REML
+##   Data: verblong 
+##        AIC      BIC    logLik
+##   3921.107 3947.588 -1954.554
+## 
+## Random effects:
+##  Formula: ~1 + grade | id
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##             StdDev   Corr  
+## (Intercept) 2.342561 (Intr)
+## grade       1.271235 0.765 
+## Residual    3.896461       
+## 
+## Fixed effects:  verb ~ 1 + grade 
+##                Value Std.Error  DF  t-value p-value
+## (Intercept) 15.58977 0.4478336 407 34.81152       0
+## grade        4.58364 0.1312429 407 34.92485       0
+##  Correlation: 
+##       (Intr)
+## grade -0.443
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -2.77591700 -0.52615278 -0.03287881  0.53033457  2.97857600 
+## 
+## Number of Observations: 612
+## Number of Groups: 204</code></pre>
+</div>
+</div>
+<div id="quadratic-growth-model-1" class="section level3 hasAnchor" number="12.1.4">
+<h3><span class="header-section-number">12.1.4</span> Quadratic Growth Model<a href="12.1-review-of-notation.html#quadratic-growth-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now, let’s review the quadratic growth model.</p>
+<div id="plot-3" class="section level4 hasAnchor" number="12.1.4.1">
+<h4><span class="header-section-number">12.1.4.1</span> Plot<a href="12.1-review-of-notation.html#plot-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="figure">
+<img src="imgs/mod_quadratic.jpg" alt="" />
+<p class="caption">Quadratic Growth Model</p>
+</div>
+</div>
+</div>
+<div id="equations-3" class="section level3 hasAnchor" number="12.1.5">
+<h3><span class="header-section-number">12.1.5</span> Equations<a href="12.1-review-of-notation.html#equations-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math display">\[\begin{align}
+y_{ti}  = &amp; \beta_{0i} + \beta_{1i}\text{time}+ \beta_{2i}\text{time}^{2} + e_{ti}, &amp; e_{ti} \sim \mathcal{N}(0,\sigma^{2}_{e}) &amp;&amp; \: [\text{Level 1}] \\
+\beta_{0i}  = &amp; \gamma_{00} + u_{0i}, &amp; u_{0i} \sim \mathcal{N}(0,\sigma^{2}_{u0}) &amp;&amp; \: [\text{Level 2}] \\
+\beta_{1i}  = &amp; \gamma_{10} + u_{1i}, &amp; u_{1i} \sim \mathcal{N}(0,\sigma^{2}_{u1}) &amp;&amp; \:  \\
+\beta_{2i}  = &amp; \gamma_{20} + u_{2i}, &amp; u_{2i} \sim \mathcal{N}(0,\sigma^{2}_{u2}) &amp;&amp; \:  \\
+y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time} + \gamma_{20}\text{time}^2 + u_{0i} + u_{1i}\text{time} + u_{2i}\text{time}^{2} + e_{ti}, &amp;  &amp;&amp; \: [\text{Combined}]
+\end{align}\]</span></p>
+<p>where</p>
+<p><span class="math display">\[\begin{align}
+u_{0i}, u_{1i} \sim 
+\left(
+\left[\begin{array}{r}
+0 \\
+0
+\end{array}\right],
+\left[\begin{array}{c}
+\sigma^{2}_{1} &amp; \\
+\sigma^{2}_{21} &amp; \sigma^{2}_{2}
+\end{array}\right]\right),
+\end{align}\]</span></p>
+<p>and</p>
+<ul>
+<li><span class="math inline">\(y_{ti}\)</span> is the repeated measures score for individual <span class="math inline">\(i\)</span> at time <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(\beta_{0i}\)</span> is the random intercept for individual <span class="math inline">\(i\)</span>
+<ul>
+<li>predicted score for individual <span class="math inline">\(i\)</span> when <span class="math inline">\(\text{time}=0\)</span></li>
+</ul></li>
+<li><span class="math inline">\(\beta_{1i}\)</span> is the random slope for individual <span class="math inline">\(i\)</span>
+<ul>
+<li>predicted rate of change for individual <span class="math inline">\(i\)</span> with a 1-unit change in <span class="math inline">\(\text{time}\)</span></li>
+</ul></li>
+<li><span class="math inline">\(\text{time}\)</span> represents time and could be grade, age, year, etc.
+<ul>
+<li>predicted rate of change for individual <span class="math inline">\(i\)</span> with a 1-unit change in <span class="math inline">\(\text{time}\)</span></li>
+</ul></li>
+<li><span class="math inline">\(c_{1}, c_{2}\)</span> have been dropped (set to <span class="math inline">\(1\)</span>) to simplify notation</li>
+<li><span class="math inline">\(e_{it}\)</span> is the time-specific residual score (within-person deviation)</li>
+<li><span class="math inline">\(\gamma_{00}\)</span> is the sample-level mean for the intercept</li>
+<li><span class="math inline">\(\gamma_{10}\)</span> is the sample-level mean for the slope</li>
+<li><span class="math inline">\(u_{0i}\)</span> is individual <span class="math inline">\(i\)</span>’s deviation from the sample-level mean of the intercept</li>
+<li><span class="math inline">\(u_{1i}\)</span> is individual <span class="math inline">\(i\)</span>’s deviation from the sample-level mean of the slope</li>
+</ul>
+</div>
+<div id="outline" class="section level3 hasAnchor" number="12.1.6">
+<h3><span class="header-section-number">12.1.6</span> Outline<a href="12.1-review-of-notation.html#outline" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This script covers …</p>
+<p>A. Describing The Cortisol Data<br />
+B. Fitting the series of growth models from Ram &amp; Grimm (2007): Linear, Quadratic, Latent Basis, Exponential, Multiphase</p>
+<p>####Preliminaries</p>
+<p>Loading libraries used in this script.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="12.1-review-of-notation.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
+<span id="cb13-2"><a href="12.1-review-of-notation.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb13-3"><a href="12.1-review-of-notation.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span>
+<span id="cb13-4"><a href="12.1-review-of-notation.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code></pre></div>
+<pre><code>## Warning: package &#39;lme4&#39; was built under R version 4.1.2</code></pre>
+<p>####Reading in the data</p>
+<p>Loading the public data</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="12.1-review-of-notation.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#set filepath for data file</span></span>
+<span id="cb15-2"><a href="12.1-review-of-notation.html#cb15-2" aria-hidden="true" tabindex="-1"></a>filepath <span class="ot">&lt;-</span> <span class="st">&quot;https://quantdev.ssri.psu.edu/sites/qdev/files/TheCortisolData.csv&quot;</span></span>
+<span id="cb15-3"><a href="12.1-review-of-notation.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#read in the .csv file using the url() function</span></span>
+<span id="cb15-4"><a href="12.1-review-of-notation.html#cb15-4" aria-hidden="true" tabindex="-1"></a>cortisol_wide <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file=</span><span class="fu">url</span>(filepath),<span class="at">header=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Looking at the top few rows of the wide data.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="12.1-review-of-notation.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cortisol_wide,<span class="dv">6</span>)</span></code></pre></div>
+<pre><code>##   id cort_0 cort_1 cort_2 cort_3 cort_4 cort_5 cort_6 cort_7 cort_8
+## 1  1    4.2    4.1    9.7   14.0   19.0   18.0   20.0   23.0   24.0
+## 2  2    5.5    5.6   14.0   16.0   19.0   17.0   18.0   20.0   19.0
+## 3  3    4.0    3.8    7.5   12.0   14.0   13.0    9.1    8.2    7.9
+## 4  4    6.1    5.6   14.0   20.0   26.0   23.0   26.0   25.0   26.0
+## 5  5    4.6    4.4    7.2   12.3   15.8   16.1   17.0   17.8   19.1
+## 6  6    6.8    9.5   14.2   19.6   19.0   13.9   13.4   12.5   11.7</code></pre>
+<p>####Reshaping the data</p>
+<p>Two main data schema are used to accommodate repeated measures data - “Wide Format” and “Long Format.” Different functions work with different kinds of data input. We already have the wide format data. We make a set of long format data.</p>
+<p>Reshape from wide to long</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="12.1-review-of-notation.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#reshaping wide to long</span></span>
+<span id="cb18-2"><a href="12.1-review-of-notation.html#cb18-2" aria-hidden="true" tabindex="-1"></a>cortisol_long <span class="ot">&lt;-</span> <span class="fu">reshape</span>(<span class="at">data=</span>cortisol_wide, </span>
+<span id="cb18-3"><a href="12.1-review-of-notation.html#cb18-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">timevar=</span><span class="fu">c</span>(<span class="st">&quot;time&quot;</span>), </span>
+<span id="cb18-4"><a href="12.1-review-of-notation.html#cb18-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">idvar=</span><span class="st">&quot;id&quot;</span>,</span>
+<span id="cb18-5"><a href="12.1-review-of-notation.html#cb18-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">varying=</span><span class="fu">c</span>(<span class="st">&quot;cort_0&quot;</span>,<span class="st">&quot;cort_1&quot;</span>,<span class="st">&quot;cort_2&quot;</span>,<span class="st">&quot;cort_3&quot;</span>,</span>
+<span id="cb18-6"><a href="12.1-review-of-notation.html#cb18-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">&quot;cort_4&quot;</span>,<span class="st">&quot;cort_5&quot;</span>,<span class="st">&quot;cort_6&quot;</span>,<span class="st">&quot;cort_7&quot;</span>,<span class="st">&quot;cort_8&quot;</span>),</span>
+<span id="cb18-7"><a href="12.1-review-of-notation.html#cb18-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">direction=</span><span class="st">&quot;long&quot;</span>, <span class="at">sep=</span><span class="st">&quot;_&quot;</span>)</span>
+<span id="cb18-8"><a href="12.1-review-of-notation.html#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#sorting for easy viewing</span></span>
+<span id="cb18-9"><a href="12.1-review-of-notation.html#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co"># order by id and time</span></span>
+<span id="cb18-10"><a href="12.1-review-of-notation.html#cb18-10" aria-hidden="true" tabindex="-1"></a>cortisol_long <span class="ot">&lt;-</span> cortisol_long[<span class="fu">order</span>(cortisol_long<span class="sc">$</span>id,cortisol_long<span class="sc">$</span>time), ]</span></code></pre></div>
+<p>To match the scaling of time used in some of the papers we add an additional time variable that runs from 0 to 1.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="12.1-review-of-notation.html#cb19-1" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>timescaled <span class="ot">&lt;-</span> (cortisol_long<span class="sc">$</span>time <span class="sc">-</span> <span class="dv">0</span>)<span class="sc">/</span><span class="dv">8</span></span></code></pre></div>
+<p>Looking at the top few rows of the long data.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="12.1-review-of-notation.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cortisol_long,<span class="dv">18</span>)</span></code></pre></div>
+<pre><code>##     id time cort timescaled
+## 1.0  1    0  4.2      0.000
+## 1.1  1    1  4.1      0.125
+## 1.2  1    2  9.7      0.250
+## 1.3  1    3 14.0      0.375
+## 1.4  1    4 19.0      0.500
+## 1.5  1    5 18.0      0.625
+## 1.6  1    6 20.0      0.750
+## 1.7  1    7 23.0      0.875
+## 1.8  1    8 24.0      1.000
+## 2.0  2    0  5.5      0.000
+## 2.1  2    1  5.6      0.125
+## 2.2  2    2 14.0      0.250
+## 2.3  2    3 16.0      0.375
+## 2.4  2    4 19.0      0.500
+## 2.5  2    5 17.0      0.625
+## 2.6  2    6 18.0      0.750
+## 2.7  2    7 20.0      0.875
+## 2.8  2    8 19.0      1.000</code></pre>
+<p>##A. Describing The Cortisol Data</p>
+<p>Basic descriptives of the 9-occasion data.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="12.1-review-of-notation.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#means, sd, etc.</span></span>
+<span id="cb22-2"><a href="12.1-review-of-notation.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(cortisol_wide)</span></code></pre></div>
+<pre><code>##        vars  n  mean   sd median trimmed   mad min  max range  skew kurtosis
+## id        1 34 17.50 9.96  17.50   17.50 12.60   1 34.0  33.0  0.00    -1.31
+## cort_0    2 34  5.25 2.45   5.00    4.90  2.30   2 12.0  10.0  1.18     0.92
+## cort_1    3 34  5.06 2.59   4.50    4.78  2.22   2 11.3   9.3  1.02    -0.01
+## cort_2    4 34 10.85 3.11  10.05   10.79  3.85   6 16.7  10.7  0.09    -1.17
+## cort_3    5 34 17.36 3.69  17.35   17.39  3.48   7 24.9  17.9 -0.29     0.39
+## cort_4    6 34 19.48 3.72  19.10   19.49  2.82  12 27.1  15.1 -0.04    -0.56
+## cort_5    7 34 16.46 4.18  16.95   16.41  4.52   8 26.0  18.0  0.08    -0.58
+## cort_6    8 34 15.03 4.57  14.65   14.90  4.15   6 26.0  20.0  0.26    -0.31
+## cort_7    9 34 15.62 4.81  16.15   15.60  5.56   7 25.0  18.0 -0.02    -0.99
+## cort_8   10 34 15.86 5.61  16.00   15.81  6.08   6 26.0  20.0  0.14    -1.08
+##          se
+## id     1.71
+## cort_0 0.42
+## cort_1 0.44
+## cort_2 0.53
+## cort_3 0.63
+## cort_4 0.64
+## cort_5 0.72
+## cort_6 0.78
+## cort_7 0.82
+## cort_8 0.96</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="12.1-review-of-notation.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#boxplot</span></span>
+<span id="cb24-2"><a href="12.1-review-of-notation.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">#boxplot by day</span></span>
+<span id="cb24-3"><a href="12.1-review-of-notation.html#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>cortisol_long, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(time), <span class="at">y=</span>cort)) <span class="sc">+</span> </span>
+<span id="cb24-4"><a href="12.1-review-of-notation.html#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">notch =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="12.1-review-of-notation.html#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.y=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">shape=</span><span class="dv">23</span>, <span class="at">size=</span><span class="dv">3</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-6"><a href="12.1-review-of-notation.html#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Cortisol&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: `fun.y` is deprecated. Use `fun` instead.</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="12.1-review-of-notation.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#correlations</span></span>
+<span id="cb26-2"><a href="12.1-review-of-notation.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlations </span></span>
+<span id="cb26-3"><a href="12.1-review-of-notation.html#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(cortisol_wide[,<span class="fu">c</span>(<span class="st">&quot;cort_0&quot;</span>,<span class="st">&quot;cort_1&quot;</span>,<span class="st">&quot;cort_2&quot;</span>,<span class="st">&quot;cort_3&quot;</span>,</span>
+<span id="cb26-4"><a href="12.1-review-of-notation.html#cb26-4" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;cort_4&quot;</span>,<span class="st">&quot;cort_5&quot;</span>,<span class="st">&quot;cort_6&quot;</span>,<span class="st">&quot;cort_7&quot;</span>,<span class="st">&quot;cort_8&quot;</span>)], </span>
+<span id="cb26-5"><a href="12.1-review-of-notation.html#cb26-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">use=</span><span class="st">&quot;complete.obs&quot;</span>,<span class="at">method=</span><span class="st">&quot;spearman&quot;</span>),<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##        cort_0 cort_1 cort_2 cort_3 cort_4 cort_5 cort_6 cort_7 cort_8
+## cort_0   1.00   0.97   0.45   0.27   0.23   0.17   0.28   0.22   0.20
+## cort_1   0.97   1.00   0.48   0.27   0.18   0.14   0.23   0.19   0.16
+## cort_2   0.45   0.48   1.00   0.71   0.66   0.47   0.42   0.39   0.34
+## cort_3   0.27   0.27   0.71   1.00   0.71   0.37   0.16   0.10   0.14
+## cort_4   0.23   0.18   0.66   0.71   1.00   0.81   0.58   0.50   0.52
+## cort_5   0.17   0.14   0.47   0.37   0.81   1.00   0.88   0.84   0.82
+## cort_6   0.28   0.23   0.42   0.16   0.58   0.88   1.00   0.97   0.93
+## cort_7   0.22   0.19   0.39   0.10   0.50   0.84   0.97   1.00   0.94
+## cort_8   0.20   0.16   0.34   0.14   0.52   0.82   0.93   0.94   1.00</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="12.1-review-of-notation.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#pairs plot from the psych library</span></span>
+<span id="cb28-2"><a href="12.1-review-of-notation.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs.panels</span>(cortisol_wide[,<span class="fu">c</span>(<span class="st">&quot;cort_0&quot;</span>,<span class="st">&quot;cort_1&quot;</span>,<span class="st">&quot;cort_2&quot;</span>,<span class="st">&quot;cort_3&quot;</span>,</span>
+<span id="cb28-3"><a href="12.1-review-of-notation.html#cb28-3" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;cort_4&quot;</span>,<span class="st">&quot;cort_5&quot;</span>,<span class="st">&quot;cort_6&quot;</span>,<span class="st">&quot;cort_7&quot;</span>,<span class="st">&quot;cort_8&quot;</span>),])</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<p>Plot of sample-level change in distribution across time</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="12.1-review-of-notation.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Density distribution by day</span></span>
+<span id="cb29-2"><a href="12.1-review-of-notation.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>cortisol_long, <span class="fu">aes</span>(<span class="at">x=</span>cort)) <span class="sc">+</span> </span>
+<span id="cb29-3"><a href="12.1-review-of-notation.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(time), <span class="at">colour=</span><span class="fu">factor</span>(time), <span class="at">fill=</span><span class="fu">factor</span>(time)), <span class="at">alpha=</span><span class="fl">0.3</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Plot of individual-level trajectories</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="12.1-review-of-notation.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
+<span id="cb30-2"><a href="12.1-review-of-notation.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> cort, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb30-3"><a href="12.1-review-of-notation.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb30-4"><a href="12.1-review-of-notation.html#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb30-5"><a href="12.1-review-of-notation.html#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb30-6"><a href="12.1-review-of-notation.html#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb30-7"><a href="12.1-review-of-notation.html#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) </span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><strong>Yay!</strong></p>
+<p>Now lets fit some growth models …</p>
+<p>##B. Fitting the series of growth models from Ram &amp; Grimm (2007)</p>
+<p>####Linear Growth Model</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="12.1-review-of-notation.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># #linear model</span></span>
+<span id="cb31-2"><a href="12.1-review-of-notation.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># cort_linear &lt;- lme(cort ~ 1 + timescaled,</span></span>
+<span id="cb31-3"><a href="12.1-review-of-notation.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                    random = ~ 1 + timescaled | id,</span></span>
+<span id="cb31-4"><a href="12.1-review-of-notation.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#                     data = cortisol_long,</span></span>
+<span id="cb31-5"><a href="12.1-review-of-notation.html#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co">#                     na.action = &quot;na.exclude&quot;)</span></span>
+<span id="cb31-6"><a href="12.1-review-of-notation.html#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co"># #convergence issues</span></span>
+<span id="cb31-7"><a href="12.1-review-of-notation.html#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb31-8"><a href="12.1-review-of-notation.html#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co"># cort_linear2 &lt;- lmer(cort ~ 1 + timescaled + (1 + timescaled | id),</span></span>
+<span id="cb31-9"><a href="12.1-review-of-notation.html#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="co">#                     data = cortisol_long,</span></span>
+<span id="cb31-10"><a href="12.1-review-of-notation.html#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co">#                     na.action = &quot;na.exclude&quot;)</span></span>
+<span id="cb31-11"><a href="12.1-review-of-notation.html#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="co"># #convergence issues</span></span>
+<span id="cb31-12"><a href="12.1-review-of-notation.html#cb31-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-13"><a href="12.1-review-of-notation.html#cb31-13" aria-hidden="true" tabindex="-1"></a>cort_linear <span class="ot">&lt;-</span> <span class="fu">nlme</span>(cort <span class="sc">~</span> g0 <span class="sc">+</span> g1<span class="sc">*</span>timescaled,</span>
+<span id="cb31-14"><a href="12.1-review-of-notation.html#cb31-14" aria-hidden="true" tabindex="-1"></a>                    <span class="at">fixed =</span> g0 <span class="sc">+</span> g1 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb31-15"><a href="12.1-review-of-notation.html#cb31-15" aria-hidden="true" tabindex="-1"></a>                    <span class="at">random =</span> g0 <span class="sc">+</span> g1 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb31-16"><a href="12.1-review-of-notation.html#cb31-16" aria-hidden="true" tabindex="-1"></a>                    <span class="at">group =</span> <span class="sc">~</span>id,</span>
+<span id="cb31-17"><a href="12.1-review-of-notation.html#cb31-17" aria-hidden="true" tabindex="-1"></a>                    <span class="at">start =</span> <span class="fu">c</span>(<span class="at">g0=</span><span class="dv">5</span>, <span class="at">g1=</span><span class="dv">1</span>), </span>
+<span id="cb31-18"><a href="12.1-review-of-notation.html#cb31-18" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> cortisol_long,</span>
+<span id="cb31-19"><a href="12.1-review-of-notation.html#cb31-19" aria-hidden="true" tabindex="-1"></a>                    <span class="at">na.action =</span> <span class="st">&quot;na.exclude&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning in nlme.formula(cort ~ g0 + g1 * timescaled, fixed = g0 + g1 ~ 1, :
+## Iteration 1, LME step: nlminb() did not converge (code = 1). Do increase
+## &#39;msMaxIter&#39;!</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="12.1-review-of-notation.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cort_linear)  </span></code></pre></div>
+<pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
+##   Model: cort ~ g0 + g1 * timescaled 
+##   Data: cortisol_long 
+##        AIC      BIC    logLik
+##   1837.972 1860.313 -912.9859
+## 
+## Random effects:
+##  Formula: list(g0 ~ 1, g1 ~ 1)
+##  Level: id
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##          StdDev    Corr 
+## g0       0.2029813 g0   
+## g1       4.4913217 0.998
+## Residual 4.3824242      
+## 
+## Fixed effects:  g0 + g1 ~ 1 
+##        Value Std.Error  DF   t-value p-value
+## g0  8.000588 0.4647792 271 17.213739       0
+## g1 10.881176 1.0971283 271  9.917871       0
+##  Correlation: 
+##    g0    
+## g1 -0.542
+## 
+## Standardized Within-Group Residuals:
+##        Min         Q1        Med         Q3        Max 
+## -1.8427027 -0.7510043 -0.1820688  0.5969361  2.9508372 
+## 
+## Number of Observations: 306
+## Number of Groups: 34</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="12.1-review-of-notation.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_linear)</span></code></pre></div>
+<pre><code>## id = pdLogChol(list(g0 ~ 1,g1 ~ 1)) 
+##          Variance   StdDev    Corr 
+## g0        0.0412014 0.2029813 g0   
+## g1       20.1719706 4.4913217 0.998
+## Residual 19.2056421 4.3824242</code></pre>
+<p>Plotting the predicted trajectories</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="12.1-review-of-notation.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
+<span id="cb37-2"><a href="12.1-review-of-notation.html#cb37-2" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_linear <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_linear)</span>
+<span id="cb37-3"><a href="12.1-review-of-notation.html#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="12.1-review-of-notation.html#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
+<span id="cb37-5"><a href="12.1-review-of-notation.html#cb37-5" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_linear <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_linear, <span class="at">level=</span><span class="dv">0</span>)</span>
+<span id="cb37-6"><a href="12.1-review-of-notation.html#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="12.1-review-of-notation.html#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
+<span id="cb37-8"><a href="12.1-review-of-notation.html#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
+<span id="cb37-9"><a href="12.1-review-of-notation.html#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_linear, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb37-10"><a href="12.1-review-of-notation.html#cb37-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
+<span id="cb37-11"><a href="12.1-review-of-notation.html#cb37-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb37-12"><a href="12.1-review-of-notation.html#cb37-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_linear), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb37-13"><a href="12.1-review-of-notation.html#cb37-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb37-14"><a href="12.1-review-of-notation.html#cb37-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb37-15"><a href="12.1-review-of-notation.html#cb37-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) </span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>Note that the model has some convergence issues, and the solution has hit a parameter boundary. In this model, and some of the models that follow, the correlation between the random effects in intercept and slope is questionable.</p>
+<p>####Quadratic Growth Model</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="12.1-review-of-notation.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#creating the quadratic time variable</span></span>
+<span id="cb38-2"><a href="12.1-review-of-notation.html#cb38-2" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>timesq <span class="ot">&lt;-</span> cortisol_long<span class="sc">$</span>timescaled<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb38-3"><a href="12.1-review-of-notation.html#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="12.1-review-of-notation.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">#quadratic model</span></span>
+<span id="cb38-5"><a href="12.1-review-of-notation.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co"># cort_quad &lt;- lme(cort ~ 1 + timescaled + timesq,</span></span>
+<span id="cb38-6"><a href="12.1-review-of-notation.html#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co">#                    random = ~ 1 + timescaled + timesq| id,</span></span>
+<span id="cb38-7"><a href="12.1-review-of-notation.html#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co">#                     data = cortisol_long,</span></span>
+<span id="cb38-8"><a href="12.1-review-of-notation.html#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="co">#                     na.action = &quot;na.exclude&quot;)</span></span>
+<span id="cb38-9"><a href="12.1-review-of-notation.html#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="co"># #convergence issues</span></span>
+<span id="cb38-10"><a href="12.1-review-of-notation.html#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb38-11"><a href="12.1-review-of-notation.html#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="co"># cort_quad &lt;- lmer(cort ~ 1 + timescaled + timesq + (1 + timescaled + timesq | id),</span></span>
+<span id="cb38-12"><a href="12.1-review-of-notation.html#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="co">#                     data = cortisol_long,</span></span>
+<span id="cb38-13"><a href="12.1-review-of-notation.html#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="co">#                     na.action = &quot;na.exclude&quot;)</span></span>
+<span id="cb38-14"><a href="12.1-review-of-notation.html#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="co"># #convergence issues</span></span>
+<span id="cb38-15"><a href="12.1-review-of-notation.html#cb38-15" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(cort_quad)</span></span>
+<span id="cb38-16"><a href="12.1-review-of-notation.html#cb38-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-17"><a href="12.1-review-of-notation.html#cb38-17" aria-hidden="true" tabindex="-1"></a>cort_quad <span class="ot">&lt;-</span> <span class="fu">nlme</span>(cort <span class="sc">~</span> g0 <span class="sc">+</span> g1<span class="sc">*</span>timescaled <span class="sc">+</span> g2<span class="sc">*</span>timesq,</span>
+<span id="cb38-18"><a href="12.1-review-of-notation.html#cb38-18" aria-hidden="true" tabindex="-1"></a>                    <span class="at">fixed =</span> g0 <span class="sc">+</span> g1 <span class="sc">+</span> g2 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb38-19"><a href="12.1-review-of-notation.html#cb38-19" aria-hidden="true" tabindex="-1"></a>                    <span class="at">random =</span> g0 <span class="sc">+</span> g1 <span class="sc">+</span> g2 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb38-20"><a href="12.1-review-of-notation.html#cb38-20" aria-hidden="true" tabindex="-1"></a>                    <span class="at">group =</span> <span class="sc">~</span>id,</span>
+<span id="cb38-21"><a href="12.1-review-of-notation.html#cb38-21" aria-hidden="true" tabindex="-1"></a>                    <span class="at">start =</span> <span class="fu">c</span>(<span class="at">g0=</span><span class="dv">5</span>, <span class="at">g1=</span><span class="dv">1</span>, <span class="at">g2=</span><span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb38-22"><a href="12.1-review-of-notation.html#cb38-22" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> cortisol_long,</span>
+<span id="cb38-23"><a href="12.1-review-of-notation.html#cb38-23" aria-hidden="true" tabindex="-1"></a>                    <span class="at">na.action =</span> <span class="st">&quot;na.exclude&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning in nlme.formula(cort ~ g0 + g1 * timescaled + g2 * timesq, fixed = g0
+## + : Iteration 1, LME step: nlminb() did not converge (code = 1). Do increase
+## &#39;msMaxIter&#39;!</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="12.1-review-of-notation.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cort_quad) </span></code></pre></div>
+<pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
+##   Model: cort ~ g0 + g1 * timescaled + g2 * timesq 
+##   Data: cortisol_long 
+##        AIC     BIC    logLik
+##   1675.114 1712.35 -827.5571
+## 
+## Random effects:
+##  Formula: list(g0 ~ 1, g1 ~ 1, g2 ~ 1)
+##  Level: id
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##          StdDev   Corr         
+## g0       1.116171 g0     g1    
+## g1       5.245119  0.627       
+## g2       5.031687 -0.965 -0.435
+## Residual 3.051657              
+## 
+## Fixed effects:  g0 + g1 + g2 ~ 1 
+##        Value Std.Error  DF    t-value p-value
+## g0   3.60086 0.4687609 270   7.681646       0
+## g1  41.05077 2.1887904 270  18.755003       0
+## g2 -30.16960 2.1048990 270 -14.333037       0
+##  Correlation: 
+##    g0     g1    
+## g1 -0.560       
+## g2  0.380 -0.873
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -2.24522596 -0.67203940  0.03084421  0.53151467  2.57511239 
+## 
+## Number of Observations: 306
+## Number of Groups: 34</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="12.1-review-of-notation.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_quad)</span></code></pre></div>
+<pre><code>## id = pdLogChol(list(g0 ~ 1,g1 ~ 1,g2 ~ 1)) 
+##          Variance  StdDev   Corr         
+## g0        1.245837 1.116171 g0     g1    
+## g1       27.511278 5.245119  0.627       
+## g2       25.317878 5.031687 -0.965 -0.435
+## Residual  9.312613 3.051657</code></pre>
+<p>Plotting the predicted trajectories</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="12.1-review-of-notation.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
+<span id="cb44-2"><a href="12.1-review-of-notation.html#cb44-2" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_quad <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_quad)</span>
+<span id="cb44-3"><a href="12.1-review-of-notation.html#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="12.1-review-of-notation.html#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
+<span id="cb44-5"><a href="12.1-review-of-notation.html#cb44-5" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_quad <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_quad, <span class="at">level=</span><span class="dv">0</span>)</span>
+<span id="cb44-6"><a href="12.1-review-of-notation.html#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-7"><a href="12.1-review-of-notation.html#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
+<span id="cb44-8"><a href="12.1-review-of-notation.html#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
+<span id="cb44-9"><a href="12.1-review-of-notation.html#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_quad, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb44-10"><a href="12.1-review-of-notation.html#cb44-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
+<span id="cb44-11"><a href="12.1-review-of-notation.html#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb44-12"><a href="12.1-review-of-notation.html#cb44-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_quad), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb44-13"><a href="12.1-review-of-notation.html#cb44-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb44-14"><a href="12.1-review-of-notation.html#cb44-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb44-15"><a href="12.1-review-of-notation.html#cb44-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) </span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>####Latent Basis Growth Model</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="12.1-review-of-notation.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#creating time-dummy variables</span></span>
+<span id="cb45-2"><a href="12.1-review-of-notation.html#cb45-2" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time0 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb45-3"><a href="12.1-review-of-notation.html#cb45-3" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time1 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb45-4"><a href="12.1-review-of-notation.html#cb45-4" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb45-5"><a href="12.1-review-of-notation.html#cb45-5" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time3 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb45-6"><a href="12.1-review-of-notation.html#cb45-6" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time4 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb45-7"><a href="12.1-review-of-notation.html#cb45-7" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time5 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb45-8"><a href="12.1-review-of-notation.html#cb45-8" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time6 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb45-9"><a href="12.1-review-of-notation.html#cb45-9" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time7 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb45-10"><a href="12.1-review-of-notation.html#cb45-10" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time8 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb45-11"><a href="12.1-review-of-notation.html#cb45-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-12"><a href="12.1-review-of-notation.html#cb45-12" aria-hidden="true" tabindex="-1"></a><span class="co">#latent basis model</span></span>
+<span id="cb45-13"><a href="12.1-review-of-notation.html#cb45-13" aria-hidden="true" tabindex="-1"></a>cort_latentb <span class="ot">&lt;-</span> <span class="fu">nlme</span>(cort <span class="sc">~</span> time0<span class="sc">*</span>(g0 <span class="sc">+</span> g1<span class="sc">*</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb45-14"><a href="12.1-review-of-notation.html#cb45-14" aria-hidden="true" tabindex="-1"></a>                            time1<span class="sc">*</span>(g0 <span class="sc">+</span> g1<span class="sc">*</span>A_1) <span class="sc">+</span></span>
+<span id="cb45-15"><a href="12.1-review-of-notation.html#cb45-15" aria-hidden="true" tabindex="-1"></a>                            time2<span class="sc">*</span>(g0 <span class="sc">+</span> g1<span class="sc">*</span>A_2) <span class="sc">+</span></span>
+<span id="cb45-16"><a href="12.1-review-of-notation.html#cb45-16" aria-hidden="true" tabindex="-1"></a>                            time3<span class="sc">*</span>(g0 <span class="sc">+</span> g1<span class="sc">*</span>A_3) <span class="sc">+</span></span>
+<span id="cb45-17"><a href="12.1-review-of-notation.html#cb45-17" aria-hidden="true" tabindex="-1"></a>                            time4<span class="sc">*</span>(g0 <span class="sc">+</span> g1<span class="sc">*</span>A_4) <span class="sc">+</span></span>
+<span id="cb45-18"><a href="12.1-review-of-notation.html#cb45-18" aria-hidden="true" tabindex="-1"></a>                            time5<span class="sc">*</span>(g0 <span class="sc">+</span> g1<span class="sc">*</span>A_5) <span class="sc">+</span></span>
+<span id="cb45-19"><a href="12.1-review-of-notation.html#cb45-19" aria-hidden="true" tabindex="-1"></a>                            time6<span class="sc">*</span>(g0 <span class="sc">+</span> g1<span class="sc">*</span>A_6) <span class="sc">+</span></span>
+<span id="cb45-20"><a href="12.1-review-of-notation.html#cb45-20" aria-hidden="true" tabindex="-1"></a>                            time7<span class="sc">*</span>(g0 <span class="sc">+</span> g1<span class="sc">*</span>A_7) <span class="sc">+</span></span>
+<span id="cb45-21"><a href="12.1-review-of-notation.html#cb45-21" aria-hidden="true" tabindex="-1"></a>                            time8<span class="sc">*</span>(g0 <span class="sc">+</span> g1<span class="sc">*</span><span class="dv">1</span>),</span>
+<span id="cb45-22"><a href="12.1-review-of-notation.html#cb45-22" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fixed =</span> g0 <span class="sc">+</span> g1 <span class="sc">+</span> A_1 <span class="sc">+</span> A_2 <span class="sc">+</span> A_3 <span class="sc">+</span> A_4 <span class="sc">+</span> A_5 <span class="sc">+</span> A_6 <span class="sc">+</span> A_7 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb45-23"><a href="12.1-review-of-notation.html#cb45-23" aria-hidden="true" tabindex="-1"></a>                            <span class="at">random =</span> g0 <span class="sc">+</span> g1 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb45-24"><a href="12.1-review-of-notation.html#cb45-24" aria-hidden="true" tabindex="-1"></a>                         <span class="at">groups =</span><span class="sc">~</span> id,</span>
+<span id="cb45-25"><a href="12.1-review-of-notation.html#cb45-25" aria-hidden="true" tabindex="-1"></a>                         <span class="at">start =</span> <span class="fu">c</span>(<span class="at">g0=</span><span class="fl">5.5</span>, <span class="at">g1=</span><span class="fl">11.5</span>, </span>
+<span id="cb45-26"><a href="12.1-review-of-notation.html#cb45-26" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">A_1=</span>.<span class="dv">3</span>, <span class="at">A_2=</span>.<span class="dv">4</span>, <span class="at">A_3=</span>.<span class="dv">5</span>, <span class="at">A_4=</span>.<span class="dv">6</span>, <span class="at">A_5=</span>.<span class="dv">7</span>, <span class="at">A_6=</span>.<span class="dv">8</span>, <span class="at">A_7=</span>.<span class="dv">9</span>),</span>
+<span id="cb45-27"><a href="12.1-review-of-notation.html#cb45-27" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> cortisol_long,</span>
+<span id="cb45-28"><a href="12.1-review-of-notation.html#cb45-28" aria-hidden="true" tabindex="-1"></a>                         <span class="at">na.action =</span> na.exclude) </span>
+<span id="cb45-29"><a href="12.1-review-of-notation.html#cb45-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-30"><a href="12.1-review-of-notation.html#cb45-30" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cort_latentb)</span></code></pre></div>
+<pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
+##   Model: cort ~ time0 * (g0 + g1 * 0) + time1 * (g0 + g1 * A_1) + time2 *      (g0 + g1 * A_2) + time3 * (g0 + g1 * A_3) + time4 * (g0 +      g1 * A_4) + time5 * (g0 + g1 * A_5) + time6 * (g0 + g1 *      A_6) + time7 * (g0 + g1 * A_7) + time8 * (g0 + g1 * 1) 
+##   Data: cortisol_long 
+##        AIC      BIC    logLik
+##   1569.164 1617.571 -771.5821
+## 
+## Random effects:
+##  Formula: list(g0 ~ 1, g1 ~ 1)
+##  Level: id
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##          StdDev   Corr 
+## g0       1.698578 g0   
+## g1       2.735103 0.001
+## Residual 2.529224      
+## 
+## Fixed effects:  g0 + g1 + A_1 + A_2 + A_3 + A_4 + A_5 + A_6 + A_7 ~ 1 
+##         Value Std.Error  DF   t-value p-value
+## g0   5.342011 0.5207451 264 10.258399  0.0000
+## g1  10.447225 0.7660285 264 13.638168  0.0000
+## A_1 -0.041829 0.0582607 264 -0.717961  0.4734
+## A_2  0.522586 0.0500425 264 10.442847  0.0000
+## A_3  1.118113 0.0611387 264 18.288132  0.0000
+## A_4  1.336652 0.0689221 264 19.393645  0.0000
+## A_5  1.081029 0.0599665 264 18.027217  0.0000
+## A_6  0.951968 0.0562971 264 16.909722  0.0000
+## A_7  1.008691 0.0578269 264 17.443266  0.0000
+##  Correlation: 
+##     g0     g1     A_1    A_2    A_3    A_4    A_5    A_6   
+## g1  -0.455                                                 
+## A_1 -0.581  0.404                                          
+## A_2 -0.314 -0.023  0.262                                   
+## A_3  0.056 -0.446 -0.066  0.287                            
+## A_4  0.151 -0.534 -0.150  0.261  0.589                     
+## A_5  0.037 -0.427 -0.050  0.291  0.540  0.577              
+## A_6 -0.034 -0.355  0.013  0.306  0.501  0.526  0.495       
+## A_7 -0.002 -0.388 -0.015  0.300  0.519  0.550  0.512  0.481
+## 
+## Standardized Within-Group Residuals:
+##        Min         Q1        Med         Q3        Max 
+## -2.4004317 -0.6084323 -0.1077279  0.5806294  2.8252173 
+## 
+## Number of Observations: 306
+## Number of Groups: 34</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="12.1-review-of-notation.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_latentb)</span></code></pre></div>
+<pre><code>## id = pdLogChol(list(g0 ~ 1,g1 ~ 1)) 
+##          Variance StdDev   Corr 
+## g0       2.885168 1.698578 g0   
+## g1       7.480787 2.735103 0.001
+## Residual 6.396974 2.529224</code></pre>
+<p>Plotting the predicted trajectories</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="12.1-review-of-notation.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
+<span id="cb49-2"><a href="12.1-review-of-notation.html#cb49-2" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_latentb <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_latentb)</span>
+<span id="cb49-3"><a href="12.1-review-of-notation.html#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="12.1-review-of-notation.html#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
+<span id="cb49-5"><a href="12.1-review-of-notation.html#cb49-5" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_latentb <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_latentb, <span class="at">level=</span><span class="dv">0</span>)</span>
+<span id="cb49-6"><a href="12.1-review-of-notation.html#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="12.1-review-of-notation.html#cb49-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-8"><a href="12.1-review-of-notation.html#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
+<span id="cb49-9"><a href="12.1-review-of-notation.html#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
+<span id="cb49-10"><a href="12.1-review-of-notation.html#cb49-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_latentb, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb49-11"><a href="12.1-review-of-notation.html#cb49-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
+<span id="cb49-12"><a href="12.1-review-of-notation.html#cb49-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb49-13"><a href="12.1-review-of-notation.html#cb49-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_latentb), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb49-14"><a href="12.1-review-of-notation.html#cb49-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb49-15"><a href="12.1-review-of-notation.html#cb49-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb49-16"><a href="12.1-review-of-notation.html#cb49-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) </span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>####Exponential Growth Model</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="12.1-review-of-notation.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co">#exponential model</span></span>
+<span id="cb50-2"><a href="12.1-review-of-notation.html#cb50-2" aria-hidden="true" tabindex="-1"></a>cort_expo <span class="ot">&lt;-</span> <span class="fu">nlme</span>(cort <span class="sc">~</span> g0 <span class="sc">+</span> g1<span class="sc">*</span>(<span class="fu">exp</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">*</span>alpha<span class="sc">*</span>timescaled)),</span>
+<span id="cb50-3"><a href="12.1-review-of-notation.html#cb50-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">fixed =</span> g0 <span class="sc">+</span> g1 <span class="sc">+</span> alpha <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb50-4"><a href="12.1-review-of-notation.html#cb50-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">random =</span> g0 <span class="sc">+</span> g1  <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb50-5"><a href="12.1-review-of-notation.html#cb50-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">group =</span> <span class="sc">~</span>id,</span>
+<span id="cb50-6"><a href="12.1-review-of-notation.html#cb50-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">start =</span> <span class="fu">c</span>(<span class="at">g0=</span><span class="dv">17</span>, <span class="at">g1=</span><span class="sc">-</span><span class="dv">14</span>, <span class="at">alpha=</span><span class="fl">0.5</span>),</span>
+<span id="cb50-7"><a href="12.1-review-of-notation.html#cb50-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> cortisol_long,</span>
+<span id="cb50-8"><a href="12.1-review-of-notation.html#cb50-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">na.action =</span> <span class="st">&quot;na.exclude&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning in nlme.formula(cort ~ g0 + g1 * (exp(-1 * alpha * timescaled)), :
+## Iteration 2, LME step: nlminb() did not converge (code = 1). Do increase
+## &#39;msMaxIter&#39;!</code></pre>
+<pre><code>## Warning in nlme.formula(cort ~ g0 + g1 * (exp(-1 * alpha * timescaled)), :
+## Iteration 4, LME step: nlminb() did not converge (code = 1). Do increase
+## &#39;msMaxIter&#39;!</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="12.1-review-of-notation.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cort_expo)</span></code></pre></div>
+<pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
+##   Model: cort ~ g0 + g1 * (exp(-1 * alpha * timescaled)) 
+##   Data: cortisol_long 
+##        AIC      BIC    logLik
+##   1730.239 1756.304 -858.1195
+## 
+## Random effects:
+##  Formula: list(g0 ~ 1, g1 ~ 1)
+##  Level: id
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##          StdDev   Corr  
+## g0       3.672433 g0    
+## g1       3.988481 -0.999
+## Residual 3.594264       
+## 
+## Fixed effects:  g0 + g1 + alpha ~ 1 
+##            Value Std.Error  DF   t-value p-value
+## g0     17.202771 0.7689113 270  22.37289       0
+## g1    -13.735113 0.9554561 270 -14.37545       0
+## alpha   4.109679 0.4852488 270   8.46922       0
+##  Correlation: 
+##       g0     g1    
+## g1    -0.788       
+## alpha -0.442  0.077
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -2.06666362 -0.69579849 -0.03313565  0.60577564  2.73039108 
+## 
+## Number of Observations: 306
+## Number of Groups: 34</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="12.1-review-of-notation.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_expo)</span></code></pre></div>
+<pre><code>## id = pdLogChol(list(g0 ~ 1,g1 ~ 1)) 
+##          Variance StdDev   Corr  
+## g0       13.48676 3.672433 g0    
+## g1       15.90798 3.988481 -0.999
+## Residual 12.91874 3.594264</code></pre>
+<p>Plotting the predicted trajectories</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="12.1-review-of-notation.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
+<span id="cb57-2"><a href="12.1-review-of-notation.html#cb57-2" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_expo <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_expo)</span>
+<span id="cb57-3"><a href="12.1-review-of-notation.html#cb57-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-4"><a href="12.1-review-of-notation.html#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
+<span id="cb57-5"><a href="12.1-review-of-notation.html#cb57-5" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_expo <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_expo, <span class="at">level=</span><span class="dv">0</span>)</span>
+<span id="cb57-6"><a href="12.1-review-of-notation.html#cb57-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-7"><a href="12.1-review-of-notation.html#cb57-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-8"><a href="12.1-review-of-notation.html#cb57-8" aria-hidden="true" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
+<span id="cb57-9"><a href="12.1-review-of-notation.html#cb57-9" aria-hidden="true" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
+<span id="cb57-10"><a href="12.1-review-of-notation.html#cb57-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_expo, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb57-11"><a href="12.1-review-of-notation.html#cb57-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
+<span id="cb57-12"><a href="12.1-review-of-notation.html#cb57-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb57-13"><a href="12.1-review-of-notation.html#cb57-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_expo), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb57-14"><a href="12.1-review-of-notation.html#cb57-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb57-15"><a href="12.1-review-of-notation.html#cb57-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb57-16"><a href="12.1-review-of-notation.html#cb57-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) </span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>####Multiphase Growth Model</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="12.1-review-of-notation.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co">#multiphase model</span></span>
+<span id="cb58-2"><a href="12.1-review-of-notation.html#cb58-2" aria-hidden="true" tabindex="-1"></a>cort_multi <span class="ot">&lt;-</span> <span class="fu">nlme</span>(cort <span class="sc">~</span> time0<span class="sc">*</span>(g0 <span class="sc">+</span> g1<span class="sc">*</span><span class="dv">0</span> <span class="sc">+</span> g2<span class="sc">*</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb58-3"><a href="12.1-review-of-notation.html#cb58-3" aria-hidden="true" tabindex="-1"></a>                          time1<span class="sc">*</span>(g0 <span class="sc">+</span> g1<span class="sc">*</span><span class="dv">0</span> <span class="sc">+</span> g2<span class="sc">*</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb58-4"><a href="12.1-review-of-notation.html#cb58-4" aria-hidden="true" tabindex="-1"></a>                          time2<span class="sc">*</span>(g0 <span class="sc">+</span> g1<span class="sc">*</span>A_2 <span class="sc">+</span> g2<span class="sc">*</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb58-5"><a href="12.1-review-of-notation.html#cb58-5" aria-hidden="true" tabindex="-1"></a>                          time3<span class="sc">*</span>(g0 <span class="sc">+</span> g1<span class="sc">*</span>A_3 <span class="sc">+</span> g2<span class="sc">*</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb58-6"><a href="12.1-review-of-notation.html#cb58-6" aria-hidden="true" tabindex="-1"></a>                          time4<span class="sc">*</span>(g0 <span class="sc">+</span> g1<span class="sc">*</span><span class="dv">1</span> <span class="sc">+</span> g2<span class="sc">*</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb58-7"><a href="12.1-review-of-notation.html#cb58-7" aria-hidden="true" tabindex="-1"></a>                          time5<span class="sc">*</span>(g0 <span class="sc">+</span> g1<span class="sc">*</span><span class="dv">1</span> <span class="sc">+</span> g2<span class="sc">*</span>A_5) <span class="sc">+</span></span>
+<span id="cb58-8"><a href="12.1-review-of-notation.html#cb58-8" aria-hidden="true" tabindex="-1"></a>                          time6<span class="sc">*</span>(g0 <span class="sc">+</span> g1<span class="sc">*</span><span class="dv">1</span> <span class="sc">+</span> g2<span class="sc">*</span>A_6) <span class="sc">+</span></span>
+<span id="cb58-9"><a href="12.1-review-of-notation.html#cb58-9" aria-hidden="true" tabindex="-1"></a>                          time7<span class="sc">*</span>(g0 <span class="sc">+</span> g1<span class="sc">*</span><span class="dv">1</span> <span class="sc">+</span> g2<span class="sc">*</span>A_7) <span class="sc">+</span></span>
+<span id="cb58-10"><a href="12.1-review-of-notation.html#cb58-10" aria-hidden="true" tabindex="-1"></a>                          time8<span class="sc">*</span>(g0 <span class="sc">+</span> g1<span class="sc">*</span><span class="dv">1</span> <span class="sc">+</span> g2<span class="sc">*</span><span class="dv">1</span>),</span>
+<span id="cb58-11"><a href="12.1-review-of-notation.html#cb58-11" aria-hidden="true" tabindex="-1"></a>                   <span class="at">fixed =</span> g0 <span class="sc">+</span> g1 <span class="sc">+</span> g2 <span class="sc">+</span> A_2 <span class="sc">+</span> A_3 <span class="sc">+</span> A_5 <span class="sc">+</span> A_6 <span class="sc">+</span> A_7 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb58-12"><a href="12.1-review-of-notation.html#cb58-12" aria-hidden="true" tabindex="-1"></a>                   <span class="at">random =</span> g0 <span class="sc">+</span> g1 <span class="sc">+</span> g2 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb58-13"><a href="12.1-review-of-notation.html#cb58-13" aria-hidden="true" tabindex="-1"></a>                   <span class="at">groups =</span><span class="sc">~</span> id,</span>
+<span id="cb58-14"><a href="12.1-review-of-notation.html#cb58-14" aria-hidden="true" tabindex="-1"></a>                   <span class="at">start =</span> <span class="fu">c</span>(<span class="at">g0=</span><span class="dv">15</span>, <span class="at">g1=</span><span class="dv">10</span>, <span class="at">g2=</span><span class="sc">-</span><span class="dv">4</span>, </span>
+<span id="cb58-15"><a href="12.1-review-of-notation.html#cb58-15" aria-hidden="true" tabindex="-1"></a>                             <span class="at">A_2=</span>.<span class="dv">4</span>, <span class="at">A_3=</span>.<span class="dv">5</span>, <span class="at">A_5=</span>.<span class="dv">7</span>, <span class="at">A_6=</span>.<span class="dv">8</span>, <span class="at">A_7=</span>.<span class="dv">9</span>),</span>
+<span id="cb58-16"><a href="12.1-review-of-notation.html#cb58-16" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> cortisol_long,</span>
+<span id="cb58-17"><a href="12.1-review-of-notation.html#cb58-17" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.action =</span> na.exclude) </span>
+<span id="cb58-18"><a href="12.1-review-of-notation.html#cb58-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-19"><a href="12.1-review-of-notation.html#cb58-19" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cort_multi)</span></code></pre></div>
+<pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
+##   Model: cort ~ time0 * (g0 + g1 * 0 + g2 * 0) + time1 * (g0 + g1 * 0 +      g2 * 0) + time2 * (g0 + g1 * A_2 + g2 * 0) + time3 * (g0 +      g1 * A_3 + g2 * 0) + time4 * (g0 + g1 * 1 + g2 * 0) + time5 *      (g0 + g1 * 1 + g2 * A_5) + time6 * (g0 + g1 * 1 + g2 * A_6) +      time7 * (g0 + g1 * 1 + g2 * A_7) + time8 * (g0 + g1 * 1 +      g2 * 1) 
+##   Data: cortisol_long 
+##        AIC      BIC    logLik
+##   1412.881 1468.735 -691.4407
+## 
+## Random effects:
+##  Formula: list(g0 ~ 1, g1 ~ 1, g2 ~ 1)
+##  Level: id
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##          StdDev   Corr         
+## g0       2.161867 g0     g1    
+## g1       3.580495 -0.315       
+## g2       4.241375 -0.041 -0.286
+## Residual 1.535205              
+## 
+## Fixed effects:  g0 + g1 + g2 + A_2 + A_3 + A_5 + A_6 + A_7 ~ 1 
+##         Value Std.Error  DF  t-value p-value
+## g0   5.118082 0.4201167 265 12.18252       0
+## g1  14.248891 0.6998856 265 20.35889       0
+## g2  -3.797260 0.8089645 265 -4.69398       0
+## A_2  0.410745 0.0210662 265 19.49783       0
+## A_3  0.860230 0.0238885 265 36.01023       0
+## A_5  0.715784 0.0598000 265 11.96963       0
+## A_6  1.046663 0.0683974 265 15.30267       0
+## A_7  1.042029 0.0682431 265 15.26937       0
+##  Correlation: 
+##     g0     g1     g2     A_2    A_3    A_5    A_6   
+## g1  -0.372                                          
+## g2  -0.033 -0.352                                   
+## A_2 -0.158 -0.032  0.111                            
+## A_3 -0.033 -0.214  0.205  0.250                     
+## A_5  0.000  0.059  0.073 -0.056 -0.104              
+## A_6  0.000 -0.008  0.165  0.007  0.014  0.393       
+## A_7  0.000 -0.007  0.164  0.006  0.012  0.392  0.504
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -3.40843238 -0.50779684 -0.01780371  0.49095891  3.70249850 
+## 
+## Number of Observations: 306
+## Number of Groups: 34</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="12.1-review-of-notation.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_multi)</span></code></pre></div>
+<pre><code>## id = pdLogChol(list(g0 ~ 1,g1 ~ 1,g2 ~ 1)) 
+##          Variance  StdDev   Corr         
+## g0        4.673669 2.161867 g0     g1    
+## g1       12.819948 3.580495 -0.315       
+## g2       17.989264 4.241375 -0.041 -0.286
+## Residual  2.356854 1.535205</code></pre>
+<p>Plotting the predicted trajectories</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="12.1-review-of-notation.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
+<span id="cb62-2"><a href="12.1-review-of-notation.html#cb62-2" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_multi <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_multi)</span>
+<span id="cb62-3"><a href="12.1-review-of-notation.html#cb62-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-4"><a href="12.1-review-of-notation.html#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
+<span id="cb62-5"><a href="12.1-review-of-notation.html#cb62-5" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_multi <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_multi, <span class="at">level=</span><span class="dv">0</span>)</span>
+<span id="cb62-6"><a href="12.1-review-of-notation.html#cb62-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-7"><a href="12.1-review-of-notation.html#cb62-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-8"><a href="12.1-review-of-notation.html#cb62-8" aria-hidden="true" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
+<span id="cb62-9"><a href="12.1-review-of-notation.html#cb62-9" aria-hidden="true" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
+<span id="cb62-10"><a href="12.1-review-of-notation.html#cb62-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_multi, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb62-11"><a href="12.1-review-of-notation.html#cb62-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
+<span id="cb62-12"><a href="12.1-review-of-notation.html#cb62-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb62-13"><a href="12.1-review-of-notation.html#cb62-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_multi), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb62-14"><a href="12.1-review-of-notation.html#cb62-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb62-15"><a href="12.1-review-of-notation.html#cb62-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb62-16"><a href="12.1-review-of-notation.html#cb62-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) </span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+
+</div>
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="12-chapter-12.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/zackfisher/HDFS523/edit/master/12_nonlinear_growth_curves.Rmd",
+"text": "Suggest an edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+},
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
