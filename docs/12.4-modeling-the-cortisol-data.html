@@ -24,7 +24,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2022-03-01" />
+<meta name="date" content="2022-03-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -501,6 +501,8 @@ div.csl-indent {
 <li class="chapter" data-level="12.4.1" data-path="12.4-modeling-the-cortisol-data.html"><a href="12.4-modeling-the-cortisol-data.html#linear-growth"><i class="fa fa-check"></i><b>12.4.1</b> Linear Growth<span></span></a></li>
 <li class="chapter" data-level="12.4.2" data-path="12.4-modeling-the-cortisol-data.html"><a href="12.4-modeling-the-cortisol-data.html#quadratic-growth-model-cortisol"><i class="fa fa-check"></i><b>12.4.2</b> Quadratic Growth Model (Cortisol)<span></span></a></li>
 <li class="chapter" data-level="12.4.3" data-path="12.4-modeling-the-cortisol-data.html"><a href="12.4-modeling-the-cortisol-data.html#latent-basis-model-cortisol"><i class="fa fa-check"></i><b>12.4.3</b> Latent Basis Model (Cortisol)<span></span></a></li>
+<li class="chapter" data-level="12.4.4" data-path="12.4-modeling-the-cortisol-data.html"><a href="12.4-modeling-the-cortisol-data.html#exponential-growth-model-cortisol"><i class="fa fa-check"></i><b>12.4.4</b> Exponential Growth Model (Cortisol)<span></span></a></li>
+<li class="chapter" data-level="12.4.5" data-path="12.4-modeling-the-cortisol-data.html"><a href="12.4-modeling-the-cortisol-data.html#multiphase-growth-model-cortisol"><i class="fa fa-check"></i><b>12.4.5</b> Multiphase Growth Model (Cortisol)<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="12.5" data-path="12.5-references-1.html"><a href="12.5-references-1.html"><i class="fa fa-check"></i><b>12.5</b> References<span></span></a></li>
 </ul></li>
@@ -536,7 +538,8 @@ y_{ti}  = &amp; \underbrace{\gamma_{00} + \gamma_{10}\text{time}_{1}}_{fixed} + 
 \end{align}\]</span></p>
 <p>where</p>
 <p><span class="math display">\[\begin{align}
-\text{time}_{1} = \{0.000 0.125 0.250 0.375 0.500 0.625 0.750 0.875 1.000\}
+\text{time}_{1} = &amp; \{0/8, 1/8, 2/8, 3/8, 4/8, 5/8, 6/8, 7/8, 8/8\}\\
+ = &amp; \{0.000, 0.125, 0.250, 0.375, 0.500, 0.625, 0.750, 0.875, 1.000\}
 \end{align}\]</span></p>
 <p>and</p>
 <ul>
@@ -555,18 +558,30 @@ y_{ti}  = &amp; \underbrace{\gamma_{00} + \gamma_{10}\text{time}_{1}}_{fixed} + 
 <div id="fit-linear-growth-model" class="section level4 hasAnchor" number="12.4.1.1">
 <h4><span class="header-section-number">12.4.1.1</span> Fit Linear Growth Model<a href="12.4-modeling-the-cortisol-data.html#fit-linear-growth-model" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Now lets fit the series of growth models from <span class="citation"><a href="#ref-ram2007" role="doc-biblioref">Ram and Grimm</a> (<a href="#ref-ram2007" role="doc-biblioref">2007</a>)</span> starting with the linear growth model. Remember our</p>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="12.4-modeling-the-cortisol-data.html#cb438-1" aria-hidden="true" tabindex="-1"></a>cort_linear <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
-<span id="cb438-2"><a href="12.4-modeling-the-cortisol-data.html#cb438-2" aria-hidden="true" tabindex="-1"></a>  cort <span class="sc">~</span> (gamma_00 <span class="sc">+</span> u_0i) <span class="sc">+</span> (gamma_10 <span class="sc">+</span> u_1i)<span class="sc">*</span>timescaled,</span>
-<span id="cb438-3"><a href="12.4-modeling-the-cortisol-data.html#cb438-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10<span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb438-4"><a href="12.4-modeling-the-cortisol-data.html#cb438-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> u_0i <span class="sc">+</span> u_1i<span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb438-5"><a href="12.4-modeling-the-cortisol-data.html#cb438-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
-<span id="cb438-6"><a href="12.4-modeling-the-cortisol-data.html#cb438-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00 =</span> <span class="dv">5</span>, <span class="at">gamma_10=</span><span class="dv">1</span>), </span>
-<span id="cb438-7"><a href="12.4-modeling-the-cortisol-data.html#cb438-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> cortisol_long,</span>
-<span id="cb438-8"><a href="12.4-modeling-the-cortisol-data.html#cb438-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> <span class="st">&quot;na.exclude&quot;</span>,</span>
-<span id="cb438-9"><a href="12.4-modeling-the-cortisol-data.html#cb438-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
-<span id="cb438-10"><a href="12.4-modeling-the-cortisol-data.html#cb438-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb438-11"><a href="12.4-modeling-the-cortisol-data.html#cb438-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb438-12"><a href="12.4-modeling-the-cortisol-data.html#cb438-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cort_linear)  </span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="12.4-modeling-the-cortisol-data.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># #linear model</span></span>
+<span id="cb20-2"><a href="12.4-modeling-the-cortisol-data.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># cort_linear &lt;- lme(cort ~ 1 + timescaled,</span></span>
+<span id="cb20-3"><a href="12.4-modeling-the-cortisol-data.html#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                    random = ~ 1 + timescaled | id,</span></span>
+<span id="cb20-4"><a href="12.4-modeling-the-cortisol-data.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#                     data = cortisol_long,</span></span>
+<span id="cb20-5"><a href="12.4-modeling-the-cortisol-data.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#                     na.action = &quot;na.exclude&quot;)</span></span>
+<span id="cb20-6"><a href="12.4-modeling-the-cortisol-data.html#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># #convergence issues</span></span>
+<span id="cb20-7"><a href="12.4-modeling-the-cortisol-data.html#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb20-8"><a href="12.4-modeling-the-cortisol-data.html#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># cort_linear2 &lt;- lmer(cort ~ 1 + timescaled + (1 + timescaled | id),</span></span>
+<span id="cb20-9"><a href="12.4-modeling-the-cortisol-data.html#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">#                     data = cortisol_long,</span></span>
+<span id="cb20-10"><a href="12.4-modeling-the-cortisol-data.html#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">#                     na.action = &quot;na.exclude&quot;)</span></span>
+<span id="cb20-11"><a href="12.4-modeling-the-cortisol-data.html#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># #convergence issues</span></span>
+<span id="cb20-12"><a href="12.4-modeling-the-cortisol-data.html#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="12.4-modeling-the-cortisol-data.html#cb20-13" aria-hidden="true" tabindex="-1"></a>cort_linear <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
+<span id="cb20-14"><a href="12.4-modeling-the-cortisol-data.html#cb20-14" aria-hidden="true" tabindex="-1"></a>  cort <span class="sc">~</span> (gamma_00 <span class="sc">+</span> u_0i) <span class="sc">+</span> (gamma_10 <span class="sc">+</span> u_1i)<span class="sc">*</span>timescaled,</span>
+<span id="cb20-15"><a href="12.4-modeling-the-cortisol-data.html#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10<span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb20-16"><a href="12.4-modeling-the-cortisol-data.html#cb20-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> u_0i <span class="sc">+</span> u_1i<span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb20-17"><a href="12.4-modeling-the-cortisol-data.html#cb20-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
+<span id="cb20-18"><a href="12.4-modeling-the-cortisol-data.html#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00 =</span> <span class="dv">5</span>, <span class="at">gamma_10=</span><span class="dv">1</span>), </span>
+<span id="cb20-19"><a href="12.4-modeling-the-cortisol-data.html#cb20-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> cortisol_long,</span>
+<span id="cb20-20"><a href="12.4-modeling-the-cortisol-data.html#cb20-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> <span class="st">&quot;na.exclude&quot;</span>,</span>
+<span id="cb20-21"><a href="12.4-modeling-the-cortisol-data.html#cb20-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
+<span id="cb20-22"><a href="12.4-modeling-the-cortisol-data.html#cb20-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-23"><a href="12.4-modeling-the-cortisol-data.html#cb20-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-24"><a href="12.4-modeling-the-cortisol-data.html#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cort_linear)  </span></code></pre></div>
 <pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
 ##   Model: cort ~ (gamma_00 + u_0i) + (gamma_10 + u_1i) * timescaled 
 ##   Data: cortisol_long 
@@ -596,7 +611,7 @@ y_{ti}  = &amp; \underbrace{\gamma_{00} + \gamma_{10}\text{time}_{1}}_{fixed} + 
 ## 
 ## Number of Observations: 306
 ## Number of Groups: 34</code></pre>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="12.4-modeling-the-cortisol-data.html#cb440-1" aria-hidden="true" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_linear)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="12.4-modeling-the-cortisol-data.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_linear)</span></code></pre></div>
 <pre><code>## id = pdLogChol(list(u_0i ~ 1,u_1i ~ 1)) 
 ##          Variance    StdDev    Corr 
 ## u_0i      0.04127021 0.2031507 u_0i 
@@ -605,29 +620,28 @@ y_{ti}  = &amp; \underbrace{\gamma_{00} + \gamma_{10}\text{time}_{1}}_{fixed} + 
 </div>
 <div id="predicted-trajectories-1" class="section level4 hasAnchor" number="12.4.1.2">
 <h4><span class="header-section-number">12.4.1.2</span> Predicted Trajectories<a href="12.4-modeling-the-cortisol-data.html#predicted-trajectories-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="12.4-modeling-the-cortisol-data.html#cb442-1" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
-<span id="cb442-2"><a href="12.4-modeling-the-cortisol-data.html#cb442-2" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_linear <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_linear)</span>
-<span id="cb442-3"><a href="12.4-modeling-the-cortisol-data.html#cb442-3" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
-<span id="cb442-4"><a href="12.4-modeling-the-cortisol-data.html#cb442-4" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_linear <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_linear, <span class="at">level=</span><span class="dv">0</span>)</span>
-<span id="cb442-5"><a href="12.4-modeling-the-cortisol-data.html#cb442-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb442-6"><a href="12.4-modeling-the-cortisol-data.html#cb442-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plotting predicted trajectories</span></span>
-<span id="cb442-7"><a href="12.4-modeling-the-cortisol-data.html#cb442-7" aria-hidden="true" tabindex="-1"></a><span class="co"># intraindividual change trajetories</span></span>
-<span id="cb442-8"><a href="12.4-modeling-the-cortisol-data.html#cb442-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_linear, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb442-9"><a href="12.4-modeling-the-cortisol-data.html#cb442-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
-<span id="cb442-10"><a href="12.4-modeling-the-cortisol-data.html#cb442-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb442-11"><a href="12.4-modeling-the-cortisol-data.html#cb442-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_linear), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb442-12"><a href="12.4-modeling-the-cortisol-data.html#cb442-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb442-13"><a href="12.4-modeling-the-cortisol-data.html#cb442-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb442-14"><a href="12.4-modeling-the-cortisol-data.html#cb442-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb442-15"><a href="12.4-modeling-the-cortisol-data.html#cb442-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-255-1.png" width="672" /></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="12.4-modeling-the-cortisol-data.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
+<span id="cb24-2"><a href="12.4-modeling-the-cortisol-data.html#cb24-2" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_linear <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_linear)</span>
+<span id="cb24-3"><a href="12.4-modeling-the-cortisol-data.html#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
+<span id="cb24-4"><a href="12.4-modeling-the-cortisol-data.html#cb24-4" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_linear <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_linear, <span class="at">level=</span><span class="dv">0</span>)</span>
+<span id="cb24-5"><a href="12.4-modeling-the-cortisol-data.html#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="12.4-modeling-the-cortisol-data.html#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plotting predicted trajectories</span></span>
+<span id="cb24-7"><a href="12.4-modeling-the-cortisol-data.html#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># intraindividual change trajetories</span></span>
+<span id="cb24-8"><a href="12.4-modeling-the-cortisol-data.html#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_linear, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb24-9"><a href="12.4-modeling-the-cortisol-data.html#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
+<span id="cb24-10"><a href="12.4-modeling-the-cortisol-data.html#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-11"><a href="12.4-modeling-the-cortisol-data.html#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_linear), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb24-12"><a href="12.4-modeling-the-cortisol-data.html#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb24-13"><a href="12.4-modeling-the-cortisol-data.html#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb24-14"><a href="12.4-modeling-the-cortisol-data.html#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb24-15"><a href="12.4-modeling-the-cortisol-data.html#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>Note that the model has some convergence issues, and the solution has hit a parameter boundary. In this model, and some of the models that follow, the correlation between the random effects in intercept and slope is questionable.</p>
 </div>
 <div id="interpretation-4" class="section level4 hasAnchor" number="12.4.1.3">
 <h4><span class="header-section-number">12.4.1.3</span> Interpretation<a href="12.4-modeling-the-cortisol-data.html#interpretation-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Although we would be reluctant to interpret this model based on the convergence issues. We might say the parameters from the linear model indicate the average person’s baseline level of
-cortisol is approximately <span class="math inline">\(8\)</span> mcg/dl and their level of cortisol increases incrementally at each occasion, in total increasing by <span class="math inline">\(10.9\)</span> units over the course of time captured by
-the remaining eight occasions.</p>
+cortisol is approximately <span class="math inline">\(8\)</span> mcg/dl and their level of cortisol increases incrementally at each occasion, in total increasing by <span class="math inline">\(10.9\)</span> units over the course of the remaining eight occasions.</p>
 <p>From the plot it appears the linear model fails to capture the intraindividual changes or the
 interindividual differences in intraindividual change noted in the raw data. It also fails to capture the complexity of the process.</p>
 </div>
@@ -663,36 +677,36 @@ y_{ti}  = &amp; \underbrace{\gamma_{00} + \gamma_{10}\text{time}_{1} + \gamma_{2
 <li><span class="math inline">\(u_{1i}\)</span> is individual <span class="math inline">\(i\)</span>’s deviation from the linear component</li>
 <li><span class="math inline">\(u_{2i}\)</span> is individual <span class="math inline">\(i\)</span>’s deviation from the quadratic component</li>
 </ul>
-<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="12.4-modeling-the-cortisol-data.html#cb443-1" aria-hidden="true" tabindex="-1"></a><span class="co">#creating the quadratic time variable</span></span>
-<span id="cb443-2"><a href="12.4-modeling-the-cortisol-data.html#cb443-2" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>timesq <span class="ot">&lt;-</span> cortisol_long<span class="sc">$</span>timescaled<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb443-3"><a href="12.4-modeling-the-cortisol-data.html#cb443-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb443-4"><a href="12.4-modeling-the-cortisol-data.html#cb443-4" aria-hidden="true" tabindex="-1"></a><span class="co">#quadratic model</span></span>
-<span id="cb443-5"><a href="12.4-modeling-the-cortisol-data.html#cb443-5" aria-hidden="true" tabindex="-1"></a><span class="co"># cort_quad &lt;- lme(cort ~ 1 + timescaled + timesq,</span></span>
-<span id="cb443-6"><a href="12.4-modeling-the-cortisol-data.html#cb443-6" aria-hidden="true" tabindex="-1"></a><span class="co">#                    random = ~ 1 + timescaled + timesq| id,</span></span>
-<span id="cb443-7"><a href="12.4-modeling-the-cortisol-data.html#cb443-7" aria-hidden="true" tabindex="-1"></a><span class="co">#                     data = cortisol_long,</span></span>
-<span id="cb443-8"><a href="12.4-modeling-the-cortisol-data.html#cb443-8" aria-hidden="true" tabindex="-1"></a><span class="co">#                     na.action = &quot;na.exclude&quot;)</span></span>
-<span id="cb443-9"><a href="12.4-modeling-the-cortisol-data.html#cb443-9" aria-hidden="true" tabindex="-1"></a><span class="co"># #convergence issues</span></span>
-<span id="cb443-10"><a href="12.4-modeling-the-cortisol-data.html#cb443-10" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb443-11"><a href="12.4-modeling-the-cortisol-data.html#cb443-11" aria-hidden="true" tabindex="-1"></a><span class="co"># cort_quad &lt;- lmer(cort ~ 1 + timescaled + timesq + (1 + timescaled + timesq | id),</span></span>
-<span id="cb443-12"><a href="12.4-modeling-the-cortisol-data.html#cb443-12" aria-hidden="true" tabindex="-1"></a><span class="co">#                     data = cortisol_long,</span></span>
-<span id="cb443-13"><a href="12.4-modeling-the-cortisol-data.html#cb443-13" aria-hidden="true" tabindex="-1"></a><span class="co">#                     na.action = &quot;na.exclude&quot;)</span></span>
-<span id="cb443-14"><a href="12.4-modeling-the-cortisol-data.html#cb443-14" aria-hidden="true" tabindex="-1"></a><span class="co"># #convergence issues</span></span>
-<span id="cb443-15"><a href="12.4-modeling-the-cortisol-data.html#cb443-15" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(cort_quad)</span></span>
-<span id="cb443-16"><a href="12.4-modeling-the-cortisol-data.html#cb443-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb443-17"><a href="12.4-modeling-the-cortisol-data.html#cb443-17" aria-hidden="true" tabindex="-1"></a>cort_quad <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
-<span id="cb443-18"><a href="12.4-modeling-the-cortisol-data.html#cb443-18" aria-hidden="true" tabindex="-1"></a>  cort <span class="sc">~</span> (gamma_00 <span class="sc">+</span> u_0i) <span class="sc">+</span> (gamma_10 <span class="sc">+</span> u_1i)<span class="sc">*</span>timescaled <span class="sc">+</span> (gamma_20 <span class="sc">+</span> u_2i)<span class="sc">*</span>timesq,</span>
-<span id="cb443-19"><a href="12.4-modeling-the-cortisol-data.html#cb443-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> gamma_20 <span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb443-20"><a href="12.4-modeling-the-cortisol-data.html#cb443-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> u_0i <span class="sc">+</span> u_1i <span class="sc">+</span> u_2i <span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb443-21"><a href="12.4-modeling-the-cortisol-data.html#cb443-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
-<span id="cb443-22"><a href="12.4-modeling-the-cortisol-data.html#cb443-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00 =</span> <span class="dv">5</span>, <span class="at">gamma_10=</span><span class="dv">1</span>, <span class="at">gamma_20=</span><span class="sc">-</span><span class="dv">1</span>), </span>
-<span id="cb443-23"><a href="12.4-modeling-the-cortisol-data.html#cb443-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> cortisol_long,</span>
-<span id="cb443-24"><a href="12.4-modeling-the-cortisol-data.html#cb443-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> <span class="st">&quot;na.exclude&quot;</span>,</span>
-<span id="cb443-25"><a href="12.4-modeling-the-cortisol-data.html#cb443-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
-<span id="cb443-26"><a href="12.4-modeling-the-cortisol-data.html#cb443-26" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="12.4-modeling-the-cortisol-data.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#creating the quadratic time variable</span></span>
+<span id="cb25-2"><a href="12.4-modeling-the-cortisol-data.html#cb25-2" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>timesq <span class="ot">&lt;-</span> cortisol_long<span class="sc">$</span>timescaled<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb25-3"><a href="12.4-modeling-the-cortisol-data.html#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="12.4-modeling-the-cortisol-data.html#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#quadratic model</span></span>
+<span id="cb25-5"><a href="12.4-modeling-the-cortisol-data.html#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># cort_quad &lt;- lme(cort ~ 1 + timescaled + timesq,</span></span>
+<span id="cb25-6"><a href="12.4-modeling-the-cortisol-data.html#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">#                    random = ~ 1 + timescaled + timesq| id,</span></span>
+<span id="cb25-7"><a href="12.4-modeling-the-cortisol-data.html#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co">#                     data = cortisol_long,</span></span>
+<span id="cb25-8"><a href="12.4-modeling-the-cortisol-data.html#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co">#                     na.action = &quot;na.exclude&quot;)</span></span>
+<span id="cb25-9"><a href="12.4-modeling-the-cortisol-data.html#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co"># #convergence issues</span></span>
+<span id="cb25-10"><a href="12.4-modeling-the-cortisol-data.html#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-11"><a href="12.4-modeling-the-cortisol-data.html#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co"># cort_quad &lt;- lmer(cort ~ 1 + timescaled + timesq + (1 + timescaled + timesq | id),</span></span>
+<span id="cb25-12"><a href="12.4-modeling-the-cortisol-data.html#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co">#                     data = cortisol_long,</span></span>
+<span id="cb25-13"><a href="12.4-modeling-the-cortisol-data.html#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co">#                     na.action = &quot;na.exclude&quot;)</span></span>
+<span id="cb25-14"><a href="12.4-modeling-the-cortisol-data.html#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="co"># #convergence issues</span></span>
+<span id="cb25-15"><a href="12.4-modeling-the-cortisol-data.html#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(cort_quad)</span></span>
+<span id="cb25-16"><a href="12.4-modeling-the-cortisol-data.html#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-17"><a href="12.4-modeling-the-cortisol-data.html#cb25-17" aria-hidden="true" tabindex="-1"></a>cort_quad <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
+<span id="cb25-18"><a href="12.4-modeling-the-cortisol-data.html#cb25-18" aria-hidden="true" tabindex="-1"></a>  cort <span class="sc">~</span> (gamma_00 <span class="sc">+</span> u_0i) <span class="sc">+</span> (gamma_10 <span class="sc">+</span> u_1i)<span class="sc">*</span>timescaled <span class="sc">+</span> (gamma_20 <span class="sc">+</span> u_2i)<span class="sc">*</span>timesq,</span>
+<span id="cb25-19"><a href="12.4-modeling-the-cortisol-data.html#cb25-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> gamma_20 <span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb25-20"><a href="12.4-modeling-the-cortisol-data.html#cb25-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> u_0i <span class="sc">+</span> u_1i <span class="sc">+</span> u_2i <span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb25-21"><a href="12.4-modeling-the-cortisol-data.html#cb25-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
+<span id="cb25-22"><a href="12.4-modeling-the-cortisol-data.html#cb25-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00 =</span> <span class="dv">5</span>, <span class="at">gamma_10=</span><span class="dv">1</span>, <span class="at">gamma_20=</span><span class="sc">-</span><span class="dv">1</span>), </span>
+<span id="cb25-23"><a href="12.4-modeling-the-cortisol-data.html#cb25-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> cortisol_long,</span>
+<span id="cb25-24"><a href="12.4-modeling-the-cortisol-data.html#cb25-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> <span class="st">&quot;na.exclude&quot;</span>,</span>
+<span id="cb25-25"><a href="12.4-modeling-the-cortisol-data.html#cb25-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
+<span id="cb25-26"><a href="12.4-modeling-the-cortisol-data.html#cb25-26" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## Warning in nlme.formula(cort ~ (gamma_00 + u_0i) + (gamma_10 + u_1i) *
 ## timescaled + : Iteration 1, LME step: nlminb() did not converge (code = 1). PORT
 ## message: function evaluation limit reached without convergence (9)</code></pre>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="12.4-modeling-the-cortisol-data.html#cb445-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cort_quad)  </span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="12.4-modeling-the-cortisol-data.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cort_quad)  </span></code></pre></div>
 <pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
 ##   Model: cort ~ (gamma_00 + u_0i) + (gamma_10 + u_1i) * timescaled + (gamma_20 +      u_2i) * timesq 
 ##   Data: cortisol_long 
@@ -725,7 +739,7 @@ y_{ti}  = &amp; \underbrace{\gamma_{00} + \gamma_{10}\text{time}_{1} + \gamma_{2
 ## 
 ## Number of Observations: 306
 ## Number of Groups: 34</code></pre>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="12.4-modeling-the-cortisol-data.html#cb447-1" aria-hidden="true" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_quad)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="12.4-modeling-the-cortisol-data.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_quad)</span></code></pre></div>
 <pre><code>## id = pdLogChol(list(u_0i ~ 1,u_1i ~ 1,u_2i ~ 1)) 
 ##          Variance  StdDev   Corr         
 ## u_0i      1.241970 1.114437 u_0i   u_1i  
@@ -734,33 +748,32 @@ y_{ti}  = &amp; \underbrace{\gamma_{00} + \gamma_{10}\text{time}_{1} + \gamma_{2
 ## Residual  9.313628 3.051824</code></pre>
 <div id="predicted-trajectories-2" class="section level4 hasAnchor" number="12.4.2.1">
 <h4><span class="header-section-number">12.4.2.1</span> Predicted Trajectories<a href="12.4-modeling-the-cortisol-data.html#predicted-trajectories-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="12.4-modeling-the-cortisol-data.html#cb449-1" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
-<span id="cb449-2"><a href="12.4-modeling-the-cortisol-data.html#cb449-2" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_quad <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_quad)</span>
-<span id="cb449-3"><a href="12.4-modeling-the-cortisol-data.html#cb449-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb449-4"><a href="12.4-modeling-the-cortisol-data.html#cb449-4" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
-<span id="cb449-5"><a href="12.4-modeling-the-cortisol-data.html#cb449-5" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_quad <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_quad, <span class="at">level=</span><span class="dv">0</span>)</span>
-<span id="cb449-6"><a href="12.4-modeling-the-cortisol-data.html#cb449-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb449-7"><a href="12.4-modeling-the-cortisol-data.html#cb449-7" aria-hidden="true" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
-<span id="cb449-8"><a href="12.4-modeling-the-cortisol-data.html#cb449-8" aria-hidden="true" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
-<span id="cb449-9"><a href="12.4-modeling-the-cortisol-data.html#cb449-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_quad, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb449-10"><a href="12.4-modeling-the-cortisol-data.html#cb449-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
-<span id="cb449-11"><a href="12.4-modeling-the-cortisol-data.html#cb449-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb449-12"><a href="12.4-modeling-the-cortisol-data.html#cb449-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_quad), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb449-13"><a href="12.4-modeling-the-cortisol-data.html#cb449-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb449-14"><a href="12.4-modeling-the-cortisol-data.html#cb449-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb449-15"><a href="12.4-modeling-the-cortisol-data.html#cb449-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) </span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-257-1.png" width="672" /></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="12.4-modeling-the-cortisol-data.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
+<span id="cb31-2"><a href="12.4-modeling-the-cortisol-data.html#cb31-2" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_quad <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_quad)</span>
+<span id="cb31-3"><a href="12.4-modeling-the-cortisol-data.html#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="12.4-modeling-the-cortisol-data.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
+<span id="cb31-5"><a href="12.4-modeling-the-cortisol-data.html#cb31-5" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_quad <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_quad, <span class="at">level=</span><span class="dv">0</span>)</span>
+<span id="cb31-6"><a href="12.4-modeling-the-cortisol-data.html#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="12.4-modeling-the-cortisol-data.html#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
+<span id="cb31-8"><a href="12.4-modeling-the-cortisol-data.html#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
+<span id="cb31-9"><a href="12.4-modeling-the-cortisol-data.html#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_quad, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb31-10"><a href="12.4-modeling-the-cortisol-data.html#cb31-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
+<span id="cb31-11"><a href="12.4-modeling-the-cortisol-data.html#cb31-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb31-12"><a href="12.4-modeling-the-cortisol-data.html#cb31-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_quad), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb31-13"><a href="12.4-modeling-the-cortisol-data.html#cb31-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb31-14"><a href="12.4-modeling-the-cortisol-data.html#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb31-15"><a href="12.4-modeling-the-cortisol-data.html#cb31-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) </span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 </div>
 <div id="interpretation-5" class="section level4 hasAnchor" number="12.4.2.2">
 <h4><span class="header-section-number">12.4.2.2</span> Interpretation<a href="12.4-modeling-the-cortisol-data.html#interpretation-5" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>In isolation, the meaning of each parameter in the quadratic growth model is difficult to interpret. The slope parameters must be examined in relation to one another, as it is only their combination that produces a specific trajectory.</p>
-<p>For example, consider the mean values of <span class="math inline">\(\beta_{0}\)</span>,<span class="math inline">\(\beta_{1}\)</span>, and <span class="math inline">\(\beta_{2}\)</span> obtained from the fitted model. The mean of <span class="math inline">\(\beta_{0} = 3.6\)</span> is interpreted as the average level of cortisol at the baseline assessment (t=0).</p>
-<p>The mean of <span class="math inline">\(\beta_{1} = 41.1\)</span> could be interpreted as a “gas pedal” of sorts, representing some underlying process that propels cortisol levels higher by the same amount
-on each successive occasion.</p>
-<p>At the same time, the mean of <span class="math inline">\(\beta_{2} = -30.2\)</span> could be interpreted as representing another underlying process, that of a “brake pedal” that brings cortisol levels lower and that is pressed harder and harder as time moves forward (because <span class="math inline">\(\beta_{2}\)</span> operates on <span class="math inline">\(\text{time}_{2}\)</span>, which consists of squared terms, its influence “gains strength” on each successive occasion).</p>
+<p>For example, consider the mean values of <span class="math inline">\(\beta_{0}\)</span>,<span class="math inline">\(\beta_{1}\)</span>, and <span class="math inline">\(\beta_{2}\)</span> obtained from the fitted model. The mean of <span class="math inline">\(\beta_{0} = 3.6\)</span> is interpreted as the average level of cortisol at the baseline assessment (<span class="math inline">\(t=0\)</span>).</p>
+<p>The mean of <span class="math inline">\(\beta_{1} = 41.1\)</span> could be interpreted as a “gas pedal” of sorts, representing some underlying process that propels cortisol levels higher by the same amount on each successive occasion.</p>
+<p>At the same time, the mean of <span class="math inline">\(\beta_{2} = -30.2\)</span> could be interpreted as representing another underlying process, that of a “brake pedal” that brings cortisol levels lower and that is pressed harder and harder as time moves forward (because <span class="math inline">\(\beta_{2}\)</span> operates on <span class="math inline">\(\text{time}_{2}=\text{time}_{1}^{2}\)</span>, which consists of squared terms, its influence gains strength on each successive occasion).</p>
 <p>From the plot we can see the co-existing “gas pedal” linear process and “brake pedal” quadratic process acting in concert on the individual trajectories. During the first few measurement occasions, when the brake pedal is less influential, cortisol increases, however, during the later occasions, when the brake pedal is stronger, cortisol levels decrease.</p>
 <p>Furthermore, <span class="math inline">\(\beta_{1}\)</span> and <span class="math inline">\(\beta_{2}\)</span> correlate negatively (<span class="math inline">\(-.43\)</span>) indicating that when the linear process is strong, the quadratic process is relatively weak.</p>
-<p>In closing, quadratic (and most polynomial models) can be difficult to interpret (see <span class="citation"><a href="#ref-cudeck2002a" role="doc-biblioref">Cudeck and du Toit</a> (<a href="#ref-cudeck2002a" role="doc-biblioref">2002</a>)</span> for more details) because</p>
+<p>In closing, quadratic (and most polynomial models) can be difficult to interpret (see <span class="citation"><a href="#ref-cudeck2002a" role="doc-biblioref">Cudeck and du Toit</a> (<a href="#ref-cudeck2002a" role="doc-biblioref">2002</a>)</span> for more details) in terms of the coefficients alone because</p>
 <ul>
 <li>multiple combination of gas and brake pedals produce similar trajectories</li>
 <li>difficult to understand big versus small gas pedal is without knowing brake pedal</li>
@@ -799,40 +812,40 @@ y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time}_{LB} + u_{0i} + u_{1i}\text
 <li><span class="math inline">\(u_{0i}\)</span> is individual <span class="math inline">\(i\)</span>’s deviation from the intercept fixed effect</li>
 <li><span class="math inline">\(u_{1i}\)</span> is individual <span class="math inline">\(i\)</span>’s deviation from the shape fixed effect</li>
 </ul>
-<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="12.4-modeling-the-cortisol-data.html#cb450-1" aria-hidden="true" tabindex="-1"></a><span class="co">#creating time-dummy variables</span></span>
-<span id="cb450-2"><a href="12.4-modeling-the-cortisol-data.html#cb450-2" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time0 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb450-3"><a href="12.4-modeling-the-cortisol-data.html#cb450-3" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time1 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb450-4"><a href="12.4-modeling-the-cortisol-data.html#cb450-4" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb450-5"><a href="12.4-modeling-the-cortisol-data.html#cb450-5" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time3 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb450-6"><a href="12.4-modeling-the-cortisol-data.html#cb450-6" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time4 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb450-7"><a href="12.4-modeling-the-cortisol-data.html#cb450-7" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time5 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb450-8"><a href="12.4-modeling-the-cortisol-data.html#cb450-8" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time6 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb450-9"><a href="12.4-modeling-the-cortisol-data.html#cb450-9" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time7 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb450-10"><a href="12.4-modeling-the-cortisol-data.html#cb450-10" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time8 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb450-11"><a href="12.4-modeling-the-cortisol-data.html#cb450-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb450-12"><a href="12.4-modeling-the-cortisol-data.html#cb450-12" aria-hidden="true" tabindex="-1"></a><span class="co">#latent basis model</span></span>
-<span id="cb450-13"><a href="12.4-modeling-the-cortisol-data.html#cb450-13" aria-hidden="true" tabindex="-1"></a>cort_latentb <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
-<span id="cb450-14"><a href="12.4-modeling-the-cortisol-data.html#cb450-14" aria-hidden="true" tabindex="-1"></a>  cort <span class="sc">~</span> time0<span class="sc">*</span>(gamma_00 <span class="sc">+</span> gamma_10<span class="sc">*</span><span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb450-15"><a href="12.4-modeling-the-cortisol-data.html#cb450-15" aria-hidden="true" tabindex="-1"></a>         time1<span class="sc">*</span>(gamma_00 <span class="sc">+</span> gamma_10<span class="sc">*</span>a1) <span class="sc">+</span></span>
-<span id="cb450-16"><a href="12.4-modeling-the-cortisol-data.html#cb450-16" aria-hidden="true" tabindex="-1"></a>         time2<span class="sc">*</span>(gamma_00 <span class="sc">+</span> gamma_10<span class="sc">*</span>a2) <span class="sc">+</span></span>
-<span id="cb450-17"><a href="12.4-modeling-the-cortisol-data.html#cb450-17" aria-hidden="true" tabindex="-1"></a>         time3<span class="sc">*</span>(gamma_00 <span class="sc">+</span> gamma_10<span class="sc">*</span>a3) <span class="sc">+</span></span>
-<span id="cb450-18"><a href="12.4-modeling-the-cortisol-data.html#cb450-18" aria-hidden="true" tabindex="-1"></a>         time4<span class="sc">*</span>(gamma_00 <span class="sc">+</span> gamma_10<span class="sc">*</span>a4) <span class="sc">+</span></span>
-<span id="cb450-19"><a href="12.4-modeling-the-cortisol-data.html#cb450-19" aria-hidden="true" tabindex="-1"></a>         time5<span class="sc">*</span>(gamma_00 <span class="sc">+</span> gamma_10<span class="sc">*</span>a5) <span class="sc">+</span></span>
-<span id="cb450-20"><a href="12.4-modeling-the-cortisol-data.html#cb450-20" aria-hidden="true" tabindex="-1"></a>         time6<span class="sc">*</span>(gamma_00 <span class="sc">+</span> gamma_10<span class="sc">*</span>a6) <span class="sc">+</span></span>
-<span id="cb450-21"><a href="12.4-modeling-the-cortisol-data.html#cb450-21" aria-hidden="true" tabindex="-1"></a>         time7<span class="sc">*</span>(gamma_00 <span class="sc">+</span> gamma_10<span class="sc">*</span>a7) <span class="sc">+</span></span>
-<span id="cb450-22"><a href="12.4-modeling-the-cortisol-data.html#cb450-22" aria-hidden="true" tabindex="-1"></a>         time8<span class="sc">*</span>(gamma_00 <span class="sc">+</span> gamma_10<span class="sc">*</span><span class="dv">1</span>),</span>
-<span id="cb450-23"><a href="12.4-modeling-the-cortisol-data.html#cb450-23" aria-hidden="true" tabindex="-1"></a>   <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> a1 <span class="sc">+</span> a2 <span class="sc">+</span> a3 <span class="sc">+</span> a4 <span class="sc">+</span> a5 <span class="sc">+</span> a6 <span class="sc">+</span> a7 <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb450-24"><a href="12.4-modeling-the-cortisol-data.html#cb450-24" aria-hidden="true" tabindex="-1"></a>   <span class="at">random =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb450-25"><a href="12.4-modeling-the-cortisol-data.html#cb450-25" aria-hidden="true" tabindex="-1"></a>   <span class="at">groups =</span><span class="sc">~</span> id,</span>
-<span id="cb450-26"><a href="12.4-modeling-the-cortisol-data.html#cb450-26" aria-hidden="true" tabindex="-1"></a>   <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00=</span><span class="fl">5.5</span>,<span class="at">gamma_10=</span><span class="fl">11.5</span>,<span class="at">a1=</span>.<span class="dv">3</span>, </span>
-<span id="cb450-27"><a href="12.4-modeling-the-cortisol-data.html#cb450-27" aria-hidden="true" tabindex="-1"></a>             <span class="at">a2=</span>.<span class="dv">4</span>, <span class="at">a3=</span>.<span class="dv">5</span>, <span class="at">a4=</span>.<span class="dv">6</span>, </span>
-<span id="cb450-28"><a href="12.4-modeling-the-cortisol-data.html#cb450-28" aria-hidden="true" tabindex="-1"></a>             <span class="at">a5=</span>.<span class="dv">7</span>, <span class="at">a6=</span>.<span class="dv">8</span>, <span class="at">a7=</span>.<span class="dv">9</span>),</span>
-<span id="cb450-29"><a href="12.4-modeling-the-cortisol-data.html#cb450-29" aria-hidden="true" tabindex="-1"></a>   <span class="at">data =</span> cortisol_long,</span>
-<span id="cb450-30"><a href="12.4-modeling-the-cortisol-data.html#cb450-30" aria-hidden="true" tabindex="-1"></a>   <span class="at">na.action =</span> na.exclude,</span>
-<span id="cb450-31"><a href="12.4-modeling-the-cortisol-data.html#cb450-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
-<span id="cb450-32"><a href="12.4-modeling-the-cortisol-data.html#cb450-32" aria-hidden="true" tabindex="-1"></a>) </span>
-<span id="cb450-33"><a href="12.4-modeling-the-cortisol-data.html#cb450-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb450-34"><a href="12.4-modeling-the-cortisol-data.html#cb450-34" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cort_latentb)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="12.4-modeling-the-cortisol-data.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#creating time-dummy variables</span></span>
+<span id="cb32-2"><a href="12.4-modeling-the-cortisol-data.html#cb32-2" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time0 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb32-3"><a href="12.4-modeling-the-cortisol-data.html#cb32-3" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time1 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb32-4"><a href="12.4-modeling-the-cortisol-data.html#cb32-4" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb32-5"><a href="12.4-modeling-the-cortisol-data.html#cb32-5" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time3 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb32-6"><a href="12.4-modeling-the-cortisol-data.html#cb32-6" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time4 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb32-7"><a href="12.4-modeling-the-cortisol-data.html#cb32-7" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time5 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb32-8"><a href="12.4-modeling-the-cortisol-data.html#cb32-8" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time6 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb32-9"><a href="12.4-modeling-the-cortisol-data.html#cb32-9" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time7 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb32-10"><a href="12.4-modeling-the-cortisol-data.html#cb32-10" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time8 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb32-11"><a href="12.4-modeling-the-cortisol-data.html#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-12"><a href="12.4-modeling-the-cortisol-data.html#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="co">#latent basis model</span></span>
+<span id="cb32-13"><a href="12.4-modeling-the-cortisol-data.html#cb32-13" aria-hidden="true" tabindex="-1"></a>cort_latentb <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
+<span id="cb32-14"><a href="12.4-modeling-the-cortisol-data.html#cb32-14" aria-hidden="true" tabindex="-1"></a>  cort <span class="sc">~</span> time0<span class="sc">*</span>(gamma_00 <span class="sc">+</span> gamma_10<span class="sc">*</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb32-15"><a href="12.4-modeling-the-cortisol-data.html#cb32-15" aria-hidden="true" tabindex="-1"></a>         time1<span class="sc">*</span>(gamma_00 <span class="sc">+</span> gamma_10<span class="sc">*</span>a1) <span class="sc">+</span></span>
+<span id="cb32-16"><a href="12.4-modeling-the-cortisol-data.html#cb32-16" aria-hidden="true" tabindex="-1"></a>         time2<span class="sc">*</span>(gamma_00 <span class="sc">+</span> gamma_10<span class="sc">*</span>a2) <span class="sc">+</span></span>
+<span id="cb32-17"><a href="12.4-modeling-the-cortisol-data.html#cb32-17" aria-hidden="true" tabindex="-1"></a>         time3<span class="sc">*</span>(gamma_00 <span class="sc">+</span> gamma_10<span class="sc">*</span>a3) <span class="sc">+</span></span>
+<span id="cb32-18"><a href="12.4-modeling-the-cortisol-data.html#cb32-18" aria-hidden="true" tabindex="-1"></a>         time4<span class="sc">*</span>(gamma_00 <span class="sc">+</span> gamma_10<span class="sc">*</span>a4) <span class="sc">+</span></span>
+<span id="cb32-19"><a href="12.4-modeling-the-cortisol-data.html#cb32-19" aria-hidden="true" tabindex="-1"></a>         time5<span class="sc">*</span>(gamma_00 <span class="sc">+</span> gamma_10<span class="sc">*</span>a5) <span class="sc">+</span></span>
+<span id="cb32-20"><a href="12.4-modeling-the-cortisol-data.html#cb32-20" aria-hidden="true" tabindex="-1"></a>         time6<span class="sc">*</span>(gamma_00 <span class="sc">+</span> gamma_10<span class="sc">*</span>a6) <span class="sc">+</span></span>
+<span id="cb32-21"><a href="12.4-modeling-the-cortisol-data.html#cb32-21" aria-hidden="true" tabindex="-1"></a>         time7<span class="sc">*</span>(gamma_00 <span class="sc">+</span> gamma_10<span class="sc">*</span>a7) <span class="sc">+</span></span>
+<span id="cb32-22"><a href="12.4-modeling-the-cortisol-data.html#cb32-22" aria-hidden="true" tabindex="-1"></a>         time8<span class="sc">*</span>(gamma_00 <span class="sc">+</span> gamma_10<span class="sc">*</span><span class="dv">1</span>),</span>
+<span id="cb32-23"><a href="12.4-modeling-the-cortisol-data.html#cb32-23" aria-hidden="true" tabindex="-1"></a>   <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> a1 <span class="sc">+</span> a2 <span class="sc">+</span> a3 <span class="sc">+</span> a4 <span class="sc">+</span> a5 <span class="sc">+</span> a6 <span class="sc">+</span> a7 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb32-24"><a href="12.4-modeling-the-cortisol-data.html#cb32-24" aria-hidden="true" tabindex="-1"></a>   <span class="at">random =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb32-25"><a href="12.4-modeling-the-cortisol-data.html#cb32-25" aria-hidden="true" tabindex="-1"></a>   <span class="at">groups =</span><span class="sc">~</span> id,</span>
+<span id="cb32-26"><a href="12.4-modeling-the-cortisol-data.html#cb32-26" aria-hidden="true" tabindex="-1"></a>   <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00=</span><span class="fl">5.5</span>,<span class="at">gamma_10=</span><span class="fl">11.5</span>,<span class="at">a1=</span>.<span class="dv">3</span>, </span>
+<span id="cb32-27"><a href="12.4-modeling-the-cortisol-data.html#cb32-27" aria-hidden="true" tabindex="-1"></a>             <span class="at">a2=</span>.<span class="dv">4</span>, <span class="at">a3=</span>.<span class="dv">5</span>, <span class="at">a4=</span>.<span class="dv">6</span>, </span>
+<span id="cb32-28"><a href="12.4-modeling-the-cortisol-data.html#cb32-28" aria-hidden="true" tabindex="-1"></a>             <span class="at">a5=</span>.<span class="dv">7</span>, <span class="at">a6=</span>.<span class="dv">8</span>, <span class="at">a7=</span>.<span class="dv">9</span>),</span>
+<span id="cb32-29"><a href="12.4-modeling-the-cortisol-data.html#cb32-29" aria-hidden="true" tabindex="-1"></a>   <span class="at">data =</span> cortisol_long,</span>
+<span id="cb32-30"><a href="12.4-modeling-the-cortisol-data.html#cb32-30" aria-hidden="true" tabindex="-1"></a>   <span class="at">na.action =</span> na.exclude,</span>
+<span id="cb32-31"><a href="12.4-modeling-the-cortisol-data.html#cb32-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
+<span id="cb32-32"><a href="12.4-modeling-the-cortisol-data.html#cb32-32" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb32-33"><a href="12.4-modeling-the-cortisol-data.html#cb32-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-34"><a href="12.4-modeling-the-cortisol-data.html#cb32-34" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cort_latentb)</span></code></pre></div>
 <pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
 ##   Model: cort ~ time0 * (gamma_00 + gamma_10 * 0) + time1 * (gamma_00 +      gamma_10 * a1) + time2 * (gamma_00 + gamma_10 * a2) + time3 *      (gamma_00 + gamma_10 * a3) + time4 * (gamma_00 + gamma_10 *      a4) + time5 * (gamma_00 + gamma_10 * a5) + time6 * (gamma_00 +      gamma_10 * a6) + time7 * (gamma_00 + gamma_10 * a7) + time8 *      (gamma_00 + gamma_10 * 1) 
 ##   Data: cortisol_long 
@@ -876,39 +889,320 @@ y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time}_{LB} + u_{0i} + u_{1i}\text
 ## 
 ## Number of Observations: 306
 ## Number of Groups: 34</code></pre>
-<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="12.4-modeling-the-cortisol-data.html#cb452-1" aria-hidden="true" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_latentb)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="12.4-modeling-the-cortisol-data.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_latentb)</span></code></pre></div>
 <pre><code>## id = pdLogChol(list(gamma_00 ~ 1,gamma_10 ~ 1)) 
 ##          Variance StdDev   Corr  
 ## gamma_00 2.885168 1.698578 gmm_00
 ## gamma_10 7.480787 2.735103 0.001 
 ## Residual 6.396974 2.529224</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="12.4-modeling-the-cortisol-data.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#latent basis model</span></span>
+<span id="cb36-2"><a href="12.4-modeling-the-cortisol-data.html#cb36-2" aria-hidden="true" tabindex="-1"></a>cort_latentb2 <span class="ot">&lt;-</span> <span class="fu">nlme</span>(cort <span class="sc">~</span> (gamma_00 <span class="sc">+</span> u_0i) <span class="sc">+</span> </span>
+<span id="cb36-3"><a href="12.4-modeling-the-cortisol-data.html#cb36-3" aria-hidden="true" tabindex="-1"></a>                             (<span class="dv">0</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> u_1i)<span class="sc">*</span>time0 <span class="sc">+</span></span>
+<span id="cb36-4"><a href="12.4-modeling-the-cortisol-data.html#cb36-4" aria-hidden="true" tabindex="-1"></a>                             (a1<span class="sc">*</span>gamma_10 <span class="sc">+</span> u_1i)<span class="sc">*</span>time1 <span class="sc">+</span></span>
+<span id="cb36-5"><a href="12.4-modeling-the-cortisol-data.html#cb36-5" aria-hidden="true" tabindex="-1"></a>                             (a2<span class="sc">*</span>gamma_10 <span class="sc">+</span> u_1i)<span class="sc">*</span>time2 <span class="sc">+</span></span>
+<span id="cb36-6"><a href="12.4-modeling-the-cortisol-data.html#cb36-6" aria-hidden="true" tabindex="-1"></a>                             (a3<span class="sc">*</span>gamma_10 <span class="sc">+</span> u_1i)<span class="sc">*</span>time3 <span class="sc">+</span></span>
+<span id="cb36-7"><a href="12.4-modeling-the-cortisol-data.html#cb36-7" aria-hidden="true" tabindex="-1"></a>                             (a4<span class="sc">*</span>gamma_10 <span class="sc">+</span> u_1i)<span class="sc">*</span>time4 <span class="sc">+</span></span>
+<span id="cb36-8"><a href="12.4-modeling-the-cortisol-data.html#cb36-8" aria-hidden="true" tabindex="-1"></a>                             (a5<span class="sc">*</span>gamma_10 <span class="sc">+</span> u_1i)<span class="sc">*</span>time5 <span class="sc">+</span></span>
+<span id="cb36-9"><a href="12.4-modeling-the-cortisol-data.html#cb36-9" aria-hidden="true" tabindex="-1"></a>                             (a6<span class="sc">*</span>gamma_10 <span class="sc">+</span> u_1i)<span class="sc">*</span>time6 <span class="sc">+</span></span>
+<span id="cb36-10"><a href="12.4-modeling-the-cortisol-data.html#cb36-10" aria-hidden="true" tabindex="-1"></a>                             (a7<span class="sc">*</span>gamma_10 <span class="sc">+</span> u_1i)<span class="sc">*</span>time7 <span class="sc">+</span></span>
+<span id="cb36-11"><a href="12.4-modeling-the-cortisol-data.html#cb36-11" aria-hidden="true" tabindex="-1"></a>                             (<span class="dv">1</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> u_1i)<span class="sc">*</span>time8,</span>
+<span id="cb36-12"><a href="12.4-modeling-the-cortisol-data.html#cb36-12" aria-hidden="true" tabindex="-1"></a>   <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> a1 <span class="sc">+</span> a2 <span class="sc">+</span> a3 <span class="sc">+</span> a4 <span class="sc">+</span> a5 <span class="sc">+</span> a6 <span class="sc">+</span> a7 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb36-13"><a href="12.4-modeling-the-cortisol-data.html#cb36-13" aria-hidden="true" tabindex="-1"></a>   <span class="at">random =</span> u_0i <span class="sc">+</span> u_1i <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb36-14"><a href="12.4-modeling-the-cortisol-data.html#cb36-14" aria-hidden="true" tabindex="-1"></a>   <span class="at">groups =</span><span class="sc">~</span> id,</span>
+<span id="cb36-15"><a href="12.4-modeling-the-cortisol-data.html#cb36-15" aria-hidden="true" tabindex="-1"></a>   <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00=</span><span class="fl">5.5</span>,<span class="at">gamma_10=</span><span class="fl">11.5</span>,<span class="at">a1=</span>.<span class="dv">3</span>, </span>
+<span id="cb36-16"><a href="12.4-modeling-the-cortisol-data.html#cb36-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">a2=</span>.<span class="dv">4</span>, <span class="at">a3=</span>.<span class="dv">5</span>, <span class="at">a4=</span>.<span class="dv">6</span>, </span>
+<span id="cb36-17"><a href="12.4-modeling-the-cortisol-data.html#cb36-17" aria-hidden="true" tabindex="-1"></a>             <span class="at">a5=</span>.<span class="dv">7</span>, <span class="at">a6=</span>.<span class="dv">8</span>, <span class="at">a7=</span>.<span class="dv">9</span>),</span>
+<span id="cb36-18"><a href="12.4-modeling-the-cortisol-data.html#cb36-18" aria-hidden="true" tabindex="-1"></a>   <span class="at">data =</span> cortisol_long,</span>
+<span id="cb36-19"><a href="12.4-modeling-the-cortisol-data.html#cb36-19" aria-hidden="true" tabindex="-1"></a>   <span class="at">na.action =</span> na.exclude,</span>
+<span id="cb36-20"><a href="12.4-modeling-the-cortisol-data.html#cb36-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
+<span id="cb36-21"><a href="12.4-modeling-the-cortisol-data.html#cb36-21" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb36-22"><a href="12.4-modeling-the-cortisol-data.html#cb36-22" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cort_latentb2)</span></code></pre></div>
+<pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
+##   Model: cort ~ (gamma_00 + u_0i) + (0 * gamma_10 + u_1i) * time0 + (a1 *      gamma_10 + u_1i) * time1 + (a2 * gamma_10 + u_1i) * time2 +      (a3 * gamma_10 + u_1i) * time3 + (a4 * gamma_10 + u_1i) *      time4 + (a5 * gamma_10 + u_1i) * time5 + (a6 * gamma_10 +      u_1i) * time6 + (a7 * gamma_10 + u_1i) * time7 + (1 * gamma_10 +      u_1i) * time8 
+##   Data: cortisol_long 
+##        AIC      BIC    logLik
+##   1613.161 1661.567 -793.5804
+## 
+## Random effects:
+##  Formula: list(u_0i ~ 1, u_1i ~ 1)
+##  Level: id
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##          StdDev   Corr  
+## u_0i     2.245610 u_0i  
+## u_1i     2.245622 -0.288
+## Residual 2.866898       
+## 
+## Fixed effects:  gamma_00 + gamma_10 + a1 + a2 + a3 + a4 + a5 + a6 + a7 ~ 1 
+##              Value Std.Error  DF   t-value p-value
+## gamma_00  5.247057 0.6831758 264  7.680392   0.000
+## gamma_10 10.617647 0.7057815 264 15.043817   0.000
+## a1       -0.017174 0.0670506 264 -0.256142   0.798
+## a2        0.527424 0.0575957 264  9.157344   0.000
+## a3        1.140443 0.0715982 264 15.928371   0.000
+## a4        1.340443 0.0802184 264 16.709920   0.000
+## a5        1.056233 0.0684181 264 15.437918   0.000
+## a6        0.921330 0.0640182 264 14.391689   0.000
+## a7        0.977008 0.0657217 264 14.865849   0.000
+##  Correlation: 
+##          gmm_00 gmm_10 a1     a2     a3     a4     a5     a6    
+## gamma_10 -0.517                                                 
+## a1       -0.521  0.513                                          
+## a2       -0.282 -0.032  0.270                                   
+## a3        0.067 -0.595 -0.075  0.287                            
+## a4        0.146 -0.696 -0.152  0.261  0.606                     
+## a5        0.028 -0.540 -0.036  0.297  0.547  0.578              
+## a6       -0.042 -0.437  0.033  0.313  0.501  0.520  0.489       
+## a7       -0.012 -0.482  0.003  0.307  0.522  0.546  0.506  0.474
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -1.99106153 -0.74129764 -0.04690651  0.62833362  2.52640060 
+## 
+## Number of Observations: 306
+## Number of Groups: 34</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="12.4-modeling-the-cortisol-data.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_latentb2)</span></code></pre></div>
+<pre><code>## id = pdLogChol(list(u_0i ~ 1,u_1i ~ 1)) 
+##          Variance StdDev   Corr  
+## u_0i     5.042765 2.245610 u_0i  
+## u_1i     5.042820 2.245622 -0.288
+## Residual 8.219103 2.866898</code></pre>
 <div id="predicted-trajectories-3" class="section level4 hasAnchor" number="12.4.3.1">
 <h4><span class="header-section-number">12.4.3.1</span> Predicted Trajectories<a href="12.4-modeling-the-cortisol-data.html#predicted-trajectories-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="12.4-modeling-the-cortisol-data.html#cb454-1" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
-<span id="cb454-2"><a href="12.4-modeling-the-cortisol-data.html#cb454-2" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_latentb <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_latentb)</span>
-<span id="cb454-3"><a href="12.4-modeling-the-cortisol-data.html#cb454-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb454-4"><a href="12.4-modeling-the-cortisol-data.html#cb454-4" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
-<span id="cb454-5"><a href="12.4-modeling-the-cortisol-data.html#cb454-5" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_latentb <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_latentb, <span class="at">level=</span><span class="dv">0</span>)</span>
-<span id="cb454-6"><a href="12.4-modeling-the-cortisol-data.html#cb454-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb454-7"><a href="12.4-modeling-the-cortisol-data.html#cb454-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb454-8"><a href="12.4-modeling-the-cortisol-data.html#cb454-8" aria-hidden="true" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
-<span id="cb454-9"><a href="12.4-modeling-the-cortisol-data.html#cb454-9" aria-hidden="true" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
-<span id="cb454-10"><a href="12.4-modeling-the-cortisol-data.html#cb454-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_latentb, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb454-11"><a href="12.4-modeling-the-cortisol-data.html#cb454-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
-<span id="cb454-12"><a href="12.4-modeling-the-cortisol-data.html#cb454-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb454-13"><a href="12.4-modeling-the-cortisol-data.html#cb454-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_latentb), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb454-14"><a href="12.4-modeling-the-cortisol-data.html#cb454-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb454-15"><a href="12.4-modeling-the-cortisol-data.html#cb454-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb454-16"><a href="12.4-modeling-the-cortisol-data.html#cb454-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb454-17"><a href="12.4-modeling-the-cortisol-data.html#cb454-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-259-1.png" width="672" /></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="12.4-modeling-the-cortisol-data.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
+<span id="cb40-2"><a href="12.4-modeling-the-cortisol-data.html#cb40-2" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_latentb <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_latentb)</span>
+<span id="cb40-3"><a href="12.4-modeling-the-cortisol-data.html#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="12.4-modeling-the-cortisol-data.html#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
+<span id="cb40-5"><a href="12.4-modeling-the-cortisol-data.html#cb40-5" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_latentb <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_latentb, <span class="at">level=</span><span class="dv">0</span>)</span>
+<span id="cb40-6"><a href="12.4-modeling-the-cortisol-data.html#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-7"><a href="12.4-modeling-the-cortisol-data.html#cb40-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-8"><a href="12.4-modeling-the-cortisol-data.html#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
+<span id="cb40-9"><a href="12.4-modeling-the-cortisol-data.html#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
+<span id="cb40-10"><a href="12.4-modeling-the-cortisol-data.html#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_latentb, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb40-11"><a href="12.4-modeling-the-cortisol-data.html#cb40-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
+<span id="cb40-12"><a href="12.4-modeling-the-cortisol-data.html#cb40-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb40-13"><a href="12.4-modeling-the-cortisol-data.html#cb40-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_latentb), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb40-14"><a href="12.4-modeling-the-cortisol-data.html#cb40-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb40-15"><a href="12.4-modeling-the-cortisol-data.html#cb40-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb40-16"><a href="12.4-modeling-the-cortisol-data.html#cb40-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb40-17"><a href="12.4-modeling-the-cortisol-data.html#cb40-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 </div>
 <div id="interpretation-6" class="section level4 hasAnchor" number="12.4.3.2">
 <h4><span class="header-section-number">12.4.3.2</span> Interpretation<a href="12.4-modeling-the-cortisol-data.html#interpretation-6" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>In the latent basis model rather than fixing the shape coefficients like in the linear model (e.g. <span class="math inline">\(t=\{1,2,3,4,\dots,T\}\)</span>) we estimate the shape from the data.</p>
+<p>In the latent basis model, rather than fixing the shape coefficients like in the linear model (e.g. <span class="math inline">\(t=\{1,2,3,4,\dots,T\}\)</span>), we estimate the shape directly from the data.</p>
 <p>The mean intercept level of cortisol was <span class="math inline">\(5.2\)</span>, meaning that on average individual “development” of cortisol proceeded from this initial baseline level, taken at the outset of the experiment.</p>
 <p>The average total amount of growth is given by the mean value of <span class="math inline">\(10.6\)</span>.</p>
 <p>From the predicted trajectories we can see that all individuals’ cortisol levels rise and fall over time in the same way, only the extent of the rise and fall (and the starting point) differs between persons. In other words, the underlying “developmental theory” suggests that, from their individual baseline levels, the process of cortisol response proceeds via the same nonlinear “process” for all individuals, with individuals only differing in the “amplitude” of this response.</p>
+</div>
+</div>
+<div id="exponential-growth-model-cortisol" class="section level3 hasAnchor" number="12.4.4">
+<h3><span class="header-section-number">12.4.4</span> Exponential Growth Model (Cortisol)<a href="12.4-modeling-the-cortisol-data.html#exponential-growth-model-cortisol" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now let’s consider a model that is nonlinear in the parameters (Type II), the exponential growth model. This is a nonlinear model that also produces a nonlinear trajectory.</p>
+<p><span class="math display">\[\begin{align}
+y_{ti}  = &amp; \beta_{0i} + \beta_{1i}(1-e^{-\alpha\text{time}}) + e_{ti}, &amp; e_{ti} \sim \mathcal{N}(0,\sigma^{2}_{e}) &amp;&amp; \: [\text{Level 1}] \\
+\beta_{0i}  = &amp; \gamma_{00} + u_{0i}, &amp; u_{0i} \sim \mathcal{N}(0,\sigma^{2}_{u0}) &amp;&amp; \: [\text{Level 2}] \\
+\beta_{1i}  = &amp; \gamma_{10} + u_{1i}, &amp; u_{1i} \sim \mathcal{N}(0,\sigma^{2}_{u1}) &amp;&amp; \:  \\
+y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time} + u_{0i} + u_{1i}\text{time} + e_{ti}, &amp;  &amp;&amp; \: [\text{Combined}]
+\end{align}\]</span></p>
+<p>where</p>
+<p><span class="math display">\[\begin{align}
+\text{time} = &amp; \{0/8, 1/8, 2/8, 3/8, 4/8, 5/8, 6/8, 7/8, 8/8\}\\
+ = &amp; \{0.000, 0.125, 0.250, 0.375, 0.500, 0.625, 0.750, 0.875, 1.000\}
+\end{align}\]</span></p>
+<p>and</p>
+<ul>
+<li><span class="math inline">\(y_{ti}\)</span> is the repeated measures score for individual <span class="math inline">\(i\)</span> at time <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(\beta_{0i}\)</span> is the random intercept for individual <span class="math inline">\(i\)</span> at <span class="math inline">\(t=0\)</span>
+<ul>
+<li>individual <span class="math inline">\(i\)</span>’s asymptotic level or the limit of individual capacity for cortisol</li>
+<li>note in this model, the intercept represents individual performance toward the end of observation.</li>
+</ul></li>
+<li><span class="math inline">\(\beta_{1i}\)</span> is the amount of change from the intercept to the asymptotic level for individual <span class="math inline">\(i\)</span>
+<ul>
+<li><span class="math inline">\(\beta_{1i}\)</span> represents an individual’s potential for change from his or her initial level.</li>
+</ul></li>
+<li><span class="math inline">\(\beta_{0i}+\beta_{1i}\)</span> represents the baseline level for individual <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(\alpha\)</span> is an estimated parameter that represents the rate of approach to the asymptotic level</li>
+<li><span class="math inline">\(\text{time}\)</span> represents the measurement occasion</li>
+<li><span class="math inline">\(e_{it}\)</span> is the time-specific residual score</li>
+<li><span class="math inline">\(\gamma_{00}\)</span> is the fixed-effect for the intercept</li>
+<li><span class="math inline">\(\gamma_{10}\)</span> is the fixed-effect for the rate of change</li>
+<li><span class="math inline">\(u_{0i}\)</span> is individual <span class="math inline">\(i\)</span>’s deviation from the intercept fixed effect</li>
+<li><span class="math inline">\(u_{1i}\)</span> is individual <span class="math inline">\(i\)</span>’s deviation from the shape fixed effect</li>
+</ul>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="12.4-modeling-the-cortisol-data.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cort_expo &lt;- nlme(cort ~ g0 + g1*(exp(-1*alpha*timescaled)),</span></span>
+<span id="cb41-2"><a href="12.4-modeling-the-cortisol-data.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co">#                     fixed = g0 + g1 + alpha ~ 1,</span></span>
+<span id="cb41-3"><a href="12.4-modeling-the-cortisol-data.html#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                     random = g0 + g1  ~ 1,</span></span>
+<span id="cb41-4"><a href="12.4-modeling-the-cortisol-data.html#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co">#                     group = ~id,</span></span>
+<span id="cb41-5"><a href="12.4-modeling-the-cortisol-data.html#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co">#                     start = c(g0=17, g1=-14, alpha=0.5),</span></span>
+<span id="cb41-6"><a href="12.4-modeling-the-cortisol-data.html#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co">#                     data = cortisol_long,</span></span>
+<span id="cb41-7"><a href="12.4-modeling-the-cortisol-data.html#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="co">#                     na.action = &quot;na.exclude&quot;)</span></span>
+<span id="cb41-8"><a href="12.4-modeling-the-cortisol-data.html#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb41-9"><a href="12.4-modeling-the-cortisol-data.html#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(cort_expo)</span></span>
+<span id="cb41-10"><a href="12.4-modeling-the-cortisol-data.html#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="co"># VarCorr(cort_expo)</span></span>
+<span id="cb41-11"><a href="12.4-modeling-the-cortisol-data.html#cb41-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-12"><a href="12.4-modeling-the-cortisol-data.html#cb41-12" aria-hidden="true" tabindex="-1"></a>cort_expo <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
+<span id="cb41-13"><a href="12.4-modeling-the-cortisol-data.html#cb41-13" aria-hidden="true" tabindex="-1"></a>  cort <span class="sc">~</span> (gamma_00 <span class="sc">+</span> u_0i) <span class="sc">+</span> (gamma_10 <span class="sc">+</span> u_1i)<span class="sc">*</span>(<span class="fu">exp</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">*</span>alpha<span class="sc">*</span>timescaled)),</span>
+<span id="cb41-14"><a href="12.4-modeling-the-cortisol-data.html#cb41-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> alpha <span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb41-15"><a href="12.4-modeling-the-cortisol-data.html#cb41-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> u_0i <span class="sc">+</span> u_1i<span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb41-16"><a href="12.4-modeling-the-cortisol-data.html#cb41-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
+<span id="cb41-17"><a href="12.4-modeling-the-cortisol-data.html#cb41-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00=</span><span class="dv">17</span>, <span class="at">gamma_10=</span><span class="sc">-</span><span class="dv">14</span>, <span class="at">alpha=</span><span class="fl">0.5</span>), </span>
+<span id="cb41-18"><a href="12.4-modeling-the-cortisol-data.html#cb41-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> cortisol_long,</span>
+<span id="cb41-19"><a href="12.4-modeling-the-cortisol-data.html#cb41-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> <span class="st">&quot;na.exclude&quot;</span>,</span>
+<span id="cb41-20"><a href="12.4-modeling-the-cortisol-data.html#cb41-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
+<span id="cb41-21"><a href="12.4-modeling-the-cortisol-data.html#cb41-21" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Warning in nlme.formula(cort ~ (gamma_00 + u_0i) + (gamma_10 + u_1i) * (exp(-1
+## * : Iteration 4, LME step: nlminb() did not converge (code = 1). PORT message:
+## function evaluation limit reached without convergence (9)</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="12.4-modeling-the-cortisol-data.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cort_expo)  </span></code></pre></div>
+<pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
+##   Model: cort ~ (gamma_00 + u_0i) + (gamma_10 + u_1i) * (exp(-1 * alpha *      timescaled)) 
+##   Data: cortisol_long 
+##        AIC      BIC    logLik
+##   1730.241 1756.306 -858.1203
+## 
+## Random effects:
+##  Formula: list(u_0i ~ 1, u_1i ~ 1)
+##  Level: id
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##          StdDev   Corr
+## u_0i     3.671944 u_0i
+## u_1i     3.984775 -1  
+## Residual 3.594807     
+## 
+## Fixed effects:  gamma_00 + gamma_10 + alpha ~ 1 
+##               Value Std.Error  DF    t-value p-value
+## gamma_00  17.202370 0.7688422 270  22.374383       0
+## gamma_10 -13.735026 0.9550588 270 -14.381340       0
+## alpha      4.110252 0.4853613 270   8.468437       0
+##  Correlation: 
+##          gmm_00 gmm_10
+## gamma_10 -0.788       
+## alpha    -0.442  0.077
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -2.06790763 -0.69558442 -0.03449916  0.60588701  2.72991303 
+## 
+## Number of Observations: 306
+## Number of Groups: 34</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="12.4-modeling-the-cortisol-data.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_expo)</span></code></pre></div>
+<pre><code>## id = pdLogChol(list(u_0i ~ 1,u_1i ~ 1)) 
+##          Variance StdDev   Corr
+## u_0i     13.48317 3.671944 u_0i
+## u_1i     15.87843 3.984775 -1  
+## Residual 12.92264 3.594807</code></pre>
+<div id="predicted-trajectories-4" class="section level4 hasAnchor" number="12.4.4.1">
+<h4><span class="header-section-number">12.4.4.1</span> Predicted Trajectories<a href="12.4-modeling-the-cortisol-data.html#predicted-trajectories-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="12.4-modeling-the-cortisol-data.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
+<span id="cb47-2"><a href="12.4-modeling-the-cortisol-data.html#cb47-2" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_expo <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_expo)</span>
+<span id="cb47-3"><a href="12.4-modeling-the-cortisol-data.html#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="12.4-modeling-the-cortisol-data.html#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
+<span id="cb47-5"><a href="12.4-modeling-the-cortisol-data.html#cb47-5" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_expo <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_expo, <span class="at">level=</span><span class="dv">0</span>)</span>
+<span id="cb47-6"><a href="12.4-modeling-the-cortisol-data.html#cb47-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-7"><a href="12.4-modeling-the-cortisol-data.html#cb47-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-8"><a href="12.4-modeling-the-cortisol-data.html#cb47-8" aria-hidden="true" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
+<span id="cb47-9"><a href="12.4-modeling-the-cortisol-data.html#cb47-9" aria-hidden="true" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
+<span id="cb47-10"><a href="12.4-modeling-the-cortisol-data.html#cb47-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_expo, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb47-11"><a href="12.4-modeling-the-cortisol-data.html#cb47-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
+<span id="cb47-12"><a href="12.4-modeling-the-cortisol-data.html#cb47-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb47-13"><a href="12.4-modeling-the-cortisol-data.html#cb47-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_expo), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb47-14"><a href="12.4-modeling-the-cortisol-data.html#cb47-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb47-15"><a href="12.4-modeling-the-cortisol-data.html#cb47-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb47-16"><a href="12.4-modeling-the-cortisol-data.html#cb47-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb47-17"><a href="12.4-modeling-the-cortisol-data.html#cb47-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+</div>
+<div id="interpretation-7" class="section level4 hasAnchor" number="12.4.4.2">
+<h4><span class="header-section-number">12.4.4.2</span> Interpretation<a href="12.4-modeling-the-cortisol-data.html#interpretation-7" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Fitted to our example data, we articulate a theory wherein individuals enter the testing situation at some baseline level of cortisol (which on average is given by mean of <span class="math inline">\(beta_{0}\)</span>, <span class="math inline">\(17.2\)</span>, plus the mean of <span class="math inline">\(\beta_{1}\)</span>, <span class="math inline">\(-13.7\)</span>, which equals <span class="math inline">\(3.5\)</span>).</p>
+<p>After beginning the simulator cortisol levels are driven at the exponential rate of <span class="math inline">\(\alpha=4.1\)</span> to some personal limit or asymptote (with the average limit being <span class="math inline">\(17.2\)</span>).</p>
+</div>
+</div>
+<div id="multiphase-growth-model-cortisol" class="section level3 hasAnchor" number="12.4.5">
+<h3><span class="header-section-number">12.4.5</span> Multiphase Growth Model (Cortisol)<a href="12.4-modeling-the-cortisol-data.html#multiphase-growth-model-cortisol" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now let’s consider a multiphase growth model. Multiphase are based on spline regression models in which two or more regression lines are connected, allowing for the modeling of multiple processes
+that together may influence intraindividual change over time. For example, consider our data as being potentially characterized by a baseline phase, an intervention phase and a recovery phase.</p>
+<div id="equation" class="section level4 hasAnchor" number="12.4.5.1">
+<h4><span class="header-section-number">12.4.5.1</span> Equation<a href="12.4-modeling-the-cortisol-data.html#equation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The equation for the multiphase model can be written as</p>
+<p><span class="math display">\[\begin{align}
+y_{ti}  = &amp; \beta_{0i} + \beta_{1i}\text{time}_{1} + \beta_{2i}\text{time}_{2}+ e_{ti}, &amp; e_{ti} \sim \mathcal{N}(0,\sigma^{2}_{e}) &amp;&amp; \: [\text{Level 1}] \\
+\beta_{0i}  = &amp; \gamma_{00} + u_{0i}, &amp; u_{0i} \sim \mathcal{N}(0,\sigma^{2}_{u0}) &amp;&amp; \: [\text{Level 2}] \\
+\beta_{1i}  = &amp; \gamma_{10} + u_{1i}, &amp; u_{1i} \sim \mathcal{N}(0,\sigma^{2}_{u1}) &amp;&amp; \:  \\
+\beta_{2i}  = &amp; \gamma_{20} + u_{2i}, &amp; u_{2i} \sim \mathcal{N}(0,\sigma^{2}_{u2}) &amp;&amp; \:  \\
+y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time}_{1} + \gamma_{20}\text{time}_{2}+ u_{0i} + u_{1i}\text{time}_{2} + u_{2i}\text{time}_{2} + e_{ti}, &amp;  &amp;&amp; \: [\text{Combined}]
+\end{align}\]</span></p>
+<p>where</p>
+<p><span class="math display">\[\begin{align}
+\text{time}_{1} = &amp; \{0, 0, $alpha_2$, $alpha_3$, 1, 1, 1, 1, 1\}\\
+\text{time}_{2} = &amp; \{0, 0, 0, 0, 0, $\alpha_{5}$, $\alpha_{6}$, $\alpha_{7}$, 1}\\
+\end{align}\]</span></p>
+<p>and</p>
+<ul>
+<li><span class="math inline">\(y_{ti}\)</span> is the repeated measures score for individual <span class="math inline">\(i\)</span> at time <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(\beta_{0i}\)</span> is the random intercept for individual <span class="math inline">\(i\)</span> at <span class="math inline">\(t=0\)</span>
+<ul>
+<li>individual <span class="math inline">\(i\)</span>’s asymptotic level or the limit of individual capacity for cortisol</li>
+<li>note in this model, the intercept represents individual performance toward the end of observation.</li>
+</ul></li>
+<li><span class="math inline">\(\beta_{1i}\)</span> is the amount of change from the intercept to the asymptotic level for individual <span class="math inline">\(i\)</span>
+<ul>
+<li><span class="math inline">\(\beta_{1i}\)</span> represents an individual’s potential for change from his or her initial level.</li>
+</ul></li>
+<li><span class="math inline">\(\beta_{0i}+\beta_{1i}\)</span> represents the baseline level for individual <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(\alpha\)</span> is an estimated parameter that represents the rate of approach to the asymptotic level</li>
+<li><span class="math inline">\(\text{time}\)</span> represents the measurement occasion</li>
+<li><span class="math inline">\(e_{it}\)</span> is the time-specific residual score</li>
+<li><span class="math inline">\(\gamma_{00}\)</span> is the fixed-effect for the intercept</li>
+<li><span class="math inline">\(\gamma_{10}\)</span> is the fixed-effect for the rate of change</li>
+<li><span class="math inline">\(u_{0i}\)</span> is individual <span class="math inline">\(i\)</span>’s deviation from the intercept fixed effect</li>
+<li><span class="math inline">\(u_{1i}\)</span> is individual <span class="math inline">\(i\)</span>’s deviation from the shape fixed effect</li>
+</ul>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="12.4-modeling-the-cortisol-data.html#cb48-1" aria-hidden="true" tabindex="-1"></a>cort_multi <span class="ot">&lt;-</span> <span class="fu">nlme</span>(cort <span class="sc">~</span> </span>
+<span id="cb48-2"><a href="12.4-modeling-the-cortisol-data.html#cb48-2" aria-hidden="true" tabindex="-1"></a>  (gamma_00 <span class="sc">+</span><span class="dv">0</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>gamma_20)<span class="sc">*</span>time0 <span class="sc">+</span></span>
+<span id="cb48-3"><a href="12.4-modeling-the-cortisol-data.html#cb48-3" aria-hidden="true" tabindex="-1"></a>  (gamma_00 <span class="sc">+</span><span class="dv">0</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>gamma_20)<span class="sc">*</span>time1 <span class="sc">+</span></span>
+<span id="cb48-4"><a href="12.4-modeling-the-cortisol-data.html#cb48-4" aria-hidden="true" tabindex="-1"></a>  (gamma_00 <span class="sc">+</span>a2<span class="sc">*</span>gamma_10 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>gamma_20)<span class="sc">*</span>time2 <span class="sc">+</span></span>
+<span id="cb48-5"><a href="12.4-modeling-the-cortisol-data.html#cb48-5" aria-hidden="true" tabindex="-1"></a>  (gamma_00 <span class="sc">+</span>a3<span class="sc">*</span>gamma_10 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>gamma_20)<span class="sc">*</span>time3 <span class="sc">+</span></span>
+<span id="cb48-6"><a href="12.4-modeling-the-cortisol-data.html#cb48-6" aria-hidden="true" tabindex="-1"></a>  (gamma_00 <span class="sc">+</span><span class="dv">1</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>gamma_20)<span class="sc">*</span>time4 <span class="sc">+</span></span>
+<span id="cb48-7"><a href="12.4-modeling-the-cortisol-data.html#cb48-7" aria-hidden="true" tabindex="-1"></a>  (gamma_00 <span class="sc">+</span><span class="dv">1</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> a5<span class="sc">*</span>gamma_20)<span class="sc">*</span>time5 <span class="sc">+</span></span>
+<span id="cb48-8"><a href="12.4-modeling-the-cortisol-data.html#cb48-8" aria-hidden="true" tabindex="-1"></a>  (gamma_00 <span class="sc">+</span><span class="dv">1</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> a6<span class="sc">*</span>gamma_20)<span class="sc">*</span>time6 <span class="sc">+</span></span>
+<span id="cb48-9"><a href="12.4-modeling-the-cortisol-data.html#cb48-9" aria-hidden="true" tabindex="-1"></a>  (gamma_00 <span class="sc">+</span><span class="dv">1</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> a7<span class="sc">*</span>gamma_20)<span class="sc">*</span>time7 <span class="sc">+</span></span>
+<span id="cb48-10"><a href="12.4-modeling-the-cortisol-data.html#cb48-10" aria-hidden="true" tabindex="-1"></a>  (gamma_00 <span class="sc">+</span><span class="dv">1</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> <span class="dv">1</span><span class="sc">*</span>gamma_20)<span class="sc">*</span>time8,</span>
+<span id="cb48-11"><a href="12.4-modeling-the-cortisol-data.html#cb48-11" aria-hidden="true" tabindex="-1"></a>   <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> gamma_20 <span class="sc">+</span> a2 <span class="sc">+</span> a3 <span class="sc">+</span> a5 <span class="sc">+</span> a6 <span class="sc">+</span> a7 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb48-12"><a href="12.4-modeling-the-cortisol-data.html#cb48-12" aria-hidden="true" tabindex="-1"></a>   <span class="at">random =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> gamma_20 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb48-13"><a href="12.4-modeling-the-cortisol-data.html#cb48-13" aria-hidden="true" tabindex="-1"></a>   <span class="at">groups =</span><span class="sc">~</span> id,</span>
+<span id="cb48-14"><a href="12.4-modeling-the-cortisol-data.html#cb48-14" aria-hidden="true" tabindex="-1"></a>   <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00=</span><span class="dv">15</span>,<span class="at">gamma_10=</span><span class="dv">10</span>,<span class="at">gamma_20=</span><span class="sc">-</span><span class="dv">4</span>,</span>
+<span id="cb48-15"><a href="12.4-modeling-the-cortisol-data.html#cb48-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">a2=</span>.<span class="dv">4</span>, <span class="at">a3=</span>.<span class="dv">5</span>, </span>
+<span id="cb48-16"><a href="12.4-modeling-the-cortisol-data.html#cb48-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">a5=</span>.<span class="dv">7</span>, <span class="at">a6=</span>.<span class="dv">8</span>, <span class="at">a7=</span>.<span class="dv">9</span>),</span>
+<span id="cb48-17"><a href="12.4-modeling-the-cortisol-data.html#cb48-17" aria-hidden="true" tabindex="-1"></a>   <span class="at">data =</span> cortisol_long,</span>
+<span id="cb48-18"><a href="12.4-modeling-the-cortisol-data.html#cb48-18" aria-hidden="true" tabindex="-1"></a>   <span class="at">na.action =</span> na.exclude,</span>
+<span id="cb48-19"><a href="12.4-modeling-the-cortisol-data.html#cb48-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
+<span id="cb48-20"><a href="12.4-modeling-the-cortisol-data.html#cb48-20" aria-hidden="true" tabindex="-1"></a>) </span></code></pre></div>
+</div>
+<div id="predicted-trajectories-5" class="section level4 hasAnchor" number="12.4.5.2">
+<h4><span class="header-section-number">12.4.5.2</span> Predicted Trajectories<a href="12.4-modeling-the-cortisol-data.html#predicted-trajectories-5" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="12.4-modeling-the-cortisol-data.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
+<span id="cb49-2"><a href="12.4-modeling-the-cortisol-data.html#cb49-2" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_multi <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_multi)</span>
+<span id="cb49-3"><a href="12.4-modeling-the-cortisol-data.html#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="12.4-modeling-the-cortisol-data.html#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
+<span id="cb49-5"><a href="12.4-modeling-the-cortisol-data.html#cb49-5" aria-hidden="true" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_multi <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_multi, <span class="at">level=</span><span class="dv">0</span>)</span>
+<span id="cb49-6"><a href="12.4-modeling-the-cortisol-data.html#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="12.4-modeling-the-cortisol-data.html#cb49-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-8"><a href="12.4-modeling-the-cortisol-data.html#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
+<span id="cb49-9"><a href="12.4-modeling-the-cortisol-data.html#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
+<span id="cb49-10"><a href="12.4-modeling-the-cortisol-data.html#cb49-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_multi, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb49-11"><a href="12.4-modeling-the-cortisol-data.html#cb49-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
+<span id="cb49-12"><a href="12.4-modeling-the-cortisol-data.html#cb49-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb49-13"><a href="12.4-modeling-the-cortisol-data.html#cb49-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_multi), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb49-14"><a href="12.4-modeling-the-cortisol-data.html#cb49-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb49-15"><a href="12.4-modeling-the-cortisol-data.html#cb49-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb49-16"><a href="12.4-modeling-the-cortisol-data.html#cb49-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb49-17"><a href="12.4-modeling-the-cortisol-data.html#cb49-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+</div>
+<div id="interpretation-8" class="section level4 hasAnchor" number="12.4.5.3">
+<h4><span class="header-section-number">12.4.5.3</span> Interpretation<a href="12.4-modeling-the-cortisol-data.html#interpretation-8" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 </div>
 </div>
 </div>
