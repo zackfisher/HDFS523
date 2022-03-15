@@ -289,5 +289,11 @@ equation-3
 fit-model-4
 predicted-trajectories-5
 interpretation-8
-in-closing
+bilinear-spline-cortisol
+equation-4
+fit-model-5
+predicted-trajectories-6
+interpretation-9
+additional-parameterization
+fit-model-6
 references-1

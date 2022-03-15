@@ -1199,9 +1199,150 @@ Looking at the predicted trajectories it is clear the multiphase growth curve mo
 Furthermore, the model parameters can be understood in a straightforward manner – one in which intraindividual changes in cortisol are characterized by multiple processes, each of which is engaged at know predetermined time in this experimental context. 
 
 
-## In Closing
+## Bilinear Spline (Cortisol)
+
+Spline growth models partition time into discrete periods. Observed changes within each phase can then be described with simple growth models. The discrete segments of the growth model connect at knot points or transition points. Specifically, a bilinear growth model partitions a trajectory into two phases, each defined by a linear trajectory.
+
+Simple spline growth models can be useful for testing specific hypotheses (e.g. does cognitive decline begin at 60 years of age?).
+
+### Equation
+
+The equation for the bilinear spline model can be written as
+
+\begin{align}
+y_{ti}  = & \beta_{0i} + \beta_{1i}\text{time} + \beta_{2i}\mathtext{max}(\text{time}-k_{1},0)+ e_{ti}, & e_{ti} \sim \mathcal{N}(0,\sigma^{2}_{e}) && \: [\text{Level 1}] \\
+\beta_{0i}  = & \gamma_{00} + u_{0i}, & u_{0i} \sim \mathcal{N}(0,\sigma^{2}_{u0}) && \: [\text{Level 2}] \\
+\beta_{1i}  = & \gamma_{10} + u_{1i}, & u_{1i} \sim \mathcal{N}(0,\sigma^{2}_{u1}) && \:  \\
+\beta_{2i}  = & \gamma_{20} + u_{2i}, & u_{2i} \sim \mathcal{N}(0,\sigma^{2}_{u2}) && \:  \\
+y_{ti}  = & \gamma_{00} + \gamma_{10}\text{time} + \gamma_{20}\mathtext{max}(\text{time}-k_{1},0) + u_{0i} + u_{1i}\text{time} + u_{2i}\mathtext{max}(\text{time}-k_{1},0) + e_{ti}, &  && \: [\text{Combined}]
+\end{align}
+
+where
+\begin{align}
+\text{time} = & \{0, 1, 2, 3, 4, 5, 6, 7, 8\}
+\end{align}
+
+and
+
+- $y_{ti}$ is the repeated measures score for individual $i$ at time $t$
+- $\beta_{0i}$ is the random intercept for individual $i$ at $t=0$
+- $\beta_{1i}$ is the random slope for individual $i$ when $t < k$
+- $\beta_{2i}$ is the change in the random slope for individual $i$ when $t > k$
+  - rate of change when $t > k$ is equal to $\beta_{1i}+\beta_{2i}$
+- $\text{time}$ represents the time index
+- $k_{1}$ is the knot point (here we set $k_{1}=4$)
+- $e_{it}$ is the time-specific residual score 
+- $\gamma_{00}$ is the fixed-effect for the intercept
+- $\gamma_{10}$ is the fixed-effect for the pre-knot phase
+- $\gamma_{10}$ is the fixed-effect for the post-knot phase
+- $u_{0i}$ is individual $i$'s deviation from the intercept fixed effect
+- $u_{1i}$ is individual $i$'s deviation from the pre-knot fixed effect
+- $u_{1i}$ is individual $i$'s deviation from the post-knot fixed effect
+
+### Fit Model
+
+```{r}
+cort_spline <- nlme(
+  cort ~ g_00 + g_10*time + g_20*(pmax(time-4,0)),
+  data = cortisol_long,
+  fixed = g_00 + g_10 + g_20 ~1,
+  random = g_00 + g_10 + g_20 ~1,
+  groups =~ id,
+  start = c(5,5,-5),
+  na.action = na.exclude,
+  control = lmeControl(maxIter = 1e8, msMaxIter = 1e8)
+)
+
+summary(cort_spline)
+VarCorr(cort_spline)
+intervals(cort_spline)
+```
 
 
+### Predicted Trajectories
 
+Note, this method of plotting can break down with spline models as the plotted trajectories are simply meant to approximate the trajectories of interest. Here they do not connect at the know point, while in the real model they would.
+
+```{r}
+ggplot(data = cortisol_long) +
+ geom_line(data=cortisol_long, aes(x = time, y = cort, group=factor(id))) +
+ stat_smooth(data=cortisol_long[which(cortisol_long$time<=4),], aes(x=time,y=cort),
+             method="lm",colour="#A3A500",size=2) +
+ stat_smooth(data=cortisol_long[which(cortisol_long$time>=4),], aes(x=time,y=cort),
+             method="lm",colour="#A3A500",size=2) +
+  xlab("Timepoint") + 
+  ylab("Cortisol Level") + 
+  scale_x_continuous(breaks=seq(0,8,by=10)) +
+  scale_y_continuous(breaks = seq(0,50,by=10)) + 
+  theme_classic() +
+  theme(title=element_text(size=12),
+        axis.text=element_text(size=12,colour="black"),
+        legend.text=element_text(size=12, colour="black"),
+        plot.title = element_text(hjust=.5, size=12))
+```
+
+
+### Interpretation
+
+The mean of the random intercept was $3.8$ mg/dl, indicating the predicted average cortisol at baseline. 
+
+The mean of the preknot slope was $3.7$, indicating the rate of cortisol growht during the baseline and experimental phases.
+
+The mean postknot slope was $-4.7$, indicating the rate of change decreased by $4.7$ after timepoint 4.
+
+The variances of the random coefficients were all significant, indicating that subjects varied in each aspect of the growth model.
+
+#### Additional Parameterization
+
+We can also obtain a measure of the post-knot slope directly by reparameterizing our model in the following manner:
+
+\begin{align}
+y_{ti}  = & \beta_{0i} + \beta_{1i}\mathtext{min}(\text{time}-k_{1},0) + \beta_{2i}\mathtext{max}(\text{time}-k_{1},0)+ e_{ti}, & e_{ti} \sim \mathcal{N}(0,\sigma^{2}_{e}) && \: [\text{Level 1}] \\
+\beta_{0i}  = & \gamma_{00} + u_{0i}, & u_{0i} \sim \mathcal{N}(0,\sigma^{2}_{u0}) && \: [\text{Level 2}] \\
+\beta_{1i}  = & \gamma_{10} + u_{1i}, & u_{1i} \sim \mathcal{N}(0,\sigma^{2}_{u1}) && \:  \\
+\beta_{2i}  = & \gamma_{20} + u_{2i}, & u_{2i} \sim \mathcal{N}(0,\sigma^{2}_{u2}) && \:  \\
+y_{ti}  = & \gamma_{00} + \gamma_{10}\mathtext{min}(\text{time}-k_{1},0) + \gamma_{20}\mathtext{max}(\text{time}-k_{1},0) + u_{0i} + u_{1i}\mathtext{min}(\text{time}-k_{1},0) + u_{2i}\mathtext{max}(\text{time}-k_{1},0) + e_{ti}, &  && \: [\text{Combined}]
+\end{align}
+
+where
+\begin{align}
+\text{time} = & \{0, 1, 2, 3, 4, 5, 6, 7, 8\}
+\end{align}
+
+and
+
+- $y_{ti}$ is the repeated measures score for individual $i$ at time $t$
+- $\beta_{0i}$ is the random intercept for individual $i$ at $t=0$
+- $\beta_{1i}$ is the random slope for individual $i$ when $t < k$
+- $\beta_{2i}$ is the change in the random slope for individual $i$ when $t > k$
+  - rate of change when $t > k$ is equal to $\beta_{1i}+\beta_{2i}$
+- $\text{time}$ represents the time index
+- $k_{1}$ is the knot point (here we set $k_{1}=4$)
+- $e_{it}$ is the time-specific residual score 
+- $\gamma_{00}$ is the fixed-effect for the intercept
+- $\gamma_{10}$ is the fixed-effect for the pre-knot phase
+- $\gamma_{10}$ is the fixed-effect for the post-knot phase
+- $u_{0i}$ is individual $i$'s deviation from the intercept fixed effect
+- $u_{1i}$ is individual $i$'s deviation from the pre-knot fixed effect
+- $u_{1i}$ is individual $i$'s deviation from the post-knot fixed effect
+
+### Fit Model
+
+```{r}
+cort_spline2 <- nlme(
+  cort ~ g_00 + g_10*(pmin(time-4,0)) + g_20*(pmax(time-4,0)),
+  data = cortisol_long,
+  fixed = g_00 + g_10 + g_20 ~1,
+  random = g_00 + g_10 + g_20 ~1,
+  groups =~ id,
+  start = c(5,5,-5),
+  na.action = na.exclude,
+  control = lmeControl(maxIter = 1e8, msMaxIter = 1e8)
+)
+
+summary(cort_spline2)
+VarCorr(cort_spline2)
+intervals(cort_spline2)
+```
 
 ## References
