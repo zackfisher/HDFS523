@@ -1210,11 +1210,11 @@ Simple spline growth models can be useful for testing specific hypotheses (e.g. 
 The equation for the bilinear spline model can be written as
 
 \begin{align}
-y_{ti}  = & \beta_{0i} + \beta_{1i}\text{time} + \beta_{2i}\mathtext{max}(\text{time}-k_{1},0)+ e_{ti}, & e_{ti} \sim \mathcal{N}(0,\sigma^{2}_{e}) && \: [\text{Level 1}] \\
+y_{ti}  = & \beta_{0i} + \beta_{1i}\text{time} + \beta_{2i}\text{max}(\text{time}-k_{1},0)+ e_{ti}, & e_{ti} \sim \mathcal{N}(0,\sigma^{2}_{e}) && \: [\text{Level 1}] \\
 \beta_{0i}  = & \gamma_{00} + u_{0i}, & u_{0i} \sim \mathcal{N}(0,\sigma^{2}_{u0}) && \: [\text{Level 2}] \\
 \beta_{1i}  = & \gamma_{10} + u_{1i}, & u_{1i} \sim \mathcal{N}(0,\sigma^{2}_{u1}) && \:  \\
 \beta_{2i}  = & \gamma_{20} + u_{2i}, & u_{2i} \sim \mathcal{N}(0,\sigma^{2}_{u2}) && \:  \\
-y_{ti}  = & \gamma_{00} + \gamma_{10}\text{time} + \gamma_{20}\mathtext{max}(\text{time}-k_{1},0) + u_{0i} + u_{1i}\text{time} + u_{2i}\mathtext{max}(\text{time}-k_{1},0) + e_{ti}, &  && \: [\text{Combined}]
+y_{ti}  = & \gamma_{00} + \gamma_{10}\text{time} + \gamma_{20}\text{max}(\text{time}-k_{1},0) + u_{0i} + u_{1i}\text{time} + u_{2i}\text{max}(\text{time}-k_{1},0) + e_{ti}, &  && \: [\text{Combined}]
 \end{align}
 
 where
@@ -1297,11 +1297,11 @@ The variances of the random coefficients were all significant, indicating that s
 We can also obtain a measure of the post-knot slope directly by reparameterizing our model in the following manner:
 
 \begin{align}
-y_{ti}  = & \beta_{0i} + \beta_{1i}\mathtext{min}(\text{time}-k_{1},0) + \beta_{2i}\mathtext{max}(\text{time}-k_{1},0)+ e_{ti}, & e_{ti} \sim \mathcal{N}(0,\sigma^{2}_{e}) && \: [\text{Level 1}] \\
+y_{ti}  = & \beta_{0i} + \beta_{1i}\text{min}(\text{time}-k_{1},0) + \beta_{2i}\text{max}(\text{time}-k_{1},0)+ e_{ti}, & e_{ti} \sim \mathcal{N}(0,\sigma^{2}_{e}) && \: [\text{Level 1}] \\
 \beta_{0i}  = & \gamma_{00} + u_{0i}, & u_{0i} \sim \mathcal{N}(0,\sigma^{2}_{u0}) && \: [\text{Level 2}] \\
 \beta_{1i}  = & \gamma_{10} + u_{1i}, & u_{1i} \sim \mathcal{N}(0,\sigma^{2}_{u1}) && \:  \\
 \beta_{2i}  = & \gamma_{20} + u_{2i}, & u_{2i} \sim \mathcal{N}(0,\sigma^{2}_{u2}) && \:  \\
-y_{ti}  = & \gamma_{00} + \gamma_{10}\mathtext{min}(\text{time}-k_{1},0) + \gamma_{20}\mathtext{max}(\text{time}-k_{1},0) + u_{0i} + u_{1i}\mathtext{min}(\text{time}-k_{1},0) + u_{2i}\mathtext{max}(\text{time}-k_{1},0) + e_{ti}, &  && \: [\text{Combined}]
+y_{ti}  = & \gamma_{00} + \gamma_{10}\text{min}(\text{time}-k_{1},0) + \gamma_{20}\text{max}(\text{time}-k_{1},0) + u_{0i} + u_{1i}\text{min}(\text{time}-k_{1},0) + u_{2i}\text{max}(\text{time}-k_{1},0) + e_{ti}, &  && \: [\text{Combined}]
 \end{align}
 
 where

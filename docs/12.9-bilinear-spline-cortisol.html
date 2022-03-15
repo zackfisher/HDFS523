@@ -571,11 +571,11 @@ div.csl-indent {
 <h3><span class="header-section-number">12.9.1</span> Equation<a href="12.9-bilinear-spline-cortisol.html#equation-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The equation for the bilinear spline model can be written as</p>
 <p><span class="math display">\[\begin{align}
-y_{ti}  = &amp; \beta_{0i} + \beta_{1i}\text{time} + \beta_{2i}\mathtext{max}(\text{time}-k_{1},0)+ e_{ti}, &amp; e_{ti} \sim \mathcal{N}(0,\sigma^{2}_{e}) &amp;&amp; \: [\text{Level 1}] \\
+y_{ti}  = &amp; \beta_{0i} + \beta_{1i}\text{time} + \beta_{2i}\text{max}(\text{time}-k_{1},0)+ e_{ti}, &amp; e_{ti} \sim \mathcal{N}(0,\sigma^{2}_{e}) &amp;&amp; \: [\text{Level 1}] \\
 \beta_{0i}  = &amp; \gamma_{00} + u_{0i}, &amp; u_{0i} \sim \mathcal{N}(0,\sigma^{2}_{u0}) &amp;&amp; \: [\text{Level 2}] \\
 \beta_{1i}  = &amp; \gamma_{10} + u_{1i}, &amp; u_{1i} \sim \mathcal{N}(0,\sigma^{2}_{u1}) &amp;&amp; \:  \\
 \beta_{2i}  = &amp; \gamma_{20} + u_{2i}, &amp; u_{2i} \sim \mathcal{N}(0,\sigma^{2}_{u2}) &amp;&amp; \:  \\
-y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time} + \gamma_{20}\mathtext{max}(\text{time}-k_{1},0) + u_{0i} + u_{1i}\text{time} + u_{2i}\mathtext{max}(\text{time}-k_{1},0) + e_{ti}, &amp;  &amp;&amp; \: [\text{Combined}]
+y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time} + \gamma_{20}\text{max}(\text{time}-k_{1},0) + u_{0i} + u_{1i}\text{time} + u_{2i}\text{max}(\text{time}-k_{1},0) + e_{ti}, &amp;  &amp;&amp; \: [\text{Combined}]
 \end{align}\]</span></p>
 <p>where
 <span class="math display">\[\begin{align}
@@ -711,11 +711,11 @@ y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time} + \gamma_{20}\mathtext{max}
 <h4><span class="header-section-number">12.9.4.1</span> Additional Parameterization<a href="12.9-bilinear-spline-cortisol.html#additional-parameterization" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>We can also obtain a measure of the post-knot slope directly by reparameterizing our model in the following manner:</p>
 <p><span class="math display">\[\begin{align}
-y_{ti}  = &amp; \beta_{0i} + \beta_{1i}\mathtext{min}(\text{time}-k_{1},0) + \beta_{2i}\mathtext{max}(\text{time}-k_{1},0)+ e_{ti}, &amp; e_{ti} \sim \mathcal{N}(0,\sigma^{2}_{e}) &amp;&amp; \: [\text{Level 1}] \\
+y_{ti}  = &amp; \beta_{0i} + \beta_{1i}\text{min}(\text{time}-k_{1},0) + \beta_{2i}\text{max}(\text{time}-k_{1},0)+ e_{ti}, &amp; e_{ti} \sim \mathcal{N}(0,\sigma^{2}_{e}) &amp;&amp; \: [\text{Level 1}] \\
 \beta_{0i}  = &amp; \gamma_{00} + u_{0i}, &amp; u_{0i} \sim \mathcal{N}(0,\sigma^{2}_{u0}) &amp;&amp; \: [\text{Level 2}] \\
 \beta_{1i}  = &amp; \gamma_{10} + u_{1i}, &amp; u_{1i} \sim \mathcal{N}(0,\sigma^{2}_{u1}) &amp;&amp; \:  \\
 \beta_{2i}  = &amp; \gamma_{20} + u_{2i}, &amp; u_{2i} \sim \mathcal{N}(0,\sigma^{2}_{u2}) &amp;&amp; \:  \\
-y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\mathtext{min}(\text{time}-k_{1},0) + \gamma_{20}\mathtext{max}(\text{time}-k_{1},0) + u_{0i} + u_{1i}\mathtext{min}(\text{time}-k_{1},0) + u_{2i}\mathtext{max}(\text{time}-k_{1},0) + e_{ti}, &amp;  &amp;&amp; \: [\text{Combined}]
+y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{min}(\text{time}-k_{1},0) + \gamma_{20}\text{max}(\text{time}-k_{1},0) + u_{0i} + u_{1i}\text{min}(\text{time}-k_{1},0) + u_{2i}\text{max}(\text{time}-k_{1},0) + e_{ti}, &amp;  &amp;&amp; \: [\text{Combined}]
 \end{align}\]</span></p>
 <p>where
 <span class="math display">\[\begin{align}
