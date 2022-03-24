@@ -15,7 +15,7 @@ button <-  "position: relative;
 codefolder::bookdown(init = "show", style = button)
 ```
 
-This chapter introduces the concept of nonlinear change. Notes from this chapter borrows heavily from Kashy and Cook (2006), a comprehensive book on dyadic data analysis.
+This chapter introduces the concept of nonlinear change. Notes from this chapter borrow heavily from Kashy and Cook (2006), a comprehensive book on dyadic data analysis.
 
 In this chapter we will cover the following topics:
 
@@ -47,6 +47,13 @@ In this chapter we will cover the following topics:
     - Model
     - Estimated Parameters
     - Parameter Covariation
+7. **Data Example 1**
+    - Preliminaries
+    - Modeling Scenario
+    - Descriptives
+    - Dyadic Data Prep
+    - APIM
+    
     
 ## Introduction 
 
@@ -263,6 +270,8 @@ The other major SRM design is called the *block design*. In the block design, in
 
 The block design is reciprocal if both blocks (the $X$ and the $X'$ scores) are gathered. 
 
+A researcher might utilize a block design when there is interest in understanding assymetric dyads. For example, if one wanted to analye how students rate teacher's communication style, and how teachers rate student's communication style, without caring about how teachers or students rate themselves. 
+
 ![Block Design (Kenny, Kashy & Cook, 2006)](imgs/dyad_block.jpg)
 
 
@@ -278,7 +287,9 @@ In the table for the round robin design:
 
 - B, C, D, F, G and H gave judgments on A, and
 - A gave judgments on B, C and D, while
-- E gave judgments on G, G, and H.
+- E gave judgments on F, G, and H.
+
+An example here might be a survey conducted among Uber drivers. Each Uber driver is asked to rate the behavior of other Uber drivers who have at one time been passengers in their car. E has never used Uber himself, but has driven F, G and H to different destinations. A drives quite a bit and has picked up B, C, and D. they have also been picked up by B through G at one time or another. 
 
 ![One-with-many Design (Kenny, Kashy & Cook, 2006)](imgs/dyad_onewithmany.jpg)
 
@@ -380,6 +391,7 @@ For the child the actor effect (playing well) would be a positive predictor of g
 
 ![APIM Model (Kenny, Kashy & Cook, 2006)](imgs/dyad_apim.jpg)
 
+```{r, echo=FALSE, eval = FALSE}
 ### Partner-Oriented Interactions
 
 Nonzero partner effects $p \neq 0$ indicate an interdependent system. In some cases it can be useful to include interaction terms with the partner effect. 
@@ -393,6 +405,7 @@ By including an interaction term between the scale score and the partner score, 
 - *scores below the neutral scale point*, and is guided by social comparison
 
 Details on this procedure can be found in Kenny, Kashy and Cook (1960, p. 50).
+```
 
 ### Actor-Partner Interactions
 
@@ -421,6 +434,7 @@ Longitudinal variants of the APIM are some of the most interesting dyadic models
 ![Longitudinal APIM (Kenny, Kashy & Cook, 2006)](imgs/dyad_apim_time.jpg)
 
 In the longitudinal APIM,
+
 - actor effects are the effects from $Y_{1,t–1}$ to $Y_{1,t}$ ($a_{1i}$) and from $Y_{2,t–1}$ to $Y_{2,t}$ ($a_{2i}$),
   - actor effects are interpreted as stability effects
 - partner effects are from $Y_{1,t–1}$ to $Y_{2,t}$ ($p_{21i}$) and from $Y_{2,t–1}$ to $Y_{1,t}$ ($p_{12i}$),
@@ -457,5 +471,267 @@ Suppose we measure stress each day for a parent-child dyad. The correlation betw
 
 Let' say a parent experiences more stress on a particular day. More stress than one would expect given their prior value and their child’s prior value, A positive correlation between the errors would indicate that is likely the child would also experience heightened stress on that day.
 
+## Data Example
 
-## References
+This data example for this chapter is based on the APIM tutorial written by Miriam Brinberg and Nilam Ram. The original version is available on the QuantDev website.
+
+This tutorial reviews the Actor-Partner Interdependence Model (APIM; Kashy & Kenny, 2000; Kenny, Kashy, & Cook, 2006), which is often used to examine the association (1) between two constructs for two people using cross-sectional data, or (2) between the same construct from two people across two time points. 
+
+### Preliminaries
+
+Let's begin by loading the neccessary libraries and reading in the data.
+
+```{r, warning = FALSE, message = FALSE}
+library(ggplot2)   #for plotting
+library(nlme)      #for model fitting
+library(psych)     #for general functions
+library(reshape)   #for data management
+filepath <- "https://quantdev.ssri.psu.edu/sites/qdev/files/wisc3raw_gender.csv"
+wisc3raw <- read.csv(file=url(filepath),header=TRUE)
+data <- wisc3raw[, c("id", "verb1", "verb6", "perfo1", "perfo6")]
+head(data)
+```
+
+We'll also make a long version of the data set for later use.
+
+```{r}
+data_long <- reshape(
+  data = data,
+  varying = c("verb1", "verb6","perfo1", "perfo6"),
+  timevar = c("grade"), 
+  idvar = c("id"),
+  direction = "long", sep=""
+)
+data_long <- data_long[order(data_long$id, data_long$grade), ]
+head(data_long)
+```
+
+### Modeling Scenario
+
+In this example, we are going to examine the association between verbal and performance ability using measures from first grade and sixth grade. We are interested in simultaneously examining whether 
+
+1. verbal ability in the first grade is predictive of verbal ability in the sixth grade, 
+2.  performance ability in the first grade is predictive of performance ability in the sixth grade, 
+3. verbal ability in the first grade is predictive of performance ability in the sixth grade, and 
+4. performance ability in the first grade is predictive of verbal ability in the sixth grade.
+
+When working with dyads, the above points 1 and 2 are often referred to as *actor effects* and points 3 and 4 are often referred to as *partner effects*.
+
+While this example is not a "traditional dyad" - i.e., two distinguishable people - the analytic processes demonstrated here for bivariate data are applicable to the examination of dyadic data.
+
+
+### Descriptives 
+
+Before we run our models, it is often useful to get more familiar with the data via plotting and descriptives statistics.
+
+Let's begin with descriptive statistics of our four variables of interest: first grade verbal and performance ability, and sixth grade verbal and performance ability.
+
+```{r}
+describe(data$verb1)
+describe(data$verb6)
+
+describe(data$perfo1)
+describe(data$perfo6)
+```
+
+We can see that both the mean and standard deviation of verbal and performance ability increase from first to sixth grade. *While this is worth noting, the APIM will not be examining changes in mean levels of verbal and performance ability.* 
+
+#### Correlations
+
+Let's also examine the correlations  among the four variables.
+
+```{r}
+#correlations
+cor(data[, 2:5])
+
+#plot
+pairs.panels(data[, c("verb1", "verb6", "perfo1", "perfo6")])
+```
+
+We can see that all four variables are relatively normally distributed. 
+
+We can see there are strong, positive correlations both across time within-construct and between-constructs.
+
+#### Plots
+
+Let's also look at a few individuals to examine the within-person association between verbal and performance ability from the first to sixth grade.  
+
+```{r}
+ggplot(data = subset(data_long, id <= 9), aes(x = grade, group = id), legend = FALSE) +
+  geom_point(aes(x = grade, y = verb), shape = 17, size = 3, color = "purple") + 
+  geom_point(aes(x = grade, y = perfo), shape = 19, size = 3, color = "pink") + 
+  geom_line(aes(x = grade, y = verb), lty = 1, size=1, color = "purple") + 
+  geom_line(aes(x = grade, y = perfo), lty = 1, size=1, color = "pink") + 
+  xlab("Grade") + 
+  ylab("Verbal and Performance Ability") + ylim(0, 80) +
+  scale_x_continuous(breaks=seq(0, 7, by = 1)) + 
+  theme_classic() +
+  facet_wrap( ~ id)
+```
+
+Within these nine participants, there is some inter-individual variability. For example, some participants' verbal and performance ability increase more than others, some participants have higher levels of verbal ability than performance ability (or vice versa) across time. 
+
+### Dyadic Data Prep
+
+We have learned to manipulate data from *wide* to *long*, and vice versa. Dyadic analyses require further manipulation in order to get the data in the correct format. We will walk through the data prep in two steps.
+
+#### Step 1
+
+First, we need to create one column that has the information for both outcome variables - i.e., for each person, the verb6 and perfo6 values will alternate. 
+
+This is almost like repeated measures data, but instead of having multiple time points nested within person, we have multiple (two) variables to nest within person.
+
+```{r}
+data_melt <- reshape::melt(
+  data = data,
+  id.vars = c("id", "verb1", "perfo1"), 
+  na.rm=FALSE
+)
+#rename "variable" and "value" variables 
+colnames(data_melt)[4:5] <- c("grade6_variable", "grade6_outcome")
+data_melt <- data_melt[order(data_melt$id, data_melt$grade6_variable), ]
+
+```
+
+**Old Data**
+```{r}
+head(data)
+```
+
+
+**New Data**
+```{r}
+head(data_melt)
+```
+
+#### Step 2
+
+Second, we need to create two dummy variables (each 0/1) to "turn on/off" a row (more on this later) in our analyses. 
+
+We will create a new variable, `verb_on` that indicates which rows are for the `verb6` outcome, 
+
+We will create a second variable, `perform_on` that indicates which rows are for the `perfo6` outcome. 
+
+```{r}
+data_melt_old <- data_melt
+data_melt$verb_on <- ifelse(data_melt$grade6_variable == "verb6", 1, 0)
+data_melt$perform_on <- ifelse(data_melt$grade6_variable == "perfo6", 1, 0)
+```
+
+**Old Data**
+```{r}
+head(data_melt_old)
+```
+
+**New Data**
+```{r}
+head(data_melt)
+```
+
+There are many alternative ways to prepare dyadic data. For example, see  https://github.com/RandiLGarcia/2day-dyad-workshop/blob/master/Day%201/R%20Code/Day%201-Data%20Restructuring.Rmd). It will depend on how you choose to run your analysis (described further later).
+
+### APIM
+
+Now that we know a bit more about the data we are working with and have the data prepared in a single-outcome (double-entry) format, we can set up our APIM model. 
+
+We'll run this model in the `nlme` package.
+
+Specifically, we'll examine whether:  
+
+- verbal ability in the first grade is predictive of verbal ability in the sixth grade (verbal "actor" effect),  
+- performance ability in the first grade is predictive of performance ability in the sixth grade (performance "actor" effect),  
+- verbal ability in the first grade is predictive of performance ability in the sixth grade (verbal "partner" effect), and  
+- performance ability in the first grade is predictive of verbal ability in the sixth grade (performance "partner" effect).
+
+
+
+### Null Model
+
+Before running this full model, we will examine the empty model to determine how much variability there is within- and between-persons. Specifically,
+
+$$
+Grade6Outcome_{i} = \beta_{0V}VerbOn_{it} + \beta_{0P}PerformOn_{it} + e_{Vi} +e_{Pi}
+$$ 
+
+
+```{r}
+apim_empty <- gls(
+  grade6_outcome ~  -1 +                # turn OFF the intercept 
+                    verb_on +           # intercept for verbal scores
+                    perform_on,         # intercept for performance scores
+  correlation = corSymm(form= ~1|id),
+  weights = varIdent(form= ~1|verb_on), # allows for 2 error terms 
+               data = data_melt,
+               na.action = na.exclude)
+
+summary(apim_empty)
+```
+
+We examine the correlation of the verbal and performance error terms to determine the degree of non-independence in the data. We can see that $\rho = 0.61$, indicating the correlation across dyad members, children who have higher verbal ability tend to also have higher performance ability.
+
+A few other points to note:
+
+- The results for `verb_on` indicate the average or expected verbal score at grade 6 is 43.75.
+- The results for `perform_on` indicate the average or expected performance score at grade 6 is 50.93.
+  - Both these expected values correspond to sample means in the raw data.
+- The grade 6 verbal and performance scores also each have estimated "standard error" values. The estimated standard error for Grade 6 verbal scores is 10.67 and the estimated standard error for Grade 6 performance scores is 12.48 = (1.17*10.67). 
+  - Note that these estimates exactly match the respective standard deviations in the raw data (see descriptives above).
+
+For completeness of representing the data we can get the means and variances of, and correlation between, the two predictors from the raw data. 
+
+### Full APIM
+
+Next, we are going to run our full APIM model using the two-intercept approach. Specifically,
+
+
+$$Grade6Outcome_{it} =  \beta_{0V}VerbOn_{it} + \beta_{1V}VerbOn_{it}*Verb1_{it} + \beta_{2V}VerbOn_{it}*Perform1_{it} + \\  \beta_{0P}PerformOn_{it} + \beta_{1P}PerformOn_{it}*Perform1_{it} + \beta_{2P}PerformOn_{it}*Verb1_{it} + e_{Vi} +e_{Pi}$$ 
+
+So when `verb_on` is equal to 0:
+
+
+$$Grade6Outcome_{it} = \beta_{0P}PerformOn_{it} + \beta_{1P}PerformOn_{it}*Perform1_{it} + \beta_{2P}PerformOn_{it}*Verb1_{it} + e_{Vi} +e_{Pi}$$ 
+
+
+and when `perform_on` is equal to 0:
+
+
+$$Grade6Outcome_{it} = \beta_{0V}VerbOn_{it} + \beta_{1V}VerbOn_{it}*Verb1_{it} + \beta_{2V}VerbOn_{it}*Perform1_{it} + e_{Vi} +e_{Pi}$$ 
+
+```{r}
+apim_full <- gls(grade6_outcome ~  
+    -1 +                # turns OFF intercept 
+    verb_on +           # verbal intercept
+    verb_on:verb1 +     # verbal "actor" effect
+    verb_on:perfo1 +    # performance "partner" effect
+    perform_on +        # performance intercept
+    perform_on:perfo1 + # performance "actor" effect
+    perform_on:verb1,   # verbal "partner" effect
+  correlation = corSymm(form=~1|id),
+  weights = varIdent(form=~1|verb_on), # allows for different error terms 
+  data = data_melt,
+  na.action = na.exclude)
+
+summary(apim_full)
+```
+
+#### Results
+
+- The expected verbal score at grade 6 = 19.87 and the expected performance score at grade 6 = 30.05 when verbal and performance scores at grade 1 are equal to zero. 
+
+**Actor Effects**
+
+- The *actor effect* of verbal ability is 0.81, indicating that every 1.0 point difference in children's verbal ability at Grade 1 is associated with a  0.81 point difference in Grade 6. Stated differently, earlier differences in verbal ability influence later differences in verbal ability.   
+- The *actor effect* of performance ability is 0.96, indicating that every 1.0 point difference in children's performance ability at Grade 1 is associated with a 0.96 point difference in Grade 6. Stated differently, earlier differences in performance ability influence later differences in performance ability. 
+
+
+**Partner Effects**
+
+- The *partner effect* of performance ability on verbal ability is 0.45, indicating that every 1.0 point difference in children's performance ability at Grade 1 is associated with a 0.45 point difference in verbal ability at Grade 6.  Stated differently, earlier differences in performance ability "influence" later differences in verbal ability. 
+
+The *partner effect* of verbal ability on performance ability is not significantly different than zero, indicating that earlier differences in performance ability at Grade 1 do not "influence" later differences in verbal ability at Grade 6.  
+     
+**Additional Info**
+
+- $\rho = 0.31$, indicating the correlation across variables (or dyad members). Here, higher verbal ability scores tend to be paired with higher performance ability scores.
+     
+## Reference

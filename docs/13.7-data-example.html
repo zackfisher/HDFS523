@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7.6 Single Predictor Model | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
+  <title>13.7 Data Example | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
   <meta name="description" content="Course notes for HDFS 523" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7.6 Single Predictor Model | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta property="og:title" content="13.7 Data Example | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="zackfisher/HDFS523" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7.6 Single Predictor Model | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta name="twitter:title" content="13.7 Data Example | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   
   <meta name="twitter:description" content="Course notes for HDFS 523" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="7.5-intercept-only-model-1.html"/>
-<link rel="next" href="7.7-marginal-effects.html"/>
+<link rel="prev" href="13.6-longitudinal-apim.html"/>
+<link rel="next" href="13.8-reference.html"/>
 <script src="libs/header-attrs-2.11.15/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -121,28 +121,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -615,83 +593,339 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="single-predictor-model" class="section level2 hasAnchor" number="7.6">
-<h2><span class="header-section-number">7.6</span> Single Predictor Model<a href="7.6-single-predictor-model.html#single-predictor-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>OK, let’s include a predictor in our logistic regression model. Let’s start with <code>PersonalSpending</code> such that</p>
-<p><span class="math display">\[ logit(\pi_i) = b_0 + b_1PersonalSpending^{*}_{1i} + \epsilon_i \]</span>
-where <span class="math inline">\(\pi_i = P(Happy_i = 1)\)</span>. Here, <span class="math inline">\(PersonalSpending^{*}\)</span> is the mean-centered amount of money one spends on themselves in a month (in units of <span class="math inline">\(100\)</span> dollars).</p>
-<p>Let’s fit the model in R.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="7.6-single-predictor-model.html#cb98-1" aria-hidden="true" tabindex="-1"></a>model10 <span class="ot">&lt;-</span> <span class="fu">glm</span>(Happy <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> PersonalSpending_star, </span>
-<span id="cb98-2"><a href="7.6-single-predictor-model.html#cb98-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>, </span>
-<span id="cb98-3"><a href="7.6-single-predictor-model.html#cb98-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> dunn2008, </span>
-<span id="cb98-4"><a href="7.6-single-predictor-model.html#cb98-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">na.action =</span> na.exclude)</span>
-<span id="cb98-5"><a href="7.6-single-predictor-model.html#cb98-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model10)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## glm(formula = Happy ~ 1 + PersonalSpending_star, family = &quot;binomial&quot;, 
-##     data = dunn2008, na.action = na.exclude)
+<div id="data-example" class="section level2 hasAnchor" number="13.7">
+<h2><span class="header-section-number">13.7</span> Data Example<a href="13.7-data-example.html#data-example" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This data example for this chapter is based on the APIM tutorial written by Miriam Brinberg and Nilam Ram. The original version is available on the QuantDev website.</p>
+<p>This tutorial reviews the Actor-Partner Interdependence Model (APIM; Kashy &amp; Kenny, 2000; Kenny, Kashy, &amp; Cook, 2006), which is often used to examine the association (1) between two constructs for two people using cross-sectional data, or (2) between the same construct from two people across two time points.</p>
+<div id="preliminaries" class="section level3 hasAnchor" number="13.7.1">
+<h3><span class="header-section-number">13.7.1</span> Preliminaries<a href="13.7-data-example.html#preliminaries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s begin by loading the neccessary libraries and reading in the data.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="13.7-data-example.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)   <span class="co">#for plotting</span></span>
+<span id="cb1-2"><a href="13.7-data-example.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)      <span class="co">#for model fitting</span></span>
+<span id="cb1-3"><a href="13.7-data-example.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)     <span class="co">#for general functions</span></span>
+<span id="cb1-4"><a href="13.7-data-example.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape)   <span class="co">#for data management</span></span>
+<span id="cb1-5"><a href="13.7-data-example.html#cb1-5" aria-hidden="true" tabindex="-1"></a>filepath <span class="ot">&lt;-</span> <span class="st">&quot;https://quantdev.ssri.psu.edu/sites/qdev/files/wisc3raw_gender.csv&quot;</span></span>
+<span id="cb1-6"><a href="13.7-data-example.html#cb1-6" aria-hidden="true" tabindex="-1"></a>wisc3raw <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file=</span><span class="fu">url</span>(filepath),<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-7"><a href="13.7-data-example.html#cb1-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> wisc3raw[, <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>, <span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb6&quot;</span>, <span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo6&quot;</span>)]</span>
+<span id="cb1-8"><a href="13.7-data-example.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<pre><code>##   id verb1 verb6 perfo1 perfo6
+## 1  1 24.42 55.64  19.84  44.19
+## 2  2 12.44 37.81   5.90  40.38
+## 3  3 32.43 50.18  27.64  77.72
+## 4  4 22.69 44.72  33.16  61.66
+## 5  5 28.23 70.95  27.64  64.22
+## 6  6 16.06 39.94   8.45  39.08</code></pre>
+<p>We’ll also make a long version of the data set for later use.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="13.7-data-example.html#cb3-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
+<span id="cb3-2"><a href="13.7-data-example.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> data,</span>
+<span id="cb3-3"><a href="13.7-data-example.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">varying =</span> <span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb6&quot;</span>,<span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo6&quot;</span>),</span>
+<span id="cb3-4"><a href="13.7-data-example.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">timevar =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>), </span>
+<span id="cb3-5"><a href="13.7-data-example.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">idvar =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>),</span>
+<span id="cb3-6"><a href="13.7-data-example.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">direction =</span> <span class="st">&quot;long&quot;</span>, <span class="at">sep=</span><span class="st">&quot;&quot;</span></span>
+<span id="cb3-7"><a href="13.7-data-example.html#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-8"><a href="13.7-data-example.html#cb3-8" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data_long[<span class="fu">order</span>(data_long<span class="sc">$</span>id, data_long<span class="sc">$</span>grade), ]</span>
+<span id="cb3-9"><a href="13.7-data-example.html#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_long)</span></code></pre></div>
+<pre><code>##     id grade  verb perfo
+## 1.1  1     1 24.42 19.84
+## 1.6  1     6 55.64 44.19
+## 2.1  2     1 12.44  5.90
+## 2.6  2     6 37.81 40.38
+## 3.1  3     1 32.43 27.64
+## 3.6  3     6 50.18 77.72</code></pre>
+</div>
+<div id="modeling-scenario" class="section level3 hasAnchor" number="13.7.2">
+<h3><span class="header-section-number">13.7.2</span> Modeling Scenario<a href="13.7-data-example.html#modeling-scenario" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In this example, we are going to examine the association between verbal and performance ability using measures from first grade and sixth grade. We are interested in simultaneously examining whether</p>
+<ol style="list-style-type: decimal">
+<li>verbal ability in the first grade is predictive of verbal ability in the sixth grade,</li>
+<li>performance ability in the first grade is predictive of performance ability in the sixth grade,</li>
+<li>verbal ability in the first grade is predictive of performance ability in the sixth grade, and</li>
+<li>performance ability in the first grade is predictive of verbal ability in the sixth grade.</li>
+</ol>
+<p>When working with dyads, the above points 1 and 2 are often referred to as <em>actor effects</em> and points 3 and 4 are often referred to as <em>partner effects</em>.</p>
+<p>While this example is not a “traditional dyad” - i.e., two distinguishable people - the analytic processes demonstrated here for bivariate data are applicable to the examination of dyadic data.</p>
+</div>
+<div id="descriptives-1" class="section level3 hasAnchor" number="13.7.3">
+<h3><span class="header-section-number">13.7.3</span> Descriptives<a href="13.7-data-example.html#descriptives-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before we run our models, it is often useful to get more familiar with the data via plotting and descriptives statistics.</p>
+<p>Let’s begin with descriptive statistics of our four variables of interest: first grade verbal and performance ability, and sixth grade verbal and performance ability.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="13.7-data-example.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(data<span class="sc">$</span>verb1)</span></code></pre></div>
+<pre><code>##    vars   n  mean   sd median trimmed  mad  min   max range skew kurtosis   se
+## X1    1 204 19.59 5.81  19.34    19.5 5.41 3.33 35.15 31.82 0.13    -0.05 0.41</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="13.7-data-example.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(data<span class="sc">$</span>verb6)</span></code></pre></div>
+<pre><code>##    vars   n  mean    sd median trimmed  mad   min   max range skew kurtosis
+## X1    1 204 43.75 10.67  42.55   43.46 11.3 17.35 72.59 55.24 0.24    -0.36
+##      se
+## X1 0.75</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="13.7-data-example.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(data<span class="sc">$</span>perfo1)</span></code></pre></div>
+<pre><code>##    vars   n  mean   sd median trimmed mad min   max range skew kurtosis   se
+## X1    1 204 17.98 8.35  17.66   17.69 8.3   0 46.58 46.58 0.35    -0.11 0.58</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="13.7-data-example.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(data<span class="sc">$</span>perfo6)</span></code></pre></div>
+<pre><code>##    vars   n  mean    sd median trimmed   mad   min   max range  skew kurtosis
+## X1    1 204 50.93 12.48  51.76   51.07 13.27 10.26 89.01 78.75 -0.06     0.18
+##      se
+## X1 0.87</code></pre>
+<p>We can see that both the mean and standard deviation of verbal and performance ability increase from first to sixth grade. <em>While this is worth noting, the APIM will not be examining changes in mean levels of verbal and performance ability.</em></p>
+<div id="correlations" class="section level4 hasAnchor" number="13.7.3.1">
+<h4><span class="header-section-number">13.7.3.1</span> Correlations<a href="13.7-data-example.html#correlations" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Let’s also examine the correlations among the four variables.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="13.7-data-example.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#correlations</span></span>
+<span id="cb13-2"><a href="13.7-data-example.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(data[, <span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>])</span></code></pre></div>
+<pre><code>##            verb1     verb6    perfo1    perfo6
+## verb1  1.0000000 0.6541040 0.6101379 0.4779672
+## verb6  0.6541040 1.0000000 0.6183155 0.6106694
+## perfo1 0.6101379 0.6183155 1.0000000 0.6958321
+## perfo6 0.4779672 0.6106694 0.6958321 1.0000000</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="13.7-data-example.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot</span></span>
+<span id="cb15-2"><a href="13.7-data-example.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs.panels</span>(data[, <span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb6&quot;</span>, <span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo6&quot;</span>)])</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>We can see that all four variables are relatively normally distributed.</p>
+<p>We can see there are strong, positive correlations both across time within-construct and between-constructs.</p>
+</div>
+<div id="plots" class="section level4 hasAnchor" number="13.7.3.2">
+<h4><span class="header-section-number">13.7.3.2</span> Plots<a href="13.7-data-example.html#plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Let’s also look at a few individuals to examine the within-person association between verbal and performance ability from the first to sixth grade.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="13.7-data-example.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">subset</span>(data_long, id <span class="sc">&lt;=</span> <span class="dv">9</span>), <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">group =</span> id), <span class="at">legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="13.7-data-example.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> verb), <span class="at">shape =</span> <span class="dv">17</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;purple&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb16-3"><a href="13.7-data-example.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> perfo), <span class="at">shape =</span> <span class="dv">19</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;pink&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb16-4"><a href="13.7-data-example.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> verb), <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">size=</span><span class="dv">1</span>, <span class="at">color =</span> <span class="st">&quot;purple&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb16-5"><a href="13.7-data-example.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> perfo), <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">size=</span><span class="dv">1</span>, <span class="at">color =</span> <span class="st">&quot;pink&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb16-6"><a href="13.7-data-example.html#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb16-7"><a href="13.7-data-example.html#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Verbal and Performance Ability&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">80</span>) <span class="sc">+</span></span>
+<span id="cb16-8"><a href="13.7-data-example.html#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">7</span>, <span class="at">by =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb16-9"><a href="13.7-data-example.html#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb16-10"><a href="13.7-data-example.html#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> id)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Within these nine participants, there is some inter-individual variability. For example, some participants’ verbal and performance ability increase more than others, some participants have higher levels of verbal ability than performance ability (or vice versa) across time.</p>
+</div>
+</div>
+<div id="dyadic-data-prep" class="section level3 hasAnchor" number="13.7.4">
+<h3><span class="header-section-number">13.7.4</span> Dyadic Data Prep<a href="13.7-data-example.html#dyadic-data-prep" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We have learned to manipulate data from <em>wide</em> to <em>long</em>, and vice versa. Dyadic analyses require further manipulation in order to get the data in the correct format. We will walk through the data prep in two steps.</p>
+<div id="step-1" class="section level4 hasAnchor" number="13.7.4.1">
+<h4><span class="header-section-number">13.7.4.1</span> Step 1<a href="13.7-data-example.html#step-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>First, we need to create one column that has the information for both outcome variables - i.e., for each person, the verb6 and perfo6 values will alternate.</p>
+<p>This is almost like repeated measures data, but instead of having multiple time points nested within person, we have multiple (two) variables to nest within person.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="13.7-data-example.html#cb17-1" aria-hidden="true" tabindex="-1"></a>data_melt <span class="ot">&lt;-</span> reshape<span class="sc">::</span><span class="fu">melt</span>(</span>
+<span id="cb17-2"><a href="13.7-data-example.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> data,</span>
+<span id="cb17-3"><a href="13.7-data-example.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id.vars =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>, <span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;perfo1&quot;</span>), </span>
+<span id="cb17-4"><a href="13.7-data-example.html#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.rm=</span><span class="cn">FALSE</span></span>
+<span id="cb17-5"><a href="13.7-data-example.html#cb17-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-6"><a href="13.7-data-example.html#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#rename &quot;variable&quot; and &quot;value&quot; variables </span></span>
+<span id="cb17-7"><a href="13.7-data-example.html#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data_melt)[<span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;grade6_variable&quot;</span>, <span class="st">&quot;grade6_outcome&quot;</span>)</span>
+<span id="cb17-8"><a href="13.7-data-example.html#cb17-8" aria-hidden="true" tabindex="-1"></a>data_melt <span class="ot">&lt;-</span> data_melt[<span class="fu">order</span>(data_melt<span class="sc">$</span>id, data_melt<span class="sc">$</span>grade6_variable), ]</span></code></pre></div>
+<p><strong>Old Data</strong></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="13.7-data-example.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<pre><code>##   id verb1 verb6 perfo1 perfo6
+## 1  1 24.42 55.64  19.84  44.19
+## 2  2 12.44 37.81   5.90  40.38
+## 3  3 32.43 50.18  27.64  77.72
+## 4  4 22.69 44.72  33.16  61.66
+## 5  5 28.23 70.95  27.64  64.22
+## 6  6 16.06 39.94   8.45  39.08</code></pre>
+<p><strong>New Data</strong></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="13.7-data-example.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_melt)</span></code></pre></div>
+<pre><code>##     id verb1 perfo1 grade6_variable grade6_outcome
+## 1    1 24.42  19.84           verb6          55.64
+## 205  1 24.42  19.84          perfo6          44.19
+## 2    2 12.44   5.90           verb6          37.81
+## 206  2 12.44   5.90          perfo6          40.38
+## 3    3 32.43  27.64           verb6          50.18
+## 207  3 32.43  27.64          perfo6          77.72</code></pre>
+</div>
+<div id="step-2" class="section level4 hasAnchor" number="13.7.4.2">
+<h4><span class="header-section-number">13.7.4.2</span> Step 2<a href="13.7-data-example.html#step-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Second, we need to create two dummy variables (each 0/1) to “turn on/off” a row (more on this later) in our analyses.</p>
+<p>We will create a new variable, <code>verb_on</code> that indicates which rows are for the <code>verb6</code> outcome,</p>
+<p>We will create a second variable, <code>perform_on</code> that indicates which rows are for the <code>perfo6</code> outcome.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="13.7-data-example.html#cb22-1" aria-hidden="true" tabindex="-1"></a>data_melt_old <span class="ot">&lt;-</span> data_melt</span>
+<span id="cb22-2"><a href="13.7-data-example.html#cb22-2" aria-hidden="true" tabindex="-1"></a>data_melt<span class="sc">$</span>verb_on <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data_melt<span class="sc">$</span>grade6_variable <span class="sc">==</span> <span class="st">&quot;verb6&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb22-3"><a href="13.7-data-example.html#cb22-3" aria-hidden="true" tabindex="-1"></a>data_melt<span class="sc">$</span>perform_on <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data_melt<span class="sc">$</span>grade6_variable <span class="sc">==</span> <span class="st">&quot;perfo6&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span></code></pre></div>
+<p><strong>Old Data</strong></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="13.7-data-example.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_melt_old)</span></code></pre></div>
+<pre><code>##     id verb1 perfo1 grade6_variable grade6_outcome
+## 1    1 24.42  19.84           verb6          55.64
+## 205  1 24.42  19.84          perfo6          44.19
+## 2    2 12.44   5.90           verb6          37.81
+## 206  2 12.44   5.90          perfo6          40.38
+## 3    3 32.43  27.64           verb6          50.18
+## 207  3 32.43  27.64          perfo6          77.72</code></pre>
+<p><strong>New Data</strong></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="13.7-data-example.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_melt)</span></code></pre></div>
+<pre><code>##     id verb1 perfo1 grade6_variable grade6_outcome verb_on perform_on
+## 1    1 24.42  19.84           verb6          55.64       1          0
+## 205  1 24.42  19.84          perfo6          44.19       0          1
+## 2    2 12.44   5.90           verb6          37.81       1          0
+## 206  2 12.44   5.90          perfo6          40.38       0          1
+## 3    3 32.43  27.64           verb6          50.18       1          0
+## 207  3 32.43  27.64          perfo6          77.72       0          1</code></pre>
+<p>There are many alternative ways to prepare dyadic data. For example, see <a href="https://github.com/RandiLGarcia/2day-dyad-workshop/blob/master/Day%201/R%20Code/Day%201-Data%20Restructuring.Rmd" class="uri">https://github.com/RandiLGarcia/2day-dyad-workshop/blob/master/Day%201/R%20Code/Day%201-Data%20Restructuring.Rmd</a>). It will depend on how you choose to run your analysis (described further later).</p>
+</div>
+</div>
+<div id="apim" class="section level3 hasAnchor" number="13.7.5">
+<h3><span class="header-section-number">13.7.5</span> APIM<a href="13.7-data-example.html#apim" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now that we know a bit more about the data we are working with and have the data prepared in a single-outcome (double-entry) format, we can set up our APIM model.</p>
+<p>We’ll run this model in the <code>nlme</code> package.</p>
+<p>Specifically, we’ll examine whether:</p>
+<ul>
+<li>verbal ability in the first grade is predictive of verbal ability in the sixth grade (verbal “actor” effect),<br />
+</li>
+<li>performance ability in the first grade is predictive of performance ability in the sixth grade (performance “actor” effect),<br />
+</li>
+<li>verbal ability in the first grade is predictive of performance ability in the sixth grade (verbal “partner” effect), and<br />
+</li>
+<li>performance ability in the first grade is predictive of verbal ability in the sixth grade (performance “partner” effect).</li>
+</ul>
+</div>
+<div id="null-model" class="section level3 hasAnchor" number="13.7.6">
+<h3><span class="header-section-number">13.7.6</span> Null Model<a href="13.7-data-example.html#null-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before running this full model, we will examine the empty model to determine how much variability there is within- and between-persons. Specifically,</p>
+<p><span class="math display">\[
+Grade6Outcome_{i} = \beta_{0V}VerbOn_{it} + \beta_{0P}PerformOn_{it} + e_{Vi} +e_{Pi}
+\]</span></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="13.7-data-example.html#cb27-1" aria-hidden="true" tabindex="-1"></a>apim_empty <span class="ot">&lt;-</span> <span class="fu">gls</span>(</span>
+<span id="cb27-2"><a href="13.7-data-example.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  grade6_outcome <span class="sc">~</span>  <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span>                <span class="co"># turn OFF the intercept </span></span>
+<span id="cb27-3"><a href="13.7-data-example.html#cb27-3" aria-hidden="true" tabindex="-1"></a>                    verb_on <span class="sc">+</span>           <span class="co"># intercept for verbal scores</span></span>
+<span id="cb27-4"><a href="13.7-data-example.html#cb27-4" aria-hidden="true" tabindex="-1"></a>                    perform_on,         <span class="co"># intercept for performance scores</span></span>
+<span id="cb27-5"><a href="13.7-data-example.html#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">correlation =</span> <span class="fu">corSymm</span>(<span class="at">form=</span> <span class="sc">~</span><span class="dv">1</span><span class="sc">|</span>id),</span>
+<span id="cb27-6"><a href="13.7-data-example.html#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">varIdent</span>(<span class="at">form=</span> <span class="sc">~</span><span class="dv">1</span><span class="sc">|</span>verb_on), <span class="co"># allows for 2 error terms </span></span>
+<span id="cb27-7"><a href="13.7-data-example.html#cb27-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> data_melt,</span>
+<span id="cb27-8"><a href="13.7-data-example.html#cb27-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">na.action =</span> na.exclude)</span>
+<span id="cb27-9"><a href="13.7-data-example.html#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="13.7-data-example.html#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(apim_empty)</span></code></pre></div>
+<pre><code>## Generalized least squares fit by REML
+##   Model: grade6_outcome ~ -1 + verb_on + perform_on 
+##   Data: data_melt 
+##        AIC      BIC    logLik
+##   3063.861 3083.893 -1526.931
 ## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -0.9100  -0.9048  -0.8994   1.4757   1.6242  
+## Correlation Structure: General
+##  Formula: ~1 | id 
+##  Parameter estimate(s):
+##  Correlation: 
+##   1    
+## 2 0.611
+## Variance function:
+##  Structure: Different standard deviations per stratum
+##  Formula: ~1 | verb_on 
+##  Parameter estimates:
+##        1        0 
+## 1.000000 1.170165 
 ## 
 ## Coefficients:
-##                        Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)           -0.690890   0.084358  -8.190 2.61e-16 ***
-## PersonalSpending_star -0.001355   0.004605  -0.294    0.769    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+##               Value Std.Error  t-value p-value
+## verb_on    43.74990 0.7467029 58.59077       0
+## perform_on 50.93162 0.8737660 58.28977       0
 ## 
-## (Dispersion parameter for binomial family taken to be 1)
+##  Correlation: 
+##            verb_n
+## perform_on 0.611 
 ## 
-##     Null deviance: 805.02  on 631  degrees of freedom
-## Residual deviance: 804.93  on 630  degrees of freedom
-## AIC: 808.93
+## Standardized residuals:
+##         Min          Q1         Med          Q3         Max 
+## -3.25897660 -0.72994511 -0.02108775  0.72002989  3.05118321 
 ## 
-## Number of Fisher Scoring iterations: 4</code></pre>
-<div id="overdispersion" class="section level3 hasAnchor" number="7.6.1">
-<h3><span class="header-section-number">7.6.1</span> Overdispersion<a href="7.6-single-predictor-model.html#overdispersion" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>A quick digression. In the binary logistic regression model <em>overdispersion</em> occurs when the observed variance is larger than what the binomial distribution would predict. For example, if <span class="math inline">\(Y \sim \mathrm{Binomial}(n_{i},\pi_{i})\)</span>, the mean is <span class="math inline">\(\u_{i}=n_{i}\pi_{i}\)</span> and the variance is <span class="math inline">\(n_{i}\pi_{i}(1-\pi_{i})\)</span>. Since both of these moments rely on <span class="math inline">\(\pi_{i}\)</span>, it can be overly restrictive, and if overdispersion is present inferences can become distorted. We will talk about this more later.</p>
+## Residual standard error: 10.66505 
+## Degrees of freedom: 408 total; 406 residual</code></pre>
+<p>We examine the correlation of the verbal and performance error terms to determine the degree of non-independence in the data. We can see that <span class="math inline">\(\rho = 0.61\)</span>, indicating the correlation across dyad members, children who have higher verbal ability tend to also have higher performance ability.</p>
+<p>A few other points to note:</p>
+<ul>
+<li>The results for <code>verb_on</code> indicate the average or expected verbal score at grade 6 is 43.75.</li>
+<li>The results for <code>perform_on</code> indicate the average or expected performance score at grade 6 is 50.93.
+<ul>
+<li>Both these expected values correspond to sample means in the raw data.</li>
+</ul></li>
+<li>The grade 6 verbal and performance scores also each have estimated “standard error” values. The estimated standard error for Grade 6 verbal scores is 10.67 and the estimated standard error for Grade 6 performance scores is 12.48 = (1.17*10.67).
+<ul>
+<li>Note that these estimates exactly match the respective standard deviations in the raw data (see descriptives above).</li>
+</ul></li>
+</ul>
+<p>For completeness of representing the data we can get the means and variances of, and correlation between, the two predictors from the raw data.</p>
 </div>
-<div id="coefficients" class="section level3 hasAnchor" number="7.6.2">
-<h3><span class="header-section-number">7.6.2</span> Coefficients<a href="7.6-single-predictor-model.html#coefficients" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Again, There are essentially three ways to interpret coefficients from a logistic regression model:</p>
-<ol style="list-style-type: decimal">
-<li>The log-odds (or logit)</li>
-<li>The Odds</li>
-<li>Probabilities</li>
-</ol>
-<div id="log-odds" class="section level4 hasAnchor" number="7.6.2.1">
-<h4><span class="header-section-number">7.6.2.1</span> Log-Odds<a href="7.6-single-predictor-model.html#log-odds" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>The parameter estimate <span class="math inline">\(b_0\)</span> reflects the expected log-odds (<span class="math inline">\(-0.69\)</span>) of being happy for an individual with an average amount of personal spending.</p>
-<p>The estimate for <span class="math inline">\(b_1\)</span> indicates the expected difference of the log-odds of being happy for a <span class="math inline">\(100\)</span> dollar difference in personal spending. Therefore, we expect a <span class="math inline">\(-0.001\)</span> difference in the log-odds of being happy for a <span class="math inline">\(100\)</span> dollar difference in personal spending.</p>
-</div>
-<div id="odds" class="section level4 hasAnchor" number="7.6.2.2">
-<h4><span class="header-section-number">7.6.2.2</span> Odds<a href="7.6-single-predictor-model.html#odds" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Parameter estimates from a logistic regression are often reported in terms of <em>odds</em> rather than <em>log-odds</em>. To obtain parameters in odds units, we simply exponentiate the coefficients. Note that this is just one of the steps of the inverse link function (which would take us all the way to probability units).</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="7.6-single-predictor-model.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">cbind</span>(<span class="at">OR =</span> <span class="fu">coef</span>(model10), <span class="fu">confint</span>(model10)))</span></code></pre></div>
-<pre><code>## Waiting for profiling to be done...</code></pre>
-<pre><code>##                              OR     2.5 %    97.5 %
-## (Intercept)           0.5011299 0.4240750 0.5903901
-## PersonalSpending_star 0.9986459 0.9886908 1.0072747</code></pre>
-<p>In other words, the odds of being happy when personal spending is at average levels is <span class="math inline">\(exp(-0.690890) = 0.5\)</span>.</p>
-<p>In regard to the slope coefficient, for a <span class="math inline">\(100\)</span> dollar difference in monthly personal spending, we expect to see about <span class="math inline">\(.1\%\)</span> decrease in the odds of being happy. This decrease does not depend on the value that personal spending is held at. Note this is not significant and we would not report this interpretation in practice. Essentially, if the odds ratio is equal to one, the predictor did not have an impact on the outcome.</p>
-</div>
-<div id="probability" class="section level4 hasAnchor" number="7.6.2.3">
-<h4><span class="header-section-number">7.6.2.3</span> Probability<a href="7.6-single-predictor-model.html#probability" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Remember, probabilities range from <span class="math inline">\([0,1]\)</span>, whereas log-odds (the output from the raw logistic regression equation) can range from <span class="math inline">\((-\infty,\infty)\)</span>, and odds and odds ratios can range from <span class="math inline">\((0,\infty)\)</span>. Due to the bounded range of probabilities, probabilities are non-linear, but log-odds can be linear.</p>
-<p>For example, as personal spending goes up by constant increments, the probability of happiness will increase (decrease) by varying amounts, but the log-odds will increase (decrease) by a constant amount, and the odds will increase (decrease) by a constant multiplicative factor.</p>
-<p>For this reason it is not so simple to interpret probabilities in logistic regression from the coefficient directly. Often it is much simpler to plot the probabilities across a range of the predictor variables.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="7.6-single-predictor-model.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>dunn2008,</span>
-<span id="cb103-2"><a href="7.6-single-predictor-model.html#cb103-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x=</span>PersonalSpending_star,<span class="at">y=</span>Happy)) <span class="sc">+</span></span>
-<span id="cb103-3"><a href="7.6-single-predictor-model.html#cb103-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">08</span>, <span class="at">size =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb103-4"><a href="7.6-single-predictor-model.html#cb103-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">xlab</span>(<span class="st">&quot;Personal Spending&quot;</span>) <span class="sc">+</span></span>
-<span id="cb103-5"><a href="7.6-single-predictor-model.html#cb103-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">ylab</span>(<span class="st">&quot;Happy&quot;</span>) <span class="sc">+</span></span>
-<span id="cb103-6"><a href="7.6-single-predictor-model.html#cb103-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb103-7"><a href="7.6-single-predictor-model.html#cb103-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">&#39;glm&#39;</span>, <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>), <span class="at">se =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
-<p>Notice how the density of the observations is visualized by manipulating the transparency (alpha) level of the data points. The predicted curve based on our model has of course a non-linear shape (however, if we were to plot the relationship between the variables with using the logit link, it would be a straight line).</p>
+<div id="full-apim" class="section level3 hasAnchor" number="13.7.7">
+<h3><span class="header-section-number">13.7.7</span> Full APIM<a href="13.7-data-example.html#full-apim" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Next, we are going to run our full APIM model using the two-intercept approach. Specifically,</p>
+<p><span class="math display">\[Grade6Outcome_{it} =  \beta_{0V}VerbOn_{it} + \beta_{1V}VerbOn_{it}*Verb1_{it} + \beta_{2V}VerbOn_{it}*Perform1_{it} + \\  \beta_{0P}PerformOn_{it} + \beta_{1P}PerformOn_{it}*Perform1_{it} + \beta_{2P}PerformOn_{it}*Verb1_{it} + e_{Vi} +e_{Pi}\]</span></p>
+<p>So when <code>verb_on</code> is equal to 0:</p>
+<p><span class="math display">\[Grade6Outcome_{it} = \beta_{0P}PerformOn_{it} + \beta_{1P}PerformOn_{it}*Perform1_{it} + \beta_{2P}PerformOn_{it}*Verb1_{it} + e_{Vi} +e_{Pi}\]</span></p>
+<p>and when <code>perform_on</code> is equal to 0:</p>
+<p><span class="math display">\[Grade6Outcome_{it} = \beta_{0V}VerbOn_{it} + \beta_{1V}VerbOn_{it}*Verb1_{it} + \beta_{2V}VerbOn_{it}*Perform1_{it} + e_{Vi} +e_{Pi}\]</span></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="13.7-data-example.html#cb29-1" aria-hidden="true" tabindex="-1"></a>apim_full <span class="ot">&lt;-</span> <span class="fu">gls</span>(grade6_outcome <span class="sc">~</span>  </span>
+<span id="cb29-2"><a href="13.7-data-example.html#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span>                <span class="co"># turns OFF intercept </span></span>
+<span id="cb29-3"><a href="13.7-data-example.html#cb29-3" aria-hidden="true" tabindex="-1"></a>    verb_on <span class="sc">+</span>           <span class="co"># verbal intercept</span></span>
+<span id="cb29-4"><a href="13.7-data-example.html#cb29-4" aria-hidden="true" tabindex="-1"></a>    verb_on<span class="sc">:</span>verb1 <span class="sc">+</span>     <span class="co"># verbal &quot;actor&quot; effect</span></span>
+<span id="cb29-5"><a href="13.7-data-example.html#cb29-5" aria-hidden="true" tabindex="-1"></a>    verb_on<span class="sc">:</span>perfo1 <span class="sc">+</span>    <span class="co"># performance &quot;partner&quot; effect</span></span>
+<span id="cb29-6"><a href="13.7-data-example.html#cb29-6" aria-hidden="true" tabindex="-1"></a>    perform_on <span class="sc">+</span>        <span class="co"># performance intercept</span></span>
+<span id="cb29-7"><a href="13.7-data-example.html#cb29-7" aria-hidden="true" tabindex="-1"></a>    perform_on<span class="sc">:</span>perfo1 <span class="sc">+</span> <span class="co"># performance &quot;actor&quot; effect</span></span>
+<span id="cb29-8"><a href="13.7-data-example.html#cb29-8" aria-hidden="true" tabindex="-1"></a>    perform_on<span class="sc">:</span>verb1,   <span class="co"># verbal &quot;partner&quot; effect</span></span>
+<span id="cb29-9"><a href="13.7-data-example.html#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">correlation =</span> <span class="fu">corSymm</span>(<span class="at">form=</span><span class="sc">~</span><span class="dv">1</span><span class="sc">|</span>id),</span>
+<span id="cb29-10"><a href="13.7-data-example.html#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">varIdent</span>(<span class="at">form=</span><span class="sc">~</span><span class="dv">1</span><span class="sc">|</span>verb_on), <span class="co"># allows for different error terms </span></span>
+<span id="cb29-11"><a href="13.7-data-example.html#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> data_melt,</span>
+<span id="cb29-12"><a href="13.7-data-example.html#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude)</span>
+<span id="cb29-13"><a href="13.7-data-example.html#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="13.7-data-example.html#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(apim_full)</span></code></pre></div>
+<pre><code>## Generalized least squares fit by REML
+##   Model: grade6_outcome ~ -1 + verb_on + verb_on:verb1 + verb_on:perfo1 +      perform_on + perform_on:perfo1 + perform_on:verb1 
+##   Data: data_melt 
+##        AIC      BIC    logLik
+##   2879.029 2914.997 -1430.514
+## 
+## Correlation Structure: General
+##  Formula: ~1 | id 
+##  Parameter estimate(s):
+##  Correlation: 
+##   1    
+## 2 0.312
+## Variance function:
+##  Structure: Different standard deviations per stratum
+##  Formula: ~1 | verb_on 
+##  Parameter estimates:
+##        1        0 
+## 1.000000 1.188537 
+## 
+## Coefficients:
+##                       Value Std.Error   t-value p-value
+## verb_on           19.869325 1.8634459 10.662679  0.0000
+## perform_on        30.049124 2.2147736 13.567582  0.0000
+## verb_on:verb1      0.809886 0.1150893  7.037017  0.0000
+## verb_on:perfo1     0.446064 0.0800504  5.572292  0.0000
+## perfo1:perform_on  0.962419 0.0951429 10.115507  0.0000
+## verb1:perform_on   0.182846 0.1367879  1.336709  0.1821
+## 
+##  Correlation: 
+##                   verb_n prfrm_ vrb_n:v1 vrb_n:p1 prf1:_
+## perform_on         0.312                                
+## verb_on:verb1     -0.738 -0.230                         
+## verb_on:perfo1    -0.034 -0.011 -0.610                  
+## perfo1:perform_on -0.011 -0.034 -0.190    0.312         
+## verb1:perform_on  -0.230 -0.738  0.312   -0.190   -0.610
+## 
+## Standardized residuals:
+##         Min          Q1         Med          Q3         Max 
+## -2.55877996 -0.66034371 -0.02441614  0.62804539  3.69258907 
+## 
+## Residual standard error: 7.545255 
+## Degrees of freedom: 408 total; 402 residual</code></pre>
+<div id="results" class="section level4 hasAnchor" number="13.7.7.1">
+<h4><span class="header-section-number">13.7.7.1</span> Results<a href="13.7-data-example.html#results" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>The expected verbal score at grade 6 = 19.87 and the expected performance score at grade 6 = 30.05 when verbal and performance scores at grade 1 are equal to zero.</li>
+</ul>
+<p><strong>Actor Effects</strong></p>
+<ul>
+<li>The <em>actor effect</em> of verbal ability is 0.81, indicating that every 1.0 point difference in children’s verbal ability at Grade 1 is associated with a 0.81 point difference in Grade 6. Stated differently, earlier differences in verbal ability influence later differences in verbal ability.<br />
+</li>
+<li>The <em>actor effect</em> of performance ability is 0.96, indicating that every 1.0 point difference in children’s performance ability at Grade 1 is associated with a 0.96 point difference in Grade 6. Stated differently, earlier differences in performance ability influence later differences in performance ability.</li>
+</ul>
+<p><strong>Partner Effects</strong></p>
+<ul>
+<li>The <em>partner effect</em> of performance ability on verbal ability is 0.45, indicating that every 1.0 point difference in children’s performance ability at Grade 1 is associated with a 0.45 point difference in verbal ability at Grade 6. Stated differently, earlier differences in performance ability “influence” later differences in verbal ability.</li>
+</ul>
+<p>The <em>partner effect</em> of verbal ability on performance ability is not significantly different than zero, indicating that earlier differences in performance ability at Grade 1 do not “influence” later differences in verbal ability at Grade 6.</p>
+<p><strong>Additional Info</strong></p>
+<ul>
+<li><span class="math inline">\(\rho = 0.31\)</span>, indicating the correlation across variables (or dyad members). Here, higher verbal ability scores tend to be paired with higher performance ability scores.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -700,8 +934,8 @@ where <span class="math inline">\(\pi_i = P(Happy_i = 1)\)</span>. Here, <span c
           </div>
         </div>
       </div>
-<a href="7.5-intercept-only-model-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="7.7-marginal-effects.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="13.6-longitudinal-apim.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="13.8-reference.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -722,7 +956,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/zackfisher/HDFS523/edit/master/07_logistic.Rmd",
+"link": "https://github.com/zackfisher/HDFS523/edit/master/13_dyadic_data_analysis.Rmd",
 "text": "Suggest an edit"
 },
 "history": {
