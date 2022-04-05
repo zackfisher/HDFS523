@@ -1,0 +1,889 @@
+# Cluster Analysis {#chapter-14}
+
+```{r, echo = F}
+button <-  "position: relative; 
+            top: -25px; 
+            left: 85%;   
+            color: white;
+            font-weight: bold;
+            background: #4B9CD3;
+            border: 1px #3079ED solid;
+            box-shadow: inset 0 1px 0 #80B0FB"
+```
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "show", style = button)
+```
+
+This chapter covers the basics of cluster analysis. First, we introduce the topics and then proceed with applied examples in R.
+
+## Introduction
+
+### Supervised Learning
+
+**Objective: Prediction**
+
+- Access to a set of variables, $x_1,x_2,\dots,x_p$, measured on $n$ observations, and a response $y$ also measured on those same $n$ observations.
+- Objective is to predict $y$ using $x_1,x_2,\dots,x_p$
+
+In many common situations there are a well-developed set of tools for supervised learning:
+
+- Regression and classification
+  - logistic regression, trees, random forests, bagging, boosting
+- Clear understanding of how to assess the quality of obtained results
+  - cross-validation, model fit, etc.
+  
+### Unsupervised Learning
+
+**Objective: Description**
+
+- A set of statistical tools intended for when we have a set of variables, $x_1,x_2,\dots,x_p$, measured on $n$ observations.
+- Objective is to uncover interesting patterns in the measurements of $x_1,x_2,\dots,x_p$
+  - Not interested in prediction because we do not have an associated response variable $y$
+  - Can we discover subgroups among the variables or among the observations?
+  - Is there an informative way to visualize the data?
+  
+Unsupervised learning is, in some ways, more challenging than supervised learning.
+
+- Tends to be more subjective.
+- No simple goal for the analysis, such as prediction of a response
+- Often hard to assess the results obtained from unsupervised learning methods because there is no universally accepted mechanism for validating the results
+- No way to check our work because we do not know the true answer—the problem is unsupervised
+
+The importance of reliable unsupervised learning methods is growing in a number of fields:
+
+- A cancer researcher might assay gene expression levels in patients with breast cancer to look for subgroups among the breast cancer samples in order to obtain a better understanding of the disease
+- An online shopping site might try to identify groups of shoppers with similar browsing and purchase histories to target coupons, sales, etc.
+- A search engine might choose what search results to display to a particular individual based on the click histories of other individuals with similar search patterns. 
+
+## Cluster Analysis
+
+Cluster analysis or clustering is the task of grouping a set of objects in such a way that objects in the same group (a cluster) are more similar (in some sense or another) to each other than to those in other groups (clusters).
+
+![https://en.wikipedia.org/wiki/Cluster_analy](imgs/cluster.png)
+
+We seek to partition observations into distinct groups so that the observations within each group are quite similar to each other, while observations in different groups are quite different from each other. 
+
+To make this concrete, we must define what it means for two or more observations to be similar or different
+
+- most often this is done by the measurement of distance
+- cluster analysis methods work from *dissimilarity* measures (e.g., distance matrix)
+
+#### Person-Oriented Clustering
+
+We can think of cluster analysis as a person-oriented approach in that one objective of cluster analysis is to identify different *types of people*.
+
+
+## Clustering Algorithms
+
+Many clustering algorithms exist:
+
+1. Ward’s hierarchical clustering
+2. K-means clustering
+3. Hierarchical clustering
+4. Density-based clustering
+5. Spectral clustering
+6. Mean shift
+7. Affinity propagation
+8. Mixture model (latent profile analysis, latent class analysis)
+
+The majority of class today will cover (1) Hierarchical and (2) K-Means Clustering.
+
+#### Hierarchical Clustering
+
+- We do not know in advance how many clusters we want
+- Bottom-up approach (grouping similar observations together) 
+- End up with a tree-like visual representation of the observations called a dendrogram
+
+
+#### K-means Clustering
+
+K-means clustering:
+
+- Seek to partition the observations into a pre-specified number of clusters
+- Top-down approach
+
+
+
+## Hierarchical Clustering
+
+Hierarchical clustering proceeds via an extremely simple algorithm:
+
+Begin by defining some sort of dissimilarity measure between each pair of observations (e.g., Euclidean distance).
+
+Algorithm proceeds iteratively:
+
+1. Each of the $n$ observations is treated as its own cluster
+2. The two clusters that are most similar are then fused so that there now are $n-1$ clusters
+3. Repeat Step 2 until all of the observations belong to one single cluster
+
+Note this produces not one clustering, but a family of clustering represented by a dendrogram.
+
+![Hierarchical Clustering](imgs/hclust.jpg)
+
+### Distances
+
+Euclidean distance is a common distance measure. For two dimensions, it is equal to the sum of squares of difference on $x$ plus the sum of squares of difference on $y$. Note, variables can differ in scale so it is important to standardize our inputs.
+
+![Euclidian Distance](imgs/euclidian.jpg)
+
+There are many **distance measures**.
+
+![Distance Measures](imgs/manhattan.jpg)
+A taxicab geometry is a form of geometry in which the usual distance function or metric of Euclidean geometry is replaced by a new metric in which the distance between two points is the sum of the absolute differences of their Cartesian coordinates.
+
+Taxicab geometry versus Euclidean distance: In taxicab geometry, the red, yellow, and blue paths all have the same shortest path length of 12. 
+
+### Distance Between Clusters
+
+The concept of dissimilarity between a pair of observations needs to be extended to a pair of groups of observations – what’s the distance between clusters?
+
+This extension is achieved by developing the notion of **linkage**, which defines the dissimilarity between two groups of observations. Four most common types of linkage: complete, average, single, and centroid. An important fifth is the Ward-method.
+
+**Complete**: Maximal intercluster dissimilarity. Compute all pairwise dissimilarities between the observations in cluster A and the observations in cluster B, and record the largest of these dissimilarities. This is sometimes referred to as farthest neighbor clustering.
+
+![Complete Linkage](imgs/linkage_complete.jpg)
+
+**Single**: Minimal intercluster dissimilarity. Compute all pairwise dissimilarities between the observations in cluster A and the observations in cluster B, and record the smallest of these dissimilarities. 
+
+![Single Linkage](imgs/linkage_single.jpg)
+
+**Average**: Mean intercluster dissimilarity. Compute all pairwise dissimilarities between the observations in cluster A and the observations in cluster B, and record the average of these dissimilarities.
+
+![Average Linkage](imgs/linkage_average.jpg)
+
+**Centroid**: Dissimilarity between the centroid for cluster A (a mean vector of length p) and the centroid for cluster B. 
+
+
+![Centroid Linkage](imgs/linkage_centroid.jpg)
+
+**Ward's Method**: minimize within cluster sum of squares. The linkage function specifying the distance between two clusters is computed as the increase in the error sum of squares after fusing two clusters into a single cluster. 
+
+![Centroid Linkage](imgs/linkage_ward.jpg)
+
+### Linkages Applied Example
+
+Let's take a look at different linkages using this US cities example. First we can calculate the difference among the different cities
+
+![US Map](imgs/clust_slide1.jpg)
+![Matrix of Dissimilarity](imgs/clust_slide2.jpg)
+
+Now, let's start by making a cluster of Boston and New York.
+
+![US Map](imgs/clust_slide3.jpg)
+
+
+Now compute new dissimilarity matrix. New matrix depends on the linkage approach.
+
+- Complete linkage would use distance from Boston to all other cities because Boston is further than NY
+- Single linkage would use distance from NY to all other cities because NY is closer than Boston
+- Average linkage would use the mean of the distances from NY and Boston 
+- Centroid linkage would place a new city half way between NY and Boston and calculate differences from this new city
+
+![Resulting Clusters](imgs/clust_slide4.jpg)
+
+### Dendograms
+
+Now let's look at the dendograms.
+
+
+![Dendogram: Single Linkage](imgs/dend_single.png)
+![Dendogram: Complete Linkage](imgs/dend_complete.png)
+Which one gives us a better solution for the underlying typology?
+
+#### Interpreting Dendograms
+
+- Each leaf of the dendrogram represents one of the $n$ observations 
+- Moving up the tree, leaves begin to fuse into branches corresponding to observations that are similar to each other
+- Moving higher up, branches fuse, either with leaves or other branches
+- The height of the fusion, as measured on the vertical axis, indicates how different the two observations are
+- Observations that fuse at the very bottom of the tree are quite similar to each other
+- Observations that fuse close to the top of the tree will tend to be quite different
+
+We can draw conclusions about the similarity of two observations based on the location on the vertical axis where branches containing those two observations first are fused.
+
+Generally we are looking for a level above which the lines are long (between-group heterogeneity) and below which the leaves are close (within-group homogeneity).
+
+#### Identifying Clusters in Dendograms
+
+- Make a horizontal cut across the dendrogram
+- The distinct sets of observations beneath the cut can be interpreted as clusters
+- Therefore, a dendrogram can be used to obtain any number of clusters
+
+Researchers often look at the dendrogram and select by eye a sensible number of clusters based on the heights of the fusion and the number of clusters desired.
+
+The choice of where to cut the dendrogram is not always clear.
+
+![Example Dendogram](imgs/dend3.jpg)
+
+What should we do with this data? 1 2 or 3 groups? You as a researcher have to decide.
+
+**Discussion Questions**
+
+1. Identify a dimension or process central to your own research where you think there is a substantial between-person heterogeneity.
+2. Identify a set of variables that might be used to classify individuals into meaningful groups as a means to address this heterogeneity.
+3. With groups or clusters identified how might you empirically assess these groupings?
+
+
+## K-Means Clustering
+
+First specify the desired number of clusters $K$.
+
+The K-means algorithm will assign each observation to exactly one of the $K$ clusters.
+
+
+![https://www.javatpoint.com/k-means-clustering-algorithm-in-machine-learning](imgs/kmeans1.png)
+
+
+### Within-Cluster Variation
+
+Good clustering is one for which the within-cluster variation is as small as possible
+The within-cluster variation for cluster $C_k$ is a measure, $W(C_k)$, of the amount by which the observations within a cluster differ from each other.
+
+We want to solve
+
+$$
+\min_{C_1,\dots,C_{K}} \sum^{K}_{k=1}W(C_{k})
+$$
+Goal is to partition the observations into $K$ clusters, such that the total within-cluster variation, summed over all $K$ clusters, is as small as possible.
+
+![K-means US States](imgs/kmeans3.png)
+
+Let's define within cluster variation using the squared Euclidian distance (the most commonly used metric)
+
+$$
+W(C_{k}) = \frac{1}{|C_k|}\sum_{i,i'\in C_k}\sum_{j=1}^{p}(x_{ij}-x_{i'j})^2
+$$
+Note, clustering with the Euclidean Squared distance metric is faster than clustering with the regular Euclidean distance. Importantly, the output of K-Means clustering is not affected if Euclidean distance is replaced with Euclidean squared distance. 
+
+### K-Means Algorithm
+
+1. Specify $K$, the number of clusters
+2. Randomly select $K$ initial cluster means (centroids)
+3. Assignment step: Assign each observation to the cluster whose centroid is closest (where closest is defined using squared Euclidean distance)
+4. Adjustment step:Compute the new cluster means (centroids).
+5. Iterate the Assignment and Update steps until the assignments no longer change.
+
+
+### K-means Example
+
+![K-means Example](imgs/kmeans2.png)
+
+![K-means Example](imgs/kmeans4.png)
+
+
+![K-means Example](imgs/kmeans5.png)
+
+
+![K-means Example](imgs/kmeans6.png)
+Here, we establish a new centroid (X) based on the means of the current assignment
+Then do the assignment again by cacluting the closeness to the new centroid,
+
+![K-means Example](imgs/kmeans7.png)
+
+![K-means Example](imgs/kmeans8.png)
+
+![K-means Example](imgs/kmeans9.png)
+
+![K-means Example](imgs/kmeans10.png)
+
+#### Snapshot of Algorithm
+
+![K-means Snapshot](imgs/kmeans11.png)
+Randomness of the initial choice for the starting point. We might end up with different solutions when we have different starting points.
+
+
+Now, let's take a look with various random starting points.
+
+![K-means Snapshot](imgs/kmeans12.png)
+
+We ended up with three clusters, but the random start value influenced, above the variance is printed, there are 4 identical solutions $235.8$ but different order (label switching)
+In R we can set a seed value so that they replicate.
+
+#### Local Optimum
+
+The K-Means algorithm finds a local rather than a global optimum. This means results obtained will depend on the initial (random) cluster assignment of each observation
+
+It is important to run the algorithm multiple times from different random starting values and then select the best solution. Here, by best, we mean the minimum within cluster variance.
+
+
+### Choosing K
+
+![Choosing K?](imgs/kmeans13.png)
+
+#### How to Choose $K$?
+
+You want to maximize data reduction while making sure that you have good accuracy in terms of cluster memberships.
+
+Some possibilities for choosing $K$:
+
+- Elbow method (see also within and between sum of squares in the R script)
+- Information criterion approach (AIC, BIC, DIC)
+- Two-step approach – using the dendogram from hierarchical clustering
+- Using the Silhouette coefficient (see next)
+
+![Elbow Method](imgs/kmeans14.png)
+
+#### Silhouette Coefficient
+
+![Silhouette Coefficient](imgs/kmeans15.jpg)
+The silhouette coefficient is one such measure. It works as follows:
+
+For each point $p$, first find the average distance between p and all other points in the same cluster (this is a measure of cohesion, call it $a$). Then find the average distance between $p$ and all points in the nearest cluster (this is a measure of separation from the closest other cluster, call it $b$). The silhouette coefficient for $p$ is defined as the difference between $b$ and $a$ divided by the greater of the two ($max(a,b)$).
+
+We evaluate the cluster coefficient of each point and from this we can obtain the 'overall' average cluster coefficient.
+
+Intuitively, we are trying to measure the space between clusters. If cluster cohesion is good ($a$ is small) and cluster separation is good ($b$ is large), the numerator will be large, etc.
+
+The silhouette plot shows the that the silhouette coefficient was highest when $k = 3$, suggesting that's the optimal number of clusters. In this example we are lucky to be able to visualize the data and we might agree that indeed, three clusters best captures the segmentation of this data set.
+
+If we were unable to visualize the data, perhaps because of higher dimensionality, a silhouette plot would still give us a suggestion. 
+
+## DBSCAN
+
+Another method to consider is Density-based spatial clustering of applications with noise (DBSCAN). 
+
+DBSCAN is a powerful, widely used method – great with identifying clusters of arbitrary shape
+clusters together points that are closely packed together (high density regions), and identifies outliers (not part of any clusters) as points whose neighbors are far away (low-density regions).
+
+
+![Algorithm Comparison](imgs/kmeans16.png)
+
+### Example of DBSCAN
+
+![DBSCAN Example ](imgs/kmeans17.png)
+
+**Eps**: You have to choose this value. Recommended to be smallish and based on domain knowledge. Eps defines the size and borders of each neighborhood. The Eps (must be bigger than 0) is a radius. The neighborhood of point $p$ called the Eps-neighborhood of $p$, is the ball with radius Eps around point $p$.
+
+
+![DBSCAN Example ](imgs/kmeans18.png)
+
+**MinPts**: You have to choose this value. Recommended to be twice the number of dimensions in your dataset. 
+
+MinPts is the density threshold. If a neighborhood includes at least MinPts points, it will be considered as a dense region. Alternatively, a point will be considered as dense if there are at least the value of MinPts points in its Eps-neighborhood. These dense points are called core points.
+
+Point $p$ is a core point because the size of its Eps-neighborhood is 12 and MinPts is 5. Point $q$, on the other hand, won't be a core point because its Eps-neighborhood is 4, smaller than MinPts.
+
+A border point has Eps-neighborhood that contains less than MinPts points (so it’s not a core point), but it belongs to the Eps-neighborhood of another core point.
+
+If a point isn’t a core point and isn’t a border point, it’s a noise point or an outlier.
+
+In the figure below we can see that point $x$ is a core point, because it has more than $11$ points in its Eps-neighborhood. Point $y$ isn’t a core point because it has less than $11$ points in its Eps-neighborhood, but because it belongs to the Eps-neighborhood of point $x$, and point $x$ is a core point, point $y$ is a border point. We can easily see that point $z$ isn’t a core point. It belongs to the Eps-neighborhood of point $y$, but point $y$ isn’t a core point, therefore point $z$ is a noise point.
+
+![https://towardsdatascience.com/a-practical-guide-to-dbscan-method-d4ec5ab2bc99](imgs/dbscan1.png)
+
+
+![DBSCAN Example ](imgs/kmeans19.png)
+Note, the assumption here is that we sampled well, like there are really not a lot of people around the outlier.
+
+A wonderful illustrated description of the DBSCAN algorithm can be found at: https://towardsdatascience.com/a-practical-guide-to-dbscan-method-d4ec5ab2bc99
+
+## Issues in Clustering
+
+- Determining the number of clusters to retain
+- Cross-validation of clusters and cluster sizes
+- All or none decision process (Either in or out of a cluster)
+- What to do with observations that really don’t belong in any cluster
+- Consequences of choices among linkage, dissimilarity measure, cutting dendrogram
+
+
+### Recommendations 
+
+Perform clustering with different choices of parameters, and look at the full set of results in order to see what patterns consistently emerge
+
+Since clustering can be non-robust, recommend to cluster subsets of the data and evaluate robustness of the clusters obtained
+
+Most importantly, must be careful about how the results of a clustering analysis are reported. 
+
+Results should not be taken as the absolute truth about a data set.
+
+Instead, results often constitute a starting point for the development of a scientific hypothesis and further study, preferably on an independent data set
+
+
+
+
+## Applied Examples
+
+The applied examples for this chapter were adapted from a more detailed tutorial on the QuantDev website (https://quantdev.ssri.psu.edu/tutorials/cluster-analysis-example).
+
+Cluster analysis is an exploratory, descriptive, "bottom-up" approach to structure heterogeneity. A key underpinning of cluster analysis is an assumption that a sample is NOT homogeneous. The method is used to examine and describe distinct sub-populations in the sample. 
+The goal is to identify *groups of individuals (observations)* whose members (a) are similar on group-defining variables, and (b) differ from members of other groups?
+
+
+### Preliminaries
+
+Libraries used in this script. There are two main libraries that we will use `cluster` (namesake) and `fpc` (Flexible Procedures for Clustering). Some other functions are in the base package.
+
+```{r, warning=FALSE, message=FALSE}
+#general packages
+library(ggplot2)
+library(psych)
+
+#cluster packages
+library(cluster) #clustering
+library(fpc) #flexible procedures for clustering
+library(clusterCrit) #cluster criteria
+```
+
+Our example makes use of one our experience sampling data sets, but treats these data as though they are cross-sectional.   Getting the data and doing a bit of data management (new id variable)    
+
+```{r}
+#set filepath for data file
+filepath <- "https://quantdev.ssri.psu.edu/sites/qdev/files/AMIBbrief_raw_daily1.csv"
+
+#read in the .csv file using the url() function
+daily <- read.csv(file=url(filepath),header=TRUE)
+
+#clean-up of variable names so that they are all lowercase
+var.names.daily <- tolower(colnames(daily))
+colnames(daily)<-var.names.daily
+
+#creating a new "id" variable
+#(we had repeated measures nested in people, now they all get different ids)
+daily$id <- daily$id*10+daily$day
+
+names(daily)
+#reducing down to variable set
+daily <- daily[ ,c("id","slphrs","weath","lteq","pss","se","swls","evalday", "posaff","negaff","temp","hum","wind","bar","prec")]
+
+#names of variables
+names(daily)
+#looking at data    
+head(daily,10)
+```
+
+### Preparing Data   
+   
+Note that cluster analysis does NOT generally work with missing data. Here we simply delete incomplete cases. Other possibilities include imputation, and calculation of distances using most complete subsets.
+
+```{r}
+#removing observations with NA
+dailysub <- daily[complete.cases(daily), ] 
+describe(dailysub)
+```
+
+### Scaling 
+
+The unit of distance may be different for different variables. For example, one year of difference in age seems like it should be a larger difference than one dollar difference in income. 
+
+Different variables will be "weighted" differently in the distance calculation. To alleviate this, a common approach is to rescale each variable into a standardized, *z-score* variable (i.e., by subtracting the mean and dividing by the standard deviation). 
+
+Thus, all the variables would then have mean = 0, with differences scales in standard deviation units. Note that this scales everything in relation to the observed sample (which has plusses and minuses).    
+
+The R function `scale()` makes it all very easy.
+
+```{r}
+#scaling all the variables
+dailyscale <- data.frame(scale(dailysub, center=TRUE, scale=TRUE))
+#checking and fixing the id variable (which we did not want standardized)
+str(dailyscale$id)
+dailyscale$id <- dailysub$id
+str(dailyscale$id)
+describe(dailyscale)
+```
+
+### Plotting
+
+We choose a small subset of variables for easy visualization in a bivariate space. We use `lteq`, a measure of physical activity (Leisure Time Exercise Questionnaire), and `posaff`, a measure of positive affect.
+
+```{r}
+ggplot(dailyscale,aes(x=lteq,y=posaff)) +
+  geom_point()
+```
+
+This is a good toy data set for class purposes, but keep in mind the original nature of the data which might not be the best for cluster analytic purposes.
+
+### Distances
+
+Each individual is conceptualized as a point in a multivariate space. For example, let's look at the first three individuals. 
+
+```{r}
+data1 <- dailyscale[c(1,3,12),c("id","lteq","posaff")]
+head(data1,3)
+labels.abc <-c("A","B","C")
+ggplot(data1,aes(x=lteq,y=posaff)) +
+  geom_polygon(fill="blue",alpha=.6) +
+  geom_point(size=3) +
+  geom_text(aes(x=lteq-.1,label=labels.abc)) +
+  ylim(-1,1) + xlim(-1,1)
+```
+
+Let's look at the distances. Euclidean Distance is calculated as
+
+$$
+EuclideanDistance_{A,B} = \sqrt{(x_{a} - x_{b})^2 + (y_{a} - y_{b})^2}
+$$
+
+and easily implemented using the `dist()` function.
+
+```{r}
+dist.abc <- dist(data1[1:3,2:3],method="euclidean",diag=TRUE,upper=FALSE)
+dist.abc
+```
+
+Might also use a different distance measure, such as Manhattan Distance ... The distance between two points in a grid based on a strictly horizontal and/or vertical path (that is, along the grid lines), as opposed to the diagonal or "as the crow flies" distance.
+
+The Manhattan distance is the simple sum of the horizontal and vertical components, whereas the diagonal distance might be computed by applying the Pythagorean theorem.
+
+$$
+ManhattanDistance_{A,B} = |x_{a} - x_{b}| + |y_{a} - y_{b}|$
+$$
+
+```{r}
+dist.abc2 <- dist(data1[1:3,2:3],method="manhattan",diag=TRUE,upper=FALSE)
+dist.abc2
+```
+
+The great thing about the distances is that they scale up to distance in many dimensions.
+
+
+### K-Means 
+
+Basic clustering in the social sciences often makes use of the *K-means* procedure. 
+
+The k-means algorithm is a traditional and widely used clustering algorithm. 
+
+In brief, the algorithm begins by specifying the number of clusters we are interested in. This is the *k*. Each of the *k* clusters is identified by the vector of the average (i.e., the mean) value of each of the variables for observations within a cluster. A random clustering is constructed (random set of mean vectors). 
+
+The *k* means are calculated. Then, using the distance measure, we gravitate each observation to its nearest mean. The means are then recalculated and the points re-gravitate. And so on until there is no further change to the means.
+
+Let's see an example where we chose $K=4$.
+
+We use the R function `kmeans()`. 
+
+```{r}
+#there are random starts involved so we set a seed
+set.seed(1234)
+#running a cluster analysis
+model <- kmeans(dailyscale[,c("lteq","posaff")], centers=4)
+model
+```
+
+That is a lot of output! - but pretty easy to walk through and understand. The algorithm even gives a within cluster sum of squares, which is a measure of the explained variance.
+
+
+Let's extract the mean vectors and plot for a more intuitive understanding of the results.
+
+```{r}
+#getting centers
+model$centers
+#plotting clustered data points with k means
+ggplot(dailyscale,aes(x=lteq,y=posaff)) +
+  geom_point(color=model$cluster, alpha=.6) +#plotting all the points
+  #plotting the centroids
+  geom_point(aes(x=model$centers[1,1],y=model$centers[1,2]),color=1,size=5,shape=18) +
+  geom_point(aes(x=model$centers[2,1],y=model$centers[2,2]),color=2,size=5,shape=18) +
+  geom_point(aes(x=model$centers[3,1],y=model$centers[3,2]),color=3,size=5,shape=18) +
+  geom_point(aes(x=model$centers[4,1],y=model$centers[4,2]),color=4,size=5,shape=18) 
+  
+```
+
+#### Evaluation of Clustering Quality
+
+Numerous measures are available for evaluating a clustering. Many are stored within the model object returned by `kmeans()`.
+
+A basic concept for evaluating the quality of the clusters is the *sum of squares*. This is typically a sum of the square of the distances between observations.
+
+```{r}
+model$totss
+model$withinss
+model$tot.withinss
+model$betweenss
+```
+
+Evaluation of the sum of squares can help us both evaluate the quality of any given solution, as well as help us choose the number of clusters, *k*, needed to describe the data.
+
+**Evaluation: Within Sum of Squares** 
+
+The within sum of squares is a measure of how *close* the observations are within the clusters. For a single cluster this is calculated as the average squared distance of each observation within the cluster from the cluster mean. Then the total within sum of squares is the sum of the within sum of squares over all clusters. 
+
+The total within sum of squares generally decreases as the number of clusters increases. As we increase the number of clusters they individually tend to become smaller and the observations closer together within the clusters. As *k* increases, the changes in the total within sum of squares would be expected to reduce, and so it flattens out. A good value of *k* might be where the reduction in the total weighted sum of squares begins to flatten.
+
+General rule of thumb: Aim to minimize the total within sum of squares (achieve within-group similarity).
+
+**Evaluation: Between Sum of Squares**
+
+The between sum or squares is a measure of how *far* the clusters are from each other.
+
+General rule of thumb: Aim to maximize the between sum of squares (achieve between-group dissimilarity).
+
+A good clustering will have a small within sum of squares and a large between sum of squares. 
+
+So, we need to have a range of solutions to see how the within and between sum of squares looks with different *k*.
+
+```{r}
+#making a empty dataframe
+criteria <- data.frame()
+#setting range of k                   
+nk <- 1:20
+#loop for range of clusters
+for (k in nk) {
+model <- kmeans(dailyscale[,c("lteq","posaff")], k)
+criteria <- rbind(criteria,c(k,model$tot.withinss,model$betweenss,model$totss))
+}
+#renaming columns
+names(criteria) <- c("k","tot.withinss","betweenss","totalss")
+
+#scree plot
+ggplot(criteria, aes(x=k)) +
+  geom_point(aes(y=tot.withinss),color="red") +
+  geom_line(aes(y=tot.withinss),color="red") +
+  geom_point(aes(y=betweenss),color="blue") +
+  geom_line(aes(y=betweenss),color="blue") +
+  xlab("k = number of clusters") + ylab("Sum of Squares (within = red, between = blue)")
+
+#looking at criteria
+round(criteria,2)
+```
+
+From the scree plot, we might look for 6 clusters (but it is really hard to see any "elbow"). 
+
+There are also additional quantitative criteria that can be used to inform selection. 
+
+For example, the Calinski-Harabasz criterion, also known as the variance ratio criterion, is the ratio of the between sum of squares (divided by k - 1) to the within sum of squares (divided by n - k).
+
+The relative values can be used to compare clusterings of a single dataset, with higher values being better clusterings. The criterion is said to work best for spherical clusters with compact centers (as with normally distributed data) using k-means with Euclidean distance.
+
+And of course this is a well-trodden area of research so there are many criteria - and packages that calculate them for you - and make automated choices.
+
+```{r}
+#from library(fpc)
+# Calinski-Harabasz
+model.manyCH <- kmeansruns(dailyscale[,c("lteq","posaff")], krange=c(2:20), criterion="ch",critout = TRUE) 
+model.manyCH
+
+#another criteria 
+# average silhouette width
+model.manyASW <- kmeansruns(dailyscale[,c("lteq","posaff")], krange=c(2:20), criterion="asw",critout = TRUE) 
+model.manyASW
+```
+
+Don't just pick an index that shows your solution but check out the next point that talks about the stability of the solution. There is not "standard reporting" of cluster analysis results in the psychological literature. Different authors report different things - but all are using some metrics to justify the choice of *k*, and to support why the chosen cluster solution is a good description of the data.
+
+
+#### Obtaining a Stable Solution
+
+Recall that k-means begins the iterations with a random cluster assignment. Different starting points may lead to different solutions. So, it may be useful to start many times to locate a stable solution. This is automated within the `kmeans()` function.
+
+```{r}
+#kmeans with nstart = 1
+km.res <- kmeans(dailyscale[,c("lteq","posaff")], centers=4, nstart = 1)
+km.res$tot.withinss
+
+#kmeans with nstart = 25
+km.res <- kmeans(dailyscale[,c("lteq","posaff")], centers=4, nstart = 25)
+km.res$tot.withinss
+
+#kmeans with nstart = 50
+km.res <- kmeans(dailyscale[,c("lteq","posaff")], centers=4, nstart = 50)
+km.res$tot.withinss
+```
+
+The improvement can be seen over the single random start. 
+
+Recommended to do 25+ or 50 for stable solutions.
+
+**Replication** 
+
+It may also be informative to repeat the procedure on randomly selected portions of the sample. If the cluster solution replicates in (random) subsets of the data - that would be strong evidence that the typology is pervasive and meaningful. 
+
+
+#### After Clustering   
+
+After finding a suitable cluster solution, each individual is placed in a cluster. Formally, we obtain a vector of cluster assignments - a new categorical, grouping variable.    
+
+What's next? 
+
+Well, we can both describe the clusters and use this new cluster variable in some other analysis - ANOVAs to test group differences, Chi-square tests, Multinomial regressions ... the cluster variable can be used as a predictor, a correlate, an outcome (e.g., check whether those clusters are for example differ across personality variables etc.)
+
+#### Describing Clusters
+
+First we merge the vector of cluster assignments back into the data set.
+
+```{r}
+dailyscale.clus <- cbind(km.res$cluster,dailyscale)
+names(dailyscale.clus)[1] <- "cluster"
+head(dailyscale.clus[,c(1:4,6)],4)
+```
+
+We can describe the different clusters - and potentially name the clusters.
+
+```{r}
+library(tidyverse)
+
+# Gather the data to 'long' format so the clustering variables are all in one column
+#gather() has been replaced by pivot_longer()
+longdata <- dailyscale.clus %>%
+  pivot_longer(c(lteq, posaff), names_to = "variable", values_to = "value")
+
+# Create the summary statistics seperately for cluster and variable (i.e. lteq, posaff)
+summary <- longdata %>%
+             group_by(cluster, variable) %>%
+             summarise(mean = mean(value), se = sd(value) / length(value))
+
+# Plot
+ggplot(summary, aes(x = variable, y = mean, fill = variable)) + 
+  geom_bar(stat = 'identity', position = 'dodge') +
+  geom_errorbar(aes(ymin = mean - se, ymax = mean + se),                            
+                  width = 0.2,
+                  position = position_dodge(0.9)) +
+  facet_wrap(~cluster) 
+```
+
+From this plot we can see the multivariate "profile" of each cluster - and use that to name the clusters. There can be some label switching, depending on random starting values, in terms of the cluster membership identifiers.
+
+There are 4 profiles:
+
+- Vigorous Exercisers
+
+- Happy Sedentary
+
+- Happy Exercisers
+
+- Unhappy Sedentary
+
+#### Analyzing Clusters
+
+Now that we have clusters = groups, we can analyze them. For example, we can take our 4-cluster solution and see if the clusters differ on another variable. 
+
+Let's see how the cluster groups differ on perceived stress (`pss`).
+
+```{r}
+fit1 <- aov(pss ~ factor(km.res$cluster), data=dailyscale.clus)
+summary(fit1)
+TukeyHSD(fit1) 
+```
+
+We see that clusters differ from each other on pss, except clusters 3 and 4 (or 3 and 2 if there was label switching).
+
+Differences on **non-clustering** variables provide evidence that, indeed, the cluster solution is providing a meaningful distinction. The typology has value.   
+
+In sum, there are variety of ways to justify a cluster solution (e.g., selection of *k*)    
+
+1. Conceptual arguments    
+2. Internal statistical criteria   
+3. replication of clusters in random halves    
+4. cluster differentiation on external variables   
+
+*A practical benefit of subgroup-oriented interpretation emerges when considering potential interventions. Multivariate profiles may point toward tailoring diagnostic and intervention efforts to individual needs.*
+
+
+### Hierarchical Clustering
+
+The `cluster` package provides a whole set of options ... including both hierarchical and non-hierarchical methods.   
+
+Let's look at a hierarchical method - more explanations can be found here http://www.econ.upf.edu/~michael/stanford/maeb7.pdf .
+
+Prelim: we make distance matrix (not totally necessary, but we do here for conceptual value)
+
+```{r}
+dist.all <- daisy(dailyscale[,c("lteq","posaff")],metric="euclidean",stand=FALSE)
+#loking at distances among first 5 persons
+as.matrix(dist.all)[1:5,1:5]
+```
+
+Note that `daisy()` does include some treatments for missing data. Be careful!
+
+Engage the hierarchical clustering ... we use the `agnes()` (agglomerative nesting, aka hierarchical clustering, Ward's method, ...) function  (which also allows for other linkage options)
+
+```{r}
+# Compute Ward clusters 
+clusterward.papa <- agnes(dist.all, diss = TRUE, method = "ward")
+```
+
+There are many choices for the *linkage method*. We have chosen Ward here, as a classic. Again, this is a well-trodden research area, and one can find recommendations of all types. Read widely to find the best for your specific purpose and data.
+
+Then we visualize it!
+
+```{r}
+# Plot
+layout(matrix(1))
+plot(clusterward.papa, which.plot = 2, main = "Ward clustering of PAPA")
+```
+
+This is a **Dendrogram** (basically an organized plot of the distance matrix) that indicates how far apart objects are and when they might be merged together. 
+The y-axis indicates the distance between the clusters. Long vertical lines indicate that there is a lot of between-cluster distance. We determine a level at which to "cut the tree". Generally we are looking for a level above which the lines are long (between-group heterogeneity) and below which the leaves are close (within-group homogeneity).
+
+We see that 4 clusters seems to be a good tradeoff for parsimony. 
+
+Lets cut the tree and make cluster assignments. 
+```{r}
+wardcluster4 <- cutree(clusterward.papa, k = 4)
+```
+And look at some statistical criteria
+```{r}
+cluster.stats(dist.all, clustering=wardcluster4,
+              silhouette = TRUE, sepindex = TRUE)
+```
+
+
+### Two-step Approach    
+
+Often times, researchers are using a two-step approach ... 
+
+1. Hierarchical Ward's method to ...    
+...evaluate optimal number of clusters    
+...produce starting seeds for subsequent step    
+2. Non-hierarchical k-means method to ...     
+...determine final case location in the separate subgroups
+
+The two-step approach circumvents some drawbacks of each procedure    
+...Ward's method does not allow revising assigned membership in later steps tends to produce clusters of similar size
+...k-means method produces optimal clusters only if starting seeds are pre-specified
+
+#### K-Medoids  
+
+An alternative hierarchical clustering method ... we use the `pam()` (partitioning around mediods) which is like k-means, but a bit more robust. 
+
+```{r}
+# Compute PAM clustering solution for k=4
+clusterpam.papa <- pam(dist.all, k=4, diss = TRUE)
+clusterpam.papa
+
+#Checking length
+pamcluster <- clusterpam.papa$clustering
+length(pamcluster)
+#binding to originaldata
+dailyscale.pam <- cbind(dailyscale,pamcluster)
+#plotting clustered data points 
+ggplot(dailyscale.pam,aes(x=lteq,y=posaff)) +
+  geom_point(alpha=.6, color=factor(pamcluster))
+```
+
+Let's run the autosearch and see what comes out ...
+```{r}
+pamauto <- pamk(dist.all,krange=2:10,criterion="asw", usepam=TRUE,
+                scaling=FALSE, alpha=0.001, diss=TRUE,
+                critout=FALSE, ns=10, seed=NULL)
+pamauto
+```
+Here, the suggestion is for *k* = 3. Only three clusters.
+```{r}
+#Obtain medoids
+pamauto$pamobject$id.med
+#binding new cluster assignment to originaldata
+dailyscale.pam$pamnew <- pamauto$pamobject$clustering
+
+#plotting clustered data points with the medoids
+ggplot(dailyscale.pam,aes(x=lteq,y=posaff)) +
+  geom_point(alpha=.6, color=factor(dailyscale.pam$pamnew)) +
+  geom_point(data=dailyscale.pam[598,],aes(x=lteq,y=posaff),color=2,size=5,shape=18) +
+  geom_point(data=dailyscale.pam[63,],aes(x=lteq,y=posaff),color=1,size=5,shape=18) +
+  geom_point(data=dailyscale.pam[738,],aes(x=lteq,y=posaff),color=4,size=5,shape=18)
+  
+```
+
+Now we have a zone to play in.
+
+### Final Thoughts 
+
+**Please remember the usual caution. Our intention here has been simple exposure. When using these methods for a paper or project, do the research necessary to engage the method precisely and with good form.**    
+
+
+
+
+
+
+
+
+## Reference
