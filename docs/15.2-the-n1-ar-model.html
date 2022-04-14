@@ -821,7 +821,7 @@ which matches the path diagram:</p>
 <span id="cb613-2"><a href="15.2-the-n1-ar-model.html#cb613-2" aria-hidden="true" tabindex="-1"></a>filename <span class="ot">&lt;-</span> <span class="st">&#39;osf_dataframe.csv&#39;</span></span>
 <span id="cb613-3"><a href="15.2-the-n1-ar-model.html#cb613-3" aria-hidden="true" tabindex="-1"></a><span class="fu">GET</span>(url, <span class="fu">write_disk</span>(filename, <span class="at">overwrite =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 <pre><code>## Response [https://files.osf.io/v1/resources/b7ar3/providers/osfstorage/592ff0d39ad5a1026250f506?action=download&amp;direct&amp;version=1]
-##   Date: 2022-04-14 17:07
+##   Date: 2022-04-14 17:29
 ##   Status: 200
 ##   Content-Type: text/csv
 ##   Size: 25.8 kB
@@ -904,9 +904,10 @@ which matches the path diagram:</p>
 <h3><span class="header-section-number">15.2.5</span> AR Coefficients Example<a href="15.2-the-n1-ar-model.html#ar-coefficients-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s consider what a time series looks like when it is generated with different AR values.</p>
 <p>The time series with an autoregressive coefficient of <span class="math inline">\(0.1\)</span> is the solid black line. The time series with an autoregressive coefficient of <span class="math inline">\(0.9\)</span> is the dashed line.</p>
-<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="15.2-the-n1-ar-model.html#cb622-1" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">ar=</span>.<span class="dv">1</span>), <span class="at">n=</span><span class="dv">100</span>)</span>
-<span id="cb622-2"><a href="15.2-the-n1-ar-model.html#cb622-2" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">ar=</span>.<span class="dv">9</span>), <span class="at">n=</span><span class="dv">100</span>)</span>
-<span id="cb622-3"><a href="15.2-the-n1-ar-model.html#cb622-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ts.plot</span>(y1,y2,<span class="at">lty=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="15.2-the-n1-ar-model.html#cb622-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb622-2"><a href="15.2-the-n1-ar-model.html#cb622-2" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">ar=</span>.<span class="dv">1</span>), <span class="at">n=</span><span class="dv">200</span>)</span>
+<span id="cb622-3"><a href="15.2-the-n1-ar-model.html#cb622-3" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">ar=</span>.<span class="dv">9</span>), <span class="at">n=</span><span class="dv">200</span>)</span>
+<span id="cb622-4"><a href="15.2-the-n1-ar-model.html#cb622-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ts.plot</span>(y1,y2,<span class="at">lty=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>))</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-326-1.png" width="672" /></p>
 </div>
 </div>

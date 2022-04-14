@@ -237,8 +237,9 @@ Let's consider what a time series looks like when it is generated with different
 The time series with an autoregressive coefficient of $0.1$ is the solid black line. The time series with an autoregressive coefficient of $0.9$ is the dashed line.
 
 ```{r}
-y1 <- arima.sim(list(order=c(1,0,0), ar=.1), n=100)
-y2 <- arima.sim(list(order=c(1,0,0), ar=.9), n=100)
+set.seed(1234)
+y1 <- arima.sim(list(order=c(1,0,0), ar=.1), n=200)
+y2 <- arima.sim(list(order=c(1,0,0), ar=.9), n=200)
 ts.plot(y1,y2,lty=c(1:2))
 ```
 
