@@ -136,7 +136,16 @@ Choose a single variable (or construct) from your own research.
 3) If you fit a simple AR(1) model to the repeated measures how might you interpret the autoregressive effect? 
 
 
-### Fitting an AR(1) Model in R
+### Fitting a AR(1) Model in R
+
+Let's load the libraries we'll need for this chapter.
+
+```{r}
+library("psych")
+require("httr")
+library("ggplot2")
+library("mlVAR")
+```
 
 Consider some example data from the Many Analysts project: https://osf.io/h3djy/
 
@@ -191,7 +200,6 @@ In the experiment by Fisher, subjects were asked to fill out a survey on their m
 Let's read in the data:
 
 ```{r}
-require("httr")
 url <- 'https://osf.io/tcnpd//?action=download'
 filename <- 'osf_dataframe.csv'
 GET(url, write_disk(filename, overwrite = TRUE))
@@ -221,6 +229,18 @@ Now, with our data lagged we can fit an AR model using OLS as follows:
 summary(lm(concentrate~concentratelag,data=lagged_df))
 ```
 
+
+### AR Coefficients Example
+
+Let's consider what a time series looks like when it is generated with different AR values. 
+
+The time series with an autoregressive coefficient of $0.1$ is the solid black line. The time series with an autoregressive coefficient of $0.9$ is the dashed line.
+
+```{r}
+y1 <- arima.sim(list(order=c(1,0,0), ar=.1), n=100)
+y2 <- arima.sim(list(order=c(1,0,0), ar=.9), n=100)
+ts.plot(y1,y2,lty=c(1:2))
+```
 
 
 ## The N=1 VAR Model
@@ -287,13 +307,56 @@ rownames(transition_mat) <- colnames(df)
 transition_mat
 ```
 
+
+### Stationarity and Non-Stationarity
+
+Consider a multivariate time series, $\{\mathbf{X}_{t}\}_{t \in \mathbb{Z}} = \{(X_{j,t})_{j=1,\dots,d}\}$, that follows a vector autoregressive model of order $p$, 
+$$
+\label{varp1}
+\mathbf{X}_{t} = 
+  \boldsymbol{\Phi}_{1} \mathbf{X}_{t-1} + 
+  \ldots + 
+  \boldsymbol{\Phi}_{p} \mathbf{X}_{t-p} + 
+  \boldsymbol{\varepsilon}_{t}, \quad t \in \mathbb{Z}.
+$$
+
+
+- $\boldsymbol{\Phi}_{1}, \dots, \boldsymbol{\Phi}_{p}$ are $d \times d$ transition matrices.
+- $\boldsymbol{\varepsilon}_{t}$ is a white noise series, $\{\boldsymbol{\varepsilon}_{t}\}_{t \in \mathbb{Z}} \sim \text{WN}(\mathbf{0}, \boldsymbol{\Sigma}_{\boldsymbol{\varepsilon}})$ with $\mathbb{E}(\boldsymbol{\varepsilon}_{t})=0$, $\mathbb{E}(\boldsymbol{\varepsilon}_{t}\boldsymbol{\varepsilon}_{s}^{'})=0$ for $s \neq t$.
+- For simplicity we assume $\mathbf{X}_{t}$ is of zero mean and \eqref{varp1} satisfies the stability conditions discussed earlier.
+
+
+As we showed earlier it is common to estimate \eqref{varp1} using ordinary least-squares (OLS) regression,
+$$
+(\widehat{\boldsymbol{\Phi}}_1,\ldots,\widehat{\boldsymbol{\Phi}}_p) = \argmin_{\boldsymbol{\Phi}_1,\ldots,\boldsymbol{\Phi}_p} \sum_{t=p+1}^T  \| \mathbf{X}_t - \boldsymbol{\Phi}_1 \mathbf{X}_{t-1} - \ldots - \boldsymbol{\Phi}_p \mathbf{X}_{t-p}\|_{2}^2.
+$$
+where a unique stationary solution can be found when the eigenvalues of $\boldsymbol{\Phi}$ are smaller than one in absolute value.
+
+
+```{r}
+non_stationary_AR <- matrix(c(1,2,3,4), 2, 2)
+stationary_AR     <- matrix(c(.1,.2,.3,.4), 2, 2)
+
+max(abs(eigen(non_stationary_AR)$values)) < 1
+max(abs(eigen(stationary_AR)$values)) < 1
+```
+
+
+Perhaps more importantly, what do stationary and non-stationary series look like? Here are some simplistic examples
+
+![Examples of (Non)-Stationarity](imgs/nonstation.jpg)
+
 ### A Note on path Diagrams
 
-Both examples below represent bivariate VAR(1) models. It is important to be comfortable with both representations as they are each commonly presented in the literature.
+Both examples below represent bivariate VAR(1) models. It is important to be comfortable with both representations as they are each commonly presented in the literature. Note the two diagrams primarily difer in how they represent the autorgressive and cross-regressive effects. In Path Diagram 1, both are illustrated using directed arrows. In Path Diagram 2, autoregressive paths are indicated by directed self-loops, while cross-regressive paths are indicated by directed arrows. 
 
-![Alternative Path Diagrams](imgs/path_var.jpg)
+![Alternative Path Diagram 1](imgs/path_var.jpg)
 
-![Alternative Path Diagrams](imgs/var_path2.jpg)
+![Alternative Path Diagram 2](imgs/var_path2.jpg)
+
+Note that Path Diagram 1 does not include information about the means (intercepts), which is indicated by the triangles in Path Diagram 2. Likewise, Path Diagram 2 does not include a visual depiction of the errors, indicated by $z_{1}$ and $z_{2}$ in Path Diagram 1.
+
+
 
 ## Introducing the Multi-level VAR
 
@@ -318,12 +381,205 @@ In the multi-level VAR we have the option for each parameter to follow a distrib
 
 ![Image from Epskamp (2017)](imgs/twopeeps.jpg)
 
+### Model
+
+Now, for illustrative purposes we will use the `mlVAR` package to demonstrate how one can estimate multi-level VAR models. However, one should note the modeling approach taken in the`mlVAR` package is unique and differs from what we have discussed in class.
+
+For example, the`mlVAR` package also estimates a contemporaneous network following the initial multi-level estimation procedure. We will cover the basics of these routines but one should consults Epskamp, Waldrop, Mottus and Borsboom (2018) for a detailed explanation of the modeling procedures.
+
+The first-stage model can be written as
+
+$$
+\mathbf{y}_{t,p} = \boldsymbol{\mu}_{p} + \mathbf{B}_{p}(\mathbf{y}_{t,p}-\boldsymbol{\mu}_{p}) +\boldsymbol{\varepsilon}_{t,p}
+$$
+
+where $\boldsymbol{\varepsilon}_{t,p} \sim \mathcal{N}(\mathbf{0},\boldsymbol{\theta}_{p})$ and $\boldsymbol{\theta}_{p}^{-1}=\mathbf{K}_{p}^{(\Theta)}$. Here, $\boldsymbol{\mu}_{p}$ is the mean vector for subject $p$, $\mathbf{B}_{p}$ is the person-specific transition matrix, and $\mathbf{K}_{p}$ is the person-specific contemporaneous relations.
+
+Unfortunately, many multi-level software routines will be unable to estimate $\boldsymbol{\mu}_{p}$ in a straightforward manner. In accordance with Hamaker \& Grasman (2014) and Epskamp et al. (2018) one possibility is to use $\bar{\mathbf{y}}_{p}$ in place of $\boldsymbol{\mu}_{p}$. This simplication allows us to estimate the VAR model as a series of univariate regressions (within-subject centered predictors) using generic multi-level software such as `nlme` or `lme4`.
+
+In this context the Level 1 model can be written as 
+
+$$
+y_{t,p,i} = \mu_{p,i} + \mathbf{B}_{p,i}(\mathbf{y}_{t-1,p}-\bar{\mathbf{y}}_{p}) +\varepsilon_{t,p,i}
+$$
+
+and the Level 2 model as
+
+$$
+\left[ 
+\begin{array}{c}
+\mu_{p,i} \\
+B_{p,i}  
+\end{array} 
+\right]
+\sim \mathcal{N}
+\left[ 
+\begin{array}{c}
+\mathbf{0} \\
+B_{*,i}  
+\end{array} 
+\right],
+\left[ 
+\begin{array}{cc}
+\omega_{\mu_{i}} & \boldsymbol{\omega}^{(\beta_{i}\mu_{i})'}\\
+\boldsymbol{\omega}^{(\beta_{i}\mu_{i})}  & \boldsymbol{\Omega}^{(\mathbf{B}_{i})}
+\end{array} 
+\right]
+$$
+
+where $\mathbf{B}_{*}$ and $\mathbf{K}_{*}^{(\Theta)}$ represent the temporal and contemporaneous network for a person selected at random, or the average parameters in the population: the fixed effects.  
+
+
+## Applied Example
+
+### Loading Data
+
+For the multi-level VAR example we will use the AMIB data available on the QuantDev server. Here, subjects provided self-report data eight times per day, for 21 days, on average. Variable included in the dataset are listed below.
+
+- `id`: person index
+- `day`: time indices (1-21) 
+- `interaction`: (1-168) 
+- `igaff`: interpersonal affection
+- `igdom`: interpersonal dominance
+- `agval`: affect valence
+- `agarous`: affect arousal
+- `stress`: stress
+- `health`: self-reported health[reverse coded]
+
+Let's take a look at the *health*,*stress*, *affect valence* and *interpersonal affection* variables.
+
+
+```{r}
+filepath <- "https://quantdev.ssri.psu.edu/sites/qdev/files/AMIBshare_phase2_interaction_2019_0501.csv"
+#read in the .csv file using the url() function
+AMIB_interactionP2 <- read.csv(file=url(filepath),header=TRUE)
+
+#subsetting to vaiables of interest
+AMIB_interactionP2 <- AMIB_interactionP2[ ,c("id","day","health","interaction",
+                                             "igaff","stress","agval")]
+describe(AMIB_interactionP2)
+```
+
+
+```{r}
+#plotting intraindividual change 
+ggplot(data = AMIB_interactionP2,
+       aes(x = interaction, group= id)) +
+  #first variable
+  geom_line(aes(y=igaff), color=1) +
+  geom_line(aes(y=agval), color=2) +
+  geom_line(aes(y=health), color=3) +
+  geom_line(aes(y=stress), color=5) +
+  #plot layouts
+  scale_x_continuous(name="Interaction#") +
+  scale_y_continuous(name="Raw Values") +  
+  theme_classic() +
+  theme(axis.title=element_text(size=14),
+        axis.text=element_text(size=14),
+        plot.title=element_text(size=14, hjust=.5)) +
+  facet_wrap(~id, ncol=2) +
+  ggtitle("AMIB Phase 2 Data (6 vars)")
+```
+
+Now, let's fit our model in the `mlVAR` package as follows:
+
+```{r}
+library("mlVAR")
+
+mlvar_all <- mlVAR(
+  data = AMIB_interactionP2, 
+  vars = c("igaff",  "stress", "agval", "health"),
+  idvar = "id",
+  lags = 1, 
+  dayvar = "day" 
+)
+```
+
+Note, the `dayvar` argument is simply used to ensure the first measurement of a day is not regressed on the last measurement of the previous day. This argument should only be included in your model if there are multiple observations per day. 
+
+
+Let's take a look at our results:
+
+```{r}
+summary(mlvar_all)
+```
+
+
+### Temporal Effects
+
+```{r,results='asis', eval = FALSE}
+Temporal effects:
+   from     to lag  fixed    SE     P ran_SD
+  igaff  agval   1 -0.015 0.019 0.432  0.041
+  igaff health   1  0.029 0.011 0.009  0.008
+ stress  igaff   1 -0.078 0.023 0.001  0.032
+ stress health   1  0.056 0.016 0.001  0.050
+  agval stress   1  0.027 0.016 0.103  0.036
+  agval  agval   1  0.138 0.032 0.000  0.125
+  agval health   1  0.005 0.014 0.705  0.025
+```
+
+For the prototypical person, only affect valence exhibited an autoregressive effect, meaning affect valence tended to persist over time. In addition, affect valence appears to have a small time-dependent deleterious effect on stress levels and health.  Likewise, stress appears to have a deleterious effect on health and interpersonal affection. On the other hand, interpersonal affection tended to have a buffering effect on affect valence and health. 
+
+
+```{r}
+# Plot temporal relations:
+plot(
+  mlvar_all, "temporal", 
+  title = "Within-person temporal (lag-1) relations", 
+  layout = "circle", 
+  nonsig = "hide"
+)
+```
+
+### Contemporaneous Effects
+
+```{r,results='asis', eval = FALSE}
+Contemporaneous effects (posthoc estimated):
+     v1     v2 P 1->2 P 1<-2   pcor ran_SD_pcor    cor ran_SD_cor
+ stress  igaff  0.022  0.127 -0.054       0.081 -0.251      0.146
+  agval  igaff  0.000  0.000  0.413       0.154  0.471      0.154
+  agval stress  0.000  0.000 -0.353       0.150 -0.441      0.169
+ health  igaff  0.851  0.967  0.002       0.015 -0.101      0.122
+ health stress  0.000  0.001  0.177       0.210  0.244      0.219
+ health  agval  0.000  0.000 -0.098       0.068 -0.200      0.145
+```
+
+For the prototypical person, contemporaneous stress levels and affect valence were negatively correlated, while interpersonal affection and affect valence were positive correlated.
 
 
 
+```{r}
+plot(mlvar_all, 
+     "contemporaneous", 
+     title = "Within-person contemporaneous relations",
+     layout = "circle", 
+     nonsig = "hide"
+)
+```
 
+### Between-Subjects Effects
 
+```{r,results='asis', eval = FALSE}
+Between-subject effects:
+     v1     v2 P 1->2 P 1<-2   pcor    cor
+ stress  igaff  0.637  0.215  0.140 -0.386
+  agval  igaff  0.000  0.000  0.739  0.804
+  agval stress  0.045  0.239 -0.251 -0.531
+ health  igaff  0.446  0.454 -0.126 -0.485
+ health stress  0.000  0.000  0.587  0.706
+ health  agval  0.532  0.384 -0.123 -0.569
+```
 
+```{r}
+plot(mlvar_all, 
+     "between", 
+     title = "Between-person relations", 
+     layout = "circle", 
+     nonsig = "hide"
+)
+```
 
+In the between-subjects network, we see a strong relationship between interpersonal affection and affect valence, meaning people who, on average, felt more interpersonal affection felt, on average, more affect valence. In addition we see people who, on average, felt more stressed also felt, on average, less health. Furthermore, we see a small negative between-person association between stress and emotional valence, with those who on average felt more stressed, feeling less emotional valence.
 
 ## Reference
