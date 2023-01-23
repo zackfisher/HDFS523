@@ -240,7 +240,7 @@ div.csl-indent {
 <p>Once the wide and long data sets are in place, we can begin describing and plotting the data. Descriptive statistics and visualization are one of the most important aspects of data analysis.</p>
 <p>Descriptives and plots will be produced from wide data and long data to show the information that can be gleaned from each construction. Having both in place facilitates learning about the data. Continually keep in mind what portions of the data-box are being described (e.g., persons, variables, occasions).</p>
 <p>We can do a quick look at descriptives using the <code>describe()</code> function from the <code>psych</code> <span class="citation">(<a href="#ref-psych" role="doc-biblioref">Revelle 2021</a>)</span> package. Note the <code>n</code> in both outputs.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="3.2-describing-means-and-variances.html#cb23-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(wiscwide)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="3.2-describing-means-and-variances.html#cb25-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(wiscwide)</span></code></pre></div>
 <pre><code>##        vars   n   mean    sd median trimmed   mad   min    max  range  skew
 ## id        1 204 102.50 59.03 102.50  102.50 75.61  1.00 204.00 203.00  0.00
 ## verb1     2 204  19.59  5.81  19.34   19.50  5.41  3.33  35.15  31.82  0.13
@@ -265,7 +265,7 @@ div.csl-indent {
 ## perfo6     0.18 0.87
 ## momed      0.01 0.19
 ## grad      -0.30 0.03</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="3.2-describing-means-and-variances.html#cb25-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(wisclong)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="3.2-describing-means-and-variances.html#cb27-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(wisclong)</span></code></pre></div>
 <pre><code>##       vars   n   mean    sd median trimmed   mad  min    max  range  skew
 ## id       1 816 102.50 58.93 102.50  102.50 75.61 1.00 204.00 203.00  0.00
 ## momed    2 816  10.81  2.69  11.50   11.00  2.97 5.50  18.00  12.50 -0.36
@@ -283,34 +283,34 @@ div.csl-indent {
 <div id="verbal-ability-all-persons-and-occasions" class="section level3 hasAnchor" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Verbal Ability (All Persons and Occasions)<a href="3.2-describing-means-and-variances.html#verbal-ability-all-persons-and-occasions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s focus on the repeated measures of verbal ability. This step is useful to get a general view of what verbal ability scores look like across persons and occasions, but note that we are <em>ignoring Time</em>. In doing so we are not considering how the repeated measures are nested within individuals.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="3.2-describing-means-and-variances.html#cb27-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(wisclong<span class="sc">$</span>verb)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="3.2-describing-means-and-variances.html#cb29-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(wisclong<span class="sc">$</span>verb)</span></code></pre></div>
 <pre><code>##    vars   n  mean    sd median trimmed   mad  min   max range skew kurtosis
 ## X1    1 816 30.34 11.86  28.46   29.39 11.33 3.33 72.59 69.26 0.71     0.33
 ##      se
 ## X1 0.42</code></pre>
 <p>In addition to the descriptive statistics we can look at a boxplot of verbal ability scores across persons and occasions. Here we will start to use the <code>ggplot2</code> <span class="citation">(<a href="#ref-ggplot2" role="doc-biblioref">Wickham 2016</a>)</span> package.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="3.2-describing-means-and-variances.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
-<span id="cb29-2"><a href="3.2-describing-means-and-variances.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> wisclong, <span class="fu">aes</span>(<span class="at">x=</span>verb, <span class="at">y=</span>..density..)) <span class="sc">+</span></span>
-<span id="cb29-3"><a href="3.2-describing-means-and-variances.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">2.5</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb29-4"><a href="3.2-describing-means-and-variances.html#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb29-5"><a href="3.2-describing-means-and-variances.html#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Verbal Ability Score (across persons and occasions)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb29-6"><a href="3.2-describing-means-and-variances.html#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Ability (Grade 1 to 6)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb29-7"><a href="3.2-describing-means-and-variances.html#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Density&quot;</span>) <span class="sc">+</span></span>
-<span id="cb29-8"><a href="3.2-describing-means-and-variances.html#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb29-9"><a href="3.2-describing-means-and-variances.html#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb29-10"><a href="3.2-describing-means-and-variances.html#cb29-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb29-11"><a href="3.2-describing-means-and-variances.html#cb29-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb29-12"><a href="3.2-describing-means-and-variances.html#cb29-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="3.2-describing-means-and-variances.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb31-2"><a href="3.2-describing-means-and-variances.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> wisclong, <span class="fu">aes</span>(<span class="at">x=</span>verb, <span class="at">y=</span>..density..)) <span class="sc">+</span></span>
+<span id="cb31-3"><a href="3.2-describing-means-and-variances.html#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">2.5</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb31-4"><a href="3.2-describing-means-and-variances.html#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb31-5"><a href="3.2-describing-means-and-variances.html#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Verbal Ability Score (across persons and occasions)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb31-6"><a href="3.2-describing-means-and-variances.html#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Ability (Grade 1 to 6)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb31-7"><a href="3.2-describing-means-and-variances.html#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Density&quot;</span>) <span class="sc">+</span></span>
+<span id="cb31-8"><a href="3.2-describing-means-and-variances.html#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb31-9"><a href="3.2-describing-means-and-variances.html#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb31-10"><a href="3.2-describing-means-and-variances.html#cb31-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb31-11"><a href="3.2-describing-means-and-variances.html#cb31-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb31-12"><a href="3.2-describing-means-and-variances.html#cb31-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## Warning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.
 ## ℹ Please use `after_stat(density)` instead.</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 </div>
 <div id="verbal-ability-across-time" class="section level3 hasAnchor" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Verbal Ability (Across Time)<a href="3.2-describing-means-and-variances.html#verbal-ability-across-time" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Note that our variable is actually “multivariate” because we have repeated measures. We should really consider the time-dependence when we are looking at descriptive statistics and plots.</p>
 <p>Let’s now look at <strong>verbal ability scores across time collapsed across individuals</strong>. This can be done using either the <code>describe()</code> function and the wide data or the <code>describeBy()</code> function and the long data.</p>
 <p>Let’s look at descriptives using the wide data.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="3.2-describing-means-and-variances.html#cb31-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(wiscwide[,<span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>,<span class="st">&quot;verb2&quot;</span>,<span class="st">&quot;verb4&quot;</span>,<span class="st">&quot;verb6&quot;</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="3.2-describing-means-and-variances.html#cb33-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(wiscwide[,<span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>,<span class="st">&quot;verb2&quot;</span>,<span class="st">&quot;verb4&quot;</span>,<span class="st">&quot;verb6&quot;</span>)])</span></code></pre></div>
 <pre><code>##       vars   n  mean    sd median trimmed   mad   min   max range  skew
 ## verb1    1 204 19.59  5.81  19.34   19.50  5.41  3.33 35.15 31.82  0.13
 ## verb2    2 204 25.42  6.11  25.98   25.40  6.57  5.95 39.85 33.90 -0.06
@@ -322,7 +322,7 @@ div.csl-indent {
 ## verb4    -0.08 0.51
 ## verb6    -0.36 0.75</code></pre>
 <p>Identical results can be obtained using the long data.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="3.2-describing-means-and-variances.html#cb33-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describeBy</span>(wisclong[,<span class="fu">c</span>(<span class="st">&quot;verb&quot;</span>)], <span class="at">group =</span> wisclong<span class="sc">$</span>grade)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="3.2-describing-means-and-variances.html#cb35-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describeBy</span>(wisclong[,<span class="fu">c</span>(<span class="st">&quot;verb&quot;</span>)], <span class="at">group =</span> wisclong<span class="sc">$</span>grade)</span></code></pre></div>
 <pre><code>## 
 ##  Descriptive statistics by group 
 ## group: 1
@@ -343,51 +343,51 @@ div.csl-indent {
 ##      se
 ## X1 0.75</code></pre>
 <p>We can visualize the distribution of verbal scores across grades in a number of different ways. Here we have a histogram.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="3.2-describing-means-and-variances.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wisclong, <span class="fu">aes</span>(<span class="at">x=</span>verb)) <span class="sc">+</span></span>
-<span id="cb35-2"><a href="3.2-describing-means-and-variances.html#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">5</span>, <span class="at">pad =</span> <span class="cn">TRUE</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>, <span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb35-3"><a href="3.2-describing-means-and-variances.html#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(grade <span class="sc">~</span> .) <span class="sc">+</span> </span>
-<span id="cb35-4"><a href="3.2-describing-means-and-variances.html#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Verbal Ability Score (across grades 1, 2, 4, 6)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb35-5"><a href="3.2-describing-means-and-variances.html#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Ability Score&quot;</span>) <span class="sc">+</span></span>
-<span id="cb35-6"><a href="3.2-describing-means-and-variances.html#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Density&quot;</span>) <span class="sc">+</span></span>
-<span id="cb35-7"><a href="3.2-describing-means-and-variances.html#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb35-8"><a href="3.2-describing-means-and-variances.html#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb35-9"><a href="3.2-describing-means-and-variances.html#cb35-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb35-10"><a href="3.2-describing-means-and-variances.html#cb35-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb35-11"><a href="3.2-describing-means-and-variances.html#cb35-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb35-12"><a href="3.2-describing-means-and-variances.html#cb35-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="3.2-describing-means-and-variances.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wisclong, <span class="fu">aes</span>(<span class="at">x=</span>verb)) <span class="sc">+</span></span>
+<span id="cb37-2"><a href="3.2-describing-means-and-variances.html#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">5</span>, <span class="at">pad =</span> <span class="cn">TRUE</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>, <span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb37-3"><a href="3.2-describing-means-and-variances.html#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(grade <span class="sc">~</span> .) <span class="sc">+</span> </span>
+<span id="cb37-4"><a href="3.2-describing-means-and-variances.html#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Verbal Ability Score (across grades 1, 2, 4, 6)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb37-5"><a href="3.2-describing-means-and-variances.html#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Ability Score&quot;</span>) <span class="sc">+</span></span>
+<span id="cb37-6"><a href="3.2-describing-means-and-variances.html#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Density&quot;</span>) <span class="sc">+</span></span>
+<span id="cb37-7"><a href="3.2-describing-means-and-variances.html#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb37-8"><a href="3.2-describing-means-and-variances.html#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb37-9"><a href="3.2-describing-means-and-variances.html#cb37-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb37-10"><a href="3.2-describing-means-and-variances.html#cb37-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb37-11"><a href="3.2-describing-means-and-variances.html#cb37-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb37-12"><a href="3.2-describing-means-and-variances.html#cb37-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## Warning: Duplicated aesthetics after name standardisation: pad</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <p>We can also create notched boxplots of the within-grade distributions (across individuals).</p>
 <p>From <a href="https://en.wikipedia.org/wiki/Box_plot">Wikipedia</a>: <em>Notched box plots apply a notch or narrowing of the box around the median. Notches are useful in offering a rough guide of the significance of the difference of medians; if the notches of two boxes do not overlap, this can provide evidence of a statistically significant difference between the medians.</em></p>
 <p>Adding the mean value to the plot gives us additonal information about central tendency and skew of the distribution.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="3.2-describing-means-and-variances.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#boxplot by grade</span></span>
-<span id="cb37-2"><a href="3.2-describing-means-and-variances.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wisclong, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(grade), <span class="at">y=</span>verb)) <span class="sc">+</span> </span>
-<span id="cb37-3"><a href="3.2-describing-means-and-variances.html#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">notch =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb37-4"><a href="3.2-describing-means-and-variances.html#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">shape=</span><span class="dv">23</span>, <span class="at">size=</span><span class="dv">3</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
-<span id="cb37-5"><a href="3.2-describing-means-and-variances.html#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Verbal Ability Score (across grades 1, 2, 4, 6)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb37-6"><a href="3.2-describing-means-and-variances.html#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Verbal Ability Score&quot;</span>) <span class="sc">+</span></span>
-<span id="cb37-7"><a href="3.2-describing-means-and-variances.html#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span></span>
-<span id="cb37-8"><a href="3.2-describing-means-and-variances.html#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb37-9"><a href="3.2-describing-means-and-variances.html#cb37-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb37-10"><a href="3.2-describing-means-and-variances.html#cb37-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb37-11"><a href="3.2-describing-means-and-variances.html#cb37-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb37-12"><a href="3.2-describing-means-and-variances.html#cb37-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb37-13"><a href="3.2-describing-means-and-variances.html#cb37-13" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="3.2-describing-means-and-variances.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#boxplot by grade</span></span>
+<span id="cb39-2"><a href="3.2-describing-means-and-variances.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wisclong, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(grade), <span class="at">y=</span>verb)) <span class="sc">+</span> </span>
+<span id="cb39-3"><a href="3.2-describing-means-and-variances.html#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">notch =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb39-4"><a href="3.2-describing-means-and-variances.html#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">shape=</span><span class="dv">23</span>, <span class="at">size=</span><span class="dv">3</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb39-5"><a href="3.2-describing-means-and-variances.html#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Verbal Ability Score (across grades 1, 2, 4, 6)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb39-6"><a href="3.2-describing-means-and-variances.html#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Verbal Ability Score&quot;</span>) <span class="sc">+</span></span>
+<span id="cb39-7"><a href="3.2-describing-means-and-variances.html#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span></span>
+<span id="cb39-8"><a href="3.2-describing-means-and-variances.html#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb39-9"><a href="3.2-describing-means-and-variances.html#cb39-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb39-10"><a href="3.2-describing-means-and-variances.html#cb39-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb39-11"><a href="3.2-describing-means-and-variances.html#cb39-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb39-12"><a href="3.2-describing-means-and-variances.html#cb39-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb39-13"><a href="3.2-describing-means-and-variances.html#cb39-13" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <p>Finally, we can view overlapping densities of the within-grade distributions of verbal ability scores.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="3.2-describing-means-and-variances.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wisclong, <span class="fu">aes</span>(<span class="at">x=</span>verb)) <span class="sc">+</span> </span>
-<span id="cb38-2"><a href="3.2-describing-means-and-variances.html#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(grade), <span class="at">colour=</span><span class="fu">factor</span>(grade), <span class="at">fill=</span><span class="fu">factor</span>(grade)), <span class="at">alpha=</span><span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb38-3"><a href="3.2-describing-means-and-variances.html#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour=</span><span class="st">&quot;none&quot;</span>,  <span class="at">fill=</span><span class="fu">guide_legend</span>(<span class="at">title=</span><span class="st">&quot;Grade&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb38-4"><a href="3.2-describing-means-and-variances.html#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Verbal Ability Score (across grades 1, 2, 4, 6)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb38-5"><a href="3.2-describing-means-and-variances.html#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Density&quot;</span>) <span class="sc">+</span></span>
-<span id="cb38-6"><a href="3.2-describing-means-and-variances.html#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Ability Score&quot;</span>) <span class="sc">+</span></span>
-<span id="cb38-7"><a href="3.2-describing-means-and-variances.html#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb38-8"><a href="3.2-describing-means-and-variances.html#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb38-9"><a href="3.2-describing-means-and-variances.html#cb38-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb38-10"><a href="3.2-describing-means-and-variances.html#cb38-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb38-11"><a href="3.2-describing-means-and-variances.html#cb38-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb38-12"><a href="3.2-describing-means-and-variances.html#cb38-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="3.2-describing-means-and-variances.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wisclong, <span class="fu">aes</span>(<span class="at">x=</span>verb)) <span class="sc">+</span> </span>
+<span id="cb40-2"><a href="3.2-describing-means-and-variances.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(grade), <span class="at">colour=</span><span class="fu">factor</span>(grade), <span class="at">fill=</span><span class="fu">factor</span>(grade)), <span class="at">alpha=</span><span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb40-3"><a href="3.2-describing-means-and-variances.html#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour=</span><span class="st">&quot;none&quot;</span>,  <span class="at">fill=</span><span class="fu">guide_legend</span>(<span class="at">title=</span><span class="st">&quot;Grade&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb40-4"><a href="3.2-describing-means-and-variances.html#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Verbal Ability Score (across grades 1, 2, 4, 6)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb40-5"><a href="3.2-describing-means-and-variances.html#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Density&quot;</span>) <span class="sc">+</span></span>
+<span id="cb40-6"><a href="3.2-describing-means-and-variances.html#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Ability Score&quot;</span>) <span class="sc">+</span></span>
+<span id="cb40-7"><a href="3.2-describing-means-and-variances.html#cb40-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb40-8"><a href="3.2-describing-means-and-variances.html#cb40-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb40-9"><a href="3.2-describing-means-and-variances.html#cb40-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb40-10"><a href="3.2-describing-means-and-variances.html#cb40-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb40-11"><a href="3.2-describing-means-and-variances.html#cb40-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb40-12"><a href="3.2-describing-means-and-variances.html#cb40-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <p>Notice in these plots how much “change” there is at the sample level across grades. Is that expected?</p>
 </div>
 </div>

@@ -238,47 +238,47 @@ div.csl-indent {
 <div id="example-data-1" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Example Data<a href="3.1-example-data-1.html#example-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Again we will make use of the WISC data described in Chapter 2. The following commands recreate the wide and long data we will use throughout this chapter.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="3.1-example-data-1.html#cb22-1" aria-hidden="true" tabindex="-1"></a>filepath <span class="ot">&lt;-</span> <span class="st">&quot;https://quantdev.ssri.psu.edu/sites/qdev/files/wisc3raw.csv&quot;</span></span>
-<span id="cb22-2"><a href="3.1-example-data-1.html#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="3.1-example-data-1.html#cb22-3" aria-hidden="true" tabindex="-1"></a>wisc3raw <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file=</span><span class="fu">url</span>(filepath),<span class="at">header=</span><span class="cn">TRUE</span>)</span>
-<span id="cb22-4"><a href="3.1-example-data-1.html#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-5"><a href="3.1-example-data-1.html#cb22-5" aria-hidden="true" tabindex="-1"></a>var_names_sub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb22-6"><a href="3.1-example-data-1.html#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;id&quot;</span>, <span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb2&quot;</span>, <span class="st">&quot;verb4&quot;</span>, <span class="st">&quot;verb6&quot;</span>,</span>
-<span id="cb22-7"><a href="3.1-example-data-1.html#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo2&quot;</span>, <span class="st">&quot;perfo4&quot;</span>, <span class="st">&quot;perfo6&quot;</span>,</span>
-<span id="cb22-8"><a href="3.1-example-data-1.html#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;momed&quot;</span>, <span class="st">&quot;grad&quot;</span></span>
-<span id="cb22-9"><a href="3.1-example-data-1.html#cb22-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-10"><a href="3.1-example-data-1.html#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-11"><a href="3.1-example-data-1.html#cb22-11" aria-hidden="true" tabindex="-1"></a>wiscraw <span class="ot">&lt;-</span> wisc3raw[,var_names_sub]</span>
-<span id="cb22-12"><a href="3.1-example-data-1.html#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-13"><a href="3.1-example-data-1.html#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co"># reshaping wide to long</span></span>
-<span id="cb22-14"><a href="3.1-example-data-1.html#cb22-14" aria-hidden="true" tabindex="-1"></a>wisclong <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
-<span id="cb22-15"><a href="3.1-example-data-1.html#cb22-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> wiscraw,</span>
-<span id="cb22-16"><a href="3.1-example-data-1.html#cb22-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">varying =</span> <span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb2&quot;</span>, <span class="st">&quot;verb4&quot;</span>,<span class="st">&quot;verb6&quot;</span>, <span class="st">&quot;perfo1&quot;</span>,<span class="st">&quot;perfo2&quot;</span>,<span class="st">&quot;perfo4&quot;</span>,<span class="st">&quot;perfo6&quot;</span>),</span>
-<span id="cb22-17"><a href="3.1-example-data-1.html#cb22-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">timevar =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>), </span>
-<span id="cb22-18"><a href="3.1-example-data-1.html#cb22-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">idvar =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>),</span>
-<span id="cb22-19"><a href="3.1-example-data-1.html#cb22-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">direction =</span> <span class="st">&quot;long&quot;</span>, </span>
-<span id="cb22-20"><a href="3.1-example-data-1.html#cb22-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot;&quot;</span></span>
-<span id="cb22-21"><a href="3.1-example-data-1.html#cb22-21" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-22"><a href="3.1-example-data-1.html#cb22-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-23"><a href="3.1-example-data-1.html#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="co"># reorder by id and day </span></span>
-<span id="cb22-24"><a href="3.1-example-data-1.html#cb22-24" aria-hidden="true" tabindex="-1"></a>wisclong <span class="ot">&lt;-</span> wisclong[ <span class="fu">order</span>(wisclong<span class="sc">$</span>id, wisclong<span class="sc">$</span>grade), ]</span>
-<span id="cb22-25"><a href="3.1-example-data-1.html#cb22-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-26"><a href="3.1-example-data-1.html#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="co">#reshaping long to wide</span></span>
-<span id="cb22-27"><a href="3.1-example-data-1.html#cb22-27" aria-hidden="true" tabindex="-1"></a>wiscwide <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
-<span id="cb22-28"><a href="3.1-example-data-1.html#cb22-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> wisclong, </span>
-<span id="cb22-29"><a href="3.1-example-data-1.html#cb22-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">timevar =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>), </span>
-<span id="cb22-30"><a href="3.1-example-data-1.html#cb22-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">idvar =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>),</span>
-<span id="cb22-31"><a href="3.1-example-data-1.html#cb22-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">v.names =</span> <span class="fu">c</span>(<span class="st">&quot;verb&quot;</span>,<span class="st">&quot;perfo&quot;</span>),</span>
-<span id="cb22-32"><a href="3.1-example-data-1.html#cb22-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">direction =</span> <span class="st">&quot;wide&quot;</span>, </span>
-<span id="cb22-33"><a href="3.1-example-data-1.html#cb22-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot;&quot;</span></span>
-<span id="cb22-34"><a href="3.1-example-data-1.html#cb22-34" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-35"><a href="3.1-example-data-1.html#cb22-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-36"><a href="3.1-example-data-1.html#cb22-36" aria-hidden="true" tabindex="-1"></a><span class="co"># reordering columns </span></span>
-<span id="cb22-37"><a href="3.1-example-data-1.html#cb22-37" aria-hidden="true" tabindex="-1"></a>wiscwide <span class="ot">&lt;-</span> wiscwide[, <span class="fu">c</span>(</span>
-<span id="cb22-38"><a href="3.1-example-data-1.html#cb22-38" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;id&quot;</span>, <span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb2&quot;</span>, <span class="st">&quot;verb4&quot;</span>, <span class="st">&quot;verb6&quot;</span>,</span>
-<span id="cb22-39"><a href="3.1-example-data-1.html#cb22-39" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo2&quot;</span>, <span class="st">&quot;perfo4&quot;</span>, <span class="st">&quot;perfo6&quot;</span>,</span>
-<span id="cb22-40"><a href="3.1-example-data-1.html#cb22-40" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;momed&quot;</span>,<span class="st">&quot;grad&quot;</span> </span>
-<span id="cb22-41"><a href="3.1-example-data-1.html#cb22-41" aria-hidden="true" tabindex="-1"></a>)]</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="3.1-example-data-1.html#cb24-1" aria-hidden="true" tabindex="-1"></a>filepath <span class="ot">&lt;-</span> <span class="st">&quot;https://quantdev.ssri.psu.edu/sites/qdev/files/wisc3raw.csv&quot;</span></span>
+<span id="cb24-2"><a href="3.1-example-data-1.html#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="3.1-example-data-1.html#cb24-3" aria-hidden="true" tabindex="-1"></a>wisc3raw <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file=</span><span class="fu">url</span>(filepath),<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb24-4"><a href="3.1-example-data-1.html#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="3.1-example-data-1.html#cb24-5" aria-hidden="true" tabindex="-1"></a>var_names_sub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb24-6"><a href="3.1-example-data-1.html#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;id&quot;</span>, <span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb2&quot;</span>, <span class="st">&quot;verb4&quot;</span>, <span class="st">&quot;verb6&quot;</span>,</span>
+<span id="cb24-7"><a href="3.1-example-data-1.html#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo2&quot;</span>, <span class="st">&quot;perfo4&quot;</span>, <span class="st">&quot;perfo6&quot;</span>,</span>
+<span id="cb24-8"><a href="3.1-example-data-1.html#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;momed&quot;</span>, <span class="st">&quot;grad&quot;</span></span>
+<span id="cb24-9"><a href="3.1-example-data-1.html#cb24-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-10"><a href="3.1-example-data-1.html#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="3.1-example-data-1.html#cb24-11" aria-hidden="true" tabindex="-1"></a>wiscraw <span class="ot">&lt;-</span> wisc3raw[,var_names_sub]</span>
+<span id="cb24-12"><a href="3.1-example-data-1.html#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="3.1-example-data-1.html#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co"># reshaping wide to long</span></span>
+<span id="cb24-14"><a href="3.1-example-data-1.html#cb24-14" aria-hidden="true" tabindex="-1"></a>wisclong <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
+<span id="cb24-15"><a href="3.1-example-data-1.html#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> wiscraw,</span>
+<span id="cb24-16"><a href="3.1-example-data-1.html#cb24-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">varying =</span> <span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb2&quot;</span>, <span class="st">&quot;verb4&quot;</span>,<span class="st">&quot;verb6&quot;</span>, <span class="st">&quot;perfo1&quot;</span>,<span class="st">&quot;perfo2&quot;</span>,<span class="st">&quot;perfo4&quot;</span>,<span class="st">&quot;perfo6&quot;</span>),</span>
+<span id="cb24-17"><a href="3.1-example-data-1.html#cb24-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">timevar =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>), </span>
+<span id="cb24-18"><a href="3.1-example-data-1.html#cb24-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">idvar =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>),</span>
+<span id="cb24-19"><a href="3.1-example-data-1.html#cb24-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">direction =</span> <span class="st">&quot;long&quot;</span>, </span>
+<span id="cb24-20"><a href="3.1-example-data-1.html#cb24-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb24-21"><a href="3.1-example-data-1.html#cb24-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-22"><a href="3.1-example-data-1.html#cb24-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-23"><a href="3.1-example-data-1.html#cb24-23" aria-hidden="true" tabindex="-1"></a><span class="co"># reorder by id and day </span></span>
+<span id="cb24-24"><a href="3.1-example-data-1.html#cb24-24" aria-hidden="true" tabindex="-1"></a>wisclong <span class="ot">&lt;-</span> wisclong[ <span class="fu">order</span>(wisclong<span class="sc">$</span>id, wisclong<span class="sc">$</span>grade), ]</span>
+<span id="cb24-25"><a href="3.1-example-data-1.html#cb24-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-26"><a href="3.1-example-data-1.html#cb24-26" aria-hidden="true" tabindex="-1"></a><span class="co">#reshaping long to wide</span></span>
+<span id="cb24-27"><a href="3.1-example-data-1.html#cb24-27" aria-hidden="true" tabindex="-1"></a>wiscwide <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
+<span id="cb24-28"><a href="3.1-example-data-1.html#cb24-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> wisclong, </span>
+<span id="cb24-29"><a href="3.1-example-data-1.html#cb24-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">timevar =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>), </span>
+<span id="cb24-30"><a href="3.1-example-data-1.html#cb24-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">idvar =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>),</span>
+<span id="cb24-31"><a href="3.1-example-data-1.html#cb24-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">v.names =</span> <span class="fu">c</span>(<span class="st">&quot;verb&quot;</span>,<span class="st">&quot;perfo&quot;</span>),</span>
+<span id="cb24-32"><a href="3.1-example-data-1.html#cb24-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">direction =</span> <span class="st">&quot;wide&quot;</span>, </span>
+<span id="cb24-33"><a href="3.1-example-data-1.html#cb24-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb24-34"><a href="3.1-example-data-1.html#cb24-34" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-35"><a href="3.1-example-data-1.html#cb24-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-36"><a href="3.1-example-data-1.html#cb24-36" aria-hidden="true" tabindex="-1"></a><span class="co"># reordering columns </span></span>
+<span id="cb24-37"><a href="3.1-example-data-1.html#cb24-37" aria-hidden="true" tabindex="-1"></a>wiscwide <span class="ot">&lt;-</span> wiscwide[, <span class="fu">c</span>(</span>
+<span id="cb24-38"><a href="3.1-example-data-1.html#cb24-38" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;id&quot;</span>, <span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb2&quot;</span>, <span class="st">&quot;verb4&quot;</span>, <span class="st">&quot;verb6&quot;</span>,</span>
+<span id="cb24-39"><a href="3.1-example-data-1.html#cb24-39" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo2&quot;</span>, <span class="st">&quot;perfo4&quot;</span>, <span class="st">&quot;perfo6&quot;</span>,</span>
+<span id="cb24-40"><a href="3.1-example-data-1.html#cb24-40" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;momed&quot;</span>,<span class="st">&quot;grad&quot;</span> </span>
+<span id="cb24-41"><a href="3.1-example-data-1.html#cb24-41" aria-hidden="true" tabindex="-1"></a>)]</span></code></pre></div>
 </div>
             </section>
 
