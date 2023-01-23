@@ -55,4 +55,4 @@ hist(x, col = "#4B9CD3")
 
 ## Acknowledgements
 
-Many people have contributed to the course materials for HDFS 523. Most importantly, the original R markdown files for the course were developed by Nilam Ram and Zita Oravecz.
+Many people have contributed to the course materials for HDFS 523. Most importantly, many of the original R markdown files for the course were developed by Nilam Ram and Zita Oravecz.

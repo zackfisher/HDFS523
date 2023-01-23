@@ -238,7 +238,7 @@ div.csl-indent {
 <div id="look-for-duplicated-ids" class="section level2 hasAnchor" number="2.4">
 <h2><span class="header-section-number">2.4</span> Look for Duplicated IDs<a href="2.4-look-for-duplicated-ids.html#look-for-duplicated-ids" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>It is always worth looking for non-unique ID numbers when ID labels are included in a dataset. Here we have an <code>id</code> variable indicating the subject number. Since our data is in a long format (more on that later) duplicate IDs may indicate a potential problem with the data source or clues on how the data is structured.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="2.4-look-for-duplicated-ids.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">duplicated</span>(wisc3raw<span class="sc">$</span>id))</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="2.4-look-for-duplicated-ids.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">duplicated</span>(wisc3raw<span class="sc">$</span>id))</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 </div>
             </section>
@@ -292,20 +292,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

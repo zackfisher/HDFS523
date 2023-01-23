@@ -239,7 +239,7 @@ div.csl-indent {
 <h2><span class="header-section-number">2.5</span> Using <code>table()</code> to Spot Irregularities<a href="2.5-using-table-to-spot-irregularities.html#using-table-to-spot-irregularities" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>When a variable takes on a limited range of values it is often useful to screen for irregularities or invalid values. This is common across all variable types and can occur for character strings, numeric, integer and factor types. For example, we would expect the <code>grad</code> variable to only take the values of zero or one. We can use the <code>table()</code> function to quickly confirm this.</p>
 <p>By default <code>table()</code> simply omits any values coded as <code>NA</code>. To include a count of the <code>NA</code> values use the <code>useNA</code> argument of <code>table()</code> as follows:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="2.5-using-table-to-spot-irregularities.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(wisc3raw<span class="sc">$</span>grad, <span class="at">useNA =</span> <span class="st">&quot;always&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="2.5-using-table-to-spot-irregularities.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(wisc3raw<span class="sc">$</span>grad, <span class="at">useNA =</span> <span class="st">&quot;always&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##    0    1 &lt;NA&gt; 
 ##  158   46    0</code></pre>
@@ -295,20 +295,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

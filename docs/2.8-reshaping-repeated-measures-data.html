@@ -240,19 +240,19 @@ div.csl-indent {
 <p>Behavioral science tends to use relational data structures - in basic form, spreadsheets. Typically, the data are stored in a data frame (a “fancy” matrix) with multiple rows and columns. Two common schemata used to accommodate repeated measures data are <em>wide format</em> and <em>long format</em>. Different analysis and plotting functions require different kinds of data input. Thus, it is imperative that one can convert the data back and forth between wide and long formats.</p>
 <p>There are lots of ways to do this. We illustrate one way.</p>
 <p><em>Sidebar</em>: The <code>dput()</code> function provides a convenient method to get the variable names (or any R object) into a format that can be read back into R. For example, this can be helpful when working with a long vector of strings.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="2.8-reshaping-repeated-measures-data.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dput</span>(<span class="fu">colnames</span>(wisc3raw))</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="2.8-reshaping-repeated-measures-data.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dput</span>(<span class="fu">colnames</span>(wisc3raw))</span></code></pre></div>
 <pre><code>## c(&quot;id&quot;, &quot;verb1&quot;, &quot;verb2&quot;, &quot;verb4&quot;, &quot;verb6&quot;, &quot;perfo1&quot;, &quot;perfo2&quot;, 
 ## &quot;perfo4&quot;, &quot;perfo6&quot;, &quot;info1&quot;, &quot;comp1&quot;, &quot;simu1&quot;, &quot;voca1&quot;, &quot;info6&quot;, 
 ## &quot;comp6&quot;, &quot;simu6&quot;, &quot;voca6&quot;, &quot;momed&quot;, &quot;grad&quot;, &quot;constant&quot;)</code></pre>
 <p>First, let’s subset our data to only include the variables we need for this analysis.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="2.8-reshaping-repeated-measures-data.html#cb18-1" aria-hidden="true" tabindex="-1"></a>var_names_sub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb18-2"><a href="2.8-reshaping-repeated-measures-data.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;id&quot;</span>, <span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb2&quot;</span>, <span class="st">&quot;verb4&quot;</span>, <span class="st">&quot;verb6&quot;</span>,</span>
-<span id="cb18-3"><a href="2.8-reshaping-repeated-measures-data.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo2&quot;</span>, <span class="st">&quot;perfo4&quot;</span>, <span class="st">&quot;perfo6&quot;</span>,</span>
-<span id="cb18-4"><a href="2.8-reshaping-repeated-measures-data.html#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;momed&quot;</span>, <span class="st">&quot;grad&quot;</span></span>
-<span id="cb18-5"><a href="2.8-reshaping-repeated-measures-data.html#cb18-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-6"><a href="2.8-reshaping-repeated-measures-data.html#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="2.8-reshaping-repeated-measures-data.html#cb18-7" aria-hidden="true" tabindex="-1"></a>wiscraw <span class="ot">&lt;-</span> wisc3raw[,var_names_sub]</span>
-<span id="cb18-8"><a href="2.8-reshaping-repeated-measures-data.html#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wiscraw)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="2.8-reshaping-repeated-measures-data.html#cb17-1" aria-hidden="true" tabindex="-1"></a>var_names_sub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb17-2"><a href="2.8-reshaping-repeated-measures-data.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;id&quot;</span>, <span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb2&quot;</span>, <span class="st">&quot;verb4&quot;</span>, <span class="st">&quot;verb6&quot;</span>,</span>
+<span id="cb17-3"><a href="2.8-reshaping-repeated-measures-data.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo2&quot;</span>, <span class="st">&quot;perfo4&quot;</span>, <span class="st">&quot;perfo6&quot;</span>,</span>
+<span id="cb17-4"><a href="2.8-reshaping-repeated-measures-data.html#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;momed&quot;</span>, <span class="st">&quot;grad&quot;</span></span>
+<span id="cb17-5"><a href="2.8-reshaping-repeated-measures-data.html#cb17-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-6"><a href="2.8-reshaping-repeated-measures-data.html#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="2.8-reshaping-repeated-measures-data.html#cb17-7" aria-hidden="true" tabindex="-1"></a>wiscraw <span class="ot">&lt;-</span> wisc3raw[,var_names_sub]</span>
+<span id="cb17-8"><a href="2.8-reshaping-repeated-measures-data.html#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wiscraw)</span></code></pre></div>
 <pre><code>##   id verb1 verb2 verb4 verb6 perfo1 perfo2 perfo4 perfo6 momed grad
 ## 1  1 24.42 26.98 39.61 55.64  19.84  22.97  43.90  44.19   9.5    0
 ## 2  2 12.44 14.38 21.92 37.81   5.90  13.44  18.29  40.38   5.5    0
@@ -264,20 +264,20 @@ div.csl-indent {
 <h3><span class="header-section-number">2.8.1</span> Reshape Wide to Long<a href="2.8-reshaping-repeated-measures-data.html#reshape-wide-to-long" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>One way to go <em>from wide to long</em> is using the <code>reshape()</code> function from base R.</p>
 <p>Notice, the <code>varying</code> argument contains the repeated measures columns we want to stack and the <code>timevar</code> is a new variable containing the grade level information previosuly appended at the end of the colnames listed in <code>varying</code>.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="2.8-reshaping-repeated-measures-data.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reshape data from wide to long</span></span>
-<span id="cb20-2"><a href="2.8-reshaping-repeated-measures-data.html#cb20-2" aria-hidden="true" tabindex="-1"></a>wisclong <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
-<span id="cb20-3"><a href="2.8-reshaping-repeated-measures-data.html#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> wiscraw,</span>
-<span id="cb20-4"><a href="2.8-reshaping-repeated-measures-data.html#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">varying =</span> <span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb2&quot;</span>, <span class="st">&quot;verb4&quot;</span>,<span class="st">&quot;verb6&quot;</span>, <span class="st">&quot;perfo1&quot;</span>,<span class="st">&quot;perfo2&quot;</span>,<span class="st">&quot;perfo4&quot;</span>,<span class="st">&quot;perfo6&quot;</span>),</span>
-<span id="cb20-5"><a href="2.8-reshaping-repeated-measures-data.html#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">timevar =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>), </span>
-<span id="cb20-6"><a href="2.8-reshaping-repeated-measures-data.html#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">idvar =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>),</span>
-<span id="cb20-7"><a href="2.8-reshaping-repeated-measures-data.html#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">direction =</span> <span class="st">&quot;long&quot;</span>, </span>
-<span id="cb20-8"><a href="2.8-reshaping-repeated-measures-data.html#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot;&quot;</span></span>
-<span id="cb20-9"><a href="2.8-reshaping-repeated-measures-data.html#cb20-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-10"><a href="2.8-reshaping-repeated-measures-data.html#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-11"><a href="2.8-reshaping-repeated-measures-data.html#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># reorder by id and day </span></span>
-<span id="cb20-12"><a href="2.8-reshaping-repeated-measures-data.html#cb20-12" aria-hidden="true" tabindex="-1"></a>wisclong <span class="ot">&lt;-</span> wisclong[ <span class="fu">order</span>(wisclong<span class="sc">$</span>id, wisclong<span class="sc">$</span>grade), ]</span>
-<span id="cb20-13"><a href="2.8-reshaping-repeated-measures-data.html#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-14"><a href="2.8-reshaping-repeated-measures-data.html#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wisclong, <span class="dv">8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="2.8-reshaping-repeated-measures-data.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reshape data from wide to long</span></span>
+<span id="cb19-2"><a href="2.8-reshaping-repeated-measures-data.html#cb19-2" aria-hidden="true" tabindex="-1"></a>wisclong <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
+<span id="cb19-3"><a href="2.8-reshaping-repeated-measures-data.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> wiscraw,</span>
+<span id="cb19-4"><a href="2.8-reshaping-repeated-measures-data.html#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">varying =</span> <span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb2&quot;</span>, <span class="st">&quot;verb4&quot;</span>,<span class="st">&quot;verb6&quot;</span>, <span class="st">&quot;perfo1&quot;</span>,<span class="st">&quot;perfo2&quot;</span>,<span class="st">&quot;perfo4&quot;</span>,<span class="st">&quot;perfo6&quot;</span>),</span>
+<span id="cb19-5"><a href="2.8-reshaping-repeated-measures-data.html#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">timevar =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>), </span>
+<span id="cb19-6"><a href="2.8-reshaping-repeated-measures-data.html#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">idvar =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>),</span>
+<span id="cb19-7"><a href="2.8-reshaping-repeated-measures-data.html#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">direction =</span> <span class="st">&quot;long&quot;</span>, </span>
+<span id="cb19-8"><a href="2.8-reshaping-repeated-measures-data.html#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb19-9"><a href="2.8-reshaping-repeated-measures-data.html#cb19-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-10"><a href="2.8-reshaping-repeated-measures-data.html#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="2.8-reshaping-repeated-measures-data.html#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co"># reorder by id and day </span></span>
+<span id="cb19-12"><a href="2.8-reshaping-repeated-measures-data.html#cb19-12" aria-hidden="true" tabindex="-1"></a>wisclong <span class="ot">&lt;-</span> wisclong[ <span class="fu">order</span>(wisclong<span class="sc">$</span>id, wisclong<span class="sc">$</span>grade), ]</span>
+<span id="cb19-13"><a href="2.8-reshaping-repeated-measures-data.html#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="2.8-reshaping-repeated-measures-data.html#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wisclong, <span class="dv">8</span>)</span></code></pre></div>
 <pre><code>##     id momed grad grade  verb perfo
 ## 1.1  1   9.5    0     1 24.42 19.84
 ## 1.2  1   9.5    0     2 26.98 22.97
@@ -292,24 +292,24 @@ div.csl-indent {
 <div id="reshape-long-to-wide" class="section level3 hasAnchor" number="2.8.2">
 <h3><span class="header-section-number">2.8.2</span> Reshape Long to Wide<a href="2.8-reshaping-repeated-measures-data.html#reshape-long-to-wide" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now we go <em>from long to wide</em>, again using the <code>reshape()</code> function. The <code>v.names</code> argument specifies the variables to be expanded column wise based on the repeated measure specified in <code>timevar</code>.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="2.8-reshaping-repeated-measures-data.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#reshaping long to wide</span></span>
-<span id="cb22-2"><a href="2.8-reshaping-repeated-measures-data.html#cb22-2" aria-hidden="true" tabindex="-1"></a>wiscwide <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
-<span id="cb22-3"><a href="2.8-reshaping-repeated-measures-data.html#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> wisclong, </span>
-<span id="cb22-4"><a href="2.8-reshaping-repeated-measures-data.html#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">timevar =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>), </span>
-<span id="cb22-5"><a href="2.8-reshaping-repeated-measures-data.html#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">idvar =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>),</span>
-<span id="cb22-6"><a href="2.8-reshaping-repeated-measures-data.html#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">v.names =</span> <span class="fu">c</span>(<span class="st">&quot;verb&quot;</span>,<span class="st">&quot;perfo&quot;</span>),</span>
-<span id="cb22-7"><a href="2.8-reshaping-repeated-measures-data.html#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">direction =</span> <span class="st">&quot;wide&quot;</span>, </span>
-<span id="cb22-8"><a href="2.8-reshaping-repeated-measures-data.html#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot;&quot;</span></span>
-<span id="cb22-9"><a href="2.8-reshaping-repeated-measures-data.html#cb22-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-10"><a href="2.8-reshaping-repeated-measures-data.html#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-11"><a href="2.8-reshaping-repeated-measures-data.html#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co"># reordering columns </span></span>
-<span id="cb22-12"><a href="2.8-reshaping-repeated-measures-data.html#cb22-12" aria-hidden="true" tabindex="-1"></a>wiscwide <span class="ot">&lt;-</span> wiscwide[, <span class="fu">c</span>(</span>
-<span id="cb22-13"><a href="2.8-reshaping-repeated-measures-data.html#cb22-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;id&quot;</span>, <span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb2&quot;</span>, <span class="st">&quot;verb4&quot;</span>, <span class="st">&quot;verb6&quot;</span>,</span>
-<span id="cb22-14"><a href="2.8-reshaping-repeated-measures-data.html#cb22-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo2&quot;</span>, <span class="st">&quot;perfo4&quot;</span>, <span class="st">&quot;perfo6&quot;</span>,</span>
-<span id="cb22-15"><a href="2.8-reshaping-repeated-measures-data.html#cb22-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;momed&quot;</span>,<span class="st">&quot;grad&quot;</span> </span>
-<span id="cb22-16"><a href="2.8-reshaping-repeated-measures-data.html#cb22-16" aria-hidden="true" tabindex="-1"></a>)]</span>
-<span id="cb22-17"><a href="2.8-reshaping-repeated-measures-data.html#cb22-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-18"><a href="2.8-reshaping-repeated-measures-data.html#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wiscwide)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="2.8-reshaping-repeated-measures-data.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#reshaping long to wide</span></span>
+<span id="cb21-2"><a href="2.8-reshaping-repeated-measures-data.html#cb21-2" aria-hidden="true" tabindex="-1"></a>wiscwide <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
+<span id="cb21-3"><a href="2.8-reshaping-repeated-measures-data.html#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> wisclong, </span>
+<span id="cb21-4"><a href="2.8-reshaping-repeated-measures-data.html#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">timevar =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>), </span>
+<span id="cb21-5"><a href="2.8-reshaping-repeated-measures-data.html#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">idvar =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>),</span>
+<span id="cb21-6"><a href="2.8-reshaping-repeated-measures-data.html#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">v.names =</span> <span class="fu">c</span>(<span class="st">&quot;verb&quot;</span>,<span class="st">&quot;perfo&quot;</span>),</span>
+<span id="cb21-7"><a href="2.8-reshaping-repeated-measures-data.html#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">direction =</span> <span class="st">&quot;wide&quot;</span>, </span>
+<span id="cb21-8"><a href="2.8-reshaping-repeated-measures-data.html#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb21-9"><a href="2.8-reshaping-repeated-measures-data.html#cb21-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-10"><a href="2.8-reshaping-repeated-measures-data.html#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="2.8-reshaping-repeated-measures-data.html#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="co"># reordering columns </span></span>
+<span id="cb21-12"><a href="2.8-reshaping-repeated-measures-data.html#cb21-12" aria-hidden="true" tabindex="-1"></a>wiscwide <span class="ot">&lt;-</span> wiscwide[, <span class="fu">c</span>(</span>
+<span id="cb21-13"><a href="2.8-reshaping-repeated-measures-data.html#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;id&quot;</span>, <span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb2&quot;</span>, <span class="st">&quot;verb4&quot;</span>, <span class="st">&quot;verb6&quot;</span>,</span>
+<span id="cb21-14"><a href="2.8-reshaping-repeated-measures-data.html#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo2&quot;</span>, <span class="st">&quot;perfo4&quot;</span>, <span class="st">&quot;perfo6&quot;</span>,</span>
+<span id="cb21-15"><a href="2.8-reshaping-repeated-measures-data.html#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;momed&quot;</span>,<span class="st">&quot;grad&quot;</span> </span>
+<span id="cb21-16"><a href="2.8-reshaping-repeated-measures-data.html#cb21-16" aria-hidden="true" tabindex="-1"></a>)]</span>
+<span id="cb21-17"><a href="2.8-reshaping-repeated-measures-data.html#cb21-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-18"><a href="2.8-reshaping-repeated-measures-data.html#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wiscwide)</span></code></pre></div>
 <pre><code>##     id verb1 verb2 verb4 verb6 perfo1 perfo2 perfo4 perfo6 momed grad
 ## 1.1  1 24.42 26.98 39.61 55.64  19.84  22.97  43.90  44.19   9.5    0
 ## 2.1  2 12.44 14.38 21.92 37.81   5.90  13.44  18.29  40.38   5.5    0
@@ -327,7 +327,7 @@ div.csl-indent {
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-tidyr" class="csl-entry">
-———. 2021. <em>Tidyr: Tidy Messy Data</em>. <a href="https://CRAN.R-project.org/package=tidyr">https://CRAN.R-project.org/package=tidyr</a>.
+Wickham, Hadley. 2021. <em>Tidyr: Tidy Messy Data</em>. <a href="https://CRAN.R-project.org/package=tidyr">https://CRAN.R-project.org/package=tidyr</a>.
 </div>
 </div>
             </section>
@@ -381,20 +381,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
