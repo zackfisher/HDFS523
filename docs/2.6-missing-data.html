@@ -243,30 +243,36 @@ div.csl-indent {
 <div id="generating-example-data" class="section level3 hasAnchor" number="2.6.1">
 <h3><span class="header-section-number">2.6.1</span> Generating Example Data<a href="2.6-missing-data.html#generating-example-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Since the WISC data does not contain missing values it is helpful to generate a synthetic dataset containing some commonly encountered missing data codes.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="2.6-missing-data.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb9-2"><a href="2.6-missing-data.html#cb9-2" aria-hidden="true" tabindex="-1"></a>wisc_miss <span class="ot">&lt;-</span> wisc3raw</span>
-<span id="cb9-3"><a href="2.6-missing-data.html#cb9-3" aria-hidden="true" tabindex="-1"></a>wisc_miss<span class="sc">$</span>verb1[<span class="fu">sample</span>(<span class="fu">nrow</span>(wisc_miss),<span class="dv">100</span>)] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">99</span></span>
-<span id="cb9-4"><a href="2.6-missing-data.html#cb9-4" aria-hidden="true" tabindex="-1"></a>wisc_miss<span class="sc">$</span>comp1[<span class="fu">sample</span>(<span class="fu">nrow</span>(wisc_miss),<span class="dv">75</span>)] <span class="ot">&lt;-</span> <span class="st">&quot;N/A&quot;</span></span>
-<span id="cb9-5"><a href="2.6-missing-data.html#cb9-5" aria-hidden="true" tabindex="-1"></a>wisc_miss<span class="sc">$</span>info1[<span class="fu">sample</span>(<span class="fu">nrow</span>(wisc_miss),<span class="dv">50</span>)] <span class="ot">&lt;-</span> <span class="st">&quot;NA&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="2.6-missing-data.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb8-2"><a href="2.6-missing-data.html#cb8-2" aria-hidden="true" tabindex="-1"></a>wisc_miss <span class="ot">&lt;-</span> wisc3raw</span>
+<span id="cb8-3"><a href="2.6-missing-data.html#cb8-3" aria-hidden="true" tabindex="-1"></a>wisc_miss<span class="sc">$</span>verb1[<span class="fu">sample</span>(<span class="fu">nrow</span>(wisc_miss),<span class="dv">100</span>)] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">99</span></span>
+<span id="cb8-4"><a href="2.6-missing-data.html#cb8-4" aria-hidden="true" tabindex="-1"></a>wisc_miss<span class="sc">$</span>comp1[<span class="fu">sample</span>(<span class="fu">nrow</span>(wisc_miss),<span class="dv">75</span>)] <span class="ot">&lt;-</span> <span class="st">&quot;N/A&quot;</span></span>
+<span id="cb8-5"><a href="2.6-missing-data.html#cb8-5" aria-hidden="true" tabindex="-1"></a>wisc_miss<span class="sc">$</span>info1[<span class="fu">sample</span>(<span class="fu">nrow</span>(wisc_miss),<span class="dv">50</span>)] <span class="ot">&lt;-</span> <span class="st">&quot;NA&quot;</span></span></code></pre></div>
 </div>
 <div id="recoding-values-with-na" class="section level3 hasAnchor" number="2.6.2">
 <h3><span class="header-section-number">2.6.2</span> Recoding Values with <code>NA</code><a href="2.6-missing-data.html#recoding-values-with-na" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now that we have a dataset with missing values we can use <code>naniar</code> to recode these values to <code>NA</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="2.6-missing-data.html#cb10-1" aria-hidden="true" tabindex="-1"></a>na_strings <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;NA&quot;</span>, <span class="st">&quot;N/A&quot;</span>, <span class="sc">-</span><span class="dv">99</span>)</span>
-<span id="cb10-2"><a href="2.6-missing-data.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-3"><a href="2.6-missing-data.html#cb10-3" aria-hidden="true" tabindex="-1"></a>wisc_miss <span class="ot">&lt;-</span> naniar<span class="sc">::</span><span class="fu">replace_with_na_all</span>(</span>
-<span id="cb10-4"><a href="2.6-missing-data.html#cb10-4" aria-hidden="true" tabindex="-1"></a>  wisc_miss, <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">%in%</span> na_strings</span>
-<span id="cb10-5"><a href="2.6-missing-data.html#cb10-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="2.6-missing-data.html#cb9-1" aria-hidden="true" tabindex="-1"></a>na_strings <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;NA&quot;</span>, <span class="st">&quot;N/A&quot;</span>, <span class="sc">-</span><span class="dv">99</span>)</span>
+<span id="cb9-2"><a href="2.6-missing-data.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-3"><a href="2.6-missing-data.html#cb9-3" aria-hidden="true" tabindex="-1"></a>wisc_miss <span class="ot">&lt;-</span> naniar<span class="sc">::</span><span class="fu">replace_with_na_all</span>(</span>
+<span id="cb9-4"><a href="2.6-missing-data.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  wisc_miss, <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">%in%</span> na_strings</span>
+<span id="cb9-5"><a href="2.6-missing-data.html#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>See the <a href="https://cran.r-project.org/web/packages/naniar/vignettes/replace-with-na.html"><code>naniar</code> vignette on recoding NA values</a> for more detailed information on the package functionality.</p>
 </div>
 <div id="missing-data-visualization" class="section level3 hasAnchor" number="2.6.3">
 <h3><span class="header-section-number">2.6.3</span> Missing Data Visualization<a href="2.6-missing-data.html#missing-data-visualization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Once we have recoded our data in a consistent manner we can use visualizations to explore the missing data. The <code>vis_miss()</code> function from <code>naniar</code> is a good starting point for visualizing the amount of missing data in our dataset. The plots shows the missing values in black and non-missing values in gray. In addition, percentages of missing data in both the dataset and individual variables are provided.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="2.6-missing-data.html#cb11-1" aria-hidden="true" tabindex="-1"></a>naniar<span class="sc">::</span><span class="fu">vis_miss</span>(wisc_miss)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="2.6-missing-data.html#cb10-1" aria-hidden="true" tabindex="-1"></a>naniar<span class="sc">::</span><span class="fu">vis_miss</span>(wisc_miss)</span></code></pre></div>
 <pre><code>## Warning: `gather_()` was deprecated in tidyr 1.2.0.
 ## ℹ Please use `gather()` instead.
 ## ℹ The deprecated feature was likely used in the visdat package.
 ##   Please report the issue at &lt;]8;;https://github.com/ropensci/visdat/issueshttps://github.com/ropensci/visdat/issues]8;;&gt;.</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>It is often useful to look at combinations of missingness among different variables.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="2.6-missing-data.html#cb12-1" aria-hidden="true" tabindex="-1"></a>naniar<span class="sc">::</span><span class="fu">gg_miss_upset</span>(wisc_miss)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>We can also look at the percentage of missing data across a factor variable.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="2.6-missing-data.html#cb13-1" aria-hidden="true" tabindex="-1"></a>naniar<span class="sc">::</span><span class="fu">gg_miss_fct</span>(<span class="at">x =</span> wisc_miss, <span class="at">fct =</span> grad)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Many missing data visualizations are described in the <a href="https://cran.r-project.org/web/packages/naniar/vignettes/naniar-visualisation.html"><code>naniar</code> vignette on missing data visualization</a> including plots for exploring missing data mechanisms.</p>
 </div>
@@ -328,20 +334,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

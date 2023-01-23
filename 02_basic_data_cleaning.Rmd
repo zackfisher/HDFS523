@@ -107,6 +107,18 @@ Once we have recoded our data in a consistent manner we can use visualizations t
 naniar::vis_miss(wisc_miss)
 ```
 
+It is often useful to look at combinations of missingness among different variables.
+
+```{r}
+naniar::gg_miss_upset(wisc_miss)
+```
+
+We can also look at the percentage of missing data across a factor variable. 
+
+```{r}
+naniar::gg_miss_fct(x = wisc_miss, fct = grad)
+```
+
 Many missing data visualizations are described in the [`naniar` vignette on missing data visualization](https://cran.r-project.org/web/packages/naniar/vignettes/naniar-visualisation.html) including plots for exploring missing data mechanisms. 
 
 ## Exporting Data
