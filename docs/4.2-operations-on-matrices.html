@@ -399,6 +399,38 @@ a_{p1}x_{1} + a_{p2}x_{2} + \dots + a_{pp}x_{p} = bp
 \mathbf{AA^{-1}} = \mathbf{A^{-1}A} = \mathbf{I}
 \]</span>
 where <span class="math inline">\(I\)</span> is the identity matrix with 1’s along the diagonal and 0’s elsewhere.</p>
+<p>So, why is division undefined for matrices. Here is a quick example. Suppose, <span class="math inline">\(\mathbf{A}\)</span> is a matrix and <span class="math inline">\(\mathbf{B}\)</span> is the inverse of <span class="math inline">\(\mathbf{A}\)</span>, such that</p>
+<p><span class="math display">\[
+\mathbf{AB^{-1}} = \mathbf{B^{-1}A} = \mathbf{I}
+\]</span></p>
+<p>Now, let</p>
+<p><span class="math display">\[
+\mathbf{A} = \begin{bmatrix}
+1 &amp; 2 \\
+1 &amp; 2
+\end{bmatrix}
+, \enspace
+\mathbf{B} = \begin{bmatrix}
+a &amp; b \\
+c &amp; d
+\end{bmatrix},
+\]</span>
+Then,</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+a &amp; b \\
+c &amp; d
+\end{bmatrix}
+\begin{bmatrix}
+1 &amp; 2 \\
+1 &amp; 2
+\end{bmatrix} =
+\begin{bmatrix}
+1 &amp; 0\\
+0 &amp; 1
+\end{bmatrix}.
+\]</span></p>
+<p>This means that <span class="math inline">\(a+b=1\)</span> and <span class="math inline">\(2a+2b = 0\)</span>, which is a contradiction, suggesting A does not have an inverse.</p>
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div class="csl-entry">

@@ -238,7 +238,7 @@ div.csl-indent {
 <div id="exporting-data" class="section level2 hasAnchor" number="2.7">
 <h2><span class="header-section-number">2.7</span> Exporting Data<a href="2.7-exporting-data.html#exporting-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Depending on work-flow, you may need to export your dataset for use in another statistical software program. The <code>write.csv()</code> function is a convenient method for outputting comma delimited files.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="2.7-exporting-data.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(wisc3raw, <span class="at">file =</span> <span class="st">&quot;wisc3raw.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">na =</span> <span class="st">&quot;-99&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="2.7-exporting-data.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(wisc3raw, <span class="at">file =</span> <span class="st">&quot;wisc3raw.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">na =</span> <span class="st">&quot;-99&quot;</span>)</span></code></pre></div>
 <p>Note that by default the <code>write.csv()</code> function will include an extra column of row numbers and will notate missing data with an <code>NA</code>. More information on exporting data is available at <a href="http://www.statmethods.net/input/exportingdata.html" class="uri">http://www.statmethods.net/input/exportingdata.html</a>.</p>
 </div>
             </section>
@@ -292,6 +292,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
