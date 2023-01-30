@@ -296,7 +296,7 @@ where $I$ is the identity matrix with 1's along the diagonal and 0's elsewhere.
 So, why is division undefined for matrices. Here is a quick example. Suppose, $\mathbf{A}$ is a matrix and $\mathbf{B}$ is the inverse of $\mathbf{A}$, such that
 
 $$
-\mathbf{AB^{-1}} = \mathbf{B^{-1}A} = \mathbf{I}
+\mathbf{AB} = \mathbf{BA} = \mathbf{I}
 $$
 
 Now, let 

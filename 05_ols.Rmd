@@ -92,7 +92,7 @@ If assumptions (1) to (5) hold, then the OLS estimator $\boldsymbol{\hat{\beta}}
 2. Asymptotically normally distributed
 3. Having a variance of $\mathbb{V}(\boldsymbol{\hat{\beta}}) = \sigma^2(\mathbf{X}'\mathbf{X})^{-1}$
 
-*Notice that we did not assume normality of $\epsilon_{i,y_{i}$ or $x_{i}$.* 
+*Notice that we did not assume normality of $\epsilon_{i},y_{i}$ or $x_{i}$.* 
 
 Let's discuss each of these properties in a little bit more detail.
 
@@ -312,7 +312,7 @@ Therefore, in this model $\mathbf{\hat\beta}$ is still consistent and asymptotic
 
 Here, *a dichotomous outcome does inherently violate the assumption of homoskedasticity.*
 
-Why is this case? It can be shown that $\mathbb{V}(\epsilon_{i})$ now directly depends on the value of $x$ that is taken. If the $ith$ person has one set of values for the $x$ variables, and another individual $j$ has another set, the estimates of $\mathbb{V}(\epsilon_{i})$ and $\mathbb{V}(\epsilon_{j})$ will differ. This can be seem by looking at the variacne of a Bernoulli random variable.
+Why is this case? It can be shown that $\mathbb{V}(\epsilon_{i})$ now directly depends on the value of $x$ that is taken. If the $ith$ person has one set of values for the $x$ variables, and another individual $j$ has another set, the estimates of $\mathbb{V}(\epsilon_{i})$ and $\mathbb{V}(\epsilon_{j})$ will differ. This can be seem by looking at the variance of a Bernoulli random variable.
 
 This means estimate of variance of $\mathbf{\hat\beta}$ is no longer reliable, SEs and significance tests possibly inaccurate. However, this could be addressed using robust standard errors.
 
