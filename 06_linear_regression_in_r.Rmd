@@ -26,10 +26,16 @@ filepath <- "https://quantdev.ssri.psu.edu/sites/qdev/files/wisc3raw.csv"
 
 wisc3raw <- read.csv(file=url(filepath),header=TRUE)
 
+colnames(wisc3raw) <- c(
+  "id", "verb1", "verb2", "verb4", "verb6", "perfo1", "perfo2", 
+  "perfo4", "perfo6", "info1", "comp1", "simu1", "voca1", "info6", 
+  "comp6", "simu6", "voca6", "daded", "grad", "constant"
+)
+
 var_names_sub <- c(
   "id", "verb1", "verb2", "verb4", "verb6",
   "perfo1", "perfo2", "perfo4", "perfo6",
-  "momed", "grad"
+  "daded", "grad"
 )
 
 wiscsub <- wisc3raw[,var_names_sub]
@@ -81,7 +87,11 @@ Note that we used `na.exclude` instead of `na.omit` (default); practically speak
 
 The output indicates that $b_0$ = 25.4153, and its standard error = 0.4275. 
 
-The intercept reflects the expected value of the outcome variable when all of the predictor variables (i.e. $\left\{ x_{1i}, ..., x_{qi}\right\}$) = 0. So, in the absence of any additional information other than the descriptive statistics of $verb_{2i}$, what is our best guess for a person's $verb_{2i}$ score? It is the mean of $verb_{2i}$. The regression above confirms this notion; regressing the outcome on a vector of 1s allows us to 'recover' the mean.
+The intercept reflects the expected value of the outcome variable when all of the predictor variables (i.e. $\left\{ x_{1i}, ..., x_{qi}\right\}$) = 0. 
+
+So, in the absence of any additional information other than the descriptive statistics of $verb_{2i}$, what is our best guess for a person's $verb_{2i}$ score? 
+
+It is the mean of $verb_{2i}$. The regression above confirms this notion; regressing the outcome on a vector of 1s allows us to 'recover' the mean.
 
 
 ### Intercept as Mean of Outcome
@@ -267,25 +277,25 @@ Note the change of scale on the x-axis.
 
 ##  Multiple Linear Regression
 
-Now, let's include a second predictor. We have information on the number of years of education for the children's mothers, variable `momed`. The values in `momed` indicate the number of years of education each mother completed. First, let's take a look at the distribution of this new predictor variable.
+Now, let's include a second predictor. We have information on the number of years of education for the children's fathers, variable `daded`. The values in `daded` indicate the number of years of education each father completed. First, let's take a look at the distribution of this new predictor variable.
 
 ```{r}
-psych::describe(wiscsub$momed)
+psych::describe(wiscsub$daded)
 
-ggplot(data=wiscsub, aes(x=momed)) + 
+ggplot(data=wiscsub, aes(x=daded)) + 
   geom_histogram(binwidth=2.5, fill="white", color="black") +
   xlim(0,20) +
-  xlab("Number of Years of Mother's Education") + 
+  xlab("Number of Years of Father's Education") + 
   ylab("Count") +
   theme_classic()
 ```
-And the relation between Grade 2 verbal scores and momed.
+And the relation between Grade 2 verbal scores and daded.
 ```{r}
-ggplot(data=wiscsub, aes(x=momed, y = verb2)) + 
+ggplot(data=wiscsub, aes(x=daded, y = verb2)) + 
   geom_point() +
   xlim(0,20) + 
   ylim(0,50) +
-  xlab("Mother's Education (Years)") + ylab("Verbal Ability Grade 2") +
+  xlab("Father's Education (Years)") + ylab("Verbal Ability Grade 2") +
   theme_classic()
 ```
 
@@ -293,23 +303,23 @@ ggplot(data=wiscsub, aes(x=momed, y = verb2)) +
 
 Our model now becomes 
 
-$$ verb_{2i} = b_01_{i} + b_1verb^{*}_{1i} + b_2momed^{*}_{i} + \epsilon_{i}$$
+$$ verb_{2i} = b_01_{i} + b_1verb^{*}_{1i} + b_2daded^{*}_{i} + \epsilon_{i}$$
 
-where $verb^{*}_{1i}$ is the sample-centered version of $verb_{1i}$, and $momed^{*}_{i}$ is the sample-centered version of $momed_{i}$. 
+where $verb^{*}_{1i}$ is the sample-centered version of $verb_{1i}$, and $daded^{*}_{i}$ is the sample-centered version of $daded_{i}$. 
 
-The slope, $b_2$ is the expected difference in grade 2 verbal score for each 1 year difference in mother's education. 
+The slope, $b_2$ is the expected difference in grade 2 verbal score for each 1 year difference in father's education. 
 
-We can also center the `momed` variable.
+We can also center the `daded` variable.
 
 ```{r}
-# Calculate mean-centered version of mother's education variable
-wiscsub$momed_star <- wiscsub$momed - mean(wiscsub$momed)
+# Calculate mean-centered version of father's education variable
+wiscsub$daded_star <- wiscsub$daded - mean(wiscsub$daded)
 ```
 
 ### Fit Model in R
 
 ```{r}
-model4 <- lm(verb2 ~ 1 + verb1_star + momed_star,
+model4 <- lm(verb2 ~ 1 + verb1_star + daded_star,
               data = wiscsub,
               na.action = na.exclude)
 summary(model4)
@@ -327,11 +337,11 @@ semPlot::semPaths(model4, what = "paths")
 
 #### Interpreting Model Parameters
 
-$b_0$ is the expected value of the outcome variable when all other variables are 0. Therefore, in this case, $b_0$ is the expected Grade 2 verbal score for a child with an average Grade 1 verbal score (i.e. $verb^{*}_{1i}$ = 0) *and* whose mother had an average education (i.e. $momed^{*}_{i}$ = 0, $\bar{momed_{i}}$ = 10.81 years of education. 
+$b_0$ is the expected value of the outcome variable when all other variables are 0. Therefore, in this case, $b_0$ is the expected Grade 2 verbal score for a child with an average Grade 1 verbal score (i.e. $verb^{*}_{1i}$ = 0) *and* whose father had an average education (i.e. $daded^{*}_{i}$ = 0, $\bar{daded_{i}}$ = 10.81 years of education. 
 
-$b_1$ is the expected difference in the outcome for a 1-unit difference in $x_{1i}$. In this example (i.e. 'model4'), $b_1$ is the expected difference in Grade 2 verbal score (outcome variable, $y_i$ = $verb_{2i}$) for a 1 point difference in the Grade 1 verbal score ($x_{1i}$ = $verb^{*}_{1i}$), holding constant the level of mother's education.
+$b_1$ is the expected difference in the outcome for a 1-unit difference in $x_{1i}$. In this example (i.e. 'model4'), $b_1$ is the expected difference in Grade 2 verbal score (outcome variable, $y_i$ = $verb_{2i}$) for a 1 point difference in the Grade 1 verbal score ($x_{1i}$ = $verb^{*}_{1i}$), holding constant the level of father's education.
 
-$b_2$ is the expected difference in the outcome for a 1-unit difference in $x_{2i}$. For this example (i.e. 'model4'), $b_2$ is the expected difference in Grade 2 verbal score (outcome variable, $y_i$ = $verb_{2i}$) for each year difference in mother's education ($x_{2i}$ = $momed^{*}_i$), holding constant in Grade 1 verbal score.
+$b_2$ is the expected difference in the outcome for a 1-unit difference in $x_{2i}$. For this example (i.e. 'model4'), $b_2$ is the expected difference in Grade 2 verbal score (outcome variable, $y_i$ = $verb_{2i}$) for each year difference in father's education ($x_{2i}$ = $daded^{*}_i$), holding constant in Grade 1 verbal score.
 
 ### A Note on Interpretation
 
@@ -339,7 +349,7 @@ The distinguishing feature for interpretation in linear models without interacti
 
 Interpretation only needs to specify which variable is changing, by how much, and that other variables are being held constant.
 
-In regard to our last example, years of mother's education does impact the relationship between Grade 1 and 2 verbal scores. Likewise, the effect of mother's education on Grade 1 verbal scores does not depend on Grade 1 verbal scores. Said in a different way, no matter what a child's Grade 1 verbal score was, the effect of mother's education on Grade 2 verbal scores is the same.
+In regard to our last example, years of father's education does impact the relationship between Grade 1 and 2 verbal scores. Likewise, the effect of father's education on Grade 1 verbal scores does not depend on Grade 1 verbal scores. Said in a different way, no matter what a child's Grade 1 verbal score was, the effect of father's education on Grade 2 verbal scores is the same.
 
 Consider another model with categorical and continuous predictors, `grad` and `verb1_star`, respectively. 
 
@@ -352,7 +362,7 @@ model4b <- lm(verb2 ~ 1 + verb1_star + grad,
 ggPredict(model4b,se=TRUE,interactive=FALSE)
 ```
 
-Notice in the plot, whether a student's mother graduated HS does not impact the relationship between Grade 1 and 2 verbal scores. Differences in Grade 1 and 2 verbal scores are not dependent on whether or not the mother graduated HS. 
+Notice in the plot, whether a student's father graduated HS does not impact the relationship between Grade 1 and 2 verbal scores. Differences in Grade 1 and 2 verbal scores are not dependent on whether or not the father graduated HS. 
 
 **Most importantly, using the coefficients themselves we can easily interpret the model parameters.** 
 
@@ -360,17 +370,17 @@ Notice in the plot, whether a student's mother graduated HS does not impact the 
 
 Ok, let's move on to the topic of an *interaction* which uses the product of two predictor variables as a new predictor.
 
-Working up a slightly different example with the 'grad' variable (whether mom graduated high school), 
+Working up a slightly different example with the 'grad' variable (whether dad graduated high school), 
 
 $$ verb_{2i} = b_01_i + b_1verb^{*}_{1i} + b_2grad_{i} + b_3(verb^{*}_{1i}grad_{i}) + \epsilon_{i}$$
 
-Where $verb^{*}_{1i}$ is the mean-centered version of $verb_{1i}$, and $grad_i$ is a dummy coded variable that equals 0 if the child's mother *did not* graduate high school, and equals 1 if the child's mother *did* graduate high school.
+Where $verb^{*}_{1i}$ is the mean-centered version of $verb_{1i}$, and $grad_i$ is a dummy coded variable that equals 0 if the child's father *did not* graduate high school, and equals 1 if the child's father *did* graduate high school.
 
-We did not sample-mean center $grad_i$ in this example because a value of 0 already has substantive meaning for the current example (i.e. when $grad_i$ equals 0, the mother *did not* graduate high school).
+We did not sample-mean center $grad_i$ in this example because a value of 0 already has substantive meaning for the current example (i.e. when $grad_i$ equals 0, the father *did not* graduate high school).
 
 ### Interaction as Moderation
 
-Often, we describe phenomena in terms of *moderation*; or that the relation between two variables (i.e. $y_i$ and $x_{1i}$) is *moderated* by a third variable (i.e. $x_{2i}$). For example, the relation between Grade 1 and Grade 2 verbal scores may be *moderated* by mother's graduation status. More specifically, the relation between 1st and 2nd grade verbal score may be different for children whose mothers' did not or did graduate from high school.
+Often, we describe phenomena in terms of *moderation*; or that the relation between two variables (i.e. $y_i$ and $x_{1i}$) is *moderated* by a third variable (i.e. $x_{2i}$). For example, the relation between Grade 1 and Grade 2 verbal scores may be *moderated* by father's graduation status. More specifically, the relation between 1st and 2nd grade verbal score may be different for children whose fathers' did not or did graduate from high school.
 
 The inclusion of product terms (i.e. interactions) allows for a direct investigation of a *moderation* hypothesis.
 
@@ -388,13 +398,13 @@ To illustrate the notion of two equations, let's rewrite the regression equation
 
 $$ verb_{2i} = b_01_i + b_1verb^{*}_{1i} + b_2grad_{i} + b_3(verb^{*}_{1i}grad_{i}) + \epsilon_{i}$$
 
-as two separate regression equations, one for mothers who graduated from highschool and one for mothers that did not. We can accomplish this by plugging in $0$ and $1$ into the regression equation and rearranging some of the terms. Doing so we get 
+as two separate regression equations, one for fathers who graduated from highschool and one for fathers that did not. We can accomplish this by plugging in $0$ and $1$ into the regression equation and rearranging some of the terms. Doing so we get 
 
-**Equation for Students whose Mother Graduated Highschool**
+**Equation for Students whose father Graduated Highschool**
 
 $$ verb_{2i} = (b_0 + b_2) + (b_1 +  b_3)verb^{*}_{1i} + \epsilon_{i}$$
 
-**Equation for Students whose Mother Did Not Graduate from Highschool**
+**Equation for Students whose father Did Not Graduate from Highschool**
 
 $$ verb_{2i} = b_0 + b_1verb^{*}_{1i} + \epsilon_{i}$$
 
@@ -402,18 +412,18 @@ $$ verb_{2i} = b_0 + b_1verb^{*}_{1i} + \epsilon_{i}$$
 
 Without an interaction, our linear regression model assumes that the only difference between the regression line for each group (graduate HS vs not) is the intercept. That is, it assumes that the relationship between verbal scores at Grades 1 and 2 is the same for both groups. 
 
-*Children Whose Mother's Did Not Graduate HS*
+*Children Whose father's Did Not Graduate HS*
 
-The expected Grade 2 verbal score for a child whose mother did not graduate high school *and* who had an average Grade 1 verbal score is $b_0$. Also, for a child whose mother did not graduate high school, $b_1$ is the expected difference in their Grade 2 verbal score for a one-point difference in their Grade 1 verbal score.
+The expected Grade 2 verbal score for a child whose father did not graduate high school *and* who had an average Grade 1 verbal score is $b_0$. Also, for a child whose father did not graduate high school, $b_1$ is the expected difference in their Grade 2 verbal score for a one-point difference in their Grade 1 verbal score.
 
-*Children Whose Mother's Did Not Graduate HS*
+*Children Whose father's Did Not Graduate HS*
 
 The parameter estimates $b_0$ and $b_1$ maintain their interpretation from before. But now each of them is *moderated* (i.e. shifted or altered) by $b_2$ or $b_3$. 
 
 
-Specifically, the expected Grade 2 verbal score for a child whose mother did graduate high school *and* who earned an average Grade 1 verbal score is $b_0 + b_2$. 
+Specifically, the expected Grade 2 verbal score for a child whose father did graduate high school *and* who earned an average Grade 1 verbal score is $b_0 + b_2$. 
 
-And, for a child whose mother did graduate high school, $b_1 + b_3$ is the expected difference in their Grade 2 verbal score for a one-point change in their Grade 1 verbal score.
+And, for a child whose father did graduate high school, $b_1 + b_3$ is the expected difference in their Grade 2 verbal score for a one-point change in their Grade 1 verbal score.
 
 ### Fit Regression Model in R
 
@@ -433,13 +443,13 @@ summary(model5)
 semPlot::semPaths(model5, what = "paths")
 ```
 
-The parameter estimates from this model indicate that, for children whose mother did not graduate high school, the expected Grade 2 verbal score for a child that earned an average 1st grade verbal score equals 25.2663 ($b_0$). 
+The parameter estimates from this model indicate that, for children whose father did not graduate high school, the expected Grade 2 verbal score for a child that earned an average 1st grade verbal score equals 25.2663 ($b_0$). 
 
-Also, for children whose mother did not graduate high school, a 1-point difference in their Grade 1 verbal score is expected to correspond with a 0.7861 ($b_1$) point difference in the Grade 2 verbal score.
+Also, for children whose father did not graduate high school, a 1-point difference in their Grade 1 verbal score is expected to correspond with a 0.7861 ($b_1$) point difference in the Grade 2 verbal score.
 
-Moreover, the parameter estimates indicate that, for children whose mother did graduate high school, the expected Grade 2 verbal score for a child that earned an average Grade 1 verbal score is 25.2663 + 1.4632 = 26.7295 ($b_0 + b_2$). 
+Moreover, the parameter estimates indicate that, for children whose father did graduate high school, the expected Grade 2 verbal score for a child that earned an average Grade 1 verbal score is 25.2663 + 1.4632 = 26.7295 ($b_0 + b_2$). 
 
-Also, for children whose mother graduated high school, a 1-point difference in their Grade 1 verbal score is expected to correspond with a ($b_1 + b_3$) = 0.7861 - 0.2430 = 0.5431 point difference in the Grade 2 verbal score.
+Also, for children whose father graduated high school, a 1-point difference in their Grade 1 verbal score is expected to correspond with a ($b_1 + b_3$) = 0.7861 - 0.2430 = 0.5431 point difference in the Grade 2 verbal score.
 
 Even though the interaction is not significant, we can plot it for illustrating the moderation effect: 
 
@@ -456,4 +466,6 @@ ggplot(data=wiscsub,
 ```
 
 
-The example from 'model5' contained an interaction using a dummy variable (i.e., $grad_i$). Interactions may also occur between two continuous variables (i.e., $verb^{*}_{1i}$ and $momed^{*}_{i}$). We will not cover here, but note that it is still very useful to consider and communicate those interactions as *moderation*. There are many resources on interactions of two (or more) continuous variables.
+The example from 'model5' contained an interaction using a dummy variable (i.e., $grad_i$). Interactions may also occur between two continuous variables (i.e., $verb^{*}_{1i}$ and $daded^{*}_{i}$). We will not cover here, but note that it is still very useful to consider and communicate those interactions as *moderation*. There are many resources on interactions of two (or more) continuous variables.
+
+\textbf{References}
