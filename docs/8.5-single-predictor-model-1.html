@@ -396,23 +396,23 @@ div.csl-indent {
 <div id="read-in-data" class="section level3 hasAnchor" number="8.5.1">
 <h3><span class="header-section-number">8.5.1</span> Read in Data<a href="8.5-single-predictor-model-1.html#read-in-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We can read in the data and create a mean-centered version of income.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="8.5-single-predictor-model-1.html#cb1-1" aria-hidden="true" tabindex="-1"></a>ferraro2016 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/ferraro2016.csv&quot;</span>)</span>
-<span id="cb1-2"><a href="8.5-single-predictor-model-1.html#cb1-2" aria-hidden="true" tabindex="-1"></a>ferraro2016<span class="sc">$</span>income_star <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(ferraro2016<span class="sc">$</span>catincome, <span class="at">scale =</span> <span class="cn">FALSE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="8.5-single-predictor-model-1.html#cb117-1" aria-hidden="true" tabindex="-1"></a>ferraro2016 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/ferraro2016.csv&quot;</span>)</span>
+<span id="cb117-2"><a href="8.5-single-predictor-model-1.html#cb117-2" aria-hidden="true" tabindex="-1"></a>ferraro2016<span class="sc">$</span>income_star <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(ferraro2016<span class="sc">$</span>catincome, <span class="at">scale =</span> <span class="cn">FALSE</span>))</span></code></pre></div>
 </div>
 <div id="single-predictor-model-in-glm" class="section level3 hasAnchor" number="8.5.2">
 <h3><span class="header-section-number">8.5.2</span> Single Predictor Model in GLM<a href="8.5-single-predictor-model-1.html#single-predictor-model-in-glm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s fit a single predictor Poisson regression model for morbidity at Wave 1 using income bracket as our predictor. For now let’s treat income bracket as a continuous predictor.</p>
 <p>Note for the Poisson regression we use <code>family = poisson(link=log)</code> argument.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="8.5-single-predictor-model-1.html#cb2-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
-<span id="cb2-2"><a href="8.5-single-predictor-model-1.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> morbidityw1 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> income_star, </span>
-<span id="cb2-3"><a href="8.5-single-predictor-model-1.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link=</span>log),  </span>
-<span id="cb2-4"><a href="8.5-single-predictor-model-1.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> ferraro2016,</span>
-<span id="cb2-5"><a href="8.5-single-predictor-model-1.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
-<span id="cb2-6"><a href="8.5-single-predictor-model-1.html#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="8.5-single-predictor-model-1.html#cb118-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb118-2"><a href="8.5-single-predictor-model-1.html#cb118-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> morbidityw1 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> income_star, </span>
+<span id="cb118-3"><a href="8.5-single-predictor-model-1.html#cb118-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link=</span>log),  </span>
+<span id="cb118-4"><a href="8.5-single-predictor-model-1.html#cb118-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> ferraro2016,</span>
+<span id="cb118-5"><a href="8.5-single-predictor-model-1.html#cb118-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
+<span id="cb118-6"><a href="8.5-single-predictor-model-1.html#cb118-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="deviance-and-goodness-of-fit" class="section level3 hasAnchor" number="8.5.3">
 <h3><span class="header-section-number">8.5.3</span> Deviance and Goodness of Fit<a href="8.5-single-predictor-model-1.html#deviance-and-goodness-of-fit" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="8.5-single-predictor-model-1.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="8.5-single-predictor-model-1.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = morbidityw1 ~ 1 + income_star, family = poisson(link = log), 
@@ -443,7 +443,7 @@ div.csl-indent {
 <li>If this value greatly exceeds one, it may be indicative of overdispersion.</li>
 </ul>
 <p>The rationale for this heuristic is based on the fact that the residual deviance is <span class="math inline">\(\chi^2_k\)</span> distributed with mean equal to the degrees of freedom (n-p). Instead of using this rule of thumb it is just as simple to formulate a goodness-of-fit test for our model as follows</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="8.5-single-predictor-model-1.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(<span class="fu">summary</span>(model1)<span class="sc">$</span>deviance, <span class="fu">summary</span>(model1)<span class="sc">$</span>df.residual )</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="8.5-single-predictor-model-1.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(<span class="fu">summary</span>(model1)<span class="sc">$</span>deviance, <span class="fu">summary</span>(model1)<span class="sc">$</span>df.residual )</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>The test of the model’s deviance is a test of the model against the null model. The null hypothesis is the fitted model fits the data as well as the saturated model. In this case, rejecting the null hypothesis (e.g. <span class="math inline">\(p &gt; 0.05\)</span>), indicates the Poisson model does not fit well. For more information see this wonderful post on stackexchange: <a href="https://stats.stackexchange.com/a/531484" class="uri">https://stats.stackexchange.com/a/531484</a>.</p>
 </div>
@@ -468,8 +468,8 @@ div.csl-indent {
 <p>This relation may be difficult to conceptualize because the outcome variable is in terms of logarithm units, so a plot may be a more intuitive display of the results.</p>
 <p><strong>Marginal Effects</strong></p>
 <p>Let’s turn to the <code>marginaleffects</code> <span class="citation">(<a href="#ref-bundock" role="doc-biblioref">Arel-Bundock 2022</a>)</span> package to look at the marginal effects of income on health.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="8.5-single-predictor-model-1.html#cb7-1" aria-hidden="true" tabindex="-1"></a>marginaleffects<span class="sc">::</span><span class="fu">plot_cap</span>(model1, <span class="at">condition =</span> <span class="fu">c</span>(<span class="st">&quot;income_star&quot;</span>), <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="8.5-single-predictor-model-1.html#cb123-1" aria-hidden="true" tabindex="-1"></a>marginaleffects<span class="sc">::</span><span class="fu">plot_cap</span>(model1, <span class="at">condition =</span> <span class="fu">c</span>(<span class="st">&quot;income_star&quot;</span>), <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
 </div>
 </div>
 </div>

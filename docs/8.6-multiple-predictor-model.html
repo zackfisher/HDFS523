@@ -394,14 +394,14 @@ div.csl-indent {
 <div id="multiple-predictor-model" class="section level2 hasAnchor" number="8.6">
 <h2><span class="header-section-number">8.6</span> Multiple Predictor Model<a href="8.6-multiple-predictor-model.html#multiple-predictor-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Let’s add another variable into the model. Specifically, the variable <code>abuse_rare</code>, which equals <span class="math inline">\(1\)</span> if the child was rarely abused during early development, and <span class="math inline">\(0\)</span> if the child experienced abuse.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="8.6-multiple-predictor-model.html#cb8-1" aria-hidden="true" tabindex="-1"></a>ferraro2016<span class="sc">$</span>abuse_rare <span class="ot">&lt;-</span> <span class="fu">factor</span>(ferraro2016<span class="sc">$</span>abuse_rare)</span>
-<span id="cb8-2"><a href="8.6-multiple-predictor-model.html#cb8-2" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
-<span id="cb8-3"><a href="8.6-multiple-predictor-model.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> morbidityw1 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> abuse_rare <span class="sc">+</span> income_star <span class="sc">+</span> abuse_rare<span class="sc">:</span>income_star, </span>
-<span id="cb8-4"><a href="8.6-multiple-predictor-model.html#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link=</span>log), </span>
-<span id="cb8-5"><a href="8.6-multiple-predictor-model.html#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> ferraro2016,</span>
-<span id="cb8-6"><a href="8.6-multiple-predictor-model.html#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
-<span id="cb8-7"><a href="8.6-multiple-predictor-model.html#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-8"><a href="8.6-multiple-predictor-model.html#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="8.6-multiple-predictor-model.html#cb124-1" aria-hidden="true" tabindex="-1"></a>ferraro2016<span class="sc">$</span>abuse_rare <span class="ot">&lt;-</span> <span class="fu">factor</span>(ferraro2016<span class="sc">$</span>abuse_rare)</span>
+<span id="cb124-2"><a href="8.6-multiple-predictor-model.html#cb124-2" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb124-3"><a href="8.6-multiple-predictor-model.html#cb124-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> morbidityw1 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> abuse_rare <span class="sc">+</span> income_star <span class="sc">+</span> abuse_rare<span class="sc">:</span>income_star, </span>
+<span id="cb124-4"><a href="8.6-multiple-predictor-model.html#cb124-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link=</span>log), </span>
+<span id="cb124-5"><a href="8.6-multiple-predictor-model.html#cb124-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> ferraro2016,</span>
+<span id="cb124-6"><a href="8.6-multiple-predictor-model.html#cb124-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
+<span id="cb124-7"><a href="8.6-multiple-predictor-model.html#cb124-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb124-8"><a href="8.6-multiple-predictor-model.html#cb124-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = morbidityw1 ~ 1 + abuse_rare + income_star + abuse_rare:income_star, 
@@ -432,11 +432,21 @@ div.csl-indent {
 <p><span class="math display">\[
 \mathrm{log}(morbidity_i) = b_0 + b_1(abuse\_rare_{i})+ b_2(income^{*}_{1i})+ b_3(income^{*}_{1i})(abuse\_rare_{i})
 \]</span></p>
+<p>Again, when we have a dummy variable interaction we have essentially set up two different equations:</p>
+<p><strong>Equation for Children Experiencing Maltreatment</strong></p>
 <p>Coefficients <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_2\)</span> describe the relation between <span class="math inline">\(income^{*}_{1i}\)</span> and <span class="math inline">\(morbidity_i\)</span> for those who experienced childhood abuse <span class="math inline">\((abuse\_rare_{i}=0)\)</span>.</p>
-<p>While coefficients <span class="math inline">\(b_0 + b_1\)</span> and <span class="math inline">\(b_2 + b_3\)</span> describe the relation for those who rarely experienced childhood abuse <span class="math inline">\((abuse\_rare_{i}=1)\)</span>. Note that neither <span class="math inline">\(b_3\)</span> is not significantly different from zero, so we would not interpret the interaction between income and abuse directly.</p>
+<p><span class="math display">\[
+\mathrm{log}(morbidity_i) = b_0 + b_2(income^{*}_{1i})
+\]</span></p>
+<p><strong>Equation for Children Rarely Experiencing Maltreatment</strong></p>
+<p><span class="math display">\[
+\mathrm{log}(morbidity_i) = (b_0 + b_1) + (b_2 + b_3)income^{*}_{1i}
+\]</span></p>
+<p>While coefficients <span class="math inline">\(b_0 + b_1\)</span> and <span class="math inline">\(b_2 + b_3\)</span> describe the relation for those who rarely experienced childhood abuse <span class="math inline">\((abuse\_rare_{i}=1)\)</span>. Note that <span class="math inline">\(b_3\)</span> is not significantly different from zero, so we would not interpret the interaction between income and abuse directly.</p>
+<p><strong>Marginal Effects</strong></p>
 <p>Let’s again turn to the <code>marginaleffects</code> <span class="citation">(<a href="#ref-bundock" role="doc-biblioref">Arel-Bundock 2022</a>)</span> package to look at the marginal effects of income and childhood abuse on health.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="8.6-multiple-predictor-model.html#cb10-1" aria-hidden="true" tabindex="-1"></a>marginaleffects<span class="sc">::</span><span class="fu">plot_cap</span>(model2, <span class="at">condition =</span> <span class="fu">c</span>(<span class="st">&quot;income_star&quot;</span>,<span class="st">&quot;abuse_rare&quot;</span>), <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="8.6-multiple-predictor-model.html#cb126-1" aria-hidden="true" tabindex="-1"></a>marginaleffects<span class="sc">::</span><span class="fu">plot_cap</span>(model2, <span class="at">condition =</span> <span class="fu">c</span>(<span class="st">&quot;income_star&quot;</span>,<span class="st">&quot;abuse_rare&quot;</span>), <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
 </div>
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
