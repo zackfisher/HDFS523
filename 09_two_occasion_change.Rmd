@@ -15,15 +15,15 @@ button <-  "position: relative;
 codefolder::bookdown(init = "show", style = button)
 ```
 
-In Chapter 9 we will introduce longitudinal models in their most basic form: repeated measures collected at two occasions. Two-occasions data are a natural starting point for studying change: all longitudinal data collection begins with two occasions. Given any two-occasion repeated measures data, popular analytic approaches include autoregressive and difference score models. 
+In this section we will introduce longitudinal models in their most basic form: repeated measures collected at two occasions. Two-occasions data are a natural starting point for studying change: all longitudinal data collection begins with two occasions. Given any two-occasion repeated measures data, popular analytic approaches include autoregressive and difference score models. 
 
 This script works through some basic representations of change, more specifically (1) autoregressive models of change (residualized change), and  (2) difference-score models (raw change) of change. These two models consider and answer different kinds of research questions: questions about change in interindividual differences and questions about intraindividual change.
 
-**Importantly, we do not yet consider predictors in our model, which is arguably the most common scenario when these two models are compared: looking at pre- and post-test differences among two groups. However, this will serve as an introduction to the concepts of raw and residualized change.** 
+**Importantly, we will first consider models without predictors to get a sense of how these approaches differ. We will then consider a dichotomous predictor representing two groups, which is arguably the most common scenario when these two models are compared: looking at pre- and post-test differences among two groups** 
 
-## Example Data
+## Example Data I
 
-Chapter 6 make use of the same WISC data used in Chapter 3. Here we again read in, subset, and provide descriptives for the WISC data. 
+For our first set of examples we will use the WISC data. Here we again read in, subset, and provide basic descriptives. 
 
 ```{r}
 filepath <- "https://quantdev.ssri.psu.edu/sites/qdev/files/wisc3raw.csv"
@@ -59,9 +59,17 @@ With cross-sectional data:
 
 - No sense of passage of time 
 - Cannot control for what happened at earlier timepoints
-- Must rely more heavily on theory (e.g. equivalent models [@maccallum1993])
 - Causality (e.g. cause precedes the effect, cause related to effect, plausible alternatives)
 - Depending on true change process, cross-sectional slice may mislead
+- Must rely more heavily on theory (e.g. equivalent models [@maccallum1993])
+
+### Equivalent Models in Psychology
+
+
+
+### Equivalent Models: An Example
+
+![Excerpt from @maccallum1993](imgs/equiv_models_study.jpg){width=500px}
 
 ### Examples of Equivalent Models
 ![Figure 3 from @maccallum1993](imgs/equiv.jpg)
@@ -73,7 +81,7 @@ Before introducing the model behind each approach is is helpful to consider the 
 
 The first approach uses the measure at the second time point as a dependent variable regressed on the the measure at the first time point. 
 
-**Importantly, when we look at residualized change, it is not what is the difference between scores at time 1 and time 2, it is where are you at time 2 relative to time 1, based on what we would expect from your time 2 scores.**
+The term residualized change comes from the fact that an outcome, such as verbal scores at grade 6, is regressed on itself at a prior occasion, verbal scores at grade 1. Any variability in the outcome that is explained by the lagged regressor will be set aside and is threfore not explainable by a key predictor. **Thus, the autoregressive effect residualizes the outcome leaving only variability that is unexplained by the lagged variable, which can be construed as the variability due to change.**
 
 In this way it is helpful to view the data as a scatter plot, like we would in a regression model.
 
@@ -444,14 +452,267 @@ coef(ARfit)
 coef(DIFfit)
 ```
 
+
+## Lord's Paradox
+
+Consider the summary of [Lord's Paradox](https://en.wikipedia.org/wiki/Lord%27s_paradox) from Wikipedia
+
+The most famous formulation of Lord's paradox comes from his 1967 paper:
+
+> “A large university is interested in investigating the effects on the students of the diet provided in the university dining halls and any sex differences in these effects. > Various types of data are gathered. In particular, the weight of each student at the time of his arrival in September and his weight the following June are recorded.” (Lord > 1967, p. 304)
+
+In both September and June, the overall distribution of male weights is the same, although individuals' weights have changed, and likewise for the distribution of female weights.
+
+Lord imagines two statisticians who use different common statistical methods but reach opposite conclusions.
+
+One statistician uses difference scores and finds no significant difference between genders: 
+
+> "[A]s far as these data are concerned, there is no evidence of any interesting effect of diet (or of anything else) on student weights. In particular, there is no evidence of any differential effect on the two sexes, since neither group shows any systematic change." (pg. 305) Visually, the first statistician sees that neither group mean ('A' and 'B') has changed, and concludes that the new diet had no causal impact.
+
+The second statistician uses the residualized change model. They find a significant difference between the two dining halls. Visually, the second statistician fits a regression model (green dotted lines), finds that the intercept differs for boys vs girls, and concludes that the new diet had a larger impact for males.
+
+> Lord concluded: "there simply is no logical or statistical procedure that can be counted on to make proper allowance for uncontrolled preexisting differences between groups."
+
+
+![image](imgs/lord.png)
+
+
+## Example Data II
+
+Now, let us compare the common situation where we have a predictor of interest. @castro2018 consider a situation common to behavioral science researchers. 
+
+> Sofia, a close relationships’ researcher, is interested in examining change in relationship
+> satisfaction before and after marriage. Specifically, she wants to know whether cohabiting
+> prior to marriage has an effect on changes in relationship satisfaction. As she plans her data
+> analysis strategy, Sofia realizes she has two options: (1) use the postmarriage relationship
+> satisfaction score as her outcome and include the premarriage score in her analysis as a
+> predictor, in addition to whether or not couples cohabited prior to marriage to account for
+> individual differences in baseline relationship satisfaction (known as residualized change
+> approach) or (2) compute the difference between the postmarriage relationship satisfaction
+> score and the premarriage relationship satisfaction score and use it as her outcome to test
+> the effect of cohabiting prior to marriage (known as difference score approach). Which of
+> these two strategies is most appropriate? Should both strategies provide the same results?
+> Sofia has heard difference scores have a bad reputation, why is that? Are there additional
+> strategies Sofia is not aware of that might be preferred over her current options?
+
+
+
+### Generate Some Data According to [@castro2018]
+
+Let's generate some data according to the example from @castro2018. Below is one possible data generating model. 
+
+We will consider two scenarios. In both scenarios the following facts will be true:
+
+* Both data sets have an equal number of dyads that did and did not cohabit
+* Cohabitation had a null effect on changes in relationship satisfaction.
+* Dyads did not exhibit any changes in relationship satisfaction over time.
+
+In this first example dataset, however, there are preexisting groups at the premarriage assessment. That is, because in a real investigation of cohabitation a controlled experiment would not be feasible, we generated one data set with lower relationship satisfaction at baseline for dyads who reported cohabiting. 
+
+Note that our description of the first dataset corresponds to the assumption made by the difference score model (i.e., no change between groups across time under the assumption of the null hypothesis for the key predictor; there are two populations at baseline).
+
+```{r}
+# set a seed so we all have the same data
+set.seed (1234)
+
+# create an id variable (N = 100 in each group)
+id <- c(1:100, 1:100)
+
+# create a time variable (0 = time 1, 1 = time 2)
+time <- c(rep(0, 100), rep(1, 100))
+
+# create grouping variable with equal number cohabiting (1) and not (0)
+cohabit <- rep(c(0,1), 100)
+
+# put all variables in a dataframe
+data <- data.frame(id, cohabit, time)
+
+# generate dataset A
+data_A <- data
+data_A$score <- 
+  4.5 +                          # intercept
+  -2*data_A$cohabit +            # difference in cohabitation
+  0*data_A$time +                # effect of time
+  0*data_A$cohabit*data_A$time + # interaction
+  rnorm(200, 0, 0.3)             # error
+
+
+# Make into wide format for computing difference score
+data_A <- reshape(
+  data_A, 
+  v.names = 'score', 
+  timevar = "time",
+  idvar = "id", 
+  direction= "wide"
+)
+
+# assign appropriate variable names
+names(data_A) <- c('id', 'cohabit', 'score1', 'score2')
+
+# compute difference variable
+data_A$diff <- data_A$score2 - data_A$score1
+
+# declare cohabiting variable as a factor (categorical variable)
+data_A$cohabit <- factor(data_A$cohabit)
+```
+
+### Plot Data
+
+```{r}
+# visualize the data
+library(ggplot2)
+ggplot(data_A, aes(x = score1, y = score2, shape= cohabit)) + 
+  geom_point(size = 3) +
+  geom_smooth(method = lm, se = F) +
+  xlab("Relationship Satisfaction Time 1") +
+  ylab("Relationship Satisfaction Time 2")
+```
+
+### Fit Residualized Change Model
+
+Recall that the main interest in these analyses is to assess the potential effect of cohabitation on changes in relationship satisfaction.
+
+According to the residualized change model we fit to data set A (which is an ANCOVA model in this application because of the categorical predictor), the factors explain 92\% of the variance in the outcome and results suggest there is a statistically and practically significant effect of cohabitation in dyad’s relationship satisfaction at Time 2, controlling for baseline relationship satisfaction.
+
+```{r}
+# ancova model
+mylml <- lm(score2 ~ score1 + cohabit, data = data_A)
+summary (mylml)
+```
+
+### Fit Difference Score Model
+
+```{r}
+# difference model
+mylm2 = lm(diff ~ cohabit, data = data_A)
+summary(mylm2)
+```
+
+In contrast, when we fit the difference score model to the same data, less than 1% of the variance in the outcome is explained by the model, and results suggested that cohabitation did not have an effect on relationship satisfaction change. As expected, the inferences from these models are strikingly different, which is an example of Lord’s paradox and can be attributed to the differences in baseline scores across couples who cohabit and those who do not.
+
+## Example Data III
+
+Consider a second example dataset, where, again
+
+* We have an equal number of dyads that did and did not cohabit
+* Cohabitation had a null effect on changes in relationship satisfaction.
+* Dyads did not exhibit any changes in relationship satisfaction over time.
+
+Unlike the first dataset, however, this second dataset would have been obtained if Sofia could have randomly assigned dyads to cohabit or live apart. 
+
+This second data set is in line with the assumption of the residualized change model, where the Time 1 score is uncorrelated with the key predictor, which is equivalent to affirming there are no preexisting group differences at baseline; there is one population of dyads at baseline with respect to relationship satisfaction.
+
+### Generate Some Data According to [@castro2018] Example B
+
+```{r}
+# set a seed so we all have the same data
+set.seed (1234)
+
+# create an id variable (N = 100 in each group)
+id <- c(1:100, 1:100)
+
+# create a time variable (0 = time 1, 1 = time 2)
+time <- c(rep(0, 100), rep(1, 100))
+
+# create grouping variable with equal number cohabiting (1) and not (0)
+cohabit <- rep(c(0,1), 100)
+
+# put all variables in a dataframe
+data <- data.frame(id, cohabit, time)
+
+# generate dataset A
+data_B <- data
+data_B$score <- 
+  4.5 +                          # intercept
+  0*data_B$cohabit +            # difference in cohabitation
+  0*data_B$time +                # effect of time
+  0*data_B$cohabit*data_B$time + # interaction
+  rnorm(200, 0, 0.3)             # error
+
+
+# Make into wide format for computing difference score
+data_B <- reshape(
+  data_B, 
+  v.names = 'score', 
+  timevar = "time",
+  idvar = "id", 
+  direction= "wide"
+)
+
+# assign appropriate variable names
+names(data_B) <- c('id', 'cohabit', 'score1', 'score2')
+
+# compute difference variable
+data_B$diff <- data_B$score2 - data_B$score1
+
+# declare cohabiting variable as a factor (categorical variable)
+data_B$cohabit <- factor(data_B$cohabit)
+```
+
+### Plot Data
+
+```{r}
+# visualize the data
+library(ggplot2)
+ggplot(data_B, aes(x = score1, y = score2, shape= cohabit)) + 
+  geom_point(size = 3) +
+  geom_smooth(method = lm, se = F) +
+  xlab("Relationship Satisfaction Time 1") +
+  ylab("Relationship Satisfaction Time 2")
+```
+
+### Fit Residualized Change Model
+
+
+
+```{r}
+# ancova model
+mylml <- lm(score2 ~ score1 + cohabit, data = data_B)
+summary (mylml)
+```
+
+
+### Fit Difference Score Model
+
+```{r}
+# difference model
+mylm2 = lm(diff ~ cohabit, data = data_B)
+summary(mylm2)
+```
+
+
 ## Closing Thoughts
 
-- Given any two-occasion repeated measures data, we can do analysis with autoregressive (residualized change) or difference score (raw change) models
-- The two-occasion change models presented in this chapter can be transformed into each other, the goodness-of-fit statistics are not good way to distinguish between them
-- The models discussed here can be distinguished when t > 2 repeated measures are available.
 - Interpretations of change are fundamentally restricted by the choice of model 
-- When choosing one model it is worth considering what change means in each context (e.g. in a weight loss study is $10$ lbs of weight loss the same for people with different baseline weights?)
+- The residualized change and difference score models will often lead to different inferences about the effect of the predictor of interest. 
+- The assumptions each of these models make are untestable, and this makes it challenging to argue that either model is more appropriate than the other. 
+    - Dyads who report cohabiting prior to marriage will never be able to report what their
+relationship satisfaction after marriage would have been if they had not cohabited. 
+    - We will never know what level of relationship satisfaction would have been reported by dyads who did not cohabit before marriage if they had in fact chosen to live with their partners prior to getting married. 
+    
+#### Random Assignment
+
+- When experimentatal procedures are followed, dyads would be randomly assigned to a grouping variable, and this would bring independence of the grouping variable with the pre-test scores. 
+- Thus, proper experimentation prohibits preexisting groups to be formed at baseline.
+- **Under such circumstances, the residualized change model and difference score models
+will arrive at the same inference, but the former has the advantage of having more power
+because it makes the correct assumption about the distribution of baseline scores.**
+
+#### Observational Studies
+
+Which should be our choice when experimentation is not possible? 
+
+- If we have different populations with different levels of the outcome at baseline, the residualized change model may not be appropriate.
+- For researchers going this route, a latent change score model may alleviate some concerns about reliability and measurement error. 
+
+
+
+#### Two-Occassion Change
 
 If you found all of this to be inherently confusing it is worth thinking about the following quote: **“Two waves of data are better than one, but maybe not much better.”** [@rogosa1982].
 
-In the next chapter we will extend the notion of raw and residualized change to comparing change among two groups. 
+
+## References
+
+<div id="refs"></div>
+

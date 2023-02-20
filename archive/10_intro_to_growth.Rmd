@@ -154,7 +154,7 @@ which is also called the linear mixed model.
 
 It is often recommended to fit the unconditional means model before moving on to more complicated models. This is primarily because the unconditional means model does well at partitioning variance of the outcome across levels. We can use this model to better understand the amount of outcome variation that exists at the within and between levels of our model. If we fail to find sufficient variation at a given level there may be little reason to proceed with attempts to explain variance at that level of analysis.
 
-### Leve l
+### Level 1
 
 First, let us write out the *level-1* (individual) model
 
