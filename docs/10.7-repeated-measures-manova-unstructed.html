@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>10.7 Repeated Measures MANOVA (Unstructed) | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
+  <meta name="description" content="Course notes for HDFS 523" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="10.7 Repeated Measures MANOVA (Unstructed) | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/images/image1.png" />
+  <meta property="og:description" content="Course notes for HDFS 523" />
+  <meta name="github-repo" content="zackfisher/HDFS523" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="10.7 Repeated Measures MANOVA (Unstructed) | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  
+  <meta name="twitter:description" content="Course notes for HDFS 523" />
+  <meta name="twitter:image" content="/images/image1.png" />
+
+<meta name="author" content="Zachary F. Fisher" />
+
+
+<meta name="date" content="2023-02-27" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="10.6-repeated-measures-manova.html"/>
+<link rel="next" href="11-chapter-11.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Course notes for HDFS 523</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1.1-why-this-book.html"><a href="1.1-why-this-book.html"><i class="fa fa-check"></i><b>1.1</b> Why this book?</a></li>
+<li class="chapter" data-level="1.2" data-path="1.2-code-folding.html"><a href="1.2-code-folding.html"><i class="fa fa-check"></i><b>1.2</b> Code Folding</a></li>
+<li class="chapter" data-level="1.3" data-path="1.3-acknowledgements.html"><a href="1.3-acknowledgements.html"><i class="fa fa-check"></i><b>1.3</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="2-chapter-2.html"><a href="2-chapter-2.html"><i class="fa fa-check"></i><b>2</b> Data Cleaning</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2.1-example-data.html"><a href="2.1-example-data.html"><i class="fa fa-check"></i><b>2.1</b> Example Data</a></li>
+<li class="chapter" data-level="2.2" data-path="2.2-reading-in-repeated-measures-data.html"><a href="2.2-reading-in-repeated-measures-data.html"><i class="fa fa-check"></i><b>2.2</b> Reading in Repeated Measures Data</a></li>
+<li class="chapter" data-level="2.3" data-path="2.3-familiarize-yourself-with-the-data.html"><a href="2.3-familiarize-yourself-with-the-data.html"><i class="fa fa-check"></i><b>2.3</b> Familiarize Yourself with the Data</a></li>
+<li class="chapter" data-level="2.4" data-path="2.4-look-for-duplicated-ids.html"><a href="2.4-look-for-duplicated-ids.html"><i class="fa fa-check"></i><b>2.4</b> Look for Duplicated IDs</a></li>
+<li class="chapter" data-level="2.5" data-path="2.5-using-table-to-spot-irregularities.html"><a href="2.5-using-table-to-spot-irregularities.html"><i class="fa fa-check"></i><b>2.5</b> Using <code>table()</code> to Spot Irregularities</a></li>
+<li class="chapter" data-level="2.6" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html"><i class="fa fa-check"></i><b>2.6</b> Missing Data</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#generating-example-data"><i class="fa fa-check"></i><b>2.6.1</b> Generating Example Data</a></li>
+<li class="chapter" data-level="2.6.2" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#recoding-values-with-na"><i class="fa fa-check"></i><b>2.6.2</b> Recoding Values with <code>NA</code></a></li>
+<li class="chapter" data-level="2.6.3" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#missing-data-visualization"><i class="fa fa-check"></i><b>2.6.3</b> Missing Data Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="2.7-exporting-data.html"><a href="2.7-exporting-data.html"><i class="fa fa-check"></i><b>2.7</b> Exporting Data</a></li>
+<li class="chapter" data-level="2.8" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html"><i class="fa fa-check"></i><b>2.8</b> Reshaping Repeated Measures Data</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html#reshape-wide-to-long"><i class="fa fa-check"></i><b>2.8.1</b> Reshape Wide to Long</a></li>
+<li class="chapter" data-level="2.8.2" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html#reshape-long-to-wide"><i class="fa fa-check"></i><b>2.8.2</b> Reshape Long to Wide</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-chapter-3.html"><a href="3-chapter-3.html"><i class="fa fa-check"></i><b>3</b> Describing Longitudinal Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3.1-example-data-1.html"><a href="3.1-example-data-1.html"><i class="fa fa-check"></i><b>3.1</b> Example Data</a></li>
+<li class="chapter" data-level="3.2" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html"><i class="fa fa-check"></i><b>3.2</b> Describing Means and Variances</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html#verbal-ability-all-persons-and-occasions"><i class="fa fa-check"></i><b>3.2.1</b> Verbal Ability (All Persons and Occasions)</a></li>
+<li class="chapter" data-level="3.2.2" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html#verbal-ability-across-time"><i class="fa fa-check"></i><b>3.2.2</b> Verbal Ability (Across Time)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="3.3-describing-covariances.html"><a href="3.3-describing-covariances.html"><i class="fa fa-check"></i><b>3.3</b> Describing Covariances</a></li>
+<li class="chapter" data-level="3.4" data-path="3.4-individual-level-descriptives.html"><a href="3.4-individual-level-descriptives.html"><i class="fa fa-check"></i><b>3.4</b> Individual-Level Descriptives</a></li>
+<li class="chapter" data-level="3.5" data-path="3.5-references.html"><a href="3.5-references.html"><i class="fa fa-check"></i><b>3.5</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-chapter-4.html"><a href="4-chapter-4.html"><i class="fa fa-check"></i><b>4</b> Matrix Algebra</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html"><i class="fa fa-check"></i><b>4.1</b> Types of matrices</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#square"><i class="fa fa-check"></i><b>4.1.1</b> Square</a></li>
+<li class="chapter" data-level="4.1.2" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#symmetric"><i class="fa fa-check"></i><b>4.1.2</b> Symmetric</a></li>
+<li class="chapter" data-level="4.1.3" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#diagonal"><i class="fa fa-check"></i><b>4.1.3</b> Diagonal</a></li>
+<li class="chapter" data-level="4.1.4" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#identity"><i class="fa fa-check"></i><b>4.1.4</b> Identity</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html"><i class="fa fa-check"></i><b>4.2</b> Operations on Matrices</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-transpose"><i class="fa fa-check"></i><b>4.2.1</b> Matrix Transpose</a></li>
+<li class="chapter" data-level="4.2.2" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-trace"><i class="fa fa-check"></i><b>4.2.2</b> Matrix Trace</a></li>
+<li class="chapter" data-level="4.2.3" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#addition"><i class="fa fa-check"></i><b>4.2.3</b> Addition</a></li>
+<li class="chapter" data-level="4.2.4" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#subtraction"><i class="fa fa-check"></i><b>4.2.4</b> Subtraction</a></li>
+<li class="chapter" data-level="4.2.5" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-multiplication"><i class="fa fa-check"></i><b>4.2.5</b> Matrix Multiplication</a></li>
+<li class="chapter" data-level="4.2.6" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-division"><i class="fa fa-check"></i><b>4.2.6</b> Matrix Division</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-chapter-5.html"><a href="5-chapter-5.html"><i class="fa fa-check"></i><b>5</b> Ordinary Least Squares</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="5.1-linear-regression-model.html"><a href="5.1-linear-regression-model.html"><i class="fa fa-check"></i><b>5.1</b> Linear Regression Model</a></li>
+<li class="chapter" data-level="5.2" data-path="5.2-ordinary-least-squares-ols.html"><a href="5.2-ordinary-least-squares-ols.html"><i class="fa fa-check"></i><b>5.2</b> Ordinary Least Squares (OLS)</a></li>
+<li class="chapter" data-level="5.3" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html"><i class="fa fa-check"></i><b>5.3</b> Assumptions of OLS</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#assumption-1.-mathbbeepsilon_i-0"><i class="fa fa-check"></i><b>5.3.1</b> Assumption 1. <span class="math inline">\(\mathbb{E}(\epsilon_{i}) = 0\)</span></a></li>
+<li class="chapter" data-level="5.3.2" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#assumption-2.-homoscedasticity"><i class="fa fa-check"></i><b>5.3.2</b> Assumption 2. Homoscedasticity</a></li>
+<li class="chapter" data-level="5.3.3" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#mathbbeepsilon_iepsilon_j-0"><i class="fa fa-check"></i><b>5.3.3</b> 3. <span class="math inline">\(\mathbb{E}(\epsilon_{i}\epsilon_{j}) = 0\)</span></a></li>
+<li class="chapter" data-level="5.3.4" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#no-perfect-collinearity"><i class="fa fa-check"></i><b>5.3.4</b> 4. No Perfect Collinearity</a></li>
+<li class="chapter" data-level="5.3.5" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#mathbbcepsilon_ix_ki-0"><i class="fa fa-check"></i><b>5.3.5</b> 5. <span class="math inline">\(\mathbb{C}(\epsilon_{i},x_{ki}) = 0\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html"><i class="fa fa-check"></i><b>5.4</b> Properties of the OLS Estimator</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html#consistentcy-of-boldsymbolbeta"><i class="fa fa-check"></i><b>5.4.1</b> 1. Consistentcy of <span class="math inline">\(\boldsymbol{{\beta}}\)</span></a></li>
+<li class="chapter" data-level="5.4.2" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html#asymptotic-normality"><i class="fa fa-check"></i><b>5.4.2</b> 2. Asymptotic Normality</a></li>
+<li class="chapter" data-level="5.4.3" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html#variance-of-hatbeta"><i class="fa fa-check"></i><b>5.4.3</b> Variance of <span class="math inline">\(\hat{\beta}\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html"><i class="fa fa-check"></i><b>5.5</b> Failure to Meet Assumptions</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html#failure-of-assumption-1."><i class="fa fa-check"></i><b>5.5.1</b> Failure of Assumption 1.</a></li>
+<li class="chapter" data-level="5.5.2" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html#failure-of-assumption-2-or-3."><i class="fa fa-check"></i><b>5.5.2</b> Failure of Assumption 2 or 3.</a></li>
+<li class="chapter" data-level="5.5.3" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html#failure-of-assumption-5."><i class="fa fa-check"></i><b>5.5.3</b> Failure of Assumption 5.</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html"><i class="fa fa-check"></i><b>5.6</b> Regression and Matrix Notation</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#an-intercept-only-model"><i class="fa fa-check"></i><b>5.6.1</b> An Intercept-Only Model</a></li>
+<li class="chapter" data-level="5.6.2" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#intercept-only-model-in-matrix-form"><i class="fa fa-check"></i><b>5.6.2</b> Intercept-Only Model in Matrix Form</a></li>
+<li class="chapter" data-level="5.6.3" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#simple-regression-in-matrix-form"><i class="fa fa-check"></i><b>5.6.3</b> Simple Regression in Matrix Form</a></li>
+<li class="chapter" data-level="5.6.4" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#multiple-regression-in-matrix-form"><i class="fa fa-check"></i><b>5.6.4</b> Multiple Regression in Matrix Form</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html"><i class="fa fa-check"></i><b>5.7</b> Solving the Regression Equation</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html#matrix-multiplication-and-transpose"><i class="fa fa-check"></i><b>5.7.1</b> Matrix Multiplication and Transpose</a></li>
+<li class="chapter" data-level="5.7.2" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html#matrix-inverse"><i class="fa fa-check"></i><b>5.7.2</b> Matrix Inverse</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html"><i class="fa fa-check"></i><b>5.8</b> The Linear Probability Model</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html#advantages-of-the-lpm"><i class="fa fa-check"></i><b>5.8.1</b> Advantages of the LPM</a></li>
+<li class="chapter" data-level="5.8.2" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html#disadvantages-of-the-lpm"><i class="fa fa-check"></i><b>5.8.2</b> Disadvantages of the LPM</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-chapter-6.html"><a href="6-chapter-6.html"><i class="fa fa-check"></i><b>6</b> Linear Regression</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="6.1-example-data-2.html"><a href="6.1-example-data-2.html"><i class="fa fa-check"></i><b>6.1</b> Example Data</a></li>
+<li class="chapter" data-level="6.2" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html"><i class="fa fa-check"></i><b>6.2</b> Intercept-Only Model</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-equation"><i class="fa fa-check"></i><b>6.2.1</b> Intercept-Only Equation</a></li>
+<li class="chapter" data-level="6.2.2" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-model-in-r"><i class="fa fa-check"></i><b>6.2.2</b> Intercept-Only Model in R</a></li>
+<li class="chapter" data-level="6.2.3" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-as-mean-of-outcome"><i class="fa fa-check"></i><b>6.2.3</b> Intercept as Mean of Outcome</a></li>
+<li class="chapter" data-level="6.2.4" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-model-r2"><i class="fa fa-check"></i><b>6.2.4</b> Intercept-Only Model <span class="math inline">\(R^2\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html"><i class="fa fa-check"></i><b>6.3</b> Simple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#regression-equation-and-model-fitting"><i class="fa fa-check"></i><b>6.3.1</b> Regression Equation and Model Fitting</a></li>
+<li class="chapter" data-level="6.3.2" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#path-diagram"><i class="fa fa-check"></i><b>6.3.2</b> Path Diagram</a></li>
+<li class="chapter" data-level="6.3.3" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#interpreting-model-parameters"><i class="fa fa-check"></i><b>6.3.3</b> Interpreting Model Parameters</a></li>
+<li class="chapter" data-level="6.3.4" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#plotting-regression-line"><i class="fa fa-check"></i><b>6.3.4</b> Plotting Regression Line</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html"><i class="fa fa-check"></i><b>6.4</b> Mean Centering Predictors</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html#interpreting-model-parameters-1"><i class="fa fa-check"></i><b>6.4.1</b> Interpreting Model Parameters</a></li>
+<li class="chapter" data-level="6.4.2" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html#plotting-regression-line-1"><i class="fa fa-check"></i><b>6.4.2</b> Plotting Regression Line</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html"><i class="fa fa-check"></i><b>6.5</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#regression-equation"><i class="fa fa-check"></i><b>6.5.1</b> Regression Equation</a></li>
+<li class="chapter" data-level="6.5.2" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#fit-model-in-r"><i class="fa fa-check"></i><b>6.5.2</b> Fit Model in R</a></li>
+<li class="chapter" data-level="6.5.3" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#path-diagram-1"><i class="fa fa-check"></i><b>6.5.3</b> Path Diagram</a></li>
+<li class="chapter" data-level="6.5.4" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#a-note-on-interpretation"><i class="fa fa-check"></i><b>6.5.4</b> A Note on Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html"><i class="fa fa-check"></i><b>6.6</b> Categorical Variable Interaction</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#interaction-as-moderation"><i class="fa fa-check"></i><b>6.6.1</b> Interaction as Moderation</a></li>
+<li class="chapter" data-level="6.6.2" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#moderation-by-categorical-variable"><i class="fa fa-check"></i><b>6.6.2</b> Moderation by Categorical Variable</a></li>
+<li class="chapter" data-level="6.6.3" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#interpretation"><i class="fa fa-check"></i><b>6.6.3</b> Interpretation</a></li>
+<li class="chapter" data-level="6.6.4" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#fit-regression-model-in-r"><i class="fa fa-check"></i><b>6.6.4</b> Fit Regression Model in R</a></li>
+<li class="chapter" data-level="6.6.5" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#path-diagram-2"><i class="fa fa-check"></i><b>6.6.5</b> Path Diagram</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="7-chapter-7.html"><a href="7-chapter-7.html"><i class="fa fa-check"></i><b>7</b> Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="7.1-categorical-data-in-the-social-sciences.html"><a href="7.1-categorical-data-in-the-social-sciences.html"><i class="fa fa-check"></i><b>7.1</b> Categorical Data in the Social Sciences</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="7.1-categorical-data-in-the-social-sciences.html"><a href="7.1-categorical-data-in-the-social-sciences.html#examples-of-categorical-data"><i class="fa fa-check"></i><b>7.1.1</b> Examples of Categorical Data</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html"><i class="fa fa-check"></i><b>7.2</b> Introduction to GLMs</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#linear-regression-as-glm"><i class="fa fa-check"></i><b>7.2.1</b> Linear Regression as GLM</a></li>
+<li class="chapter" data-level="7.2.2" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#logistic-regression-as-glm"><i class="fa fa-check"></i><b>7.2.2</b> Logistic Regression as GLM</a></li>
+<li class="chapter" data-level="7.2.3" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#poisson-regression-as-glm"><i class="fa fa-check"></i><b>7.2.3</b> Poisson Regression as GLM</a></li>
+<li class="chapter" data-level="7.2.4" data-path="7.2-introduction-to-glms.html"><a href="7.2-introduction-to-glms.html#additional-remarks"><i class="fa fa-check"></i><b>7.2.4</b> Additional Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="7.3-binary-logistic-regression.html"><a href="7.3-binary-logistic-regression.html"><i class="fa fa-check"></i><b>7.3</b> Binary Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="7.3-binary-logistic-regression.html"><a href="7.3-binary-logistic-regression.html#overcoming-lpm"><i class="fa fa-check"></i><b>7.3.1</b> Overcoming LPM</a></li>
+<li class="chapter" data-level="7.3.2" data-path="7.3-binary-logistic-regression.html"><a href="7.3-binary-logistic-regression.html#model"><i class="fa fa-check"></i><b>7.3.2</b> Model</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="7.4-example-data-3.html"><a href="7.4-example-data-3.html"><i class="fa fa-check"></i><b>7.4</b> Example Data</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="7.4-example-data-3.html"><a href="7.4-example-data-3.html#variables"><i class="fa fa-check"></i><b>7.4.1</b> Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="7.5-intercept-only-model-1.html"><a href="7.5-intercept-only-model-1.html"><i class="fa fa-check"></i><b>7.5</b> Intercept-Only Model</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="7.5-intercept-only-model-1.html"><a href="7.5-intercept-only-model-1.html#intercept-only-model-in-r-1"><i class="fa fa-check"></i><b>7.5.1</b> Intercept-Only Model in R</a></li>
+<li class="chapter" data-level="7.5.2" data-path="7.5-intercept-only-model-1.html"><a href="7.5-intercept-only-model-1.html#interpretation-1"><i class="fa fa-check"></i><b>7.5.2</b> Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="7.6-single-predictor-model.html"><a href="7.6-single-predictor-model.html"><i class="fa fa-check"></i><b>7.6</b> Single Predictor Model</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="7.6-single-predictor-model.html"><a href="7.6-single-predictor-model.html#overdispersion"><i class="fa fa-check"></i><b>7.6.1</b> Overdispersion</a></li>
+<li class="chapter" data-level="7.6.2" data-path="7.6-single-predictor-model.html"><a href="7.6-single-predictor-model.html#coefficients"><i class="fa fa-check"></i><b>7.6.2</b> Coefficients</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html"><i class="fa fa-check"></i><b>7.7</b> Marginal Effects</a>
+<ul>
+<li class="chapter" data-level="7.7.1" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#a-definition-of-marginal-effects"><i class="fa fa-check"></i><b>7.7.1</b> A Definition of Marginal Effects</a></li>
+<li class="chapter" data-level="7.7.2" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#a-few-observations"><i class="fa fa-check"></i><b>7.7.2</b> A Few Observations</a></li>
+<li class="chapter" data-level="7.7.3" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#types-of-marginal-effects"><i class="fa fa-check"></i><b>7.7.3</b> Types of Marginal Effects</a></li>
+<li class="chapter" data-level="7.7.4" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#example-model"><i class="fa fa-check"></i><b>7.7.4</b> Example Model</a></li>
+<li class="chapter" data-level="7.7.5" data-path="7.7-marginal-effects.html"><a href="7.7-marginal-effects.html#marginal-effects-at-representative-values-mer"><i class="fa fa-check"></i><b>7.7.5</b> Marginal Effects at Representative Values (MER)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="8-chapter-8.html"><a href="8-chapter-8.html"><i class="fa fa-check"></i><b>8</b> Poisson Regression</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="8.1-poisson-regression.html"><a href="8.1-poisson-regression.html"><i class="fa fa-check"></i><b>8.1</b> Poisson Regression</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="8.1-poisson-regression.html"><a href="8.1-poisson-regression.html#review-of-glm"><i class="fa fa-check"></i><b>8.1.1</b> Review of GLM</a></li>
+<li class="chapter" data-level="8.1.2" data-path="8.1-poisson-regression.html"><a href="8.1-poisson-regression.html#poisson-regression-as-glm-1"><i class="fa fa-check"></i><b>8.1.2</b> Poisson Regression as GLM</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="8.2-poisson-distribution.html"><a href="8.2-poisson-distribution.html"><i class="fa fa-check"></i><b>8.2</b> Poisson Distribution</a></li>
+<li class="chapter" data-level="8.3" data-path="8.3-notes-on-interpretation.html"><a href="8.3-notes-on-interpretation.html"><i class="fa fa-check"></i><b>8.3</b> Notes on Interpretation</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="8.3-notes-on-interpretation.html"><a href="8.3-notes-on-interpretation.html#one-predictor-model"><i class="fa fa-check"></i><b>8.3.1</b> One Predictor Model</a></li>
+<li class="chapter" data-level="8.3.2" data-path="8.3-notes-on-interpretation.html"><a href="8.3-notes-on-interpretation.html#similarity-to-logistic-regression"><i class="fa fa-check"></i><b>8.3.2</b> Similarity to Logistic Regression</a></li>
+<li class="chapter" data-level="8.3.3" data-path="8.3-notes-on-interpretation.html"><a href="8.3-notes-on-interpretation.html#percent-change"><i class="fa fa-check"></i><b>8.3.3</b> Percent Change</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="8.4-example-data-4.html"><a href="8.4-example-data-4.html"><i class="fa fa-check"></i><b>8.4</b> Example Data</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="8.4-example-data-4.html"><a href="8.4-example-data-4.html#dependent-variable"><i class="fa fa-check"></i><b>8.4.1</b> Dependent variable</a></li>
+<li class="chapter" data-level="8.4.2" data-path="8.4-example-data-4.html"><a href="8.4-example-data-4.html#explanatory-variables"><i class="fa fa-check"></i><b>8.4.2</b> Explanatory Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="8.5-single-predictor-model-1.html"><a href="8.5-single-predictor-model-1.html"><i class="fa fa-check"></i><b>8.5</b> Single Predictor Model</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="8.5-single-predictor-model-1.html"><a href="8.5-single-predictor-model-1.html#read-in-data"><i class="fa fa-check"></i><b>8.5.1</b> Read in Data</a></li>
+<li class="chapter" data-level="8.5.2" data-path="8.5-single-predictor-model-1.html"><a href="8.5-single-predictor-model-1.html#single-predictor-model-in-glm"><i class="fa fa-check"></i><b>8.5.2</b> Single Predictor Model in GLM</a></li>
+<li class="chapter" data-level="8.5.3" data-path="8.5-single-predictor-model-1.html"><a href="8.5-single-predictor-model-1.html#deviance-and-goodness-of-fit"><i class="fa fa-check"></i><b>8.5.3</b> Deviance and Goodness of Fit</a></li>
+<li class="chapter" data-level="8.5.4" data-path="8.5-single-predictor-model-1.html"><a href="8.5-single-predictor-model-1.html#overdispersion-1"><i class="fa fa-check"></i><b>8.5.4</b> Overdispersion?</a></li>
+<li class="chapter" data-level="8.5.5" data-path="8.5-single-predictor-model-1.html"><a href="8.5-single-predictor-model-1.html#interpretation-of-single-predictor-model"><i class="fa fa-check"></i><b>8.5.5</b> Interpretation of Single Predictor Model</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="8.6-multiple-predictor-model.html"><a href="8.6-multiple-predictor-model.html"><i class="fa fa-check"></i><b>8.6</b> Multiple Predictor Model</a></li>
+<li class="chapter" data-level="8.7" data-path="8.7-revisisting-overdispersion.html"><a href="8.7-revisisting-overdispersion.html"><i class="fa fa-check"></i><b>8.7</b> Revisisting Overdispersion</a>
+<ul>
+<li class="chapter" data-level="8.7.1" data-path="8.7-revisisting-overdispersion.html"><a href="8.7-revisisting-overdispersion.html#quassi-poisson-family"><i class="fa fa-check"></i><b>8.7.1</b> Quassi-Poisson Family</a></li>
+<li class="chapter" data-level="8.7.2" data-path="8.7-revisisting-overdispersion.html"><a href="8.7-revisisting-overdispersion.html#negative-binomial-regression"><i class="fa fa-check"></i><b>8.7.2</b> Negative Binomial Regression</a></li>
+<li class="chapter" data-level="8.7.3" data-path="8.7-revisisting-overdispersion.html"><a href="8.7-revisisting-overdispersion.html#references-1"><i class="fa fa-check"></i><b>8.7.3</b> References</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="9-chapter-9.html"><a href="9-chapter-9.html"><i class="fa fa-check"></i><b>9</b> Two-Occassion change</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="9.1-example-data-i.html"><a href="9.1-example-data-i.html"><i class="fa fa-check"></i><b>9.1</b> Example Data I</a></li>
+<li class="chapter" data-level="9.2" data-path="9.2-inroduction.html"><a href="9.2-inroduction.html"><i class="fa fa-check"></i><b>9.2</b> Inroduction</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="9.2-inroduction.html"><a href="9.2-inroduction.html#a-thought-experiment"><i class="fa fa-check"></i><b>9.2.1</b> A Thought Experiment</a></li>
+<li class="chapter" data-level="9.2.2" data-path="9.2-inroduction.html"><a href="9.2-inroduction.html#equivalent-models-in-psychology"><i class="fa fa-check"></i><b>9.2.2</b> Equivalent Models in Psychology</a></li>
+<li class="chapter" data-level="9.2.3" data-path="9.2-inroduction.html"><a href="9.2-inroduction.html#equivalent-models-an-example"><i class="fa fa-check"></i><b>9.2.3</b> Equivalent Models: An Example</a></li>
+<li class="chapter" data-level="9.2.4" data-path="9.2-inroduction.html"><a href="9.2-inroduction.html#examples-of-equivalent-models"><i class="fa fa-check"></i><b>9.2.4</b> Examples of Equivalent Models</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="9.3-residualized-change.html"><a href="9.3-residualized-change.html"><i class="fa fa-check"></i><b>9.3</b> Residualized Change</a></li>
+<li class="chapter" data-level="9.4" data-path="9.4-raw-change.html"><a href="9.4-raw-change.html"><i class="fa fa-check"></i><b>9.4</b> Raw Change</a></li>
+<li class="chapter" data-level="9.5" data-path="9.5-autoregressive-models.html"><a href="9.5-autoregressive-models.html"><i class="fa fa-check"></i><b>9.5</b> Autoregressive Models</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="9.5-autoregressive-models.html"><a href="9.5-autoregressive-models.html#autoregressive-residuals"><i class="fa fa-check"></i><b>9.5.1</b> Autoregressive Residuals</a></li>
+<li class="chapter" data-level="9.5.2" data-path="9.5-autoregressive-models.html"><a href="9.5-autoregressive-models.html#autoregressive-model-in-r"><i class="fa fa-check"></i><b>9.5.2</b> Autoregressive Model in R</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="9.6-difference-score-model.html"><a href="9.6-difference-score-model.html"><i class="fa fa-check"></i><b>9.6</b> Difference Score Model</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="9.6-difference-score-model.html"><a href="9.6-difference-score-model.html#calculating-difference-scores"><i class="fa fa-check"></i><b>9.6.1</b> Calculating Difference Scores</a></li>
+<li class="chapter" data-level="9.6.2" data-path="9.6-difference-score-model.html"><a href="9.6-difference-score-model.html#comparison-to-residualized-change"><i class="fa fa-check"></i><b>9.6.2</b> Comparison to Residualized Change</a></li>
+<li class="chapter" data-level="9.6.3" data-path="9.6-difference-score-model.html"><a href="9.6-difference-score-model.html#a-difference-score-regression-model"><i class="fa fa-check"></i><b>9.6.3</b> A Difference Score Regression Model</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="9.7-critique-of-residualized-change.html"><a href="9.7-critique-of-residualized-change.html"><i class="fa fa-check"></i><b>9.7</b> Critique of Residualized Change</a></li>
+<li class="chapter" data-level="9.8" data-path="9.8-critique-of-difference-scores.html"><a href="9.8-critique-of-difference-scores.html"><i class="fa fa-check"></i><b>9.8</b> Critique of Difference Scores</a>
+<ul>
+<li class="chapter" data-level="9.8.1" data-path="9.8-critique-of-difference-scores.html"><a href="9.8-critique-of-difference-scores.html#alternative-interpretation"><i class="fa fa-check"></i><b>9.8.1</b> Alternative Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.9" data-path="9.9-comparing-models.html"><a href="9.9-comparing-models.html"><i class="fa fa-check"></i><b>9.9</b> Comparing Models</a></li>
+<li class="chapter" data-level="9.10" data-path="9.10-lords-paradox.html"><a href="9.10-lords-paradox.html"><i class="fa fa-check"></i><b>9.10</b> Lord’s Paradox</a></li>
+<li class="chapter" data-level="9.11" data-path="9.11-example-data-ii.html"><a href="9.11-example-data-ii.html"><i class="fa fa-check"></i><b>9.11</b> Example Data II</a>
+<ul>
+<li class="chapter" data-level="9.11.1" data-path="9.11-example-data-ii.html"><a href="9.11-example-data-ii.html#generate-some-data-according-to-castro2018"><i class="fa fa-check"></i><b>9.11.1</b> Generate Some Data According to <span class="citation">(Castro-Schilo and Grimm 2018)</span></a></li>
+<li class="chapter" data-level="9.11.2" data-path="9.11-example-data-ii.html"><a href="9.11-example-data-ii.html#plot-data"><i class="fa fa-check"></i><b>9.11.2</b> Plot Data</a></li>
+<li class="chapter" data-level="9.11.3" data-path="9.11-example-data-ii.html"><a href="9.11-example-data-ii.html#fit-residualized-change-model"><i class="fa fa-check"></i><b>9.11.3</b> Fit Residualized Change Model</a></li>
+<li class="chapter" data-level="9.11.4" data-path="9.11-example-data-ii.html"><a href="9.11-example-data-ii.html#fit-difference-score-model"><i class="fa fa-check"></i><b>9.11.4</b> Fit Difference Score Model</a></li>
+</ul></li>
+<li class="chapter" data-level="9.12" data-path="9.12-example-data-iii.html"><a href="9.12-example-data-iii.html"><i class="fa fa-check"></i><b>9.12</b> Example Data III</a>
+<ul>
+<li class="chapter" data-level="9.12.1" data-path="9.12-example-data-iii.html"><a href="9.12-example-data-iii.html#generate-some-data-according-to-castro2018-example-b"><i class="fa fa-check"></i><b>9.12.1</b> Generate Some Data According to <span class="citation">(Castro-Schilo and Grimm 2018)</span> Example B</a></li>
+<li class="chapter" data-level="9.12.2" data-path="9.12-example-data-iii.html"><a href="9.12-example-data-iii.html#plot-data-1"><i class="fa fa-check"></i><b>9.12.2</b> Plot Data</a></li>
+<li class="chapter" data-level="9.12.3" data-path="9.12-example-data-iii.html"><a href="9.12-example-data-iii.html#fit-residualized-change-model-1"><i class="fa fa-check"></i><b>9.12.3</b> Fit Residualized Change Model</a></li>
+<li class="chapter" data-level="9.12.4" data-path="9.12-example-data-iii.html"><a href="9.12-example-data-iii.html#fit-difference-score-model-1"><i class="fa fa-check"></i><b>9.12.4</b> Fit Difference Score Model</a></li>
+</ul></li>
+<li class="chapter" data-level="9.13" data-path="9.13-closing-thoughts.html"><a href="9.13-closing-thoughts.html"><i class="fa fa-check"></i><b>9.13</b> Closing Thoughts</a></li>
+<li class="chapter" data-level="9.14" data-path="9.14-references-2.html"><a href="9.14-references-2.html"><i class="fa fa-check"></i><b>9.14</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="10-chapter-10.html"><a href="10-chapter-10.html"><i class="fa fa-check"></i><b>10</b> Introduction to Growth</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="10.1-introduction.html"><a href="10.1-introduction.html"><i class="fa fa-check"></i><b>10.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="10.1-introduction.html"><a href="10.1-introduction.html#what-is-a-multilevel-model"><i class="fa fa-check"></i><b>10.1.1</b> What is a multilevel model?</a></li>
+<li class="chapter" data-level="10.1.2" data-path="10.1-introduction.html"><a href="10.1-introduction.html#two-faces-of-mlm"><i class="fa fa-check"></i><b>10.1.2</b> Two Faces of MLM</a></li>
+<li class="chapter" data-level="10.1.3" data-path="10.1-introduction.html"><a href="10.1-introduction.html#two-level-longitudinal-data"><i class="fa fa-check"></i><b>10.1.3</b> Two-Level Longitudinal Data</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="10.2-example-data-5.html"><a href="10.2-example-data-5.html"><i class="fa fa-check"></i><b>10.2</b> Example Data</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="10.2-example-data-5.html"><a href="10.2-example-data-5.html#data-preparation-and-description"><i class="fa fa-check"></i><b>10.2.1</b> Data Preparation and Description</a></li>
+<li class="chapter" data-level="10.2.2" data-path="10.2-example-data-5.html"><a href="10.2-example-data-5.html#sample-moments"><i class="fa fa-check"></i><b>10.2.2</b> Sample Moments</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="10.3-a-general-model.html"><a href="10.3-a-general-model.html"><i class="fa fa-check"></i><b>10.3</b> A General Model</a></li>
+<li class="chapter" data-level="10.4" data-path="10.4-unconditional-means-model.html"><a href="10.4-unconditional-means-model.html"><i class="fa fa-check"></i><b>10.4</b> Unconditional Means Model</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="10.4-unconditional-means-model.html"><a href="10.4-unconditional-means-model.html#level-1"><i class="fa fa-check"></i><b>10.4.1</b> Level 1</a></li>
+<li class="chapter" data-level="10.4.2" data-path="10.4-unconditional-means-model.html"><a href="10.4-unconditional-means-model.html#level-2"><i class="fa fa-check"></i><b>10.4.2</b> Level 2</a></li>
+<li class="chapter" data-level="10.4.3" data-path="10.4-unconditional-means-model.html"><a href="10.4-unconditional-means-model.html#single-equation"><i class="fa fa-check"></i><b>10.4.3</b> Single Equation</a></li>
+<li class="chapter" data-level="10.4.4" data-path="10.4-unconditional-means-model.html"><a href="10.4-unconditional-means-model.html#model-elaboration"><i class="fa fa-check"></i><b>10.4.4</b> Model Elaboration</a></li>
+<li class="chapter" data-level="10.4.5" data-path="10.4-unconditional-means-model.html"><a href="10.4-unconditional-means-model.html#estimated-quantities"><i class="fa fa-check"></i><b>10.4.5</b> Estimated Quantities</a></li>
+<li class="chapter" data-level="10.4.6" data-path="10.4-unconditional-means-model.html"><a href="10.4-unconditional-means-model.html#more-notation"><i class="fa fa-check"></i><b>10.4.6</b> More Notation</a></li>
+<li class="chapter" data-level="10.4.7" data-path="10.4-unconditional-means-model.html"><a href="10.4-unconditional-means-model.html#unconditional-means-model-in-r"><i class="fa fa-check"></i><b>10.4.7</b> Unconditional Means Model in R</a></li>
+<li class="chapter" data-level="10.4.8" data-path="10.4-unconditional-means-model.html"><a href="10.4-unconditional-means-model.html#intra-class-correlation"><i class="fa fa-check"></i><b>10.4.8</b> Intra-Class Correlation</a></li>
+<li class="chapter" data-level="10.4.9" data-path="10.4-unconditional-means-model.html"><a href="10.4-unconditional-means-model.html#model-impled-moments"><i class="fa fa-check"></i><b>10.4.9</b> Model-Impled Moments</a></li>
+<li class="chapter" data-level="10.4.10" data-path="10.4-unconditional-means-model.html"><a href="10.4-unconditional-means-model.html#model-residuals"><i class="fa fa-check"></i><b>10.4.10</b> Model Residuals</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="10.5-repeated-measures-anova.html"><a href="10.5-repeated-measures-anova.html"><i class="fa fa-check"></i><b>10.5</b> Repeated Measures ANOVA</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="10.5-repeated-measures-anova.html"><a href="10.5-repeated-measures-anova.html#intra-class-correlation-1"><i class="fa fa-check"></i><b>10.5.1</b> Intra-Class Correlation</a></li>
+<li class="chapter" data-level="10.5.2" data-path="10.5-repeated-measures-anova.html"><a href="10.5-repeated-measures-anova.html#model-implied-mean-vector"><i class="fa fa-check"></i><b>10.5.2</b> Model-Implied Mean Vector</a></li>
+<li class="chapter" data-level="10.5.3" data-path="10.5-repeated-measures-anova.html"><a href="10.5-repeated-measures-anova.html#model-implied-covariance-matrix-1"><i class="fa fa-check"></i><b>10.5.3</b> Model-Implied Covariance Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="10.6-repeated-measures-manova.html"><a href="10.6-repeated-measures-manova.html"><i class="fa fa-check"></i><b>10.6</b> Repeated Measures MANOVA</a>
+<ul>
+<li class="chapter" data-level="10.6.1" data-path="10.6-repeated-measures-manova.html"><a href="10.6-repeated-measures-manova.html#model-implied-mean-vector-1"><i class="fa fa-check"></i><b>10.6.1</b> Model-Implied Mean Vector</a></li>
+<li class="chapter" data-level="10.6.2" data-path="10.6-repeated-measures-manova.html"><a href="10.6-repeated-measures-manova.html#model-implied-covariance-matrix-2"><i class="fa fa-check"></i><b>10.6.2</b> Model-Implied Covariance Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="10.7-repeated-measures-manova-unstructed.html"><a href="10.7-repeated-measures-manova-unstructed.html"><i class="fa fa-check"></i><b>10.7</b> Repeated Measures MANOVA (Unstructed)</a>
+<ul>
+<li class="chapter" data-level="10.7.1" data-path="10.7-repeated-measures-manova-unstructed.html"><a href="10.7-repeated-measures-manova-unstructed.html#model-implied-mean-vector-2"><i class="fa fa-check"></i><b>10.7.1</b> Model-Implied Mean Vector</a></li>
+<li class="chapter" data-level="10.7.2" data-path="10.7-repeated-measures-manova-unstructed.html"><a href="10.7-repeated-measures-manova-unstructed.html#model-implied-covariance-matrix-3"><i class="fa fa-check"></i><b>10.7.2</b> Model-Implied Covariance Matrix</a></li>
+<li class="chapter" data-level="10.7.3" data-path="10.7-repeated-measures-manova-unstructed.html"><a href="10.7-repeated-measures-manova-unstructed.html#references-3"><i class="fa fa-check"></i><b>10.7.3</b> References</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="11-chapter-11.html"><a href="11-chapter-11.html"><i class="fa fa-check"></i><b>11</b> Growth Curve Modeling</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="11.1-introduction-1.html"><a href="11.1-introduction-1.html"><i class="fa fa-check"></i><b>11.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.2" data-path="11.2-data-preparation-and-description-1.html"><a href="11.2-data-preparation-and-description-1.html"><i class="fa fa-check"></i><b>11.2</b> Data Preparation and Description</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="11.2-data-preparation-and-description-1.html"><a href="11.2-data-preparation-and-description-1.html#loading-libraries-used-in-this-script."><i class="fa fa-check"></i><b>11.2.1</b> Loading libraries used in this script.</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="11.3-individual-growth-models.html"><a href="11.3-individual-growth-models.html"><i class="fa fa-check"></i><b>11.3</b> Individual Growth Models</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="11.3-individual-growth-models.html"><a href="11.3-individual-growth-models.html#visualizing-individual-change"><i class="fa fa-check"></i><b>11.3.1</b> Visualizing Individual Change</a></li>
+<li class="chapter" data-level="11.3.2" data-path="11.3-individual-growth-models.html"><a href="11.3-individual-growth-models.html#multiple-individuals"><i class="fa fa-check"></i><b>11.3.2</b> Multiple Individuals</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="11.4-unconditional-means-model-1.html"><a href="11.4-unconditional-means-model-1.html"><i class="fa fa-check"></i><b>11.4</b> Unconditional Means Model</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="11.4-unconditional-means-model-1.html"><a href="11.4-unconditional-means-model-1.html#predicted-trajectories"><i class="fa fa-check"></i><b>11.4.1</b> Predicted Trajectories</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="11.5-linear-growth-model.html"><a href="11.5-linear-growth-model.html"><i class="fa fa-check"></i><b>11.5</b> Linear Growth Model</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="11.5-linear-growth-model.html"><a href="11.5-linear-growth-model.html#random-intercept-model"><i class="fa fa-check"></i><b>11.5.1</b> Random Intercept Model</a></li>
+<li class="chapter" data-level="11.5.2" data-path="11.5-linear-growth-model.html"><a href="11.5-linear-growth-model.html#random-intercept-and-slopes-model"><i class="fa fa-check"></i><b>11.5.2</b> Random Intercept and Slopes Model</a></li>
+<li class="chapter" data-level="11.5.3" data-path="11.5-linear-growth-model.html"><a href="11.5-linear-growth-model.html#model-comparison"><i class="fa fa-check"></i><b>11.5.3</b> Model Comparison</a></li>
+<li class="chapter" data-level="11.5.4" data-path="11.5-linear-growth-model.html"><a href="11.5-linear-growth-model.html#mlm-and-individual-models"><i class="fa fa-check"></i><b>11.5.4</b> MLM and Individual Models</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="11.6-quadratic-growth-model.html"><a href="11.6-quadratic-growth-model.html"><i class="fa fa-check"></i><b>11.6</b> Quadratic Growth Model</a></li>
+<li class="chapter" data-level="11.7" data-path="11.7-conditional-growth-model.html"><a href="11.7-conditional-growth-model.html"><i class="fa fa-check"></i><b>11.7</b> Conditional Growth Model</a>
+<ul>
+<li class="chapter" data-level="11.7.1" data-path="11.7-conditional-growth-model.html"><a href="11.7-conditional-growth-model.html#conditional-growth-equation"><i class="fa fa-check"></i><b>11.7.1</b> Conditional Growth Equation</a></li>
+<li class="chapter" data-level="11.7.2" data-path="11.7-conditional-growth-model.html"><a href="11.7-conditional-growth-model.html#conditional-growth-model-1"><i class="fa fa-check"></i><b>11.7.2</b> Conditional Growth Model 1</a></li>
+<li class="chapter" data-level="11.7.3" data-path="11.7-conditional-growth-model.html"><a href="11.7-conditional-growth-model.html#conditional-growth-model-1-1"><i class="fa fa-check"></i><b>11.7.3</b> Conditional Growth Model 1</a></li>
+</ul></li>
+<li class="chapter" data-level="11.8" data-path="11.8-alternative-time-metrics.html"><a href="11.8-alternative-time-metrics.html"><i class="fa fa-check"></i><b>11.8</b> Alternative Time Metrics</a>
+<ul>
+<li class="chapter" data-level="11.8.1" data-path="11.8-alternative-time-metrics.html"><a href="11.8-alternative-time-metrics.html#recentering-time-metrics"><i class="fa fa-check"></i><b>11.8.1</b> Recentering time metrics</a></li>
+<li class="chapter" data-level="11.8.2" data-path="11.8-alternative-time-metrics.html"><a href="11.8-alternative-time-metrics.html#rescaling-time-metric"><i class="fa fa-check"></i><b>11.8.2</b> Rescaling time metric</a></li>
+<li class="chapter" data-level="11.8.3" data-path="11.8-alternative-time-metrics.html"><a href="11.8-alternative-time-metrics.html#remapping-time"><i class="fa fa-check"></i><b>11.8.3</b> Remapping Time</a></li>
+<li class="chapter" data-level="11.8.4" data-path="11.8-alternative-time-metrics.html"><a href="11.8-alternative-time-metrics.html#compare-growth-metrics"><i class="fa fa-check"></i><b>11.8.4</b> Compare Growth Metrics</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/zackfisher/HDFS523" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">HDFS 523: Strategies for Data Analysis in Developmental Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="repeated-measures-manova-unstructed" class="section level2 hasAnchor" number="10.7">
+<h2><span class="header-section-number">10.7</span> Repeated Measures MANOVA (Unstructed)<a href="10.7-repeated-measures-manova-unstructed.html#repeated-measures-manova-unstructed" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s adjust the RM MANOVA error structure to have no constraints. To do this in <code>lme()</code> we can use the <code>correlation</code> argument.</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="10.7-repeated-measures-manova-unstructed.html#cb123-1" aria-hidden="true" tabindex="-1"></a>timecatunst_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
+<span id="cb123-2"><a href="10.7-repeated-measures-manova-unstructed.html#cb123-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">fixed=</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time0, </span>
+<span id="cb123-3"><a href="10.7-repeated-measures-manova-unstructed.html#cb123-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span><span class="sc">|</span>id,</span>
+<span id="cb123-4"><a href="10.7-repeated-measures-manova-unstructed.html#cb123-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights=</span><span class="fu">varIdent</span>(<span class="at">form=</span><span class="sc">~</span><span class="dv">1</span><span class="sc">|</span>time0),</span>
+<span id="cb123-5"><a href="10.7-repeated-measures-manova-unstructed.html#cb123-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">correlation=</span><span class="fu">corSymm</span>(<span class="at">form=</span><span class="sc">~</span><span class="dv">1</span><span class="sc">|</span>id),</span>
+<span id="cb123-6"><a href="10.7-repeated-measures-manova-unstructed.html#cb123-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
+<span id="cb123-7"><a href="10.7-repeated-measures-manova-unstructed.html#cb123-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
+<span id="cb123-8"><a href="10.7-repeated-measures-manova-unstructed.html#cb123-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb123-9"><a href="10.7-repeated-measures-manova-unstructed.html#cb123-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(timecatunst_fit)</span></code></pre></div>
+<pre><code>## Linear mixed-effects model fit by REML
+##   Data: verblong 
+##        AIC      BIC    logLik
+##   3906.226 3945.947 -1944.113
+## 
+## Random effects:
+##  Formula: ~1 | id
+##         (Intercept) Residual
+## StdDev:    5.396122 2.989864
+## 
+## Correlation Structure: General
+##  Formula: ~1 | id 
+##  Parameter estimate(s):
+##  Correlation: 
+##   1     2    
+## 2 0.282      
+## 3 0.710 0.686
+## Variance function:
+##  Structure: Different standard deviations per stratum
+##  Formula: ~1 | time0 
+##  Parameter estimates:
+##        0        1        2 
+## 1.000000 1.665202 3.140697 
+## Fixed effects:  verb ~ 1 + time0 
+##                 Value Std.Error  DF  t-value p-value
+## (Intercept) 24.527488 0.4049598 407 60.56771       0
+## time0        8.657464 0.2504051 407 34.57384       0
+##  Correlation: 
+##       (Intr)
+## time0 0.138 
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -2.15515157 -0.44689483  0.08324398  0.70545373  3.17592136 
+## 
+## Number of Observations: 612
+## Number of Groups: 204</code></pre>
+<div id="model-implied-mean-vector-2" class="section level3 hasAnchor" number="10.7.1">
+<h3><span class="header-section-number">10.7.1</span> Model-Implied Mean Vector<a href="10.7-repeated-measures-manova-unstructed.html#model-implied-mean-vector-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There will be no differences in the model implied mean vector in this model.</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="10.7-repeated-measures-manova-unstructed.html#cb125-1" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">fixef</span>(timecatunst_fit), <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## Warning in matrix(fixef(timecatunst_fit), nrow = 3, ncol = 1): data length [2]
+## is not a sub-multiple or multiple of the number of rows [3]</code></pre>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="10.7-repeated-measures-manova-unstructed.html#cb127-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">nrow=</span><span class="dv">3</span>,<span class="at">ncol=</span><span class="dv">3</span>)</span>
+<span id="cb127-2"><a href="10.7-repeated-measures-manova-unstructed.html#cb127-2" aria-hidden="true" tabindex="-1"></a>meanvector_timecatunst  <span class="ot">&lt;-</span> X <span class="sc">%*%</span> beta</span>
+<span id="cb127-3"><a href="10.7-repeated-measures-manova-unstructed.html#cb127-3" aria-hidden="true" tabindex="-1"></a>meanvector_timecatunst</span></code></pre></div>
+<pre><code>##          [,1]
+## [1,] 24.52749
+## [2,] 33.18495
+## [3,] 49.05498</code></pre>
+</div>
+<div id="model-implied-covariance-matrix-3" class="section level3 hasAnchor" number="10.7.2">
+<h3><span class="header-section-number">10.7.2</span> Model-Implied Covariance Matrix<a href="10.7-repeated-measures-manova-unstructed.html#model-implied-covariance-matrix-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Again, we start with the between-part of our model.</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="10.7-repeated-measures-manova-unstructed.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="co">#parsing the model variances &amp; covariances</span></span>
+<span id="cb129-2"><a href="10.7-repeated-measures-manova-unstructed.html#cb129-2" aria-hidden="true" tabindex="-1"></a><span class="fu">VarCorr</span>(timecatunst_fit)</span></code></pre></div>
+<pre><code>## id = pdLogChol(1) 
+##             Variance  StdDev  
+## (Intercept) 29.118131 5.396122
+## Residual     8.939287 2.989864</code></pre>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="10.7-repeated-measures-manova-unstructed.html#cb131-1" aria-hidden="true" tabindex="-1"></a>Psi <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fu">as.numeric</span>(<span class="fu">VarCorr</span>(timecatunst_fit)[<span class="dv">1</span>])),<span class="at">nrow=</span><span class="dv">1</span>,<span class="at">ncol=</span><span class="dv">1</span>)  </span>
+<span id="cb131-2"><a href="10.7-repeated-measures-manova-unstructed.html#cb131-2" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>),  <span class="at">nrow=</span><span class="dv">3</span>,<span class="at">ncol=</span><span class="dv">1</span>)</span>
+<span id="cb131-3"><a href="10.7-repeated-measures-manova-unstructed.html#cb131-3" aria-hidden="true" tabindex="-1"></a>Z <span class="sc">%*%</span> Psi <span class="sc">%*%</span> <span class="fu">t</span>(Z)</span></code></pre></div>
+<pre><code>##          [,1]     [,2]     [,3]
+## [1,] 29.11813 29.11813 29.11813
+## [2,] 29.11813 29.11813 29.11813
+## [3,] 29.11813 29.11813 29.11813</code></pre>
+<p>Now it gets a bit more complicated, because we have a fully unstructured matrix for the within-person residual variance-covariance.</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="co">#parse the residual/&quot;error&quot; variance-covariance</span></span>
+<span id="cb133-2"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-2" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">VarCorr</span>(timecatunst_fit)[<span class="dv">4</span>]) <span class="co">#note this is standard deviation</span></span>
+<span id="cb133-3"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb133-4"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-4" aria-hidden="true" tabindex="-1"></a><span class="co">#From the summary(timecatunst_fit) above</span></span>
+<span id="cb133-5"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-5" aria-hidden="true" tabindex="-1"></a><span class="co">#  Variance function:</span></span>
+<span id="cb133-6"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   Structure: Different standard deviations per stratum</span></span>
+<span id="cb133-7"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Formula: ~1 | time0 </span></span>
+<span id="cb133-8"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameter estimates:</span></span>
+<span id="cb133-9"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-9" aria-hidden="true" tabindex="-1"></a><span class="co">#        0        1        2 </span></span>
+<span id="cb133-10"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 1.000000 1.827573 3.461330 </span></span>
+<span id="cb133-11"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-11" aria-hidden="true" tabindex="-1"></a>sigmaunst <span class="ot">&lt;-</span> sigma <span class="sc">*</span> (<span class="fu">diag</span>(<span class="fu">c</span>(<span class="fl">1.000000</span>, <span class="fl">1.827573</span>, <span class="fl">3.461330</span>), <span class="at">nrow=</span><span class="dv">3</span>,<span class="at">ncol=</span><span class="dv">3</span>))</span>
+<span id="cb133-12"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb133-13"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-13" aria-hidden="true" tabindex="-1"></a><span class="co">#From the summary(timecatunst_fit) above</span></span>
+<span id="cb133-14"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation Structure: General</span></span>
+<span id="cb133-15"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Formula: ~1 | id </span></span>
+<span id="cb133-16"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameter estimate(s):</span></span>
+<span id="cb133-17"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   Correlation: </span></span>
+<span id="cb133-18"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   1     2    </span></span>
+<span id="cb133-19"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 0.275      </span></span>
+<span id="cb133-20"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 0.709 0.725</span></span>
+<span id="cb133-21"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-21" aria-hidden="true" tabindex="-1"></a>cormatrixunst <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">1.000</span>, <span class="fl">0.275</span>, <span class="fl">0.709</span>,</span>
+<span id="cb133-22"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-22" aria-hidden="true" tabindex="-1"></a>                          <span class="fl">0.275</span>, <span class="fl">1.000</span>, <span class="fl">0.725</span>,</span>
+<span id="cb133-23"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-23" aria-hidden="true" tabindex="-1"></a>                          <span class="fl">0.709</span>, <span class="fl">0.725</span>, <span class="fl">1.000</span>),</span>
+<span id="cb133-24"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-24" aria-hidden="true" tabindex="-1"></a>                        <span class="at">nrow=</span><span class="dv">3</span>,<span class="at">ncol=</span><span class="dv">3</span>)</span>
+<span id="cb133-25"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb133-26"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-26" aria-hidden="true" tabindex="-1"></a><span class="co">#Pre and post multiply by SDs to convert Correlation matrix into</span></span>
+<span id="cb133-27"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-27" aria-hidden="true" tabindex="-1"></a><span class="co">#Covariance matrix</span></span>
+<span id="cb133-28"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-28" aria-hidden="true" tabindex="-1"></a>covresidunst <span class="ot">&lt;-</span> sigmaunst <span class="sc">%*%</span> cormatrixunst <span class="sc">%*%</span> <span class="fu">t</span>(sigmaunst)</span>
+<span id="cb133-29"><a href="10.7-repeated-measures-manova-unstructed.html#cb133-29" aria-hidden="true" tabindex="-1"></a>covresidunst</span></code></pre></div>
+<pre><code>##           [,1]     [,2]      [,3]
+## [1,]  8.939287  4.49273  21.93775
+## [2,]  4.492730 29.85742  40.99762
+## [3,] 21.937751 40.99762 107.09985</code></pre>
+<p>Finally, calculate the implied between- + within-person variance-covariances</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="10.7-repeated-measures-manova-unstructed.html#cb135-1" aria-hidden="true" tabindex="-1"></a>varcovmatrix_timecatunst <span class="ot">&lt;-</span> Z <span class="sc">%*%</span> Psi <span class="sc">%*%</span> <span class="fu">t</span>(Z) <span class="sc">+</span> covresidunst</span>
+<span id="cb135-2"><a href="10.7-repeated-measures-manova-unstructed.html#cb135-2" aria-hidden="true" tabindex="-1"></a>varcovmatrix_timecatunst</span></code></pre></div>
+<pre><code>##          [,1]     [,2]      [,3]
+## [1,] 38.05742 33.61086  51.05588
+## [2,] 33.61086 58.97555  70.11575
+## [3,] 51.05588 70.11575 136.21799</code></pre>
+<p>Let’s look at the misfit (real matrix - model implied).</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="10.7-repeated-measures-manova-unstructed.html#cb137-1" aria-hidden="true" tabindex="-1"></a>meanvector <span class="sc">-</span> meanvector_timecatunst</span></code></pre></div>
+<pre><code>##            [,1]
+## [1,]  0.8878550
+## [2,] -0.5772067
+## [3,] -5.3050743</code></pre>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="10.7-repeated-measures-manova-unstructed.html#cb139-1" aria-hidden="true" tabindex="-1"></a>varcovmatrix <span class="sc">-</span> varcovmatrix_timecatunst</span></code></pre></div>
+<pre><code>##           verb2     verb4     verb6
+## verb2 -0.769575  0.208709  -3.65100
+## verb4  0.208709 -5.394852  -7.86086
+## verb6 -3.651000 -7.860860 -22.47467</code></pre>
+<p>It appears we have fully reproduced our observed data. We can formally test the improvement of this model using the <code>anove()</code> function.</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="10.7-repeated-measures-manova-unstructed.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(timecathet_fit, timecatunst_fit)</span></code></pre></div>
+<pre><code>##                 Model df      AIC      BIC    logLik   Test  L.Ratio p-value
+## timecathet_fit      1  6 3957.310 3983.790 -1972.655                        
+## timecatunst_fit     2  9 3906.226 3945.947 -1944.113 1 vs 2 57.08328  &lt;.0001</code></pre>
+</div>
+<div id="references-3" class="section level3 hasAnchor" number="10.7.3">
+<h3><span class="header-section-number">10.7.3</span> References<a href="10.7-repeated-measures-manova-unstructed.html#references-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+
+</div>
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="10.6-repeated-measures-manova.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="11-chapter-11.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/zackfisher/HDFS523/edit/master/10_intro_to_growth.Rmd",
+"text": "Suggest an edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+},
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
