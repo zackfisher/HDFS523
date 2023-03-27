@@ -668,14 +668,14 @@ div.csl-indent {
 <div id="preliminaries" class="section level3 hasAnchor" number="13.7.1">
 <h3><span class="header-section-number">13.7.1</span> Preliminaries<a href="13.7-data-example.html#preliminaries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s begin by loading the neccessary libraries and reading in the data.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="13.7-data-example.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)   <span class="co">#for plotting</span></span>
-<span id="cb1-2"><a href="13.7-data-example.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)      <span class="co">#for model fitting</span></span>
-<span id="cb1-3"><a href="13.7-data-example.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)     <span class="co">#for general functions</span></span>
-<span id="cb1-4"><a href="13.7-data-example.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape)   <span class="co">#for data management</span></span>
-<span id="cb1-5"><a href="13.7-data-example.html#cb1-5" aria-hidden="true" tabindex="-1"></a>filepath <span class="ot">&lt;-</span> <span class="st">&quot;https://quantdev.ssri.psu.edu/sites/qdev/files/wisc3raw_gender.csv&quot;</span></span>
-<span id="cb1-6"><a href="13.7-data-example.html#cb1-6" aria-hidden="true" tabindex="-1"></a>wisc3raw <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file=</span><span class="fu">url</span>(filepath),<span class="at">header=</span><span class="cn">TRUE</span>)</span>
-<span id="cb1-7"><a href="13.7-data-example.html#cb1-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> wisc3raw[, <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>, <span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb6&quot;</span>, <span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo6&quot;</span>)]</span>
-<span id="cb1-8"><a href="13.7-data-example.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="13.7-data-example.html#cb496-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)   <span class="co">#for plotting</span></span>
+<span id="cb496-2"><a href="13.7-data-example.html#cb496-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)      <span class="co">#for model fitting</span></span>
+<span id="cb496-3"><a href="13.7-data-example.html#cb496-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)     <span class="co">#for general functions</span></span>
+<span id="cb496-4"><a href="13.7-data-example.html#cb496-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape)   <span class="co">#for data management</span></span>
+<span id="cb496-5"><a href="13.7-data-example.html#cb496-5" aria-hidden="true" tabindex="-1"></a>filepath <span class="ot">&lt;-</span> <span class="st">&quot;https://quantdev.ssri.psu.edu/sites/qdev/files/wisc3raw_gender.csv&quot;</span></span>
+<span id="cb496-6"><a href="13.7-data-example.html#cb496-6" aria-hidden="true" tabindex="-1"></a>wisc3raw <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file=</span><span class="fu">url</span>(filepath),<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb496-7"><a href="13.7-data-example.html#cb496-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> wisc3raw[, <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>, <span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb6&quot;</span>, <span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo6&quot;</span>)]</span>
+<span id="cb496-8"><a href="13.7-data-example.html#cb496-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
 <pre><code>##   id verb1 verb6 perfo1 perfo6
 ## 1  1 24.42 55.64  19.84  44.19
 ## 2  2 12.44 37.81   5.90  40.38
@@ -684,15 +684,15 @@ div.csl-indent {
 ## 5  5 28.23 70.95  27.64  64.22
 ## 6  6 16.06 39.94   8.45  39.08</code></pre>
 <p>We’ll also make a long version of the data set for later use.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="13.7-data-example.html#cb3-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
-<span id="cb3-2"><a href="13.7-data-example.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> data,</span>
-<span id="cb3-3"><a href="13.7-data-example.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">varying =</span> <span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb6&quot;</span>,<span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo6&quot;</span>),</span>
-<span id="cb3-4"><a href="13.7-data-example.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">timevar =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>), </span>
-<span id="cb3-5"><a href="13.7-data-example.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">idvar =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>),</span>
-<span id="cb3-6"><a href="13.7-data-example.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">direction =</span> <span class="st">&quot;long&quot;</span>, <span class="at">sep=</span><span class="st">&quot;&quot;</span></span>
-<span id="cb3-7"><a href="13.7-data-example.html#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-8"><a href="13.7-data-example.html#cb3-8" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data_long[<span class="fu">order</span>(data_long<span class="sc">$</span>id, data_long<span class="sc">$</span>grade), ]</span>
-<span id="cb3-9"><a href="13.7-data-example.html#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_long)</span></code></pre></div>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="13.7-data-example.html#cb498-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
+<span id="cb498-2"><a href="13.7-data-example.html#cb498-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> data,</span>
+<span id="cb498-3"><a href="13.7-data-example.html#cb498-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">varying =</span> <span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb6&quot;</span>,<span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo6&quot;</span>),</span>
+<span id="cb498-4"><a href="13.7-data-example.html#cb498-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">timevar =</span> <span class="fu">c</span>(<span class="st">&quot;grade&quot;</span>), </span>
+<span id="cb498-5"><a href="13.7-data-example.html#cb498-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">idvar =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>),</span>
+<span id="cb498-6"><a href="13.7-data-example.html#cb498-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">direction =</span> <span class="st">&quot;long&quot;</span>, <span class="at">sep=</span><span class="st">&quot;&quot;</span></span>
+<span id="cb498-7"><a href="13.7-data-example.html#cb498-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb498-8"><a href="13.7-data-example.html#cb498-8" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data_long[<span class="fu">order</span>(data_long<span class="sc">$</span>id, data_long<span class="sc">$</span>grade), ]</span>
+<span id="cb498-9"><a href="13.7-data-example.html#cb498-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_long)</span></code></pre></div>
 <pre><code>##     id grade  verb perfo
 ## 1.1  1     1 24.42 19.84
 ## 1.6  1     6 55.64 44.19
@@ -717,18 +717,18 @@ div.csl-indent {
 <h3><span class="header-section-number">13.7.3</span> Descriptives<a href="13.7-data-example.html#descriptives-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Before we run our models, it is often useful to get more familiar with the data via plotting and descriptives statistics.</p>
 <p>Let’s begin with descriptive statistics of our four variables of interest: first grade verbal and performance ability, and sixth grade verbal and performance ability.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="13.7-data-example.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(data<span class="sc">$</span>verb1)</span></code></pre></div>
+<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="13.7-data-example.html#cb500-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(data<span class="sc">$</span>verb1)</span></code></pre></div>
 <pre><code>##    vars   n  mean   sd median trimmed  mad  min   max range skew kurtosis   se
 ## X1    1 204 19.59 5.81  19.34    19.5 5.41 3.33 35.15 31.82 0.13    -0.05 0.41</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="13.7-data-example.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(data<span class="sc">$</span>verb6)</span></code></pre></div>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="13.7-data-example.html#cb502-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(data<span class="sc">$</span>verb6)</span></code></pre></div>
 <pre><code>##    vars   n  mean    sd median trimmed  mad   min   max range skew kurtosis
 ## X1    1 204 43.75 10.67  42.55   43.46 11.3 17.35 72.59 55.24 0.24    -0.36
 ##      se
 ## X1 0.75</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="13.7-data-example.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(data<span class="sc">$</span>perfo1)</span></code></pre></div>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="13.7-data-example.html#cb504-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(data<span class="sc">$</span>perfo1)</span></code></pre></div>
 <pre><code>##    vars   n  mean   sd median trimmed mad min   max range skew kurtosis   se
 ## X1    1 204 17.98 8.35  17.66   17.69 8.3   0 46.58 46.58 0.35    -0.11 0.58</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="13.7-data-example.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(data<span class="sc">$</span>perfo6)</span></code></pre></div>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="13.7-data-example.html#cb506-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(data<span class="sc">$</span>perfo6)</span></code></pre></div>
 <pre><code>##    vars   n  mean    sd median trimmed   mad   min   max range  skew kurtosis
 ## X1    1 204 50.93 12.48  51.76   51.07 13.27 10.26 89.01 78.75 -0.06     0.18
 ##      se
@@ -737,35 +737,33 @@ div.csl-indent {
 <div id="correlations" class="section level4 hasAnchor" number="13.7.3.1">
 <h4><span class="header-section-number">13.7.3.1</span> Correlations<a href="13.7-data-example.html#correlations" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Let’s also examine the correlations among the four variables.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="13.7-data-example.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#correlations</span></span>
-<span id="cb13-2"><a href="13.7-data-example.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(data[, <span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="13.7-data-example.html#cb508-1" aria-hidden="true" tabindex="-1"></a><span class="co">#correlations</span></span>
+<span id="cb508-2"><a href="13.7-data-example.html#cb508-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(data[, <span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>])</span></code></pre></div>
 <pre><code>##            verb1     verb6    perfo1    perfo6
 ## verb1  1.0000000 0.6541040 0.6101379 0.4779672
 ## verb6  0.6541040 1.0000000 0.6183155 0.6106694
 ## perfo1 0.6101379 0.6183155 1.0000000 0.6958321
 ## perfo6 0.4779672 0.6106694 0.6958321 1.0000000</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="13.7-data-example.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot</span></span>
-<span id="cb15-2"><a href="13.7-data-example.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs.panels</span>(data[, <span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb6&quot;</span>, <span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo6&quot;</span>)])</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="13.7-data-example.html#cb510-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot</span></span>
+<span id="cb510-2"><a href="13.7-data-example.html#cb510-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs.panels</span>(data[, <span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb6&quot;</span>, <span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo6&quot;</span>)])</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-284-1.png" width="672" /></p>
 <p>We can see that all four variables are relatively normally distributed.</p>
 <p>We can see there are strong, positive correlations both across time within-construct and between-constructs.</p>
 </div>
 <div id="plots" class="section level4 hasAnchor" number="13.7.3.2">
 <h4><span class="header-section-number">13.7.3.2</span> Plots<a href="13.7-data-example.html#plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Let’s also look at a few individuals to examine the within-person association between verbal and performance ability from the first to sixth grade.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="13.7-data-example.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">subset</span>(data_long, id <span class="sc">&lt;=</span> <span class="dv">9</span>), <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">group =</span> id), <span class="at">legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb16-2"><a href="13.7-data-example.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> verb), <span class="at">shape =</span> <span class="dv">17</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;purple&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb16-3"><a href="13.7-data-example.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> perfo), <span class="at">shape =</span> <span class="dv">19</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;pink&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb16-4"><a href="13.7-data-example.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> verb), <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">size=</span><span class="dv">1</span>, <span class="at">color =</span> <span class="st">&quot;purple&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb16-5"><a href="13.7-data-example.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> perfo), <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">size=</span><span class="dv">1</span>, <span class="at">color =</span> <span class="st">&quot;pink&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb16-6"><a href="13.7-data-example.html#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb16-7"><a href="13.7-data-example.html#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Verbal and Performance Ability&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">80</span>) <span class="sc">+</span></span>
-<span id="cb16-8"><a href="13.7-data-example.html#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">7</span>, <span class="at">by =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb16-9"><a href="13.7-data-example.html#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb16-10"><a href="13.7-data-example.html#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> id)</span></code></pre></div>
-<pre><code>## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-## ℹ Please use `linewidth` instead.</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="13.7-data-example.html#cb511-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">subset</span>(data_long, id <span class="sc">&lt;=</span> <span class="dv">9</span>), <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">group =</span> id), <span class="at">legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb511-2"><a href="13.7-data-example.html#cb511-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> verb), <span class="at">shape =</span> <span class="dv">17</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;purple&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb511-3"><a href="13.7-data-example.html#cb511-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> perfo), <span class="at">shape =</span> <span class="dv">19</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;pink&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb511-4"><a href="13.7-data-example.html#cb511-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> verb), <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">size=</span><span class="dv">1</span>, <span class="at">color =</span> <span class="st">&quot;purple&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb511-5"><a href="13.7-data-example.html#cb511-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> perfo), <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">size=</span><span class="dv">1</span>, <span class="at">color =</span> <span class="st">&quot;pink&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb511-6"><a href="13.7-data-example.html#cb511-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb511-7"><a href="13.7-data-example.html#cb511-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Verbal and Performance Ability&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">80</span>) <span class="sc">+</span></span>
+<span id="cb511-8"><a href="13.7-data-example.html#cb511-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">7</span>, <span class="at">by =</span> <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb511-9"><a href="13.7-data-example.html#cb511-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb511-10"><a href="13.7-data-example.html#cb511-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> id)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-285-1.png" width="672" /></p>
 <p>Within these nine participants, there is some inter-individual variability. For example, some participants’ verbal and performance ability increase more than others, some participants have higher levels of verbal ability than performance ability (or vice versa) across time.</p>
 </div>
 </div>
@@ -776,16 +774,16 @@ div.csl-indent {
 <h4><span class="header-section-number">13.7.4.1</span> Step 1<a href="13.7-data-example.html#step-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>First, we need to create one column that has the information for both outcome variables - i.e., for each person, the verb6 and perfo6 values will alternate.</p>
 <p>This is almost like repeated measures data, but instead of having multiple time points nested within person, we have multiple (two) variables to nest within person.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="13.7-data-example.html#cb18-1" aria-hidden="true" tabindex="-1"></a>data_melt <span class="ot">&lt;-</span> reshape<span class="sc">::</span><span class="fu">melt</span>(</span>
-<span id="cb18-2"><a href="13.7-data-example.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> data,</span>
-<span id="cb18-3"><a href="13.7-data-example.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id.vars =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>, <span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;perfo1&quot;</span>), </span>
-<span id="cb18-4"><a href="13.7-data-example.html#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.rm=</span><span class="cn">FALSE</span></span>
-<span id="cb18-5"><a href="13.7-data-example.html#cb18-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-6"><a href="13.7-data-example.html#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#rename &quot;variable&quot; and &quot;value&quot; variables </span></span>
-<span id="cb18-7"><a href="13.7-data-example.html#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data_melt)[<span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;grade6_variable&quot;</span>, <span class="st">&quot;grade6_outcome&quot;</span>)</span>
-<span id="cb18-8"><a href="13.7-data-example.html#cb18-8" aria-hidden="true" tabindex="-1"></a>data_melt <span class="ot">&lt;-</span> data_melt[<span class="fu">order</span>(data_melt<span class="sc">$</span>id, data_melt<span class="sc">$</span>grade6_variable), ]</span></code></pre></div>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="13.7-data-example.html#cb512-1" aria-hidden="true" tabindex="-1"></a>data_melt <span class="ot">&lt;-</span> reshape<span class="sc">::</span><span class="fu">melt</span>(</span>
+<span id="cb512-2"><a href="13.7-data-example.html#cb512-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> data,</span>
+<span id="cb512-3"><a href="13.7-data-example.html#cb512-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id.vars =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>, <span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;perfo1&quot;</span>), </span>
+<span id="cb512-4"><a href="13.7-data-example.html#cb512-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.rm=</span><span class="cn">FALSE</span></span>
+<span id="cb512-5"><a href="13.7-data-example.html#cb512-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb512-6"><a href="13.7-data-example.html#cb512-6" aria-hidden="true" tabindex="-1"></a><span class="co">#rename &quot;variable&quot; and &quot;value&quot; variables </span></span>
+<span id="cb512-7"><a href="13.7-data-example.html#cb512-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data_melt)[<span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;grade6_variable&quot;</span>, <span class="st">&quot;grade6_outcome&quot;</span>)</span>
+<span id="cb512-8"><a href="13.7-data-example.html#cb512-8" aria-hidden="true" tabindex="-1"></a>data_melt <span class="ot">&lt;-</span> data_melt[<span class="fu">order</span>(data_melt<span class="sc">$</span>id, data_melt<span class="sc">$</span>grade6_variable), ]</span></code></pre></div>
 <p><strong>Old Data</strong></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="13.7-data-example.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="13.7-data-example.html#cb513-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
 <pre><code>##   id verb1 verb6 perfo1 perfo6
 ## 1  1 24.42 55.64  19.84  44.19
 ## 2  2 12.44 37.81   5.90  40.38
@@ -794,7 +792,7 @@ div.csl-indent {
 ## 5  5 28.23 70.95  27.64  64.22
 ## 6  6 16.06 39.94   8.45  39.08</code></pre>
 <p><strong>New Data</strong></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="13.7-data-example.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_melt)</span></code></pre></div>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="13.7-data-example.html#cb515-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_melt)</span></code></pre></div>
 <pre><code>##     id verb1 perfo1 grade6_variable grade6_outcome
 ## 1    1 24.42  19.84           verb6          55.64
 ## 205  1 24.42  19.84          perfo6          44.19
@@ -808,11 +806,11 @@ div.csl-indent {
 <p>Second, we need to create two dummy variables (each 0/1) to “turn on/off” a row (more on this later) in our analyses.</p>
 <p>We will create a new variable, <code>verb_on</code> that indicates which rows are for the <code>verb6</code> outcome,</p>
 <p>We will create a second variable, <code>perform_on</code> that indicates which rows are for the <code>perfo6</code> outcome.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="13.7-data-example.html#cb23-1" aria-hidden="true" tabindex="-1"></a>data_melt_old <span class="ot">&lt;-</span> data_melt</span>
-<span id="cb23-2"><a href="13.7-data-example.html#cb23-2" aria-hidden="true" tabindex="-1"></a>data_melt<span class="sc">$</span>verb_on <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data_melt<span class="sc">$</span>grade6_variable <span class="sc">==</span> <span class="st">&quot;verb6&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb23-3"><a href="13.7-data-example.html#cb23-3" aria-hidden="true" tabindex="-1"></a>data_melt<span class="sc">$</span>perform_on <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data_melt<span class="sc">$</span>grade6_variable <span class="sc">==</span> <span class="st">&quot;perfo6&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="13.7-data-example.html#cb517-1" aria-hidden="true" tabindex="-1"></a>data_melt_old <span class="ot">&lt;-</span> data_melt</span>
+<span id="cb517-2"><a href="13.7-data-example.html#cb517-2" aria-hidden="true" tabindex="-1"></a>data_melt<span class="sc">$</span>verb_on <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data_melt<span class="sc">$</span>grade6_variable <span class="sc">==</span> <span class="st">&quot;verb6&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb517-3"><a href="13.7-data-example.html#cb517-3" aria-hidden="true" tabindex="-1"></a>data_melt<span class="sc">$</span>perform_on <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data_melt<span class="sc">$</span>grade6_variable <span class="sc">==</span> <span class="st">&quot;perfo6&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span></code></pre></div>
 <p><strong>Old Data</strong></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="13.7-data-example.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_melt_old)</span></code></pre></div>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="13.7-data-example.html#cb518-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_melt_old)</span></code></pre></div>
 <pre><code>##     id verb1 perfo1 grade6_variable grade6_outcome
 ## 1    1 24.42  19.84           verb6          55.64
 ## 205  1 24.42  19.84          perfo6          44.19
@@ -821,7 +819,7 @@ div.csl-indent {
 ## 3    3 32.43  27.64           verb6          50.18
 ## 207  3 32.43  27.64          perfo6          77.72</code></pre>
 <p><strong>New Data</strong></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="13.7-data-example.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_melt)</span></code></pre></div>
+<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb520-1"><a href="13.7-data-example.html#cb520-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_melt)</span></code></pre></div>
 <pre><code>##     id verb1 perfo1 grade6_variable grade6_outcome verb_on perform_on
 ## 1    1 24.42  19.84           verb6          55.64       1          0
 ## 205  1 24.42  19.84          perfo6          44.19       0          1
@@ -853,16 +851,16 @@ div.csl-indent {
 <p><span class="math display">\[
 Grade6Outcome_{i} = \beta_{0V}VerbOn_{it} + \beta_{0P}PerformOn_{it} + e_{Vi} +e_{Pi}
 \]</span></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="13.7-data-example.html#cb28-1" aria-hidden="true" tabindex="-1"></a>apim_empty <span class="ot">&lt;-</span> <span class="fu">gls</span>(</span>
-<span id="cb28-2"><a href="13.7-data-example.html#cb28-2" aria-hidden="true" tabindex="-1"></a>  grade6_outcome <span class="sc">~</span>  <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span>                <span class="co"># turn OFF the intercept </span></span>
-<span id="cb28-3"><a href="13.7-data-example.html#cb28-3" aria-hidden="true" tabindex="-1"></a>                    verb_on <span class="sc">+</span>           <span class="co"># intercept for verbal scores</span></span>
-<span id="cb28-4"><a href="13.7-data-example.html#cb28-4" aria-hidden="true" tabindex="-1"></a>                    perform_on,         <span class="co"># intercept for performance scores</span></span>
-<span id="cb28-5"><a href="13.7-data-example.html#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">correlation =</span> <span class="fu">corSymm</span>(<span class="at">form=</span> <span class="sc">~</span><span class="dv">1</span><span class="sc">|</span>id),</span>
-<span id="cb28-6"><a href="13.7-data-example.html#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">varIdent</span>(<span class="at">form=</span> <span class="sc">~</span><span class="dv">1</span><span class="sc">|</span>verb_on), <span class="co"># allows for 2 error terms </span></span>
-<span id="cb28-7"><a href="13.7-data-example.html#cb28-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> data_melt,</span>
-<span id="cb28-8"><a href="13.7-data-example.html#cb28-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">na.action =</span> na.exclude)</span>
-<span id="cb28-9"><a href="13.7-data-example.html#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-10"><a href="13.7-data-example.html#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(apim_empty)</span></code></pre></div>
+<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb522-1"><a href="13.7-data-example.html#cb522-1" aria-hidden="true" tabindex="-1"></a>apim_empty <span class="ot">&lt;-</span> <span class="fu">gls</span>(</span>
+<span id="cb522-2"><a href="13.7-data-example.html#cb522-2" aria-hidden="true" tabindex="-1"></a>  grade6_outcome <span class="sc">~</span>  <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span>                <span class="co"># turn OFF the intercept </span></span>
+<span id="cb522-3"><a href="13.7-data-example.html#cb522-3" aria-hidden="true" tabindex="-1"></a>                    verb_on <span class="sc">+</span>           <span class="co"># intercept for verbal scores</span></span>
+<span id="cb522-4"><a href="13.7-data-example.html#cb522-4" aria-hidden="true" tabindex="-1"></a>                    perform_on,         <span class="co"># intercept for performance scores</span></span>
+<span id="cb522-5"><a href="13.7-data-example.html#cb522-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">correlation =</span> <span class="fu">corSymm</span>(<span class="at">form=</span> <span class="sc">~</span><span class="dv">1</span><span class="sc">|</span>id),</span>
+<span id="cb522-6"><a href="13.7-data-example.html#cb522-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">varIdent</span>(<span class="at">form=</span> <span class="sc">~</span><span class="dv">1</span><span class="sc">|</span>verb_on), <span class="co"># allows for 2 error terms </span></span>
+<span id="cb522-7"><a href="13.7-data-example.html#cb522-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> data_melt,</span>
+<span id="cb522-8"><a href="13.7-data-example.html#cb522-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">na.action =</span> na.exclude)</span>
+<span id="cb522-9"><a href="13.7-data-example.html#cb522-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb522-10"><a href="13.7-data-example.html#cb522-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(apim_empty)</span></code></pre></div>
 <pre><code>## Generalized least squares fit by REML
 ##   Model: grade6_outcome ~ -1 + verb_on + perform_on 
 ##   Data: data_melt 
@@ -920,20 +918,20 @@ Grade6Outcome_{i} = \beta_{0V}VerbOn_{it} + \beta_{0P}PerformOn_{it} + e_{Vi} +e
 <p><span class="math display">\[Grade6Outcome_{it} = \beta_{0P}PerformOn_{it} + \beta_{1P}PerformOn_{it}*Perform1_{it} + \beta_{2P}PerformOn_{it}*Verb1_{it} + e_{Vi} +e_{Pi}\]</span></p>
 <p>and when <code>perform_on</code> is equal to 0:</p>
 <p><span class="math display">\[Grade6Outcome_{it} = \beta_{0V}VerbOn_{it} + \beta_{1V}VerbOn_{it}*Verb1_{it} + \beta_{2V}VerbOn_{it}*Perform1_{it} + e_{Vi} +e_{Pi}\]</span></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="13.7-data-example.html#cb30-1" aria-hidden="true" tabindex="-1"></a>apim_full <span class="ot">&lt;-</span> <span class="fu">gls</span>(grade6_outcome <span class="sc">~</span>  </span>
-<span id="cb30-2"><a href="13.7-data-example.html#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span>                <span class="co"># turns OFF intercept </span></span>
-<span id="cb30-3"><a href="13.7-data-example.html#cb30-3" aria-hidden="true" tabindex="-1"></a>    verb_on <span class="sc">+</span>           <span class="co"># verbal intercept</span></span>
-<span id="cb30-4"><a href="13.7-data-example.html#cb30-4" aria-hidden="true" tabindex="-1"></a>    verb_on<span class="sc">:</span>verb1 <span class="sc">+</span>     <span class="co"># verbal &quot;actor&quot; effect</span></span>
-<span id="cb30-5"><a href="13.7-data-example.html#cb30-5" aria-hidden="true" tabindex="-1"></a>    verb_on<span class="sc">:</span>perfo1 <span class="sc">+</span>    <span class="co"># performance &quot;partner&quot; effect</span></span>
-<span id="cb30-6"><a href="13.7-data-example.html#cb30-6" aria-hidden="true" tabindex="-1"></a>    perform_on <span class="sc">+</span>        <span class="co"># performance intercept</span></span>
-<span id="cb30-7"><a href="13.7-data-example.html#cb30-7" aria-hidden="true" tabindex="-1"></a>    perform_on<span class="sc">:</span>perfo1 <span class="sc">+</span> <span class="co"># performance &quot;actor&quot; effect</span></span>
-<span id="cb30-8"><a href="13.7-data-example.html#cb30-8" aria-hidden="true" tabindex="-1"></a>    perform_on<span class="sc">:</span>verb1,   <span class="co"># verbal &quot;partner&quot; effect</span></span>
-<span id="cb30-9"><a href="13.7-data-example.html#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">correlation =</span> <span class="fu">corSymm</span>(<span class="at">form=</span><span class="sc">~</span><span class="dv">1</span><span class="sc">|</span>id),</span>
-<span id="cb30-10"><a href="13.7-data-example.html#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">varIdent</span>(<span class="at">form=</span><span class="sc">~</span><span class="dv">1</span><span class="sc">|</span>verb_on), <span class="co"># allows for different error terms </span></span>
-<span id="cb30-11"><a href="13.7-data-example.html#cb30-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> data_melt,</span>
-<span id="cb30-12"><a href="13.7-data-example.html#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude)</span>
-<span id="cb30-13"><a href="13.7-data-example.html#cb30-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-14"><a href="13.7-data-example.html#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(apim_full)</span></code></pre></div>
+<div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb524-1"><a href="13.7-data-example.html#cb524-1" aria-hidden="true" tabindex="-1"></a>apim_full <span class="ot">&lt;-</span> <span class="fu">gls</span>(grade6_outcome <span class="sc">~</span>  </span>
+<span id="cb524-2"><a href="13.7-data-example.html#cb524-2" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span>                <span class="co"># turns OFF intercept </span></span>
+<span id="cb524-3"><a href="13.7-data-example.html#cb524-3" aria-hidden="true" tabindex="-1"></a>    verb_on <span class="sc">+</span>           <span class="co"># verbal intercept</span></span>
+<span id="cb524-4"><a href="13.7-data-example.html#cb524-4" aria-hidden="true" tabindex="-1"></a>    verb_on<span class="sc">:</span>verb1 <span class="sc">+</span>     <span class="co"># verbal &quot;actor&quot; effect</span></span>
+<span id="cb524-5"><a href="13.7-data-example.html#cb524-5" aria-hidden="true" tabindex="-1"></a>    verb_on<span class="sc">:</span>perfo1 <span class="sc">+</span>    <span class="co"># performance &quot;partner&quot; effect</span></span>
+<span id="cb524-6"><a href="13.7-data-example.html#cb524-6" aria-hidden="true" tabindex="-1"></a>    perform_on <span class="sc">+</span>        <span class="co"># performance intercept</span></span>
+<span id="cb524-7"><a href="13.7-data-example.html#cb524-7" aria-hidden="true" tabindex="-1"></a>    perform_on<span class="sc">:</span>perfo1 <span class="sc">+</span> <span class="co"># performance &quot;actor&quot; effect</span></span>
+<span id="cb524-8"><a href="13.7-data-example.html#cb524-8" aria-hidden="true" tabindex="-1"></a>    perform_on<span class="sc">:</span>verb1,   <span class="co"># verbal &quot;partner&quot; effect</span></span>
+<span id="cb524-9"><a href="13.7-data-example.html#cb524-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">correlation =</span> <span class="fu">corSymm</span>(<span class="at">form=</span><span class="sc">~</span><span class="dv">1</span><span class="sc">|</span>id),</span>
+<span id="cb524-10"><a href="13.7-data-example.html#cb524-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">varIdent</span>(<span class="at">form=</span><span class="sc">~</span><span class="dv">1</span><span class="sc">|</span>verb_on), <span class="co"># allows for different error terms </span></span>
+<span id="cb524-11"><a href="13.7-data-example.html#cb524-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> data_melt,</span>
+<span id="cb524-12"><a href="13.7-data-example.html#cb524-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude)</span>
+<span id="cb524-13"><a href="13.7-data-example.html#cb524-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb524-14"><a href="13.7-data-example.html#cb524-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(apim_full)</span></code></pre></div>
 <pre><code>## Generalized least squares fit by REML
 ##   Model: grade6_outcome ~ -1 + verb_on + verb_on:verb1 + verb_on:perfo1 +      perform_on + perform_on:perfo1 + perform_on:verb1 
 ##   Data: data_melt 
