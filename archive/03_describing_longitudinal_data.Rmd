@@ -1,0 +1,343 @@
+# Describing Longitudinal Data {#chapter-3}
+
+```{r, echo = F}
+button <-  "position: relative; 
+            top: -25px; 
+            left: 85%;   
+            color: white;
+            font-weight: bold;
+            background: #4B9CD3;
+            border: 1px #3079ED solid;
+            box-shadow: inset 0 1px 0 #80B0FB"
+```
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "show", style = button)
+```
+
+In Chapter 3 we will look at some option for describing and visualizing longitudinal data. 
+
+## Example Data
+
+Again we will make use of the WISC data described in Chapter 2. The following commands recreate the wide and long data we will use throughout this chapter.
+
+```{r}
+filepath <- "https://quantdev.ssri.psu.edu/sites/qdev/files/wisc3raw.csv"
+
+wisc3raw <- read.csv(file=url(filepath),header=TRUE)
+
+var_names_sub <- c(
+  "id", "verb1", "verb2", "verb4", "verb6",
+  "perfo1", "perfo2", "perfo4", "perfo6",
+  "momed", "grad"
+)
+
+wiscraw <- wisc3raw[,var_names_sub]
+
+# reshaping wide to long
+wisclong <- reshape(
+  data = wiscraw,
+  varying = c("verb1", "verb2", "verb4","verb6", "perfo1","perfo2","perfo4","perfo6"),
+  timevar = c("grade"), 
+  idvar = c("id"),
+  direction = "long", 
+  sep = ""
+)
+
+# reorder by id and day 
+wisclong <- wisclong[ order(wisclong$id, wisclong$grade), ]
+
+#reshaping long to wide
+wiscwide <- reshape(
+  data = wisclong, 
+  timevar = c("grade"), 
+  idvar = c("id"),
+  v.names = c("verb","perfo"),
+  direction = "wide", 
+  sep = ""
+)
+
+# reordering columns 
+wiscwide <- wiscwide[, c(
+  "id", "verb1", "verb2", "verb4", "verb6",
+  "perfo1", "perfo2", "perfo4", "perfo6",
+  "momed","grad" 
+)]
+```
+
+## Describing Means and Variances
+
+Once the wide and long data sets are in place, we can begin describing and plotting the data. Descriptive statistics and visualization are one of the most important aspects of data analysis. 
+
+Descriptives and plots will be produced from wide data and long data to show the information that can be gleaned from each construction. Having both in place facilitates learning about the data. Continually keep in mind what portions of the data-box are being described (e.g., persons, variables, occasions). 
+
+We can do a quick look at descriptives using the `describe()` function from the `psych` [@psych] package. Note the `n` in both outputs.
+
+```{r}
+psych::describe(wiscwide)
+```
+
+```{r}
+psych::describe(wisclong)
+```
+
+### Verbal Ability (All Persons and Occasions)
+
+Let's focus on the repeated measures of verbal ability. This step is useful to get a general view of what verbal ability scores look like across persons and occasions, but note that we are *ignoring Time*. In doing so we are not considering how the repeated measures are nested within individuals.
+
+```{r}
+psych::describe(wisclong$verb)
+```
+
+
+In addition to the descriptive statistics we can look at a boxplot of verbal ability scores across persons and occasions. Here we will start to use the `ggplot2` [@ggplot2] package.
+
+```{r}
+library("ggplot2")
+ggplot(data = wisclong, aes(x=verb, y=..density..)) +
+  geom_histogram(binwidth=2.5, fill = "white", color = "black") + 
+  geom_density(color = "red") +
+  ggtitle("Verbal Ability Score (across persons and occasions)") +
+  xlab("Verbal Ability (Grade 1 to 6)") +
+  ylab("Density") +
+  theme_bw() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank()
+  )
+```
+
+### Verbal Ability (Across Time)
+
+Note that our variable is actually "multivariate" because we have repeated measures. We should really consider the time-dependence when we are looking at descriptive statistics and plots. 
+
+Let's now look at **verbal ability scores across time collapsed across individuals**. This can be done using either the `describe()` function and the wide data or the `describeBy()` function and the long data. 
+
+Let's look at descriptives using the wide data.
+
+```{r}
+psych::describe(wiscwide[,c("verb1","verb2","verb4","verb6")])
+```
+
+Identical results can be obtained using the long data.
+
+```{r}
+psych::describeBy(wisclong[,c("verb")], group = wisclong$grade)
+```
+
+We can visualize the distribution of verbal scores across grades in a number of different ways. Here we have a histogram.
+
+```{r}
+ggplot(data=wisclong, aes(x=verb)) +
+  geom_histogram(binwidth=5, pad = TRUE, fill="white", color="black") + 
+  facet_grid(grade ~ .) + 
+  ggtitle("Verbal Ability Score (across grades 1, 2, 4, 6)") +
+  xlab("Verbal Ability Score") +
+  ylab("Density") +
+  theme_bw() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    strip.background = element_blank()
+  )
+```
+
+We can also create notched boxplots of the within-grade distributions (across individuals). 
+
+From [Wikipedia](https://en.wikipedia.org/wiki/Box_plot): *Notched box plots apply a notch or narrowing of the box around the median. Notches are useful in offering a rough guide of the significance of the difference of medians; if the notches of two boxes do not overlap, this can provide evidence of a statistically significant difference between the medians.*
+
+Adding the mean value to the plot gives us additonal information about central tendency and skew of the distribution.
+
+```{r}
+#boxplot by grade
+ggplot(data=wisclong, aes(x=factor(grade), y=verb)) + 
+  geom_boxplot(notch = TRUE) +
+  stat_summary(fun="mean", geom="point", shape=23, size=3, fill="white") +
+  ggtitle("Verbal Ability Score (across grades 1, 2, 4, 6)") +
+  ylab("Verbal Ability Score") +
+  xlab("Grade") +
+  theme_bw() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    strip.background = element_blank()
+  )
+```
+
+Finally, we can view overlapping densities of the within-grade distributions of verbal ability scores.
+
+```{r}
+ggplot(data=wisclong, aes(x=verb)) + 
+  geom_density(aes(group=factor(grade), colour=factor(grade), fill=factor(grade)), alpha=0.3) +
+  guides(colour="none",  fill=guide_legend(title="Grade")) +
+  ggtitle("Verbal Ability Score (across grades 1, 2, 4, 6)") +
+  ylab("Density") +
+  xlab("Verbal Ability Score") +
+  theme_bw() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    strip.background = element_blank()
+  )
+```
+
+Notice in these plots how much "change" there is at the sample level across grades. Is that expected? 
+
+## Describing Covariances
+
+In the previous section we looked at the means and variances. Because these are repeated measures, we can also look at covariances and correlations over time. A simple covariance and correlation matrix of the verbal scores across grades can be produced using the `cov()` and `cor()` function.
+
+```{r}
+cov(wiscwide[,c("verb1","verb2","verb4","verb6")], use="complete.obs")
+cor(wiscwide[,c("verb1","verb2","verb4","verb6")], use="complete.obs")
+```
+
+A plot corresponding to the correlation matrix can be obtained in a number of different ways. First, using the `pairs()` function from base R.
+
+```{r}
+pairs(wiscwide[,c("verb1","verb2","verb4","verb6")])
+```
+
+There is also a `pairs.panel()` function in the `psych` package. Here we see a LOESS smoothed fit line in red.
+
+```{r}
+psych::pairs.panels(wiscwide[,c("verb1","verb2","verb4","verb6")])
+```
+
+Finally, the`scatterplotMatrix()` from the `car` [@car] package can be used to create scatterplot matrices with confidence bands around the line of best fit.
+
+```{r}
+car::scatterplotMatrix(~ verb1 + verb2 + verb4 + verb6, data=wiscwide)
+```
+
+Each of these functions can be customized with additional features. Those interested in specifics should consult the help documentation for each function (e.g. `?car::scatterplotMatrix`). It is also worth noting the default behavior of these functions is to provide automatic, data-based ranges for each pair of variables separately.
+
+## Individual-Level Descriptives
+
+Note that our interest is often in *individual* development, rather than sample development. We need to consider how each individual is changing over time. Thus, we are interested in verbal ability across Time for each individual person. Visualization is typically our best tool for synthesizing the large amounts of information in individual-level data.
+
+```{r}
+ggplot(data = wisclong, aes(x = grade, y = verb, group = id)) +
+  geom_point() + 
+  geom_line() +
+  scale_x_continuous(breaks=seq(1,6,by=1)) +
+  ylim(0,80) +
+  ggtitle("Verbal Ability Score (across grades 1, 2, 4, 6)") +
+  xlab("Grade") +
+  ylab("Verbal Ability Score") +
+  theme_bw() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    strip.background = element_blank()
+  )
+```
+
+Sometimes the "blob" gets too dense. This can be fixed by selecting a subset of persons to visualize.
+
+```{r}
+ggplot(subset(wisclong, id < 30), aes(x = grade, y = verb, group = id)) +
+  geom_point() + 
+  geom_line() +
+  scale_x_continuous(breaks=seq(1,6,by=1)) +
+  ylim(0,80) +
+  ggtitle("Verbal Ability Score (across grades 1, 2, 4, 6)") +
+  xlab("Grade") +
+  ylab("Verbal Ability Score") +
+  theme_bw() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    strip.background = element_blank()
+  )
+```
+       
+We can add some color to our plot using the `color` argument and treating `id` as a factor.
+
+```{r}
+ggplot(subset(wisclong, id < 30), aes(x = grade, y = verb, group = id, color = factor(id))) +
+  geom_point() + 
+  geom_line() +
+  scale_x_continuous(breaks=seq(1,6,by=1)) +
+  ylim(0,80) +
+  ggtitle("Verbal Ability Score (across grades 1, 2, 4, 6)") +
+  xlab("Grade") +
+  ylab("Verbal Ability Score") +
+  theme_bw() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    strip.background = element_blank(),
+    legend.position = "none"
+  )
+```
+
+We can also get a gradient of colors by treating`id` as continuous.
+
+```{r}
+ggplot(subset(wisclong, id < 30), aes(x = grade, y = verb, group = id, color = id)) +
+  geom_point() + 
+  geom_line() +
+  scale_x_continuous(breaks=seq(1,6,by=1)) +
+  ylim(0,80) +
+  ggtitle("Verbal Ability Score (across grades 1, 2, 4, 6)") +
+  xlab("Grade") +
+  ylab("Verbal Ability Score") +
+  theme_bw() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    strip.background = element_blank(),
+    legend.position = "none"
+  )
+```
+
+It is also sometimes useful to look at the collection of individual-level plots. 
+
+```{r}
+ggplot(subset(wisclong, id <= 20), aes(x = grade, y = verb)) +
+  geom_point() + 
+  geom_line() +
+  scale_x_continuous(breaks=seq(1,6,by=1)) +
+  ylim(0,80) +
+  ggtitle("Verbal Ability Score (across grades 1, 2, 4, 6)") +
+  xlab("Grade") +
+  ylab("Verbal Ability Score") +
+  theme_bw() +
+  facet_wrap( ~ id) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    strip.background = element_blank(),
+    legend.position = "none"
+  )
+```
+
+Some other aesthetics to get to the formal APA style.
+
+```{r}
+#ggplot version .. see also http://ggplot.yhathq.com/docs/index.html
+ggplot(subset(wisclong, id <= 20), aes(x = grade, y = verb, group = id)) +
+  geom_point() + 
+  geom_line() +
+  xlab("Grade") + 
+  ylab("WISC Verbal Score") + 
+  ylim(0,100) +
+  scale_x_continuous(breaks=seq(1,6,by=1)) +
+  ggtitle("Intraindividual Change in Verbal Ability") +
+  theme_classic() + 
+  #increase font size of axis and point labels
+  theme(axis.title = element_text(size = rel(1.5)),
+        axis.text = element_text(size = rel(1.2)),
+        legend.position = "none")
+```
+
+Saving the plot file. See also [outputting plots to a file](http://www.cookbook-r.com/Graphs/Output_to_a_file/).
+
+```{r, evaluate=FALSE}
+ggsave(filename = "wiscverbal.png", width = 5, height = 5, dpi=300)
+```
+
+Now we have a good set of strategies to apply when looking at new longitudinal data.  
+
+## References
