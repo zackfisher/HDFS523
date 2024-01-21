@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="2.7-exporting-data.html"/>
-
+<link rel="next" href="3-chapter-3.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -188,6 +188,18 @@ div.csl-indent {
 <li class="chapter" data-level="2.8.2" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html#reshape-long-to-wide"><i class="fa fa-check"></i><b>2.8.2</b> Reshape Long to Wide</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="3" data-path="3-chapter-3.html"><a href="3-chapter-3.html"><i class="fa fa-check"></i><b>3</b> Describing Longitudinal Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3.1-example-data-1.html"><a href="3.1-example-data-1.html"><i class="fa fa-check"></i><b>3.1</b> Example Data</a></li>
+<li class="chapter" data-level="3.2" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html"><i class="fa fa-check"></i><b>3.2</b> Describing Means and Variances</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html#verbal-ability-all-persons-and-occasions"><i class="fa fa-check"></i><b>3.2.1</b> Verbal Ability (All Persons and Occasions)</a></li>
+<li class="chapter" data-level="3.2.2" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html#verbal-ability-across-time"><i class="fa fa-check"></i><b>3.2.2</b> Verbal Ability (Across Time)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="3.3-describing-covariances.html"><a href="3.3-describing-covariances.html"><i class="fa fa-check"></i><b>3.3</b> Describing Covariances</a></li>
+<li class="chapter" data-level="3.4" data-path="3.4-individual-level-descriptives.html"><a href="3.4-individual-level-descriptives.html"><i class="fa fa-check"></i><b>3.4</b> Individual-Level Descriptives</a></li>
+<li class="chapter" data-level="3.5" data-path="3.5-references.html"><a href="3.5-references.html"><i class="fa fa-check"></i><b>3.5</b> References</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/zackfisher/HDFS523" target="blank">Published with bookdown</a></li>
 
@@ -294,39 +306,13 @@ div.csl-indent {
 <p>That said, many people find <code>reshape</code> to be unnecessarily complicated. A similar, and potentially more convenient, set of functions have been developed for reshaping data in the <code>tidyr</code> <span class="citation">(<a href="#ref-tidyr">Wickham 2021</a>)</span> package. For those interested take a look at the <code>pivot_longer()</code> and <code>pivot_wider()</code> functions.</p>
 <p>For examples using <code>tidyr</code> to reshape data see the <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/pivot.html">tidyr vignette on pivoting</a>.</p>
 
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div class="csl-entry">
-McArdle, J. J. 1988. <span>“Dynamic but Structural Equation Modeling of Repeated Measures Data.”</span> In <em>Handbook of Multivariate Experimental Psychology, 2nd Ed</em>, 561–614. Perspectives on Individual Differences. <span>New York, NY, US</span>: <span>Plenum Press</span>. <a href="https://doi.org/10.1007/978-1-4613-0893-5_17">https://doi.org/10.1007/978-1-4613-0893-5_17</a>.
-</div>
-<div class="csl-entry">
-Mcardle, J. J., and MARK S. Aber. 1990. <span>“Chapter 5 - <span>Patterns</span> of <span>Change</span> Within <span>Latent Variable Structural Equation Models</span>.”</span> In <em>Statistical <span>Methods</span> in <span>Longitudinal Research</span></em>, edited by Alexander von Eye, 1:151–224. Statistical <span>Modeling</span> and <span>Decision Science</span>. <span>San Diego</span>: <span>Academic Press</span>. <a href="https://doi.org/10.1016/B978-0-12-724960-5.50010-X">https://doi.org/10.1016/B978-0-12-724960-5.50010-X</a>.
-</div>
-<div class="csl-entry">
-McArdle, J. J., and David Epstein. 1987. <span>“Latent Growth Curves Within Developmental Structural Equation Models.”</span> <em>Child Development</em> 58 (1): 110–33. <a href="https://doi.org/10.2307/1130295">https://doi.org/10.2307/1130295</a>.
-</div>
-<div class="csl-entry">
-McArdle, J. J., and John R. Nesselroade. 1994. <span>“Using Multivariate Data to Structure Developmental Change.”</span> In <em>Life-Span Developmental Psychology: <span>Methodological</span> Contributions</em>, 223–67. The <span>West Virginia University</span> Conferences on Life-Span Developmental Psychology. <span>Hillsdale, NJ, US</span>: <span>Lawrence Erlbaum Associates, Inc</span>.
-</div>
-<div class="csl-entry">
-Osborne, R. T., and D. E. Suddick. 1972. <span>“A Longitudinal Investigation of the Intellectual Differentiation Hypothesis.”</span> <em>The Journal of Genetic Psychology: Research and Theory on Human Development</em> 121 (1): 83–89. <a href="https://doi.org/10.1080/00221325.1972.10533131">https://doi.org/10.1080/00221325.1972.10533131</a>.
-</div>
-<div class="csl-entry">
-Tierney, Nicholas, Di Cook, Miles McBain, and Colin Fay. 2021. <em>Naniar: Data Structures, Summaries, and Visualisations for Missing Data</em>. <a href="https://CRAN.R-project.org/package=naniar">https://CRAN.R-project.org/package=naniar</a>.
-</div>
-<div class="csl-entry">
-Wechsler, David. 1949. <em>Wechsler <span>Intelligence Scale</span> for <span>Children</span></em>. Wechsler <span>Intelligence Scale</span> for <span>Children</span>. <span>San Antonio, TX, US</span>: <span>Psychological Corporation</span>.
-</div>
-<div class="csl-entry">
-Wickham, Hadley. 2021. <em>Tidyr: Tidy Messy Data</em>. <a href="https://CRAN.R-project.org/package=tidyr">https://CRAN.R-project.org/package=tidyr</a>.
-</div>
-</div>
 </div>
 </div>
 <!-- </div> -->
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-tidyr" class="csl-entry">
-Wickham, Hadley. 2021. <em>Tidyr: Tidy Messy Data</em>. <a href="https://CRAN.R-project.org/package=tidyr">https://CRAN.R-project.org/package=tidyr</a>.
+———. 2021. <em>Tidyr: Tidy Messy Data</em>. <a href="https://CRAN.R-project.org/package=tidyr">https://CRAN.R-project.org/package=tidyr</a>.
 </div>
 </div>
             </section>
@@ -334,8 +320,8 @@ Wickham, Hadley. 2021. <em>Tidyr: Tidy Messy Data</em>. <a href="https://CRAN.R-
           </div>
         </div>
       </div>
-<a href="2.7-exporting-data.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="2.7-exporting-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="3-chapter-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

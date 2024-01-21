@@ -16,3 +16,11 @@ exporting-data
 reshaping-repeated-measures-data
 reshape-wide-to-long
 reshape-long-to-wide
+chapter-3
+example-data-1
+describing-means-and-variances
+verbal-ability-all-persons-and-occasions
+verbal-ability-across-time
+describing-covariances
+individual-level-descriptives
+references
