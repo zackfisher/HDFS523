@@ -2,3 +2,17 @@ about-this-book
 why-this-book
 code-folding
 acknowledgements
+chapter-2
+example-data
+reading-in-repeated-measures-data
+familiarize-yourself-with-the-data
+look-for-duplicated-ids
+using-table-to-spot-irregularities
+missing-data
+generating-example-data
+recoding-values-with-na
+missing-data-visualization
+exporting-data
+reshaping-repeated-measures-data
+reshape-wide-to-long
+reshape-long-to-wide
