@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.6 Missing Data | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
+  <title>4.3 References | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
   <meta name="description" content="Course notes for HDFS 523" />
   <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.6 Missing Data | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta property="og:title" content="4.3 References | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for HDFS 523" />
   <meta name="github-repo" content="zackfisher/HDFS523" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.6 Missing Data | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta name="twitter:title" content="4.3 References | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   
   <meta name="twitter:description" content="Course notes for HDFS 523" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="2.5-using-table-to-spot-irregularities.html"/>
-<link rel="next" href="2.7-exporting-data.html"/>
+<link rel="prev" href="4.2-operations-on-matrices.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -240,57 +240,53 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="missing-data" class="section level2 hasAnchor" number="2.6">
-<h2><span class="header-section-number">2.6</span> Missing Data<a href="2.6-missing-data.html#missing-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Dealing with missing data in a consistent manner is one of the most important aspects of data cleaning. When data are imported into R it is common to discover missing values are coded according to a variety of conventions.</p>
-<p>Often a first step in handling missing data involves recoding missing values as <code>NA</code>. Writing bespoke code to handle the different types of missing data one might encounter is tedious and unnecessary.</p>
-<p><code>naniar</code> <span class="citation">(<a href="#ref-naniar">Tierney et al. 2021</a>)</span> is a useful package with many convenience functions for managing missing data in R. Here we demonstrate some of this functionality.</p>
-<div id="generating-example-data" class="section level3 hasAnchor" number="2.6.1">
-<h3><span class="header-section-number">2.6.1</span> Generating Example Data<a href="2.6-missing-data.html#generating-example-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Since the WISC data does not contain missing values it is helpful to generate a synthetic dataset containing some commonly encountered missing data codes.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="2.6-missing-data.html#cb9-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb9-2"><a href="2.6-missing-data.html#cb9-2" tabindex="-1"></a>wisc_miss <span class="ot">&lt;-</span> wisc3raw</span>
-<span id="cb9-3"><a href="2.6-missing-data.html#cb9-3" tabindex="-1"></a>wisc_miss<span class="sc">$</span>verb1[<span class="fu">sample</span>(<span class="fu">nrow</span>(wisc_miss),<span class="dv">100</span>)] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">99</span></span>
-<span id="cb9-4"><a href="2.6-missing-data.html#cb9-4" tabindex="-1"></a>wisc_miss<span class="sc">$</span>comp1[<span class="fu">sample</span>(<span class="fu">nrow</span>(wisc_miss),<span class="dv">75</span>)] <span class="ot">&lt;-</span> <span class="st">&quot;N/A&quot;</span></span>
-<span id="cb9-5"><a href="2.6-missing-data.html#cb9-5" tabindex="-1"></a>wisc_miss<span class="sc">$</span>info1[<span class="fu">sample</span>(<span class="fu">nrow</span>(wisc_miss),<span class="dv">50</span>)] <span class="ot">&lt;-</span> <span class="st">&quot;NA&quot;</span></span></code></pre></div>
-</div>
-<div id="recoding-values-with-na" class="section level3 hasAnchor" number="2.6.2">
-<h3><span class="header-section-number">2.6.2</span> Recoding Values with <code>NA</code><a href="2.6-missing-data.html#recoding-values-with-na" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Now that we have a dataset with missing values we can use <code>naniar</code> to recode these values to <code>NA</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="2.6-missing-data.html#cb10-1" tabindex="-1"></a>na_strings <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;NA&quot;</span>, <span class="st">&quot;N/A&quot;</span>, <span class="sc">-</span><span class="dv">99</span>)</span>
-<span id="cb10-2"><a href="2.6-missing-data.html#cb10-2" tabindex="-1"></a>  </span>
-<span id="cb10-3"><a href="2.6-missing-data.html#cb10-3" tabindex="-1"></a>wisc_miss <span class="ot">&lt;-</span> naniar<span class="sc">::</span><span class="fu">replace_with_na_all</span>(</span>
-<span id="cb10-4"><a href="2.6-missing-data.html#cb10-4" tabindex="-1"></a>  wisc_miss, <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">%in%</span> na_strings</span>
-<span id="cb10-5"><a href="2.6-missing-data.html#cb10-5" tabindex="-1"></a>)</span></code></pre></div>
-<p>See the <a href="https://cran.r-project.org/web/packages/naniar/vignettes/replace-with-na.html"><code>naniar</code> vignette on recoding NA values</a> for more detailed information on the package functionality.</p>
-</div>
-<div id="missing-data-visualization" class="section level3 hasAnchor" number="2.6.3">
-<h3><span class="header-section-number">2.6.3</span> Missing Data Visualization<a href="2.6-missing-data.html#missing-data-visualization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Once we have recoded our data in a consistent manner we can use visualizations to explore the missing data. The <code>vis_miss()</code> function from <code>naniar</code> is a good starting point for visualizing the amount of missing data in our dataset. The plots shows the missing values in black and non-missing values in gray. In addition, percentages of missing data in both the dataset and individual variables are provided.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="2.6-missing-data.html#cb11-1" tabindex="-1"></a>naniar<span class="sc">::</span><span class="fu">vis_miss</span>(wisc_miss)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<p>It is often useful to look at combinations of missingness among different variables.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="2.6-missing-data.html#cb12-1" tabindex="-1"></a>naniar<span class="sc">::</span><span class="fu">gg_miss_upset</span>(wisc_miss)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<p>We can also look at the percentage of missing data across a factor variable.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="2.6-missing-data.html#cb13-1" tabindex="-1"></a>naniar<span class="sc">::</span><span class="fu">gg_miss_fct</span>(<span class="at">x =</span> wisc_miss, <span class="at">fct =</span> grad)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<p>Many missing data visualizations are described in the <a href="https://cran.r-project.org/web/packages/naniar/vignettes/naniar-visualisation.html"><code>naniar</code> vignette on missing data visualization</a> including plots for exploring missing data mechanisms.</p>
-</div>
-</div>
-<h3>References</h3>
+<div id="references-1" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> References<a href="4.3-references-1.html#references-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-naniar" class="csl-entry">
+<div class="csl-entry">
+Fox, John, and Sanford Weisberg. 2019. <em>An <span>R</span> Companion to Applied Regression</em>. Third. Thousand Oaks <span>CA</span>: Sage. <a href="https://socialsciences.mcmaster.ca/jfox/Books/Companion/">https://socialsciences.mcmaster.ca/jfox/Books/Companion/</a>.
+</div>
+<div class="csl-entry">
+McArdle, J. J. 1988. <span>“Dynamic but Structural Equation Modeling of Repeated Measures Data.”</span> In <em>Handbook of Multivariate Experimental Psychology, 2nd Ed</em>, 561–614. Perspectives on Individual Differences. <span>New York, NY, US</span>: <span>Plenum Press</span>. <a href="https://doi.org/10.1007/978-1-4613-0893-5_17">https://doi.org/10.1007/978-1-4613-0893-5_17</a>.
+</div>
+<div class="csl-entry">
+Mcardle, J. J., and MARK S. Aber. 1990. <span>“Chapter 5 - <span>Patterns</span> of <span>Change</span> Within <span>Latent Variable Structural Equation Models</span>.”</span> In <em>Statistical <span>Methods</span> in <span>Longitudinal Research</span></em>, edited by Alexander von Eye, 1:151–224. Statistical <span>Modeling</span> and <span>Decision Science</span>. <span>San Diego</span>: <span>Academic Press</span>. <a href="https://doi.org/10.1016/B978-0-12-724960-5.50010-X">https://doi.org/10.1016/B978-0-12-724960-5.50010-X</a>.
+</div>
+<div class="csl-entry">
+McArdle, J. J., and David Epstein. 1987. <span>“Latent Growth Curves Within Developmental Structural Equation Models.”</span> <em>Child Development</em> 58 (1): 110–33. <a href="https://doi.org/10.2307/1130295">https://doi.org/10.2307/1130295</a>.
+</div>
+<div class="csl-entry">
+McArdle, J. J., and John R. Nesselroade. 1994. <span>“Using Multivariate Data to Structure Developmental Change.”</span> In <em>Life-Span Developmental Psychology: <span>Methodological</span> Contributions</em>, 223–67. The <span>West Virginia University</span> Conferences on Life-Span Developmental Psychology. <span>Hillsdale, NJ, US</span>: <span>Lawrence Erlbaum Associates, Inc</span>.
+</div>
+<div class="csl-entry">
+Osborne, R. T., and D. E. Suddick. 1972. <span>“A Longitudinal Investigation of the Intellectual Differentiation Hypothesis.”</span> <em>The Journal of Genetic Psychology: Research and Theory on Human Development</em> 121 (1): 83–89. <a href="https://doi.org/10.1080/00221325.1972.10533131">https://doi.org/10.1080/00221325.1972.10533131</a>.
+</div>
+<div class="csl-entry">
+Revelle, William. 2021. <em>Psych: Procedures for Psychological, Psychometric, and Personality Research</em>. Evanston, Illinois: Northwestern University. <a href="https://CRAN.R-project.org/package=psych">https://CRAN.R-project.org/package=psych</a>.
+</div>
+<div class="csl-entry">
 Tierney, Nicholas, Di Cook, Miles McBain, and Colin Fay. 2021. <em>Naniar: Data Structures, Summaries, and Visualisations for Missing Data</em>. <a href="https://CRAN.R-project.org/package=naniar">https://CRAN.R-project.org/package=naniar</a>.
 </div>
+<div class="csl-entry">
+Wechsler, David. 1949. <em>Wechsler <span>Intelligence Scale</span> for <span>Children</span></em>. Wechsler <span>Intelligence Scale</span> for <span>Children</span>. <span>San Antonio, TX, US</span>: <span>Psychological Corporation</span>.
 </div>
+<div class="csl-entry">
+Wickham, Hadley. 2016. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.
+</div>
+<div class="csl-entry">
+———. 2021. <em>Tidyr: Tidy Messy Data</em>. <a href="https://CRAN.R-project.org/package=tidyr">https://CRAN.R-project.org/package=tidyr</a>.
+</div>
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="2.5-using-table-to-spot-irregularities.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="2.7-exporting-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="4.2-operations-on-matrices.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -311,7 +307,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/zackfisher/HDFS523/edit/master/02_basic_data_cleaning.Rmd",
+"link": "https://github.com/zackfisher/HDFS523/edit/master/04_matrix_algebra.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

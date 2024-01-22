@@ -24,3 +24,17 @@ verbal-ability-across-time
 describing-covariances
 individual-level-descriptives
 references
+chapter-4
+types-of-matrices
+square
+symmetric
+diagonal
+identity
+operations-on-matrices
+matrix-transpose
+matrix-trace
+addition
+subtraction
+matrix-multiplication
+matrix-division
+references-1
