@@ -23,7 +23,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2024-01-24" />
+<meta name="date" content="2024-01-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -122,28 +122,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <style type="text/css">
   
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -323,17 +301,17 @@ div.csl-indent {
 <div id="intercept-only-model" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Intercept-Only Model<a href="6.2-intercept-only-model.html#intercept-only-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>For our first example, we focus on verbal ability at Grade 2 as an outcome (<code>verb2</code> in the data frame <code>wiscsub</code>). Examining the distribution for ‘verb2’.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="6.2-intercept-only-model.html#cb56-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
-<span id="cb56-2"><a href="6.2-intercept-only-model.html#cb56-2" tabindex="-1"></a></span>
-<span id="cb56-3"><a href="6.2-intercept-only-model.html#cb56-3" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(wiscsub<span class="sc">$</span>verb2)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="6.2-intercept-only-model.html#cb3-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb3-2"><a href="6.2-intercept-only-model.html#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="6.2-intercept-only-model.html#cb3-3" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(wiscsub<span class="sc">$</span>verb2)</span></code></pre></div>
 <pre><code>##    vars   n  mean   sd median trimmed  mad  min   max range  skew kurtosis   se
 ## X1    1 204 25.42 6.11  25.98    25.4 6.57 5.95 39.85  33.9 -0.06    -0.34 0.43</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="6.2-intercept-only-model.html#cb58-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wiscsub, <span class="fu">aes</span>(<span class="at">x=</span>verb2)) <span class="sc">+</span> </span>
-<span id="cb58-2"><a href="6.2-intercept-only-model.html#cb58-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">2.5</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>, <span class="at">color=</span><span class="st">&quot;black&quot;</span>, <span class="at">boundary=</span><span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb58-3"><a href="6.2-intercept-only-model.html#cb58-3" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Ability Grade 2&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Count&quot;</span>) <span class="sc">+</span></span>
-<span id="cb58-4"><a href="6.2-intercept-only-model.html#cb58-4" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">50</span>) <span class="sc">+</span></span>
-<span id="cb58-5"><a href="6.2-intercept-only-model.html#cb58-5" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="6.2-intercept-only-model.html#cb5-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wiscsub, <span class="fu">aes</span>(<span class="at">x=</span>verb2)) <span class="sc">+</span> </span>
+<span id="cb5-2"><a href="6.2-intercept-only-model.html#cb5-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">2.5</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>, <span class="at">color=</span><span class="st">&quot;black&quot;</span>, <span class="at">boundary=</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="6.2-intercept-only-model.html#cb5-3" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Ability Grade 2&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Count&quot;</span>) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="6.2-intercept-only-model.html#cb5-4" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">50</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="6.2-intercept-only-model.html#cb5-5" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <div id="intercept-only-equation" class="section level3 hasAnchor" number="6.2.1">
 <h3><span class="header-section-number">6.2.1</span> Intercept-Only Equation<a href="6.2-intercept-only-model.html#intercept-only-equation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The simplest model is an intercept only model. In this case, we would fit the model</p>
@@ -345,10 +323,10 @@ This is helpful for explicit translation into the R code, specifically the <code
 <div id="intercept-only-model-in-r" class="section level3 hasAnchor" number="6.2.2">
 <h3><span class="header-section-number">6.2.2</span> Intercept-Only Model in R<a href="6.2-intercept-only-model.html#intercept-only-model-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We fit the model using the following code. Note that the code has the ‘1’ predictor variable stated explicitly.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="6.2-intercept-only-model.html#cb59-1" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> verb2 <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb59-2"><a href="6.2-intercept-only-model.html#cb59-2" tabindex="-1"></a>              <span class="at">data =</span> wiscsub,</span>
-<span id="cb59-3"><a href="6.2-intercept-only-model.html#cb59-3" tabindex="-1"></a>              <span class="at">na.action =</span> na.exclude)</span>
-<span id="cb59-4"><a href="6.2-intercept-only-model.html#cb59-4" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="6.2-intercept-only-model.html#cb6-1" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> verb2 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb6-2"><a href="6.2-intercept-only-model.html#cb6-2" tabindex="-1"></a>              <span class="at">data =</span> wiscsub,</span>
+<span id="cb6-3"><a href="6.2-intercept-only-model.html#cb6-3" tabindex="-1"></a>              <span class="at">na.action =</span> na.exclude)</span>
+<span id="cb6-4"><a href="6.2-intercept-only-model.html#cb6-4" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = verb2 ~ 1, data = wiscsub, na.action = na.exclude)
@@ -369,6 +347,7 @@ This is helpful for explicit translation into the R code, specifically the <code
 <p>The intercept reflects the expected value of the outcome variable when all of the predictor variables (i.e. <span class="math inline">\(\left\{ x_{1i}, ..., x_{qi}\right\}\)</span>) = 0.</p>
 <p>So, in the absence of any additional information other than the descriptive statistics of <span class="math inline">\(verb_{2i}\)</span>, what is our best guess for a person’s <span class="math inline">\(verb_{2i}\)</span> score?</p>
 <p>It is the mean of <span class="math inline">\(verb_{2i}\)</span>. The regression above confirms this notion; regressing the outcome on a vector of 1s allows us to ‘recover’ the mean.</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="intercept-as-mean-of-outcome" class="section level3 hasAnchor" number="6.2.3">
 <h3><span class="header-section-number">6.2.3</span> Intercept as Mean of Outcome<a href="6.2-intercept-only-model.html#intercept-as-mean-of-outcome" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -389,13 +368,13 @@ Remembering Assumption 1, <span class="math inline">\(\mathbb{E}(\epsilon_{i})=0
 \mathbb{E}(verb_{2i}) = b_0
 \]</span>
 We can confirm this by looking at Verbal Scores at Wave 2.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="6.2-intercept-only-model.html#cb61-1" tabindex="-1"></a><span class="fu">mean</span>(wiscsub<span class="sc">$</span>verb2)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="6.2-intercept-only-model.html#cb8-1" tabindex="-1"></a><span class="fu">mean</span>(wiscsub<span class="sc">$</span>verb2)</span></code></pre></div>
 <pre><code>## [1] 25.41534</code></pre>
 </div>
 <div id="intercept-only-model-r2" class="section level3 hasAnchor" number="6.2.4">
 <h3><span class="header-section-number">6.2.4</span> Intercept-Only Model <span class="math inline">\(R^2\)</span><a href="6.2-intercept-only-model.html#intercept-only-model-r2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Yes - we recovered the <em>mean</em>, but we did not attempt to explain any of the <em>variance</em>. Let’s take a look at the variance explained for Model 1.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="6.2-intercept-only-model.html#cb63-1" tabindex="-1"></a><span class="fu">summary</span>(model1)<span class="sc">$</span>r.squared</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="6.2-intercept-only-model.html#cb10-1" tabindex="-1"></a><span class="fu">summary</span>(model1)<span class="sc">$</span>r.squared</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>It thus makes sense that we get 0 as the R-square. From the properties of variance, we know that <span class="math inline">\(\mathbb{V}(c)=0\)</span>. There is no variability due to the regression model because there are no predictors, only a constant.</p>
 </div>

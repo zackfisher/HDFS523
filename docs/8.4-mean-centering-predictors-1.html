@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>8.4 Mean Centering Predictors | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
+  <meta name="description" content="Course notes for HDFS 523" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="8.4 Mean Centering Predictors | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/images/image1.png" />
+  <meta property="og:description" content="Course notes for HDFS 523" />
+  <meta name="github-repo" content="zackfisher/HDFS523" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="8.4 Mean Centering Predictors | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  
+  <meta name="twitter:description" content="Course notes for HDFS 523" />
+  <meta name="twitter:image" content="/images/image1.png" />
+
+<meta name="author" content="Zachary F. Fisher" />
+
+
+<meta name="date" content="2024-01-31" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="8.3-simple-linear-regression-1.html"/>
+<link rel="next" href="8.5-multiple-linear-regression-1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Course notes for HDFS 523</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1.1-why-this-book.html"><a href="1.1-why-this-book.html"><i class="fa fa-check"></i><b>1.1</b> Why this book?</a></li>
+<li class="chapter" data-level="1.2" data-path="1.2-code-folding.html"><a href="1.2-code-folding.html"><i class="fa fa-check"></i><b>1.2</b> Code Folding</a></li>
+<li class="chapter" data-level="1.3" data-path="1.3-acknowledgements.html"><a href="1.3-acknowledgements.html"><i class="fa fa-check"></i><b>1.3</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="2-chapter-2.html"><a href="2-chapter-2.html"><i class="fa fa-check"></i><b>2</b> Data Cleaning</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2.1-example-data.html"><a href="2.1-example-data.html"><i class="fa fa-check"></i><b>2.1</b> Example Data</a></li>
+<li class="chapter" data-level="2.2" data-path="2.2-reading-in-repeated-measures-data.html"><a href="2.2-reading-in-repeated-measures-data.html"><i class="fa fa-check"></i><b>2.2</b> Reading in Repeated Measures Data</a></li>
+<li class="chapter" data-level="2.3" data-path="2.3-familiarize-yourself-with-the-data.html"><a href="2.3-familiarize-yourself-with-the-data.html"><i class="fa fa-check"></i><b>2.3</b> Familiarize Yourself with the Data</a></li>
+<li class="chapter" data-level="2.4" data-path="2.4-look-for-duplicated-ids.html"><a href="2.4-look-for-duplicated-ids.html"><i class="fa fa-check"></i><b>2.4</b> Look for Duplicated IDs</a></li>
+<li class="chapter" data-level="2.5" data-path="2.5-using-table-to-spot-irregularities.html"><a href="2.5-using-table-to-spot-irregularities.html"><i class="fa fa-check"></i><b>2.5</b> Using <code>table()</code> to Spot Irregularities</a></li>
+<li class="chapter" data-level="2.6" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html"><i class="fa fa-check"></i><b>2.6</b> Missing Data</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#generating-example-data"><i class="fa fa-check"></i><b>2.6.1</b> Generating Example Data</a></li>
+<li class="chapter" data-level="2.6.2" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#recoding-values-with-na"><i class="fa fa-check"></i><b>2.6.2</b> Recoding Values with <code>NA</code></a></li>
+<li class="chapter" data-level="2.6.3" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#missing-data-visualization"><i class="fa fa-check"></i><b>2.6.3</b> Missing Data Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="2.7-exporting-data.html"><a href="2.7-exporting-data.html"><i class="fa fa-check"></i><b>2.7</b> Exporting Data</a></li>
+<li class="chapter" data-level="2.8" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html"><i class="fa fa-check"></i><b>2.8</b> Reshaping Repeated Measures Data</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html#reshape-wide-to-long"><i class="fa fa-check"></i><b>2.8.1</b> Reshape Wide to Long</a></li>
+<li class="chapter" data-level="2.8.2" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html#reshape-long-to-wide"><i class="fa fa-check"></i><b>2.8.2</b> Reshape Long to Wide</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-chapter-3.html"><a href="3-chapter-3.html"><i class="fa fa-check"></i><b>3</b> Describing Longitudinal Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3.1-example-data-1.html"><a href="3.1-example-data-1.html"><i class="fa fa-check"></i><b>3.1</b> Example Data</a></li>
+<li class="chapter" data-level="3.2" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html"><i class="fa fa-check"></i><b>3.2</b> Describing Means and Variances</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html#verbal-ability-all-persons-and-occasions"><i class="fa fa-check"></i><b>3.2.1</b> Verbal Ability (All Persons and Occasions)</a></li>
+<li class="chapter" data-level="3.2.2" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html#verbal-ability-across-time"><i class="fa fa-check"></i><b>3.2.2</b> Verbal Ability (Across Time)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="3.3-describing-covariances.html"><a href="3.3-describing-covariances.html"><i class="fa fa-check"></i><b>3.3</b> Describing Covariances</a></li>
+<li class="chapter" data-level="3.4" data-path="3.4-individual-level-descriptives.html"><a href="3.4-individual-level-descriptives.html"><i class="fa fa-check"></i><b>3.4</b> Individual-Level Descriptives</a></li>
+<li class="chapter" data-level="3.5" data-path="3.5-references.html"><a href="3.5-references.html"><i class="fa fa-check"></i><b>3.5</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-chapter-4.html"><a href="4-chapter-4.html"><i class="fa fa-check"></i><b>4</b> Matrix Algebra</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html"><i class="fa fa-check"></i><b>4.1</b> Types of matrices</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#square"><i class="fa fa-check"></i><b>4.1.1</b> Square</a></li>
+<li class="chapter" data-level="4.1.2" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#symmetric"><i class="fa fa-check"></i><b>4.1.2</b> Symmetric</a></li>
+<li class="chapter" data-level="4.1.3" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#diagonal"><i class="fa fa-check"></i><b>4.1.3</b> Diagonal</a></li>
+<li class="chapter" data-level="4.1.4" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#identity"><i class="fa fa-check"></i><b>4.1.4</b> Identity</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html"><i class="fa fa-check"></i><b>4.2</b> Operations on Matrices</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-transpose"><i class="fa fa-check"></i><b>4.2.1</b> Matrix Transpose</a></li>
+<li class="chapter" data-level="4.2.2" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-trace"><i class="fa fa-check"></i><b>4.2.2</b> Matrix Trace</a></li>
+<li class="chapter" data-level="4.2.3" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#addition"><i class="fa fa-check"></i><b>4.2.3</b> Addition</a></li>
+<li class="chapter" data-level="4.2.4" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#subtraction"><i class="fa fa-check"></i><b>4.2.4</b> Subtraction</a></li>
+<li class="chapter" data-level="4.2.5" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-multiplication"><i class="fa fa-check"></i><b>4.2.5</b> Matrix Multiplication</a></li>
+<li class="chapter" data-level="4.2.6" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-division"><i class="fa fa-check"></i><b>4.2.6</b> Matrix Division</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="4.3-references-1.html"><a href="4.3-references-1.html"><i class="fa fa-check"></i><b>4.3</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-chapter-5.html"><a href="5-chapter-5.html"><i class="fa fa-check"></i><b>5</b> Ordinary Least Squares</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="5.1-linear-regression-model.html"><a href="5.1-linear-regression-model.html"><i class="fa fa-check"></i><b>5.1</b> Linear Regression Model</a></li>
+<li class="chapter" data-level="5.2" data-path="5.2-ordinary-least-squares-ols.html"><a href="5.2-ordinary-least-squares-ols.html"><i class="fa fa-check"></i><b>5.2</b> Ordinary Least Squares (OLS)</a></li>
+<li class="chapter" data-level="5.3" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html"><i class="fa fa-check"></i><b>5.3</b> Assumptions of OLS</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#assumption-1.-mathbbeepsilon_i-0"><i class="fa fa-check"></i><b>5.3.1</b> Assumption 1. <span class="math inline">\(\mathbb{E}(\epsilon_{i}) = 0\)</span></a></li>
+<li class="chapter" data-level="5.3.2" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#assumption-2.-homoscedasticity"><i class="fa fa-check"></i><b>5.3.2</b> Assumption 2. Homoscedasticity</a></li>
+<li class="chapter" data-level="5.3.3" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#mathbbeepsilon_iepsilon_j-0"><i class="fa fa-check"></i><b>5.3.3</b> 3. <span class="math inline">\(\mathbb{E}(\epsilon_{i}\epsilon_{j}) = 0\)</span></a></li>
+<li class="chapter" data-level="5.3.4" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#no-perfect-collinearity"><i class="fa fa-check"></i><b>5.3.4</b> 4. No Perfect Collinearity</a></li>
+<li class="chapter" data-level="5.3.5" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#mathbbcepsilon_ix_ki-0"><i class="fa fa-check"></i><b>5.3.5</b> 5. <span class="math inline">\(\mathbb{C}(\epsilon_{i},x_{ki}) = 0\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html"><i class="fa fa-check"></i><b>5.4</b> Properties of the OLS Estimator</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html#consistentcy-of-boldsymbolbeta"><i class="fa fa-check"></i><b>5.4.1</b> 1. Consistentcy of <span class="math inline">\(\boldsymbol{{\beta}}\)</span></a></li>
+<li class="chapter" data-level="5.4.2" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html#asymptotic-normality"><i class="fa fa-check"></i><b>5.4.2</b> 2. Asymptotic Normality</a></li>
+<li class="chapter" data-level="5.4.3" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html#variance-of-hatbeta"><i class="fa fa-check"></i><b>5.4.3</b> Variance of <span class="math inline">\(\hat{\beta}\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html"><i class="fa fa-check"></i><b>5.5</b> Failure to Meet Assumptions</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html#failure-of-assumption-1."><i class="fa fa-check"></i><b>5.5.1</b> Failure of Assumption 1.</a></li>
+<li class="chapter" data-level="5.5.2" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html#failure-of-assumption-2-or-3."><i class="fa fa-check"></i><b>5.5.2</b> Failure of Assumption 2 or 3.</a></li>
+<li class="chapter" data-level="5.5.3" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html#failure-of-assumption-5."><i class="fa fa-check"></i><b>5.5.3</b> Failure of Assumption 5.</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html"><i class="fa fa-check"></i><b>5.6</b> Regression and Matrix Notation</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#an-intercept-only-model"><i class="fa fa-check"></i><b>5.6.1</b> An Intercept-Only Model</a></li>
+<li class="chapter" data-level="5.6.2" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#intercept-only-model-in-matrix-form"><i class="fa fa-check"></i><b>5.6.2</b> Intercept-Only Model in Matrix Form</a></li>
+<li class="chapter" data-level="5.6.3" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#simple-regression-in-matrix-form"><i class="fa fa-check"></i><b>5.6.3</b> Simple Regression in Matrix Form</a></li>
+<li class="chapter" data-level="5.6.4" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#multiple-regression-in-matrix-form"><i class="fa fa-check"></i><b>5.6.4</b> Multiple Regression in Matrix Form</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html"><i class="fa fa-check"></i><b>5.7</b> Solving the Regression Equation</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html#matrix-multiplication-and-transpose"><i class="fa fa-check"></i><b>5.7.1</b> Matrix Multiplication and Transpose</a></li>
+<li class="chapter" data-level="5.7.2" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html#matrix-inverse"><i class="fa fa-check"></i><b>5.7.2</b> Matrix Inverse</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html"><i class="fa fa-check"></i><b>5.8</b> The Linear Probability Model</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html#advantages-of-the-lpm"><i class="fa fa-check"></i><b>5.8.1</b> Advantages of the LPM</a></li>
+<li class="chapter" data-level="5.8.2" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html#disadvantages-of-the-lpm"><i class="fa fa-check"></i><b>5.8.2</b> Disadvantages of the LPM</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-chapter-6.html"><a href="6-chapter-6.html"><i class="fa fa-check"></i><b>6</b> Statistical Control</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="6.1-statistical-control.html"><a href="6.1-statistical-control.html"><i class="fa fa-check"></i><b>6.1</b> Statistical Control</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="6.1-statistical-control.html"><a href="6.1-statistical-control.html#directed-acyclic-graphs-dags"><i class="fa fa-check"></i><b>6.1.1</b> Directed Acyclic Graphs (DAGs)</a></li>
+<li class="chapter" data-level="6.1.2" data-path="6.1-statistical-control.html"><a href="6.1-statistical-control.html#introduction-to-dags"><i class="fa fa-check"></i><b>6.1.2</b> Introduction to DAGs</a></li>
+<li class="chapter" data-level="6.1.3" data-path="6.1-statistical-control.html"><a href="6.1-statistical-control.html#introduction-to-dags-paths"><i class="fa fa-check"></i><b>6.1.3</b> Introduction to DAGs: Paths</a></li>
+<li class="chapter" data-level="6.1.4" data-path="6.1-statistical-control.html"><a href="6.1-statistical-control.html#introduction-to-dags-chains"><i class="fa fa-check"></i><b>6.1.4</b> Introduction to DAGs: Chains</a></li>
+<li class="chapter" data-level="6.1.5" data-path="6.1-statistical-control.html"><a href="6.1-statistical-control.html#introduction-to-dags-descendants-and-ancestors"><i class="fa fa-check"></i><b>6.1.5</b> Introduction to DAGs: Descendants and Ancestors</a></li>
+<li class="chapter" data-level="6.1.6" data-path="6.1-statistical-control.html"><a href="6.1-statistical-control.html#introduction-to-dags-forks"><i class="fa fa-check"></i><b>6.1.6</b> Introduction to DAGs: Forks</a></li>
+<li class="chapter" data-level="6.1.7" data-path="6.1-statistical-control.html"><a href="6.1-statistical-control.html#introduction-to-dags-inverted-forks"><i class="fa fa-check"></i><b>6.1.7</b> Introduction to DAGs: Inverted Forks</a></li>
+<li class="chapter" data-level="6.1.8" data-path="6.1-statistical-control.html"><a href="6.1-statistical-control.html#introduction-to-dags-inverted-forks-1"><i class="fa fa-check"></i><b>6.1.8</b> Introduction to DAGs: Inverted Forks</a></li>
+<li class="chapter" data-level="6.1.9" data-path="6.1-statistical-control.html"><a href="6.1-statistical-control.html#statistical-control-done-right"><i class="fa fa-check"></i><b>6.1.9</b> Statistical Control Done Right</a></li>
+<li class="chapter" data-level="6.1.10" data-path="6.1-statistical-control.html"><a href="6.1-statistical-control.html#building-a-dag"><i class="fa fa-check"></i><b>6.1.10</b> Building a DAG</a></li>
+<li class="chapter" data-level="6.1.11" data-path="6.1-statistical-control.html"><a href="6.1-statistical-control.html#building-a-dag-back-door-paths"><i class="fa fa-check"></i><b>6.1.11</b> Building a DAG: Back-Door Paths</a></li>
+<li class="chapter" data-level="6.1.12" data-path="6.1-statistical-control.html"><a href="6.1-statistical-control.html#statistical-control-gone-wrong"><i class="fa fa-check"></i><b>6.1.12</b> Statistical Control Gone Wrong</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="7-chapter-7.html"><a href="7-chapter-7.html"><i class="fa fa-check"></i><b>7</b> Linear Regression</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="7.1-example-data-2.html"><a href="7.1-example-data-2.html"><i class="fa fa-check"></i><b>7.1</b> Example Data</a></li>
+<li class="chapter" data-level="7.2" data-path="7.2-intercept-only-model.html"><a href="7.2-intercept-only-model.html"><i class="fa fa-check"></i><b>7.2</b> Intercept-Only Model</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="7.2-intercept-only-model.html"><a href="7.2-intercept-only-model.html#intercept-only-equation"><i class="fa fa-check"></i><b>7.2.1</b> Intercept-Only Equation</a></li>
+<li class="chapter" data-level="7.2.2" data-path="7.2-intercept-only-model.html"><a href="7.2-intercept-only-model.html#intercept-only-model-in-r"><i class="fa fa-check"></i><b>7.2.2</b> Intercept-Only Model in R</a></li>
+<li class="chapter" data-level="7.2.3" data-path="7.2-intercept-only-model.html"><a href="7.2-intercept-only-model.html#intercept-as-mean-of-outcome"><i class="fa fa-check"></i><b>7.2.3</b> Intercept as Mean of Outcome</a></li>
+<li class="chapter" data-level="7.2.4" data-path="7.2-intercept-only-model.html"><a href="7.2-intercept-only-model.html#intercept-only-model-r2"><i class="fa fa-check"></i><b>7.2.4</b> Intercept-Only Model <span class="math inline">\(R^2\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="7.3-simple-linear-regression.html"><a href="7.3-simple-linear-regression.html"><i class="fa fa-check"></i><b>7.3</b> Simple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="7.3-simple-linear-regression.html"><a href="7.3-simple-linear-regression.html#regression-equation-and-model-fitting"><i class="fa fa-check"></i><b>7.3.1</b> Regression Equation and Model Fitting</a></li>
+<li class="chapter" data-level="7.3.2" data-path="7.3-simple-linear-regression.html"><a href="7.3-simple-linear-regression.html#path-diagram"><i class="fa fa-check"></i><b>7.3.2</b> Path Diagram</a></li>
+<li class="chapter" data-level="7.3.3" data-path="7.3-simple-linear-regression.html"><a href="7.3-simple-linear-regression.html#interpreting-model-parameters"><i class="fa fa-check"></i><b>7.3.3</b> Interpreting Model Parameters</a></li>
+<li class="chapter" data-level="7.3.4" data-path="7.3-simple-linear-regression.html"><a href="7.3-simple-linear-regression.html#plotting-regression-line"><i class="fa fa-check"></i><b>7.3.4</b> Plotting Regression Line</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="7.4-mean-centering-predictors.html"><a href="7.4-mean-centering-predictors.html"><i class="fa fa-check"></i><b>7.4</b> Mean Centering Predictors</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="7.4-mean-centering-predictors.html"><a href="7.4-mean-centering-predictors.html#interpreting-model-parameters-1"><i class="fa fa-check"></i><b>7.4.1</b> Interpreting Model Parameters</a></li>
+<li class="chapter" data-level="7.4.2" data-path="7.4-mean-centering-predictors.html"><a href="7.4-mean-centering-predictors.html#plotting-regression-line-1"><i class="fa fa-check"></i><b>7.4.2</b> Plotting Regression Line</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="7.5-multiple-linear-regression.html"><a href="7.5-multiple-linear-regression.html"><i class="fa fa-check"></i><b>7.5</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="7.5-multiple-linear-regression.html"><a href="7.5-multiple-linear-regression.html#regression-equation"><i class="fa fa-check"></i><b>7.5.1</b> Regression Equation</a></li>
+<li class="chapter" data-level="7.5.2" data-path="7.5-multiple-linear-regression.html"><a href="7.5-multiple-linear-regression.html#fit-model-in-r"><i class="fa fa-check"></i><b>7.5.2</b> Fit Model in R</a></li>
+<li class="chapter" data-level="7.5.3" data-path="7.5-multiple-linear-regression.html"><a href="7.5-multiple-linear-regression.html#path-diagram-1"><i class="fa fa-check"></i><b>7.5.3</b> Path Diagram</a></li>
+<li class="chapter" data-level="7.5.4" data-path="7.5-multiple-linear-regression.html"><a href="7.5-multiple-linear-regression.html#a-note-on-interpretation"><i class="fa fa-check"></i><b>7.5.4</b> A Note on Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html"><i class="fa fa-check"></i><b>7.6</b> Categorical Variable Interaction</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html#interaction-as-moderation"><i class="fa fa-check"></i><b>7.6.1</b> Interaction as Moderation</a></li>
+<li class="chapter" data-level="7.6.2" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html#moderation-by-categorical-variable"><i class="fa fa-check"></i><b>7.6.2</b> Moderation by Categorical Variable</a></li>
+<li class="chapter" data-level="7.6.3" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html#interpretation"><i class="fa fa-check"></i><b>7.6.3</b> Interpretation</a></li>
+<li class="chapter" data-level="7.6.4" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html#fit-regression-model-in-r"><i class="fa fa-check"></i><b>7.6.4</b> Fit Regression Model in R</a></li>
+<li class="chapter" data-level="7.6.5" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html#path-diagram-2"><i class="fa fa-check"></i><b>7.6.5</b> Path Diagram</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="7-chapter-7.html"><a href="7-chapter-7.html#chapter-7"><i class="fa fa-check"></i><b>8</b> Linear Regression</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="8.1-example-data-3.html"><a href="8.1-example-data-3.html"><i class="fa fa-check"></i><b>8.1</b> Example Data</a></li>
+<li class="chapter" data-level="8.2" data-path="8.2-intercept-only-model-1.html"><a href="8.2-intercept-only-model-1.html"><i class="fa fa-check"></i><b>8.2</b> Intercept-Only Model</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="8.2-intercept-only-model-1.html"><a href="8.2-intercept-only-model-1.html#intercept-only-equation-1"><i class="fa fa-check"></i><b>8.2.1</b> Intercept-Only Equation</a></li>
+<li class="chapter" data-level="8.2.2" data-path="8.2-intercept-only-model-1.html"><a href="8.2-intercept-only-model-1.html#intercept-only-model-in-r-1"><i class="fa fa-check"></i><b>8.2.2</b> Intercept-Only Model in R</a></li>
+<li class="chapter" data-level="8.2.3" data-path="8.2-intercept-only-model-1.html"><a href="8.2-intercept-only-model-1.html#intercept-as-mean-of-outcome-1"><i class="fa fa-check"></i><b>8.2.3</b> Intercept as Mean of Outcome</a></li>
+<li class="chapter" data-level="8.2.4" data-path="8.2-intercept-only-model-1.html"><a href="8.2-intercept-only-model-1.html#intercept-only-model-r2-1"><i class="fa fa-check"></i><b>8.2.4</b> Intercept-Only Model <span class="math inline">\(R^2\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="8.3-simple-linear-regression-1.html"><a href="8.3-simple-linear-regression-1.html"><i class="fa fa-check"></i><b>8.3</b> Simple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="8.3-simple-linear-regression-1.html"><a href="8.3-simple-linear-regression-1.html#regression-equation-and-model-fitting-1"><i class="fa fa-check"></i><b>8.3.1</b> Regression Equation and Model Fitting</a></li>
+<li class="chapter" data-level="8.3.2" data-path="8.3-simple-linear-regression-1.html"><a href="8.3-simple-linear-regression-1.html#path-diagram-3"><i class="fa fa-check"></i><b>8.3.2</b> Path Diagram</a></li>
+<li class="chapter" data-level="8.3.3" data-path="8.3-simple-linear-regression-1.html"><a href="8.3-simple-linear-regression-1.html#interpreting-model-parameters-3"><i class="fa fa-check"></i><b>8.3.3</b> Interpreting Model Parameters</a></li>
+<li class="chapter" data-level="8.3.4" data-path="8.3-simple-linear-regression-1.html"><a href="8.3-simple-linear-regression-1.html#plotting-regression-line-2"><i class="fa fa-check"></i><b>8.3.4</b> Plotting Regression Line</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="8.4-mean-centering-predictors-1.html"><a href="8.4-mean-centering-predictors-1.html"><i class="fa fa-check"></i><b>8.4</b> Mean Centering Predictors</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="8.4-mean-centering-predictors-1.html"><a href="8.4-mean-centering-predictors-1.html#interpreting-model-parameters-4"><i class="fa fa-check"></i><b>8.4.1</b> Interpreting Model Parameters</a></li>
+<li class="chapter" data-level="8.4.2" data-path="8.4-mean-centering-predictors-1.html"><a href="8.4-mean-centering-predictors-1.html#plotting-regression-line-3"><i class="fa fa-check"></i><b>8.4.2</b> Plotting Regression Line</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="8.5-multiple-linear-regression-1.html"><a href="8.5-multiple-linear-regression-1.html"><i class="fa fa-check"></i><b>8.5</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="8.5-multiple-linear-regression-1.html"><a href="8.5-multiple-linear-regression-1.html#regression-equation-1"><i class="fa fa-check"></i><b>8.5.1</b> Regression Equation</a></li>
+<li class="chapter" data-level="8.5.2" data-path="8.5-multiple-linear-regression-1.html"><a href="8.5-multiple-linear-regression-1.html#fit-model-in-r-1"><i class="fa fa-check"></i><b>8.5.2</b> Fit Model in R</a></li>
+<li class="chapter" data-level="8.5.3" data-path="8.5-multiple-linear-regression-1.html"><a href="8.5-multiple-linear-regression-1.html#path-diagram-4"><i class="fa fa-check"></i><b>8.5.3</b> Path Diagram</a></li>
+<li class="chapter" data-level="8.5.4" data-path="8.5-multiple-linear-regression-1.html"><a href="8.5-multiple-linear-regression-1.html#a-note-on-interpretation-1"><i class="fa fa-check"></i><b>8.5.4</b> A Note on Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="8.6-categorical-variable-interaction-1.html"><a href="8.6-categorical-variable-interaction-1.html"><i class="fa fa-check"></i><b>8.6</b> Categorical Variable Interaction</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="8.6-categorical-variable-interaction-1.html"><a href="8.6-categorical-variable-interaction-1.html#interaction-as-moderation-1"><i class="fa fa-check"></i><b>8.6.1</b> Interaction as Moderation</a></li>
+<li class="chapter" data-level="8.6.2" data-path="8.6-categorical-variable-interaction-1.html"><a href="8.6-categorical-variable-interaction-1.html#moderation-by-categorical-variable-1"><i class="fa fa-check"></i><b>8.6.2</b> Moderation by Categorical Variable</a></li>
+<li class="chapter" data-level="8.6.3" data-path="8.6-categorical-variable-interaction-1.html"><a href="8.6-categorical-variable-interaction-1.html#interpretation-1"><i class="fa fa-check"></i><b>8.6.3</b> Interpretation</a></li>
+<li class="chapter" data-level="8.6.4" data-path="8.6-categorical-variable-interaction-1.html"><a href="8.6-categorical-variable-interaction-1.html#fit-regression-model-in-r-1"><i class="fa fa-check"></i><b>8.6.4</b> Fit Regression Model in R</a></li>
+<li class="chapter" data-level="8.6.5" data-path="8.6-categorical-variable-interaction-1.html"><a href="8.6-categorical-variable-interaction-1.html#path-diagram-5"><i class="fa fa-check"></i><b>8.6.5</b> Path Diagram</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/zackfisher/HDFS523" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">HDFS 523: Strategies for Data Analysis in Developmental Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="mean-centering-predictors-1" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Mean Centering Predictors<a href="8.4-mean-centering-predictors-1.html#mean-centering-predictors-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this case, and in many other cases, the intercept does not have a ‘useful’ interpretation for the empirical example. This is because no students had a Grade 1 verbal score equal to 0.</p>
+<p>Therefore, if we want to make the intercept more meaningful, we need to make a Grade 1 verbal score with a more meaningful 0 point. Typically we center the <em>predictor</em> variables in regression analysis.</p>
+<p>For example, we create a centered variable, <span class="math inline">\(x^{*}_{1i}\)</span> by subtracting the sample mean, <span class="math inline">\(\bar{x_1}\)</span> from each observation,<br />
+<span class="math display">\[ x^{*}_{1i} = x_{1i} - \bar{x_1} \]</span>
+Our model becomes<br />
+<span class="math display">\[ y_i = b_0(1_i) + b_1(x^{*}_{1i}) + \epsilon_i \]</span>
+We can sample-mean center <span class="math inline">\(verb_{1i}\)</span> in R as follows</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="8.4-mean-centering-predictors-1.html#cb111-1" tabindex="-1"></a><span class="co">#calculate the mean centered variable</span></span>
+<span id="cb111-2"><a href="8.4-mean-centering-predictors-1.html#cb111-2" tabindex="-1"></a>wiscsub<span class="sc">$</span>verb1_star <span class="ot">&lt;-</span> wiscsub<span class="sc">$</span>verb1 <span class="sc">-</span> <span class="fu">mean</span>(wiscsub<span class="sc">$</span>verb1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Then we can fit a new model using <span class="math inline">\(verb^{*}_{1i}\)</span>, such that</p>
+<p><span class="math display">\[ verb_{2i} = b_0(1_i) + b_1(verb^{*}_{1i}) + \epsilon_i \]</span></p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="8.4-mean-centering-predictors-1.html#cb112-1" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(verb2 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> verb1_star,</span>
+<span id="cb112-2"><a href="8.4-mean-centering-predictors-1.html#cb112-2" tabindex="-1"></a>              <span class="at">data =</span> wiscsub,</span>
+<span id="cb112-3"><a href="8.4-mean-centering-predictors-1.html#cb112-3" tabindex="-1"></a>              <span class="at">na.action =</span> na.exclude)</span>
+<span id="cb112-4"><a href="8.4-mean-centering-predictors-1.html#cb112-4" tabindex="-1"></a><span class="fu">summary</span>(model3)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = verb2 ~ 1 + verb1_star, data = wiscsub, na.action = na.exclude)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -11.5305  -3.0362   0.2526   2.7147  12.5020 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 25.41534    0.29831   85.20   &lt;2e-16 ***
+## verb1_star   0.75495    0.05149   14.66   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 4.261 on 202 degrees of freedom
+## Multiple R-squared:  0.5156, Adjusted R-squared:  0.5132 
+## F-statistic:   215 on 1 and 202 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p><strong>Note</strong>: Mean centering should be used to aid interpretation. Historically, it has been suggested that mean centering will reduce multicollinearity, however this is not the case. See <img src="https://journals.sagepub.com/doi/full/10.1177/0013164418817801" alt="Olvera &amp; Kroc (2018)" /> for more information.</p>
+<div id="interpreting-model-parameters-4" class="section level3 hasAnchor" number="8.4.1">
+<h3><span class="header-section-number">8.4.1</span> Interpreting Model Parameters<a href="8.4-mean-centering-predictors-1.html#interpreting-model-parameters-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Note that the estimate for the slope <span class="math inline">\(b_1\)</span> stays the same, but the estimate for the intercept is different. This is because the variable ‘verb1_star’ equals 0 when a child has an average 1st grade verbal score. Therefore the expected value for the 2nd grade verbal score, for <em>a child with an average 1st grade verbal score</em>, is 25.41534.</p>
+</div>
+<div id="plotting-regression-line-3" class="section level3 hasAnchor" number="8.4.2">
+<h3><span class="header-section-number">8.4.2</span> Plotting Regression Line<a href="8.4-mean-centering-predictors-1.html#plotting-regression-line-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="8.4-mean-centering-predictors-1.html#cb114-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wiscsub, <span class="fu">aes</span>(<span class="at">x=</span>verb1_star,<span class="at">y=</span>verb2)) <span class="sc">+</span></span>
+<span id="cb114-2"><a href="8.4-mean-centering-predictors-1.html#cb114-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">shape=</span><span class="dv">19</span>) <span class="sc">+</span></span>
+<span id="cb114-3"><a href="8.4-mean-centering-predictors-1.html#cb114-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm,<span class="at">se=</span><span class="cn">TRUE</span>,<span class="at">fullrange=</span><span class="cn">TRUE</span>,<span class="at">colour=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb114-4"><a href="8.4-mean-centering-predictors-1.html#cb114-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">&quot;Sample-Centered Verbal Ability Grade 1&quot;</span>, <span class="at">y=</span> <span class="st">&quot;Verbal Ability Grade 2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb114-5"><a href="8.4-mean-centering-predictors-1.html#cb114-5" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">20</span>,<span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb114-6"><a href="8.4-mean-centering-predictors-1.html#cb114-6" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">50</span>) <span class="sc">+</span></span>
+<span id="cb114-7"><a href="8.4-mean-centering-predictors-1.html#cb114-7" tabindex="-1"></a>  <span class="co">#theme with white background</span></span>
+<span id="cb114-8"><a href="8.4-mean-centering-predictors-1.html#cb114-8" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb114-9"><a href="8.4-mean-centering-predictors-1.html#cb114-9" tabindex="-1"></a>  <span class="co">#eliminate background, gridlines, and chart border</span></span>
+<span id="cb114-10"><a href="8.4-mean-centering-predictors-1.html#cb114-10" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb114-11"><a href="8.4-mean-centering-predictors-1.html#cb114-11" tabindex="-1"></a>    <span class="at">plot.background =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb114-12"><a href="8.4-mean-centering-predictors-1.html#cb114-12" tabindex="-1"></a>    ,<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb114-13"><a href="8.4-mean-centering-predictors-1.html#cb114-13" tabindex="-1"></a>    ,<span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb114-14"><a href="8.4-mean-centering-predictors-1.html#cb114-14" tabindex="-1"></a>    ,<span class="at">panel.border =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb114-15"><a href="8.4-mean-centering-predictors-1.html#cb114-15" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb114-16"><a href="8.4-mean-centering-predictors-1.html#cb114-16" tabindex="-1"></a>  <span class="co">#draws x and y axis line</span></span>
+<span id="cb114-17"><a href="8.4-mean-centering-predictors-1.html#cb114-17" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&#39;black&#39;</span>)) <span class="sc">+</span></span>
+<span id="cb114-18"><a href="8.4-mean-centering-predictors-1.html#cb114-18" tabindex="-1"></a>  <span class="co">#set size of axis labels and titles</span></span>
+<span id="cb114-19"><a href="8.4-mean-centering-predictors-1.html#cb114-19" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">12</span>),</span>
+<span id="cb114-20"><a href="8.4-mean-centering-predictors-1.html#cb114-20" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>))</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
+<p>Note the change of scale on the x-axis.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="8.3-simple-linear-regression-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="8.5-multiple-linear-regression-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/zackfisher/HDFS523/edit/master/07_linear_regression_in_r.Rmd",
+"text": "Suggest an edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+},
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
