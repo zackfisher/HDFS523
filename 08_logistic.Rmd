@@ -1,4 +1,4 @@
-# Logistic Regression {#chapter-7}
+# Logistic Regression {#chapter-8}
 
 ```{r, echo = F}
 button <-  "position: relative; 
@@ -17,7 +17,7 @@ codefolder::bookdown(init = "show", style = button)
 
 <!-- comment -->
   
-In Chapter 7 we will introduce the logistic regression model through the lens of generalized linear models (GLMs). The GLM is an essential tool for modeling discretely distributed dependent variables. 
+In Chapter 8 we will introduce the logistic regression model through the lens of generalized linear models (GLMs). The GLM is an essential tool for modeling discretely distributed dependent variables. 
 
 ## Categorical Data in the Social Sciences
 
@@ -414,11 +414,11 @@ In nonlinear, the marginal effect of one variable is conditional on the value of
 Let's look at the effect of `PersonalSpending` on the relationship between `ProsocialSpending` and `Happy`.
 
 ```{r}
-marginaleffects::plot_cme(model11, effect = "ProsocialSpending", condition = "PersonalSpending")
+marginaleffects::plot_cme(model11, variables = "ProsocialSpending", condition = "PersonalSpending")
 ```
 
 In addition, we can look at the effect of `PersonalSpending` on the relationship between `PersonalSpending` and `Happy`.
 
 ```{r}
-marginaleffects::plot_cme(model11, effect = "PersonalSpending", condition = "ProsocialSpending")
+marginaleffects::plot_cme(model11, variables = "PersonalSpending", condition = "ProsocialSpending")
 ```
