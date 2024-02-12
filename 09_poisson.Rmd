@@ -1,4 +1,4 @@
-# Poisson Regression {#chapter-8}
+# Poisson Regression {#chapter-9}
 
 ```{r, echo = F}
 button <-  "position: relative; 
@@ -16,7 +16,7 @@ codefolder::bookdown(init = "show", style = button)
 ```
 <!-- comment -->
   
-In Chapter 8 we will round out our discussion of the GLM with **Poisson regression**. 
+In Chapter 9 we will round out our discussion of the GLM with **Poisson regression**. 
 
 - **Poisson regression can be a useful modeling approach for handling count dependent variables**
     - Counts typically describe nonnegative (or only positive) integer.
@@ -109,13 +109,12 @@ Interpretation of the Poisson regression coefficients is similar to logistic reg
 
 ### Percent Change
 
-We can also talk about these regression coefficients in terms of percent change as follow,
+We can also talk about these regression coefficients in terms of percent change as follows,
 
 - **If $\beta_{1}$ is negative**:
     - All else being equal, we might expect to see a $(1-\mathrm{exp}(\beta_{1})) \times 100$ percent decrease in the expected count of $Y$, with each additional unit increase in $x_{1}$, holding constant all other variables in the model.
 - **If $\beta_{1}$ is positive**:
     - All else being equal, we might expect to see a $(\mathrm{exp}(\beta_{1})-1) \times 100$ percent increase in the expected count of $Y$, with each additional unit increase in $x_{1}$, holding constant all other variables in the model.
-
 
 
 The following relationships are helpful to keep in mind,

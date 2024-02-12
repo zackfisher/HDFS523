@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.1 Why this book? | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
+  <title>9.1 Poisson Regression | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
   <meta name="description" content="Course notes for HDFS 523" />
   <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.1 Why this book? | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta property="og:title" content="9.1 Poisson Regression | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for HDFS 523" />
   <meta name="github-repo" content="zackfisher/HDFS523" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.1 Why this book? | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta name="twitter:title" content="9.1 Poisson Regression | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   
   <meta name="twitter:description" content="Course notes for HDFS 523" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="1.2-code-folding.html"/>
+<link rel="prev" href="9-chapter-9.html"/>
+<link rel="next" href="9.2-poisson-distribution.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -423,17 +423,41 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="why-this-book" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Why this book?<a href="1.1-why-this-book.html#why-this-book" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There are a few goals of moving from “textbook + slides + exercises” to an ebook. For now, the main goal is to update and integrate code contents from the course into one consistent format, rather than having multiple files to sort through on Canvas.</p>
+<div id="poisson-regression" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Poisson Regression<a href="9.1-poisson-regression.html#poisson-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="review-of-glm" class="section level3 hasAnchor" number="9.1.1">
+<h3><span class="header-section-number">9.1.1</span> Review of GLM<a href="9.1-poisson-regression.html#review-of-glm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To review, there are three important components to the GLM:</p>
+<ol style="list-style-type: decimal">
+<li><em>A random component</em>: The random component of the GLM contains the response variable <span class="math inline">\(\mathbf{Y}\)</span> and its probability distribution (e.g. the binomial distribution of <span class="math inline">\(\mathbf{Y}\)</span> in the binary regression model).</li>
+<li><em>A Linear Predictor</em>: The linear predictor typically takes the form of <span class="math inline">\(\mathbf{X}\boldsymbol{\beta}\)</span> where <span class="math inline">\(\mathbf{X}\)</span> is an <span class="math inline">\(n \times q\)</span> matrix of observations and <span class="math inline">\(\boldsymbol{\beta}\)</span> is an <span class="math inline">\(q \times 1\)</span> column vector.</li>
+<li><em>Link Function</em>: The link function, typically specified as <span class="math inline">\(g()\)</span>, is used to relate each component of <span class="math inline">\(\mathbb{E}(\mathbf{Y})\)</span> to the linear predictor, <span class="math inline">\(g[\mathbb{E}(\mathbf{Y})]=\mathbf{X}\boldsymbol{\beta}\)</span>.</li>
+</ol>
+</div>
+<div id="poisson-regression-as-glm-1" class="section level3 hasAnchor" number="9.1.2">
+<h3><span class="header-section-number">9.1.2</span> Poisson Regression as GLM<a href="9.1-poisson-regression.html#poisson-regression-as-glm-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Poisson regression can also be formulated as a GLM:</p>
+<p><span class="math display">\[
+\mathrm{log}(\mu) = \beta_{0} + \beta_{1}x_{1}
+\]</span>
+or equivalently,</p>
+<p><span class="math display">\[
+\mu = \mathrm{exp}(\beta_{0} + \beta_{1}x_{1}) = \mathrm{exp}(\beta_{0})\mathrm{exp}(\beta_{1}x_{1}).
+\]</span></p>
+<ol style="list-style-type: decimal">
+<li><em>A random component</em>: The distribution of <span class="math inline">\(\mathbf{Y}\)</span> is assumed to be Poisson, <span class="math inline">\(Y_{i} \sim \mathrm{Poisson}(\mu_{i})\)</span>.</li>
+<li><em>A Linear Predictor</em>: The systematic component takes the form of <span class="math inline">\(\mathbf{X}\boldsymbol{\beta}\)</span>.</li>
+<li><em>Link Function</em>: For Poisson regression the <em>log link</em> is used.</li>
+</ol>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="1.2-code-folding.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="9-chapter-9.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="9.2-poisson-distribution.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -454,7 +478,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/zackfisher/HDFS523/edit/master/index.Rmd",
+"link": "https://github.com/zackfisher/HDFS523/edit/master/09_poisson.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

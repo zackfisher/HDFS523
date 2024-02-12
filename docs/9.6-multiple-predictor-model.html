@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.1 Why this book? | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
+  <title>9.6 Multiple Predictor Model | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
   <meta name="description" content="Course notes for HDFS 523" />
   <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.1 Why this book? | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta property="og:title" content="9.6 Multiple Predictor Model | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for HDFS 523" />
   <meta name="github-repo" content="zackfisher/HDFS523" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.1 Why this book? | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta name="twitter:title" content="9.6 Multiple Predictor Model | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   
   <meta name="twitter:description" content="Course notes for HDFS 523" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="1.2-code-folding.html"/>
+<link rel="prev" href="9.5-single-predictor-model-1.html"/>
+<link rel="next" href="9.7-revisisting-overdispersion.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -423,17 +423,74 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="why-this-book" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Why this book?<a href="1.1-why-this-book.html#why-this-book" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There are a few goals of moving from “textbook + slides + exercises” to an ebook. For now, the main goal is to update and integrate code contents from the course into one consistent format, rather than having multiple files to sort through on Canvas.</p>
+<div id="multiple-predictor-model" class="section level2 hasAnchor" number="9.6">
+<h2><span class="header-section-number">9.6</span> Multiple Predictor Model<a href="9.6-multiple-predictor-model.html#multiple-predictor-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s add another variable into the model. Specifically, the variable <code>abuse_rare</code>, which equals <span class="math inline">\(1\)</span> if the child was rarely abused during early development, and <span class="math inline">\(0\)</span> if the child experienced abuse.</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="9.6-multiple-predictor-model.html#cb129-1" tabindex="-1"></a>ferraro2016<span class="sc">$</span>abuse_rare <span class="ot">&lt;-</span> <span class="fu">factor</span>(ferraro2016<span class="sc">$</span>abuse_rare)</span>
+<span id="cb129-2"><a href="9.6-multiple-predictor-model.html#cb129-2" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb129-3"><a href="9.6-multiple-predictor-model.html#cb129-3" tabindex="-1"></a>  <span class="at">formula =</span> morbidityw1 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> abuse_rare <span class="sc">+</span> income_star <span class="sc">+</span> abuse_rare<span class="sc">:</span>income_star, </span>
+<span id="cb129-4"><a href="9.6-multiple-predictor-model.html#cb129-4" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link=</span>log), </span>
+<span id="cb129-5"><a href="9.6-multiple-predictor-model.html#cb129-5" tabindex="-1"></a>  <span class="at">data =</span> ferraro2016,</span>
+<span id="cb129-6"><a href="9.6-multiple-predictor-model.html#cb129-6" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
+<span id="cb129-7"><a href="9.6-multiple-predictor-model.html#cb129-7" tabindex="-1"></a>)</span>
+<span id="cb129-8"><a href="9.6-multiple-predictor-model.html#cb129-8" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = morbidityw1 ~ 1 + abuse_rare + income_star + abuse_rare:income_star, 
+##     family = poisson(link = log), data = ferraro2016, na.action = na.exclude)
+## 
+## Coefficients:
+##                           Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)              1.0766511  0.0129647  83.045  &lt; 2e-16 ***
+## abuse_rare1             -0.2382614  0.0251265  -9.482  &lt; 2e-16 ***
+## income_star             -0.0311089  0.0091684  -3.393 0.000691 ***
+## abuse_rare1:income_star -0.0000822  0.0179350  -0.005 0.996343    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 8068.4  on 2966  degrees of freedom
+## Residual deviance: 7956.7  on 2963  degrees of freedom
+##   (55 observations deleted due to missingness)
+## AIC: 14737
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<p>As the model becomes more complicated it can be helpful to write out the equation,</p>
+<p><span class="math display">\[
+\mathrm{log}(morbidity_i) = b_0 + b_1(abuse\_rare_{i})+ b_2(income^{*}_{1i})+ b_3(income^{*}_{1i})(abuse\_rare_{i})
+\]</span></p>
+<p>Again, when we have a dummy variable interaction we have essentially set up two different equations:</p>
+<p><strong>Equation for Children Experiencing Maltreatment</strong></p>
+<p>Coefficients <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_2\)</span> describe the relation between <span class="math inline">\(income^{*}_{1i}\)</span> and <span class="math inline">\(morbidity_i\)</span> for those who experienced childhood abuse <span class="math inline">\((abuse\_rare_{i}=0)\)</span>.</p>
+<p><span class="math display">\[
+\mathrm{log}(morbidity_i) = b_0 + b_2(income^{*}_{1i})
+\]</span></p>
+<p><strong>Equation for Children Rarely Experiencing Maltreatment</strong></p>
+<p><span class="math display">\[
+\mathrm{log}(morbidity_i) = (b_0 + b_1) + (b_2 + b_3)income^{*}_{1i}
+\]</span></p>
+<p>While coefficients <span class="math inline">\(b_0 + b_1\)</span> and <span class="math inline">\(b_2 + b_3\)</span> describe the relation for those who rarely experienced childhood abuse <span class="math inline">\((abuse\_rare_{i}=1)\)</span>. Note that <span class="math inline">\(b_3\)</span> is not significantly different from zero, so we would not interpret the interaction between income and abuse directly.</p>
+<p><strong>Marginal Effects</strong></p>
+<p>Let’s again turn to the <code>marginaleffects</code> <span class="citation">(<a href="#ref-bundock">Arel-Bundock 2022</a>)</span> package to look at the marginal effects of income and childhood abuse on health.</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="9.6-multiple-predictor-model.html#cb131-1" tabindex="-1"></a>marginaleffects<span class="sc">::</span><span class="fu">plot_cap</span>(model2, <span class="at">condition =</span> <span class="fu">c</span>(<span class="st">&quot;income_star&quot;</span>,<span class="st">&quot;abuse_rare&quot;</span>), <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## Warning: This function has been renamed to `plot_predictions()`. The `plot_cap()`
+##   alias will be removed in the near future.</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-108-1.png" width="672" /></p>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-bundock" class="csl-entry">
+Arel-Bundock, Vincent. 2022. <em>Marginaleffects: Marginal Effects, Marginal Means, Predictions, and Contrasts</em>. <a href="https://CRAN.R-project.org/package=marginaleffects">https://CRAN.R-project.org/package=marginaleffects</a>.
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="1.2-code-folding.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="9.5-single-predictor-model-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="9.7-revisisting-overdispersion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -454,7 +511,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/zackfisher/HDFS523/edit/master/index.Rmd",
+"link": "https://github.com/zackfisher/HDFS523/edit/master/09_poisson.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

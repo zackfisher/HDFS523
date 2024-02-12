@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.1 Why this book? | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
+  <title>9.2 Poisson Distribution | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
   <meta name="description" content="Course notes for HDFS 523" />
   <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.1 Why this book? | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta property="og:title" content="9.2 Poisson Distribution | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for HDFS 523" />
   <meta name="github-repo" content="zackfisher/HDFS523" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.1 Why this book? | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta name="twitter:title" content="9.2 Poisson Distribution | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   
   <meta name="twitter:description" content="Course notes for HDFS 523" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="1.2-code-folding.html"/>
+<link rel="prev" href="9.1-poisson-regression.html"/>
+<link rel="next" href="9.3-notes-on-interpretation.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -423,17 +423,40 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="why-this-book" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Why this book?<a href="1.1-why-this-book.html#why-this-book" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There are a few goals of moving from “textbook + slides + exercises” to an ebook. For now, the main goal is to update and integrate code contents from the course into one consistent format, rather than having multiple files to sort through on Canvas.</p>
+<div id="poisson-distribution" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Poisson Distribution<a href="9.2-poisson-distribution.html#poisson-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To gain some intuition about the Poisson regression model consider the Poisson distribution</p>
+<p><span class="math display">\[
+P(\mathrm{y}|\mu) = \frac{e^{-\mu}\mu^{\mathrm{y}}}{\mathrm{y}!}
+\]</span>
+where</p>
+<ul>
+<li><span class="math inline">\(y\)</span> is a random count variable</li>
+<li><span class="math inline">\(\mu\)</span> is the expected number of times an event ocurrs</li>
+<li><span class="math inline">\(y! = y \times (y-1) \times ... \times 1\)</span> is the factorical operator</li>
+</ul>
+<p>The Poisson distribution relies on a single parameter, <span class="math inline">\(\mu\)</span>. Importantly, <span class="math inline">\(\mu\)</span> represents both the mean and the variance of the Poisson distribution (e.g. when <span class="math inline">\(\mu\)</span> is large both the mean and variance are large).</p>
+<div class="float">
+<img src="imgs/poisson.png" alt="https://en.wikipedia.org/wiki/Poisson_distribution" />
+<div class="figcaption"><a href="https://en.wikipedia.org/wiki/Poisson_distribution" class="uri">https://en.wikipedia.org/wiki/Poisson_distribution</a></div>
+</div>
+<p><strong>What Does This Mean In Practice</strong>:</p>
+<ul>
+<li>As <span class="math inline">\(\mu\)</span> grows the center of the distribution shifts to right</li>
+<li>Departure of real count data from predictions from Poisson distribution
+<ul>
+<li>Variance frequently greater than mean (overdisperion)</li>
+<li>Frequency of 0 counts exceed number predicted by Poisson</li>
+</ul></li>
+</ul>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="1.2-code-folding.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="9.1-poisson-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="9.3-notes-on-interpretation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -454,7 +477,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/zackfisher/HDFS523/edit/master/index.Rmd",
+"link": "https://github.com/zackfisher/HDFS523/edit/master/09_poisson.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

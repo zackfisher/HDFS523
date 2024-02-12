@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.1 Why this book? | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
+  <title>9.5 Single Predictor Model | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
   <meta name="description" content="Course notes for HDFS 523" />
   <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.1 Why this book? | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta property="og:title" content="9.5 Single Predictor Model | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for HDFS 523" />
   <meta name="github-repo" content="zackfisher/HDFS523" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.1 Why this book? | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta name="twitter:title" content="9.5 Single Predictor Model | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   
   <meta name="twitter:description" content="Course notes for HDFS 523" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="1.2-code-folding.html"/>
+<link rel="prev" href="9.4-example-data-4.html"/>
+<link rel="next" href="9.6-multiple-predictor-model.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -423,17 +423,99 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="why-this-book" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Why this book?<a href="1.1-why-this-book.html#why-this-book" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There are a few goals of moving from “textbook + slides + exercises” to an ebook. For now, the main goal is to update and integrate code contents from the course into one consistent format, rather than having multiple files to sort through on Canvas.</p>
+<div id="single-predictor-model-1" class="section level2 hasAnchor" number="9.5">
+<h2><span class="header-section-number">9.5</span> Single Predictor Model<a href="9.5-single-predictor-model-1.html#single-predictor-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="read-in-data" class="section level3 hasAnchor" number="9.5.1">
+<h3><span class="header-section-number">9.5.1</span> Read in Data<a href="9.5-single-predictor-model-1.html#read-in-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can read in the data and create a mean-centered version of income.</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="9.5-single-predictor-model-1.html#cb121-1" tabindex="-1"></a>ferraro2016 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/ferraro2016.csv&quot;</span>)</span>
+<span id="cb121-2"><a href="9.5-single-predictor-model-1.html#cb121-2" tabindex="-1"></a>ferraro2016<span class="sc">$</span>income_star <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(ferraro2016<span class="sc">$</span>catincome, <span class="at">scale =</span> <span class="cn">FALSE</span>))</span></code></pre></div>
+</div>
+<div id="single-predictor-model-in-glm" class="section level3 hasAnchor" number="9.5.2">
+<h3><span class="header-section-number">9.5.2</span> Single Predictor Model in GLM<a href="9.5-single-predictor-model-1.html#single-predictor-model-in-glm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s fit a single predictor Poisson regression model for morbidity at Wave 1 using income bracket as our predictor. For now let’s treat income bracket as a continuous predictor.</p>
+<p>Note for the Poisson regression we use <code>family = poisson(link=log)</code> argument.</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="9.5-single-predictor-model-1.html#cb122-1" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb122-2"><a href="9.5-single-predictor-model-1.html#cb122-2" tabindex="-1"></a>  <span class="at">formula =</span> morbidityw1 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> income_star, </span>
+<span id="cb122-3"><a href="9.5-single-predictor-model-1.html#cb122-3" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link=</span>log),  </span>
+<span id="cb122-4"><a href="9.5-single-predictor-model-1.html#cb122-4" tabindex="-1"></a>  <span class="at">data =</span> ferraro2016,</span>
+<span id="cb122-5"><a href="9.5-single-predictor-model-1.html#cb122-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
+<span id="cb122-6"><a href="9.5-single-predictor-model-1.html#cb122-6" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div id="deviance-and-goodness-of-fit" class="section level3 hasAnchor" number="9.5.3">
+<h3><span class="header-section-number">9.5.3</span> Deviance and Goodness of Fit<a href="9.5-single-predictor-model-1.html#deviance-and-goodness-of-fit" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="9.5-single-predictor-model-1.html#cb123-1" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = morbidityw1 ~ 1 + income_star, family = poisson(link = log), 
+##     data = ferraro2016, na.action = na.exclude)
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  1.007472   0.011047  91.195  &lt; 2e-16 ***
+## income_star -0.032445   0.007838  -4.139 3.48e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 8166.6  on 2994  degrees of freedom
+## Residual deviance: 8149.5  on 2993  degrees of freedom
+##   (27 observations deleted due to missingness)
+## AIC: 14986
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<p>We can think about the deviance as a measure of how well the model fits the data.</p>
+<ul>
+<li>If the model fits well, the observed values <span class="math inline">\(Y_{i}\)</span> will be close to their predicted means <span class="math inline">\(\mu_{i}\)</span>, causing the deviance to be small.</li>
+<li>If this value greatly exceeds one, it may be indicative of overdispersion.</li>
+</ul>
+<p>The rationale for this heuristic is based on the fact that the residual deviance is <span class="math inline">\(\chi^2_k\)</span> distributed with mean equal to the degrees of freedom (n-p). Instead of using this rule of thumb it is just as simple to formulate a goodness-of-fit test for our model as follows</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="9.5-single-predictor-model-1.html#cb125-1" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(<span class="fu">summary</span>(model1)<span class="sc">$</span>deviance, <span class="fu">summary</span>(model1)<span class="sc">$</span>df.residual )</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<p>The test of the model’s deviance is a test of the model against the null model. The null hypothesis is the fitted model fits the data as well as the saturated model. In this case, rejecting the null hypothesis (e.g. <span class="math inline">\(p &gt; 0.05\)</span>), indicates the Poisson model does not fit well. For more information see this wonderful post on stackexchange: <a href="https://stats.stackexchange.com/a/531484" class="uri">https://stats.stackexchange.com/a/531484</a>.</p>
+</div>
+<div id="overdispersion-1" class="section level3 hasAnchor" number="9.5.4">
+<h3><span class="header-section-number">9.5.4</span> Overdispersion?<a href="9.5-single-predictor-model-1.html#overdispersion-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The deviance statistic suggests there may be a problem with overdispersion?</p>
+<p><em>Overdispersion indicates there is greater variability in the data than would be expected based on the model.</em></p>
+<p>Overdispersion is often encountered when fitting simple Poisson regression models. The Poisson distribution has one free parameter and does not allow for the variance to be adjusted independently of the mean.</p>
+<p>If overdispersion is present the resultant model may yield biased parameter estimates and underestimated standard errors, possibly leading to invalid conclusions.</p>
+</div>
+<div id="interpretation-of-single-predictor-model" class="section level3 hasAnchor" number="9.5.5">
+<h3><span class="header-section-number">9.5.5</span> Interpretation of Single Predictor Model<a href="9.5-single-predictor-model-1.html#interpretation-of-single-predictor-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Intercept in Log Units</strong></p>
+<p>This is the Poisson regression estimate when all variables in the model are evaluated at zero. For our model, we have centered the income variable. This means for an individual with an average income level the log of the expected count for health problems is <span class="math inline">\(1.007\)</span> units.</p>
+<p><strong>Intercept in Count Units</strong></p>
+<p>We can also exponentiate the intercept, <span class="math inline">\(exp(1.007) = 2.7\)</span> indicating that at Wave 1 follow-up, an individual with an average income level is expected to have approximately <span class="math inline">\(2.7\)</span> health problems.</p>
+<div id="slope-coefficient" class="section level4 hasAnchor" number="9.5.5.1">
+<h4><span class="header-section-number">9.5.5.1</span> Slope Coefficient<a href="9.5-single-predictor-model-1.html#slope-coefficient" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><strong>Slope Coefficient in Log Units</strong></p>
+<p>Within our single predictor model, <span class="math inline">\(b_1\)</span> is the difference in <em>log</em> number of health problems for a 1-level difference in income bracket.</p>
+<p>Therefore, we expect a <span class="math inline">\(-0.03\)</span> difference in the log-count of health problems for a 1-level difference in income brackets. Or, all else being equal, we might expect to see a <span class="math inline">\(3\%\)</span> percent decrease in the number of health problems with each additional unit-change in income level.</p>
+<p>This relation may be difficult to conceptualize because the outcome variable is in terms of logarithm units, so a plot may be a more intuitive display of the results.</p>
+<p><strong>Marginal Effects</strong></p>
+<p>Let’s turn to the <code>marginaleffects</code> <span class="citation">(<a href="#ref-bundock">Arel-Bundock 2022</a>)</span> package to look at the marginal effects of income on health.</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="9.5-single-predictor-model-1.html#cb127-1" tabindex="-1"></a>marginaleffects<span class="sc">::</span><span class="fu">plot_cap</span>(model1, <span class="at">condition =</span> <span class="fu">c</span>(<span class="st">&quot;income_star&quot;</span>), <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## Warning: This function has been renamed to `plot_predictions()`. The `plot_cap()`
+##   alias will be removed in the near future.</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-106-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-bundock" class="csl-entry">
+Arel-Bundock, Vincent. 2022. <em>Marginaleffects: Marginal Effects, Marginal Means, Predictions, and Contrasts</em>. <a href="https://CRAN.R-project.org/package=marginaleffects">https://CRAN.R-project.org/package=marginaleffects</a>.
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="1.2-code-folding.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="9.4-example-data-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="9.6-multiple-predictor-model.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -454,7 +536,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/zackfisher/HDFS523/edit/master/index.Rmd",
+"link": "https://github.com/zackfisher/HDFS523/edit/master/09_poisson.Rmd",
 "text": "Suggest an edit"
 },
 "history": {
