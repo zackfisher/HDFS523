@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9.7 Revisisting Overdispersion | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
   <meta name="description" content="Course notes for HDFS 523" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37.2 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9.7 Revisisting Overdispersion | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2024-02-19" />
+<meta name="date" content="2024-02-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="9.6-multiple-predictor-model.html"/>
-<link rel="next" href="10-chapter-9.html"/>
+<link rel="next" href="10-chapter-10.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -380,7 +380,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="9.3.1" data-path="9.3-notes-on-interpretation.html"><a href="9.3-notes-on-interpretation.html#one-predictor-model"><i class="fa fa-check"></i><b>9.3.1</b> One Predictor Model</a></li>
 <li class="chapter" data-level="9.3.2" data-path="9.3-notes-on-interpretation.html"><a href="9.3-notes-on-interpretation.html#similarity-to-logistic-regression"><i class="fa fa-check"></i><b>9.3.2</b> Similarity to Logistic Regression</a></li>
-<li class="chapter" data-level="9.3.3" data-path="9.3-notes-on-interpretation.html"><a href="9.3-notes-on-interpretation.html#percent-change"><i class="fa fa-check"></i><b>9.3.3</b> Percent Change</a></li>
+<li class="chapter" data-level="9.3.3" data-path="9.3-notes-on-interpretation.html"><a href="9.3-notes-on-interpretation.html#percentchange"><i class="fa fa-check"></i><b>9.3.3</b> Percent Change</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="9.4-example-data-4.html"><a href="9.4-example-data-4.html"><i class="fa fa-check"></i><b>9.4</b> Example Data</a>
 <ul>
@@ -399,11 +399,10 @@ div.csl-indent {
 <li class="chapter" data-level="9.7" data-path="9.7-revisisting-overdispersion.html"><a href="9.7-revisisting-overdispersion.html"><i class="fa fa-check"></i><b>9.7</b> Revisisting Overdispersion</a>
 <ul>
 <li class="chapter" data-level="9.7.1" data-path="9.7-revisisting-overdispersion.html"><a href="9.7-revisisting-overdispersion.html#quassi-poisson-family"><i class="fa fa-check"></i><b>9.7.1</b> Quassi-Poisson Family</a></li>
-<li class="chapter" data-level="9.7.2" data-path="9.7-revisisting-overdispersion.html"><a href="9.7-revisisting-overdispersion.html#negative-binomial-regression"><i class="fa fa-check"></i><b>9.7.2</b> Negative Binomial Regression</a></li>
-<li class="chapter" data-level="9.7.3" data-path="9.7-revisisting-overdispersion.html"><a href="9.7-revisisting-overdispersion.html#references-2"><i class="fa fa-check"></i><b>9.7.3</b> References</a></li>
+<li class="chapter" data-level="9.7.2" data-path="9.7-revisisting-overdispersion.html"><a href="9.7-revisisting-overdispersion.html#references-2"><i class="fa fa-check"></i><b>9.7.2</b> References</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="9-chapter-9.html"><a href="9-chapter-9.html#chapter-9"><i class="fa fa-check"></i><b>10</b> Two-Occassion change</a>
+<li class="chapter" data-level="10" data-path="10-chapter-10.html"><a href="10-chapter-10.html"><i class="fa fa-check"></i><b>10</b> Two-Occassion change</a>
 <ul>
 <li class="chapter" data-level="10.1" data-path="10.1-example-data-i.html"><a href="10.1-example-data-i.html"><i class="fa fa-check"></i><b>10.1</b> Example Data I</a></li>
 <li class="chapter" data-level="10.2" data-path="10.2-inroduction.html"><a href="10.2-inroduction.html"><i class="fa fa-check"></i><b>10.2</b> Inroduction</a>
@@ -473,30 +472,46 @@ div.csl-indent {
 <div id="revisisting-overdispersion" class="section level2 hasAnchor" number="9.7">
 <h2><span class="header-section-number">9.7</span> Revisisting Overdispersion<a href="9.7-revisisting-overdispersion.html#revisisting-overdispersion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Let’s run our model fit test based on the deviance for <code>model2</code>.</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="9.7-revisisting-overdispersion.html#cb133-1" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(<span class="fu">summary</span>(model2)<span class="sc">$</span>deviance, <span class="fu">summary</span>(model2)<span class="sc">$</span>df.residual )</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="9.7-revisisting-overdispersion.html#cb137-1" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(<span class="fu">summary</span>(model2)<span class="sc">$</span>deviance, <span class="fu">summary</span>(model2)<span class="sc">$</span>df.residual )</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>Again, we reject the hypothesis of a close fit between model and data. To gain a little more insight we can plot estimates of the variance against the expected value, alongside a line with an intercept of zero and a slope of 1.</p>
 <p>We expect the data points to fall somewhat evenly along that line. Here, it appears our variance is consistently larger than our mean, indicating the possibility of overdispersion.</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="9.7-revisisting-overdispersion.html#cb135-1" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb135-2"><a href="9.7-revisisting-overdispersion.html#cb135-2" tabindex="-1"></a>  <span class="fu">log</span>(<span class="fu">fitted</span>(model2)),</span>
-<span id="cb135-3"><a href="9.7-revisisting-overdispersion.html#cb135-3" tabindex="-1"></a>  <span class="fu">log</span>((ferraro2016<span class="sc">$</span>morbidityw1<span class="sc">-</span><span class="fu">fitted</span>(model2))<span class="sc">^</span><span class="dv">2</span>),</span>
-<span id="cb135-4"><a href="9.7-revisisting-overdispersion.html#cb135-4" tabindex="-1"></a>  <span class="at">xlab=</span><span class="fu">expression</span>(<span class="fu">hat</span>(mu)),</span>
-<span id="cb135-5"><a href="9.7-revisisting-overdispersion.html#cb135-5" tabindex="-1"></a>  <span class="at">ylab=</span><span class="fu">expression</span>((y<span class="sc">-</span><span class="fu">hat</span>(mu))<span class="sc">^</span><span class="dv">2</span>),</span>
-<span id="cb135-6"><a href="9.7-revisisting-overdispersion.html#cb135-6" tabindex="-1"></a>  <span class="at">pch=</span><span class="dv">20</span>,<span class="at">col=</span><span class="st">&quot;blue&quot;</span></span>
-<span id="cb135-7"><a href="9.7-revisisting-overdispersion.html#cb135-7" tabindex="-1"></a>)</span>
-<span id="cb135-8"><a href="9.7-revisisting-overdispersion.html#cb135-8" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>) <span class="do">## &#39;varianc = mean&#39; line</span></span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
-<p>Two ways we might handle this overdispersion are <strong>(1)</strong> estimate the overdispersion parameter directly within the model, or <strong>(2)</strong> use a negative binomial model.</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="9.7-revisisting-overdispersion.html#cb139-1" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb139-2"><a href="9.7-revisisting-overdispersion.html#cb139-2" tabindex="-1"></a>  <span class="fu">log</span>(<span class="fu">fitted</span>(model2)),</span>
+<span id="cb139-3"><a href="9.7-revisisting-overdispersion.html#cb139-3" tabindex="-1"></a>  <span class="fu">log</span>((ferraro2016<span class="sc">$</span>morbidityw1<span class="sc">-</span><span class="fu">fitted</span>(model2))<span class="sc">^</span><span class="dv">2</span>),</span>
+<span id="cb139-4"><a href="9.7-revisisting-overdispersion.html#cb139-4" tabindex="-1"></a>  <span class="at">xlab=</span><span class="fu">expression</span>(<span class="fu">hat</span>(mu)),</span>
+<span id="cb139-5"><a href="9.7-revisisting-overdispersion.html#cb139-5" tabindex="-1"></a>  <span class="at">ylab=</span><span class="fu">expression</span>((y<span class="sc">-</span><span class="fu">hat</span>(mu))<span class="sc">^</span><span class="dv">2</span>),</span>
+<span id="cb139-6"><a href="9.7-revisisting-overdispersion.html#cb139-6" tabindex="-1"></a>  <span class="at">pch=</span><span class="dv">20</span>,<span class="at">col=</span><span class="st">&quot;blue&quot;</span></span>
+<span id="cb139-7"><a href="9.7-revisisting-overdispersion.html#cb139-7" tabindex="-1"></a>)</span>
+<span id="cb139-8"><a href="9.7-revisisting-overdispersion.html#cb139-8" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>) <span class="do">## &#39;varianc = mean&#39; line</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
+<p>We can also run some formal tests for overdispersion. For example, using the <strong>AER</strong> package we can estimate an overdispersion parameter and test whether or not it equals zero.</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="9.7-revisisting-overdispersion.html#cb140-1" tabindex="-1"></a>AER<span class="sc">::</span><span class="fu">dispersiontest</span>(model2,<span class="at">trafo=</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## Warning in y - yhat: longer object length is not a multiple of shorter object
+## length</code></pre>
+<pre><code>## Warning in (y - yhat)^2 - y: longer object length is not a multiple of shorter
+## object length</code></pre>
+<pre><code>## 
+##  Overdispersion test
+## 
+## data:  model2
+## z = 13.22, p-value &lt; 2.2e-16
+## alternative hypothesis: true alpha is greater than 0
+## sample estimates:
+##    alpha 
+## 1.986701</code></pre>
+<p>Here we clearly see that there is evidence of overdispersion (<span class="math inline">\(\alpha\)</span> is estimated to be 1.986) which speaks quite strongly against the assumption of equidispersion (i.e. <span class="math inline">\(\alpha=0\)</span>).</p>
+<p>One way to handle this is to fit a estimate with overdispersion parameter directly in the model using a quassipoison approach.</p>
 <div id="quassi-poisson-family" class="section level3 hasAnchor" number="9.7.1">
 <h3><span class="header-section-number">9.7.1</span> Quassi-Poisson Family<a href="9.7-revisisting-overdispersion.html#quassi-poisson-family" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If we want to test and adjust for overdispersion we can add a scale parameter with the <code>family=quasipoisson</code> option. The estimated scale parameter will be labeled as <code>Overdispersion parameter</code> in the output.</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="9.7-revisisting-overdispersion.html#cb136-1" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
-<span id="cb136-2"><a href="9.7-revisisting-overdispersion.html#cb136-2" tabindex="-1"></a>  <span class="at">formula =</span> morbidityw1 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> abuse_rare <span class="sc">+</span> income_star <span class="sc">+</span> abuse_rare<span class="sc">:</span>income_star, </span>
-<span id="cb136-3"><a href="9.7-revisisting-overdispersion.html#cb136-3" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">quasipoisson</span>(<span class="at">link=</span>log), </span>
-<span id="cb136-4"><a href="9.7-revisisting-overdispersion.html#cb136-4" tabindex="-1"></a>  <span class="at">data =</span> ferraro2016,</span>
-<span id="cb136-5"><a href="9.7-revisisting-overdispersion.html#cb136-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
-<span id="cb136-6"><a href="9.7-revisisting-overdispersion.html#cb136-6" tabindex="-1"></a>)</span>
-<span id="cb136-7"><a href="9.7-revisisting-overdispersion.html#cb136-7" tabindex="-1"></a><span class="fu">summary</span>(model3)</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="9.7-revisisting-overdispersion.html#cb144-1" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb144-2"><a href="9.7-revisisting-overdispersion.html#cb144-2" tabindex="-1"></a>  <span class="at">formula =</span> morbidityw1 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> abuse_rare <span class="sc">+</span> income_star <span class="sc">+</span> abuse_rare<span class="sc">:</span>income_star, </span>
+<span id="cb144-3"><a href="9.7-revisisting-overdispersion.html#cb144-3" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">quasipoisson</span>(<span class="at">link=</span>log), </span>
+<span id="cb144-4"><a href="9.7-revisisting-overdispersion.html#cb144-4" tabindex="-1"></a>  <span class="at">data =</span> ferraro2016,</span>
+<span id="cb144-5"><a href="9.7-revisisting-overdispersion.html#cb144-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
+<span id="cb144-6"><a href="9.7-revisisting-overdispersion.html#cb144-6" tabindex="-1"></a>)</span>
+<span id="cb144-7"><a href="9.7-revisisting-overdispersion.html#cb144-7" tabindex="-1"></a><span class="fu">summary</span>(model3)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = morbidityw1 ~ 1 + abuse_rare + income_star + abuse_rare:income_star, 
@@ -520,71 +535,25 @@ div.csl-indent {
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
 <p>The new standard errors (in comparison to the model without the overdispersion parameter), are larger, Thus, the Wald statistics will be smaller and less likely to be significant.</p>
+<p>We could also use a likelihood-ratio test to test whether a quasipoisson GLM with overdispersion is significantly better than a regular poisson GLM without overdispersion :</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="9.7-revisisting-overdispersion.html#cb146-1" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="fu">summary</span>(model3)<span class="sc">$</span>dispersion <span class="sc">*</span> model2<span class="sc">$</span>df.residual, </span>
+<span id="cb146-2"><a href="9.7-revisisting-overdispersion.html#cb146-2" tabindex="-1"></a>               model2<span class="sc">$</span>df.residual, <span class="at">lower =</span> <span class="cn">FALSE</span>) </span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<p>This results suggest we would reject the null hypothesis of the Poisson regression being a superior fit to the quasipoisson approach, providing evidence for the quasipoisson model.</p>
 </div>
-<div id="negative-binomial-regression" class="section level3 hasAnchor" number="9.7.2">
-<h3><span class="header-section-number">9.7.2</span> Negative Binomial Regression<a href="9.7-revisisting-overdispersion.html#negative-binomial-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We can also fit a negative binomial model, in which allows dispersion or variance in the outcome. The negative binomial distribution has one parameter more than the Poisson regression. This parameters adjusts the variance independently from the mean. In fact, the Poisson distribution is a special case of the negative binomial distribution.</p>
-<p>Importantly, the Poisson and Negative Binomial have the same mean structure, so we can interpret coefficients in the same way. However, we will need to use the <code>MASS</code> package <span class="citation">(<a href="#ref-venables">Venables and Ripley 2002</a>)</span> to fit the Negative Binomial regression.</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="9.7-revisisting-overdispersion.html#cb138-1" tabindex="-1"></a>model4 <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">glm.nb</span>(</span>
-<span id="cb138-2"><a href="9.7-revisisting-overdispersion.html#cb138-2" tabindex="-1"></a>  <span class="at">formula =</span> morbidityw1 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> abuse_rare <span class="sc">+</span> income_star <span class="sc">+</span> abuse_rare<span class="sc">:</span>income_star, </span>
-<span id="cb138-3"><a href="9.7-revisisting-overdispersion.html#cb138-3" tabindex="-1"></a>  <span class="at">data =</span> ferraro2016,</span>
-<span id="cb138-4"><a href="9.7-revisisting-overdispersion.html#cb138-4" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
-<span id="cb138-5"><a href="9.7-revisisting-overdispersion.html#cb138-5" tabindex="-1"></a>)</span>
-<span id="cb138-6"><a href="9.7-revisisting-overdispersion.html#cb138-6" tabindex="-1"></a><span class="fu">summary</span>(model4)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## MASS::glm.nb(formula = morbidityw1 ~ 1 + abuse_rare + income_star + 
-##     abuse_rare:income_star, data = ferraro2016, na.action = na.exclude, 
-##     init.theta = 1.529056769, link = log)
-## 
-## Coefficients:
-##                           Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)              1.0766474  0.0221378  48.634  &lt; 2e-16 ***
-## abuse_rare1             -0.2382366  0.0406825  -5.856 4.74e-09 ***
-## income_star             -0.0311705  0.0156452  -1.992   0.0463 *  
-## abuse_rare1:income_star -0.0004478  0.0289957  -0.015   0.9877    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for Negative Binomial(1.5291) family taken to be 1)
-## 
-##     Null deviance: 3375.4  on 2966  degrees of freedom
-## Residual deviance: 3334.7  on 2963  degrees of freedom
-##   (55 observations deleted due to missingness)
-## AIC: 12770
-## 
-## Number of Fisher Scoring iterations: 1
-## 
-## 
-##               Theta:  1.5291 
-##           Std. Err.:  0.0682 
-## 
-##  2 x log-likelihood:  -12760.4610</code></pre>
-<p>We notice the smaller dispersion parameter, approximately <span class="math inline">\(1.53\)</span>, providing some support the negative binomial is a better fit for our data.</p>
-<p>We can also test the hypothesis of overdispersion formally using a likelihood ratio test. The difference between the two models is captured by estimating a dispersion parameter that is held constant in a Poisson model. Thus, the Poisson model is actually nested in the negative binomial model. We can then use a likelihood ratio test to compare the two and test this model assumption.</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="9.7-revisisting-overdispersion.html#cb140-1" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="dv">2</span> <span class="sc">*</span> (<span class="fu">logLik</span>(model4) <span class="sc">-</span> <span class="fu">logLik</span>(model2)), <span class="at">df =</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>## &#39;log Lik.&#39; 0 (df=5)</code></pre>
-<p>In this example the associated chi-squared value estimated from <span class="math inline">\(2*(logLik(\mathrm{negative \:binomial}) – logLik(\mathrm{poisson}))\)</span> is <span class="math inline">\(1968.679\)</span> with one degree of freedom. This strongly suggests the negative binomial model, estimating the dispersion parameter, is more appropriate than the Poisson model.</p>
-</div>
-<div id="references-2" class="section level3 hasAnchor" number="9.7.3">
-<h3><span class="header-section-number">9.7.3</span> References<a href="9.7-revisisting-overdispersion.html#references-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="references-2" class="section level3 hasAnchor" number="9.7.2">
+<h3><span class="header-section-number">9.7.2</span> References<a href="9.7-revisisting-overdispersion.html#references-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 </div>
 </div>
 <!-- </div> -->
-<h3>References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-venables" class="csl-entry">
-Venables, W. N., and B. D. Ripley. 2002. <em>Modern Applied Statistics with s</em>. Fourth. New York: Springer. <a href="https://www.stats.ox.ac.uk/pub/MASS4/">https://www.stats.ox.ac.uk/pub/MASS4/</a>.
-</div>
-</div>
             </section>
 
           </div>
         </div>
       </div>
 <a href="9.6-multiple-predictor-model.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="10-chapter-9.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="10-chapter-10.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -624,7 +593,8 @@ gitbook.start({
 "toc": {
 "collapse": "section"
 },
-"info": true
+"info": true,
+"output": "html_document2"
 });
 });
 </script>

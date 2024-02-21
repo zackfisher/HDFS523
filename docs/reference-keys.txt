@@ -152,7 +152,7 @@ poisson-distribution
 notes-on-interpretation
 one-predictor-model
 similarity-to-logistic-regression
-percent-change
+percentchange
 example-data-4
 dependent-variable
 explanatory-variables
@@ -168,8 +168,8 @@ slope-coefficient
 multiple-predictor-model
 revisisting-overdispersion
 quassi-poisson-family
-negative-binomial-regression
 references-2
+chapter-10
 example-data-i
 inroduction
 a-thought-experiment
@@ -207,3 +207,4 @@ random-assignment
 observational-studies
 two-occassion-change
 references-3
+introduction

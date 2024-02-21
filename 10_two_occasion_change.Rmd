@@ -1,4 +1,4 @@
-# Two-Occassion change {#chapter-9}
+# Two-Occassion change {#chapter-10}
 
 ```{r, echo = F}
 button <-  "position: relative; 
@@ -20,6 +20,33 @@ In this section we will introduce longitudinal models in their most basic form: 
 This script works through some basic representations of change, more specifically (1) autoregressive models of change (residualized change), and  (2) difference-score models (raw change) of change. These two models consider and answer different kinds of research questions: questions about change in interindividual differences and questions about intraindividual change.
 
 **Importantly, we will first consider models without predictors to get a sense of how these approaches differ. We will then consider a dichotomous predictor representing two groups, which is arguably the most common scenario when these two models are compared: looking at pre- and post-test differences among two groups** 
+
+
+
+## Introduction
+
+### A Thought Experiment 
+
+Now that we are considering repeated measures data it is helpful to thinking about what repeated measures buy us. Here are a few thoughts:
+
+With cross-sectional data:
+
+- No sense of passage of time 
+- Cannot control for what happened at earlier timepoints
+- Causality (e.g. cause precedes the effect, cause related to effect, plausible alternatives)
+- Depending on true change process, cross-sectional slice may mislead
+- Must rely more heavily on theory (e.g. equivalent models [@maccallum1993])
+
+### Equivalent Models in Psychology
+
+
+
+#### Equivalent Models: An Example
+
+![Excerpt from @maccallum1993](imgs/equiv_models_study.jpg){width=500px}
+
+### Examples of Equivalent Models
+![Figure 3 from @maccallum1993](imgs/equiv.jpg)
 
 ## Example Data I
 
@@ -47,32 +74,6 @@ And some bivariate plots of the two-occasion relations.
 ```{r}
 psych::pairs.panels(wiscsub[,c("verb1","verb6")])
 ```
-
-
-## Inroduction
-
-### A Thought Experiment 
-
-Now that we are considering repeated measures data it is helpful to thinking about what repeated measures buy us. Here are a few thoughts:
-
-With cross-sectional data:
-
-- No sense of passage of time 
-- Cannot control for what happened at earlier timepoints
-- Causality (e.g. cause precedes the effect, cause related to effect, plausible alternatives)
-- Depending on true change process, cross-sectional slice may mislead
-- Must rely more heavily on theory (e.g. equivalent models [@maccallum1993])
-
-### Equivalent Models in Psychology
-
-
-
-### Equivalent Models: An Example
-
-![Excerpt from @maccallum1993](imgs/equiv_models_study.jpg){width=500px}
-
-### Examples of Equivalent Models
-![Figure 3 from @maccallum1993](imgs/equiv.jpg)
 
 
 ## Residualized Change

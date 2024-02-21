@@ -107,7 +107,7 @@ Interpretation of the Poisson regression coefficients is similar to logistic reg
 - $\mathrm{exp}(\beta_{0})$ is the effect on the mean of $Y$ when $\mathbf{x}=0$
 - $\mathrm{exp}(\beta_{1})$ is the multiplicative effect on the mean of $Y$ for each 1-unit difference in $\mathbf{x_{1}}$
 
-### Percent Change
+### Percent Change {#percentchange}
 
 We can also talk about these regression coefficients in terms of percent change as follows,
 
@@ -203,6 +203,11 @@ model1 <- glm(
 )
 ```
 
+```{r}
+summary(model1)
+```
+
+
 ### Deviance and Goodness of Fit
 
 ```{r}
@@ -235,6 +240,12 @@ If overdispersion is present the resultant model may yield biased parameter esti
 
 ### Interpretation of Single Predictor Model
 
+How do we interpret the coefficients from our single predictor poisson regression?
+
+In the classic linear regression model we might interpret a slope coefficient as characterizing the change in mean number of health problems for a 1-unit increase in income. 
+
+In our Poisson regression we are modeling the **log of the mean number** of health problems, so we must convert back to original units. 
+
 **Intercept in Log Units**
 
 This is the Poisson regression estimate when all variables in the model are evaluated at zero. For our model, we have centered the income variable. This means for an individual with an average income level the log of the expected count for health problems is $1.007$ units. 
@@ -249,9 +260,35 @@ We can also exponentiate the intercept, $exp(1.007) = 2.7$ indicating that at Wa
 
 Within our single predictor model, $b_1$ is the difference in *log* number of health problems for a 1-level difference in income bracket. 
 
-Therefore, we expect a $-0.03$ difference in the log-count of health problems for a 1-level difference in income brackets. Or, all else being equal, we might expect to see a $3\%$ percent decrease in the number of health problems with each additional unit-change in income level.
+For example, consider a comparison of two models—one for a given income bracket $(x)$, and one income bracket higher $(x+1)$:
 
-This relation may be difficult to conceptualize because the outcome variable is in terms of logarithm units, so a plot may be a more intuitive display of the results.
+\begin{equation}
+\begin{split}
+log(\mu_X) &= \beta_0 + \beta_1X \\
+log(\mu_{X+1}) &= \beta_0 + \beta_1(X+1) \\
+log(\mu_{X+1})-log(\mu_X) &=  \beta_1 \\
+log \left(\frac{\mu_{X+1}}{\mu_X}\right)   &= \beta_1\\
+\frac{\mu_{X+1}}{\mu_X} &= e^{\beta_1}
+\end{split}
+\tag{4.1}
+\end{equation}
+
+These results suggest that by exponentiating the coefficient of income, we obtain the multiplicative factor by which the mean count of health problems change. In this case, the mean number of health problems changes by a factor of $e^{(-0.032445)}=0.968$.
+
+
+We might also think about percent change as in Section \@ref(percentchange). Here we would $1-e^{(-0.032445)}*100=3.19$ percent decrease in the number of health problems for a 1-unit increase in income band. 
+
+To calculate the percentage change you can use the formulas in Section \@ref(percentchange) or use the **catregs** package on github.
+
+```{r}
+# manual
+#(1-exp(coef(model1)[2]))*100 # if slope is negative, % decrease
+#(exp(coef(model1)[1])-1)*100 # if slope is positive, % increase
+
+# using catregs
+#devtools::install_github("dmmelamed/catregs")
+catregs::list.coef(model1)
+```
 
 **Marginal Effects**
 
@@ -333,7 +370,14 @@ plot(
 abline(0,1) ## 'varianc = mean' line
 ```
 
-Two ways we might handle this overdispersion are **(1)** estimate the overdispersion parameter directly within the model, or **(2)** use a negative binomial model.
+We can also run some formal tests for overdispersion. For example, using the **AER** package we can estimate an overdispersion parameter and test whether or not it equals zero.
+
+```{r}
+AER::dispersiontest(model2,trafo=1)
+```
+Here we clearly see that there is evidence of overdispersion ($\alpha$ is estimated to be 1.986) which speaks quite strongly against the assumption of equidispersion (i.e. $\alpha=0$).
+
+One way to handle this is to fit a estimate with overdispersion parameter directly in the model using a quassipoison approach.
 
 
 ### Quassi-Poisson Family
@@ -352,30 +396,12 @@ summary(model3)
 
 The new standard errors (in comparison to the model without the overdispersion parameter), are larger, Thus, the Wald statistics will be smaller and less likely to be significant.
 
-### Negative Binomial Regression
-
-We can also fit a negative binomial model, in which allows dispersion or variance in the outcome. The negative binomial distribution has one parameter more than the Poisson regression. This parameters adjusts the variance independently from the mean. In fact, the Poisson distribution is a special case of the negative binomial distribution.
-
-Importantly, the Poisson and Negative Binomial have the same mean structure, so we can interpret coefficients in the same way. However, we will need to use the `MASS` package [@venables] to fit the Negative Binomial regression.
+We could also use a likelihood-ratio test to test whether a quasipoisson GLM with overdispersion is significantly better than a regular poisson GLM without overdispersion :
 
 ```{r}
-model4 <- MASS::glm.nb(
-  formula = morbidityw1 ~ 1 + abuse_rare + income_star + abuse_rare:income_star, 
-  data = ferraro2016,
-  na.action = na.exclude
-)
-summary(model4)
+pchisq(summary(model3)$dispersion * model2$df.residual, 
+               model2$df.residual, lower = FALSE) 
 ```
-
-We notice the smaller dispersion parameter, approximately $1.53$, providing some support the negative binomial is a better fit for our data. 
-
-We can also test the hypothesis of overdispersion formally using a likelihood ratio test. The difference between the two models is captured by estimating a dispersion parameter that is held constant in a Poisson model. Thus, the Poisson model is actually nested in the negative binomial model. We can then use a likelihood ratio test to compare the two and test this model assumption. 
-
-
-```{r}
-pchisq(2 * (logLik(model4) - logLik(model2)), df = 1, lower.tail = FALSE)
-```
-
-In this example the associated chi-squared value estimated from $2*(logLik(\mathrm{negative \:binomial}) – logLik(\mathrm{poisson}))$ is $1968.679$ with one degree of freedom. This strongly suggests the negative binomial model, estimating the dispersion parameter, is more appropriate than the Poisson model.
+This results suggest we would reject the null hypothesis of the Poisson regression being a superior fit to the quasipoisson approach, providing evidence for the quasipoisson model.
 
 ### References
