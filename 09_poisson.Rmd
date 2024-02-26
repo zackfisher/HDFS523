@@ -152,10 +152,10 @@ For the remaining 2, cancer and heart disease, respondents were asked if they ha
 #### Early Life Disadvantage
 
 - *ses*: Childhood SES is a sum score based on standardized measures of (1) the education for the head of household, (2) financial strain and (3) receipt of welfare. 
-- *family*:	Family composition is a sum score based on (1) the presence of a male in the household, (2) parental divorce, and (3) death of parent prior to age 16,
+- *family*:	Family composition is a sum score based on (1) no presence of a male in the household, (2) parental divorce, and (3) death of parent prior to age 16,
 - *abuse_rare*:	Physical or Emotional Child abuse by parents is categorized by frequency of abuse.  abuse_rare indicates respondent rarely experience one or both types of abuse. The reference category is never having experienced emotional or physical abuse. 
-- *abuse_frequency1*:	abuse_frequency1 indicates respondents  frequently (sometimes or often) experienced one type of abuse during childhood. The reference category is never having experienced emotional or physical abuse.
-- *abuse_frequency2*:	abuse_frequency2 indicates respondents frequently experienced both types of abuse during childhood. The reference category is never having experienced emotional or physical abuse.
+- *abuse_freq1*:	abuse_frequency1 indicates respondents  frequently (sometimes or often) experienced one type of abuse during childhood. The reference category is never having experienced emotional or physical abuse.
+- *abuse_freq2*:	abuse_frequency2 indicates respondents frequently experienced both types of abuse during childhood. The reference category is never having experienced emotional or physical abuse.
 - *health*:	Adolescent health problems are measured by self-rated physical and mental health at age 16. 
 
 #### Adult Characteristics
@@ -343,7 +343,7 @@ While coefficients $b_0 + b_1$ and $b_2 + b_3$ describe the relation for those w
 Let's again turn to the `marginaleffects` [@bundock] package to look at the marginal effects of income and childhood abuse on health. 
 
 ```{r}
-marginaleffects::plot_cap(model2, condition = c("income_star","abuse_rare"), conf.int = TRUE)
+marginaleffects::plot_predictions(model2, condition = c("income_star","abuse_rare"), conf.int = TRUE)
 ```
 
 
@@ -403,5 +403,23 @@ pchisq(summary(model3)$dispersion * model2$df.residual,
                model2$df.residual, lower = FALSE) 
 ```
 This results suggest we would reject the null hypothesis of the Poisson regression being a superior fit to the quasipoisson approach, providing evidence for the quasipoisson model.
+
+### Marginal Effects Examples
+
+Fit our main model.
+
+```{r}
+model4 <- glm(
+  formula = morbidityw1 ~ 1 + health + abuse_rare + income_star + abuse_rare:income_star, 
+  family = quasipoisson(link=log), 
+  data = ferraro2016,
+  na.action = na.exclude
+)
+summary(model4)
+```
+In GLM models, most quantities of interest are conditional, in the sense that they will typically depend on the values of all the predictors in the model. Therefore, we need to decide where in the predictor space we want to evaluate the quantity of interest described above.
+
+
+
 
 ### References

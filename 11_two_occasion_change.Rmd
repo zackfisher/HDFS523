@@ -1,4 +1,4 @@
-# Two-Occassion change {#chapter-10}
+# Two-Occassion Change {#chapter-11}
 
 ```{r, echo = F}
 button <-  "position: relative; 
@@ -15,12 +15,11 @@ button <-  "position: relative;
 codefolder::bookdown(init = "show", style = button)
 ```
 
-In this section we will introduce longitudinal models in their most basic form: repeated measures collected at two occasions. Two-occasions data are a natural starting point for studying change: all longitudinal data collection begins with two occasions. Given any two-occasion repeated measures data, popular analytic approaches include autoregressive and difference score models. 
+In this section we will introduce longitudinal models in their most basic form: repeated measures collected at two occasions. 
 
-This script works through some basic representations of change, more specifically (1) autoregressive models of change (residualized change), and  (2) difference-score models (raw change) of change. These two models consider and answer different kinds of research questions: questions about change in interindividual differences and questions about intraindividual change.
+Two-occasions data are a natural starting point for studying change: all longitudinal data collection begins with two occasions. Given any two-occasion repeated measures data, popular analytic approaches include the ANCOVA (autoregressive) and difference score models. 
 
-**Importantly, we will first consider models without predictors to get a sense of how these approaches differ. We will then consider a dichotomous predictor representing two groups, which is arguably the most common scenario when these two models are compared: looking at pre- and post-test differences among two groups** 
-
+This script works through some basic representations of change, more specifically (1) autoregressive models of change, and  (2) difference-score models of change. These two models consider and answer different kinds of research questions: questions about change in interindividual differences and questions about intraindividual change.
 
 
 ## Introduction
@@ -37,16 +36,20 @@ With cross-sectional data:
 - Depending on true change process, cross-sectional slice may mislead
 - Must rely more heavily on theory (e.g. equivalent models [@maccallum1993])
 
-### Equivalent Models in Psychology
+<h3> Equivalent Models and Time Dependence </h3> 
+
+In addition to allowing us to model processes unfolding across time, repeated measures also allow us to address an important problem in applied modeling: the existence of equivalent models. 
 
 
-
-#### Equivalent Models: An Example
+<h3> Equivalent Models: An Example </h3> 
 
 ![Excerpt from @maccallum1993](imgs/equiv_models_study.jpg){width=500px}
 
-### Examples of Equivalent Models
+<h4> Examples of Equivalent Models </h4>
+
 ![Figure 3 from @maccallum1993](imgs/equiv.jpg)
+
+Now image these variables were collected at four different waves. This would eliminate the possibility of equivalent models under this scenario.
 
 ## Example Data I
 
@@ -75,14 +78,79 @@ And some bivariate plots of the two-occasion relations.
 psych::pairs.panels(wiscsub[,c("verb1","verb6")])
 ```
 
+## Two-Occassions of Change
 
-## Residualized Change
+Although we may prefer to have more timepoints, two waves of data is
+
+-  often what is available or affordable,
+-  often directly related to a change of interest, e.g., pretest-posttest
+-  an improvement over cross-sectional data for many questions of interest
+
+
+<h3>  Notions of Stability </h3>
+
+<h5>  Stability in the Absolute or Exact Sense </h5>
+
+A variable may be considered stable to the extent that 
+
+- mean values for $y_{1}$ and $y_{2}$ are equal over time ($\bar{y}_{2}-\bar{y}_{1}=0$, $y_{2i}-y_{1i}=0$)
+- individual values of  $y_{1i}$ and $y_{2i}$ are equal over time ($y_{2i}-y_{1i}=0$)
+
+<h5>  Stability in the Relative Sense </h5>
+
+A variable may be considered stable to the extent that 
+
+- $y_{1i}$ and $y_{2i}$ are correlated ($r_{12}=1$)
+
+Note that mean or individual values may increase or decrease over time, but correlation will be largely unchanged unless relative position changes.
+
+<h3>  Notions of Change </h3>
+
+<h5>  Raw Change </h5>
+
+In thinking about difference scores (change scores, gain scores) we are often interested in the absolute change in the value of $y_{t}$.
+
+Difference scores captures increase or decrease in the mean values or
+individual values. 
+
+Correlation between $y_{1}$ and $y_{2}$ can be anywhere between $0$ or $1$ and difference scores may be small or large.
+
+For example. if $r_{12} = 1.0$ and we add $5$ points to $y_2$, $r_{12}$ will still be equl to $1.0$ but the mean difference will have changed.
+
+```{r, eval = FALSE}
+y1 <- c(1,1,1,2,2,2)
+y2 <- c(3,3,3,4,4,4)
+# cor(y1,y2) = 1
+# mean(y2-y1) = 2
+
+y2 <- y2 + 5
+# cor(y1,y2) = 1
+# mean(y2-y1) = 7
+```
+
+<h5>  Relative Change </h5>
+
+When we think about relative change, a lower correlation indicates greater change, but change is relative to other cases in the data and not absolute.
+
+For example, if $r_{12}=0.45$, and we all $5$ points to all scores, $r_{12}$ will still be $0.45$. Even though the scores themselves will all change, the relative degree of change is unaffected.
+
+<h5>  Compare Absolute and Relative Change </h5>
+
+![Image from Newsom (2011)](images/changepic.jpg)
+
+
+
+## Autoregressive Model
 
 Before introducing the model behind each approach is is helpful to consider the data characteristics underlying each notion of change. 
 
+<h3> Residualized Change </h3>
+
 The first approach uses the measure at the second time point as a dependent variable regressed on the the measure at the first time point. 
 
-The term residualized change comes from the fact that an outcome, such as verbal scores at grade 6, is regressed on itself at a prior occasion, verbal scores at grade 1. Any variability in the outcome that is explained by the lagged regressor will be set aside and is threfore not explainable by a key predictor. **Thus, the autoregressive effect residualizes the outcome leaving only variability that is unexplained by the lagged variable, which can be construed as the variability due to change.**
+The term residualized change comes from the fact that an outcome, such as verbal scores at grade 6, is regressed on itself at a prior occasion, verbal scores at grade 1. Any variability in the outcome that is explained by the lagged regressor will be set aside and is threfore not explainable by a key predictor. 
+
+**Thus, the autoregressive effect residualizes the outcome leaving only variability that is unexplained by the lagged variable, which can be construed as the variability due to change.**
 
 In this way it is helpful to view the data as a scatter plot, like we would in a regression model.
 
@@ -95,7 +163,103 @@ ggplot(data = wiscsub, aes(x = verb1, y = verb6)) +
   theme_bw()
 ```
 
-## Raw Change
+<h3> Autoregressive Model </h3>
+
+When researchers refer to the autoregressive (residualized change) model for two occasion data they are referring to the following multiple regression model:
+
+$$ y_{2i} = \beta_0 + \beta_1y_{1i} + e_{i} $$
+
+where 
+
+- $y_{1i}$ is the value of the outcome variable for individual $i$ at time $1$
+- $y_{2i}$ is the value of the outcome variable for individual $i$ at time $2$
+- $\beta_0$ is an intercept parameter, the expected value of $y_{2i}$ when $y_{1i}=0$
+- $\beta_1$ is a regression parameter indicating the difference in the predicted score of $y_{2i}$ based on a 1-unit difference in $y_{1i}$
+- $e_{i}$ is the model error for individual $i$
+
+Note, the term *residualized change* comes from the fact that the autoregressive effect *residualizes* the outcome. 
+
+**This leaves only the variability that is unexplained by the previous timepoint, or the variability due to change.**
+
+<h5>  Autoregressive Residuals </h5>
+
+With the autoregressive model it is helpful to think more about the residual term. Let's ignore the scaling constant for now, 
+
+If we subtract $y_{2i} -\beta_1y_{1i}$ from both sides of the AR equation we isolate the residuals:
+
+
+$$ 
+e_{i} = y_{2i} -\beta_1y_{1i} 
+$$
+
+**Here, the residualized change is the function of a weighted combination of our time 1 scores.**
+
+Instead of talking about raw change we are instead asking 
+
+> "Where would we predict you to be at time 2 given your standing relative to the mean at time 1?"**
+
+Consider the following scenarios:
+
+- $e_{i}$ is positive: you changed more in a positive direction than would have been expected.
+- $e_{i}$ is negative: you changed more in a negative direction than would have been expected.
+
+
+<h3>  Autoregressive Model in R </h3>
+
+As we said previously, the autoregrssive model is useful for examining questions about change in interindividual differences. The model for verbal scores at grade 6 can be written as   
+
+$$ verb6_{i} = \beta_{0} + \beta_{1}verb1_{i} + e_{i}$$
+
+We note that this is a model of relations among between-person differences. This model is similar to, but is not a single-subject time-series model (which are also called autoregressive models, but are fit to a different kind of data). 
+
+Translating the between-person autoregressive model into code and fitting it to the two-occasion WISC data we have
+
+```{r}
+ARfit <- lm(
+  formula = verb6 ~ 1 + verb1,
+  data=wiscsub,
+  na.action=na.exclude
+)
+summary(ARfit)
+```
+
+The *intercept* term, $\beta_{0}$ = 20.22 is the expected value of Verbal Ability at the 2nd occasion, for an individual with a Verbal Ability score = 0 at the 1st occasion. 
+
+The *slope* term, $\beta_{1}$ = 1.20 indicates that for every 1-point difference in Verbal Ability at the 1st occasion, we expect a 1.2 point difference at the 2nd occasion. 
+
+We can plot the autoregressive model prediction with confidence intervals (CI).
+
+The function `termplot` takes the fitted `lm` object.  The CI bounds are plotted with the `se` option and residuals with `partial.resid` option.
+
+```{r}
+termplot(ARfit,se=TRUE,partial.resid=TRUE,
+         main="Autoregressive Model",
+         xlab="Verbal Score at Grade 1",
+         ylab="Verbal Score at Grade 6")
+```
+
+Note that this code makes use of the `lm()` model object. 
+
+We can also do something similar with the raw data using `ggplot.`
+
+```{r, warning = FALSE}
+ggplot(data = wiscsub, aes(x = verb1, y = verb6)) +
+  geom_point() + 
+  geom_smooth(method="lm", formula= y ~ 1 + x, 
+              se=TRUE, fullrange=TRUE, color="red", size=2) +
+  xlab("Verbal Score at Grade 1") + 
+  ylab("Verbal Score at Grade 6") +
+  ggtitle("Autoregressive Model") +
+  theme_classic()
+```
+
+Note that this code embeds an `lm()` model within the `ggplot` function. 
+
+## Difference Score Model
+
+Again, let's first take a look at the data characteristics.
+
+<h3>  Raw Change </h3>
 
 The second approach involves computing a change score by subtracting the measure at time 1 from the measure at time 2 (e.g. $y_{t}-y_{t-1}$)
 
@@ -141,98 +305,7 @@ ggplot(data = wiscsublong, aes(x = grade, y = verb, group = id)) +
   theme_bw()
 ```
 
-
-## Autoregressive Models
-
-When researchers refer to the **autoregressive or residualized change** model for two occasion data they are referring to the following multiple regression model:
-
-$$ y_{2i} = \beta_0 + \beta_1y_{1i} + e_{i} $$
-
-where 
-
-- $y_{1i}$ is the value of the outcome variable for individual $i$ at time $1$
-- $y_{2i}$ is the value of the outcome variable for individual $i$ at time $2$
-- $\beta_0$ is an intercept parameter, the expected value of $y_{2i}$ when $y_{1i}=0$
-- $\beta_1$ is a regression parameter indicating the difference in the predicted score of $y_{2i}$ based on a 1-unit difference in $y_{1i}$
-- $e_{i}$ is the residual score for individual $i$
-
-Note, the term *residualized change* comes from the fact that the autoregressive effect *residualizes* the outcome. **This leaves only the variability that is unexplained by the previous timepoint, or the variability due to change.**
-
-### Autoregressive Residuals
-
-With the autoregressive model it is helpful to think more about the residual term. Let's ignore the scaling constant for now, 
-
-If we subtract $y_{2i} -\beta_1y_{1i}$ from both sides of the AR equation we isolate the residuals:
-
-
-$$ 
-e_{i} = y_{2i} -\beta_1y_{1i} 
-$$
-
-**Here, the residualized change is the function of a weighted combination of your time 1 scores. Instead of talking about raw change we are asking "Where would we predict you to be at time 2 given your standing relative to the mean at time 1?"**
-
-Consider the following scenarios:
-
-- $e_{i}$ is positive: you changed more in a positive direction than would have been expected.
-- $e_{i}$ is negative: you changed more in a negative direction than would have been expected.
-
-<!-- ### Path Diagram of Autoregressive Model -->
-
-<!-- ![Autoregressive Model](imgs/path_ar.jpg) -->
-
-
-### Autoregressive Model in R
-
-As we said previously, the autoregressive (AR) model is useful for examining questions about change in interindividual differences. The model for verbal scores at grade 6 can be written as   
-
-$$ verb6_{i} = \beta_{0} + \beta_{1}verb1_{i} + e_{i}$$
-
-We note that this is a model of relations among between-person differences. This model is similar to, but is not a single-subject time-series model (which are also called autoregressive models, but are fit to a different kind of data). 
-
-Translating the between-person autoregressive model into code and fitting it to the two-occasion WISC data we have
-
-```{r}
-ARfit <- lm(formula= verb6 ~ 1 + verb1,
-            data=wiscsub,
-            na.action=na.exclude)
-summary(ARfit)
-```
-
-The *intercept* term, $\beta_{0}$ = 20.22 is the expected value of Verbal Ability at the 2nd occasion, for an individual with a Verbal Ability score = 0 at the 1st occasion. 
-
-The *slope* term, $\beta_{1}$ = 1.20 indicates that for every 1-point difference in Verbal Ability at the 1st occasion, we expect a 1.2 point difference at the 2nd occasion. 
-
-We can plot the autoregressive model prediction with confidence intervals (CI).
-
-The function `termplot` takes the fitted `lm` object.  The CI bounds are plotted with the `se` option and residuals with `partial.resid` option.
-
-```{r}
-termplot(ARfit,se=TRUE,partial.resid=TRUE,
-         main="Autoregressive Model",
-         xlab="Verbal Score at Grade 1",
-         ylab="Verbal Score at Grade 6")
-```
-
-Note that this code makes use of the `lm()` model object. 
-
-We can also do something similar with the raw data using `ggplot.`
-
-```{r}
-ggplot(data = wiscsub, aes(x = verb1, y = verb6)) +
-  geom_point() + 
-  geom_smooth(method="lm", formula= y ~ 1 + x, 
-              se=TRUE, fullrange=TRUE, color="red", size=2) +
-  xlab("Verbal Score at Grade 1") + 
-  ylab("Verbal Score at Grade 6") +
-  ggtitle("Autoregressive Model") +
-  theme_classic()
-```
-
-Note that this code embeds an `lm()` model within the `ggplot` function. 
-
-## Difference Score Model
-
-### Calculating Difference Scores
+<h3>  Calculating Difference Scores </h3>
 
 Using the same repeated measures notation as above we can think about difference scores in the following way
 
@@ -249,9 +322,9 @@ We can calculate the difference score as
 $$ \Delta_{i} = y_{2i} - y_{1i}$$
 where $\Delta_{i}$ is a score just like other scores (we can calculate its mean and covariance with other variables, etc.).
 
-### Comparison to Residualized Change
+<h3>  Comparison to Residualized Change </h3>
 
-Remember when we talked about the residualize change model we showed the residual was equal to 
+Remember when we talked about the autoregressive change model we showed the residual was equal to 
 
 $$ 
 e_{i} = y_{2i} -\beta_1y_{1i} 
@@ -265,7 +338,8 @@ $$ \Delta_{i} = y_{2i} - y_{1i}$$
 
 What we see from this relationship is that **raw change is residualized change when $\beta_1 = 1$.** We can see these concepts are intimately linked.
 
-#### Difference Scores in WISC Data
+
+<h3>  Difference Scores in WISC Data </h3>
 
 For our empirical example we can write the difference score, or raw change in verbal ability, between Grades 1 and 6, as  
 
@@ -282,7 +356,8 @@ wiscsub$verbD <- wiscsub$verb6-wiscsub$verb1
 head(round(wiscsub,2))
 ```
 
-#### Difference Score Descriptives
+
+<h3>  Difference Score Descriptives </h3>
 
 Look at the descriptives with the difference score. 
 
@@ -301,7 +376,7 @@ psych::pairs.panels(wiscsub[,c("verb1","verbD")])
 
 **A note on computing difference scores**: always use raw scores when computing difference scores, Pre-standardizing variables discards important variance information.
 
-### A Difference Score Regression Model
+<h3>  A Difference Score Regression Model </h3>
 
 For the purpose of comparison consider a linear model is expressed for $i = 1$ to $N$ as
 
@@ -349,7 +424,9 @@ ggplot(data = wiscsub, aes(x = verb1, y = verbD)) +
 
 Note that each of these model results plots are regression plots: outcome on the y-axis, predictor on the x-axis.
 
-## Critique of Residualized Change
+## Critiques and Comparisons
+
+<h3> Critiques of the Autoregressive Model </h3>
 
 Some interpretational oddities arise from the autoregressive model that are worth considering.
 
@@ -360,8 +437,7 @@ Some interpretational oddities arise from the autoregressive model that are wort
 - *Individual 2*: Weight at time 1 was $250lbs$ and weight at time 2 is $230lbs$.
   - Relative standing is the same so there is *no residualized change*.
 
-
-## Critique of Difference Scores
+<h3> Critique of Difference Score Model </h3>
 
 There have also been some major historical critiques of differences scores (e.g. @cronbach1970a).
 
@@ -394,7 +470,7 @@ where
 - Variance of the difference score is entirely based on the variance of the differences in random error scores
 - the reliability of the difference scores is zero
 
-### Alternative Interpretation
+<h5> Alternative Interpretation </h5>
 
 This has led many to many historical critiques of difference scores. However, other researchers have pointed out this conclusion is based on how one envisions change. If, for example, we have the following theoretical model for change,
 
@@ -425,7 +501,7 @@ where
 - this implies difference scores may be an entirely appropriate means for measuring change
 
 
-## Comparing Models
+<h3> Comparing Models </h3>
 
 To compare the autoregressive (residualized change) and difference score models, it is useful to better understand their equivalence. Let's start with the autoregressive model and see if we can get to the change score model. 
 
@@ -453,6 +529,33 @@ coef(ARfit)
 coef(DIFfit)
 ```
 
+## Adding Explanatory Variables
+
+
+Assessing the effects of an intervention, grouping variable or construct on change in another construct is a central goal in virtually all areas of the social, health and behavioral sciences. 
+
+- developmental researchers interested in how the occurrence of particular life events (e.g., job loss, marriage) affects changes in well-being or personality. 
+- educational psychology researchers investigate how teacher characteristics (e.g.,competence, motivation) predict changes in students’ achievement. 
+
+
+Most researchers rely on one of two basic strategies when analyzing the prospective effects of one construct on another construct in the context of two-wave data: (1) the ANCOVA model or (2) the difference score model. 
+
+For example, in this situation the autoregressive model becomes the traditional ANCOVA model
+
+$$
+y_{2i} = \beta_{0} + \beta_{1} x_{i} + \beta_{2} y_{1i} + \epsilon_{i}
+$$
+and we have the following difference score model
+
+$$
+\Delta_{i} = \beta_{0} + \beta_{1}x_{i} + \epsilon_{i}
+$$
+where $x_{i}$ is either zero or one for the $i^th$ individual in the sample. Although not immediately obvious, the difference between these two approaches is that $\beta{2}$ is estimated in the ANCOVA model, and fixed to $1$ in the difference score approach.
+
+
+As pointed out by many different researchers over the year, it can be
+challenging to decide which of the two approaches is more appropriate. However, the decision is often critical as the two approaches can yield results that substantially differ concerning the magnitude, sign, and statistical significance of the estimated treatment effect.
+
 
 ## Lord's Paradox
 
@@ -470,7 +573,7 @@ One statistician uses difference scores and finds no significant difference betw
 
 > "[A]s far as these data are concerned, there is no evidence of any interesting effect of diet (or of anything else) on student weights. In particular, there is no evidence of any differential effect on the two sexes, since neither group shows any systematic change." (pg. 305) Visually, the first statistician sees that neither group mean ('A' and 'B') has changed, and concludes that the new diet had no causal impact.
 
-The second statistician uses the residualized change model. They find a significant difference between the two dining halls. Visually, the second statistician fits a regression model (green dotted lines), finds that the intercept differs for boys vs girls, and concludes that the new diet had a larger impact for males.
+The second statistician uses the ANCOVA (residualized change) model. They find a significant difference between the two sexes. Visually, the second statistician fits a regression model (green dotted lines), finds that the intercept differs for boys vs girls, and concludes that the new diet had a larger impact for males.
 
 > Lord concluded: "there simply is no logical or statistical procedure that can be counted on to make proper allowance for uncontrolled preexisting differences between groups."
 
