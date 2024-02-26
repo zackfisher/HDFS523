@@ -539,14 +539,13 @@ Marginal Effect at User-Specified Values
 <span id="cb158-3"><a href="10.4-marginaleffects-slopes.html#cb158-3" tabindex="-1"></a>  <span class="at">variables =</span> <span class="st">&quot;abuse_freq2&quot;</span>,</span>
 <span id="cb158-4"><a href="10.4-marginaleffects-slopes.html#cb158-4" tabindex="-1"></a>  <span class="at">newdata =</span> <span class="fu">datagrid</span>(</span>
 <span id="cb158-5"><a href="10.4-marginaleffects-slopes.html#cb158-5" tabindex="-1"></a>    <span class="at">age =</span> <span class="dv">30</span>,</span>
-<span id="cb158-6"><a href="10.4-marginaleffects-slopes.html#cb158-6" tabindex="-1"></a>    <span class="at">obse =</span> <span class="dv">1</span>,</span>
+<span id="cb158-6"><a href="10.4-marginaleffects-slopes.html#cb158-6" tabindex="-1"></a>    <span class="at">obese =</span> <span class="dv">1</span>,</span>
 <span id="cb158-7"><a href="10.4-marginaleffects-slopes.html#cb158-7" tabindex="-1"></a>    <span class="at">female =</span> <span class="dv">0</span></span>
 <span id="cb158-8"><a href="10.4-marginaleffects-slopes.html#cb158-8" tabindex="-1"></a>  )</span>
 <span id="cb158-9"><a href="10.4-marginaleffects-slopes.html#cb158-9" tabindex="-1"></a>)</span></code></pre></div>
-<pre><code>## Warning: Some of the variable names are missing from the model data: obse</code></pre>
 <pre><code>## 
 ##         Term Contrast Estimate Std. Error    z Pr(&gt;|z|)    S 2.5 % 97.5 %
-##  abuse_freq2    1 - 0    0.453     0.0872 5.19   &lt;0.001 22.2 0.282  0.624
+##  abuse_freq2    1 - 0     0.59      0.114 5.16   &lt;0.001 21.9 0.366  0.814
 ## 
 ## Columns: rowid, term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high, predicted_lo, predicted_hi, predicted 
 ## Type:  response</code></pre>
@@ -554,9 +553,9 @@ Marginal Effect at User-Specified Values
 Hypothesis Tests
 </H3>
 <p>We also might be interested in hypothesis tests based on our model. For example, compared to those who did not experience childhood trauma is the effect of experiencing emotional and physical abuse during childhood on adult health problems different depending on whether an individual experienced both, or just one of these type of abuse.</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="10.4-marginaleffects-slopes.html#cb161-1" tabindex="-1"></a><span class="fu">hypotheses</span>(model4, </span>
-<span id="cb161-2"><a href="10.4-marginaleffects-slopes.html#cb161-2" tabindex="-1"></a>  <span class="at">hypothesis =</span> <span class="st">&quot;abuse_freq11 = abuse_freq21&quot;</span></span>
-<span id="cb161-3"><a href="10.4-marginaleffects-slopes.html#cb161-3" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="10.4-marginaleffects-slopes.html#cb160-1" tabindex="-1"></a><span class="fu">hypotheses</span>(model4, </span>
+<span id="cb160-2"><a href="10.4-marginaleffects-slopes.html#cb160-2" tabindex="-1"></a>  <span class="at">hypothesis =</span> <span class="st">&quot;abuse_freq11 = abuse_freq21&quot;</span></span>
+<span id="cb160-3"><a href="10.4-marginaleffects-slopes.html#cb160-3" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## 
 ##                         Term Estimate Std. Error     z Pr(&gt;|z|)    S  2.5 %
 ##  abuse_freq11 = abuse_freq21   -0.183     0.0544 -3.36   &lt;0.001 10.3 -0.289

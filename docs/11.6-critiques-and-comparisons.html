@@ -552,10 +552,10 @@ y_{2i} - y_{1i} &amp;= \beta_{0} + \beta^{AR}_{1}y_{1i} - y_{1i} + \epsilon_{i} 
 \beta^{DIFF}_{1} = (\beta^{AR}_{1} - 1)
 \]</span></p>
 <p>We can confirm this relationship look at our model output:</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="11.6-critiques-and-comparisons.html#cb208-1" tabindex="-1"></a><span class="fu">coef</span>(ARfit)</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="11.6-critiques-and-comparisons.html#cb207-1" tabindex="-1"></a><span class="fu">coef</span>(ARfit)</span></code></pre></div>
 <pre><code>## (Intercept)       verb1 
 ##   20.224849    1.201174</code></pre>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="11.6-critiques-and-comparisons.html#cb210-1" tabindex="-1"></a><span class="fu">coef</span>(DIFfit)</span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="11.6-critiques-and-comparisons.html#cb209-1" tabindex="-1"></a><span class="fu">coef</span>(DIFfit)</span></code></pre></div>
 <pre><code>## (Intercept)       verb1 
 ##  20.2248493   0.2011741</code></pre>
 </div>

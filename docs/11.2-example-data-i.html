@@ -465,19 +465,19 @@ div.csl-indent {
 <div id="example-data-i" class="section level2 hasAnchor" number="11.2">
 <h2><span class="header-section-number">11.2</span> Example Data I<a href="11.2-example-data-i.html#example-data-i" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>For our first set of examples we will use the WISC data. Here we again read in, subset, and provide basic descriptives.</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="11.2-example-data-i.html#cb183-1" tabindex="-1"></a>filepath <span class="ot">&lt;-</span> <span class="st">&quot;https://quantdev.ssri.psu.edu/sites/qdev/files/wisc3raw.csv&quot;</span></span>
-<span id="cb183-2"><a href="11.2-example-data-i.html#cb183-2" tabindex="-1"></a></span>
-<span id="cb183-3"><a href="11.2-example-data-i.html#cb183-3" tabindex="-1"></a>wisc3raw <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file=</span><span class="fu">url</span>(filepath),<span class="at">header=</span><span class="cn">TRUE</span>)</span>
-<span id="cb183-4"><a href="11.2-example-data-i.html#cb183-4" tabindex="-1"></a></span>
-<span id="cb183-5"><a href="11.2-example-data-i.html#cb183-5" tabindex="-1"></a>var_names_sub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb183-6"><a href="11.2-example-data-i.html#cb183-6" tabindex="-1"></a>  <span class="st">&quot;id&quot;</span>, <span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb2&quot;</span>, <span class="st">&quot;verb4&quot;</span>, <span class="st">&quot;verb6&quot;</span>,</span>
-<span id="cb183-7"><a href="11.2-example-data-i.html#cb183-7" tabindex="-1"></a>  <span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo2&quot;</span>, <span class="st">&quot;perfo4&quot;</span>, <span class="st">&quot;perfo6&quot;</span>,</span>
-<span id="cb183-8"><a href="11.2-example-data-i.html#cb183-8" tabindex="-1"></a>  <span class="st">&quot;momed&quot;</span>, <span class="st">&quot;grad&quot;</span></span>
-<span id="cb183-9"><a href="11.2-example-data-i.html#cb183-9" tabindex="-1"></a>)</span>
-<span id="cb183-10"><a href="11.2-example-data-i.html#cb183-10" tabindex="-1"></a></span>
-<span id="cb183-11"><a href="11.2-example-data-i.html#cb183-11" tabindex="-1"></a>wiscsub <span class="ot">&lt;-</span> wisc3raw[,var_names_sub]</span>
-<span id="cb183-12"><a href="11.2-example-data-i.html#cb183-12" tabindex="-1"></a></span>
-<span id="cb183-13"><a href="11.2-example-data-i.html#cb183-13" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(wiscsub)</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="11.2-example-data-i.html#cb182-1" tabindex="-1"></a>filepath <span class="ot">&lt;-</span> <span class="st">&quot;https://quantdev.ssri.psu.edu/sites/qdev/files/wisc3raw.csv&quot;</span></span>
+<span id="cb182-2"><a href="11.2-example-data-i.html#cb182-2" tabindex="-1"></a></span>
+<span id="cb182-3"><a href="11.2-example-data-i.html#cb182-3" tabindex="-1"></a>wisc3raw <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file=</span><span class="fu">url</span>(filepath),<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb182-4"><a href="11.2-example-data-i.html#cb182-4" tabindex="-1"></a></span>
+<span id="cb182-5"><a href="11.2-example-data-i.html#cb182-5" tabindex="-1"></a>var_names_sub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb182-6"><a href="11.2-example-data-i.html#cb182-6" tabindex="-1"></a>  <span class="st">&quot;id&quot;</span>, <span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb2&quot;</span>, <span class="st">&quot;verb4&quot;</span>, <span class="st">&quot;verb6&quot;</span>,</span>
+<span id="cb182-7"><a href="11.2-example-data-i.html#cb182-7" tabindex="-1"></a>  <span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo2&quot;</span>, <span class="st">&quot;perfo4&quot;</span>, <span class="st">&quot;perfo6&quot;</span>,</span>
+<span id="cb182-8"><a href="11.2-example-data-i.html#cb182-8" tabindex="-1"></a>  <span class="st">&quot;momed&quot;</span>, <span class="st">&quot;grad&quot;</span></span>
+<span id="cb182-9"><a href="11.2-example-data-i.html#cb182-9" tabindex="-1"></a>)</span>
+<span id="cb182-10"><a href="11.2-example-data-i.html#cb182-10" tabindex="-1"></a></span>
+<span id="cb182-11"><a href="11.2-example-data-i.html#cb182-11" tabindex="-1"></a>wiscsub <span class="ot">&lt;-</span> wisc3raw[,var_names_sub]</span>
+<span id="cb182-12"><a href="11.2-example-data-i.html#cb182-12" tabindex="-1"></a></span>
+<span id="cb182-13"><a href="11.2-example-data-i.html#cb182-13" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(wiscsub)</span></code></pre></div>
 <pre><code>##        vars   n   mean    sd median trimmed   mad   min    max  range  skew
 ## id        1 204 102.50 59.03 102.50  102.50 75.61  1.00 204.00 203.00  0.00
 ## verb1     2 204  19.59  5.81  19.34   19.50  5.41  3.33  35.15  31.82  0.13
@@ -503,7 +503,7 @@ div.csl-indent {
 ## momed      0.01 0.19
 ## grad      -0.30 0.03</code></pre>
 <p>And some bivariate plots of the two-occasion relations.</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="11.2-example-data-i.html#cb185-1" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">pairs.panels</span>(wiscsub[,<span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>,<span class="st">&quot;verb6&quot;</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="11.2-example-data-i.html#cb184-1" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">pairs.panels</span>(wiscsub[,<span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>,<span class="st">&quot;verb6&quot;</span>)])</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-140-1.png" width="672" /></p>
 </div>
             </section>

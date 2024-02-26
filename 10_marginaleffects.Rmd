@@ -24,7 +24,7 @@ codefolder::bookdown(init = "show", style = button)
   
 In Chapter 10 we will dig a little deeper into the `marginaleffects` [@bundock] R package.
 
-![](images/meme.jpg)
+
 
 ## Reintroducing Marginal Effects 
 
@@ -39,7 +39,7 @@ Marginal effects are partial derivatives of the regression equation with respect
 **Big picture**: Marginal effects use model predictions to aid us in our interpretation of a fitted model, while also providing a framework to visualize and test our results.
 
 
-(and allow us to use hypothesis testing. We are using the estimated model to make predictions so we can better interpret the ...
+![](images/meme.jpg)
 
 <h3> Linear Models </h3>
 
@@ -203,7 +203,7 @@ avg_slopes(
   variables = "abuse_freq2",
   newdata = datagrid(
     age = 30,
-    obse = 1,
+    obese = 1,
     female = 0
   )
 )
