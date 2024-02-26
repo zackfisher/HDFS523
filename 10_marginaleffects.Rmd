@@ -144,6 +144,9 @@ summary(model4)
 
 Remember, we can interpret these coefficients just as we would regression coefficients, however, we would be speaking in terms of the log of the mean count.
 
+Broadly, we may be interested in **(1)** *predictions*, **(2)** *slopes* and **(3)** *hypothesis tests*. Let's briefly review functionality for each of these areas.
+
+
 ## `marginaleffects: Slopes`
 
 Slopes are defined as the partial derivatives of the regression equation with respect to an explanatory variable of interest (i.e. a marginal effect or trend). In the remainder of this section we use the terms slope and marginal effect interchangeably. 
@@ -220,9 +223,6 @@ hypotheses(model4,
 ```
 
 ## `marginaleffects: Predictions`
-
-Broadly, we may be interested in **(1)** *predictions*, **(2)** *slopes* and **(3)** *hypothesis tests*. Let's briefly review functionality for each of these areas.
-
 
 <h3> Predictions </h3>
 
