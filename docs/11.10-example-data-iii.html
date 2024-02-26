@@ -474,66 +474,66 @@ div.csl-indent {
 <p>This second data set is in line with the assumption of the residualized change model, where the Time 1 score is uncorrelated with the key predictor, which is equivalent to affirming there are no preexisting group differences at baseline; there is one population of dyads at baseline with respect to relationship satisfaction.</p>
 <div id="generate-some-data-according-to-castro2018-example-b" class="section level3 hasAnchor" number="11.10.1">
 <h3><span class="header-section-number">11.10.1</span> Generate Some Data According to <span class="citation">(<a href="#ref-castro2018">Castro-Schilo and Grimm 2018</a>)</span> Example B<a href="11.10-example-data-iii.html#generate-some-data-according-to-castro2018-example-b" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="11.10-example-data-iii.html#cb37-1" tabindex="-1"></a><span class="co"># set a seed so we all have the same data</span></span>
-<span id="cb37-2"><a href="11.10-example-data-iii.html#cb37-2" tabindex="-1"></a><span class="fu">set.seed</span> (<span class="dv">1234</span>)</span>
-<span id="cb37-3"><a href="11.10-example-data-iii.html#cb37-3" tabindex="-1"></a></span>
-<span id="cb37-4"><a href="11.10-example-data-iii.html#cb37-4" tabindex="-1"></a><span class="co"># create an id variable (N = 100 in each group)</span></span>
-<span id="cb37-5"><a href="11.10-example-data-iii.html#cb37-5" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span>
-<span id="cb37-6"><a href="11.10-example-data-iii.html#cb37-6" tabindex="-1"></a></span>
-<span id="cb37-7"><a href="11.10-example-data-iii.html#cb37-7" tabindex="-1"></a><span class="co"># create a time variable (0 = time 1, 1 = time 2)</span></span>
-<span id="cb37-8"><a href="11.10-example-data-iii.html#cb37-8" tabindex="-1"></a>time <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">100</span>))</span>
-<span id="cb37-9"><a href="11.10-example-data-iii.html#cb37-9" tabindex="-1"></a></span>
-<span id="cb37-10"><a href="11.10-example-data-iii.html#cb37-10" tabindex="-1"></a><span class="co"># create grouping variable with equal number cohabiting (1) and not (0)</span></span>
-<span id="cb37-11"><a href="11.10-example-data-iii.html#cb37-11" tabindex="-1"></a>cohabit <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dv">100</span>)</span>
-<span id="cb37-12"><a href="11.10-example-data-iii.html#cb37-12" tabindex="-1"></a></span>
-<span id="cb37-13"><a href="11.10-example-data-iii.html#cb37-13" tabindex="-1"></a><span class="co"># put all variables in a dataframe</span></span>
-<span id="cb37-14"><a href="11.10-example-data-iii.html#cb37-14" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(id, cohabit, time)</span>
-<span id="cb37-15"><a href="11.10-example-data-iii.html#cb37-15" tabindex="-1"></a></span>
-<span id="cb37-16"><a href="11.10-example-data-iii.html#cb37-16" tabindex="-1"></a><span class="co"># generate dataset A</span></span>
-<span id="cb37-17"><a href="11.10-example-data-iii.html#cb37-17" tabindex="-1"></a>data_B <span class="ot">&lt;-</span> data</span>
-<span id="cb37-18"><a href="11.10-example-data-iii.html#cb37-18" tabindex="-1"></a>data_B<span class="sc">$</span>score <span class="ot">&lt;-</span> </span>
-<span id="cb37-19"><a href="11.10-example-data-iii.html#cb37-19" tabindex="-1"></a>  <span class="fl">4.5</span> <span class="sc">+</span>                          <span class="co"># intercept</span></span>
-<span id="cb37-20"><a href="11.10-example-data-iii.html#cb37-20" tabindex="-1"></a>  <span class="dv">0</span><span class="sc">*</span>data_B<span class="sc">$</span>cohabit <span class="sc">+</span>            <span class="co"># difference in cohabitation</span></span>
-<span id="cb37-21"><a href="11.10-example-data-iii.html#cb37-21" tabindex="-1"></a>  <span class="dv">0</span><span class="sc">*</span>data_B<span class="sc">$</span>time <span class="sc">+</span>                <span class="co"># effect of time</span></span>
-<span id="cb37-22"><a href="11.10-example-data-iii.html#cb37-22" tabindex="-1"></a>  <span class="dv">0</span><span class="sc">*</span>data_B<span class="sc">$</span>cohabit<span class="sc">*</span>data_B<span class="sc">$</span>time <span class="sc">+</span> <span class="co"># interaction</span></span>
-<span id="cb37-23"><a href="11.10-example-data-iii.html#cb37-23" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="dv">200</span>, <span class="dv">0</span>, <span class="fl">0.3</span>)             <span class="co"># error</span></span>
-<span id="cb37-24"><a href="11.10-example-data-iii.html#cb37-24" tabindex="-1"></a></span>
-<span id="cb37-25"><a href="11.10-example-data-iii.html#cb37-25" tabindex="-1"></a></span>
-<span id="cb37-26"><a href="11.10-example-data-iii.html#cb37-26" tabindex="-1"></a><span class="co"># Make into wide format for computing difference score</span></span>
-<span id="cb37-27"><a href="11.10-example-data-iii.html#cb37-27" tabindex="-1"></a>data_B <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
-<span id="cb37-28"><a href="11.10-example-data-iii.html#cb37-28" tabindex="-1"></a>  data_B, </span>
-<span id="cb37-29"><a href="11.10-example-data-iii.html#cb37-29" tabindex="-1"></a>  <span class="at">v.names =</span> <span class="st">&#39;score&#39;</span>, </span>
-<span id="cb37-30"><a href="11.10-example-data-iii.html#cb37-30" tabindex="-1"></a>  <span class="at">timevar =</span> <span class="st">&quot;time&quot;</span>,</span>
-<span id="cb37-31"><a href="11.10-example-data-iii.html#cb37-31" tabindex="-1"></a>  <span class="at">idvar =</span> <span class="st">&quot;id&quot;</span>, </span>
-<span id="cb37-32"><a href="11.10-example-data-iii.html#cb37-32" tabindex="-1"></a>  <span class="at">direction=</span> <span class="st">&quot;wide&quot;</span></span>
-<span id="cb37-33"><a href="11.10-example-data-iii.html#cb37-33" tabindex="-1"></a>)</span>
-<span id="cb37-34"><a href="11.10-example-data-iii.html#cb37-34" tabindex="-1"></a></span>
-<span id="cb37-35"><a href="11.10-example-data-iii.html#cb37-35" tabindex="-1"></a><span class="co"># assign appropriate variable names</span></span>
-<span id="cb37-36"><a href="11.10-example-data-iii.html#cb37-36" tabindex="-1"></a><span class="fu">names</span>(data_B) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;id&#39;</span>, <span class="st">&#39;cohabit&#39;</span>, <span class="st">&#39;score1&#39;</span>, <span class="st">&#39;score2&#39;</span>)</span>
-<span id="cb37-37"><a href="11.10-example-data-iii.html#cb37-37" tabindex="-1"></a></span>
-<span id="cb37-38"><a href="11.10-example-data-iii.html#cb37-38" tabindex="-1"></a><span class="co"># compute difference variable</span></span>
-<span id="cb37-39"><a href="11.10-example-data-iii.html#cb37-39" tabindex="-1"></a>data_B<span class="sc">$</span>diff <span class="ot">&lt;-</span> data_B<span class="sc">$</span>score2 <span class="sc">-</span> data_B<span class="sc">$</span>score1</span>
-<span id="cb37-40"><a href="11.10-example-data-iii.html#cb37-40" tabindex="-1"></a></span>
-<span id="cb37-41"><a href="11.10-example-data-iii.html#cb37-41" tabindex="-1"></a><span class="co"># declare cohabiting variable as a factor (categorical variable)</span></span>
-<span id="cb37-42"><a href="11.10-example-data-iii.html#cb37-42" tabindex="-1"></a>data_B<span class="sc">$</span>cohabit <span class="ot">&lt;-</span> <span class="fu">factor</span>(data_B<span class="sc">$</span>cohabit)</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="11.10-example-data-iii.html#cb219-1" tabindex="-1"></a><span class="co"># set a seed so we all have the same data</span></span>
+<span id="cb219-2"><a href="11.10-example-data-iii.html#cb219-2" tabindex="-1"></a><span class="fu">set.seed</span> (<span class="dv">1234</span>)</span>
+<span id="cb219-3"><a href="11.10-example-data-iii.html#cb219-3" tabindex="-1"></a></span>
+<span id="cb219-4"><a href="11.10-example-data-iii.html#cb219-4" tabindex="-1"></a><span class="co"># create an id variable (N = 100 in each group)</span></span>
+<span id="cb219-5"><a href="11.10-example-data-iii.html#cb219-5" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span>
+<span id="cb219-6"><a href="11.10-example-data-iii.html#cb219-6" tabindex="-1"></a></span>
+<span id="cb219-7"><a href="11.10-example-data-iii.html#cb219-7" tabindex="-1"></a><span class="co"># create a time variable (0 = time 1, 1 = time 2)</span></span>
+<span id="cb219-8"><a href="11.10-example-data-iii.html#cb219-8" tabindex="-1"></a>time <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">100</span>))</span>
+<span id="cb219-9"><a href="11.10-example-data-iii.html#cb219-9" tabindex="-1"></a></span>
+<span id="cb219-10"><a href="11.10-example-data-iii.html#cb219-10" tabindex="-1"></a><span class="co"># create grouping variable with equal number cohabiting (1) and not (0)</span></span>
+<span id="cb219-11"><a href="11.10-example-data-iii.html#cb219-11" tabindex="-1"></a>cohabit <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dv">100</span>)</span>
+<span id="cb219-12"><a href="11.10-example-data-iii.html#cb219-12" tabindex="-1"></a></span>
+<span id="cb219-13"><a href="11.10-example-data-iii.html#cb219-13" tabindex="-1"></a><span class="co"># put all variables in a dataframe</span></span>
+<span id="cb219-14"><a href="11.10-example-data-iii.html#cb219-14" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(id, cohabit, time)</span>
+<span id="cb219-15"><a href="11.10-example-data-iii.html#cb219-15" tabindex="-1"></a></span>
+<span id="cb219-16"><a href="11.10-example-data-iii.html#cb219-16" tabindex="-1"></a><span class="co"># generate dataset A</span></span>
+<span id="cb219-17"><a href="11.10-example-data-iii.html#cb219-17" tabindex="-1"></a>data_B <span class="ot">&lt;-</span> data</span>
+<span id="cb219-18"><a href="11.10-example-data-iii.html#cb219-18" tabindex="-1"></a>data_B<span class="sc">$</span>score <span class="ot">&lt;-</span> </span>
+<span id="cb219-19"><a href="11.10-example-data-iii.html#cb219-19" tabindex="-1"></a>  <span class="fl">4.5</span> <span class="sc">+</span>                          <span class="co"># intercept</span></span>
+<span id="cb219-20"><a href="11.10-example-data-iii.html#cb219-20" tabindex="-1"></a>  <span class="dv">0</span><span class="sc">*</span>data_B<span class="sc">$</span>cohabit <span class="sc">+</span>            <span class="co"># difference in cohabitation</span></span>
+<span id="cb219-21"><a href="11.10-example-data-iii.html#cb219-21" tabindex="-1"></a>  <span class="dv">0</span><span class="sc">*</span>data_B<span class="sc">$</span>time <span class="sc">+</span>                <span class="co"># effect of time</span></span>
+<span id="cb219-22"><a href="11.10-example-data-iii.html#cb219-22" tabindex="-1"></a>  <span class="dv">0</span><span class="sc">*</span>data_B<span class="sc">$</span>cohabit<span class="sc">*</span>data_B<span class="sc">$</span>time <span class="sc">+</span> <span class="co"># interaction</span></span>
+<span id="cb219-23"><a href="11.10-example-data-iii.html#cb219-23" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="dv">200</span>, <span class="dv">0</span>, <span class="fl">0.3</span>)             <span class="co"># error</span></span>
+<span id="cb219-24"><a href="11.10-example-data-iii.html#cb219-24" tabindex="-1"></a></span>
+<span id="cb219-25"><a href="11.10-example-data-iii.html#cb219-25" tabindex="-1"></a></span>
+<span id="cb219-26"><a href="11.10-example-data-iii.html#cb219-26" tabindex="-1"></a><span class="co"># Make into wide format for computing difference score</span></span>
+<span id="cb219-27"><a href="11.10-example-data-iii.html#cb219-27" tabindex="-1"></a>data_B <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
+<span id="cb219-28"><a href="11.10-example-data-iii.html#cb219-28" tabindex="-1"></a>  data_B, </span>
+<span id="cb219-29"><a href="11.10-example-data-iii.html#cb219-29" tabindex="-1"></a>  <span class="at">v.names =</span> <span class="st">&#39;score&#39;</span>, </span>
+<span id="cb219-30"><a href="11.10-example-data-iii.html#cb219-30" tabindex="-1"></a>  <span class="at">timevar =</span> <span class="st">&quot;time&quot;</span>,</span>
+<span id="cb219-31"><a href="11.10-example-data-iii.html#cb219-31" tabindex="-1"></a>  <span class="at">idvar =</span> <span class="st">&quot;id&quot;</span>, </span>
+<span id="cb219-32"><a href="11.10-example-data-iii.html#cb219-32" tabindex="-1"></a>  <span class="at">direction=</span> <span class="st">&quot;wide&quot;</span></span>
+<span id="cb219-33"><a href="11.10-example-data-iii.html#cb219-33" tabindex="-1"></a>)</span>
+<span id="cb219-34"><a href="11.10-example-data-iii.html#cb219-34" tabindex="-1"></a></span>
+<span id="cb219-35"><a href="11.10-example-data-iii.html#cb219-35" tabindex="-1"></a><span class="co"># assign appropriate variable names</span></span>
+<span id="cb219-36"><a href="11.10-example-data-iii.html#cb219-36" tabindex="-1"></a><span class="fu">names</span>(data_B) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;id&#39;</span>, <span class="st">&#39;cohabit&#39;</span>, <span class="st">&#39;score1&#39;</span>, <span class="st">&#39;score2&#39;</span>)</span>
+<span id="cb219-37"><a href="11.10-example-data-iii.html#cb219-37" tabindex="-1"></a></span>
+<span id="cb219-38"><a href="11.10-example-data-iii.html#cb219-38" tabindex="-1"></a><span class="co"># compute difference variable</span></span>
+<span id="cb219-39"><a href="11.10-example-data-iii.html#cb219-39" tabindex="-1"></a>data_B<span class="sc">$</span>diff <span class="ot">&lt;-</span> data_B<span class="sc">$</span>score2 <span class="sc">-</span> data_B<span class="sc">$</span>score1</span>
+<span id="cb219-40"><a href="11.10-example-data-iii.html#cb219-40" tabindex="-1"></a></span>
+<span id="cb219-41"><a href="11.10-example-data-iii.html#cb219-41" tabindex="-1"></a><span class="co"># declare cohabiting variable as a factor (categorical variable)</span></span>
+<span id="cb219-42"><a href="11.10-example-data-iii.html#cb219-42" tabindex="-1"></a>data_B<span class="sc">$</span>cohabit <span class="ot">&lt;-</span> <span class="fu">factor</span>(data_B<span class="sc">$</span>cohabit)</span></code></pre></div>
 </div>
 <div id="plot-data-1" class="section level3 hasAnchor" number="11.10.2">
 <h3><span class="header-section-number">11.10.2</span> Plot Data<a href="11.10-example-data-iii.html#plot-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="11.10-example-data-iii.html#cb38-1" tabindex="-1"></a><span class="co"># visualize the data</span></span>
-<span id="cb38-2"><a href="11.10-example-data-iii.html#cb38-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb38-3"><a href="11.10-example-data-iii.html#cb38-3" tabindex="-1"></a><span class="fu">ggplot</span>(data_B, <span class="fu">aes</span>(<span class="at">x =</span> score1, <span class="at">y =</span> score2, <span class="at">shape=</span> cohabit)) <span class="sc">+</span> </span>
-<span id="cb38-4"><a href="11.10-example-data-iii.html#cb38-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb38-5"><a href="11.10-example-data-iii.html#cb38-5" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> F) <span class="sc">+</span></span>
-<span id="cb38-6"><a href="11.10-example-data-iii.html#cb38-6" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Relationship Satisfaction Time 1&quot;</span>) <span class="sc">+</span></span>
-<span id="cb38-7"><a href="11.10-example-data-iii.html#cb38-7" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Relationship Satisfaction Time 2&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="11.10-example-data-iii.html#cb220-1" tabindex="-1"></a><span class="co"># visualize the data</span></span>
+<span id="cb220-2"><a href="11.10-example-data-iii.html#cb220-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb220-3"><a href="11.10-example-data-iii.html#cb220-3" tabindex="-1"></a><span class="fu">ggplot</span>(data_B, <span class="fu">aes</span>(<span class="at">x =</span> score1, <span class="at">y =</span> score2, <span class="at">shape=</span> cohabit)) <span class="sc">+</span> </span>
+<span id="cb220-4"><a href="11.10-example-data-iii.html#cb220-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb220-5"><a href="11.10-example-data-iii.html#cb220-5" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> F) <span class="sc">+</span></span>
+<span id="cb220-6"><a href="11.10-example-data-iii.html#cb220-6" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Relationship Satisfaction Time 1&quot;</span>) <span class="sc">+</span></span>
+<span id="cb220-7"><a href="11.10-example-data-iii.html#cb220-7" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Relationship Satisfaction Time 2&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-161-1.png" width="672" /></p>
 </div>
 <div id="fit-residualized-change-model-1" class="section level3 hasAnchor" number="11.10.3">
 <h3><span class="header-section-number">11.10.3</span> Fit Residualized Change Model<a href="11.10-example-data-iii.html#fit-residualized-change-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="11.10-example-data-iii.html#cb40-1" tabindex="-1"></a><span class="co"># ancova model</span></span>
-<span id="cb40-2"><a href="11.10-example-data-iii.html#cb40-2" tabindex="-1"></a>mylml <span class="ot">&lt;-</span> <span class="fu">lm</span>(score2 <span class="sc">~</span> score1 <span class="sc">+</span> cohabit, <span class="at">data =</span> data_B)</span>
-<span id="cb40-3"><a href="11.10-example-data-iii.html#cb40-3" tabindex="-1"></a><span class="fu">summary</span> (mylml)</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="11.10-example-data-iii.html#cb222-1" tabindex="-1"></a><span class="co"># ancova model</span></span>
+<span id="cb222-2"><a href="11.10-example-data-iii.html#cb222-2" tabindex="-1"></a>mylml <span class="ot">&lt;-</span> <span class="fu">lm</span>(score2 <span class="sc">~</span> score1 <span class="sc">+</span> cohabit, <span class="at">data =</span> data_B)</span>
+<span id="cb222-3"><a href="11.10-example-data-iii.html#cb222-3" tabindex="-1"></a><span class="fu">summary</span> (mylml)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = score2 ~ score1 + cohabit, data = data_B)
@@ -556,9 +556,9 @@ div.csl-indent {
 </div>
 <div id="fit-difference-score-model-1" class="section level3 hasAnchor" number="11.10.4">
 <h3><span class="header-section-number">11.10.4</span> Fit Difference Score Model<a href="11.10-example-data-iii.html#fit-difference-score-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="11.10-example-data-iii.html#cb42-1" tabindex="-1"></a><span class="co"># difference model</span></span>
-<span id="cb42-2"><a href="11.10-example-data-iii.html#cb42-2" tabindex="-1"></a>mylm2 <span class="ot">=</span> <span class="fu">lm</span>(diff <span class="sc">~</span> cohabit, <span class="at">data =</span> data_B)</span>
-<span id="cb42-3"><a href="11.10-example-data-iii.html#cb42-3" tabindex="-1"></a><span class="fu">summary</span>(mylm2)</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="11.10-example-data-iii.html#cb224-1" tabindex="-1"></a><span class="co"># difference model</span></span>
+<span id="cb224-2"><a href="11.10-example-data-iii.html#cb224-2" tabindex="-1"></a>mylm2 <span class="ot">=</span> <span class="fu">lm</span>(diff <span class="sc">~</span> cohabit, <span class="at">data =</span> data_B)</span>
+<span id="cb224-3"><a href="11.10-example-data-iii.html#cb224-3" tabindex="-1"></a><span class="fu">summary</span>(mylm2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = diff ~ cohabit, data = data_B)

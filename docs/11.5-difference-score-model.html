@@ -472,7 +472,7 @@ Raw Change
 <p>This raw change score is then typically used as the dependent variable in a regression equation.</p>
 <p>Here we are speaking in terms of difference scores and raw change. We can plot intraindividual change, by putting time along the x-axis. This requires reshaping the data from wide format to long format.</p>
 <p>To recap, our wide data looks like this:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="11.5-difference-score-model.html#cb10-1" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">round</span>(wiscsub,<span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="11.5-difference-score-model.html#cb192-1" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">round</span>(wiscsub,<span class="dv">2</span>))</span></code></pre></div>
 <pre><code>##   id verb1 verb2 verb4 verb6 perfo1 perfo2 perfo4 perfo6 momed grad
 ## 1  1 24.42 26.98 39.61 55.64  19.84  22.97  43.90  44.19   9.5    0
 ## 2  2 12.44 14.38 21.92 37.81   5.90  13.44  18.29  40.38   5.5    0
@@ -481,18 +481,18 @@ Raw Change
 ## 5  5 28.23 37.81 41.06 70.95  27.64  44.42  65.48  64.22  11.5    0
 ## 6  6 16.06 20.12 38.02 39.94   8.45  15.78  26.99  39.08  14.0    1</code></pre>
 <p>We can reshape our data to a long format using the <code>reshape()</code> function as follows</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="11.5-difference-score-model.html#cb12-1" tabindex="-1"></a>wiscsublong <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
-<span id="cb12-2"><a href="11.5-difference-score-model.html#cb12-2" tabindex="-1"></a>  <span class="at">data =</span> wiscsub[<span class="fu">c</span>(<span class="st">&quot;id&quot;</span>,<span class="st">&quot;verb1&quot;</span>,<span class="st">&quot;verb6&quot;</span>)], </span>
-<span id="cb12-3"><a href="11.5-difference-score-model.html#cb12-3" tabindex="-1"></a>  <span class="at">varying =</span> <span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>,<span class="st">&quot;verb6&quot;</span>), </span>
-<span id="cb12-4"><a href="11.5-difference-score-model.html#cb12-4" tabindex="-1"></a>  <span class="at">timevar =</span> <span class="st">&quot;grade&quot;</span>, </span>
-<span id="cb12-5"><a href="11.5-difference-score-model.html#cb12-5" tabindex="-1"></a>  <span class="at">idvar =</span> <span class="st">&quot;id&quot;</span>, </span>
-<span id="cb12-6"><a href="11.5-difference-score-model.html#cb12-6" tabindex="-1"></a>  <span class="at">direction =</span> <span class="st">&quot;long&quot;</span>, </span>
-<span id="cb12-7"><a href="11.5-difference-score-model.html#cb12-7" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot;&quot;</span></span>
-<span id="cb12-8"><a href="11.5-difference-score-model.html#cb12-8" tabindex="-1"></a>)</span>
-<span id="cb12-9"><a href="11.5-difference-score-model.html#cb12-9" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="11.5-difference-score-model.html#cb12-10" tabindex="-1"></a>wiscsublong <span class="ot">&lt;-</span> wiscsublong[<span class="fu">order</span>(wiscsublong<span class="sc">$</span>id,wiscsublong<span class="sc">$</span>grade),]</span>
-<span id="cb12-11"><a href="11.5-difference-score-model.html#cb12-11" tabindex="-1"></a></span>
-<span id="cb12-12"><a href="11.5-difference-score-model.html#cb12-12" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">round</span>(wiscsublong,<span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="11.5-difference-score-model.html#cb194-1" tabindex="-1"></a>wiscsublong <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
+<span id="cb194-2"><a href="11.5-difference-score-model.html#cb194-2" tabindex="-1"></a>  <span class="at">data =</span> wiscsub[<span class="fu">c</span>(<span class="st">&quot;id&quot;</span>,<span class="st">&quot;verb1&quot;</span>,<span class="st">&quot;verb6&quot;</span>)], </span>
+<span id="cb194-3"><a href="11.5-difference-score-model.html#cb194-3" tabindex="-1"></a>  <span class="at">varying =</span> <span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>,<span class="st">&quot;verb6&quot;</span>), </span>
+<span id="cb194-4"><a href="11.5-difference-score-model.html#cb194-4" tabindex="-1"></a>  <span class="at">timevar =</span> <span class="st">&quot;grade&quot;</span>, </span>
+<span id="cb194-5"><a href="11.5-difference-score-model.html#cb194-5" tabindex="-1"></a>  <span class="at">idvar =</span> <span class="st">&quot;id&quot;</span>, </span>
+<span id="cb194-6"><a href="11.5-difference-score-model.html#cb194-6" tabindex="-1"></a>  <span class="at">direction =</span> <span class="st">&quot;long&quot;</span>, </span>
+<span id="cb194-7"><a href="11.5-difference-score-model.html#cb194-7" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb194-8"><a href="11.5-difference-score-model.html#cb194-8" tabindex="-1"></a>)</span>
+<span id="cb194-9"><a href="11.5-difference-score-model.html#cb194-9" tabindex="-1"></a></span>
+<span id="cb194-10"><a href="11.5-difference-score-model.html#cb194-10" tabindex="-1"></a>wiscsublong <span class="ot">&lt;-</span> wiscsublong[<span class="fu">order</span>(wiscsublong<span class="sc">$</span>id,wiscsublong<span class="sc">$</span>grade),]</span>
+<span id="cb194-11"><a href="11.5-difference-score-model.html#cb194-11" tabindex="-1"></a></span>
+<span id="cb194-12"><a href="11.5-difference-score-model.html#cb194-12" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">round</span>(wiscsublong,<span class="dv">2</span>))</span></code></pre></div>
 <pre><code>##     id grade  verb
 ## 1.1  1     1 24.42
 ## 1.6  1     6 55.64
@@ -502,15 +502,15 @@ Raw Change
 ## 3.6  3     6 50.18</code></pre>
 <p>Now, the long data is structured in a manner amenable to plotting.</p>
 <p><strong>Notice here that each line indicates how an individual’s Grade 6 score differs from their Grade 1 score: intraindividual change.</strong></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="11.5-difference-score-model.html#cb14-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
-<span id="cb14-2"><a href="11.5-difference-score-model.html#cb14-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> wiscsublong, <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> verb, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb14-3"><a href="11.5-difference-score-model.html#cb14-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb14-4"><a href="11.5-difference-score-model.html#cb14-4" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb14-5"><a href="11.5-difference-score-model.html#cb14-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb14-6"><a href="11.5-difference-score-model.html#cb14-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;WISC Verbal Score&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="sc">+</span></span>
-<span id="cb14-7"><a href="11.5-difference-score-model.html#cb14-7" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb14-8"><a href="11.5-difference-score-model.html#cb14-8" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="11.5-difference-score-model.html#cb196-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb196-2"><a href="11.5-difference-score-model.html#cb196-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> wiscsublong, <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> verb, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb196-3"><a href="11.5-difference-score-model.html#cb196-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb196-4"><a href="11.5-difference-score-model.html#cb196-4" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb196-5"><a href="11.5-difference-score-model.html#cb196-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb196-6"><a href="11.5-difference-score-model.html#cb196-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;WISC Verbal Score&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="sc">+</span></span>
+<span id="cb196-7"><a href="11.5-difference-score-model.html#cb196-7" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb196-8"><a href="11.5-difference-score-model.html#cb196-8" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-148-1.png" width="672" /></p>
 <h3>
 Calculating Difference Scores
 </h3>
@@ -544,10 +544,10 @@ Difference Scores in WISC Data
 verbD_{i} = verb2_{i} - verb1_{i}
 \]</span></p>
 <p>Furthermore, we can calculate the difference score in R as follows</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="11.5-difference-score-model.html#cb15-1" tabindex="-1"></a><span class="co">#calculating difference score</span></span>
-<span id="cb15-2"><a href="11.5-difference-score-model.html#cb15-2" tabindex="-1"></a>wiscsub<span class="sc">$</span>verbD <span class="ot">&lt;-</span> wiscsub<span class="sc">$</span>verb6<span class="sc">-</span>wiscsub<span class="sc">$</span>verb1</span>
-<span id="cb15-3"><a href="11.5-difference-score-model.html#cb15-3" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="11.5-difference-score-model.html#cb15-4" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">round</span>(wiscsub,<span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="11.5-difference-score-model.html#cb197-1" tabindex="-1"></a><span class="co">#calculating difference score</span></span>
+<span id="cb197-2"><a href="11.5-difference-score-model.html#cb197-2" tabindex="-1"></a>wiscsub<span class="sc">$</span>verbD <span class="ot">&lt;-</span> wiscsub<span class="sc">$</span>verb6<span class="sc">-</span>wiscsub<span class="sc">$</span>verb1</span>
+<span id="cb197-3"><a href="11.5-difference-score-model.html#cb197-3" tabindex="-1"></a></span>
+<span id="cb197-4"><a href="11.5-difference-score-model.html#cb197-4" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">round</span>(wiscsub,<span class="dv">2</span>))</span></code></pre></div>
 <pre><code>##   id verb1 verb2 verb4 verb6 perfo1 perfo2 perfo4 perfo6 momed grad verbD
 ## 1  1 24.42 26.98 39.61 55.64  19.84  22.97  43.90  44.19   9.5    0 31.22
 ## 2  2 12.44 14.38 21.92 37.81   5.90  13.44  18.29  40.38   5.5    0 25.37
@@ -559,7 +559,7 @@ verbD_{i} = verb2_{i} - verb1_{i}
 Difference Score Descriptives
 </h3>
 <p>Look at the descriptives with the difference score.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="11.5-difference-score-model.html#cb17-1" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(wiscsub[,<span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>,<span class="st">&quot;verb6&quot;</span>,<span class="st">&quot;verbD&quot;</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="11.5-difference-score-model.html#cb199-1" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(wiscsub[,<span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>,<span class="st">&quot;verb6&quot;</span>,<span class="st">&quot;verbD&quot;</span>)])</span></code></pre></div>
 <pre><code>##       vars   n  mean    sd median trimmed   mad   min   max range skew kurtosis
 ## verb1    1 204 19.59  5.81  19.34   19.50  5.41  3.33 35.15 31.82 0.13    -0.05
 ## verb6    2 204 43.75 10.67  42.55   43.46 11.30 17.35 72.59 55.24 0.24    -0.36
@@ -568,7 +568,7 @@ Difference Score Descriptives
 ## verb1 0.41
 ## verb6 0.75
 ## verbD 0.57</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="11.5-difference-score-model.html#cb19-1" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">corr.test</span>(wiscsub[,<span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>,<span class="st">&quot;verb6&quot;</span>,<span class="st">&quot;verbD&quot;</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="11.5-difference-score-model.html#cb201-1" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">corr.test</span>(wiscsub[,<span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>,<span class="st">&quot;verb6&quot;</span>,<span class="st">&quot;verbD&quot;</span>)])</span></code></pre></div>
 <pre><code>## Call:psych::corr.test(x = wiscsub[, c(&quot;verb1&quot;, &quot;verb6&quot;, &quot;verbD&quot;)])
 ## Correlation matrix 
 ##       verb1 verb6 verbD
@@ -585,8 +585,8 @@ Difference Score Descriptives
 ## 
 ##  To see confidence intervals of the correlations, print with the short=FALSE option</code></pre>
 <p>Of particular interest in questions about intraindividual change is the relation between the <em>pre-test score</em> and the <em>amount of intraindividual change</em>. We can look at the bivariate association.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="11.5-difference-score-model.html#cb21-1" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">pairs.panels</span>(wiscsub[,<span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>,<span class="st">&quot;verbD&quot;</span>)])</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="11.5-difference-score-model.html#cb203-1" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">pairs.panels</span>(wiscsub[,<span class="fu">c</span>(<span class="st">&quot;verb1&quot;</span>,<span class="st">&quot;verbD&quot;</span>)])</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-151-1.png" width="672" /></p>
 <p><strong>A note on computing difference scores</strong>: always use raw scores when computing difference scores, Pre-standardizing variables discards important variance information.</p>
 <h3>
 A Difference Score Regression Model
@@ -599,11 +599,11 @@ A Difference Score Regression Model
 <li><span class="math inline">\(\beta_1\)</span> is a slope parameter indicating the difference in the predicted score of <span class="math inline">\(\Delta y\)</span> based on a 1-unit difference in <span class="math inline">\(y_{1i}\)</span></li>
 <li><span class="math inline">\(e_{i}\)</span> is the residual score for individual <span class="math inline">\(i\)</span></li>
 </ul>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="11.5-difference-score-model.html#cb22-1" tabindex="-1"></a><span class="co">#Difference score model</span></span>
-<span id="cb22-2"><a href="11.5-difference-score-model.html#cb22-2" tabindex="-1"></a>DIFfit <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> verbD <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> verb1,</span>
-<span id="cb22-3"><a href="11.5-difference-score-model.html#cb22-3" tabindex="-1"></a>             <span class="at">data=</span>wiscsub,</span>
-<span id="cb22-4"><a href="11.5-difference-score-model.html#cb22-4" tabindex="-1"></a>             <span class="at">na.action=</span>na.exclude)</span>
-<span id="cb22-5"><a href="11.5-difference-score-model.html#cb22-5" tabindex="-1"></a><span class="fu">summary</span>(DIFfit)</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="11.5-difference-score-model.html#cb204-1" tabindex="-1"></a><span class="co">#Difference score model</span></span>
+<span id="cb204-2"><a href="11.5-difference-score-model.html#cb204-2" tabindex="-1"></a>DIFfit <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> verbD <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> verb1,</span>
+<span id="cb204-3"><a href="11.5-difference-score-model.html#cb204-3" tabindex="-1"></a>             <span class="at">data=</span>wiscsub,</span>
+<span id="cb204-4"><a href="11.5-difference-score-model.html#cb204-4" tabindex="-1"></a>             <span class="at">na.action=</span>na.exclude)</span>
+<span id="cb204-5"><a href="11.5-difference-score-model.html#cb204-5" tabindex="-1"></a><span class="fu">summary</span>(DIFfit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = verbD ~ 1 + verb1, data = wiscsub, na.action = na.exclude)
@@ -625,22 +625,22 @@ A Difference Score Regression Model
 <p>The <em>intercept</em> term, <span class="math inline">\(\beta_{0} = 20.22\)</span> is the expected value of the difference score (raw change in verbal ability), for an individual with a verbal ability score = 0 at the first occasion.</p>
 <p>The <em>slope</em> term, <span class="math inline">\(\beta_{1} = 0.20\)</span> indicates that for every 1-point difference in verbal ability at the first occasion, we expect a <span class="math inline">\(1.2\)</span> point difference in the amount of intraindividual change.</p>
 <p>The same methods as above can be used to plot the results of the difference score model.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="11.5-difference-score-model.html#cb24-1" tabindex="-1"></a><span class="fu">termplot</span>(DIFfit,<span class="at">se=</span><span class="cn">TRUE</span>,<span class="at">partial.resid=</span><span class="cn">TRUE</span>,</span>
-<span id="cb24-2"><a href="11.5-difference-score-model.html#cb24-2" tabindex="-1"></a>         <span class="at">main=</span><span class="st">&quot;Difference-score Model&quot;</span>,</span>
-<span id="cb24-3"><a href="11.5-difference-score-model.html#cb24-3" tabindex="-1"></a>         <span class="at">xlab=</span><span class="st">&quot;Verbal Score at Time 1&quot;</span>,</span>
-<span id="cb24-4"><a href="11.5-difference-score-model.html#cb24-4" tabindex="-1"></a>         <span class="at">ylab=</span><span class="st">&quot;Difference in G1 and G6 Verbal Scores&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="11.5-difference-score-model.html#cb206-1" tabindex="-1"></a><span class="fu">termplot</span>(DIFfit,<span class="at">se=</span><span class="cn">TRUE</span>,<span class="at">partial.resid=</span><span class="cn">TRUE</span>,</span>
+<span id="cb206-2"><a href="11.5-difference-score-model.html#cb206-2" tabindex="-1"></a>         <span class="at">main=</span><span class="st">&quot;Difference-score Model&quot;</span>,</span>
+<span id="cb206-3"><a href="11.5-difference-score-model.html#cb206-3" tabindex="-1"></a>         <span class="at">xlab=</span><span class="st">&quot;Verbal Score at Time 1&quot;</span>,</span>
+<span id="cb206-4"><a href="11.5-difference-score-model.html#cb206-4" tabindex="-1"></a>         <span class="at">ylab=</span><span class="st">&quot;Difference in G1 and G6 Verbal Scores&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-153-1.png" width="672" /></p>
 <p>We can also do something similar using <code>ggplot</code>.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="11.5-difference-score-model.html#cb25-1" tabindex="-1"></a><span class="co">#making interindividual regression plot</span></span>
-<span id="cb25-2"><a href="11.5-difference-score-model.html#cb25-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> wiscsub, <span class="fu">aes</span>(<span class="at">x =</span> verb1, <span class="at">y =</span> verbD)) <span class="sc">+</span></span>
-<span id="cb25-3"><a href="11.5-difference-score-model.html#cb25-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb25-4"><a href="11.5-difference-score-model.html#cb25-4" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">formula=</span> y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> x, </span>
-<span id="cb25-5"><a href="11.5-difference-score-model.html#cb25-5" tabindex="-1"></a>              <span class="at">se=</span><span class="cn">TRUE</span>, <span class="at">fullrange=</span><span class="cn">TRUE</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb25-6"><a href="11.5-difference-score-model.html#cb25-6" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Score at Grade 1&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb25-7"><a href="11.5-difference-score-model.html#cb25-7" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Difference Score&quot;</span>) <span class="sc">+</span></span>
-<span id="cb25-8"><a href="11.5-difference-score-model.html#cb25-8" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Difference Score Model&quot;</span>) <span class="sc">+</span></span>
-<span id="cb25-9"><a href="11.5-difference-score-model.html#cb25-9" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="11.5-difference-score-model.html#cb207-1" tabindex="-1"></a><span class="co">#making interindividual regression plot</span></span>
+<span id="cb207-2"><a href="11.5-difference-score-model.html#cb207-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> wiscsub, <span class="fu">aes</span>(<span class="at">x =</span> verb1, <span class="at">y =</span> verbD)) <span class="sc">+</span></span>
+<span id="cb207-3"><a href="11.5-difference-score-model.html#cb207-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb207-4"><a href="11.5-difference-score-model.html#cb207-4" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">formula=</span> y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> x, </span>
+<span id="cb207-5"><a href="11.5-difference-score-model.html#cb207-5" tabindex="-1"></a>              <span class="at">se=</span><span class="cn">TRUE</span>, <span class="at">fullrange=</span><span class="cn">TRUE</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb207-6"><a href="11.5-difference-score-model.html#cb207-6" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Score at Grade 1&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb207-7"><a href="11.5-difference-score-model.html#cb207-7" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Difference Score&quot;</span>) <span class="sc">+</span></span>
+<span id="cb207-8"><a href="11.5-difference-score-model.html#cb207-8" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Difference Score Model&quot;</span>) <span class="sc">+</span></span>
+<span id="cb207-9"><a href="11.5-difference-score-model.html#cb207-9" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-154-1.png" width="672" /></p>
 <p>Note that each of these model results plots are regression plots: outcome on the y-axis, predictor on the x-axis.</p>
 </div>
             </section>

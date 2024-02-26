@@ -24,6 +24,7 @@ codefolder::bookdown(init = "show", style = button)
   
 In Chapter 10 we will dig a little deeper into the `marginaleffects` [@bundock] R package.
 
+![](images/meme.jpg)
 
 ## Reintroducing Marginal Effects 
 
