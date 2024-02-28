@@ -23,7 +23,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2024-02-26" />
+<meta name="date" content="2024-02-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -552,10 +552,10 @@ y_{2i} - y_{1i} &amp;= \beta_{0} + \beta^{AR}_{1}y_{1i} - y_{1i} + \epsilon_{i} 
 \beta^{DIFF}_{1} = (\beta^{AR}_{1} - 1)
 \]</span></p>
 <p>We can confirm this relationship look at our model output:</p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="11.6-critiques-and-comparisons.html#cb207-1" tabindex="-1"></a><span class="fu">coef</span>(ARfit)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="11.6-critiques-and-comparisons.html#cb26-1" tabindex="-1"></a><span class="fu">coef</span>(ARfit)</span></code></pre></div>
 <pre><code>## (Intercept)       verb1 
 ##   20.224849    1.201174</code></pre>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="11.6-critiques-and-comparisons.html#cb209-1" tabindex="-1"></a><span class="fu">coef</span>(DIFfit)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="11.6-critiques-and-comparisons.html#cb28-1" tabindex="-1"></a><span class="fu">coef</span>(DIFfit)</span></code></pre></div>
 <pre><code>## (Intercept)       verb1 
 ##  20.2248493   0.2011741</code></pre>
 </div>

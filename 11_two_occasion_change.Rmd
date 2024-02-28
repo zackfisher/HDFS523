@@ -132,7 +132,7 @@ y2 <- y2 + 5
 
 When we think about relative change, a lower correlation indicates greater change, but change is relative to other cases in the data and not absolute.
 
-For example, if $r_{12}=0.45$, and we all $5$ points to all scores, $r_{12}$ will still be $0.45$. Even though the scores themselves will all change, the relative degree of change is unaffected.
+For example, if $r_{12}=0.45$, and we add $5$ points to all scores, $r_{12}$ will still be $0.45$. Even though the scores themselves will all change, the relative degree of change is unaffected.
 
 <h5>  Compare Absolute and Relative Change </h5>
 
@@ -185,7 +185,7 @@ Note, the term *residualized change* comes from the fact that the autoregressive
 
 With the autoregressive model it is helpful to think more about the residual term. Let's ignore the scaling constant for now, 
 
-If we subtract $y_{2i} -\beta_1y_{1i}$ from both sides of the AR equation we isolate the residuals:
+If we subtract $\beta_1y_{1i}$ from both sides of the AR equation we isolate the residuals:
 
 
 $$ 
@@ -399,7 +399,7 @@ summary(DIFfit)
 
 The *intercept* term, $\beta_{0} = 20.22$ is the expected value of the difference score (raw change in verbal ability), for an individual with a verbal ability score = 0 at the first occasion. 
 
-The *slope* term, $\beta_{1} = 0.20$ indicates that for every 1-point difference in verbal ability at the first occasion, we expect a $1.2$ point difference in the amount of intraindividual change. 
+The *slope* term, $\beta_{1} = 0.20$ indicates that for every 1-point difference in verbal ability at the first occasion, we expect a $0.2$ point difference in the amount of intraindividual change. 
 
 The same methods as above can be used to plot the results of the difference score model.
 ```{r}
@@ -550,7 +550,7 @@ and we have the following difference score model
 $$
 \Delta_{i} = \beta_{0} + \beta_{1}x_{i} + \epsilon_{i}
 $$
-where $x_{i}$ is either zero or one for the $i^th$ individual in the sample. Although not immediately obvious, the difference between these two approaches is that $\beta{2}$ is estimated in the ANCOVA model, and fixed to $1$ in the difference score approach.
+where $x_{i}$ is either zero or one for the $i^{th}$ individual in the sample. Although not immediately obvious, the difference between these two approaches is that $\beta{2}$ is estimated in the ANCOVA model, and fixed to $1$ in the difference score approach.
 
 
 As pointed out by many different researchers over the year, it can be

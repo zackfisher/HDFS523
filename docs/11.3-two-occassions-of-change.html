@@ -23,7 +23,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2024-02-26" />
+<meta name="date" content="2024-02-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -500,19 +500,19 @@ Raw Change
 individual values.</p>
 <p>Correlation between <span class="math inline">\(y_{1}\)</span> and <span class="math inline">\(y_{2}\)</span> can be anywhere between <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span> and difference scores may be small or large.</p>
 <p>For example. if <span class="math inline">\(r_{12} = 1.0\)</span> and we add <span class="math inline">\(5\)</span> points to <span class="math inline">\(y_2\)</span>, <span class="math inline">\(r_{12}\)</span> will still be equl to <span class="math inline">\(1.0\)</span> but the mean difference will have changed.</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="11.3-two-occassions-of-change.html#cb185-1" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>)</span>
-<span id="cb185-2"><a href="11.3-two-occassions-of-change.html#cb185-2" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>)</span>
-<span id="cb185-3"><a href="11.3-two-occassions-of-change.html#cb185-3" tabindex="-1"></a><span class="co"># cor(y1,y2) = 1</span></span>
-<span id="cb185-4"><a href="11.3-two-occassions-of-change.html#cb185-4" tabindex="-1"></a><span class="co"># mean(y2-y1) = 2</span></span>
-<span id="cb185-5"><a href="11.3-two-occassions-of-change.html#cb185-5" tabindex="-1"></a></span>
-<span id="cb185-6"><a href="11.3-two-occassions-of-change.html#cb185-6" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> y2 <span class="sc">+</span> <span class="dv">5</span></span>
-<span id="cb185-7"><a href="11.3-two-occassions-of-change.html#cb185-7" tabindex="-1"></a><span class="co"># cor(y1,y2) = 1</span></span>
-<span id="cb185-8"><a href="11.3-two-occassions-of-change.html#cb185-8" tabindex="-1"></a><span class="co"># mean(y2-y1) = 7</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="11.3-two-occassions-of-change.html#cb4-1" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb4-2"><a href="11.3-two-occassions-of-change.html#cb4-2" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>)</span>
+<span id="cb4-3"><a href="11.3-two-occassions-of-change.html#cb4-3" tabindex="-1"></a><span class="co"># cor(y1,y2) = 1</span></span>
+<span id="cb4-4"><a href="11.3-two-occassions-of-change.html#cb4-4" tabindex="-1"></a><span class="co"># mean(y2-y1) = 2</span></span>
+<span id="cb4-5"><a href="11.3-two-occassions-of-change.html#cb4-5" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="11.3-two-occassions-of-change.html#cb4-6" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> y2 <span class="sc">+</span> <span class="dv">5</span></span>
+<span id="cb4-7"><a href="11.3-two-occassions-of-change.html#cb4-7" tabindex="-1"></a><span class="co"># cor(y1,y2) = 1</span></span>
+<span id="cb4-8"><a href="11.3-two-occassions-of-change.html#cb4-8" tabindex="-1"></a><span class="co"># mean(y2-y1) = 7</span></span></code></pre></div>
 <h5>
 Relative Change
 </h5>
 <p>When we think about relative change, a lower correlation indicates greater change, but change is relative to other cases in the data and not absolute.</p>
-<p>For example, if <span class="math inline">\(r_{12}=0.45\)</span>, and we all <span class="math inline">\(5\)</span> points to all scores, <span class="math inline">\(r_{12}\)</span> will still be <span class="math inline">\(0.45\)</span>. Even though the scores themselves will all change, the relative degree of change is unaffected.</p>
+<p>For example, if <span class="math inline">\(r_{12}=0.45\)</span>, and we add <span class="math inline">\(5\)</span> points to all scores, <span class="math inline">\(r_{12}\)</span> will still be <span class="math inline">\(0.45\)</span>. Even though the scores themselves will all change, the relative degree of change is unaffected.</p>
 <h5>
 Compare Absolute and Relative Change
 </h5>
