@@ -472,13 +472,13 @@ Residualized Change
 <p>The term residualized change comes from the fact that an outcome, such as verbal scores at grade 6, is regressed on itself at a prior occasion, verbal scores at grade 1. Any variability in the outcome that is explained by the lagged regressor will be set aside and is threfore not explainable by a key predictor.</p>
 <p><strong>Thus, the autoregressive effect residualizes the outcome leaving only variability that is unexplained by the lagged variable, which can be construed as the variability due to change.</strong></p>
 <p>In this way it is helpful to view the data as a scatter plot, like we would in a regression model.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="11.4-autoregressive-model.html#cb5-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
-<span id="cb5-2"><a href="11.4-autoregressive-model.html#cb5-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> wiscsub, <span class="fu">aes</span>(<span class="at">x =</span> verb1, <span class="at">y =</span> verb6)) <span class="sc">+</span></span>
-<span id="cb5-3"><a href="11.4-autoregressive-model.html#cb5-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb5-4"><a href="11.4-autoregressive-model.html#cb5-4" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Scores at Grade 1&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb5-5"><a href="11.4-autoregressive-model.html#cb5-5" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Verbal Scores at Grade 6&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb5-6"><a href="11.4-autoregressive-model.html#cb5-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="11.4-autoregressive-model.html#cb186-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb186-2"><a href="11.4-autoregressive-model.html#cb186-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> wiscsub, <span class="fu">aes</span>(<span class="at">x =</span> verb1, <span class="at">y =</span> verb6)) <span class="sc">+</span></span>
+<span id="cb186-3"><a href="11.4-autoregressive-model.html#cb186-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb186-4"><a href="11.4-autoregressive-model.html#cb186-4" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Scores at Grade 1&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb186-5"><a href="11.4-autoregressive-model.html#cb186-5" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Verbal Scores at Grade 6&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb186-6"><a href="11.4-autoregressive-model.html#cb186-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-142-1.png" width="672" /></p>
 <h3>
 Autoregressive Model
 </h3>
@@ -519,12 +519,12 @@ Autoregressive Model in R
 <p><span class="math display">\[ verb6_{i} = \beta_{0} + \beta_{1}verb1_{i} + e_{i}\]</span></p>
 <p>We note that this is a model of relations among between-person differences. This model is similar to, but is not a single-subject time-series model (which are also called autoregressive models, but are fit to a different kind of data).</p>
 <p>Translating the between-person autoregressive model into code and fitting it to the two-occasion WISC data we have</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="11.4-autoregressive-model.html#cb6-1" tabindex="-1"></a>ARfit <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
-<span id="cb6-2"><a href="11.4-autoregressive-model.html#cb6-2" tabindex="-1"></a>  <span class="at">formula =</span> verb6 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> verb1,</span>
-<span id="cb6-3"><a href="11.4-autoregressive-model.html#cb6-3" tabindex="-1"></a>  <span class="at">data=</span>wiscsub,</span>
-<span id="cb6-4"><a href="11.4-autoregressive-model.html#cb6-4" tabindex="-1"></a>  <span class="at">na.action=</span>na.exclude</span>
-<span id="cb6-5"><a href="11.4-autoregressive-model.html#cb6-5" tabindex="-1"></a>)</span>
-<span id="cb6-6"><a href="11.4-autoregressive-model.html#cb6-6" tabindex="-1"></a><span class="fu">summary</span>(ARfit)</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="11.4-autoregressive-model.html#cb187-1" tabindex="-1"></a>ARfit <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb187-2"><a href="11.4-autoregressive-model.html#cb187-2" tabindex="-1"></a>  <span class="at">formula =</span> verb6 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> verb1,</span>
+<span id="cb187-3"><a href="11.4-autoregressive-model.html#cb187-3" tabindex="-1"></a>  <span class="at">data=</span>wiscsub,</span>
+<span id="cb187-4"><a href="11.4-autoregressive-model.html#cb187-4" tabindex="-1"></a>  <span class="at">na.action=</span>na.exclude</span>
+<span id="cb187-5"><a href="11.4-autoregressive-model.html#cb187-5" tabindex="-1"></a>)</span>
+<span id="cb187-6"><a href="11.4-autoregressive-model.html#cb187-6" tabindex="-1"></a><span class="fu">summary</span>(ARfit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = verb6 ~ 1 + verb1, data = wiscsub, na.action = na.exclude)
@@ -547,22 +547,22 @@ Autoregressive Model in R
 <p>The <em>slope</em> term, <span class="math inline">\(\beta_{1}\)</span> = 1.20 indicates that for every 1-point difference in Verbal Ability at the 1st occasion, we expect a 1.2 point difference at the 2nd occasion.</p>
 <p>We can plot the autoregressive model prediction with confidence intervals (CI).</p>
 <p>The function <code>termplot</code> takes the fitted <code>lm</code> object. The CI bounds are plotted with the <code>se</code> option and residuals with <code>partial.resid</code> option.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="11.4-autoregressive-model.html#cb8-1" tabindex="-1"></a><span class="fu">termplot</span>(ARfit,<span class="at">se=</span><span class="cn">TRUE</span>,<span class="at">partial.resid=</span><span class="cn">TRUE</span>,</span>
-<span id="cb8-2"><a href="11.4-autoregressive-model.html#cb8-2" tabindex="-1"></a>         <span class="at">main=</span><span class="st">&quot;Autoregressive Model&quot;</span>,</span>
-<span id="cb8-3"><a href="11.4-autoregressive-model.html#cb8-3" tabindex="-1"></a>         <span class="at">xlab=</span><span class="st">&quot;Verbal Score at Grade 1&quot;</span>,</span>
-<span id="cb8-4"><a href="11.4-autoregressive-model.html#cb8-4" tabindex="-1"></a>         <span class="at">ylab=</span><span class="st">&quot;Verbal Score at Grade 6&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="11.4-autoregressive-model.html#cb189-1" tabindex="-1"></a><span class="fu">termplot</span>(ARfit,<span class="at">se=</span><span class="cn">TRUE</span>,<span class="at">partial.resid=</span><span class="cn">TRUE</span>,</span>
+<span id="cb189-2"><a href="11.4-autoregressive-model.html#cb189-2" tabindex="-1"></a>         <span class="at">main=</span><span class="st">&quot;Autoregressive Model&quot;</span>,</span>
+<span id="cb189-3"><a href="11.4-autoregressive-model.html#cb189-3" tabindex="-1"></a>         <span class="at">xlab=</span><span class="st">&quot;Verbal Score at Grade 1&quot;</span>,</span>
+<span id="cb189-4"><a href="11.4-autoregressive-model.html#cb189-4" tabindex="-1"></a>         <span class="at">ylab=</span><span class="st">&quot;Verbal Score at Grade 6&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-144-1.png" width="672" /></p>
 <p>Note that this code makes use of the <code>lm()</code> model object.</p>
 <p>We can also do something similar with the raw data using <code>ggplot.</code></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="11.4-autoregressive-model.html#cb9-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> wiscsub, <span class="fu">aes</span>(<span class="at">x =</span> verb1, <span class="at">y =</span> verb6)) <span class="sc">+</span></span>
-<span id="cb9-2"><a href="11.4-autoregressive-model.html#cb9-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb9-3"><a href="11.4-autoregressive-model.html#cb9-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">formula=</span> y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> x, </span>
-<span id="cb9-4"><a href="11.4-autoregressive-model.html#cb9-4" tabindex="-1"></a>              <span class="at">se=</span><span class="cn">TRUE</span>, <span class="at">fullrange=</span><span class="cn">TRUE</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb9-5"><a href="11.4-autoregressive-model.html#cb9-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Score at Grade 1&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb9-6"><a href="11.4-autoregressive-model.html#cb9-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Verbal Score at Grade 6&quot;</span>) <span class="sc">+</span></span>
-<span id="cb9-7"><a href="11.4-autoregressive-model.html#cb9-7" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Autoregressive Model&quot;</span>) <span class="sc">+</span></span>
-<span id="cb9-8"><a href="11.4-autoregressive-model.html#cb9-8" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="11.4-autoregressive-model.html#cb190-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> wiscsub, <span class="fu">aes</span>(<span class="at">x =</span> verb1, <span class="at">y =</span> verb6)) <span class="sc">+</span></span>
+<span id="cb190-2"><a href="11.4-autoregressive-model.html#cb190-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb190-3"><a href="11.4-autoregressive-model.html#cb190-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">formula=</span> y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> x, </span>
+<span id="cb190-4"><a href="11.4-autoregressive-model.html#cb190-4" tabindex="-1"></a>              <span class="at">se=</span><span class="cn">TRUE</span>, <span class="at">fullrange=</span><span class="cn">TRUE</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb190-5"><a href="11.4-autoregressive-model.html#cb190-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Score at Grade 1&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb190-6"><a href="11.4-autoregressive-model.html#cb190-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Verbal Score at Grade 6&quot;</span>) <span class="sc">+</span></span>
+<span id="cb190-7"><a href="11.4-autoregressive-model.html#cb190-7" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Autoregressive Model&quot;</span>) <span class="sc">+</span></span>
+<span id="cb190-8"><a href="11.4-autoregressive-model.html#cb190-8" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-145-1.png" width="672" /></p>
 <p>Note that this code embeds an <code>lm()</code> model within the <code>ggplot</code> function.</p>
 </div>
             </section>

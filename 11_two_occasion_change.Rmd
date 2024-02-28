@@ -501,33 +501,33 @@ where
 - this implies difference scores may be an entirely appropriate means for measuring change
 
 
-<h3> Comparing Models </h3>
+<!-- <h3> Comparing Models </h3> -->
 
-To compare the autoregressive (residualized change) and difference score models, it is useful to better understand their equivalence. Let's start with the autoregressive model and see if we can get to the change score model. 
+<!-- To compare the autoregressive (residualized change) and difference score models, it is useful to better understand their equivalence. Let's start with the autoregressive model and see if we can get to the change score model.  -->
 
-$$
-\begin{aligned}
-y_{2i} &= \beta_{0} + \beta^{AR}_{1}y_{1i} + \epsilon_{i} & (\text{AR Model})  \\
-y_{2i} - y_{1i} &= \beta_{0} + \beta^{AR}_{1}y_{1i} + \epsilon_{i} - y_{1i}  & (\text{Subtract} \: y_{1i}) \\
-y_{2i} - y_{1i} &= \beta_{0} + \beta^{AR}_{1}y_{1i} - y_{1i} + \epsilon_{i}  & (\text{Rearrange}) \\
-(y_{2i} - y_{1i}) &= \beta_{0} + (\beta^{AR}_{1}-1)y_{1i} + \epsilon_{i}  & (\text{Factor}) \\
-\Delta y_{i} &= \beta_{0} + (\beta^{AR}_{1}-1)y_{1i} + \epsilon_{i}  & (\text{Def. of} \: \Delta) \\
-\Delta y_{i} &= \beta_{0} + \beta^{DIFF}_{1}y_{1i} + \epsilon_{i}  &   (\text{Equivalence})
-\end{aligned}
-$$
+<!-- $$ -->
+<!-- \begin{aligned} -->
+<!-- y_{2i} &= \beta_{0} + \beta^{AR}_{1}y_{1i} + \epsilon_{i} & (\text{AR Model})  \\ -->
+<!-- y_{2i} - y_{1i} &= \beta_{0} + \beta^{AR}_{1}y_{1i} + \epsilon_{i} - y_{1i}  & (\text{Subtract} \: y_{1i}) \\ -->
+<!-- y_{2i} - y_{1i} &= \beta_{0} + \beta^{AR}_{1}y_{1i} - y_{1i} + \epsilon_{i}  & (\text{Rearrange}) \\ -->
+<!-- (y_{2i} - y_{1i}) &= \beta_{0} + (\beta^{AR}_{1}-1)y_{1i} + \epsilon_{i}  & (\text{Factor}) \\ -->
+<!-- \Delta y_{i} &= \beta_{0} + (\beta^{AR}_{1}-1)y_{1i} + \epsilon_{i}  & (\text{Def. of} \: \Delta) \\ -->
+<!-- \Delta y_{i} &= \beta_{0} + \beta^{DIFF}_{1}y_{1i} + \epsilon_{i}  &   (\text{Equivalence}) -->
+<!-- \end{aligned} -->
+<!-- $$ -->
 
-Here we have shown analytically an equivalence relationship between the slope coefficients from the two models, namely,
+<!-- Here we have shown analytically an equivalence relationship between the slope coefficients from the two models, namely, -->
 
-$$
-\beta^{DIFF}_{1} = (\beta^{AR}_{1} - 1)
-$$
+<!-- $$ -->
+<!-- \beta^{DIFF}_{1} = (\beta^{AR}_{1} - 1) -->
+<!-- $$ -->
 
-We can confirm this relationship look at our model output:
+<!-- We can confirm this relationship look at our model output: -->
 
-```{r}
-coef(ARfit)
-coef(DIFfit)
-```
+<!-- ```{r} -->
+<!-- coef(ARfit) -->
+<!-- coef(DIFfit) -->
+<!-- ``` -->
 
 ## Adding Explanatory Variables
 
