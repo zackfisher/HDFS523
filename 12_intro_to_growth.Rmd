@@ -1,0 +1,1253 @@
+# Introduction to Growth {#chapter-12}
+
+```{r, echo = F}
+button <-  "position: relative; 
+            top: -25px; 
+            left: 85%;   
+            color: white;
+            font-weight: bold;
+            background: #4B9CD3;
+            border: 1px #3079ED solid;
+            box-shadow: inset 0 1px 0 #80B0FB"
+```
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "show", style = button)
+```
+
+This chapter introduces models for repeated measures data (e.g., RM ANOVA, RM MANOVA) along a *continuum*. The motivation for this introduction is to present how these models are linked together, making the similarities and differences among them easier to identify and understand. We will tie the models together in a multilevel framework, working from repeated measures ANOVA through repeated measures MANOVA to growth models. 
+
+## Introduction
+
+### What is a multilevel model?
+
+Multilevel models (MLM) go by many names:
+
+- General Linear Mixed Model
+- Random Coefficients Model 
+- Hierarchical Linear Model 
+
+### Two Faces of MLM
+
+In traditional MLM we typically have a model for the means, and a model for the variance.
+
+#### A Model for the Means
+
+- Typicalled known as **fixed effects**
+- Similar to the quantities tested in single-level models
+- How the expected value of an outcome varies based on the values of predictors in our model
+
+#### A Model for the Variances
+
+- Typically known as **random effects**
+- Similar to the assumptions used in single-level models
+- Model for how residuals are distributed and vary across observations (persons, groups, and time)
+
+### Two-Level Longitudinal Data
+
+**Between-Person Variation**
+
+- Level 2 or inter-individual differences
+- Time-invariant
+- More of less than other people
+
+**Within-Person Variation**
+
+- Level 1 or intra-individual differences
+- Time-varying
+- Can only assess with longitudinal studies
+- More or less than one's average
+
+## Example Data 
+
+Loading some new libraries used in this chapter.
+
+```{r, warning=FALSE, message=FALSE}
+library(psych)     # for descriptives etc
+library(ggplot2)   # for plotting
+library(nlme)      # for mixed effects models
+library(lme4)      # for mixed effects models
+library(lmerTest)  # to get significance tests from lmer
+```
+
+### Data Preparation and Description
+
+For our examples, we use 3-occasion WISC data that are *equally spaced*. 
+
+Load the repeated measures data 
+
+```{r}
+filepath <- "https://quantdev.ssri.psu.edu/sites/qdev/files/wisc3raw.csv"
+wisc3raw <- read.csv(file=url(filepath),header=TRUE)
+```
+
+
+Next, let's Subset the variables of interest. For this chapter we will include:
+
+- 3-occasion equally spaced repeated measures (`verb2`, `verb4`, `verb6`)
+- A person-level grouping variable (`grade`)
+- An ID variable (`id`)
+
+After subsetting let's take a look at some basic descriptives.
+
+```{r}
+varnames <- c("id","verb2","verb4","verb6","grad")
+wiscsub <- wisc3raw[ ,varnames]
+describe(wiscsub)
+```
+
+Multilevel modeling analyses typically require a long data set. So, we also reshape from wide to long in order to have a long data set.
+
+```{r}
+verblong <- reshape(
+  data = wiscsub, 
+  varying = c("verb2","verb4","verb6"), 
+  timevar = "grade", 
+  idvar = "id", 
+  direction = "long", 
+  sep = ""
+)
+verblong <- verblong[order(verblong$id,verblong$grade), c("id","grade","verb","grad")]
+head(verblong,12)
+```
+
+### Sample Moments
+
+For clarity, let's consider the basic information representation of the 3-occasion repeated measures data. In particular, data (even non-repeated measures data) are summarized (at the sample-level) as (1) a vector of means and (2) a variance-covariance matrix.   
+
+```{r}
+#mean vector (from wide data)
+meanvector <- sapply(wiscsub[ ,c("verb2","verb4","verb6")], mean, na.rm=TRUE)
+round(meanvector,2)
+#variance-covariance matrix (from wide data)
+varcovmatrix <- cov(wiscsub[ ,c("verb2","verb4","verb6")], use="pairwise.complete.obs")
+round(varcovmatrix,2)
+```
+
+Making visual counterparts can also be extremely useful - especially for facilitating higher-level conversations in a research group. Basic sample-level descriptions in visual form. Note that the time variable has been converted to a factor = categorical   
+
+```{r}
+ggplot(data=verblong, aes(x=factor(grade), y=verb)) + 
+  geom_boxplot(notch = TRUE) +
+  stat_summary(fun.y="mean", geom="point", shape=23, size=3, fill="white") +
+  labs(x = "Grade", y = "Verbal Ability") +
+  theme_classic()
+
+pairs.panels(wiscsub[,c("verb2","verb4","verb6")])
+```
+
+Reminder, we should always be careful about the scaling of the x- and y-axes in these plots.
+
+One additional recoding for convenience is to center and scale our time variable. This gives us a specific $0$ point and an intuitive $0, 1, 2$ scale that is useful for our didactic purposes.
+
+```{r}
+unique(verblong$grade)
+verblong$time0 <- (verblong$grade-2)/2 # from 2,4,6 to 0,1,2
+unique(verblong$time0)
+head(verblong,12)
+```
+
+Plotting the raw data along this new time variable. 
+
+```{r}
+#plotting intraindividual change RAW DATA
+ggplot(data = verblong, aes(x = time0, y = verb, group = id)) +
+  ggtitle("Raw Data") +
+  geom_point() + 
+  geom_line() +
+  xlab("Time") + 
+  ylab("WISC Verbal Score") + 
+  ylim(0,100) + xlim(0,2) +
+  theme_classic()
+```
+
+Note that the time variable in this plot has NOT been converted to a factor. It is a continuous variable.
+
+## A General Model 
+
+The presentation of all of these models here is an attempt to *integrate* traditions that are typically kept separate or set against each other. In reality, they are just a few examples of the many, many possible models that exist. Each model is useful in specific situations. 
+
+The objective of all of our analyses is to *deconstruct* the data into meaningful and interpretable pieces. Each *model* does this in a different way, with different assumptions.
+
+We can *judge* the models based on    
+
+1. How well they articulate and test our theory, and   
+2. How well they recover the data (evaluated as misfit to the impled moments).    
+
+Recall that the regression model may be compactly written as
+
+
+$$ 
+\mathbf{Y} = \mathbf{X}\mathbf{\beta} + \boldsymbol{e} 
+$$
+
+We make it into a multilevel regression model by further partitioning the predictor space into between-person and within-person components. Note: this is the very same distinction that is made in traditional presentations of ANOVA when examining between-person factors and within-person factors.
+
+The general model becomes
+
+$$ 
+\underbrace{\boldsymbol{Y}_i}_{\begin{subarray}{c}\text{repeated measures}\\
+    \text{for persion i}\end{subarray}} = \underbrace{\boldsymbol{X}_i}_{\begin{subarray}{c}\text{known}\\
+    \text{covariates}\end{subarray}}\underbrace{\boldsymbol{\beta}}_{\begin{subarray}{c}\text{fixed}\\
+    \text{effects}\end{subarray}} + \underbrace{\boldsymbol{Z}_i}_{\begin{subarray}{c}\text{known}\\
+    \text{covariates}\end{subarray}}\underbrace{\boldsymbol{u}_i}_{\begin{subarray}{c}\text{random}\\
+    \text{effects}\end{subarray}} + \underbrace{\boldsymbol{e}_i}_{\begin{subarray}{c}\text{residuals}\end{subarray}}
+$$
+which is also called the linear mixed model. 
+
+
+## Unconditional Means Model
+
+It is often recommended to fit the unconditional means model before moving on to more complicated models. 
+
+This is primarily because the unconditional means model does well at partitioning variance of the outcome across levels. 
+
+We can use this model to better understand the amount of outcome variation that exists at the within and between levels of our model. 
+
+If we fail to find sufficient variation at a given level there may be little reason to proceed with attempts to explain variance at that level of analysis.
+
+### Level 1
+
+First, let us write out the *level-1* (individual) model
+
+$$
+y_{it} = 1\beta_{0i} + e_{it}
+$$
+where
+
+- $y_{it}$ is the repeated measures score for individual $i$ at time $t$
+- $\beta_{0i}$ is the random intercept for individual $i$ (person-specific mean)
+- $e_{it}$ is the time-specific residual score (within-person deviation)
+  - $e_{it} \sim \mathcal{N}(0,\sigma^{2}_{e})$
+
+Note, the level 1 model shows us the true individual-level trajectories are completely flat, sitting at $\beta_{0i}$.
+
+### Level 2
+
+The level-2 (sample) equation for the random intercept $\beta_{0i}$ can be written as
+
+$$
+\beta_{0i} = 1\gamma_{00} + u_{0i}
+$$
+
+where
+
+- $\gamma_{00}$ is the sample mean for the intercept (grand mean)
+- $u_{0i}$ is individual $i$'s deviation from the sample mean (between person deviation)
+  - $u_{0i} \sim \mathcal{N}(0,\psi_{u0})$
+
+Note, the looking at the level 1 and level 2 model tells us that while these flat trajectories may differ in elevation, across everyone in the population, their average elevation is $\gamma_{00}$.
+
+### Single Equation
+
+We can write also both models in a single equation as follows
+
+$$
+y_{it} = (1\gamma_{00} + 1u_{0i}) + e_{it}
+$$
+where
+
+- $y_{it}$ is the repeated measures score for individual $i$ at time $t$
+- $\gamma_{00}$ is the sample mean for the intercept (grand mean)
+- $u_{0i}$ is individual $i$'s deviation from the sample mean (between person deviation)
+  - $u_{0i} \sim \mathcal{N}(0,\psi_{u0})$
+- $e_{it}$ is the time-specific residual score (within-person deviation)
+  - $e_{it} \sim \mathcal{N}(0,\sigma^{2}_{e})$
+  
+### Model Elaboration
+
+#### Within-Person Residual Covariance
+
+For clarity, Let's write out the full variance covariance matrix of the within-person residuals (spanning across the $T = 3$ repeated measures). Remember, we wrote $(e_{it} \sim \mathcal{N}(0,\sigma^{2}_{e}))$, or in matrix notation,
+
+$$
+\sigma^{2}_{e}\boldsymbol{I} = 
+\sigma^{2}_{e}
+\left[\begin{array}
+{rrr}
+1 & 0 & 0  \\
+ 0 & 1 & 0  \\
+ 0 & 0 & 1   
+\end{array}\right] = 
+\left[\begin{array}
+{rrr}
+ \sigma^{2}_{e} & 0 & 0  \\
+ 0 & \sigma^{2}_{e} & 0  \\
+ 0 & 0 & \sigma^{2}_{e}   
+\end{array}\right] = 
+\boldsymbol{\Lambda}
+$$
+Note, this is the homoscedasticity of errors assumption.
+
+#### Between-Person Residual Covariance
+
+We can now do the same for the full variance covariance matrix of the between-person residuals,
+
+$$
+\left[\begin{array}
+{r}
+\psi_{u0}
+\end{array}\right] = u_{0i}u_{0i}'
+$$
+
+Note, in the unconditional means model there is no-growth, each individual has an intercept, but no change in scores is predicted because there are no predictors (e.g. time) in the level-1 equation.
+
+### Estimated Quantities
+
+Importantly, in the unconditional means model we will be interested in estimating three parameters:
+
+- The sample-level mean of the random intercept ($\gamma_{00}$) or the grand mean across all occasions and individuals.
+- The variance of the random intercept ($\psi_{u0}$)
+  - Provides information about the magnitude of between person differences in scores at each
+    measurement occasion. 
+- The residual variance ($\sigma^{2}_{e}$)
+  - Provides information about the magnitude of with-person fluctuations in scores over time. 
+
+
+### More Notation 
+
+It is also worth mentioning that through some replacement (e.g., replacing $u_{i}$ = $b_{i}$, the different vectors of 1 with $X_{i}$ and  $Z_{i}$ = 1 we can get to ...
+$$ \boldsymbol{Y} = \boldsymbol{X}\boldsymbol{\beta} + \boldsymbol{Z}\boldsymbol{b} + \boldsymbol{e} $$
+which is just the more general notation  often used in the statistics literature. The equation we started with, with another multilevel notation  ...
+$$ \boldsymbol{Y} = \boldsymbol{X}\boldsymbol{\gamma} + \boldsymbol{Z}\boldsymbol{u} + \boldsymbol{e} $$
+
+### Unconditional Means Model in R
+
+We can write the unconditional means model in R as follows.
+
+```{r}
+um_fit <- lme(
+  fixed = verb ~ 1, 
+  random = ~ 1|id, 
+  data = verblong,
+  na.action = na.exclude
+)
+summary(um_fit)
+
+# um_fit2 <- lmer(
+#   verb ~ 1 + (1|id),
+#   data=verblong,
+#   na.action = na.exclude
+# )
+# summary(um_fit2)
+```
+
+#### Interpretation
+
+The single fixed effect in our unconditional means model is the grand mean, or $\gamma_{00}$. Rejection of the null indicates the average verbal score between Grades 2 and 6 is non-zero.
+
+Next we look at the random effects. The estimated between-person standard deviation is $\psi_{u0}=4.4$ and the estimated within-person standard deviation is $\sigma^{2}_{e}=10.28$.
+
+
+### Intra-Class Correlation
+
+The intra-class correlation (ICC) as the ratio of the random intercept variance (between-person) to the total variance, defined as the sum of the random intercept variance and residual variance (between + within). Specifically,
+$$ICC_{between} = \frac{\sigma^{2}_{u0}}{\sigma^{2}_{u0} + \sigma^{2}_{e}}$$
+
+#### Calculating the ICC
+
+The ICC is the ratio of the random intercept variance (between-person var) over the total variance (between + within var):
+```{r}
+ICC_between <- 4.4^2 / (4.4^2 + 10.28^2)
+ICC_between
+
+# Simple function for computing ICC from lme() output
+ICClme <- function(out) {
+   varests <- as.numeric(VarCorr(out)[1:2])
+   return(paste("ICC =", varests[1]/sum(varests)))
+}
+ICClme(um_fit)
+```
+
+
+From the unconditional means model, the ICC was calculated, which indicated that of the total variance in verbal scores, approximately 16\%, is attributable to between-person variation whereas 84\% is attributable to within-person variation. This means there is a good portion of within-person variance sill to be modeled.
+
+### Model-Impled Moments
+
+What is the implied representation of the basic information? What are the model-implied moments?
+
+Let's remember our original equation.
+
+
+$$\left[\begin{array}
+{r}
+Y_{i0} \\
+Y_{i1} \\
+Y_{i2}
+\end{array}\right] = 
+\left[\begin{array}
+{r}
+X_{0} \\
+X_{1} \\
+X_{2}
+\end{array}\right] 
+\left[\begin{array}
+{r}
+\beta_{0}
+\end{array}\right] + 
+\left[\begin{array}
+{r}
+Z_{0} \\
+Z_{1} \\
+Z_{2}
+\end{array}\right] 
+\left[\begin{array}
+{r}
+u_{0i}
+\end{array}\right] + 
+\left[\begin{array}
+{r}
+e_{i0} \\
+e_{i1} \\
+e_{i2}
+\end{array}\right]$$
+
+
+In this *unconditional means* model the $X$ and $Z$ design matrices are simply vectors of $1$s, leaving us with
+
+$$\left[\begin{array}
+{r}
+Y_{i0} \\
+Y_{i1} \\
+Y_{i2}
+\end{array}\right] = 
+\left[\begin{array}
+{r}
+ 1  \\
+ 1  \\
+ 1    
+\end{array}\right] 
+\left[\begin{array}
+{r}
+\beta_{0}
+\end{array}\right] + 
+\left[\begin{array}
+{r}
+ 1  \\
+ 1  \\
+ 1    
+\end{array}\right]
+\left[\begin{array}
+{r}
+u_{0i}
+\end{array}\right] + 
+\left[\begin{array}
+{r}
+e_{i0} \\
+e_{i1} \\
+e_{i2}
+\end{array}\right]$$. 
+
+
+#### Mean Vector
+
+To obtain the model-implied mean vector we want $\mathbb{E}(\mathbf{Y})$. Remember, from our covariance algebra 
+
+$$
+\mathbb{E}(\mathbf{A}+\mathbf{B}+\mathbf{C}) = \mathbb{E}(\mathbf{A}) +\mathbb{E}(\mathbf{B})+\mathbb{E}(\mathbf{C})
+$$
+which gives us
+
+\begin{align}
+\mathbb{E} \left( \left[\begin{array}
+{r}
+Y_{i0} \\
+Y_{i1} \\
+Y_{i2}
+\end{array}\right]  \right) =  &
+\mathbb{E}\left( \left[\begin{array}
+{r}
+ 1  \\
+ 1  \\
+ 1    
+\end{array}\right] 
+\left[\begin{array}
+{r}
+\beta_{0}
+\end{array}\right] \right) + 
+\mathbb{E}\left( \left[\begin{array}
+{r}
+ 1  \\
+ 1  \\
+ 1    
+\end{array}\right]
+\left[\begin{array}
+{r}
+u_{0i}
+\end{array}\right] \right) + 
+\mathbb{E}\left( \left[\begin{array}
+{r}
+e_{i0} \\
+e_{i1} \\
+e_{i2}
+\end{array}\right] \right) 
+\end{align}
+
+or after simplifying
+
+\begin{align}
+\mathbb{E} \left( \mathbf{Y}  \right) = &
+\mathbb{E}\left( \beta_{0}\right) + 
+\mathbf{0} + \mathbf{0} \\
+\end{align}
+
+#### Mean Vector in R
+
+Let's make the implied *mean vector* in R.
+
+
+First, extract the fixed effects from the model using `fixef()`, specifically the contents of the $\beta$ matrix.
+
+```{r}
+fixef(um_fit)
+beta <- matrix(fixef(um_fit)[1], nrow = 1, ncol = 1)
+beta
+```
+
+Create the model design matrix for the fixed effects. In this model this is a matrix of order $3 \times 1$.
+
+```{r}
+X <- matrix(c(1,1,1), nrow = 3, ncol = 1)
+X
+```
+
+Creating the model implied mean vector through multiplication
+
+$$ 
+\mathbf{Y} = \mathbf{X}\mathbf{\beta} + 0 + 0
+$$
+
+```{r}
+meanvector_um <- X %*% beta
+meanvector_um
+```
+
+Note this is the overall (grand) mean.
+
+#### Model-Implied Covariance Matrix
+
+Now, let's take a look at the model-implied variance-covariance matrix. Before we start let's review the model again,
+
+$$ 
+\boldsymbol{Y}_i = \boldsymbol{X}_i\boldsymbol{\beta} + \boldsymbol{Z}_i\boldsymbol{u}_i + \boldsymbol{e}_i 
+$$
+
+where
+
+- $\mathbf{Z}_i$ is the random effects regressor (design) matrix;
+- $\boldsymbol{\beta}$ contains the fixed effects; 
+- $\boldsymbol{u}_i$ contains the random effects which are distributed normally with $0$ mean and covariance matrix $\mathbf{\Psi}$ and 
+- $\boldsymbol{e}_i$ are errors  which are distributed normally with $0$ mean and covariance matrix $\mathbf{\Lambda_{i}}$, and
+- our "standard assumption" was that $\mathbf{\Lambda_{i}} = \mathbf{\sigma^2}\mathbf{I}$  (homogeneity of errors).
+
+
+We'd like to identify the quantity $\mathbb{C}ov(\mathbf{Y})$. 
+
+We subtract the "means" from both sides ...
+$$\left[\begin{array}
+{r}
+Y_{i0} \\
+Y_{i1} \\
+Y_{i2}
+\end{array}\right] - 
+\left[\begin{array}
+{r}
+X_{0} \\
+X_{1} \\
+X_{2}
+\end{array}\right] 
+\left[\begin{array}
+{r}
+\beta_{0}
+\end{array}\right] =
+\left[\begin{array}
+{r}
+Z_{0} \\
+Z_{1} \\
+Z_{2}
+\end{array}\right] 
+\left[\begin{array}
+{r}
+u_{0i}
+\end{array}\right] + 
+\left[\begin{array}
+{r}
+e_{i0} \\
+e_{i1} \\
+e_{i2}
+\end{array}\right]$$  
+
+So on the left side we now have de-meaned scores and on the right we have a between-portion part and a within-person part. Note that $\mathbf{Y}^{*}$ is now mean-centered, and as such, $\mathbb{C}ov(\mathbf{Y}) = \mathbf{Y}^{*}\mathbf{Y}^{*'}$.
+
+This gives us 
+
+\begin{align}
+\mathbf{Y}^{*} \mathbf{Y}^{*'} = (\mathbf{Z}\mu_{0i} + \boldsymbol{\epsilon})(\mathbf{Z}\mu_{0i} + \boldsymbol{\epsilon})^{'} \\
+= (\mathbf{Z}\mu_{0i} + \boldsymbol{\epsilon})(\mu_{0i}^{'}\mathbf{Z}^{'} + \boldsymbol{\epsilon}^{'}) & \quad \text{[Distribute transpose]}\\
+= \mathbf{Z}\mu_{0i}\mu_{0i}^{'}\mathbf{Z}^{'} + \mathbf{Z}\mu_{0i}\boldsymbol{\epsilon}^{'} + \boldsymbol{\epsilon}\mu_{0i}^{'}\mathbf{Z}^{'} + \boldsymbol{\epsilon}\boldsymbol{\epsilon}^{'} & \quad \text{[Expand]}\\
+= \mathbf{Z}\mu_{0i}\mu_{0i}^{'}\mathbf{Z}^{'} + \boldsymbol{\epsilon}\boldsymbol{\epsilon}^{'} & \quad \text{[Orthogonality]}\\
+= \mathbf{Z}\boldsymbol{\Psi}\mathbf{Z}^{'} + \boldsymbol{\Lambda} & \quad \text{[De. \: Covariances]}\\
+\end{align}
+
+Or we can alternatively see this in matrix form, without recalculating all the steps.
+
+$$\left[\begin{array}
+{r}
+Y^*_{i0} \\
+Y^*_{i1} \\
+Y^*_{i2}
+\end{array}\right] =
+\left[\begin{array}
+{r}
+Z_{0} \\
+Z_{1} \\
+Z_{2}
+\end{array}\right] 
+\left[\begin{array}
+{r}
+u_{0i}
+\end{array}\right] + 
+\left[\begin{array}
+{r}
+e_{i0} \\
+e_{i1} \\
+e_{i2}
+\end{array}\right]$$ 
+
+Let's calculate var-cov matrix ...
+
+$$\left[\begin{array}
+{r}
+Y^*_{i0} \\
+Y^*_{i1} \\
+Y^*_{i2}
+\end{array}\right]
+\left[\begin{array}
+{r}
+Y^*_{i0} &
+Y^*_{i1} &
+Y^*_{i2}
+\end{array}\right] =
+\left[\begin{array}
+{r}
+Z_{0} \\
+Z_{1} \\
+Z_{2}
+\end{array}\right] 
+\left[\begin{array}
+{r}
+u_{0i}
+\end{array}\right] 
+\left[\begin{array}
+{r}
+u_{0i}
+\end{array}\right] 
+\left[\begin{array}
+{r}
+Z_{0} &
+Z_{1} &
+Z_{2}
+\end{array}\right] 
++ 
+\left[\begin{array}
+{r}
+e_{i0} \\
+e_{i1} \\
+e_{i2}
+\end{array}\right]
+\left[\begin{array}
+{r}
+e_{i0} &
+e_{i1} &
+e_{i2}
+\end{array}\right]$$  
+
+From above we get
+
+
+$$\left[\begin{array}
+{r}
+\hat\Sigma
+\end{array}\right] =
+\left[\begin{array}
+{r}
+Z_{0} \\
+Z_{1} \\
+Z_{2}
+\end{array}\right] 
+\left[\begin{array}
+{r}
+\Psi
+\end{array}\right] 
+\left[\begin{array}
+{r}
+Z_{0} &
+Z_{1} &
+Z_{2}
+\end{array}\right] 
++ 
+\left[\begin{array}
+{r}
+\sigma^2_{e} 
+\end{array}\right]
+\left[\begin{array}
+{r}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1 
+\end{array}\right]$$
+
+
+#### Covariance Matrix in R
+
+```{r}
+#parsing the model variances & covariances
+VarCorr(um_fit)
+```
+
+
+So, in order to reconstruct the implied variance-covariances, we need to find $\mathbf{\Psi}$ and $\mathbf{\sigma^2}$ to create $\boldsymbol{\Lambda}$, and do some multiplication.
+
+a. Parse the between-person variances from the model output.
+```{r}
+Psi <- matrix(c(as.numeric(VarCorr(um_fit)[1])),nrow = 1, ncol = 1)  
+Psi
+```
+
+Create the model design matrix, $\mathbf{Z}$, for the random effects. In this model this is a matrix of order $3 \times 1$
+
+```{r}
+Z <- matrix(c(1,1,1), nrow=3,ncol=1)
+Z
+```
+
+So, the implied variance-covariance matrix of the between-person random effects for the three occasions is: 
+
+```{r}
+Cov1 = Z %*% Psi %*% t(Z)
+Cov1
+```
+
+Which in correlation units implies 
+
+```{r}
+Delta = diag(3)
+Delta[1,1] = 1/sqrt(Cov1[1,1])
+Delta[2,2] = 1/sqrt(Cov1[2,2])
+Delta[3,3] = 1/sqrt(Cov1[3,3])
+Delta %*% Cov1 %*% Delta
+```
+
+
+Now, let's look at the residual error variance-covariance matrix,
+
+```{r}
+sigma2 <- as.numeric(VarCorr(um_fit)[2])
+Lambda <- sigma2 * diag(1, nrow = 3, ncol = 3)
+```
+
+
+Finally, can  put the between- and within- pieces together to calculate the model-implied variance-covariance matrix as follows
+
+```{r}
+varcovmatrix_um <- Z %*% Psi %*% t(Z) + (sigma2 * Lambda)
+varcovmatrix_um
+```
+
+Note, we have a compound symmetry structure in our model-implied covariance matrix. 
+
+Together with the implied mean vector, we have the entire picture provided by all the model components.
+
+### Model Residuals
+
+Recall what the observed mean and var-cov were ...
+```{r}
+meanvector
+varcovmatrix
+```
+
+For fun, let's look at the misfit to the data (observed matrix - model implied matrix)
+```{r}
+meanvector - meanvector_um
+varcovmatrix - varcovmatrix_um
+```
+
+Fit is not so good. Let's visualize the implied model. 
+
+```{r}
+#Calculating predicted scores from the models 
+verblong$pred_um <- predict(um_fit)
+#Making the prototype from the implied means
+proto_um <- data.frame(cbind(c(1000,1000,1000),c(0,1,2),meanvector_um))
+names(proto_um) <- c("id","time0","pred_um")
+
+#plotting implied individual scores
+ggplot(data = verblong, aes(x = time0, y = pred_um, group = id)) +
+  ggtitle("Unconditional Means Model") +
+  geom_point() + 
+  geom_line() +
+  geom_point(data=proto_um, color="red", size=2) +
+  geom_line(data=proto_um, color="red", size=1) +
+  xlab("Time") + 
+  ylab("WISC Verbal Score") + 
+  ylim(0,100) + xlim(0,2)
+```
+
+
+## Repeated Measures ANOVA 
+
+OK, now let's move to an repeated measures (RM) ANOVA by adding in effects for categorical time. Recall, we must tell R that `time0` is a categorical variable using `factor()`
+
+```{r}
+verblong$time0 <- factor(verblong$time0, ordered=FALSE)
+str(verblong$time0)
+```
+
+Here is our RM ANOVA model with time as within-person factor
+
+```{r}
+timecat_fit <- lme(
+  fixed = verb ~ 1 + time0, 
+  random = ~ 1|id, 
+  data = verblong,
+  na.action = na.exclude)
+summary(timecat_fit)
+
+# timecat_fit2 <- lmer(verb ~ 1 + time0 + (1|id), 
+#                    data=verblong,
+#                    na.action = na.exclude)
+# summary(timecat_fit2)
+```
+
+Remember that interpretation is with respect to *time0*, with the first category set as default intercept which is
+
+```{r}
+str(verblong$time0)
+```
+
+### Intra-Class Correlation
+
+The intra-class correlation (ICC) as the ratio of the random intercept variance (between-person) to the total variance, defined as the sum of the random intercept variance and residual variance (between + within). Specifically,
+$$ICC_{between} = \frac{\sigma^{2}_{u0}}{\sigma^{2}_{u0} + \sigma^{2}_{e}}$$
+
+#### Calculating the ICC
+
+The ICC is the ratio of the random intercept variance (between-person var) over the total variance (between + within var):
+
+```{r}
+# Simple function for computing ICC from lme() output
+ICClme <- function(out) {
+   varests <- as.numeric(VarCorr(out)[1:2])
+   return(paste("ICC =", varests[1]/sum(varests)))
+}
+ICClme(timecat_fit)
+```
+
+
+From the current model, the ICC was calculated, which indicated that of the total variance in verbal scores, approximately 70\%, is attributable to between-person variation whereas 30\% is attributable to within-person variation. 
+
+### Model-Implied Mean Vector
+
+Let's be explicit with our model
+
+$$\left[\begin{array}
+{r}
+Y_{i0} \\
+Y_{i1} \\
+Y_{i2}
+\end{array}\right] = 
+\left[\begin{array}
+{r}
+ 1  & 0 & 0 \\
+ 1  & 1 & 0 \\
+ 1  & 0 & 1 
+\end{array}\right] 
+\left[\begin{array}
+{r}
+\beta_{0} \\
+\beta_{1} \\
+\beta_{2}
+\end{array}\right] + 
+\left[\begin{array}
+{r}
+ 1  \\
+ 1  \\
+ 1    
+\end{array}\right]
+\left[\begin{array}
+{r}
+u_{0i}
+\end{array}\right] + 
+\left[\begin{array}
+{r}
+e_{i0} \\
+e_{i1} \\
+e_{i2}
+\end{array}\right]$$. 
+
+
+Making the implied *mean vector*
+
+```{r}
+fixef(timecat_fit)
+
+beta <- matrix(
+  c(
+    fixef(timecat_fit)[1], 
+    fixef(timecat_fit)[2], 
+    fixef(timecat_fit)[3]
+  ), nrow =3, ncol=1)
+beta
+```
+
+Create the model design matrix for the fixed effects. In this model this is a matrix of order $3 \times 3$.
+
+```{r}
+X <- matrix(c(1,1,1,0,1,0,0,0,1), nrow=3, ncol=3)
+X
+```
+
+Creating the model implied mean vector through multiplication
+
+$$ 
+\mathbf{Y} = \mathbf{X}\mathbf{\beta} + 0 + 
+$$
+
+```{r}
+meanvector_timecat <- X %*% beta
+meanvector_timecat
+```
+
+See the *differences* in the means across levels of `time0`.
+
+### Model-Implied Covariance Matrix
+
+Making the implied *variance-covariance matrix*.
+
+```{r}
+VarCorr(timecat_fit)
+```
+
+From this, we need to create the model implied variance-covariance.
+
+Parse the between-person variances from the model output.
+
+```{r}
+Psi <- matrix(c(as.numeric(VarCorr(timecat_fit)[1])), nrow=1,ncol=1)  
+Psi
+```
+
+Create the model design matrix for the random effects. In this model this is a matrix of order $3 \times 1$
+```{r}
+Z <- matrix(c(1,1,1), nrow=3,ncol=1)
+Z
+```
+
+So, the implied variance-covariance matrix of the between-person random effects for the three occasions is: 
+
+```{r}
+Z %*% Psi %*% t(Z)
+```
+
+Next, we parse the residual/"error" variance-covariance.
+
+```{r}
+sigma2 <- as.numeric(VarCorr(timecat_fit)[2])
+Lambda <- sigma2 * diag(1,nrow=3,ncol=3)
+```
+
+So the residual within-person residual/"error" structure 
+
+```{r}
+Lambda
+```
+
+As before, we have homogeneity and uncorrelated errors.
+
+Finally, calculate the implied variance-covariances of total model
+```{r}
+varcovmatrix_timecat <- Z %*% Psi %*% t(Z) + Lambda
+varcovmatrix_timecat
+```
+
+Again, notice the compound symmetry structure.
+
+For fun, let's look at the misfit (real matrix - model implied)
+
+```{r}
+#misfit of means
+meanvector - meanvector_timecat
+#misfit of var-cov
+varcovmatrix - varcovmatrix_timecat
+```
+
+The means are now perfectly reproduced, however, the variances and covariances are not so good, particularly the variances
+
+
+Let's make a picture of the implied model. 
+```{r}
+#Calculating predicted scores from the models 
+verblong$pred_timecat <- predict(timecat_fit)
+#Making the prototype from the implied means
+proto_timecat <- data.frame(cbind(c(1000,1000,1000),c(0,1,2),meanvector_timecat))
+names(proto_timecat) <- c("id","time0","pred_timecat")
+
+#need to convert time0 back into a continuous variable for plotting as intraindividual change
+verblong$time0 <- as.numeric(unclass(verblong$time0))-1
+#plotting implied individual scores
+ggplot(data = verblong, aes(x = time0, y = pred_timecat, group = id)) +
+  ggtitle("RM ANOVA Model (time categorical)") +
+  geom_point() + 
+  geom_line() +
+  geom_point(data=proto_timecat, color="red", size=2) +
+  geom_line(data=proto_timecat, color="red", size=1, linetype=2) +
+  xlab("Time") + 
+  ylab("WISC Verbal Score") + 
+  ylim(0,100) + xlim(0,2) +
+  theme_classic()
+```
+
+Notice that the implied lines are all parallel. This is a model of *mean differences*.
+
+Can also see what the residuals look like.
+
+```{r}
+#Calculating residual scores from the models 
+verblong$resid_timecat <- residuals(timecat_fit)
+
+#plotting implied individual scores
+ggplot(data = verblong, aes(x = time0, y = resid_timecat, group = id)) +
+  ggtitle("RM ANOVA Model Residuals (time categorical)") +
+  geom_point() + 
+  xlab("Time") + 
+  ylab("WISC Verbal Score") + 
+  xlim(0,2) +
+  theme_classic()
+```
+
+Note, that the points are not connected - this is to highlight the model and the implication that the within-person residuals are from the occasion-specific mean (NOT from a trajectory).Note also the heteroskedasticity of the residuals. 
+
+
+## Repeated Measures MANOVA 
+
+Now let's adjust the RM ANOVA error structure to get a RM MANOVA. The *multivariate* part of the MANOVA, has to do with relaxing the assumption on the error structure - this means more flexibility than compound symmetry.
+
+Here is our RM ANOVA model with time as within-person factor. The error structure is *compound symmetry with heterogeneous variances*.
+
+```{r}
+verblong$time0 <- factor(verblong$time0, ordered=FALSE)
+timecathet_fit <- lme(
+  fixed= verb ~ 1 + time0, 
+  random= ~ 1|id,
+  weights=varIdent(form=~1|time0),
+  data=verblong,
+  na.action = na.exclude
+)
+
+summary(timecathet_fit)
+```
+
+### Model-Implied Mean Vector
+
+So what is the implied representation of the basic information
+Making the implied *mean vector*.
+```{r}
+fixef(timecathet_fit)
+beta <- matrix(
+  c(
+    fixef(timecathet_fit)[1], 
+    fixef(timecathet_fit)[2], 
+    fixef(timecathet_fit)[3]
+    ), nrow=3, ncol=1)
+beta
+```
+
+Create the model design matrix, X, for the fixed effects. In this model this is a matrix of order $3 \times 3$.
+
+```{r}
+X <- matrix(c(1,1,1,0,1,0,0,0,1), nrow=3,ncol=3)
+X
+```
+
+Creating the model implied mean vector through multiplication
+
+$$ 
+\mathbf{Y} = \mathbf{X}\mathbf{\beta} + 0 + 0
+$$
+
+```{r}
+meanvector_timecathet  <- X %*% beta
+meanvector_timecathet
+```
+
+See the *differences* in the means across levels of `time0`. This is exactly the same as in the last model
+
+### Model-Implied Covariance Matrix
+
+```{r}
+#parse the between-person variances
+Psi <- matrix(c(as.numeric(VarCorr(timecathet_fit)[1])),nrow=1,ncol=1)  
+Psi
+#create the model design matrix
+Z <- matrix(c(1,1,1), nrow=3,ncol=1)
+Z
+```
+
+So the implied variance covariance of the between-person random effects for the three repeated measures is: 
+
+```{r}
+Z %*% Psi %*% t(Z)
+```
+
+Now for the within-person residual var-cov.
+
+```{r}
+#parse the residual/"error" variance-covariance
+sigma <- as.numeric(VarCorr(timecathet_fit)[4]) #note this is standard deviation
+sigma
+```
+
+**Note**: Now we have another step due to the heterogeneous variances.  We have to get the heterogeneous weights for the residual standard deviation from the `summary(timecathet_fit)`.
+
+```{r, eval=FALSE}
+# Variance function:
+#   Structure: Different standard deviations per stratum
+# Formula: ~1 | time0 
+# Parameter estimates:
+#        0        1        2 
+# 1.000000 1.254186 2.341456 
+```
+
+Pulling from the output.
+
+```{r}
+sigmahet <- sigma * (diag(c(1.000000, 1.254186, 2.341456), nrow=3,ncol=3))
+#Calculate the implied residual error variance-covariance
+Lambda   <- sigmahet^2 
+```
+
+Finally calculating the model implied between- + within var-cov structure.
+
+
+```{r}
+varcovmatrix_timecathet <- Z %*% Psi %*% t(Z) + Lambda
+varcovmatrix_timecathet
+```
+
+Note the *heterogeneity* we now have along the diagonal.
+
+Again, Let's look at the misfit (real matrix - model implied)
+
+```{r}
+meanvector - meanvector_timecathet
+varcovmatrix - varcovmatrix_timecathet
+```
+
+Getting better. Note, we can formally compare the models.
+
+```{r}
+anova(timecat_fit, timecathet_fit)
+```
+
+Remember, the null hypothesis of the LRT states that the more constrained model provides as good a fit for the data as the less constrained model. If the null hypothesis is rejected, then the alternative, unconstrained model provides a significant improvement in fit over the smaller model. Thus, allowing for the additional heterogeneity improved our model.
+
+
+## Repeated Measures MANOVA (Unstructured)
+
+Let's adjust the RM MANOVA error structure to have no constraints. To do this in `lme()` we can use the `correlation` argument.
+
+We can now use the `weights` argument to indicate that the residual variances will be a function of time.
+
+Option `correlation = corSymm(form=~1|id)` specifies that the correlation structure is unstructured.
+
+```{r}
+verblong$time0 <- factor(verblong$time0, ordered=FALSE)
+timecatunst_fit <- lme(
+  fixed= verb ~ 1 + time0, 
+  random= ~ 1|id,
+  weights=varIdent(form=~1|time0),
+  correlation=corSymm(form=~1|id),
+  data=verblong,
+  na.action = na.exclude
+)
+summary(timecatunst_fit)
+```
+
+### Model-Implied Mean Vector
+
+There will be no differences in the model implied mean vector in this model.
+
+```{r}
+beta <- matrix(fixef(timecatunst_fit), nrow=3, ncol=1)
+X <- matrix(c(1,1,1,0,1,0,0,0,1), nrow=3,ncol=3)
+meanvector_timecatunst  <- X %*% beta
+meanvector_timecatunst
+```
+
+### Model-Implied Covariance Matrix
+
+Again, we start with the between-part of our model.
+
+```{r}
+#parsing the model variances & covariances
+VarCorr(timecatunst_fit)
+Psi <- matrix(c(as.numeric(VarCorr(timecatunst_fit)[1])),nrow=1,ncol=1)  
+Z <- matrix(c(1,1,1),  nrow=3,ncol=1)
+Z %*% Psi %*% t(Z)
+```
+
+Now it gets a bit more complicated, because we have a fully unstructured matrix for the within-person residual variance-covariance.
+
+```{r}
+#parse the residual/"error" variance-covariance
+sigma <- as.numeric(VarCorr(timecatunst_fit)[4]) #note this is standard deviation
+
+#From the summary(timecatunst_fit) above
+#  Variance function:
+#   Structure: Different standard deviations per stratum
+# Formula: ~1 | time0 
+# Parameter estimates:
+#        0        1        2 
+# 1.000000 1.827573 3.461330 
+sigmaunst <- sigma * (diag(c(1.000000, 1.827573, 3.461330), nrow=3,ncol=3))
+
+#From the summary(timecatunst_fit) above
+# Correlation Structure: General
+# Formula: ~1 | id 
+# Parameter estimate(s):
+#   Correlation: 
+#   1     2    
+# 2 0.275      
+# 3 0.709 0.725
+cormatrixunst <- matrix(c(1.000, 0.275, 0.709,
+                          0.275, 1.000, 0.725,
+                          0.709, 0.725, 1.000),
+                        nrow=3,ncol=3)
+
+#Pre and post multiply by SDs to convert Correlation matrix into
+#Covariance matrix
+covresidunst <- sigmaunst %*% cormatrixunst %*% t(sigmaunst)
+covresidunst
+```
+
+
+Finally, calculate the implied between- + within-person variance-covariances
+```{r}
+varcovmatrix_timecatunst <- Z %*% Psi %*% t(Z) + covresidunst
+varcovmatrix_timecatunst
+```
+
+Let's look at the misfit (real matrix - model implied).
+
+```{r}
+meanvector - meanvector_timecatunst
+varcovmatrix - varcovmatrix_timecatunst
+```
+
+It appears we have fully reproduced our observed data. We can formally test the improvement of this model using the `anove()` function.
+
+```{r}
+anova(timecathet_fit, timecatunst_fit)
+```
+
+### References

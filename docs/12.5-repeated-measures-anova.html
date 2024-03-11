@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 12 Introduction to Growth | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
+  <title>12.5 Repeated Measures ANOVA | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
   <meta name="description" content="Course notes for HDFS 523" />
   <meta name="generator" content="bookdown 0.37.2 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 12 Introduction to Growth | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta property="og:title" content="12.5 Repeated Measures ANOVA | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for HDFS 523" />
   <meta name="github-repo" content="zackfisher/HDFS523" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 12 Introduction to Growth | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta name="twitter:title" content="12.5 Repeated Measures ANOVA | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   
   <meta name="twitter:description" content="Course notes for HDFS 523" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="11.12-references-4.html"/>
-<link rel="next" href="12.1-introduction-1.html"/>
+<link rel="prev" href="12.4-unconditional-means-model.html"/>
+<link rel="next" href="12.6-repeated-measures-manova.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -545,39 +545,244 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="chapter-12" class="section level1 hasAnchor" number="12">
-<h1><span class="header-section-number">Chapter 12</span> Introduction to Growth<a href="12-chapter-12.html#chapter-12" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
-<script>
-  function codefolder(query) {
-
-    var x = document.querySelectorAll(query);
-    if (x.length === 0) return;
-
-    function toggle_vis(o) {
-      var d = o.style.display;
-      o.style.display = (d === 'block' || d === '') ? 'none':'block';
-    }
-
-    for (i = 0; i < x.length; i++) {
-      var y = x[i];
-      toggle_vis(y);
-    }
-
-    var elem = document.getElementById("codefolder-button");
-    if (elem.value === "Hide Code") elem.value = "Show Code";
-    else elem.value = "Hide Code";
-  }
-</script>
-<p>This chapter introduces models for repeated measures data (e.g., RM ANOVA, RM MANOVA) along a <em>continuum</em>. The motivation for this introduction is to present how these models are linked together, making the similarities and differences among them easier to identify and understand. We will tie the models together in a multilevel framework, working from repeated measures ANOVA through repeated measures MANOVA to growth models.</p>
+<div id="repeated-measures-anova" class="section level2 hasAnchor" number="12.5">
+<h2><span class="header-section-number">12.5</span> Repeated Measures ANOVA<a href="12.5-repeated-measures-anova.html#repeated-measures-anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>OK, now let’s move to an repeated measures (RM) ANOVA by adding in effects for categorical time. Recall, we must tell R that <code>time0</code> is a categorical variable using <code>factor()</code></p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="12.5-repeated-measures-anova.html#cb59-1" tabindex="-1"></a>verblong<span class="sc">$</span>time0 <span class="ot">&lt;-</span> <span class="fu">factor</span>(verblong<span class="sc">$</span>time0, <span class="at">ordered=</span><span class="cn">FALSE</span>)</span>
+<span id="cb59-2"><a href="12.5-repeated-measures-anova.html#cb59-2" tabindex="-1"></a><span class="fu">str</span>(verblong<span class="sc">$</span>time0)</span></code></pre></div>
+<pre><code>##  Factor w/ 3 levels &quot;0&quot;,&quot;1&quot;,&quot;2&quot;: 1 2 3 1 2 3 1 2 3 1 ...</code></pre>
+<p>Here is our RM ANOVA model with time as within-person factor</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="12.5-repeated-measures-anova.html#cb61-1" tabindex="-1"></a>timecat_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
+<span id="cb61-2"><a href="12.5-repeated-measures-anova.html#cb61-2" tabindex="-1"></a>  <span class="at">fixed =</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time0, </span>
+<span id="cb61-3"><a href="12.5-repeated-measures-anova.html#cb61-3" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span><span class="sc">|</span>id, </span>
+<span id="cb61-4"><a href="12.5-repeated-measures-anova.html#cb61-4" tabindex="-1"></a>  <span class="at">data =</span> verblong,</span>
+<span id="cb61-5"><a href="12.5-repeated-measures-anova.html#cb61-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude)</span>
+<span id="cb61-6"><a href="12.5-repeated-measures-anova.html#cb61-6" tabindex="-1"></a><span class="fu">summary</span>(timecat_fit)</span></code></pre></div>
+<pre><code>## Linear mixed-effects model fit by REML
+##   Data: verblong 
+##        AIC      BIC    logLik
+##   4013.176 4035.235 -2001.588
+## 
+## Random effects:
+##  Formula: ~1 | id
+##         (Intercept) Residual
+## StdDev:    6.915667 4.514145
+## 
+## Fixed effects:  verb ~ 1 + time0 
+##                 Value Std.Error  DF  t-value p-value
+## (Intercept) 25.415343 0.5782155 406 43.95480       0
+## time01       7.192402 0.4469670 406 16.09157       0
+## time02      18.334559 0.4469670 406 41.01994       0
+##  Correlation: 
+##        (Intr) time01
+## time01 -0.387       
+## time02 -0.387  0.500
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -2.61263084 -0.54466998 -0.02451831  0.48627468  3.50536334 
+## 
+## Number of Observations: 612
+## Number of Groups: 204</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="12.5-repeated-measures-anova.html#cb63-1" tabindex="-1"></a><span class="co"># timecat_fit2 &lt;- lmer(verb ~ 1 + time0 + (1|id), </span></span>
+<span id="cb63-2"><a href="12.5-repeated-measures-anova.html#cb63-2" tabindex="-1"></a><span class="co">#                    data=verblong,</span></span>
+<span id="cb63-3"><a href="12.5-repeated-measures-anova.html#cb63-3" tabindex="-1"></a><span class="co">#                    na.action = na.exclude)</span></span>
+<span id="cb63-4"><a href="12.5-repeated-measures-anova.html#cb63-4" tabindex="-1"></a><span class="co"># summary(timecat_fit2)</span></span></code></pre></div>
+<p>Remember that interpretation is with respect to <em>time0</em>, with the first category set as default intercept which is</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="12.5-repeated-measures-anova.html#cb64-1" tabindex="-1"></a><span class="fu">str</span>(verblong<span class="sc">$</span>time0)</span></code></pre></div>
+<pre><code>##  Factor w/ 3 levels &quot;0&quot;,&quot;1&quot;,&quot;2&quot;: 1 2 3 1 2 3 1 2 3 1 ...</code></pre>
+<div id="intra-class-correlation-1" class="section level3 hasAnchor" number="12.5.1">
+<h3><span class="header-section-number">12.5.1</span> Intra-Class Correlation<a href="12.5-repeated-measures-anova.html#intra-class-correlation-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The intra-class correlation (ICC) as the ratio of the random intercept variance (between-person) to the total variance, defined as the sum of the random intercept variance and residual variance (between + within). Specifically,
+<span class="math display">\[ICC_{between} = \frac{\sigma^{2}_{u0}}{\sigma^{2}_{u0} + \sigma^{2}_{e}}\]</span></p>
+<div id="calculating-the-icc-1" class="section level4 hasAnchor" number="12.5.1.1">
+<h4><span class="header-section-number">12.5.1.1</span> Calculating the ICC<a href="12.5-repeated-measures-anova.html#calculating-the-icc-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The ICC is the ratio of the random intercept variance (between-person var) over the total variance (between + within var):</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="12.5-repeated-measures-anova.html#cb66-1" tabindex="-1"></a><span class="co"># Simple function for computing ICC from lme() output</span></span>
+<span id="cb66-2"><a href="12.5-repeated-measures-anova.html#cb66-2" tabindex="-1"></a>ICClme <span class="ot">&lt;-</span> <span class="cf">function</span>(out) {</span>
+<span id="cb66-3"><a href="12.5-repeated-measures-anova.html#cb66-3" tabindex="-1"></a>   varests <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">VarCorr</span>(out)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
+<span id="cb66-4"><a href="12.5-repeated-measures-anova.html#cb66-4" tabindex="-1"></a>   <span class="fu">return</span>(<span class="fu">paste</span>(<span class="st">&quot;ICC =&quot;</span>, varests[<span class="dv">1</span>]<span class="sc">/</span><span class="fu">sum</span>(varests)))</span>
+<span id="cb66-5"><a href="12.5-repeated-measures-anova.html#cb66-5" tabindex="-1"></a>}</span>
+<span id="cb66-6"><a href="12.5-repeated-measures-anova.html#cb66-6" tabindex="-1"></a><span class="fu">ICClme</span>(timecat_fit)</span></code></pre></div>
+<pre><code>## [1] &quot;ICC = 0.701226878908497&quot;</code></pre>
+<p>From the current model, the ICC was calculated, which indicated that of the total variance in verbal scores, approximately 70%, is attributable to between-person variation whereas 30% is attributable to within-person variation.</p>
+</div>
+</div>
+<div id="model-implied-mean-vector" class="section level3 hasAnchor" number="12.5.2">
+<h3><span class="header-section-number">12.5.2</span> Model-Implied Mean Vector<a href="12.5-repeated-measures-anova.html#model-implied-mean-vector" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s be explicit with our model</p>
+<p><span class="math display">\[\left[\begin{array}
+{r}
+Y_{i0} \\
+Y_{i1} \\
+Y_{i2}
+\end{array}\right] =
+\left[\begin{array}
+{r}
+1  &amp; 0 &amp; 0 \\
+1  &amp; 1 &amp; 0 \\
+1  &amp; 0 &amp; 1
+\end{array}\right]
+\left[\begin{array}
+{r}
+\beta_{0} \\
+\beta_{1} \\
+\beta_{2}
+\end{array}\right] +
+\left[\begin{array}
+{r}
+1  \\
+1  \\
+1    
+\end{array}\right]
+\left[\begin{array}
+{r}
+u_{0i}
+\end{array}\right] +
+\left[\begin{array}
+{r}
+e_{i0} \\
+e_{i1} \\
+e_{i2}
+\end{array}\right]\]</span>.</p>
+<p>Making the implied <em>mean vector</em></p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="12.5-repeated-measures-anova.html#cb68-1" tabindex="-1"></a><span class="fu">fixef</span>(timecat_fit)</span></code></pre></div>
+<pre><code>## (Intercept)      time01      time02 
+##   25.415343    7.192402   18.334559</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="12.5-repeated-measures-anova.html#cb70-1" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb70-2"><a href="12.5-repeated-measures-anova.html#cb70-2" tabindex="-1"></a>  <span class="fu">c</span>(</span>
+<span id="cb70-3"><a href="12.5-repeated-measures-anova.html#cb70-3" tabindex="-1"></a>    <span class="fu">fixef</span>(timecat_fit)[<span class="dv">1</span>], </span>
+<span id="cb70-4"><a href="12.5-repeated-measures-anova.html#cb70-4" tabindex="-1"></a>    <span class="fu">fixef</span>(timecat_fit)[<span class="dv">2</span>], </span>
+<span id="cb70-5"><a href="12.5-repeated-measures-anova.html#cb70-5" tabindex="-1"></a>    <span class="fu">fixef</span>(timecat_fit)[<span class="dv">3</span>]</span>
+<span id="cb70-6"><a href="12.5-repeated-measures-anova.html#cb70-6" tabindex="-1"></a>  ), <span class="at">nrow =</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">1</span>)</span>
+<span id="cb70-7"><a href="12.5-repeated-measures-anova.html#cb70-7" tabindex="-1"></a>beta</span></code></pre></div>
+<pre><code>##           [,1]
+## [1,] 25.415343
+## [2,]  7.192402
+## [3,] 18.334559</code></pre>
+<p>Create the model design matrix for the fixed effects. In this model this is a matrix of order <span class="math inline">\(3 \times 3\)</span>.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="12.5-repeated-measures-anova.html#cb72-1" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">3</span>)</span>
+<span id="cb72-2"><a href="12.5-repeated-measures-anova.html#cb72-2" tabindex="-1"></a>X</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    0    0
+## [2,]    1    1    0
+## [3,]    1    0    1</code></pre>
+<p>Creating the model implied mean vector through multiplication</p>
+<p><span class="math display">\[
+\mathbf{Y} = \mathbf{X}\mathbf{\beta} + 0 +
+\]</span></p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="12.5-repeated-measures-anova.html#cb74-1" tabindex="-1"></a>meanvector_timecat <span class="ot">&lt;-</span> X <span class="sc">%*%</span> beta</span>
+<span id="cb74-2"><a href="12.5-repeated-measures-anova.html#cb74-2" tabindex="-1"></a>meanvector_timecat</span></code></pre></div>
+<pre><code>##          [,1]
+## [1,] 25.41534
+## [2,] 32.60775
+## [3,] 43.74990</code></pre>
+<p>See the <em>differences</em> in the means across levels of <code>time0</code>.</p>
+</div>
+<div id="model-implied-covariance-matrix-1" class="section level3 hasAnchor" number="12.5.3">
+<h3><span class="header-section-number">12.5.3</span> Model-Implied Covariance Matrix<a href="12.5-repeated-measures-anova.html#model-implied-covariance-matrix-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Making the implied <em>variance-covariance matrix</em>.</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="12.5-repeated-measures-anova.html#cb76-1" tabindex="-1"></a><span class="fu">VarCorr</span>(timecat_fit)</span></code></pre></div>
+<pre><code>## id = pdLogChol(1) 
+##             Variance StdDev  
+## (Intercept) 47.82645 6.915667
+## Residual    20.37751 4.514145</code></pre>
+<p>From this, we need to create the model implied variance-covariance.</p>
+<p>Parse the between-person variances from the model output.</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="12.5-repeated-measures-anova.html#cb78-1" tabindex="-1"></a>Psi <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fu">as.numeric</span>(<span class="fu">VarCorr</span>(timecat_fit)[<span class="dv">1</span>])), <span class="at">nrow=</span><span class="dv">1</span>,<span class="at">ncol=</span><span class="dv">1</span>)  </span>
+<span id="cb78-2"><a href="12.5-repeated-measures-anova.html#cb78-2" tabindex="-1"></a>Psi</span></code></pre></div>
+<pre><code>##          [,1]
+## [1,] 47.82645</code></pre>
+<p>Create the model design matrix for the random effects. In this model this is a matrix of order <span class="math inline">\(3 \times 1\)</span></p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="12.5-repeated-measures-anova.html#cb80-1" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">nrow=</span><span class="dv">3</span>,<span class="at">ncol=</span><span class="dv">1</span>)</span>
+<span id="cb80-2"><a href="12.5-repeated-measures-anova.html#cb80-2" tabindex="-1"></a>Z</span></code></pre></div>
+<pre><code>##      [,1]
+## [1,]    1
+## [2,]    1
+## [3,]    1</code></pre>
+<p>So, the implied variance-covariance matrix of the between-person random effects for the three occasions is:</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="12.5-repeated-measures-anova.html#cb82-1" tabindex="-1"></a>Z <span class="sc">%*%</span> Psi <span class="sc">%*%</span> <span class="fu">t</span>(Z)</span></code></pre></div>
+<pre><code>##          [,1]     [,2]     [,3]
+## [1,] 47.82645 47.82645 47.82645
+## [2,] 47.82645 47.82645 47.82645
+## [3,] 47.82645 47.82645 47.82645</code></pre>
+<p>Next, we parse the residual/“error” variance-covariance.</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="12.5-repeated-measures-anova.html#cb84-1" tabindex="-1"></a>sigma2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">VarCorr</span>(timecat_fit)[<span class="dv">2</span>])</span>
+<span id="cb84-2"><a href="12.5-repeated-measures-anova.html#cb84-2" tabindex="-1"></a>Lambda <span class="ot">&lt;-</span> sigma2 <span class="sc">*</span> <span class="fu">diag</span>(<span class="dv">1</span>,<span class="at">nrow=</span><span class="dv">3</span>,<span class="at">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<p>So the residual within-person residual/“error” structure</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="12.5-repeated-measures-anova.html#cb85-1" tabindex="-1"></a>Lambda</span></code></pre></div>
+<pre><code>##          [,1]     [,2]     [,3]
+## [1,] 20.37751  0.00000  0.00000
+## [2,]  0.00000 20.37751  0.00000
+## [3,]  0.00000  0.00000 20.37751</code></pre>
+<p>As before, we have homogeneity and uncorrelated errors.</p>
+<p>Finally, calculate the implied variance-covariances of total model</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="12.5-repeated-measures-anova.html#cb87-1" tabindex="-1"></a>varcovmatrix_timecat <span class="ot">&lt;-</span> Z <span class="sc">%*%</span> Psi <span class="sc">%*%</span> <span class="fu">t</span>(Z) <span class="sc">+</span> Lambda</span>
+<span id="cb87-2"><a href="12.5-repeated-measures-anova.html#cb87-2" tabindex="-1"></a>varcovmatrix_timecat</span></code></pre></div>
+<pre><code>##          [,1]     [,2]     [,3]
+## [1,] 68.20396 47.82645 47.82645
+## [2,] 47.82645 68.20396 47.82645
+## [3,] 47.82645 47.82645 68.20396</code></pre>
+<p>Again, notice the compound symmetry structure.</p>
+<p>For fun, let’s look at the misfit (real matrix - model implied)</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="12.5-repeated-measures-anova.html#cb89-1" tabindex="-1"></a><span class="co">#misfit of means</span></span>
+<span id="cb89-2"><a href="12.5-repeated-measures-anova.html#cb89-2" tabindex="-1"></a>meanvector <span class="sc">-</span> meanvector_timecat</span></code></pre></div>
+<pre><code>##               [,1]
+## [1,]  4.618528e-14
+## [2,] -9.947598e-14
+## [3,]  1.421085e-14</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="12.5-repeated-measures-anova.html#cb91-1" tabindex="-1"></a><span class="co">#misfit of var-cov</span></span>
+<span id="cb91-2"><a href="12.5-repeated-measures-anova.html#cb91-2" tabindex="-1"></a>varcovmatrix <span class="sc">-</span> varcovmatrix_timecat</span></code></pre></div>
+<pre><code>##             verb2     verb4      verb6
+## verb2 -30.9161173 -14.00688 -0.4215677
+## verb4 -14.0068803 -14.62326 14.4284384
+## verb6  -0.4215677  14.42844 45.5393553</code></pre>
+<p>The means are now perfectly reproduced, however, the variances and covariances are not so good, particularly the variances</p>
+<p>Let’s make a picture of the implied model.</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="12.5-repeated-measures-anova.html#cb93-1" tabindex="-1"></a><span class="co">#Calculating predicted scores from the models </span></span>
+<span id="cb93-2"><a href="12.5-repeated-measures-anova.html#cb93-2" tabindex="-1"></a>verblong<span class="sc">$</span>pred_timecat <span class="ot">&lt;-</span> <span class="fu">predict</span>(timecat_fit)</span>
+<span id="cb93-3"><a href="12.5-repeated-measures-anova.html#cb93-3" tabindex="-1"></a><span class="co">#Making the prototype from the implied means</span></span>
+<span id="cb93-4"><a href="12.5-repeated-measures-anova.html#cb93-4" tabindex="-1"></a>proto_timecat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">1000</span>,<span class="dv">1000</span>,<span class="dv">1000</span>),<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>),meanvector_timecat))</span>
+<span id="cb93-5"><a href="12.5-repeated-measures-anova.html#cb93-5" tabindex="-1"></a><span class="fu">names</span>(proto_timecat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>,<span class="st">&quot;time0&quot;</span>,<span class="st">&quot;pred_timecat&quot;</span>)</span>
+<span id="cb93-6"><a href="12.5-repeated-measures-anova.html#cb93-6" tabindex="-1"></a></span>
+<span id="cb93-7"><a href="12.5-repeated-measures-anova.html#cb93-7" tabindex="-1"></a><span class="co">#need to convert time0 back into a continuous variable for plotting as intraindividual change</span></span>
+<span id="cb93-8"><a href="12.5-repeated-measures-anova.html#cb93-8" tabindex="-1"></a>verblong<span class="sc">$</span>time0 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">unclass</span>(verblong<span class="sc">$</span>time0))<span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb93-9"><a href="12.5-repeated-measures-anova.html#cb93-9" tabindex="-1"></a><span class="co">#plotting implied individual scores</span></span>
+<span id="cb93-10"><a href="12.5-repeated-measures-anova.html#cb93-10" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> time0, <span class="at">y =</span> pred_timecat, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb93-11"><a href="12.5-repeated-measures-anova.html#cb93-11" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;RM ANOVA Model (time categorical)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb93-12"><a href="12.5-repeated-measures-anova.html#cb93-12" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb93-13"><a href="12.5-repeated-measures-anova.html#cb93-13" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb93-14"><a href="12.5-repeated-measures-anova.html#cb93-14" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>proto_timecat, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb93-15"><a href="12.5-repeated-measures-anova.html#cb93-15" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>proto_timecat, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">1</span>, <span class="at">linetype=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb93-16"><a href="12.5-repeated-measures-anova.html#cb93-16" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb93-17"><a href="12.5-repeated-measures-anova.html#cb93-17" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;WISC Verbal Score&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb93-18"><a href="12.5-repeated-measures-anova.html#cb93-18" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb93-19"><a href="12.5-repeated-measures-anova.html#cb93-19" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<p>Notice that the implied lines are all parallel. This is a model of <em>mean differences</em>.</p>
+<p>Can also see what the residuals look like.</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="12.5-repeated-measures-anova.html#cb94-1" tabindex="-1"></a><span class="co">#Calculating residual scores from the models </span></span>
+<span id="cb94-2"><a href="12.5-repeated-measures-anova.html#cb94-2" tabindex="-1"></a>verblong<span class="sc">$</span>resid_timecat <span class="ot">&lt;-</span> <span class="fu">residuals</span>(timecat_fit)</span>
+<span id="cb94-3"><a href="12.5-repeated-measures-anova.html#cb94-3" tabindex="-1"></a></span>
+<span id="cb94-4"><a href="12.5-repeated-measures-anova.html#cb94-4" tabindex="-1"></a><span class="co">#plotting implied individual scores</span></span>
+<span id="cb94-5"><a href="12.5-repeated-measures-anova.html#cb94-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> time0, <span class="at">y =</span> resid_timecat, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb94-6"><a href="12.5-repeated-measures-anova.html#cb94-6" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;RM ANOVA Model Residuals (time categorical)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb94-7"><a href="12.5-repeated-measures-anova.html#cb94-7" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb94-8"><a href="12.5-repeated-measures-anova.html#cb94-8" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb94-9"><a href="12.5-repeated-measures-anova.html#cb94-9" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;WISC Verbal Score&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb94-10"><a href="12.5-repeated-measures-anova.html#cb94-10" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb94-11"><a href="12.5-repeated-measures-anova.html#cb94-11" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<p>Note, that the points are not connected - this is to highlight the model and the implication that the within-person residuals are from the occasion-specific mean (NOT from a trajectory).Note also the heteroskedasticity of the residuals.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="11.12-references-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="12.1-introduction-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="12.4-unconditional-means-model.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="12.6-repeated-measures-manova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

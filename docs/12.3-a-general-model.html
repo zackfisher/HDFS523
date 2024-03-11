@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 12 Introduction to Growth | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
+  <title>12.3 A General Model | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
   <meta name="description" content="Course notes for HDFS 523" />
   <meta name="generator" content="bookdown 0.37.2 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 12 Introduction to Growth | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta property="og:title" content="12.3 A General Model | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for HDFS 523" />
   <meta name="github-repo" content="zackfisher/HDFS523" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 12 Introduction to Growth | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta name="twitter:title" content="12.3 A General Model | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   
   <meta name="twitter:description" content="Course notes for HDFS 523" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="11.12-references-4.html"/>
-<link rel="next" href="12.1-introduction-1.html"/>
+<link rel="prev" href="12.2-example-data-5.html"/>
+<link rel="next" href="12.4-unconditional-means-model.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -545,39 +545,39 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="chapter-12" class="section level1 hasAnchor" number="12">
-<h1><span class="header-section-number">Chapter 12</span> Introduction to Growth<a href="12-chapter-12.html#chapter-12" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
-<script>
-  function codefolder(query) {
-
-    var x = document.querySelectorAll(query);
-    if (x.length === 0) return;
-
-    function toggle_vis(o) {
-      var d = o.style.display;
-      o.style.display = (d === 'block' || d === '') ? 'none':'block';
-    }
-
-    for (i = 0; i < x.length; i++) {
-      var y = x[i];
-      toggle_vis(y);
-    }
-
-    var elem = document.getElementById("codefolder-button");
-    if (elem.value === "Hide Code") elem.value = "Show Code";
-    else elem.value = "Hide Code";
-  }
-</script>
-<p>This chapter introduces models for repeated measures data (e.g., RM ANOVA, RM MANOVA) along a <em>continuum</em>. The motivation for this introduction is to present how these models are linked together, making the similarities and differences among them easier to identify and understand. We will tie the models together in a multilevel framework, working from repeated measures ANOVA through repeated measures MANOVA to growth models.</p>
+<div id="a-general-model" class="section level2 hasAnchor" number="12.3">
+<h2><span class="header-section-number">12.3</span> A General Model<a href="12.3-a-general-model.html#a-general-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The presentation of all of these models here is an attempt to <em>integrate</em> traditions that are typically kept separate or set against each other. In reality, they are just a few examples of the many, many possible models that exist. Each model is useful in specific situations.</p>
+<p>The objective of all of our analyses is to <em>deconstruct</em> the data into meaningful and interpretable pieces. Each <em>model</em> does this in a different way, with different assumptions.</p>
+<p>We can <em>judge</em> the models based on</p>
+<ol style="list-style-type: decimal">
+<li>How well they articulate and test our theory, and<br />
+</li>
+<li>How well they recover the data (evaluated as misfit to the impled moments).</li>
+</ol>
+<p>Recall that the regression model may be compactly written as</p>
+<p><span class="math display">\[
+\mathbf{Y} = \mathbf{X}\mathbf{\beta} + \boldsymbol{e}
+\]</span></p>
+<p>We make it into a multilevel regression model by further partitioning the predictor space into between-person and within-person components. Note: this is the very same distinction that is made in traditional presentations of ANOVA when examining between-person factors and within-person factors.</p>
+<p>The general model becomes</p>
+<p><span class="math display">\[
+\underbrace{\boldsymbol{Y}_i}_{\begin{subarray}{c}\text{repeated measures}\\
+    \text{for persion i}\end{subarray}} = \underbrace{\boldsymbol{X}_i}_{\begin{subarray}{c}\text{known}\\
+    \text{covariates}\end{subarray}}\underbrace{\boldsymbol{\beta}}_{\begin{subarray}{c}\text{fixed}\\
+    \text{effects}\end{subarray}} + \underbrace{\boldsymbol{Z}_i}_{\begin{subarray}{c}\text{known}\\
+    \text{covariates}\end{subarray}}\underbrace{\boldsymbol{u}_i}_{\begin{subarray}{c}\text{random}\\
+    \text{effects}\end{subarray}} + \underbrace{\boldsymbol{e}_i}_{\begin{subarray}{c}\text{residuals}\end{subarray}}
+\]</span>
+which is also called the linear mixed model.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="11.12-references-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="12.1-introduction-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="12.2-example-data-5.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="12.4-unconditional-means-model.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
