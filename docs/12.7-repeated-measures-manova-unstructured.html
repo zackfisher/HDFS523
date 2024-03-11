@@ -548,6 +548,8 @@ div.csl-indent {
 <div id="repeated-measures-manova-unstructured" class="section level2 hasAnchor" number="12.7">
 <h2><span class="header-section-number">12.7</span> Repeated Measures MANOVA (Unstructured)<a href="12.7-repeated-measures-manova-unstructured.html#repeated-measures-manova-unstructured" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Let’s adjust the RM MANOVA error structure to have no constraints. To do this in <code>lme()</code> we can use the <code>correlation</code> argument.</p>
+<p>We can now use the <code>weights</code> argument to indicate that the residual variances will be a function of time.</p>
+<p>Option <code>correlation = corSymm(form=~1|id)</code> specifies that the correlation structure is unstructured.</p>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="12.7-repeated-measures-manova-unstructured.html#cb123-1" tabindex="-1"></a>verblong<span class="sc">$</span>time0 <span class="ot">&lt;-</span> <span class="fu">factor</span>(verblong<span class="sc">$</span>time0, <span class="at">ordered=</span><span class="cn">FALSE</span>)</span>
 <span id="cb123-2"><a href="12.7-repeated-measures-manova-unstructured.html#cb123-2" tabindex="-1"></a>timecatunst_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
 <span id="cb123-3"><a href="12.7-repeated-measures-manova-unstructured.html#cb123-3" tabindex="-1"></a>  <span class="at">fixed=</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time0, </span>
