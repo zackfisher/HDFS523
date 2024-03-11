@@ -548,17 +548,17 @@ div.csl-indent {
 <div id="example-data-5" class="section level2 hasAnchor" number="12.2">
 <h2><span class="header-section-number">12.2</span> Example Data<a href="12.2-example-data-5.html#example-data-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Loading some new libraries used in this chapter.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="12.2-example-data-5.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(psych)     <span class="co"># for descriptives etc</span></span>
-<span id="cb1-2"><a href="12.2-example-data-5.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)   <span class="co"># for plotting</span></span>
-<span id="cb1-3"><a href="12.2-example-data-5.html#cb1-3" tabindex="-1"></a><span class="fu">library</span>(nlme)      <span class="co"># for mixed effects models</span></span>
-<span id="cb1-4"><a href="12.2-example-data-5.html#cb1-4" tabindex="-1"></a><span class="fu">library</span>(lme4)      <span class="co"># for mixed effects models</span></span>
-<span id="cb1-5"><a href="12.2-example-data-5.html#cb1-5" tabindex="-1"></a><span class="fu">library</span>(lmerTest)  <span class="co"># to get significance tests from lmer</span></span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="12.2-example-data-5.html#cb223-1" tabindex="-1"></a><span class="fu">library</span>(psych)     <span class="co"># for descriptives etc</span></span>
+<span id="cb223-2"><a href="12.2-example-data-5.html#cb223-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)   <span class="co"># for plotting</span></span>
+<span id="cb223-3"><a href="12.2-example-data-5.html#cb223-3" tabindex="-1"></a><span class="fu">library</span>(nlme)      <span class="co"># for mixed effects models</span></span>
+<span id="cb223-4"><a href="12.2-example-data-5.html#cb223-4" tabindex="-1"></a><span class="fu">library</span>(lme4)      <span class="co"># for mixed effects models</span></span>
+<span id="cb223-5"><a href="12.2-example-data-5.html#cb223-5" tabindex="-1"></a><span class="fu">library</span>(lmerTest)  <span class="co"># to get significance tests from lmer</span></span></code></pre></div>
 <div id="data-preparation-and-description" class="section level3 hasAnchor" number="12.2.1">
 <h3><span class="header-section-number">12.2.1</span> Data Preparation and Description<a href="12.2-example-data-5.html#data-preparation-and-description" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For our examples, we use 3-occasion WISC data that are <em>equally spaced</em>.</p>
 <p>Load the repeated measures data</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="12.2-example-data-5.html#cb2-1" tabindex="-1"></a>filepath <span class="ot">&lt;-</span> <span class="st">&quot;https://quantdev.ssri.psu.edu/sites/qdev/files/wisc3raw.csv&quot;</span></span>
-<span id="cb2-2"><a href="12.2-example-data-5.html#cb2-2" tabindex="-1"></a>wisc3raw <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file=</span><span class="fu">url</span>(filepath),<span class="at">header=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="12.2-example-data-5.html#cb224-1" tabindex="-1"></a>filepath <span class="ot">&lt;-</span> <span class="st">&quot;https://quantdev.ssri.psu.edu/sites/qdev/files/wisc3raw.csv&quot;</span></span>
+<span id="cb224-2"><a href="12.2-example-data-5.html#cb224-2" tabindex="-1"></a>wisc3raw <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file=</span><span class="fu">url</span>(filepath),<span class="at">header=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Next, let’s Subset the variables of interest. For this chapter we will include:</p>
 <ul>
 <li>3-occasion equally spaced repeated measures (<code>verb2</code>, <code>verb4</code>, <code>verb6</code>)</li>
@@ -566,9 +566,9 @@ div.csl-indent {
 <li>An ID variable (<code>id</code>)</li>
 </ul>
 <p>After subsetting let’s take a look at some basic descriptives.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="12.2-example-data-5.html#cb3-1" tabindex="-1"></a>varnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>,<span class="st">&quot;verb2&quot;</span>,<span class="st">&quot;verb4&quot;</span>,<span class="st">&quot;verb6&quot;</span>,<span class="st">&quot;grad&quot;</span>)</span>
-<span id="cb3-2"><a href="12.2-example-data-5.html#cb3-2" tabindex="-1"></a>wiscsub <span class="ot">&lt;-</span> wisc3raw[ ,varnames]</span>
-<span id="cb3-3"><a href="12.2-example-data-5.html#cb3-3" tabindex="-1"></a><span class="fu">describe</span>(wiscsub)</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="12.2-example-data-5.html#cb225-1" tabindex="-1"></a>varnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>,<span class="st">&quot;verb2&quot;</span>,<span class="st">&quot;verb4&quot;</span>,<span class="st">&quot;verb6&quot;</span>,<span class="st">&quot;grad&quot;</span>)</span>
+<span id="cb225-2"><a href="12.2-example-data-5.html#cb225-2" tabindex="-1"></a>wiscsub <span class="ot">&lt;-</span> wisc3raw[ ,varnames]</span>
+<span id="cb225-3"><a href="12.2-example-data-5.html#cb225-3" tabindex="-1"></a><span class="fu">describe</span>(wiscsub)</span></code></pre></div>
 <pre><code>##       vars   n   mean    sd median trimmed   mad   min    max  range  skew
 ## id       1 204 102.50 59.03 102.50  102.50 75.61  1.00 204.00 203.00  0.00
 ## verb2    2 204  25.42  6.11  25.98   25.40  6.57  5.95  39.85  33.90 -0.06
@@ -582,16 +582,16 @@ div.csl-indent {
 ## verb6    -0.36 0.75
 ## grad     -0.30 0.03</code></pre>
 <p>Multilevel modeling analyses typically require a long data set. So, we also reshape from wide to long in order to have a long data set.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="12.2-example-data-5.html#cb5-1" tabindex="-1"></a>verblong <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
-<span id="cb5-2"><a href="12.2-example-data-5.html#cb5-2" tabindex="-1"></a>  <span class="at">data =</span> wiscsub, </span>
-<span id="cb5-3"><a href="12.2-example-data-5.html#cb5-3" tabindex="-1"></a>  <span class="at">varying =</span> <span class="fu">c</span>(<span class="st">&quot;verb2&quot;</span>,<span class="st">&quot;verb4&quot;</span>,<span class="st">&quot;verb6&quot;</span>), </span>
-<span id="cb5-4"><a href="12.2-example-data-5.html#cb5-4" tabindex="-1"></a>  <span class="at">timevar =</span> <span class="st">&quot;grade&quot;</span>, </span>
-<span id="cb5-5"><a href="12.2-example-data-5.html#cb5-5" tabindex="-1"></a>  <span class="at">idvar =</span> <span class="st">&quot;id&quot;</span>, </span>
-<span id="cb5-6"><a href="12.2-example-data-5.html#cb5-6" tabindex="-1"></a>  <span class="at">direction =</span> <span class="st">&quot;long&quot;</span>, </span>
-<span id="cb5-7"><a href="12.2-example-data-5.html#cb5-7" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot;&quot;</span></span>
-<span id="cb5-8"><a href="12.2-example-data-5.html#cb5-8" tabindex="-1"></a>)</span>
-<span id="cb5-9"><a href="12.2-example-data-5.html#cb5-9" tabindex="-1"></a>verblong <span class="ot">&lt;-</span> verblong[<span class="fu">order</span>(verblong<span class="sc">$</span>id,verblong<span class="sc">$</span>grade), <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>,<span class="st">&quot;grade&quot;</span>,<span class="st">&quot;verb&quot;</span>,<span class="st">&quot;grad&quot;</span>)]</span>
-<span id="cb5-10"><a href="12.2-example-data-5.html#cb5-10" tabindex="-1"></a><span class="fu">head</span>(verblong,<span class="dv">12</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="12.2-example-data-5.html#cb227-1" tabindex="-1"></a>verblong <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
+<span id="cb227-2"><a href="12.2-example-data-5.html#cb227-2" tabindex="-1"></a>  <span class="at">data =</span> wiscsub, </span>
+<span id="cb227-3"><a href="12.2-example-data-5.html#cb227-3" tabindex="-1"></a>  <span class="at">varying =</span> <span class="fu">c</span>(<span class="st">&quot;verb2&quot;</span>,<span class="st">&quot;verb4&quot;</span>,<span class="st">&quot;verb6&quot;</span>), </span>
+<span id="cb227-4"><a href="12.2-example-data-5.html#cb227-4" tabindex="-1"></a>  <span class="at">timevar =</span> <span class="st">&quot;grade&quot;</span>, </span>
+<span id="cb227-5"><a href="12.2-example-data-5.html#cb227-5" tabindex="-1"></a>  <span class="at">idvar =</span> <span class="st">&quot;id&quot;</span>, </span>
+<span id="cb227-6"><a href="12.2-example-data-5.html#cb227-6" tabindex="-1"></a>  <span class="at">direction =</span> <span class="st">&quot;long&quot;</span>, </span>
+<span id="cb227-7"><a href="12.2-example-data-5.html#cb227-7" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb227-8"><a href="12.2-example-data-5.html#cb227-8" tabindex="-1"></a>)</span>
+<span id="cb227-9"><a href="12.2-example-data-5.html#cb227-9" tabindex="-1"></a>verblong <span class="ot">&lt;-</span> verblong[<span class="fu">order</span>(verblong<span class="sc">$</span>id,verblong<span class="sc">$</span>grade), <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>,<span class="st">&quot;grade&quot;</span>,<span class="st">&quot;verb&quot;</span>,<span class="st">&quot;grad&quot;</span>)]</span>
+<span id="cb227-10"><a href="12.2-example-data-5.html#cb227-10" tabindex="-1"></a><span class="fu">head</span>(verblong,<span class="dv">12</span>)</span></code></pre></div>
 <pre><code>##     id grade  verb grad
 ## 1.2  1     2 26.98    0
 ## 1.4  1     4 39.61    0
@@ -609,40 +609,40 @@ div.csl-indent {
 <div id="sample-moments" class="section level3 hasAnchor" number="12.2.2">
 <h3><span class="header-section-number">12.2.2</span> Sample Moments<a href="12.2-example-data-5.html#sample-moments" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For clarity, let’s consider the basic information representation of the 3-occasion repeated measures data. In particular, data (even non-repeated measures data) are summarized (at the sample-level) as (1) a vector of means and (2) a variance-covariance matrix.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="12.2-example-data-5.html#cb7-1" tabindex="-1"></a><span class="co">#mean vector (from wide data)</span></span>
-<span id="cb7-2"><a href="12.2-example-data-5.html#cb7-2" tabindex="-1"></a>meanvector <span class="ot">&lt;-</span> <span class="fu">sapply</span>(wiscsub[ ,<span class="fu">c</span>(<span class="st">&quot;verb2&quot;</span>,<span class="st">&quot;verb4&quot;</span>,<span class="st">&quot;verb6&quot;</span>)], mean, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb7-3"><a href="12.2-example-data-5.html#cb7-3" tabindex="-1"></a><span class="fu">round</span>(meanvector,<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="12.2-example-data-5.html#cb229-1" tabindex="-1"></a><span class="co">#mean vector (from wide data)</span></span>
+<span id="cb229-2"><a href="12.2-example-data-5.html#cb229-2" tabindex="-1"></a>meanvector <span class="ot">&lt;-</span> <span class="fu">sapply</span>(wiscsub[ ,<span class="fu">c</span>(<span class="st">&quot;verb2&quot;</span>,<span class="st">&quot;verb4&quot;</span>,<span class="st">&quot;verb6&quot;</span>)], mean, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb229-3"><a href="12.2-example-data-5.html#cb229-3" tabindex="-1"></a><span class="fu">round</span>(meanvector,<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## verb2 verb4 verb6 
 ## 25.42 32.61 43.75</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="12.2-example-data-5.html#cb9-1" tabindex="-1"></a><span class="co">#variance-covariance matrix (from wide data)</span></span>
-<span id="cb9-2"><a href="12.2-example-data-5.html#cb9-2" tabindex="-1"></a>varcovmatrix <span class="ot">&lt;-</span> <span class="fu">cov</span>(wiscsub[ ,<span class="fu">c</span>(<span class="st">&quot;verb2&quot;</span>,<span class="st">&quot;verb4&quot;</span>,<span class="st">&quot;verb6&quot;</span>)], <span class="at">use=</span><span class="st">&quot;pairwise.complete.obs&quot;</span>)</span>
-<span id="cb9-3"><a href="12.2-example-data-5.html#cb9-3" tabindex="-1"></a><span class="fu">round</span>(varcovmatrix,<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="12.2-example-data-5.html#cb231-1" tabindex="-1"></a><span class="co">#variance-covariance matrix (from wide data)</span></span>
+<span id="cb231-2"><a href="12.2-example-data-5.html#cb231-2" tabindex="-1"></a>varcovmatrix <span class="ot">&lt;-</span> <span class="fu">cov</span>(wiscsub[ ,<span class="fu">c</span>(<span class="st">&quot;verb2&quot;</span>,<span class="st">&quot;verb4&quot;</span>,<span class="st">&quot;verb6&quot;</span>)], <span class="at">use=</span><span class="st">&quot;pairwise.complete.obs&quot;</span>)</span>
+<span id="cb231-3"><a href="12.2-example-data-5.html#cb231-3" tabindex="-1"></a><span class="fu">round</span>(varcovmatrix,<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##       verb2 verb4  verb6
 ## verb2 37.29 33.82  47.40
 ## verb4 33.82 53.58  62.25
 ## verb6 47.40 62.25 113.74</code></pre>
 <p>Making visual counterparts can also be extremely useful - especially for facilitating higher-level conversations in a research group. Basic sample-level descriptions in visual form. Note that the time variable has been converted to a factor = categorical</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="12.2-example-data-5.html#cb11-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>verblong, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(grade), <span class="at">y=</span>verb)) <span class="sc">+</span> </span>
-<span id="cb11-2"><a href="12.2-example-data-5.html#cb11-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">notch =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb11-3"><a href="12.2-example-data-5.html#cb11-3" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.y=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">shape=</span><span class="dv">23</span>, <span class="at">size=</span><span class="dv">3</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
-<span id="cb11-4"><a href="12.2-example-data-5.html#cb11-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Grade&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Verbal Ability&quot;</span>) <span class="sc">+</span></span>
-<span id="cb11-5"><a href="12.2-example-data-5.html#cb11-5" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="12.2-example-data-5.html#cb233-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>verblong, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(grade), <span class="at">y=</span>verb)) <span class="sc">+</span> </span>
+<span id="cb233-2"><a href="12.2-example-data-5.html#cb233-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">notch =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb233-3"><a href="12.2-example-data-5.html#cb233-3" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.y=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">shape=</span><span class="dv">23</span>, <span class="at">size=</span><span class="dv">3</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb233-4"><a href="12.2-example-data-5.html#cb233-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Grade&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Verbal Ability&quot;</span>) <span class="sc">+</span></span>
+<span id="cb233-5"><a href="12.2-example-data-5.html#cb233-5" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
 <pre><code>## Warning: The `fun.y` argument of `stat_summary()` is deprecated as of ggplot2 3.3.0.
 ## ℹ Please use the `fun` argument instead.
 ## This warning is displayed once every 8 hours.
 ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
 ## generated.</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="12.2-example-data-5.html#cb13-1" tabindex="-1"></a><span class="fu">pairs.panels</span>(wiscsub[,<span class="fu">c</span>(<span class="st">&quot;verb2&quot;</span>,<span class="st">&quot;verb4&quot;</span>,<span class="st">&quot;verb6&quot;</span>)])</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-170-1.png" width="672" /></p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="12.2-example-data-5.html#cb235-1" tabindex="-1"></a><span class="fu">pairs.panels</span>(wiscsub[,<span class="fu">c</span>(<span class="st">&quot;verb2&quot;</span>,<span class="st">&quot;verb4&quot;</span>,<span class="st">&quot;verb6&quot;</span>)])</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-170-2.png" width="672" /></p>
 <p>Reminder, we should always be careful about the scaling of the x- and y-axes in these plots.</p>
 <p>One additional recoding for convenience is to center and scale our time variable. This gives us a specific <span class="math inline">\(0\)</span> point and an intuitive <span class="math inline">\(0, 1, 2\)</span> scale that is useful for our didactic purposes.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="12.2-example-data-5.html#cb14-1" tabindex="-1"></a><span class="fu">unique</span>(verblong<span class="sc">$</span>grade)</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="12.2-example-data-5.html#cb236-1" tabindex="-1"></a><span class="fu">unique</span>(verblong<span class="sc">$</span>grade)</span></code></pre></div>
 <pre><code>## [1] 2 4 6</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="12.2-example-data-5.html#cb16-1" tabindex="-1"></a>verblong<span class="sc">$</span>time0 <span class="ot">&lt;-</span> (verblong<span class="sc">$</span>grade<span class="dv">-2</span>)<span class="sc">/</span><span class="dv">2</span> <span class="co"># from 2,4,6 to 0,1,2</span></span>
-<span id="cb16-2"><a href="12.2-example-data-5.html#cb16-2" tabindex="-1"></a><span class="fu">unique</span>(verblong<span class="sc">$</span>time0)</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="12.2-example-data-5.html#cb238-1" tabindex="-1"></a>verblong<span class="sc">$</span>time0 <span class="ot">&lt;-</span> (verblong<span class="sc">$</span>grade<span class="dv">-2</span>)<span class="sc">/</span><span class="dv">2</span> <span class="co"># from 2,4,6 to 0,1,2</span></span>
+<span id="cb238-2"><a href="12.2-example-data-5.html#cb238-2" tabindex="-1"></a><span class="fu">unique</span>(verblong<span class="sc">$</span>time0)</span></code></pre></div>
 <pre><code>## [1] 0 1 2</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="12.2-example-data-5.html#cb18-1" tabindex="-1"></a><span class="fu">head</span>(verblong,<span class="dv">12</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="12.2-example-data-5.html#cb240-1" tabindex="-1"></a><span class="fu">head</span>(verblong,<span class="dv">12</span>)</span></code></pre></div>
 <pre><code>##     id grade  verb grad time0
 ## 1.2  1     2 26.98    0     0
 ## 1.4  1     4 39.61    0     1
@@ -657,16 +657,16 @@ div.csl-indent {
 ## 4.4  4     4 42.16    1     1
 ## 4.6  4     6 44.72    1     2</code></pre>
 <p>Plotting the raw data along this new time variable.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="12.2-example-data-5.html#cb20-1" tabindex="-1"></a><span class="co">#plotting intraindividual change RAW DATA</span></span>
-<span id="cb20-2"><a href="12.2-example-data-5.html#cb20-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> time0, <span class="at">y =</span> verb, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb20-3"><a href="12.2-example-data-5.html#cb20-3" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Raw Data&quot;</span>) <span class="sc">+</span></span>
-<span id="cb20-4"><a href="12.2-example-data-5.html#cb20-4" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb20-5"><a href="12.2-example-data-5.html#cb20-5" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb20-6"><a href="12.2-example-data-5.html#cb20-6" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb20-7"><a href="12.2-example-data-5.html#cb20-7" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;WISC Verbal Score&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb20-8"><a href="12.2-example-data-5.html#cb20-8" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb20-9"><a href="12.2-example-data-5.html#cb20-9" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="12.2-example-data-5.html#cb242-1" tabindex="-1"></a><span class="co">#plotting intraindividual change RAW DATA</span></span>
+<span id="cb242-2"><a href="12.2-example-data-5.html#cb242-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> time0, <span class="at">y =</span> verb, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb242-3"><a href="12.2-example-data-5.html#cb242-3" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Raw Data&quot;</span>) <span class="sc">+</span></span>
+<span id="cb242-4"><a href="12.2-example-data-5.html#cb242-4" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb242-5"><a href="12.2-example-data-5.html#cb242-5" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb242-6"><a href="12.2-example-data-5.html#cb242-6" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb242-7"><a href="12.2-example-data-5.html#cb242-7" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;WISC Verbal Score&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb242-8"><a href="12.2-example-data-5.html#cb242-8" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb242-9"><a href="12.2-example-data-5.html#cb242-9" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-172-1.png" width="672" /></p>
 <p>Note that the time variable in this plot has NOT been converted to a factor. It is a continuous variable.</p>
 </div>
 </div>

@@ -666,13 +666,13 @@ which is just the more general notation often used in the statistics literature.
 <div id="unconditional-means-model-in-r" class="section level3 hasAnchor" number="12.4.7">
 <h3><span class="header-section-number">12.4.7</span> Unconditional Means Model in R<a href="12.4-unconditional-means-model.html#unconditional-means-model-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We can write the unconditional means model in R as follows.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="12.4-unconditional-means-model.html#cb21-1" tabindex="-1"></a>um_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
-<span id="cb21-2"><a href="12.4-unconditional-means-model.html#cb21-2" tabindex="-1"></a>  <span class="at">fixed =</span> verb <span class="sc">~</span> <span class="dv">1</span>, </span>
-<span id="cb21-3"><a href="12.4-unconditional-means-model.html#cb21-3" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span><span class="sc">|</span>id, </span>
-<span id="cb21-4"><a href="12.4-unconditional-means-model.html#cb21-4" tabindex="-1"></a>  <span class="at">data =</span> verblong,</span>
-<span id="cb21-5"><a href="12.4-unconditional-means-model.html#cb21-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
-<span id="cb21-6"><a href="12.4-unconditional-means-model.html#cb21-6" tabindex="-1"></a>)</span>
-<span id="cb21-7"><a href="12.4-unconditional-means-model.html#cb21-7" tabindex="-1"></a><span class="fu">summary</span>(um_fit)</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="12.4-unconditional-means-model.html#cb243-1" tabindex="-1"></a>um_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
+<span id="cb243-2"><a href="12.4-unconditional-means-model.html#cb243-2" tabindex="-1"></a>  <span class="at">fixed =</span> verb <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb243-3"><a href="12.4-unconditional-means-model.html#cb243-3" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span><span class="sc">|</span>id, </span>
+<span id="cb243-4"><a href="12.4-unconditional-means-model.html#cb243-4" tabindex="-1"></a>  <span class="at">data =</span> verblong,</span>
+<span id="cb243-5"><a href="12.4-unconditional-means-model.html#cb243-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
+<span id="cb243-6"><a href="12.4-unconditional-means-model.html#cb243-6" tabindex="-1"></a>)</span>
+<span id="cb243-7"><a href="12.4-unconditional-means-model.html#cb243-7" tabindex="-1"></a><span class="fu">summary</span>(um_fit)</span></code></pre></div>
 <pre><code>## Linear mixed-effects model fit by REML
 ##   Data: verblong 
 ##       AIC      BIC   logLik
@@ -693,12 +693,12 @@ which is just the more general notation often used in the statistics literature.
 ## 
 ## Number of Observations: 612
 ## Number of Groups: 204</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="12.4-unconditional-means-model.html#cb23-1" tabindex="-1"></a><span class="co"># um_fit2 &lt;- lmer(</span></span>
-<span id="cb23-2"><a href="12.4-unconditional-means-model.html#cb23-2" tabindex="-1"></a><span class="co">#   verb ~ 1 + (1|id),</span></span>
-<span id="cb23-3"><a href="12.4-unconditional-means-model.html#cb23-3" tabindex="-1"></a><span class="co">#   data=verblong,</span></span>
-<span id="cb23-4"><a href="12.4-unconditional-means-model.html#cb23-4" tabindex="-1"></a><span class="co">#   na.action = na.exclude</span></span>
-<span id="cb23-5"><a href="12.4-unconditional-means-model.html#cb23-5" tabindex="-1"></a><span class="co"># )</span></span>
-<span id="cb23-6"><a href="12.4-unconditional-means-model.html#cb23-6" tabindex="-1"></a><span class="co"># summary(um_fit2)</span></span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="12.4-unconditional-means-model.html#cb245-1" tabindex="-1"></a><span class="co"># um_fit2 &lt;- lmer(</span></span>
+<span id="cb245-2"><a href="12.4-unconditional-means-model.html#cb245-2" tabindex="-1"></a><span class="co">#   verb ~ 1 + (1|id),</span></span>
+<span id="cb245-3"><a href="12.4-unconditional-means-model.html#cb245-3" tabindex="-1"></a><span class="co">#   data=verblong,</span></span>
+<span id="cb245-4"><a href="12.4-unconditional-means-model.html#cb245-4" tabindex="-1"></a><span class="co">#   na.action = na.exclude</span></span>
+<span id="cb245-5"><a href="12.4-unconditional-means-model.html#cb245-5" tabindex="-1"></a><span class="co"># )</span></span>
+<span id="cb245-6"><a href="12.4-unconditional-means-model.html#cb245-6" tabindex="-1"></a><span class="co"># summary(um_fit2)</span></span></code></pre></div>
 <div id="interpretation-2" class="section level4 hasAnchor" number="12.4.7.1">
 <h4><span class="header-section-number">12.4.7.1</span> Interpretation<a href="12.4-unconditional-means-model.html#interpretation-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The single fixed effect in our unconditional means model is the grand mean, or <span class="math inline">\(\gamma_{00}\)</span>. Rejection of the null indicates the average verbal score between Grades 2 and 6 is non-zero.</p>
@@ -712,15 +712,15 @@ which is just the more general notation often used in the statistics literature.
 <div id="calculating-the-icc" class="section level4 hasAnchor" number="12.4.8.1">
 <h4><span class="header-section-number">12.4.8.1</span> Calculating the ICC<a href="12.4-unconditional-means-model.html#calculating-the-icc" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The ICC is the ratio of the random intercept variance (between-person var) over the total variance (between + within var):</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="12.4-unconditional-means-model.html#cb24-1" tabindex="-1"></a>ICC_between <span class="ot">&lt;-</span> <span class="fl">4.4</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (<span class="fl">4.4</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="fl">10.28</span><span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb24-2"><a href="12.4-unconditional-means-model.html#cb24-2" tabindex="-1"></a>ICC_between</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="12.4-unconditional-means-model.html#cb246-1" tabindex="-1"></a>ICC_between <span class="ot">&lt;-</span> <span class="fl">4.4</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (<span class="fl">4.4</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="fl">10.28</span><span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb246-2"><a href="12.4-unconditional-means-model.html#cb246-2" tabindex="-1"></a>ICC_between</span></code></pre></div>
 <pre><code>## [1] 0.1548324</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="12.4-unconditional-means-model.html#cb26-1" tabindex="-1"></a><span class="co"># Simple function for computing ICC from lme() output</span></span>
-<span id="cb26-2"><a href="12.4-unconditional-means-model.html#cb26-2" tabindex="-1"></a>ICClme <span class="ot">&lt;-</span> <span class="cf">function</span>(out) {</span>
-<span id="cb26-3"><a href="12.4-unconditional-means-model.html#cb26-3" tabindex="-1"></a>   varests <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">VarCorr</span>(out)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
-<span id="cb26-4"><a href="12.4-unconditional-means-model.html#cb26-4" tabindex="-1"></a>   <span class="fu">return</span>(<span class="fu">paste</span>(<span class="st">&quot;ICC =&quot;</span>, varests[<span class="dv">1</span>]<span class="sc">/</span><span class="fu">sum</span>(varests)))</span>
-<span id="cb26-5"><a href="12.4-unconditional-means-model.html#cb26-5" tabindex="-1"></a>}</span>
-<span id="cb26-6"><a href="12.4-unconditional-means-model.html#cb26-6" tabindex="-1"></a><span class="fu">ICClme</span>(um_fit)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="12.4-unconditional-means-model.html#cb248-1" tabindex="-1"></a><span class="co"># Simple function for computing ICC from lme() output</span></span>
+<span id="cb248-2"><a href="12.4-unconditional-means-model.html#cb248-2" tabindex="-1"></a>ICClme <span class="ot">&lt;-</span> <span class="cf">function</span>(out) {</span>
+<span id="cb248-3"><a href="12.4-unconditional-means-model.html#cb248-3" tabindex="-1"></a>   varests <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">VarCorr</span>(out)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
+<span id="cb248-4"><a href="12.4-unconditional-means-model.html#cb248-4" tabindex="-1"></a>   <span class="fu">return</span>(<span class="fu">paste</span>(<span class="st">&quot;ICC =&quot;</span>, varests[<span class="dv">1</span>]<span class="sc">/</span><span class="fu">sum</span>(varests)))</span>
+<span id="cb248-5"><a href="12.4-unconditional-means-model.html#cb248-5" tabindex="-1"></a>}</span>
+<span id="cb248-6"><a href="12.4-unconditional-means-model.html#cb248-6" tabindex="-1"></a><span class="fu">ICClme</span>(um_fit)</span></code></pre></div>
 <pre><code>## [1] &quot;ICC = 0.155269768304537&quot;</code></pre>
 <p>From the unconditional means model, the ICC was calculated, which indicated that of the total variance in verbal scores, approximately 16%, is attributable to between-person variation whereas 84% is attributable to within-person variation. This means there is a good portion of within-person variance sill to be modeled.</p>
 </div>
@@ -846,16 +846,16 @@ e_{i2}
 <h4><span class="header-section-number">12.4.9.2</span> Mean Vector in R<a href="12.4-unconditional-means-model.html#mean-vector-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Let’s make the implied <em>mean vector</em> in R.</p>
 <p>First, extract the fixed effects from the model using <code>fixef()</code>, specifically the contents of the <span class="math inline">\(\beta\)</span> matrix.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="12.4-unconditional-means-model.html#cb28-1" tabindex="-1"></a><span class="fu">fixef</span>(um_fit)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="12.4-unconditional-means-model.html#cb250-1" tabindex="-1"></a><span class="fu">fixef</span>(um_fit)</span></code></pre></div>
 <pre><code>## (Intercept) 
 ##    33.92433</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="12.4-unconditional-means-model.html#cb30-1" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">fixef</span>(um_fit)[<span class="dv">1</span>], <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">ncol =</span> <span class="dv">1</span>)</span>
-<span id="cb30-2"><a href="12.4-unconditional-means-model.html#cb30-2" tabindex="-1"></a>beta</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="12.4-unconditional-means-model.html#cb252-1" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">fixef</span>(um_fit)[<span class="dv">1</span>], <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb252-2"><a href="12.4-unconditional-means-model.html#cb252-2" tabindex="-1"></a>beta</span></code></pre></div>
 <pre><code>##          [,1]
 ## [1,] 33.92433</code></pre>
 <p>Create the model design matrix for the fixed effects. In this model this is a matrix of order <span class="math inline">\(3 \times 1\)</span>.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="12.4-unconditional-means-model.html#cb32-1" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">1</span>)</span>
-<span id="cb32-2"><a href="12.4-unconditional-means-model.html#cb32-2" tabindex="-1"></a>X</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="12.4-unconditional-means-model.html#cb254-1" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb254-2"><a href="12.4-unconditional-means-model.html#cb254-2" tabindex="-1"></a>X</span></code></pre></div>
 <pre><code>##      [,1]
 ## [1,]    1
 ## [2,]    1
@@ -864,8 +864,8 @@ e_{i2}
 <p><span class="math display">\[
 \mathbf{Y} = \mathbf{X}\mathbf{\beta} + 0 + 0
 \]</span></p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="12.4-unconditional-means-model.html#cb34-1" tabindex="-1"></a>meanvector_um <span class="ot">&lt;-</span> X <span class="sc">%*%</span> beta</span>
-<span id="cb34-2"><a href="12.4-unconditional-means-model.html#cb34-2" tabindex="-1"></a>meanvector_um</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="12.4-unconditional-means-model.html#cb256-1" tabindex="-1"></a>meanvector_um <span class="ot">&lt;-</span> X <span class="sc">%*%</span> beta</span>
+<span id="cb256-2"><a href="12.4-unconditional-means-model.html#cb256-2" tabindex="-1"></a>meanvector_um</span></code></pre></div>
 <pre><code>##          [,1]
 ## [1,] 33.92433
 ## [2,] 33.92433
@@ -1033,8 +1033,8 @@ Z_{2}
 </div>
 <div id="covariance-matrix-in-r" class="section level4 hasAnchor" number="12.4.9.4">
 <h4><span class="header-section-number">12.4.9.4</span> Covariance Matrix in R<a href="12.4-unconditional-means-model.html#covariance-matrix-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="12.4-unconditional-means-model.html#cb36-1" tabindex="-1"></a><span class="co">#parsing the model variances &amp; covariances</span></span>
-<span id="cb36-2"><a href="12.4-unconditional-means-model.html#cb36-2" tabindex="-1"></a><span class="fu">VarCorr</span>(um_fit)</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="12.4-unconditional-means-model.html#cb258-1" tabindex="-1"></a><span class="co">#parsing the model variances &amp; covariances</span></span>
+<span id="cb258-2"><a href="12.4-unconditional-means-model.html#cb258-2" tabindex="-1"></a><span class="fu">VarCorr</span>(um_fit)</span></code></pre></div>
 <pre><code>## id = pdLogChol(1) 
 ##             Variance  StdDev   
 ## (Intercept)  19.41339  4.406063
@@ -1043,40 +1043,40 @@ Z_{2}
 <ol style="list-style-type: lower-alpha">
 <li>Parse the between-person variances from the model output.</li>
 </ol>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="12.4-unconditional-means-model.html#cb38-1" tabindex="-1"></a>Psi <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fu">as.numeric</span>(<span class="fu">VarCorr</span>(um_fit)[<span class="dv">1</span>])),<span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">ncol =</span> <span class="dv">1</span>)  </span>
-<span id="cb38-2"><a href="12.4-unconditional-means-model.html#cb38-2" tabindex="-1"></a>Psi</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="12.4-unconditional-means-model.html#cb260-1" tabindex="-1"></a>Psi <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fu">as.numeric</span>(<span class="fu">VarCorr</span>(um_fit)[<span class="dv">1</span>])),<span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">ncol =</span> <span class="dv">1</span>)  </span>
+<span id="cb260-2"><a href="12.4-unconditional-means-model.html#cb260-2" tabindex="-1"></a>Psi</span></code></pre></div>
 <pre><code>##          [,1]
 ## [1,] 19.41339</code></pre>
 <p>Create the model design matrix, <span class="math inline">\(\mathbf{Z}\)</span>, for the random effects. In this model this is a matrix of order <span class="math inline">\(3 \times 1\)</span></p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="12.4-unconditional-means-model.html#cb40-1" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">nrow=</span><span class="dv">3</span>,<span class="at">ncol=</span><span class="dv">1</span>)</span>
-<span id="cb40-2"><a href="12.4-unconditional-means-model.html#cb40-2" tabindex="-1"></a>Z</span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="12.4-unconditional-means-model.html#cb262-1" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">nrow=</span><span class="dv">3</span>,<span class="at">ncol=</span><span class="dv">1</span>)</span>
+<span id="cb262-2"><a href="12.4-unconditional-means-model.html#cb262-2" tabindex="-1"></a>Z</span></code></pre></div>
 <pre><code>##      [,1]
 ## [1,]    1
 ## [2,]    1
 ## [3,]    1</code></pre>
 <p>So, the implied variance-covariance matrix of the between-person random effects for the three occasions is:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="12.4-unconditional-means-model.html#cb42-1" tabindex="-1"></a>Cov1 <span class="ot">=</span> Z <span class="sc">%*%</span> Psi <span class="sc">%*%</span> <span class="fu">t</span>(Z)</span>
-<span id="cb42-2"><a href="12.4-unconditional-means-model.html#cb42-2" tabindex="-1"></a>Cov1</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="12.4-unconditional-means-model.html#cb264-1" tabindex="-1"></a>Cov1 <span class="ot">=</span> Z <span class="sc">%*%</span> Psi <span class="sc">%*%</span> <span class="fu">t</span>(Z)</span>
+<span id="cb264-2"><a href="12.4-unconditional-means-model.html#cb264-2" tabindex="-1"></a>Cov1</span></code></pre></div>
 <pre><code>##          [,1]     [,2]     [,3]
 ## [1,] 19.41339 19.41339 19.41339
 ## [2,] 19.41339 19.41339 19.41339
 ## [3,] 19.41339 19.41339 19.41339</code></pre>
 <p>Which in correlation units implies</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="12.4-unconditional-means-model.html#cb44-1" tabindex="-1"></a>Delta <span class="ot">=</span> <span class="fu">diag</span>(<span class="dv">3</span>)</span>
-<span id="cb44-2"><a href="12.4-unconditional-means-model.html#cb44-2" tabindex="-1"></a>Delta[<span class="dv">1</span>,<span class="dv">1</span>] <span class="ot">=</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">sqrt</span>(Cov1[<span class="dv">1</span>,<span class="dv">1</span>])</span>
-<span id="cb44-3"><a href="12.4-unconditional-means-model.html#cb44-3" tabindex="-1"></a>Delta[<span class="dv">2</span>,<span class="dv">2</span>] <span class="ot">=</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">sqrt</span>(Cov1[<span class="dv">2</span>,<span class="dv">2</span>])</span>
-<span id="cb44-4"><a href="12.4-unconditional-means-model.html#cb44-4" tabindex="-1"></a>Delta[<span class="dv">3</span>,<span class="dv">3</span>] <span class="ot">=</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">sqrt</span>(Cov1[<span class="dv">3</span>,<span class="dv">3</span>])</span>
-<span id="cb44-5"><a href="12.4-unconditional-means-model.html#cb44-5" tabindex="-1"></a>Delta <span class="sc">%*%</span> Cov1 <span class="sc">%*%</span> Delta</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="12.4-unconditional-means-model.html#cb266-1" tabindex="-1"></a>Delta <span class="ot">=</span> <span class="fu">diag</span>(<span class="dv">3</span>)</span>
+<span id="cb266-2"><a href="12.4-unconditional-means-model.html#cb266-2" tabindex="-1"></a>Delta[<span class="dv">1</span>,<span class="dv">1</span>] <span class="ot">=</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">sqrt</span>(Cov1[<span class="dv">1</span>,<span class="dv">1</span>])</span>
+<span id="cb266-3"><a href="12.4-unconditional-means-model.html#cb266-3" tabindex="-1"></a>Delta[<span class="dv">2</span>,<span class="dv">2</span>] <span class="ot">=</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">sqrt</span>(Cov1[<span class="dv">2</span>,<span class="dv">2</span>])</span>
+<span id="cb266-4"><a href="12.4-unconditional-means-model.html#cb266-4" tabindex="-1"></a>Delta[<span class="dv">3</span>,<span class="dv">3</span>] <span class="ot">=</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">sqrt</span>(Cov1[<span class="dv">3</span>,<span class="dv">3</span>])</span>
+<span id="cb266-5"><a href="12.4-unconditional-means-model.html#cb266-5" tabindex="-1"></a>Delta <span class="sc">%*%</span> Cov1 <span class="sc">%*%</span> Delta</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    1    1
 ## [2,]    1    1    1
 ## [3,]    1    1    1</code></pre>
 <p>Now, let’s look at the residual error variance-covariance matrix,</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="12.4-unconditional-means-model.html#cb46-1" tabindex="-1"></a>sigma2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">VarCorr</span>(um_fit)[<span class="dv">2</span>])</span>
-<span id="cb46-2"><a href="12.4-unconditional-means-model.html#cb46-2" tabindex="-1"></a>Lambda <span class="ot">&lt;-</span> sigma2 <span class="sc">*</span> <span class="fu">diag</span>(<span class="dv">1</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="12.4-unconditional-means-model.html#cb268-1" tabindex="-1"></a>sigma2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">VarCorr</span>(um_fit)[<span class="dv">2</span>])</span>
+<span id="cb268-2"><a href="12.4-unconditional-means-model.html#cb268-2" tabindex="-1"></a>Lambda <span class="ot">&lt;-</span> sigma2 <span class="sc">*</span> <span class="fu">diag</span>(<span class="dv">1</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span></code></pre></div>
 <p>Finally, can put the between- and within- pieces together to calculate the model-implied variance-covariance matrix as follows</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="12.4-unconditional-means-model.html#cb47-1" tabindex="-1"></a>varcovmatrix_um <span class="ot">&lt;-</span> Z <span class="sc">%*%</span> Psi <span class="sc">%*%</span> <span class="fu">t</span>(Z) <span class="sc">+</span> (sigma2 <span class="sc">*</span> Lambda)</span>
-<span id="cb47-2"><a href="12.4-unconditional-means-model.html#cb47-2" tabindex="-1"></a>varcovmatrix_um</span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="12.4-unconditional-means-model.html#cb269-1" tabindex="-1"></a>varcovmatrix_um <span class="ot">&lt;-</span> Z <span class="sc">%*%</span> Psi <span class="sc">%*%</span> <span class="fu">t</span>(Z) <span class="sc">+</span> (sigma2 <span class="sc">*</span> Lambda)</span>
+<span id="cb269-2"><a href="12.4-unconditional-means-model.html#cb269-2" tabindex="-1"></a>varcovmatrix_um</span></code></pre></div>
 <pre><code>##             [,1]        [,2]        [,3]
 ## [1,] 11174.29648    19.41339    19.41339
 ## [2,]    19.41339 11174.29648    19.41339
@@ -1088,48 +1088,43 @@ Z_{2}
 <div id="model-residuals" class="section level3 hasAnchor" number="12.4.10">
 <h3><span class="header-section-number">12.4.10</span> Model Residuals<a href="12.4-unconditional-means-model.html#model-residuals" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Recall what the observed mean and var-cov were …</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="12.4-unconditional-means-model.html#cb49-1" tabindex="-1"></a>meanvector</span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="12.4-unconditional-means-model.html#cb271-1" tabindex="-1"></a>meanvector</span></code></pre></div>
 <pre><code>##    verb2    verb4    verb6 
 ## 25.41534 32.60775 43.74990</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="12.4-unconditional-means-model.html#cb51-1" tabindex="-1"></a>varcovmatrix</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="12.4-unconditional-means-model.html#cb273-1" tabindex="-1"></a>varcovmatrix</span></code></pre></div>
 <pre><code>##          verb2    verb4     verb6
 ## verb2 37.28784 33.81957  47.40488
 ## verb4 33.81957 53.58070  62.25489
 ## verb6 47.40488 62.25489 113.74332</code></pre>
 <p>For fun, let’s look at the misfit to the data (observed matrix - model implied matrix)</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="12.4-unconditional-means-model.html#cb53-1" tabindex="-1"></a>meanvector <span class="sc">-</span> meanvector_um</span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="12.4-unconditional-means-model.html#cb275-1" tabindex="-1"></a>meanvector <span class="sc">-</span> meanvector_um</span></code></pre></div>
 <pre><code>##           [,1]
 ## [1,] -8.508987
 ## [2,] -1.316585
 ## [3,]  9.825572</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="12.4-unconditional-means-model.html#cb55-1" tabindex="-1"></a>varcovmatrix <span class="sc">-</span> varcovmatrix_um</span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="12.4-unconditional-means-model.html#cb277-1" tabindex="-1"></a>varcovmatrix <span class="sc">-</span> varcovmatrix_um</span></code></pre></div>
 <pre><code>##              verb2        verb4        verb6
 ## verb2 -11137.00864     14.40618     27.99149
 ## verb4     14.40618 -11120.71578     42.84150
 ## verb6     27.99149     42.84150 -11060.55317</code></pre>
 <p>Fit is not so good. Let’s visualize the implied model.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="12.4-unconditional-means-model.html#cb57-1" tabindex="-1"></a><span class="co">#Calculating predicted scores from the models </span></span>
-<span id="cb57-2"><a href="12.4-unconditional-means-model.html#cb57-2" tabindex="-1"></a>verblong<span class="sc">$</span>pred_um <span class="ot">&lt;-</span> <span class="fu">predict</span>(um_fit)</span>
-<span id="cb57-3"><a href="12.4-unconditional-means-model.html#cb57-3" tabindex="-1"></a><span class="co">#Making the prototype from the implied means</span></span>
-<span id="cb57-4"><a href="12.4-unconditional-means-model.html#cb57-4" tabindex="-1"></a>proto_um <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">1000</span>,<span class="dv">1000</span>,<span class="dv">1000</span>),<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>),meanvector_um))</span>
-<span id="cb57-5"><a href="12.4-unconditional-means-model.html#cb57-5" tabindex="-1"></a><span class="fu">names</span>(proto_um) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>,<span class="st">&quot;time0&quot;</span>,<span class="st">&quot;pred_um&quot;</span>)</span>
-<span id="cb57-6"><a href="12.4-unconditional-means-model.html#cb57-6" tabindex="-1"></a></span>
-<span id="cb57-7"><a href="12.4-unconditional-means-model.html#cb57-7" tabindex="-1"></a><span class="co">#plotting implied individual scores</span></span>
-<span id="cb57-8"><a href="12.4-unconditional-means-model.html#cb57-8" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> time0, <span class="at">y =</span> pred_um, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb57-9"><a href="12.4-unconditional-means-model.html#cb57-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Unconditional Means Model&quot;</span>) <span class="sc">+</span></span>
-<span id="cb57-10"><a href="12.4-unconditional-means-model.html#cb57-10" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb57-11"><a href="12.4-unconditional-means-model.html#cb57-11" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb57-12"><a href="12.4-unconditional-means-model.html#cb57-12" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>proto_um, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb57-13"><a href="12.4-unconditional-means-model.html#cb57-13" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>proto_um, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb57-14"><a href="12.4-unconditional-means-model.html#cb57-14" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb57-15"><a href="12.4-unconditional-means-model.html#cb57-15" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;WISC Verbal Score&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb57-16"><a href="12.4-unconditional-means-model.html#cb57-16" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-## ℹ Please use `linewidth` instead.
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-## generated.</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="12.4-unconditional-means-model.html#cb279-1" tabindex="-1"></a><span class="co">#Calculating predicted scores from the models </span></span>
+<span id="cb279-2"><a href="12.4-unconditional-means-model.html#cb279-2" tabindex="-1"></a>verblong<span class="sc">$</span>pred_um <span class="ot">&lt;-</span> <span class="fu">predict</span>(um_fit)</span>
+<span id="cb279-3"><a href="12.4-unconditional-means-model.html#cb279-3" tabindex="-1"></a><span class="co">#Making the prototype from the implied means</span></span>
+<span id="cb279-4"><a href="12.4-unconditional-means-model.html#cb279-4" tabindex="-1"></a>proto_um <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">1000</span>,<span class="dv">1000</span>,<span class="dv">1000</span>),<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>),meanvector_um))</span>
+<span id="cb279-5"><a href="12.4-unconditional-means-model.html#cb279-5" tabindex="-1"></a><span class="fu">names</span>(proto_um) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>,<span class="st">&quot;time0&quot;</span>,<span class="st">&quot;pred_um&quot;</span>)</span>
+<span id="cb279-6"><a href="12.4-unconditional-means-model.html#cb279-6" tabindex="-1"></a></span>
+<span id="cb279-7"><a href="12.4-unconditional-means-model.html#cb279-7" tabindex="-1"></a><span class="co">#plotting implied individual scores</span></span>
+<span id="cb279-8"><a href="12.4-unconditional-means-model.html#cb279-8" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> time0, <span class="at">y =</span> pred_um, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb279-9"><a href="12.4-unconditional-means-model.html#cb279-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Unconditional Means Model&quot;</span>) <span class="sc">+</span></span>
+<span id="cb279-10"><a href="12.4-unconditional-means-model.html#cb279-10" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb279-11"><a href="12.4-unconditional-means-model.html#cb279-11" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb279-12"><a href="12.4-unconditional-means-model.html#cb279-12" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>proto_um, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb279-13"><a href="12.4-unconditional-means-model.html#cb279-13" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>proto_um, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb279-14"><a href="12.4-unconditional-means-model.html#cb279-14" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb279-15"><a href="12.4-unconditional-means-model.html#cb279-15" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;WISC Verbal Score&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb279-16"><a href="12.4-unconditional-means-model.html#cb279-16" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">2</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-187-1.png" width="672" /></p>
 </div>
 </div>
             </section>
