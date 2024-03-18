@@ -885,3 +885,12 @@ summary(linear_assessment_fit)
 ```
 
 
+## Intperpreting Interactions
+
+Below is a quick note on visualizing slope intercept interactions in linear growth curve models.
+
+![Interpreting interactions.](images/interaction.jpg)
+
+
+
+

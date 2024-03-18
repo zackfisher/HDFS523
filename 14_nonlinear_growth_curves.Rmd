@@ -1,4 +1,4 @@
-# Nonlinear Growth Curves {#chapter-12}
+# Nonlinear Growth Curves {#chapter-14}
 
 ```{r, echo = F}
 button <-  "position: relative; 
@@ -402,7 +402,7 @@ quad_nlme <- nlme::nlme(
   random = u_0i + u_1i + u_2i~1,
   group = ~id,
   na.action="na.omit",
-  start = c(gamma_00 = 30, gamma_10=10, gamma_20=1)
+  start = c(gamma_00 = 20, gamma_10=10, gamma_20=1)
 )
 summary(quad_nlme)
 
@@ -412,7 +412,7 @@ quad_lme <- nlme::lme(
   random = ~ 1 + grade|id + gradeSquared|id, 
   data=verblong,
   na.action = na.exclude,
-  method = "ML"
+  method = "REML" # does not converge with ML
 )
 summary(quad_lme)
 ```
@@ -1342,7 +1342,7 @@ cort_spline2 <- nlme(
 
 summary(cort_spline2)
 VarCorr(cort_spline2)
-intervals(cort_spline2)
+#intervals(cort_spline2)
 ```
 
 ## References
