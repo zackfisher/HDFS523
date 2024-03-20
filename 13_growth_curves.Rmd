@@ -548,15 +548,6 @@ fq_rq_fit <- lme(
 summary(fq_rq_fit)
 ```
 
-Let's test the significance of having random slopes. We compare models by applying `anova()` function to examine difference in fit between the two nested models. 
-
-```{r}
-anova(fl_rl_fit,fq_rq_fit)
-```
-
-From the test results we see they are different. 
-
-
 Let's look at the predicted trajectories.
 
 ```{r}

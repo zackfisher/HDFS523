@@ -23,7 +23,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2024-03-18" />
+<meta name="date" content="2024-03-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -658,48 +658,48 @@ y_{ti}  = &amp; \underbrace{\gamma_{00} + \gamma_{10}\text{time}_{1} + \gamma_{2
 </div>
 <div id="fit-model-1" class="section level3 hasAnchor" number="14.5.2">
 <h3><span class="header-section-number">14.5.2</span> Fit Model<a href="14.5-quadratic-growth-cortisol.html#fit-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="14.5-quadratic-growth-cortisol.html#cb503-1" tabindex="-1"></a><span class="co">#creating the quadratic time variable</span></span>
-<span id="cb503-2"><a href="14.5-quadratic-growth-cortisol.html#cb503-2" tabindex="-1"></a>cortisol_long<span class="sc">$</span>timesq <span class="ot">&lt;-</span> cortisol_long<span class="sc">$</span>timescaled<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb503-3"><a href="14.5-quadratic-growth-cortisol.html#cb503-3" tabindex="-1"></a></span>
-<span id="cb503-4"><a href="14.5-quadratic-growth-cortisol.html#cb503-4" tabindex="-1"></a><span class="co">#quadratic model</span></span>
-<span id="cb503-5"><a href="14.5-quadratic-growth-cortisol.html#cb503-5" tabindex="-1"></a><span class="co"># cort_quad &lt;- lme(cort ~ 1 + timescaled + timesq,</span></span>
-<span id="cb503-6"><a href="14.5-quadratic-growth-cortisol.html#cb503-6" tabindex="-1"></a><span class="co">#                    random = ~ 1 + timescaled + timesq| id,</span></span>
-<span id="cb503-7"><a href="14.5-quadratic-growth-cortisol.html#cb503-7" tabindex="-1"></a><span class="co">#                     data = cortisol_long,</span></span>
-<span id="cb503-8"><a href="14.5-quadratic-growth-cortisol.html#cb503-8" tabindex="-1"></a><span class="co">#                     na.action = &quot;na.exclude&quot;)</span></span>
-<span id="cb503-9"><a href="14.5-quadratic-growth-cortisol.html#cb503-9" tabindex="-1"></a><span class="co"># #convergence issues</span></span>
-<span id="cb503-10"><a href="14.5-quadratic-growth-cortisol.html#cb503-10" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb503-11"><a href="14.5-quadratic-growth-cortisol.html#cb503-11" tabindex="-1"></a><span class="co"># cort_quad &lt;- lmer(cort ~ 1 + timescaled + timesq + (1 + timescaled + timesq | id),</span></span>
-<span id="cb503-12"><a href="14.5-quadratic-growth-cortisol.html#cb503-12" tabindex="-1"></a><span class="co">#                     data = cortisol_long,</span></span>
-<span id="cb503-13"><a href="14.5-quadratic-growth-cortisol.html#cb503-13" tabindex="-1"></a><span class="co">#                     na.action = &quot;na.exclude&quot;)</span></span>
-<span id="cb503-14"><a href="14.5-quadratic-growth-cortisol.html#cb503-14" tabindex="-1"></a><span class="co"># #convergence issues</span></span>
-<span id="cb503-15"><a href="14.5-quadratic-growth-cortisol.html#cb503-15" tabindex="-1"></a><span class="co"># summary(cort_quad)</span></span>
-<span id="cb503-16"><a href="14.5-quadratic-growth-cortisol.html#cb503-16" tabindex="-1"></a></span>
-<span id="cb503-17"><a href="14.5-quadratic-growth-cortisol.html#cb503-17" tabindex="-1"></a><span class="co"># cort_quad &lt;- nlme(</span></span>
-<span id="cb503-18"><a href="14.5-quadratic-growth-cortisol.html#cb503-18" tabindex="-1"></a><span class="co">#   cort ~ (gamma_00 + u_0i) + (gamma_10 + u_1i)*timescaled + (gamma_20 + u_2i)*timesq,</span></span>
-<span id="cb503-19"><a href="14.5-quadratic-growth-cortisol.html#cb503-19" tabindex="-1"></a><span class="co">#   fixed = gamma_00 + gamma_10 + gamma_20 ~1,</span></span>
-<span id="cb503-20"><a href="14.5-quadratic-growth-cortisol.html#cb503-20" tabindex="-1"></a><span class="co">#   random = u_0i + u_1i + u_2i ~1,</span></span>
-<span id="cb503-21"><a href="14.5-quadratic-growth-cortisol.html#cb503-21" tabindex="-1"></a><span class="co">#   group = ~id,</span></span>
-<span id="cb503-22"><a href="14.5-quadratic-growth-cortisol.html#cb503-22" tabindex="-1"></a><span class="co">#   start = c(gamma_00 = 5, gamma_10=1, gamma_20=-1), </span></span>
-<span id="cb503-23"><a href="14.5-quadratic-growth-cortisol.html#cb503-23" tabindex="-1"></a><span class="co">#   data = cortisol_long,</span></span>
-<span id="cb503-24"><a href="14.5-quadratic-growth-cortisol.html#cb503-24" tabindex="-1"></a><span class="co">#   na.action = &quot;na.exclude&quot;,</span></span>
-<span id="cb503-25"><a href="14.5-quadratic-growth-cortisol.html#cb503-25" tabindex="-1"></a><span class="co">#   control = lmeControl(maxIter = 1e8, msMaxIter = 1e8)</span></span>
-<span id="cb503-26"><a href="14.5-quadratic-growth-cortisol.html#cb503-26" tabindex="-1"></a><span class="co"># )</span></span>
-<span id="cb503-27"><a href="14.5-quadratic-growth-cortisol.html#cb503-27" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb503-28"><a href="14.5-quadratic-growth-cortisol.html#cb503-28" tabindex="-1"></a><span class="co"># summary(cort_quad)  </span></span>
-<span id="cb503-29"><a href="14.5-quadratic-growth-cortisol.html#cb503-29" tabindex="-1"></a><span class="co"># VarCorr(cort_quad)</span></span>
-<span id="cb503-30"><a href="14.5-quadratic-growth-cortisol.html#cb503-30" tabindex="-1"></a></span>
-<span id="cb503-31"><a href="14.5-quadratic-growth-cortisol.html#cb503-31" tabindex="-1"></a>cort_quad <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
-<span id="cb503-32"><a href="14.5-quadratic-growth-cortisol.html#cb503-32" tabindex="-1"></a>  cort <span class="sc">~</span> (gamma_00) <span class="sc">+</span> (gamma_10)<span class="sc">*</span>timescaled <span class="sc">+</span> (gamma_20)<span class="sc">*</span>timesq,</span>
-<span id="cb503-33"><a href="14.5-quadratic-growth-cortisol.html#cb503-33" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> gamma_20 <span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb503-34"><a href="14.5-quadratic-growth-cortisol.html#cb503-34" tabindex="-1"></a>  <span class="at">random =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> gamma_20 <span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb503-35"><a href="14.5-quadratic-growth-cortisol.html#cb503-35" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
-<span id="cb503-36"><a href="14.5-quadratic-growth-cortisol.html#cb503-36" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00 =</span> <span class="dv">5</span>, <span class="at">gamma_10=</span><span class="dv">1</span>, <span class="at">gamma_20=</span><span class="sc">-</span><span class="dv">1</span>), </span>
-<span id="cb503-37"><a href="14.5-quadratic-growth-cortisol.html#cb503-37" tabindex="-1"></a>  <span class="at">data =</span> cortisol_long,</span>
-<span id="cb503-38"><a href="14.5-quadratic-growth-cortisol.html#cb503-38" tabindex="-1"></a>  <span class="at">na.action =</span> <span class="st">&quot;na.exclude&quot;</span>,</span>
-<span id="cb503-39"><a href="14.5-quadratic-growth-cortisol.html#cb503-39" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
-<span id="cb503-40"><a href="14.5-quadratic-growth-cortisol.html#cb503-40" tabindex="-1"></a>)</span>
-<span id="cb503-41"><a href="14.5-quadratic-growth-cortisol.html#cb503-41" tabindex="-1"></a></span>
-<span id="cb503-42"><a href="14.5-quadratic-growth-cortisol.html#cb503-42" tabindex="-1"></a><span class="fu">summary</span>(cort_quad)  </span></code></pre></div>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="14.5-quadratic-growth-cortisol.html#cb501-1" tabindex="-1"></a><span class="co">#creating the quadratic time variable</span></span>
+<span id="cb501-2"><a href="14.5-quadratic-growth-cortisol.html#cb501-2" tabindex="-1"></a>cortisol_long<span class="sc">$</span>timesq <span class="ot">&lt;-</span> cortisol_long<span class="sc">$</span>timescaled<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb501-3"><a href="14.5-quadratic-growth-cortisol.html#cb501-3" tabindex="-1"></a></span>
+<span id="cb501-4"><a href="14.5-quadratic-growth-cortisol.html#cb501-4" tabindex="-1"></a><span class="co">#quadratic model</span></span>
+<span id="cb501-5"><a href="14.5-quadratic-growth-cortisol.html#cb501-5" tabindex="-1"></a><span class="co"># cort_quad &lt;- lme(cort ~ 1 + timescaled + timesq,</span></span>
+<span id="cb501-6"><a href="14.5-quadratic-growth-cortisol.html#cb501-6" tabindex="-1"></a><span class="co">#                    random = ~ 1 + timescaled + timesq| id,</span></span>
+<span id="cb501-7"><a href="14.5-quadratic-growth-cortisol.html#cb501-7" tabindex="-1"></a><span class="co">#                     data = cortisol_long,</span></span>
+<span id="cb501-8"><a href="14.5-quadratic-growth-cortisol.html#cb501-8" tabindex="-1"></a><span class="co">#                     na.action = &quot;na.exclude&quot;)</span></span>
+<span id="cb501-9"><a href="14.5-quadratic-growth-cortisol.html#cb501-9" tabindex="-1"></a><span class="co"># #convergence issues</span></span>
+<span id="cb501-10"><a href="14.5-quadratic-growth-cortisol.html#cb501-10" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb501-11"><a href="14.5-quadratic-growth-cortisol.html#cb501-11" tabindex="-1"></a><span class="co"># cort_quad &lt;- lmer(cort ~ 1 + timescaled + timesq + (1 + timescaled + timesq | id),</span></span>
+<span id="cb501-12"><a href="14.5-quadratic-growth-cortisol.html#cb501-12" tabindex="-1"></a><span class="co">#                     data = cortisol_long,</span></span>
+<span id="cb501-13"><a href="14.5-quadratic-growth-cortisol.html#cb501-13" tabindex="-1"></a><span class="co">#                     na.action = &quot;na.exclude&quot;)</span></span>
+<span id="cb501-14"><a href="14.5-quadratic-growth-cortisol.html#cb501-14" tabindex="-1"></a><span class="co"># #convergence issues</span></span>
+<span id="cb501-15"><a href="14.5-quadratic-growth-cortisol.html#cb501-15" tabindex="-1"></a><span class="co"># summary(cort_quad)</span></span>
+<span id="cb501-16"><a href="14.5-quadratic-growth-cortisol.html#cb501-16" tabindex="-1"></a></span>
+<span id="cb501-17"><a href="14.5-quadratic-growth-cortisol.html#cb501-17" tabindex="-1"></a><span class="co"># cort_quad &lt;- nlme(</span></span>
+<span id="cb501-18"><a href="14.5-quadratic-growth-cortisol.html#cb501-18" tabindex="-1"></a><span class="co">#   cort ~ (gamma_00 + u_0i) + (gamma_10 + u_1i)*timescaled + (gamma_20 + u_2i)*timesq,</span></span>
+<span id="cb501-19"><a href="14.5-quadratic-growth-cortisol.html#cb501-19" tabindex="-1"></a><span class="co">#   fixed = gamma_00 + gamma_10 + gamma_20 ~1,</span></span>
+<span id="cb501-20"><a href="14.5-quadratic-growth-cortisol.html#cb501-20" tabindex="-1"></a><span class="co">#   random = u_0i + u_1i + u_2i ~1,</span></span>
+<span id="cb501-21"><a href="14.5-quadratic-growth-cortisol.html#cb501-21" tabindex="-1"></a><span class="co">#   group = ~id,</span></span>
+<span id="cb501-22"><a href="14.5-quadratic-growth-cortisol.html#cb501-22" tabindex="-1"></a><span class="co">#   start = c(gamma_00 = 5, gamma_10=1, gamma_20=-1), </span></span>
+<span id="cb501-23"><a href="14.5-quadratic-growth-cortisol.html#cb501-23" tabindex="-1"></a><span class="co">#   data = cortisol_long,</span></span>
+<span id="cb501-24"><a href="14.5-quadratic-growth-cortisol.html#cb501-24" tabindex="-1"></a><span class="co">#   na.action = &quot;na.exclude&quot;,</span></span>
+<span id="cb501-25"><a href="14.5-quadratic-growth-cortisol.html#cb501-25" tabindex="-1"></a><span class="co">#   control = lmeControl(maxIter = 1e8, msMaxIter = 1e8)</span></span>
+<span id="cb501-26"><a href="14.5-quadratic-growth-cortisol.html#cb501-26" tabindex="-1"></a><span class="co"># )</span></span>
+<span id="cb501-27"><a href="14.5-quadratic-growth-cortisol.html#cb501-27" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb501-28"><a href="14.5-quadratic-growth-cortisol.html#cb501-28" tabindex="-1"></a><span class="co"># summary(cort_quad)  </span></span>
+<span id="cb501-29"><a href="14.5-quadratic-growth-cortisol.html#cb501-29" tabindex="-1"></a><span class="co"># VarCorr(cort_quad)</span></span>
+<span id="cb501-30"><a href="14.5-quadratic-growth-cortisol.html#cb501-30" tabindex="-1"></a></span>
+<span id="cb501-31"><a href="14.5-quadratic-growth-cortisol.html#cb501-31" tabindex="-1"></a>cort_quad <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
+<span id="cb501-32"><a href="14.5-quadratic-growth-cortisol.html#cb501-32" tabindex="-1"></a>  cort <span class="sc">~</span> (gamma_00) <span class="sc">+</span> (gamma_10)<span class="sc">*</span>timescaled <span class="sc">+</span> (gamma_20)<span class="sc">*</span>timesq,</span>
+<span id="cb501-33"><a href="14.5-quadratic-growth-cortisol.html#cb501-33" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> gamma_20 <span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb501-34"><a href="14.5-quadratic-growth-cortisol.html#cb501-34" tabindex="-1"></a>  <span class="at">random =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> gamma_20 <span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb501-35"><a href="14.5-quadratic-growth-cortisol.html#cb501-35" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
+<span id="cb501-36"><a href="14.5-quadratic-growth-cortisol.html#cb501-36" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00 =</span> <span class="dv">5</span>, <span class="at">gamma_10=</span><span class="dv">1</span>, <span class="at">gamma_20=</span><span class="sc">-</span><span class="dv">1</span>), </span>
+<span id="cb501-37"><a href="14.5-quadratic-growth-cortisol.html#cb501-37" tabindex="-1"></a>  <span class="at">data =</span> cortisol_long,</span>
+<span id="cb501-38"><a href="14.5-quadratic-growth-cortisol.html#cb501-38" tabindex="-1"></a>  <span class="at">na.action =</span> <span class="st">&quot;na.exclude&quot;</span>,</span>
+<span id="cb501-39"><a href="14.5-quadratic-growth-cortisol.html#cb501-39" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
+<span id="cb501-40"><a href="14.5-quadratic-growth-cortisol.html#cb501-40" tabindex="-1"></a>)</span>
+<span id="cb501-41"><a href="14.5-quadratic-growth-cortisol.html#cb501-41" tabindex="-1"></a></span>
+<span id="cb501-42"><a href="14.5-quadratic-growth-cortisol.html#cb501-42" tabindex="-1"></a><span class="fu">summary</span>(cort_quad)  </span></code></pre></div>
 <pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
 ##   Model: cort ~ (gamma_00) + (gamma_10) * timescaled + (gamma_20) * timesq 
 ##   Data: cortisol_long 
@@ -732,7 +732,7 @@ y_{ti}  = &amp; \underbrace{\gamma_{00} + \gamma_{10}\text{time}_{1} + \gamma_{2
 ## 
 ## Number of Observations: 306
 ## Number of Groups: 34</code></pre>
-<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="14.5-quadratic-growth-cortisol.html#cb505-1" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_quad)</span></code></pre></div>
+<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="14.5-quadratic-growth-cortisol.html#cb503-1" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_quad)</span></code></pre></div>
 <pre><code>## id = pdLogChol(list(gamma_00 ~ 1,gamma_10 ~ 1,gamma_20 ~ 1)) 
 ##          Variance  StdDev   Corr         
 ## gamma_00  1.242072 1.114483 gmm_00 gmm_10
@@ -742,22 +742,22 @@ y_{ti}  = &amp; \underbrace{\gamma_{00} + \gamma_{10}\text{time}_{1} + \gamma_{2
 </div>
 <div id="predicted-trajectories-2" class="section level3 hasAnchor" number="14.5.3">
 <h3><span class="header-section-number">14.5.3</span> Predicted Trajectories<a href="14.5-quadratic-growth-cortisol.html#predicted-trajectories-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="14.5-quadratic-growth-cortisol.html#cb507-1" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
-<span id="cb507-2"><a href="14.5-quadratic-growth-cortisol.html#cb507-2" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_quad <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_quad)</span>
-<span id="cb507-3"><a href="14.5-quadratic-growth-cortisol.html#cb507-3" tabindex="-1"></a></span>
-<span id="cb507-4"><a href="14.5-quadratic-growth-cortisol.html#cb507-4" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
-<span id="cb507-5"><a href="14.5-quadratic-growth-cortisol.html#cb507-5" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_quad <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_quad, <span class="at">level=</span><span class="dv">0</span>)</span>
-<span id="cb507-6"><a href="14.5-quadratic-growth-cortisol.html#cb507-6" tabindex="-1"></a></span>
-<span id="cb507-7"><a href="14.5-quadratic-growth-cortisol.html#cb507-7" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
-<span id="cb507-8"><a href="14.5-quadratic-growth-cortisol.html#cb507-8" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
-<span id="cb507-9"><a href="14.5-quadratic-growth-cortisol.html#cb507-9" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_quad, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb507-10"><a href="14.5-quadratic-growth-cortisol.html#cb507-10" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
-<span id="cb507-11"><a href="14.5-quadratic-growth-cortisol.html#cb507-11" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb507-12"><a href="14.5-quadratic-growth-cortisol.html#cb507-12" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_quad), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb507-13"><a href="14.5-quadratic-growth-cortisol.html#cb507-13" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb507-14"><a href="14.5-quadratic-growth-cortisol.html#cb507-14" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb507-15"><a href="14.5-quadratic-growth-cortisol.html#cb507-15" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) </span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-305-1.png" width="672" /></p>
+<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="14.5-quadratic-growth-cortisol.html#cb505-1" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
+<span id="cb505-2"><a href="14.5-quadratic-growth-cortisol.html#cb505-2" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_quad <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_quad)</span>
+<span id="cb505-3"><a href="14.5-quadratic-growth-cortisol.html#cb505-3" tabindex="-1"></a></span>
+<span id="cb505-4"><a href="14.5-quadratic-growth-cortisol.html#cb505-4" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
+<span id="cb505-5"><a href="14.5-quadratic-growth-cortisol.html#cb505-5" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_quad <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_quad, <span class="at">level=</span><span class="dv">0</span>)</span>
+<span id="cb505-6"><a href="14.5-quadratic-growth-cortisol.html#cb505-6" tabindex="-1"></a></span>
+<span id="cb505-7"><a href="14.5-quadratic-growth-cortisol.html#cb505-7" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
+<span id="cb505-8"><a href="14.5-quadratic-growth-cortisol.html#cb505-8" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
+<span id="cb505-9"><a href="14.5-quadratic-growth-cortisol.html#cb505-9" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_quad, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb505-10"><a href="14.5-quadratic-growth-cortisol.html#cb505-10" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
+<span id="cb505-11"><a href="14.5-quadratic-growth-cortisol.html#cb505-11" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb505-12"><a href="14.5-quadratic-growth-cortisol.html#cb505-12" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_quad), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb505-13"><a href="14.5-quadratic-growth-cortisol.html#cb505-13" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb505-14"><a href="14.5-quadratic-growth-cortisol.html#cb505-14" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb505-15"><a href="14.5-quadratic-growth-cortisol.html#cb505-15" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) </span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-304-1.png" width="672" /></p>
 </div>
 <div id="interpretation-4" class="section level3 hasAnchor" number="14.5.4">
 <h3><span class="header-section-number">14.5.4</span> Interpretation<a href="14.5-quadratic-growth-cortisol.html#interpretation-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>

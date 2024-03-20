@@ -23,7 +23,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2024-03-18" />
+<meta name="date" content="2024-03-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -658,44 +658,44 @@ y_{ti}  = &amp; \underbrace{\gamma_{00} + \gamma_{10}\text{time}_{1}}_{fixed} + 
 </div>
 <div id="fit-model" class="section level3 hasAnchor" number="14.4.2">
 <h3><span class="header-section-number">14.4.2</span> Fit Model<a href="14.4-linear-growth-cortisol.html#fit-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="14.4-linear-growth-cortisol.html#cb498-1" tabindex="-1"></a><span class="co"># #linear model</span></span>
-<span id="cb498-2"><a href="14.4-linear-growth-cortisol.html#cb498-2" tabindex="-1"></a><span class="co"># cort_linear &lt;- lme(cort ~ 1 + timescaled,</span></span>
-<span id="cb498-3"><a href="14.4-linear-growth-cortisol.html#cb498-3" tabindex="-1"></a><span class="co">#                    random = ~ 1 + timescaled | id,</span></span>
-<span id="cb498-4"><a href="14.4-linear-growth-cortisol.html#cb498-4" tabindex="-1"></a><span class="co">#                     data = cortisol_long,</span></span>
-<span id="cb498-5"><a href="14.4-linear-growth-cortisol.html#cb498-5" tabindex="-1"></a><span class="co">#                     na.action = &quot;na.exclude&quot;)</span></span>
-<span id="cb498-6"><a href="14.4-linear-growth-cortisol.html#cb498-6" tabindex="-1"></a><span class="co"># #convergence issues</span></span>
-<span id="cb498-7"><a href="14.4-linear-growth-cortisol.html#cb498-7" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb498-8"><a href="14.4-linear-growth-cortisol.html#cb498-8" tabindex="-1"></a><span class="co"># cort_linear2 &lt;- lmer(cort ~ 1 + timescaled + (1 + timescaled | id),</span></span>
-<span id="cb498-9"><a href="14.4-linear-growth-cortisol.html#cb498-9" tabindex="-1"></a><span class="co">#                     data = cortisol_long,</span></span>
-<span id="cb498-10"><a href="14.4-linear-growth-cortisol.html#cb498-10" tabindex="-1"></a><span class="co">#                     na.action = &quot;na.exclude&quot;)</span></span>
-<span id="cb498-11"><a href="14.4-linear-growth-cortisol.html#cb498-11" tabindex="-1"></a><span class="co"># #convergence issues</span></span>
-<span id="cb498-12"><a href="14.4-linear-growth-cortisol.html#cb498-12" tabindex="-1"></a></span>
-<span id="cb498-13"><a href="14.4-linear-growth-cortisol.html#cb498-13" tabindex="-1"></a><span class="co"># cort_linear &lt;- nlme(</span></span>
-<span id="cb498-14"><a href="14.4-linear-growth-cortisol.html#cb498-14" tabindex="-1"></a><span class="co">#   cort ~ (gamma_00 + u_0i) + (gamma_10 + u_1i)*timescaled,</span></span>
-<span id="cb498-15"><a href="14.4-linear-growth-cortisol.html#cb498-15" tabindex="-1"></a><span class="co">#   fixed = gamma_00 + gamma_10~1,</span></span>
-<span id="cb498-16"><a href="14.4-linear-growth-cortisol.html#cb498-16" tabindex="-1"></a><span class="co">#   random = u_0i + u_1i~1,</span></span>
-<span id="cb498-17"><a href="14.4-linear-growth-cortisol.html#cb498-17" tabindex="-1"></a><span class="co">#   group = ~id,</span></span>
-<span id="cb498-18"><a href="14.4-linear-growth-cortisol.html#cb498-18" tabindex="-1"></a><span class="co">#   start = c(gamma_00 = 5, gamma_10=1),</span></span>
-<span id="cb498-19"><a href="14.4-linear-growth-cortisol.html#cb498-19" tabindex="-1"></a><span class="co">#   data = cortisol_long,</span></span>
-<span id="cb498-20"><a href="14.4-linear-growth-cortisol.html#cb498-20" tabindex="-1"></a><span class="co">#   na.action = &quot;na.exclude&quot;,</span></span>
-<span id="cb498-21"><a href="14.4-linear-growth-cortisol.html#cb498-21" tabindex="-1"></a><span class="co">#   control = lmeControl(maxIter = 1e8, msMaxIter = 1e8)</span></span>
-<span id="cb498-22"><a href="14.4-linear-growth-cortisol.html#cb498-22" tabindex="-1"></a><span class="co"># )</span></span>
-<span id="cb498-23"><a href="14.4-linear-growth-cortisol.html#cb498-23" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb498-24"><a href="14.4-linear-growth-cortisol.html#cb498-24" tabindex="-1"></a><span class="co"># summary(cort_linear)</span></span>
-<span id="cb498-25"><a href="14.4-linear-growth-cortisol.html#cb498-25" tabindex="-1"></a><span class="co"># VarCorr(cort_linear)</span></span>
-<span id="cb498-26"><a href="14.4-linear-growth-cortisol.html#cb498-26" tabindex="-1"></a></span>
-<span id="cb498-27"><a href="14.4-linear-growth-cortisol.html#cb498-27" tabindex="-1"></a>cort_linear <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
-<span id="cb498-28"><a href="14.4-linear-growth-cortisol.html#cb498-28" tabindex="-1"></a>  cort <span class="sc">~</span> (gamma_00) <span class="sc">+</span> (gamma_10)<span class="sc">*</span>timescaled,</span>
-<span id="cb498-29"><a href="14.4-linear-growth-cortisol.html#cb498-29" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10<span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb498-30"><a href="14.4-linear-growth-cortisol.html#cb498-30" tabindex="-1"></a>  <span class="at">random =</span> gamma_00 <span class="sc">+</span> gamma_10<span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb498-31"><a href="14.4-linear-growth-cortisol.html#cb498-31" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
-<span id="cb498-32"><a href="14.4-linear-growth-cortisol.html#cb498-32" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00 =</span> <span class="dv">5</span>, <span class="at">gamma_10=</span><span class="dv">1</span>), </span>
-<span id="cb498-33"><a href="14.4-linear-growth-cortisol.html#cb498-33" tabindex="-1"></a>  <span class="at">data =</span> cortisol_long,</span>
-<span id="cb498-34"><a href="14.4-linear-growth-cortisol.html#cb498-34" tabindex="-1"></a>  <span class="at">na.action =</span> <span class="st">&quot;na.exclude&quot;</span>,</span>
-<span id="cb498-35"><a href="14.4-linear-growth-cortisol.html#cb498-35" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
-<span id="cb498-36"><a href="14.4-linear-growth-cortisol.html#cb498-36" tabindex="-1"></a>)</span>
-<span id="cb498-37"><a href="14.4-linear-growth-cortisol.html#cb498-37" tabindex="-1"></a></span>
-<span id="cb498-38"><a href="14.4-linear-growth-cortisol.html#cb498-38" tabindex="-1"></a><span class="fu">summary</span>(cort_linear)  </span></code></pre></div>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="14.4-linear-growth-cortisol.html#cb496-1" tabindex="-1"></a><span class="co"># #linear model</span></span>
+<span id="cb496-2"><a href="14.4-linear-growth-cortisol.html#cb496-2" tabindex="-1"></a><span class="co"># cort_linear &lt;- lme(cort ~ 1 + timescaled,</span></span>
+<span id="cb496-3"><a href="14.4-linear-growth-cortisol.html#cb496-3" tabindex="-1"></a><span class="co">#                    random = ~ 1 + timescaled | id,</span></span>
+<span id="cb496-4"><a href="14.4-linear-growth-cortisol.html#cb496-4" tabindex="-1"></a><span class="co">#                     data = cortisol_long,</span></span>
+<span id="cb496-5"><a href="14.4-linear-growth-cortisol.html#cb496-5" tabindex="-1"></a><span class="co">#                     na.action = &quot;na.exclude&quot;)</span></span>
+<span id="cb496-6"><a href="14.4-linear-growth-cortisol.html#cb496-6" tabindex="-1"></a><span class="co"># #convergence issues</span></span>
+<span id="cb496-7"><a href="14.4-linear-growth-cortisol.html#cb496-7" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb496-8"><a href="14.4-linear-growth-cortisol.html#cb496-8" tabindex="-1"></a><span class="co"># cort_linear2 &lt;- lmer(cort ~ 1 + timescaled + (1 + timescaled | id),</span></span>
+<span id="cb496-9"><a href="14.4-linear-growth-cortisol.html#cb496-9" tabindex="-1"></a><span class="co">#                     data = cortisol_long,</span></span>
+<span id="cb496-10"><a href="14.4-linear-growth-cortisol.html#cb496-10" tabindex="-1"></a><span class="co">#                     na.action = &quot;na.exclude&quot;)</span></span>
+<span id="cb496-11"><a href="14.4-linear-growth-cortisol.html#cb496-11" tabindex="-1"></a><span class="co"># #convergence issues</span></span>
+<span id="cb496-12"><a href="14.4-linear-growth-cortisol.html#cb496-12" tabindex="-1"></a></span>
+<span id="cb496-13"><a href="14.4-linear-growth-cortisol.html#cb496-13" tabindex="-1"></a><span class="co"># cort_linear &lt;- nlme(</span></span>
+<span id="cb496-14"><a href="14.4-linear-growth-cortisol.html#cb496-14" tabindex="-1"></a><span class="co">#   cort ~ (gamma_00 + u_0i) + (gamma_10 + u_1i)*timescaled,</span></span>
+<span id="cb496-15"><a href="14.4-linear-growth-cortisol.html#cb496-15" tabindex="-1"></a><span class="co">#   fixed = gamma_00 + gamma_10~1,</span></span>
+<span id="cb496-16"><a href="14.4-linear-growth-cortisol.html#cb496-16" tabindex="-1"></a><span class="co">#   random = u_0i + u_1i~1,</span></span>
+<span id="cb496-17"><a href="14.4-linear-growth-cortisol.html#cb496-17" tabindex="-1"></a><span class="co">#   group = ~id,</span></span>
+<span id="cb496-18"><a href="14.4-linear-growth-cortisol.html#cb496-18" tabindex="-1"></a><span class="co">#   start = c(gamma_00 = 5, gamma_10=1),</span></span>
+<span id="cb496-19"><a href="14.4-linear-growth-cortisol.html#cb496-19" tabindex="-1"></a><span class="co">#   data = cortisol_long,</span></span>
+<span id="cb496-20"><a href="14.4-linear-growth-cortisol.html#cb496-20" tabindex="-1"></a><span class="co">#   na.action = &quot;na.exclude&quot;,</span></span>
+<span id="cb496-21"><a href="14.4-linear-growth-cortisol.html#cb496-21" tabindex="-1"></a><span class="co">#   control = lmeControl(maxIter = 1e8, msMaxIter = 1e8)</span></span>
+<span id="cb496-22"><a href="14.4-linear-growth-cortisol.html#cb496-22" tabindex="-1"></a><span class="co"># )</span></span>
+<span id="cb496-23"><a href="14.4-linear-growth-cortisol.html#cb496-23" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb496-24"><a href="14.4-linear-growth-cortisol.html#cb496-24" tabindex="-1"></a><span class="co"># summary(cort_linear)</span></span>
+<span id="cb496-25"><a href="14.4-linear-growth-cortisol.html#cb496-25" tabindex="-1"></a><span class="co"># VarCorr(cort_linear)</span></span>
+<span id="cb496-26"><a href="14.4-linear-growth-cortisol.html#cb496-26" tabindex="-1"></a></span>
+<span id="cb496-27"><a href="14.4-linear-growth-cortisol.html#cb496-27" tabindex="-1"></a>cort_linear <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
+<span id="cb496-28"><a href="14.4-linear-growth-cortisol.html#cb496-28" tabindex="-1"></a>  cort <span class="sc">~</span> (gamma_00) <span class="sc">+</span> (gamma_10)<span class="sc">*</span>timescaled,</span>
+<span id="cb496-29"><a href="14.4-linear-growth-cortisol.html#cb496-29" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10<span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb496-30"><a href="14.4-linear-growth-cortisol.html#cb496-30" tabindex="-1"></a>  <span class="at">random =</span> gamma_00 <span class="sc">+</span> gamma_10<span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb496-31"><a href="14.4-linear-growth-cortisol.html#cb496-31" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
+<span id="cb496-32"><a href="14.4-linear-growth-cortisol.html#cb496-32" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00 =</span> <span class="dv">5</span>, <span class="at">gamma_10=</span><span class="dv">1</span>), </span>
+<span id="cb496-33"><a href="14.4-linear-growth-cortisol.html#cb496-33" tabindex="-1"></a>  <span class="at">data =</span> cortisol_long,</span>
+<span id="cb496-34"><a href="14.4-linear-growth-cortisol.html#cb496-34" tabindex="-1"></a>  <span class="at">na.action =</span> <span class="st">&quot;na.exclude&quot;</span>,</span>
+<span id="cb496-35"><a href="14.4-linear-growth-cortisol.html#cb496-35" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
+<span id="cb496-36"><a href="14.4-linear-growth-cortisol.html#cb496-36" tabindex="-1"></a>)</span>
+<span id="cb496-37"><a href="14.4-linear-growth-cortisol.html#cb496-37" tabindex="-1"></a></span>
+<span id="cb496-38"><a href="14.4-linear-growth-cortisol.html#cb496-38" tabindex="-1"></a><span class="fu">summary</span>(cort_linear)  </span></code></pre></div>
 <pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
 ##   Model: cort ~ (gamma_00) + (gamma_10) * timescaled 
 ##   Data: cortisol_long 
@@ -725,7 +725,7 @@ y_{ti}  = &amp; \underbrace{\gamma_{00} + \gamma_{10}\text{time}_{1}}_{fixed} + 
 ## 
 ## Number of Observations: 306
 ## Number of Groups: 34</code></pre>
-<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="14.4-linear-growth-cortisol.html#cb500-1" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_linear)</span></code></pre></div>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="14.4-linear-growth-cortisol.html#cb498-1" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_linear)</span></code></pre></div>
 <pre><code>## id = pdLogChol(list(gamma_00 ~ 1,gamma_10 ~ 1)) 
 ##          Variance    StdDev    Corr  
 ## gamma_00  0.04125879 0.2031226 gmm_00
@@ -734,22 +734,22 @@ y_{ti}  = &amp; \underbrace{\gamma_{00} + \gamma_{10}\text{time}_{1}}_{fixed} + 
 </div>
 <div id="predicted-trajectories-1" class="section level3 hasAnchor" number="14.4.3">
 <h3><span class="header-section-number">14.4.3</span> Predicted Trajectories<a href="14.4-linear-growth-cortisol.html#predicted-trajectories-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="14.4-linear-growth-cortisol.html#cb502-1" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
-<span id="cb502-2"><a href="14.4-linear-growth-cortisol.html#cb502-2" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_linear <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_linear)</span>
-<span id="cb502-3"><a href="14.4-linear-growth-cortisol.html#cb502-3" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
-<span id="cb502-4"><a href="14.4-linear-growth-cortisol.html#cb502-4" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_linear <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_linear, <span class="at">level=</span><span class="dv">0</span>)</span>
-<span id="cb502-5"><a href="14.4-linear-growth-cortisol.html#cb502-5" tabindex="-1"></a></span>
-<span id="cb502-6"><a href="14.4-linear-growth-cortisol.html#cb502-6" tabindex="-1"></a><span class="co"># plotting predicted trajectories</span></span>
-<span id="cb502-7"><a href="14.4-linear-growth-cortisol.html#cb502-7" tabindex="-1"></a><span class="co"># intraindividual change trajetories</span></span>
-<span id="cb502-8"><a href="14.4-linear-growth-cortisol.html#cb502-8" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_linear, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb502-9"><a href="14.4-linear-growth-cortisol.html#cb502-9" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
-<span id="cb502-10"><a href="14.4-linear-growth-cortisol.html#cb502-10" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb502-11"><a href="14.4-linear-growth-cortisol.html#cb502-11" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_linear), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb502-12"><a href="14.4-linear-growth-cortisol.html#cb502-12" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb502-13"><a href="14.4-linear-growth-cortisol.html#cb502-13" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb502-14"><a href="14.4-linear-growth-cortisol.html#cb502-14" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb502-15"><a href="14.4-linear-growth-cortisol.html#cb502-15" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-303-1.png" width="672" /></p>
+<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="14.4-linear-growth-cortisol.html#cb500-1" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
+<span id="cb500-2"><a href="14.4-linear-growth-cortisol.html#cb500-2" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_linear <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_linear)</span>
+<span id="cb500-3"><a href="14.4-linear-growth-cortisol.html#cb500-3" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
+<span id="cb500-4"><a href="14.4-linear-growth-cortisol.html#cb500-4" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_linear <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_linear, <span class="at">level=</span><span class="dv">0</span>)</span>
+<span id="cb500-5"><a href="14.4-linear-growth-cortisol.html#cb500-5" tabindex="-1"></a></span>
+<span id="cb500-6"><a href="14.4-linear-growth-cortisol.html#cb500-6" tabindex="-1"></a><span class="co"># plotting predicted trajectories</span></span>
+<span id="cb500-7"><a href="14.4-linear-growth-cortisol.html#cb500-7" tabindex="-1"></a><span class="co"># intraindividual change trajetories</span></span>
+<span id="cb500-8"><a href="14.4-linear-growth-cortisol.html#cb500-8" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_linear, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb500-9"><a href="14.4-linear-growth-cortisol.html#cb500-9" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
+<span id="cb500-10"><a href="14.4-linear-growth-cortisol.html#cb500-10" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb500-11"><a href="14.4-linear-growth-cortisol.html#cb500-11" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_linear), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb500-12"><a href="14.4-linear-growth-cortisol.html#cb500-12" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb500-13"><a href="14.4-linear-growth-cortisol.html#cb500-13" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb500-14"><a href="14.4-linear-growth-cortisol.html#cb500-14" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb500-15"><a href="14.4-linear-growth-cortisol.html#cb500-15" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-302-1.png" width="672" /></p>
 <p>Note that the model has some convergence issues, and the solution has hit a parameter boundary. In this model, and some of the models that follow, the correlation between the random effects in intercept and slope is questionable.</p>
 </div>
 <div id="interpretation-3" class="section level3 hasAnchor" number="14.4.4">

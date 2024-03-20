@@ -23,7 +23,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2024-03-18" />
+<meta name="date" content="2024-03-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -655,40 +655,40 @@ y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time}_{LB} + u_{0i} + u_{1i}\text
 </div>
 <div id="fit-model-2" class="section level3 hasAnchor" number="14.6.2">
 <h3><span class="header-section-number">14.6.2</span> Fit Model<a href="14.6-latent-basis-cortisol.html#fit-model-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="14.6-latent-basis-cortisol.html#cb508-1" tabindex="-1"></a><span class="co">#creating time-dummy variables</span></span>
-<span id="cb508-2"><a href="14.6-latent-basis-cortisol.html#cb508-2" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time0 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb508-3"><a href="14.6-latent-basis-cortisol.html#cb508-3" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time1 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb508-4"><a href="14.6-latent-basis-cortisol.html#cb508-4" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb508-5"><a href="14.6-latent-basis-cortisol.html#cb508-5" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time3 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb508-6"><a href="14.6-latent-basis-cortisol.html#cb508-6" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time4 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb508-7"><a href="14.6-latent-basis-cortisol.html#cb508-7" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time5 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb508-8"><a href="14.6-latent-basis-cortisol.html#cb508-8" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time6 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb508-9"><a href="14.6-latent-basis-cortisol.html#cb508-9" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time7 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb508-10"><a href="14.6-latent-basis-cortisol.html#cb508-10" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time8 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb508-11"><a href="14.6-latent-basis-cortisol.html#cb508-11" tabindex="-1"></a></span>
-<span id="cb508-12"><a href="14.6-latent-basis-cortisol.html#cb508-12" tabindex="-1"></a><span class="co">#latent basis model</span></span>
-<span id="cb508-13"><a href="14.6-latent-basis-cortisol.html#cb508-13" tabindex="-1"></a>cort_latentb <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
-<span id="cb508-14"><a href="14.6-latent-basis-cortisol.html#cb508-14" tabindex="-1"></a>  cort <span class="sc">~</span> gamma_00 <span class="sc">+</span> time0<span class="sc">*</span>(gamma_10<span class="sc">*</span><span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb508-15"><a href="14.6-latent-basis-cortisol.html#cb508-15" tabindex="-1"></a>         time1<span class="sc">*</span>(gamma_10<span class="sc">*</span>a1) <span class="sc">+</span></span>
-<span id="cb508-16"><a href="14.6-latent-basis-cortisol.html#cb508-16" tabindex="-1"></a>         time2<span class="sc">*</span>(gamma_10<span class="sc">*</span>a2) <span class="sc">+</span></span>
-<span id="cb508-17"><a href="14.6-latent-basis-cortisol.html#cb508-17" tabindex="-1"></a>         time3<span class="sc">*</span>(gamma_10<span class="sc">*</span>a3) <span class="sc">+</span></span>
-<span id="cb508-18"><a href="14.6-latent-basis-cortisol.html#cb508-18" tabindex="-1"></a>         time4<span class="sc">*</span>(gamma_10<span class="sc">*</span>a4) <span class="sc">+</span></span>
-<span id="cb508-19"><a href="14.6-latent-basis-cortisol.html#cb508-19" tabindex="-1"></a>         time5<span class="sc">*</span>(gamma_10<span class="sc">*</span>a5) <span class="sc">+</span></span>
-<span id="cb508-20"><a href="14.6-latent-basis-cortisol.html#cb508-20" tabindex="-1"></a>         time6<span class="sc">*</span>(gamma_10<span class="sc">*</span>a6) <span class="sc">+</span></span>
-<span id="cb508-21"><a href="14.6-latent-basis-cortisol.html#cb508-21" tabindex="-1"></a>         time7<span class="sc">*</span>(gamma_10<span class="sc">*</span>a7) <span class="sc">+</span></span>
-<span id="cb508-22"><a href="14.6-latent-basis-cortisol.html#cb508-22" tabindex="-1"></a>         time8<span class="sc">*</span>(gamma_10<span class="sc">*</span><span class="dv">1</span>),</span>
-<span id="cb508-23"><a href="14.6-latent-basis-cortisol.html#cb508-23" tabindex="-1"></a>   <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> a1 <span class="sc">+</span> a2 <span class="sc">+</span> a3 <span class="sc">+</span> a4 <span class="sc">+</span> a5 <span class="sc">+</span> a6 <span class="sc">+</span> a7 <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb508-24"><a href="14.6-latent-basis-cortisol.html#cb508-24" tabindex="-1"></a>   <span class="at">random =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb508-25"><a href="14.6-latent-basis-cortisol.html#cb508-25" tabindex="-1"></a>   <span class="at">groups =</span><span class="sc">~</span> id,</span>
-<span id="cb508-26"><a href="14.6-latent-basis-cortisol.html#cb508-26" tabindex="-1"></a>   <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00=</span><span class="fl">5.5</span>,<span class="at">gamma_10=</span><span class="fl">11.5</span>,<span class="at">a1=</span>.<span class="dv">3</span>, </span>
-<span id="cb508-27"><a href="14.6-latent-basis-cortisol.html#cb508-27" tabindex="-1"></a>             <span class="at">a2=</span>.<span class="dv">4</span>, <span class="at">a3=</span>.<span class="dv">5</span>, <span class="at">a4=</span>.<span class="dv">6</span>, </span>
-<span id="cb508-28"><a href="14.6-latent-basis-cortisol.html#cb508-28" tabindex="-1"></a>             <span class="at">a5=</span>.<span class="dv">7</span>, <span class="at">a6=</span>.<span class="dv">8</span>, <span class="at">a7=</span>.<span class="dv">9</span>),</span>
-<span id="cb508-29"><a href="14.6-latent-basis-cortisol.html#cb508-29" tabindex="-1"></a>   <span class="at">data =</span> cortisol_long,</span>
-<span id="cb508-30"><a href="14.6-latent-basis-cortisol.html#cb508-30" tabindex="-1"></a>   <span class="at">na.action =</span> na.exclude,</span>
-<span id="cb508-31"><a href="14.6-latent-basis-cortisol.html#cb508-31" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
-<span id="cb508-32"><a href="14.6-latent-basis-cortisol.html#cb508-32" tabindex="-1"></a>) </span>
-<span id="cb508-33"><a href="14.6-latent-basis-cortisol.html#cb508-33" tabindex="-1"></a></span>
-<span id="cb508-34"><a href="14.6-latent-basis-cortisol.html#cb508-34" tabindex="-1"></a><span class="fu">summary</span>(cort_latentb)</span></code></pre></div>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="14.6-latent-basis-cortisol.html#cb506-1" tabindex="-1"></a><span class="co">#creating time-dummy variables</span></span>
+<span id="cb506-2"><a href="14.6-latent-basis-cortisol.html#cb506-2" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time0 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb506-3"><a href="14.6-latent-basis-cortisol.html#cb506-3" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time1 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb506-4"><a href="14.6-latent-basis-cortisol.html#cb506-4" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb506-5"><a href="14.6-latent-basis-cortisol.html#cb506-5" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time3 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb506-6"><a href="14.6-latent-basis-cortisol.html#cb506-6" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time4 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb506-7"><a href="14.6-latent-basis-cortisol.html#cb506-7" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time5 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb506-8"><a href="14.6-latent-basis-cortisol.html#cb506-8" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time6 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb506-9"><a href="14.6-latent-basis-cortisol.html#cb506-9" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time7 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb506-10"><a href="14.6-latent-basis-cortisol.html#cb506-10" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time8 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb506-11"><a href="14.6-latent-basis-cortisol.html#cb506-11" tabindex="-1"></a></span>
+<span id="cb506-12"><a href="14.6-latent-basis-cortisol.html#cb506-12" tabindex="-1"></a><span class="co">#latent basis model</span></span>
+<span id="cb506-13"><a href="14.6-latent-basis-cortisol.html#cb506-13" tabindex="-1"></a>cort_latentb <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
+<span id="cb506-14"><a href="14.6-latent-basis-cortisol.html#cb506-14" tabindex="-1"></a>  cort <span class="sc">~</span> gamma_00 <span class="sc">+</span> time0<span class="sc">*</span>(gamma_10<span class="sc">*</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb506-15"><a href="14.6-latent-basis-cortisol.html#cb506-15" tabindex="-1"></a>         time1<span class="sc">*</span>(gamma_10<span class="sc">*</span>a1) <span class="sc">+</span></span>
+<span id="cb506-16"><a href="14.6-latent-basis-cortisol.html#cb506-16" tabindex="-1"></a>         time2<span class="sc">*</span>(gamma_10<span class="sc">*</span>a2) <span class="sc">+</span></span>
+<span id="cb506-17"><a href="14.6-latent-basis-cortisol.html#cb506-17" tabindex="-1"></a>         time3<span class="sc">*</span>(gamma_10<span class="sc">*</span>a3) <span class="sc">+</span></span>
+<span id="cb506-18"><a href="14.6-latent-basis-cortisol.html#cb506-18" tabindex="-1"></a>         time4<span class="sc">*</span>(gamma_10<span class="sc">*</span>a4) <span class="sc">+</span></span>
+<span id="cb506-19"><a href="14.6-latent-basis-cortisol.html#cb506-19" tabindex="-1"></a>         time5<span class="sc">*</span>(gamma_10<span class="sc">*</span>a5) <span class="sc">+</span></span>
+<span id="cb506-20"><a href="14.6-latent-basis-cortisol.html#cb506-20" tabindex="-1"></a>         time6<span class="sc">*</span>(gamma_10<span class="sc">*</span>a6) <span class="sc">+</span></span>
+<span id="cb506-21"><a href="14.6-latent-basis-cortisol.html#cb506-21" tabindex="-1"></a>         time7<span class="sc">*</span>(gamma_10<span class="sc">*</span>a7) <span class="sc">+</span></span>
+<span id="cb506-22"><a href="14.6-latent-basis-cortisol.html#cb506-22" tabindex="-1"></a>         time8<span class="sc">*</span>(gamma_10<span class="sc">*</span><span class="dv">1</span>),</span>
+<span id="cb506-23"><a href="14.6-latent-basis-cortisol.html#cb506-23" tabindex="-1"></a>   <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> a1 <span class="sc">+</span> a2 <span class="sc">+</span> a3 <span class="sc">+</span> a4 <span class="sc">+</span> a5 <span class="sc">+</span> a6 <span class="sc">+</span> a7 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb506-24"><a href="14.6-latent-basis-cortisol.html#cb506-24" tabindex="-1"></a>   <span class="at">random =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb506-25"><a href="14.6-latent-basis-cortisol.html#cb506-25" tabindex="-1"></a>   <span class="at">groups =</span><span class="sc">~</span> id,</span>
+<span id="cb506-26"><a href="14.6-latent-basis-cortisol.html#cb506-26" tabindex="-1"></a>   <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00=</span><span class="fl">5.5</span>,<span class="at">gamma_10=</span><span class="fl">11.5</span>,<span class="at">a1=</span>.<span class="dv">3</span>, </span>
+<span id="cb506-27"><a href="14.6-latent-basis-cortisol.html#cb506-27" tabindex="-1"></a>             <span class="at">a2=</span>.<span class="dv">4</span>, <span class="at">a3=</span>.<span class="dv">5</span>, <span class="at">a4=</span>.<span class="dv">6</span>, </span>
+<span id="cb506-28"><a href="14.6-latent-basis-cortisol.html#cb506-28" tabindex="-1"></a>             <span class="at">a5=</span>.<span class="dv">7</span>, <span class="at">a6=</span>.<span class="dv">8</span>, <span class="at">a7=</span>.<span class="dv">9</span>),</span>
+<span id="cb506-29"><a href="14.6-latent-basis-cortisol.html#cb506-29" tabindex="-1"></a>   <span class="at">data =</span> cortisol_long,</span>
+<span id="cb506-30"><a href="14.6-latent-basis-cortisol.html#cb506-30" tabindex="-1"></a>   <span class="at">na.action =</span> na.exclude,</span>
+<span id="cb506-31"><a href="14.6-latent-basis-cortisol.html#cb506-31" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
+<span id="cb506-32"><a href="14.6-latent-basis-cortisol.html#cb506-32" tabindex="-1"></a>) </span>
+<span id="cb506-33"><a href="14.6-latent-basis-cortisol.html#cb506-33" tabindex="-1"></a></span>
+<span id="cb506-34"><a href="14.6-latent-basis-cortisol.html#cb506-34" tabindex="-1"></a><span class="fu">summary</span>(cort_latentb)</span></code></pre></div>
 <pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
 ##   Model: cort ~ gamma_00 + time0 * (gamma_10 * 0) + time1 * (gamma_10 *      a1) + time2 * (gamma_10 * a2) + time3 * (gamma_10 * a3) +      time4 * (gamma_10 * a4) + time5 * (gamma_10 * a5) + time6 *      (gamma_10 * a6) + time7 * (gamma_10 * a7) + time8 * (gamma_10 *      1) 
 ##   Data: cortisol_long 
@@ -732,7 +732,7 @@ y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time}_{LB} + u_{0i} + u_{1i}\text
 ## 
 ## Number of Observations: 306
 ## Number of Groups: 34</code></pre>
-<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="14.6-latent-basis-cortisol.html#cb510-1" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_latentb)</span></code></pre></div>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="14.6-latent-basis-cortisol.html#cb508-1" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_latentb)</span></code></pre></div>
 <pre><code>## id = pdLogChol(list(gamma_00 ~ 1,gamma_10 ~ 1)) 
 ##          Variance StdDev   Corr  
 ## gamma_00 2.885168 1.698578 gmm_00
@@ -741,24 +741,24 @@ y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time}_{LB} + u_{0i} + u_{1i}\text
 </div>
 <div id="predicted-trajectories-3" class="section level3 hasAnchor" number="14.6.3">
 <h3><span class="header-section-number">14.6.3</span> Predicted Trajectories<a href="14.6-latent-basis-cortisol.html#predicted-trajectories-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="14.6-latent-basis-cortisol.html#cb512-1" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
-<span id="cb512-2"><a href="14.6-latent-basis-cortisol.html#cb512-2" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_latentb <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_latentb)</span>
-<span id="cb512-3"><a href="14.6-latent-basis-cortisol.html#cb512-3" tabindex="-1"></a></span>
-<span id="cb512-4"><a href="14.6-latent-basis-cortisol.html#cb512-4" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
-<span id="cb512-5"><a href="14.6-latent-basis-cortisol.html#cb512-5" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_latentb <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_latentb, <span class="at">level=</span><span class="dv">0</span>)</span>
-<span id="cb512-6"><a href="14.6-latent-basis-cortisol.html#cb512-6" tabindex="-1"></a></span>
-<span id="cb512-7"><a href="14.6-latent-basis-cortisol.html#cb512-7" tabindex="-1"></a></span>
-<span id="cb512-8"><a href="14.6-latent-basis-cortisol.html#cb512-8" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
-<span id="cb512-9"><a href="14.6-latent-basis-cortisol.html#cb512-9" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
-<span id="cb512-10"><a href="14.6-latent-basis-cortisol.html#cb512-10" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_latentb, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb512-11"><a href="14.6-latent-basis-cortisol.html#cb512-11" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
-<span id="cb512-12"><a href="14.6-latent-basis-cortisol.html#cb512-12" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb512-13"><a href="14.6-latent-basis-cortisol.html#cb512-13" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_latentb), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb512-14"><a href="14.6-latent-basis-cortisol.html#cb512-14" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb512-15"><a href="14.6-latent-basis-cortisol.html#cb512-15" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb512-16"><a href="14.6-latent-basis-cortisol.html#cb512-16" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb512-17"><a href="14.6-latent-basis-cortisol.html#cb512-17" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-307-1.png" width="672" /></p>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="14.6-latent-basis-cortisol.html#cb510-1" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
+<span id="cb510-2"><a href="14.6-latent-basis-cortisol.html#cb510-2" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_latentb <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_latentb)</span>
+<span id="cb510-3"><a href="14.6-latent-basis-cortisol.html#cb510-3" tabindex="-1"></a></span>
+<span id="cb510-4"><a href="14.6-latent-basis-cortisol.html#cb510-4" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
+<span id="cb510-5"><a href="14.6-latent-basis-cortisol.html#cb510-5" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_latentb <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_latentb, <span class="at">level=</span><span class="dv">0</span>)</span>
+<span id="cb510-6"><a href="14.6-latent-basis-cortisol.html#cb510-6" tabindex="-1"></a></span>
+<span id="cb510-7"><a href="14.6-latent-basis-cortisol.html#cb510-7" tabindex="-1"></a></span>
+<span id="cb510-8"><a href="14.6-latent-basis-cortisol.html#cb510-8" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
+<span id="cb510-9"><a href="14.6-latent-basis-cortisol.html#cb510-9" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
+<span id="cb510-10"><a href="14.6-latent-basis-cortisol.html#cb510-10" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_latentb, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb510-11"><a href="14.6-latent-basis-cortisol.html#cb510-11" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
+<span id="cb510-12"><a href="14.6-latent-basis-cortisol.html#cb510-12" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb510-13"><a href="14.6-latent-basis-cortisol.html#cb510-13" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_latentb), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb510-14"><a href="14.6-latent-basis-cortisol.html#cb510-14" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb510-15"><a href="14.6-latent-basis-cortisol.html#cb510-15" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb510-16"><a href="14.6-latent-basis-cortisol.html#cb510-16" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb510-17"><a href="14.6-latent-basis-cortisol.html#cb510-17" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-306-1.png" width="672" /></p>
 </div>
 <div id="interpretation-5" class="section level3 hasAnchor" number="14.6.4">
 <h3><span class="header-section-number">14.6.4</span> Interpretation<a href="14.6-latent-basis-cortisol.html#interpretation-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>

@@ -23,7 +23,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2024-03-18" />
+<meta name="date" content="2024-03-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -667,31 +667,25 @@ div.csl-indent {
 ## 
 ## Number of Observations: 816
 ## Number of Groups: 204</code></pre>
-<p>Let’s test the significance of having random slopes. We compare models by applying <code>anova()</code> function to examine difference in fit between the two nested models.</p>
-<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="13.6-quadratic-growth-model.html#cb437-1" tabindex="-1"></a><span class="fu">anova</span>(fl_rl_fit,fq_rq_fit)</span></code></pre></div>
-<pre><code>##           Model df      AIC      BIC    logLik   Test L.Ratio p-value
-## fl_rl_fit     1  6 5050.844 5079.071 -2519.422                       
-## fq_rq_fit     2  7 5226.412 5259.343 -2606.206 1 vs 2 173.568  &lt;.0001</code></pre>
-<p>From the test results we see they are different.</p>
 <p>Let’s look at the predicted trajectories.</p>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="13.6-quadratic-growth-model.html#cb439-1" tabindex="-1"></a>verblong<span class="sc">$</span>pred_fq_rq <span class="ot">&lt;-</span> <span class="fu">predict</span>(fq_rq_fit)</span>
-<span id="cb439-2"><a href="13.6-quadratic-growth-model.html#cb439-2" tabindex="-1"></a>verblong<span class="sc">$</span>resid_fq_rq <span class="ot">&lt;-</span> <span class="fu">residuals</span>(fq_rq_fit)</span>
-<span id="cb439-3"><a href="13.6-quadratic-growth-model.html#cb439-3" tabindex="-1"></a></span>
-<span id="cb439-4"><a href="13.6-quadratic-growth-model.html#cb439-4" tabindex="-1"></a>fun_fq_rq <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb439-5"><a href="13.6-quadratic-growth-model.html#cb439-5" tabindex="-1"></a>  <span class="fu">fixef</span>(fq_rq_fit)[[<span class="dv">1</span>]] <span class="sc">+</span> <span class="fu">fixef</span>(fq_rq_fit)[[<span class="dv">2</span>]]<span class="sc">*</span>x <span class="sc">+</span> <span class="fu">fixef</span>(fq_rq_fit)[[<span class="dv">3</span>]]<span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb439-6"><a href="13.6-quadratic-growth-model.html#cb439-6" tabindex="-1"></a>}</span>
-<span id="cb439-7"><a href="13.6-quadratic-growth-model.html#cb439-7" tabindex="-1"></a></span>
-<span id="cb439-8"><a href="13.6-quadratic-growth-model.html#cb439-8" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> pred_fq_rq, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb439-9"><a href="13.6-quadratic-growth-model.html#cb439-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Fixed Quadratic, Random Quadratic&quot;</span>) <span class="sc">+</span></span>
-<span id="cb439-10"><a href="13.6-quadratic-growth-model.html#cb439-10" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb439-11"><a href="13.6-quadratic-growth-model.html#cb439-11" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb439-12"><a href="13.6-quadratic-growth-model.html#cb439-12" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;PREDICTED WISC Verbal Score&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="sc">+</span></span>
-<span id="cb439-13"><a href="13.6-quadratic-growth-model.html#cb439-13" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb439-14"><a href="13.6-quadratic-growth-model.html#cb439-14" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>fun_fq_rq, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb439-15"><a href="13.6-quadratic-growth-model.html#cb439-15" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="13.6-quadratic-growth-model.html#cb437-1" tabindex="-1"></a>verblong<span class="sc">$</span>pred_fq_rq <span class="ot">&lt;-</span> <span class="fu">predict</span>(fq_rq_fit)</span>
+<span id="cb437-2"><a href="13.6-quadratic-growth-model.html#cb437-2" tabindex="-1"></a>verblong<span class="sc">$</span>resid_fq_rq <span class="ot">&lt;-</span> <span class="fu">residuals</span>(fq_rq_fit)</span>
+<span id="cb437-3"><a href="13.6-quadratic-growth-model.html#cb437-3" tabindex="-1"></a></span>
+<span id="cb437-4"><a href="13.6-quadratic-growth-model.html#cb437-4" tabindex="-1"></a>fun_fq_rq <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb437-5"><a href="13.6-quadratic-growth-model.html#cb437-5" tabindex="-1"></a>  <span class="fu">fixef</span>(fq_rq_fit)[[<span class="dv">1</span>]] <span class="sc">+</span> <span class="fu">fixef</span>(fq_rq_fit)[[<span class="dv">2</span>]]<span class="sc">*</span>x <span class="sc">+</span> <span class="fu">fixef</span>(fq_rq_fit)[[<span class="dv">3</span>]]<span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb437-6"><a href="13.6-quadratic-growth-model.html#cb437-6" tabindex="-1"></a>}</span>
+<span id="cb437-7"><a href="13.6-quadratic-growth-model.html#cb437-7" tabindex="-1"></a></span>
+<span id="cb437-8"><a href="13.6-quadratic-growth-model.html#cb437-8" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> pred_fq_rq, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb437-9"><a href="13.6-quadratic-growth-model.html#cb437-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Fixed Quadratic, Random Quadratic&quot;</span>) <span class="sc">+</span></span>
+<span id="cb437-10"><a href="13.6-quadratic-growth-model.html#cb437-10" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb437-11"><a href="13.6-quadratic-growth-model.html#cb437-11" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb437-12"><a href="13.6-quadratic-growth-model.html#cb437-12" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;PREDICTED WISC Verbal Score&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="sc">+</span></span>
+<span id="cb437-13"><a href="13.6-quadratic-growth-model.html#cb437-13" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb437-14"><a href="13.6-quadratic-growth-model.html#cb437-14" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>fun_fq_rq, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb437-15"><a href="13.6-quadratic-growth-model.html#cb437-15" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
 <pre><code>## Warning: Multiple drawing groups in `geom_function()`
 ## ℹ Did you use the correct group, colour, or fill aesthetics?</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-265-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-264-1.png" width="672" /></p>
 </div>
             </section>
 

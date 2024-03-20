@@ -23,7 +23,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2024-03-18" />
+<meta name="date" content="2024-03-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -692,24 +692,24 @@ y_{ti}  = &amp; \underbrace{\gamma_{00}}_{fixed} + \underbrace{u_{0i}}_{random} 
 <div id="no-growth-code" class="section level4 hasAnchor" number="14.1.3.3">
 <h4><span class="header-section-number">14.1.3.3</span> No Growth Code<a href="14.1-review-of-linear-growth.html#no-growth-code" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Here, we present code for fitting the no growth model in the <code>nlme</code> package using both <em>compact</em> and <em>detailed</em> model syntax.</p>
-<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="14.1-review-of-linear-growth.html#cb482-1" tabindex="-1"></a>um_nlme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">nlme</span>(</span>
-<span id="cb482-2"><a href="14.1-review-of-linear-growth.html#cb482-2" tabindex="-1"></a>  verb <span class="sc">~</span> gamma_00 <span class="sc">+</span> u_0i,</span>
-<span id="cb482-3"><a href="14.1-review-of-linear-growth.html#cb482-3" tabindex="-1"></a>  <span class="at">data =</span> verblong,</span>
-<span id="cb482-4"><a href="14.1-review-of-linear-growth.html#cb482-4" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00<span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb482-5"><a href="14.1-review-of-linear-growth.html#cb482-5" tabindex="-1"></a>  <span class="at">random =</span> u_0i<span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb482-6"><a href="14.1-review-of-linear-growth.html#cb482-6" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
-<span id="cb482-7"><a href="14.1-review-of-linear-growth.html#cb482-7" tabindex="-1"></a>  <span class="at">na.action=</span><span class="st">&quot;na.omit&quot;</span>,</span>
-<span id="cb482-8"><a href="14.1-review-of-linear-growth.html#cb482-8" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00 =</span> <span class="fu">mean</span>(verblong<span class="sc">$</span>verb))</span>
-<span id="cb482-9"><a href="14.1-review-of-linear-growth.html#cb482-9" tabindex="-1"></a>)</span>
-<span id="cb482-10"><a href="14.1-review-of-linear-growth.html#cb482-10" tabindex="-1"></a><span class="fu">summary</span>(um_nlme)</span>
-<span id="cb482-11"><a href="14.1-review-of-linear-growth.html#cb482-11" tabindex="-1"></a></span>
-<span id="cb482-12"><a href="14.1-review-of-linear-growth.html#cb482-12" tabindex="-1"></a>um_lme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">lme</span>(</span>
-<span id="cb482-13"><a href="14.1-review-of-linear-growth.html#cb482-13" tabindex="-1"></a>  <span class="at">fixed=</span> verb <span class="sc">~</span> <span class="dv">1</span>, </span>
-<span id="cb482-14"><a href="14.1-review-of-linear-growth.html#cb482-14" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span><span class="sc">|</span>id, </span>
-<span id="cb482-15"><a href="14.1-review-of-linear-growth.html#cb482-15" tabindex="-1"></a>  <span class="at">data =</span> verblong,</span>
-<span id="cb482-16"><a href="14.1-review-of-linear-growth.html#cb482-16" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
-<span id="cb482-17"><a href="14.1-review-of-linear-growth.html#cb482-17" tabindex="-1"></a>)</span>
-<span id="cb482-18"><a href="14.1-review-of-linear-growth.html#cb482-18" tabindex="-1"></a><span class="fu">summary</span>(um_lme)</span></code></pre></div>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="14.1-review-of-linear-growth.html#cb480-1" tabindex="-1"></a>um_nlme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">nlme</span>(</span>
+<span id="cb480-2"><a href="14.1-review-of-linear-growth.html#cb480-2" tabindex="-1"></a>  verb <span class="sc">~</span> gamma_00 <span class="sc">+</span> u_0i,</span>
+<span id="cb480-3"><a href="14.1-review-of-linear-growth.html#cb480-3" tabindex="-1"></a>  <span class="at">data =</span> verblong,</span>
+<span id="cb480-4"><a href="14.1-review-of-linear-growth.html#cb480-4" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00<span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb480-5"><a href="14.1-review-of-linear-growth.html#cb480-5" tabindex="-1"></a>  <span class="at">random =</span> u_0i<span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb480-6"><a href="14.1-review-of-linear-growth.html#cb480-6" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
+<span id="cb480-7"><a href="14.1-review-of-linear-growth.html#cb480-7" tabindex="-1"></a>  <span class="at">na.action=</span><span class="st">&quot;na.omit&quot;</span>,</span>
+<span id="cb480-8"><a href="14.1-review-of-linear-growth.html#cb480-8" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00 =</span> <span class="fu">mean</span>(verblong<span class="sc">$</span>verb))</span>
+<span id="cb480-9"><a href="14.1-review-of-linear-growth.html#cb480-9" tabindex="-1"></a>)</span>
+<span id="cb480-10"><a href="14.1-review-of-linear-growth.html#cb480-10" tabindex="-1"></a><span class="fu">summary</span>(um_nlme)</span>
+<span id="cb480-11"><a href="14.1-review-of-linear-growth.html#cb480-11" tabindex="-1"></a></span>
+<span id="cb480-12"><a href="14.1-review-of-linear-growth.html#cb480-12" tabindex="-1"></a>um_lme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">lme</span>(</span>
+<span id="cb480-13"><a href="14.1-review-of-linear-growth.html#cb480-13" tabindex="-1"></a>  <span class="at">fixed=</span> verb <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb480-14"><a href="14.1-review-of-linear-growth.html#cb480-14" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span><span class="sc">|</span>id, </span>
+<span id="cb480-15"><a href="14.1-review-of-linear-growth.html#cb480-15" tabindex="-1"></a>  <span class="at">data =</span> verblong,</span>
+<span id="cb480-16"><a href="14.1-review-of-linear-growth.html#cb480-16" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
+<span id="cb480-17"><a href="14.1-review-of-linear-growth.html#cb480-17" tabindex="-1"></a>)</span>
+<span id="cb480-18"><a href="14.1-review-of-linear-growth.html#cb480-18" tabindex="-1"></a><span class="fu">summary</span>(um_lme)</span></code></pre></div>
 </div>
 </div>
 <div id="random-intercept-model-1" class="section level3 hasAnchor" number="14.1.4">
@@ -772,25 +772,25 @@ u_{0i}  \sim
 <div id="random-intercept-code" class="section level4 hasAnchor" number="14.1.4.3">
 <h4><span class="header-section-number">14.1.4.3</span> Random Intercept Code<a href="14.1-review-of-linear-growth.html#random-intercept-code" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Here, we present code for fitting the random intercept model in the <code>nlme</code> package using both <em>compact</em> and <em>detailed</em> model syntax.</p>
-<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="14.1-review-of-linear-growth.html#cb483-1" tabindex="-1"></a>ri_nlme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">nlme</span>(</span>
-<span id="cb483-2"><a href="14.1-review-of-linear-growth.html#cb483-2" tabindex="-1"></a>  verb <span class="sc">~</span> (gamma_00 <span class="sc">+</span> u_0i) <span class="sc">+</span> (gamma_10)<span class="sc">*</span>grade,</span>
-<span id="cb483-3"><a href="14.1-review-of-linear-growth.html#cb483-3" tabindex="-1"></a>  <span class="at">data =</span> verblong,</span>
-<span id="cb483-4"><a href="14.1-review-of-linear-growth.html#cb483-4" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10<span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb483-5"><a href="14.1-review-of-linear-growth.html#cb483-5" tabindex="-1"></a>  <span class="at">random =</span> u_0i<span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb483-6"><a href="14.1-review-of-linear-growth.html#cb483-6" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
-<span id="cb483-7"><a href="14.1-review-of-linear-growth.html#cb483-7" tabindex="-1"></a>  <span class="at">na.action=</span><span class="st">&quot;na.omit&quot;</span>,</span>
-<span id="cb483-8"><a href="14.1-review-of-linear-growth.html#cb483-8" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00 =</span> <span class="dv">30</span>, <span class="at">gamma_10=</span><span class="dv">10</span>)</span>
-<span id="cb483-9"><a href="14.1-review-of-linear-growth.html#cb483-9" tabindex="-1"></a>)</span>
-<span id="cb483-10"><a href="14.1-review-of-linear-growth.html#cb483-10" tabindex="-1"></a><span class="fu">summary</span>(ri_nlme)</span>
-<span id="cb483-11"><a href="14.1-review-of-linear-growth.html#cb483-11" tabindex="-1"></a></span>
-<span id="cb483-12"><a href="14.1-review-of-linear-growth.html#cb483-12" tabindex="-1"></a>ri_lme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">lme</span>(</span>
-<span id="cb483-13"><a href="14.1-review-of-linear-growth.html#cb483-13" tabindex="-1"></a>  <span class="at">fixed =</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade, </span>
-<span id="cb483-14"><a href="14.1-review-of-linear-growth.html#cb483-14" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span><span class="sc">|</span>id, </span>
-<span id="cb483-15"><a href="14.1-review-of-linear-growth.html#cb483-15" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
-<span id="cb483-16"><a href="14.1-review-of-linear-growth.html#cb483-16" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude,</span>
-<span id="cb483-17"><a href="14.1-review-of-linear-growth.html#cb483-17" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;ML&quot;</span></span>
-<span id="cb483-18"><a href="14.1-review-of-linear-growth.html#cb483-18" tabindex="-1"></a>)</span>
-<span id="cb483-19"><a href="14.1-review-of-linear-growth.html#cb483-19" tabindex="-1"></a><span class="fu">summary</span>(ri_lme)</span></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="14.1-review-of-linear-growth.html#cb481-1" tabindex="-1"></a>ri_nlme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">nlme</span>(</span>
+<span id="cb481-2"><a href="14.1-review-of-linear-growth.html#cb481-2" tabindex="-1"></a>  verb <span class="sc">~</span> (gamma_00 <span class="sc">+</span> u_0i) <span class="sc">+</span> (gamma_10)<span class="sc">*</span>grade,</span>
+<span id="cb481-3"><a href="14.1-review-of-linear-growth.html#cb481-3" tabindex="-1"></a>  <span class="at">data =</span> verblong,</span>
+<span id="cb481-4"><a href="14.1-review-of-linear-growth.html#cb481-4" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10<span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb481-5"><a href="14.1-review-of-linear-growth.html#cb481-5" tabindex="-1"></a>  <span class="at">random =</span> u_0i<span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb481-6"><a href="14.1-review-of-linear-growth.html#cb481-6" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
+<span id="cb481-7"><a href="14.1-review-of-linear-growth.html#cb481-7" tabindex="-1"></a>  <span class="at">na.action=</span><span class="st">&quot;na.omit&quot;</span>,</span>
+<span id="cb481-8"><a href="14.1-review-of-linear-growth.html#cb481-8" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00 =</span> <span class="dv">30</span>, <span class="at">gamma_10=</span><span class="dv">10</span>)</span>
+<span id="cb481-9"><a href="14.1-review-of-linear-growth.html#cb481-9" tabindex="-1"></a>)</span>
+<span id="cb481-10"><a href="14.1-review-of-linear-growth.html#cb481-10" tabindex="-1"></a><span class="fu">summary</span>(ri_nlme)</span>
+<span id="cb481-11"><a href="14.1-review-of-linear-growth.html#cb481-11" tabindex="-1"></a></span>
+<span id="cb481-12"><a href="14.1-review-of-linear-growth.html#cb481-12" tabindex="-1"></a>ri_lme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">lme</span>(</span>
+<span id="cb481-13"><a href="14.1-review-of-linear-growth.html#cb481-13" tabindex="-1"></a>  <span class="at">fixed =</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade, </span>
+<span id="cb481-14"><a href="14.1-review-of-linear-growth.html#cb481-14" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span><span class="sc">|</span>id, </span>
+<span id="cb481-15"><a href="14.1-review-of-linear-growth.html#cb481-15" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
+<span id="cb481-16"><a href="14.1-review-of-linear-growth.html#cb481-16" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude,</span>
+<span id="cb481-17"><a href="14.1-review-of-linear-growth.html#cb481-17" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;ML&quot;</span></span>
+<span id="cb481-18"><a href="14.1-review-of-linear-growth.html#cb481-18" tabindex="-1"></a>)</span>
+<span id="cb481-19"><a href="14.1-review-of-linear-growth.html#cb481-19" tabindex="-1"></a><span class="fu">summary</span>(ri_lme)</span></code></pre></div>
 </div>
 </div>
 <div id="linear-growth-model-1" class="section level3 hasAnchor" number="14.1.5">
@@ -850,25 +850,25 @@ u_{0i}, u_{1i} \sim
 <div id="linear-growth-code" class="section level4 hasAnchor" number="14.1.5.3">
 <h4><span class="header-section-number">14.1.5.3</span> Linear Growth Code<a href="14.1-review-of-linear-growth.html#linear-growth-code" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Here, we present code for fitting the linear growth model in the <code>nlme</code> package using both <em>compact</em> and <em>detailed</em> model syntax.</p>
-<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="14.1-review-of-linear-growth.html#cb484-1" tabindex="-1"></a>lin_nlme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">nlme</span>(</span>
-<span id="cb484-2"><a href="14.1-review-of-linear-growth.html#cb484-2" tabindex="-1"></a>  verb <span class="sc">~</span> (gamma_00 <span class="sc">+</span> u_0i) <span class="sc">+</span> (gamma_10 <span class="sc">+</span> u_1i)<span class="sc">*</span>grade,</span>
-<span id="cb484-3"><a href="14.1-review-of-linear-growth.html#cb484-3" tabindex="-1"></a>  <span class="at">data =</span> verblong,</span>
-<span id="cb484-4"><a href="14.1-review-of-linear-growth.html#cb484-4" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10<span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb484-5"><a href="14.1-review-of-linear-growth.html#cb484-5" tabindex="-1"></a>  <span class="at">random =</span> u_0i <span class="sc">+</span> u_1i<span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb484-6"><a href="14.1-review-of-linear-growth.html#cb484-6" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
-<span id="cb484-7"><a href="14.1-review-of-linear-growth.html#cb484-7" tabindex="-1"></a>  <span class="at">na.action=</span><span class="st">&quot;na.omit&quot;</span>,</span>
-<span id="cb484-8"><a href="14.1-review-of-linear-growth.html#cb484-8" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00 =</span> <span class="dv">30</span>, <span class="at">gamma_10=</span><span class="dv">10</span>)</span>
-<span id="cb484-9"><a href="14.1-review-of-linear-growth.html#cb484-9" tabindex="-1"></a>)</span>
-<span id="cb484-10"><a href="14.1-review-of-linear-growth.html#cb484-10" tabindex="-1"></a><span class="fu">summary</span>(lin_nlme)</span>
-<span id="cb484-11"><a href="14.1-review-of-linear-growth.html#cb484-11" tabindex="-1"></a></span>
-<span id="cb484-12"><a href="14.1-review-of-linear-growth.html#cb484-12" tabindex="-1"></a>lin_lme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">lme</span>(</span>
-<span id="cb484-13"><a href="14.1-review-of-linear-growth.html#cb484-13" tabindex="-1"></a>  <span class="at">fixed =</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade, </span>
-<span id="cb484-14"><a href="14.1-review-of-linear-growth.html#cb484-14" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade<span class="sc">|</span>id, </span>
-<span id="cb484-15"><a href="14.1-review-of-linear-growth.html#cb484-15" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
-<span id="cb484-16"><a href="14.1-review-of-linear-growth.html#cb484-16" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude,</span>
-<span id="cb484-17"><a href="14.1-review-of-linear-growth.html#cb484-17" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;ML&quot;</span></span>
-<span id="cb484-18"><a href="14.1-review-of-linear-growth.html#cb484-18" tabindex="-1"></a>)</span>
-<span id="cb484-19"><a href="14.1-review-of-linear-growth.html#cb484-19" tabindex="-1"></a><span class="fu">summary</span>(lin_lme)</span></code></pre></div>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="14.1-review-of-linear-growth.html#cb482-1" tabindex="-1"></a>lin_nlme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">nlme</span>(</span>
+<span id="cb482-2"><a href="14.1-review-of-linear-growth.html#cb482-2" tabindex="-1"></a>  verb <span class="sc">~</span> (gamma_00 <span class="sc">+</span> u_0i) <span class="sc">+</span> (gamma_10 <span class="sc">+</span> u_1i)<span class="sc">*</span>grade,</span>
+<span id="cb482-3"><a href="14.1-review-of-linear-growth.html#cb482-3" tabindex="-1"></a>  <span class="at">data =</span> verblong,</span>
+<span id="cb482-4"><a href="14.1-review-of-linear-growth.html#cb482-4" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10<span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb482-5"><a href="14.1-review-of-linear-growth.html#cb482-5" tabindex="-1"></a>  <span class="at">random =</span> u_0i <span class="sc">+</span> u_1i<span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb482-6"><a href="14.1-review-of-linear-growth.html#cb482-6" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
+<span id="cb482-7"><a href="14.1-review-of-linear-growth.html#cb482-7" tabindex="-1"></a>  <span class="at">na.action=</span><span class="st">&quot;na.omit&quot;</span>,</span>
+<span id="cb482-8"><a href="14.1-review-of-linear-growth.html#cb482-8" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00 =</span> <span class="dv">30</span>, <span class="at">gamma_10=</span><span class="dv">10</span>)</span>
+<span id="cb482-9"><a href="14.1-review-of-linear-growth.html#cb482-9" tabindex="-1"></a>)</span>
+<span id="cb482-10"><a href="14.1-review-of-linear-growth.html#cb482-10" tabindex="-1"></a><span class="fu">summary</span>(lin_nlme)</span>
+<span id="cb482-11"><a href="14.1-review-of-linear-growth.html#cb482-11" tabindex="-1"></a></span>
+<span id="cb482-12"><a href="14.1-review-of-linear-growth.html#cb482-12" tabindex="-1"></a>lin_lme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">lme</span>(</span>
+<span id="cb482-13"><a href="14.1-review-of-linear-growth.html#cb482-13" tabindex="-1"></a>  <span class="at">fixed =</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade, </span>
+<span id="cb482-14"><a href="14.1-review-of-linear-growth.html#cb482-14" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade<span class="sc">|</span>id, </span>
+<span id="cb482-15"><a href="14.1-review-of-linear-growth.html#cb482-15" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
+<span id="cb482-16"><a href="14.1-review-of-linear-growth.html#cb482-16" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude,</span>
+<span id="cb482-17"><a href="14.1-review-of-linear-growth.html#cb482-17" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;ML&quot;</span></span>
+<span id="cb482-18"><a href="14.1-review-of-linear-growth.html#cb482-18" tabindex="-1"></a>)</span>
+<span id="cb482-19"><a href="14.1-review-of-linear-growth.html#cb482-19" tabindex="-1"></a><span class="fu">summary</span>(lin_lme)</span></code></pre></div>
 </div>
 </div>
 <div id="quadratic-growth-model-1" class="section level3 hasAnchor" number="14.1.6">
@@ -938,28 +938,28 @@ u_{0i}, u_{1i} \sim
 <div id="quadratic-growth-code" class="section level4 hasAnchor" number="14.1.7.1">
 <h4><span class="header-section-number">14.1.7.1</span> Quadratic Growth Code<a href="14.1-review-of-linear-growth.html#quadratic-growth-code" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Here, we present code for fitting the quadratic growth model in the <code>nlme</code> package using both <em>compact</em> and <em>detailed</em> model syntax.</p>
-<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="14.1-review-of-linear-growth.html#cb485-1" tabindex="-1"></a>verblong<span class="sc">$</span>gradeSquared <span class="ot">&lt;-</span> (verblong<span class="sc">$</span>grade)<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb485-2"><a href="14.1-review-of-linear-growth.html#cb485-2" tabindex="-1"></a></span>
-<span id="cb485-3"><a href="14.1-review-of-linear-growth.html#cb485-3" tabindex="-1"></a>quad_nlme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">nlme</span>(</span>
-<span id="cb485-4"><a href="14.1-review-of-linear-growth.html#cb485-4" tabindex="-1"></a>  verb <span class="sc">~</span> (gamma_00 <span class="sc">+</span> u_0i) <span class="sc">+</span> (gamma_10 <span class="sc">+</span> u_1i)<span class="sc">*</span>grade <span class="sc">+</span> (gamma_20 <span class="sc">+</span> u_2i)<span class="sc">*</span>gradeSquared,</span>
-<span id="cb485-5"><a href="14.1-review-of-linear-growth.html#cb485-5" tabindex="-1"></a>  <span class="at">data =</span> verblong,</span>
-<span id="cb485-6"><a href="14.1-review-of-linear-growth.html#cb485-6" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> gamma_20<span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb485-7"><a href="14.1-review-of-linear-growth.html#cb485-7" tabindex="-1"></a>  <span class="at">random =</span> u_0i <span class="sc">+</span> u_1i <span class="sc">+</span> u_2i<span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb485-8"><a href="14.1-review-of-linear-growth.html#cb485-8" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
-<span id="cb485-9"><a href="14.1-review-of-linear-growth.html#cb485-9" tabindex="-1"></a>  <span class="at">na.action=</span><span class="st">&quot;na.omit&quot;</span>,</span>
-<span id="cb485-10"><a href="14.1-review-of-linear-growth.html#cb485-10" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00 =</span> <span class="dv">20</span>, <span class="at">gamma_10=</span><span class="dv">10</span>, <span class="at">gamma_20=</span><span class="dv">1</span>)</span>
-<span id="cb485-11"><a href="14.1-review-of-linear-growth.html#cb485-11" tabindex="-1"></a>)</span>
-<span id="cb485-12"><a href="14.1-review-of-linear-growth.html#cb485-12" tabindex="-1"></a><span class="fu">summary</span>(quad_nlme)</span>
-<span id="cb485-13"><a href="14.1-review-of-linear-growth.html#cb485-13" tabindex="-1"></a></span>
-<span id="cb485-14"><a href="14.1-review-of-linear-growth.html#cb485-14" tabindex="-1"></a></span>
-<span id="cb485-15"><a href="14.1-review-of-linear-growth.html#cb485-15" tabindex="-1"></a>quad_lme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">lme</span>(</span>
-<span id="cb485-16"><a href="14.1-review-of-linear-growth.html#cb485-16" tabindex="-1"></a>  <span class="at">fixed =</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade <span class="sc">+</span> gradeSquared, </span>
-<span id="cb485-17"><a href="14.1-review-of-linear-growth.html#cb485-17" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade<span class="sc">|</span>id <span class="sc">+</span> gradeSquared<span class="sc">|</span>id, </span>
-<span id="cb485-18"><a href="14.1-review-of-linear-growth.html#cb485-18" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
-<span id="cb485-19"><a href="14.1-review-of-linear-growth.html#cb485-19" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude,</span>
-<span id="cb485-20"><a href="14.1-review-of-linear-growth.html#cb485-20" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;REML&quot;</span> <span class="co"># does not converge with ML</span></span>
-<span id="cb485-21"><a href="14.1-review-of-linear-growth.html#cb485-21" tabindex="-1"></a>)</span>
-<span id="cb485-22"><a href="14.1-review-of-linear-growth.html#cb485-22" tabindex="-1"></a><span class="fu">summary</span>(quad_lme)</span></code></pre></div>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="14.1-review-of-linear-growth.html#cb483-1" tabindex="-1"></a>verblong<span class="sc">$</span>gradeSquared <span class="ot">&lt;-</span> (verblong<span class="sc">$</span>grade)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb483-2"><a href="14.1-review-of-linear-growth.html#cb483-2" tabindex="-1"></a></span>
+<span id="cb483-3"><a href="14.1-review-of-linear-growth.html#cb483-3" tabindex="-1"></a>quad_nlme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">nlme</span>(</span>
+<span id="cb483-4"><a href="14.1-review-of-linear-growth.html#cb483-4" tabindex="-1"></a>  verb <span class="sc">~</span> (gamma_00 <span class="sc">+</span> u_0i) <span class="sc">+</span> (gamma_10 <span class="sc">+</span> u_1i)<span class="sc">*</span>grade <span class="sc">+</span> (gamma_20 <span class="sc">+</span> u_2i)<span class="sc">*</span>gradeSquared,</span>
+<span id="cb483-5"><a href="14.1-review-of-linear-growth.html#cb483-5" tabindex="-1"></a>  <span class="at">data =</span> verblong,</span>
+<span id="cb483-6"><a href="14.1-review-of-linear-growth.html#cb483-6" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> gamma_20<span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb483-7"><a href="14.1-review-of-linear-growth.html#cb483-7" tabindex="-1"></a>  <span class="at">random =</span> u_0i <span class="sc">+</span> u_1i <span class="sc">+</span> u_2i<span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb483-8"><a href="14.1-review-of-linear-growth.html#cb483-8" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
+<span id="cb483-9"><a href="14.1-review-of-linear-growth.html#cb483-9" tabindex="-1"></a>  <span class="at">na.action=</span><span class="st">&quot;na.omit&quot;</span>,</span>
+<span id="cb483-10"><a href="14.1-review-of-linear-growth.html#cb483-10" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00 =</span> <span class="dv">20</span>, <span class="at">gamma_10=</span><span class="dv">10</span>, <span class="at">gamma_20=</span><span class="dv">1</span>)</span>
+<span id="cb483-11"><a href="14.1-review-of-linear-growth.html#cb483-11" tabindex="-1"></a>)</span>
+<span id="cb483-12"><a href="14.1-review-of-linear-growth.html#cb483-12" tabindex="-1"></a><span class="fu">summary</span>(quad_nlme)</span>
+<span id="cb483-13"><a href="14.1-review-of-linear-growth.html#cb483-13" tabindex="-1"></a></span>
+<span id="cb483-14"><a href="14.1-review-of-linear-growth.html#cb483-14" tabindex="-1"></a></span>
+<span id="cb483-15"><a href="14.1-review-of-linear-growth.html#cb483-15" tabindex="-1"></a>quad_lme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">lme</span>(</span>
+<span id="cb483-16"><a href="14.1-review-of-linear-growth.html#cb483-16" tabindex="-1"></a>  <span class="at">fixed =</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade <span class="sc">+</span> gradeSquared, </span>
+<span id="cb483-17"><a href="14.1-review-of-linear-growth.html#cb483-17" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade<span class="sc">|</span>id <span class="sc">+</span> gradeSquared<span class="sc">|</span>id, </span>
+<span id="cb483-18"><a href="14.1-review-of-linear-growth.html#cb483-18" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
+<span id="cb483-19"><a href="14.1-review-of-linear-growth.html#cb483-19" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude,</span>
+<span id="cb483-20"><a href="14.1-review-of-linear-growth.html#cb483-20" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;REML&quot;</span> <span class="co"># does not converge with ML</span></span>
+<span id="cb483-21"><a href="14.1-review-of-linear-growth.html#cb483-21" tabindex="-1"></a>)</span>
+<span id="cb483-22"><a href="14.1-review-of-linear-growth.html#cb483-22" tabindex="-1"></a><span class="fu">summary</span>(quad_lme)</span></code></pre></div>
 </div>
 </div>
 </div>

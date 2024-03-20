@@ -23,7 +23,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2024-03-18" />
+<meta name="date" content="2024-03-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -664,27 +664,27 @@ y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time}_{1} + \gamma_{20}\text{time
 </div>
 <div id="fit-model-4" class="section level3 hasAnchor" number="14.8.2">
 <h3><span class="header-section-number">14.8.2</span> Fit Model<a href="14.8-multiphase-growth-cortisol.html#fit-model-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb520-1"><a href="14.8-multiphase-growth-cortisol.html#cb520-1" tabindex="-1"></a>cort_multi <span class="ot">&lt;-</span> <span class="fu">nlme</span>(cort <span class="sc">~</span> gamma_00 <span class="sc">+</span></span>
-<span id="cb520-2"><a href="14.8-multiphase-growth-cortisol.html#cb520-2" tabindex="-1"></a>  (<span class="dv">0</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>gamma_20)<span class="sc">*</span>time0 <span class="sc">+</span></span>
-<span id="cb520-3"><a href="14.8-multiphase-growth-cortisol.html#cb520-3" tabindex="-1"></a>  (<span class="dv">0</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>gamma_20)<span class="sc">*</span>time1 <span class="sc">+</span></span>
-<span id="cb520-4"><a href="14.8-multiphase-growth-cortisol.html#cb520-4" tabindex="-1"></a>  (a2<span class="sc">*</span>gamma_10 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>gamma_20)<span class="sc">*</span>time2 <span class="sc">+</span></span>
-<span id="cb520-5"><a href="14.8-multiphase-growth-cortisol.html#cb520-5" tabindex="-1"></a>  (a3<span class="sc">*</span>gamma_10 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>gamma_20)<span class="sc">*</span>time3 <span class="sc">+</span></span>
-<span id="cb520-6"><a href="14.8-multiphase-growth-cortisol.html#cb520-6" tabindex="-1"></a>  (<span class="dv">1</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>gamma_20)<span class="sc">*</span>time4 <span class="sc">+</span></span>
-<span id="cb520-7"><a href="14.8-multiphase-growth-cortisol.html#cb520-7" tabindex="-1"></a>  (<span class="dv">1</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> a5<span class="sc">*</span>gamma_20)<span class="sc">*</span>time5 <span class="sc">+</span></span>
-<span id="cb520-8"><a href="14.8-multiphase-growth-cortisol.html#cb520-8" tabindex="-1"></a>  (<span class="dv">1</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> a6<span class="sc">*</span>gamma_20)<span class="sc">*</span>time6 <span class="sc">+</span></span>
-<span id="cb520-9"><a href="14.8-multiphase-growth-cortisol.html#cb520-9" tabindex="-1"></a>  (<span class="dv">1</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> a7<span class="sc">*</span>gamma_20)<span class="sc">*</span>time7 <span class="sc">+</span></span>
-<span id="cb520-10"><a href="14.8-multiphase-growth-cortisol.html#cb520-10" tabindex="-1"></a>  (<span class="dv">1</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> <span class="dv">1</span><span class="sc">*</span>gamma_20)<span class="sc">*</span>time8,</span>
-<span id="cb520-11"><a href="14.8-multiphase-growth-cortisol.html#cb520-11" tabindex="-1"></a>   <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> gamma_20 <span class="sc">+</span> a2 <span class="sc">+</span> a3 <span class="sc">+</span> a5 <span class="sc">+</span> a6 <span class="sc">+</span> a7 <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb520-12"><a href="14.8-multiphase-growth-cortisol.html#cb520-12" tabindex="-1"></a>   <span class="at">random =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> gamma_20 <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb520-13"><a href="14.8-multiphase-growth-cortisol.html#cb520-13" tabindex="-1"></a>   <span class="at">groups =</span><span class="sc">~</span> id,</span>
-<span id="cb520-14"><a href="14.8-multiphase-growth-cortisol.html#cb520-14" tabindex="-1"></a>   <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00=</span><span class="dv">15</span>,<span class="at">gamma_10=</span><span class="dv">10</span>,<span class="at">gamma_20=</span><span class="sc">-</span><span class="dv">4</span>,</span>
-<span id="cb520-15"><a href="14.8-multiphase-growth-cortisol.html#cb520-15" tabindex="-1"></a>             <span class="at">a2=</span>.<span class="dv">4</span>, <span class="at">a3=</span>.<span class="dv">5</span>, </span>
-<span id="cb520-16"><a href="14.8-multiphase-growth-cortisol.html#cb520-16" tabindex="-1"></a>             <span class="at">a5=</span>.<span class="dv">7</span>, <span class="at">a6=</span>.<span class="dv">8</span>, <span class="at">a7=</span>.<span class="dv">9</span>),</span>
-<span id="cb520-17"><a href="14.8-multiphase-growth-cortisol.html#cb520-17" tabindex="-1"></a>   <span class="at">data =</span> cortisol_long,</span>
-<span id="cb520-18"><a href="14.8-multiphase-growth-cortisol.html#cb520-18" tabindex="-1"></a>   <span class="at">na.action =</span> na.exclude,</span>
-<span id="cb520-19"><a href="14.8-multiphase-growth-cortisol.html#cb520-19" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
-<span id="cb520-20"><a href="14.8-multiphase-growth-cortisol.html#cb520-20" tabindex="-1"></a>) </span>
-<span id="cb520-21"><a href="14.8-multiphase-growth-cortisol.html#cb520-21" tabindex="-1"></a><span class="fu">summary</span>(cort_multi)  </span></code></pre></div>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="14.8-multiphase-growth-cortisol.html#cb518-1" tabindex="-1"></a>cort_multi <span class="ot">&lt;-</span> <span class="fu">nlme</span>(cort <span class="sc">~</span> gamma_00 <span class="sc">+</span></span>
+<span id="cb518-2"><a href="14.8-multiphase-growth-cortisol.html#cb518-2" tabindex="-1"></a>  (<span class="dv">0</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>gamma_20)<span class="sc">*</span>time0 <span class="sc">+</span></span>
+<span id="cb518-3"><a href="14.8-multiphase-growth-cortisol.html#cb518-3" tabindex="-1"></a>  (<span class="dv">0</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>gamma_20)<span class="sc">*</span>time1 <span class="sc">+</span></span>
+<span id="cb518-4"><a href="14.8-multiphase-growth-cortisol.html#cb518-4" tabindex="-1"></a>  (a2<span class="sc">*</span>gamma_10 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>gamma_20)<span class="sc">*</span>time2 <span class="sc">+</span></span>
+<span id="cb518-5"><a href="14.8-multiphase-growth-cortisol.html#cb518-5" tabindex="-1"></a>  (a3<span class="sc">*</span>gamma_10 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>gamma_20)<span class="sc">*</span>time3 <span class="sc">+</span></span>
+<span id="cb518-6"><a href="14.8-multiphase-growth-cortisol.html#cb518-6" tabindex="-1"></a>  (<span class="dv">1</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>gamma_20)<span class="sc">*</span>time4 <span class="sc">+</span></span>
+<span id="cb518-7"><a href="14.8-multiphase-growth-cortisol.html#cb518-7" tabindex="-1"></a>  (<span class="dv">1</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> a5<span class="sc">*</span>gamma_20)<span class="sc">*</span>time5 <span class="sc">+</span></span>
+<span id="cb518-8"><a href="14.8-multiphase-growth-cortisol.html#cb518-8" tabindex="-1"></a>  (<span class="dv">1</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> a6<span class="sc">*</span>gamma_20)<span class="sc">*</span>time6 <span class="sc">+</span></span>
+<span id="cb518-9"><a href="14.8-multiphase-growth-cortisol.html#cb518-9" tabindex="-1"></a>  (<span class="dv">1</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> a7<span class="sc">*</span>gamma_20)<span class="sc">*</span>time7 <span class="sc">+</span></span>
+<span id="cb518-10"><a href="14.8-multiphase-growth-cortisol.html#cb518-10" tabindex="-1"></a>  (<span class="dv">1</span><span class="sc">*</span>gamma_10 <span class="sc">+</span> <span class="dv">1</span><span class="sc">*</span>gamma_20)<span class="sc">*</span>time8,</span>
+<span id="cb518-11"><a href="14.8-multiphase-growth-cortisol.html#cb518-11" tabindex="-1"></a>   <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> gamma_20 <span class="sc">+</span> a2 <span class="sc">+</span> a3 <span class="sc">+</span> a5 <span class="sc">+</span> a6 <span class="sc">+</span> a7 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb518-12"><a href="14.8-multiphase-growth-cortisol.html#cb518-12" tabindex="-1"></a>   <span class="at">random =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> gamma_20 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb518-13"><a href="14.8-multiphase-growth-cortisol.html#cb518-13" tabindex="-1"></a>   <span class="at">groups =</span><span class="sc">~</span> id,</span>
+<span id="cb518-14"><a href="14.8-multiphase-growth-cortisol.html#cb518-14" tabindex="-1"></a>   <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00=</span><span class="dv">15</span>,<span class="at">gamma_10=</span><span class="dv">10</span>,<span class="at">gamma_20=</span><span class="sc">-</span><span class="dv">4</span>,</span>
+<span id="cb518-15"><a href="14.8-multiphase-growth-cortisol.html#cb518-15" tabindex="-1"></a>             <span class="at">a2=</span>.<span class="dv">4</span>, <span class="at">a3=</span>.<span class="dv">5</span>, </span>
+<span id="cb518-16"><a href="14.8-multiphase-growth-cortisol.html#cb518-16" tabindex="-1"></a>             <span class="at">a5=</span>.<span class="dv">7</span>, <span class="at">a6=</span>.<span class="dv">8</span>, <span class="at">a7=</span>.<span class="dv">9</span>),</span>
+<span id="cb518-17"><a href="14.8-multiphase-growth-cortisol.html#cb518-17" tabindex="-1"></a>   <span class="at">data =</span> cortisol_long,</span>
+<span id="cb518-18"><a href="14.8-multiphase-growth-cortisol.html#cb518-18" tabindex="-1"></a>   <span class="at">na.action =</span> na.exclude,</span>
+<span id="cb518-19"><a href="14.8-multiphase-growth-cortisol.html#cb518-19" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
+<span id="cb518-20"><a href="14.8-multiphase-growth-cortisol.html#cb518-20" tabindex="-1"></a>) </span>
+<span id="cb518-21"><a href="14.8-multiphase-growth-cortisol.html#cb518-21" tabindex="-1"></a><span class="fu">summary</span>(cort_multi)  </span></code></pre></div>
 <pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
 ##   Model: cort ~ gamma_00 + (0 * gamma_10 + 0 * gamma_20) * time0 + (0 *      gamma_10 + 0 * gamma_20) * time1 + (a2 * gamma_10 + 0 * gamma_20) *      time2 + (a3 * gamma_10 + 0 * gamma_20) * time3 + (1 * gamma_10 +      0 * gamma_20) * time4 + (1 * gamma_10 + a5 * gamma_20) *      time5 + (1 * gamma_10 + a6 * gamma_20) * time6 + (1 * gamma_10 +      a7 * gamma_20) * time7 + (1 * gamma_10 + 1 * gamma_20) *      time8 
 ##   Data: cortisol_long 
@@ -727,7 +727,7 @@ y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time}_{1} + \gamma_{20}\text{time
 ## 
 ## Number of Observations: 306
 ## Number of Groups: 34</code></pre>
-<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb522-1"><a href="14.8-multiphase-growth-cortisol.html#cb522-1" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_multi)</span></code></pre></div>
+<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb520-1"><a href="14.8-multiphase-growth-cortisol.html#cb520-1" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_multi)</span></code></pre></div>
 <pre><code>## id = pdLogChol(list(gamma_00 ~ 1,gamma_10 ~ 1,gamma_20 ~ 1)) 
 ##          Variance  StdDev   Corr         
 ## gamma_00  4.673669 2.161867 gmm_00 gmm_10
@@ -737,24 +737,24 @@ y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time}_{1} + \gamma_{20}\text{time
 </div>
 <div id="predicted-trajectories-5" class="section level3 hasAnchor" number="14.8.3">
 <h3><span class="header-section-number">14.8.3</span> Predicted Trajectories<a href="14.8-multiphase-growth-cortisol.html#predicted-trajectories-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb524-1"><a href="14.8-multiphase-growth-cortisol.html#cb524-1" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
-<span id="cb524-2"><a href="14.8-multiphase-growth-cortisol.html#cb524-2" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_multi <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_multi)</span>
-<span id="cb524-3"><a href="14.8-multiphase-growth-cortisol.html#cb524-3" tabindex="-1"></a></span>
-<span id="cb524-4"><a href="14.8-multiphase-growth-cortisol.html#cb524-4" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
-<span id="cb524-5"><a href="14.8-multiphase-growth-cortisol.html#cb524-5" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_multi <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_multi, <span class="at">level=</span><span class="dv">0</span>)</span>
-<span id="cb524-6"><a href="14.8-multiphase-growth-cortisol.html#cb524-6" tabindex="-1"></a></span>
-<span id="cb524-7"><a href="14.8-multiphase-growth-cortisol.html#cb524-7" tabindex="-1"></a></span>
-<span id="cb524-8"><a href="14.8-multiphase-growth-cortisol.html#cb524-8" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
-<span id="cb524-9"><a href="14.8-multiphase-growth-cortisol.html#cb524-9" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
-<span id="cb524-10"><a href="14.8-multiphase-growth-cortisol.html#cb524-10" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_multi, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb524-11"><a href="14.8-multiphase-growth-cortisol.html#cb524-11" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
-<span id="cb524-12"><a href="14.8-multiphase-growth-cortisol.html#cb524-12" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb524-13"><a href="14.8-multiphase-growth-cortisol.html#cb524-13" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_multi), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb524-14"><a href="14.8-multiphase-growth-cortisol.html#cb524-14" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb524-15"><a href="14.8-multiphase-growth-cortisol.html#cb524-15" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb524-16"><a href="14.8-multiphase-growth-cortisol.html#cb524-16" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb524-17"><a href="14.8-multiphase-growth-cortisol.html#cb524-17" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-311-1.png" width="672" /></p>
+<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb522-1"><a href="14.8-multiphase-growth-cortisol.html#cb522-1" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
+<span id="cb522-2"><a href="14.8-multiphase-growth-cortisol.html#cb522-2" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_multi <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_multi)</span>
+<span id="cb522-3"><a href="14.8-multiphase-growth-cortisol.html#cb522-3" tabindex="-1"></a></span>
+<span id="cb522-4"><a href="14.8-multiphase-growth-cortisol.html#cb522-4" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
+<span id="cb522-5"><a href="14.8-multiphase-growth-cortisol.html#cb522-5" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_multi <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_multi, <span class="at">level=</span><span class="dv">0</span>)</span>
+<span id="cb522-6"><a href="14.8-multiphase-growth-cortisol.html#cb522-6" tabindex="-1"></a></span>
+<span id="cb522-7"><a href="14.8-multiphase-growth-cortisol.html#cb522-7" tabindex="-1"></a></span>
+<span id="cb522-8"><a href="14.8-multiphase-growth-cortisol.html#cb522-8" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
+<span id="cb522-9"><a href="14.8-multiphase-growth-cortisol.html#cb522-9" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
+<span id="cb522-10"><a href="14.8-multiphase-growth-cortisol.html#cb522-10" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_multi, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb522-11"><a href="14.8-multiphase-growth-cortisol.html#cb522-11" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
+<span id="cb522-12"><a href="14.8-multiphase-growth-cortisol.html#cb522-12" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb522-13"><a href="14.8-multiphase-growth-cortisol.html#cb522-13" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_multi), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb522-14"><a href="14.8-multiphase-growth-cortisol.html#cb522-14" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb522-15"><a href="14.8-multiphase-growth-cortisol.html#cb522-15" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb522-16"><a href="14.8-multiphase-growth-cortisol.html#cb522-16" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb522-17"><a href="14.8-multiphase-growth-cortisol.html#cb522-17" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-310-1.png" width="672" /></p>
 </div>
 <div id="interpretation-7" class="section level3 hasAnchor" number="14.8.4">
 <h3><span class="header-section-number">14.8.4</span> Interpretation<a href="14.8-multiphase-growth-cortisol.html#interpretation-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>

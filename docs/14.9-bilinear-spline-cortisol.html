@@ -23,7 +23,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2024-03-18" />
+<meta name="date" content="2024-03-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -661,18 +661,18 @@ y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time} + \gamma_{20}\text{max}(\te
 </div>
 <div id="fit-model-5" class="section level3 hasAnchor" number="14.9.2">
 <h3><span class="header-section-number">14.9.2</span> Fit Model<a href="14.9-bilinear-spline-cortisol.html#fit-model-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="14.9-bilinear-spline-cortisol.html#cb525-1" tabindex="-1"></a>cort_spline <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
-<span id="cb525-2"><a href="14.9-bilinear-spline-cortisol.html#cb525-2" tabindex="-1"></a>  cort <span class="sc">~</span> g_00 <span class="sc">+</span> g_10<span class="sc">*</span>time <span class="sc">+</span> g_20<span class="sc">*</span>(<span class="fu">pmax</span>(time<span class="dv">-4</span>,<span class="dv">0</span>)),</span>
-<span id="cb525-3"><a href="14.9-bilinear-spline-cortisol.html#cb525-3" tabindex="-1"></a>  <span class="at">data =</span> cortisol_long,</span>
-<span id="cb525-4"><a href="14.9-bilinear-spline-cortisol.html#cb525-4" tabindex="-1"></a>  <span class="at">fixed =</span> g_00 <span class="sc">+</span> g_10 <span class="sc">+</span> g_20 <span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb525-5"><a href="14.9-bilinear-spline-cortisol.html#cb525-5" tabindex="-1"></a>  <span class="at">random =</span> g_00 <span class="sc">+</span> g_10 <span class="sc">+</span> g_20 <span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb525-6"><a href="14.9-bilinear-spline-cortisol.html#cb525-6" tabindex="-1"></a>  <span class="at">groups =</span><span class="sc">~</span> id,</span>
-<span id="cb525-7"><a href="14.9-bilinear-spline-cortisol.html#cb525-7" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="sc">-</span><span class="dv">5</span>),</span>
-<span id="cb525-8"><a href="14.9-bilinear-spline-cortisol.html#cb525-8" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude,</span>
-<span id="cb525-9"><a href="14.9-bilinear-spline-cortisol.html#cb525-9" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
-<span id="cb525-10"><a href="14.9-bilinear-spline-cortisol.html#cb525-10" tabindex="-1"></a>)</span>
-<span id="cb525-11"><a href="14.9-bilinear-spline-cortisol.html#cb525-11" tabindex="-1"></a></span>
-<span id="cb525-12"><a href="14.9-bilinear-spline-cortisol.html#cb525-12" tabindex="-1"></a><span class="fu">summary</span>(cort_spline)</span></code></pre></div>
+<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="14.9-bilinear-spline-cortisol.html#cb523-1" tabindex="-1"></a>cort_spline <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
+<span id="cb523-2"><a href="14.9-bilinear-spline-cortisol.html#cb523-2" tabindex="-1"></a>  cort <span class="sc">~</span> g_00 <span class="sc">+</span> g_10<span class="sc">*</span>time <span class="sc">+</span> g_20<span class="sc">*</span>(<span class="fu">pmax</span>(time<span class="dv">-4</span>,<span class="dv">0</span>)),</span>
+<span id="cb523-3"><a href="14.9-bilinear-spline-cortisol.html#cb523-3" tabindex="-1"></a>  <span class="at">data =</span> cortisol_long,</span>
+<span id="cb523-4"><a href="14.9-bilinear-spline-cortisol.html#cb523-4" tabindex="-1"></a>  <span class="at">fixed =</span> g_00 <span class="sc">+</span> g_10 <span class="sc">+</span> g_20 <span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb523-5"><a href="14.9-bilinear-spline-cortisol.html#cb523-5" tabindex="-1"></a>  <span class="at">random =</span> g_00 <span class="sc">+</span> g_10 <span class="sc">+</span> g_20 <span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb523-6"><a href="14.9-bilinear-spline-cortisol.html#cb523-6" tabindex="-1"></a>  <span class="at">groups =</span><span class="sc">~</span> id,</span>
+<span id="cb523-7"><a href="14.9-bilinear-spline-cortisol.html#cb523-7" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="sc">-</span><span class="dv">5</span>),</span>
+<span id="cb523-8"><a href="14.9-bilinear-spline-cortisol.html#cb523-8" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude,</span>
+<span id="cb523-9"><a href="14.9-bilinear-spline-cortisol.html#cb523-9" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
+<span id="cb523-10"><a href="14.9-bilinear-spline-cortisol.html#cb523-10" tabindex="-1"></a>)</span>
+<span id="cb523-11"><a href="14.9-bilinear-spline-cortisol.html#cb523-11" tabindex="-1"></a></span>
+<span id="cb523-12"><a href="14.9-bilinear-spline-cortisol.html#cb523-12" tabindex="-1"></a><span class="fu">summary</span>(cort_spline)</span></code></pre></div>
 <pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
 ##   Model: cort ~ g_00 + g_10 * time + g_20 * (pmax(time - 4, 0)) 
 ##   Data: cortisol_long 
@@ -705,14 +705,14 @@ y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time} + \gamma_{20}\text{max}(\te
 ## 
 ## Number of Observations: 306
 ## Number of Groups: 34</code></pre>
-<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="14.9-bilinear-spline-cortisol.html#cb527-1" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_spline)</span></code></pre></div>
+<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="14.9-bilinear-spline-cortisol.html#cb525-1" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_spline)</span></code></pre></div>
 <pre><code>## id = pdLogChol(list(g_00 ~ 1,g_10 ~ 1,g_20 ~ 1)) 
 ##          Variance  StdDev    Corr         
 ## g_00     3.4383258 1.8542723 g_00   g_10  
 ## g_10     0.6726292 0.8201397 -0.327       
 ## g_20     1.6900288 1.3000111  0.043 -0.539
 ## Residual 6.0265184 2.4548968</code></pre>
-<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="14.9-bilinear-spline-cortisol.html#cb529-1" tabindex="-1"></a><span class="fu">intervals</span>(cort_spline)</span></code></pre></div>
+<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="14.9-bilinear-spline-cortisol.html#cb527-1" tabindex="-1"></a><span class="fu">intervals</span>(cort_spline)</span></code></pre></div>
 <pre><code>## Approximate 95% confidence intervals
 ## 
 ##  Fixed effects:
@@ -738,24 +738,24 @@ y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time} + \gamma_{20}\text{max}(\te
 <div id="predicted-trajectories-6" class="section level3 hasAnchor" number="14.9.3">
 <h3><span class="header-section-number">14.9.3</span> Predicted Trajectories<a href="14.9-bilinear-spline-cortisol.html#predicted-trajectories-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Note, this method of plotting can break down with spline models as the plotted trajectories are simply meant to approximate the trajectories of interest. Here they do not connect at the know point, while in the real model they would.</p>
-<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="14.9-bilinear-spline-cortisol.html#cb531-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long) <span class="sc">+</span></span>
-<span id="cb531-2"><a href="14.9-bilinear-spline-cortisol.html#cb531-2" tabindex="-1"></a> <span class="fu">geom_line</span>(<span class="at">data=</span>cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> cort, <span class="at">group=</span><span class="fu">factor</span>(id))) <span class="sc">+</span></span>
-<span id="cb531-3"><a href="14.9-bilinear-spline-cortisol.html#cb531-3" tabindex="-1"></a> <span class="fu">stat_smooth</span>(<span class="at">data=</span>cortisol_long[<span class="fu">which</span>(cortisol_long<span class="sc">$</span>time<span class="sc">&lt;=</span><span class="dv">4</span>),], <span class="fu">aes</span>(<span class="at">x=</span>time,<span class="at">y=</span>cort),</span>
-<span id="cb531-4"><a href="14.9-bilinear-spline-cortisol.html#cb531-4" tabindex="-1"></a>             <span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">colour=</span><span class="st">&quot;#A3A500&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb531-5"><a href="14.9-bilinear-spline-cortisol.html#cb531-5" tabindex="-1"></a> <span class="fu">stat_smooth</span>(<span class="at">data=</span>cortisol_long[<span class="fu">which</span>(cortisol_long<span class="sc">$</span>time<span class="sc">&gt;=</span><span class="dv">4</span>),], <span class="fu">aes</span>(<span class="at">x=</span>time,<span class="at">y=</span>cort),</span>
-<span id="cb531-6"><a href="14.9-bilinear-spline-cortisol.html#cb531-6" tabindex="-1"></a>             <span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">colour=</span><span class="st">&quot;#A3A500&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb531-7"><a href="14.9-bilinear-spline-cortisol.html#cb531-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Timepoint&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb531-8"><a href="14.9-bilinear-spline-cortisol.html#cb531-8" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol Level&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb531-9"><a href="14.9-bilinear-spline-cortisol.html#cb531-9" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb531-10"><a href="14.9-bilinear-spline-cortisol.html#cb531-10" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">50</span>,<span class="at">by=</span><span class="dv">10</span>)) <span class="sc">+</span> </span>
-<span id="cb531-11"><a href="14.9-bilinear-spline-cortisol.html#cb531-11" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb531-12"><a href="14.9-bilinear-spline-cortisol.html#cb531-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">12</span>),</span>
-<span id="cb531-13"><a href="14.9-bilinear-spline-cortisol.html#cb531-13" tabindex="-1"></a>        <span class="at">axis.text=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">12</span>,<span class="at">colour=</span><span class="st">&quot;black&quot;</span>),</span>
-<span id="cb531-14"><a href="14.9-bilinear-spline-cortisol.html#cb531-14" tabindex="-1"></a>        <span class="at">legend.text=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">12</span>, <span class="at">colour=</span><span class="st">&quot;black&quot;</span>),</span>
-<span id="cb531-15"><a href="14.9-bilinear-spline-cortisol.html#cb531-15" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span>.<span class="dv">5</span>, <span class="at">size=</span><span class="dv">12</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="14.9-bilinear-spline-cortisol.html#cb529-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long) <span class="sc">+</span></span>
+<span id="cb529-2"><a href="14.9-bilinear-spline-cortisol.html#cb529-2" tabindex="-1"></a> <span class="fu">geom_line</span>(<span class="at">data=</span>cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> cort, <span class="at">group=</span><span class="fu">factor</span>(id))) <span class="sc">+</span></span>
+<span id="cb529-3"><a href="14.9-bilinear-spline-cortisol.html#cb529-3" tabindex="-1"></a> <span class="fu">stat_smooth</span>(<span class="at">data=</span>cortisol_long[<span class="fu">which</span>(cortisol_long<span class="sc">$</span>time<span class="sc">&lt;=</span><span class="dv">4</span>),], <span class="fu">aes</span>(<span class="at">x=</span>time,<span class="at">y=</span>cort),</span>
+<span id="cb529-4"><a href="14.9-bilinear-spline-cortisol.html#cb529-4" tabindex="-1"></a>             <span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">colour=</span><span class="st">&quot;#A3A500&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb529-5"><a href="14.9-bilinear-spline-cortisol.html#cb529-5" tabindex="-1"></a> <span class="fu">stat_smooth</span>(<span class="at">data=</span>cortisol_long[<span class="fu">which</span>(cortisol_long<span class="sc">$</span>time<span class="sc">&gt;=</span><span class="dv">4</span>),], <span class="fu">aes</span>(<span class="at">x=</span>time,<span class="at">y=</span>cort),</span>
+<span id="cb529-6"><a href="14.9-bilinear-spline-cortisol.html#cb529-6" tabindex="-1"></a>             <span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">colour=</span><span class="st">&quot;#A3A500&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb529-7"><a href="14.9-bilinear-spline-cortisol.html#cb529-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Timepoint&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb529-8"><a href="14.9-bilinear-spline-cortisol.html#cb529-8" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol Level&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb529-9"><a href="14.9-bilinear-spline-cortisol.html#cb529-9" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb529-10"><a href="14.9-bilinear-spline-cortisol.html#cb529-10" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">50</span>,<span class="at">by=</span><span class="dv">10</span>)) <span class="sc">+</span> </span>
+<span id="cb529-11"><a href="14.9-bilinear-spline-cortisol.html#cb529-11" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb529-12"><a href="14.9-bilinear-spline-cortisol.html#cb529-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">12</span>),</span>
+<span id="cb529-13"><a href="14.9-bilinear-spline-cortisol.html#cb529-13" tabindex="-1"></a>        <span class="at">axis.text=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">12</span>,<span class="at">colour=</span><span class="st">&quot;black&quot;</span>),</span>
+<span id="cb529-14"><a href="14.9-bilinear-spline-cortisol.html#cb529-14" tabindex="-1"></a>        <span class="at">legend.text=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">12</span>, <span class="at">colour=</span><span class="st">&quot;black&quot;</span>),</span>
+<span id="cb529-15"><a href="14.9-bilinear-spline-cortisol.html#cb529-15" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span>.<span class="dv">5</span>, <span class="at">size=</span><span class="dv">12</span>))</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;
 ## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-313-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-312-1.png" width="672" /></p>
 </div>
 <div id="interpretation-8" class="section level3 hasAnchor" number="14.9.4">
 <h3><span class="header-section-number">14.9.4</span> Interpretation<a href="14.9-bilinear-spline-cortisol.html#interpretation-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -800,18 +800,18 @@ y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{min}(\text{time}-k_{1},0) + \gamm
 </div>
 <div id="fit-model-6" class="section level3 hasAnchor" number="14.9.5">
 <h3><span class="header-section-number">14.9.5</span> Fit Model<a href="14.9-bilinear-spline-cortisol.html#fit-model-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="14.9-bilinear-spline-cortisol.html#cb533-1" tabindex="-1"></a>cort_spline2 <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
-<span id="cb533-2"><a href="14.9-bilinear-spline-cortisol.html#cb533-2" tabindex="-1"></a>  cort <span class="sc">~</span> g_00 <span class="sc">+</span> g_10<span class="sc">*</span>(<span class="fu">pmin</span>(time<span class="dv">-4</span>,<span class="dv">0</span>)) <span class="sc">+</span> g_20<span class="sc">*</span>(<span class="fu">pmax</span>(time<span class="dv">-4</span>,<span class="dv">0</span>)),</span>
-<span id="cb533-3"><a href="14.9-bilinear-spline-cortisol.html#cb533-3" tabindex="-1"></a>  <span class="at">data =</span> cortisol_long,</span>
-<span id="cb533-4"><a href="14.9-bilinear-spline-cortisol.html#cb533-4" tabindex="-1"></a>  <span class="at">fixed =</span> g_00 <span class="sc">+</span> g_10 <span class="sc">+</span> g_20 <span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb533-5"><a href="14.9-bilinear-spline-cortisol.html#cb533-5" tabindex="-1"></a>  <span class="at">random =</span> g_00 <span class="sc">+</span> g_10 <span class="sc">+</span> g_20 <span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb533-6"><a href="14.9-bilinear-spline-cortisol.html#cb533-6" tabindex="-1"></a>  <span class="at">groups =</span><span class="sc">~</span> id,</span>
-<span id="cb533-7"><a href="14.9-bilinear-spline-cortisol.html#cb533-7" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="sc">-</span><span class="dv">5</span>),</span>
-<span id="cb533-8"><a href="14.9-bilinear-spline-cortisol.html#cb533-8" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude,</span>
-<span id="cb533-9"><a href="14.9-bilinear-spline-cortisol.html#cb533-9" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
-<span id="cb533-10"><a href="14.9-bilinear-spline-cortisol.html#cb533-10" tabindex="-1"></a>)</span>
-<span id="cb533-11"><a href="14.9-bilinear-spline-cortisol.html#cb533-11" tabindex="-1"></a></span>
-<span id="cb533-12"><a href="14.9-bilinear-spline-cortisol.html#cb533-12" tabindex="-1"></a><span class="fu">summary</span>(cort_spline2)</span></code></pre></div>
+<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="14.9-bilinear-spline-cortisol.html#cb531-1" tabindex="-1"></a>cort_spline2 <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
+<span id="cb531-2"><a href="14.9-bilinear-spline-cortisol.html#cb531-2" tabindex="-1"></a>  cort <span class="sc">~</span> g_00 <span class="sc">+</span> g_10<span class="sc">*</span>(<span class="fu">pmin</span>(time<span class="dv">-4</span>,<span class="dv">0</span>)) <span class="sc">+</span> g_20<span class="sc">*</span>(<span class="fu">pmax</span>(time<span class="dv">-4</span>,<span class="dv">0</span>)),</span>
+<span id="cb531-3"><a href="14.9-bilinear-spline-cortisol.html#cb531-3" tabindex="-1"></a>  <span class="at">data =</span> cortisol_long,</span>
+<span id="cb531-4"><a href="14.9-bilinear-spline-cortisol.html#cb531-4" tabindex="-1"></a>  <span class="at">fixed =</span> g_00 <span class="sc">+</span> g_10 <span class="sc">+</span> g_20 <span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb531-5"><a href="14.9-bilinear-spline-cortisol.html#cb531-5" tabindex="-1"></a>  <span class="at">random =</span> g_00 <span class="sc">+</span> g_10 <span class="sc">+</span> g_20 <span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb531-6"><a href="14.9-bilinear-spline-cortisol.html#cb531-6" tabindex="-1"></a>  <span class="at">groups =</span><span class="sc">~</span> id,</span>
+<span id="cb531-7"><a href="14.9-bilinear-spline-cortisol.html#cb531-7" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="sc">-</span><span class="dv">5</span>),</span>
+<span id="cb531-8"><a href="14.9-bilinear-spline-cortisol.html#cb531-8" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude,</span>
+<span id="cb531-9"><a href="14.9-bilinear-spline-cortisol.html#cb531-9" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
+<span id="cb531-10"><a href="14.9-bilinear-spline-cortisol.html#cb531-10" tabindex="-1"></a>)</span>
+<span id="cb531-11"><a href="14.9-bilinear-spline-cortisol.html#cb531-11" tabindex="-1"></a></span>
+<span id="cb531-12"><a href="14.9-bilinear-spline-cortisol.html#cb531-12" tabindex="-1"></a><span class="fu">summary</span>(cort_spline2)</span></code></pre></div>
 <pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
 ##   Model: cort ~ g_00 + g_10 * (pmin(time - 4, 0)) + g_20 * (pmax(time -      4, 0)) 
 ##   Data: cortisol_long 
@@ -844,14 +844,14 @@ y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{min}(\text{time}-k_{1},0) + \gamm
 ## 
 ## Number of Observations: 306
 ## Number of Groups: 34</code></pre>
-<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="14.9-bilinear-spline-cortisol.html#cb535-1" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_spline2)</span></code></pre></div>
+<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="14.9-bilinear-spline-cortisol.html#cb533-1" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_spline2)</span></code></pre></div>
 <pre><code>## id = pdLogChol(list(g_00 ~ 1,g_10 ~ 1,g_20 ~ 1)) 
 ##          Variance   StdDev    Corr         
 ## g_00     10.2170261 3.1964083 g_00   g_10  
 ## g_10      0.6726291 0.8201397  0.836       
 ## g_20      1.2137093 1.1016847 -0.001  0.109
 ## Residual  6.0265185 2.4548968</code></pre>
-<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb537-1"><a href="14.9-bilinear-spline-cortisol.html#cb537-1" tabindex="-1"></a><span class="co">#intervals(cort_spline2)</span></span></code></pre></div>
+<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="14.9-bilinear-spline-cortisol.html#cb535-1" tabindex="-1"></a><span class="co">#intervals(cort_spline2)</span></span></code></pre></div>
 </div>
 </div>
             </section>

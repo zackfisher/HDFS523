@@ -23,7 +23,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2024-03-18" />
+<meta name="date" content="2024-03-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -658,34 +658,34 @@ y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time} + u_{0i} + u_{1i}\text{time
 </ul>
 <div id="fit-model-3" class="section level3 hasAnchor" number="14.7.1">
 <h3><span class="header-section-number">14.7.1</span> Fit Model<a href="14.7-exponential-growth-cortisol.html#fit-model-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="14.7-exponential-growth-cortisol.html#cb513-1" tabindex="-1"></a><span class="co"># cort_expo &lt;- nlme(</span></span>
-<span id="cb513-2"><a href="14.7-exponential-growth-cortisol.html#cb513-2" tabindex="-1"></a><span class="co">#   cort ~ (gamma_00 + u_0i) + (gamma_10 + u_1i)*(exp(-1*alpha*timescaled)),</span></span>
-<span id="cb513-3"><a href="14.7-exponential-growth-cortisol.html#cb513-3" tabindex="-1"></a><span class="co">#   fixed = gamma_00 + gamma_10 + alpha ~1,</span></span>
-<span id="cb513-4"><a href="14.7-exponential-growth-cortisol.html#cb513-4" tabindex="-1"></a><span class="co">#   random = u_0i + u_1i~1,</span></span>
-<span id="cb513-5"><a href="14.7-exponential-growth-cortisol.html#cb513-5" tabindex="-1"></a><span class="co">#   group = ~id,</span></span>
-<span id="cb513-6"><a href="14.7-exponential-growth-cortisol.html#cb513-6" tabindex="-1"></a><span class="co">#   start = c(gamma_00=17, gamma_10=-14, alpha=0.5), </span></span>
-<span id="cb513-7"><a href="14.7-exponential-growth-cortisol.html#cb513-7" tabindex="-1"></a><span class="co">#   data = cortisol_long,</span></span>
-<span id="cb513-8"><a href="14.7-exponential-growth-cortisol.html#cb513-8" tabindex="-1"></a><span class="co">#   na.action = &quot;na.exclude&quot;,</span></span>
-<span id="cb513-9"><a href="14.7-exponential-growth-cortisol.html#cb513-9" tabindex="-1"></a><span class="co">#   control = lmeControl(maxIter = 1e8, msMaxIter = 1e8)</span></span>
-<span id="cb513-10"><a href="14.7-exponential-growth-cortisol.html#cb513-10" tabindex="-1"></a><span class="co"># )</span></span>
-<span id="cb513-11"><a href="14.7-exponential-growth-cortisol.html#cb513-11" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb513-12"><a href="14.7-exponential-growth-cortisol.html#cb513-12" tabindex="-1"></a><span class="co"># summary(cort_expo)  </span></span>
-<span id="cb513-13"><a href="14.7-exponential-growth-cortisol.html#cb513-13" tabindex="-1"></a><span class="co"># VarCorr(cort_expo)</span></span>
-<span id="cb513-14"><a href="14.7-exponential-growth-cortisol.html#cb513-14" tabindex="-1"></a></span>
-<span id="cb513-15"><a href="14.7-exponential-growth-cortisol.html#cb513-15" tabindex="-1"></a>cort_expo <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
-<span id="cb513-16"><a href="14.7-exponential-growth-cortisol.html#cb513-16" tabindex="-1"></a>  cort <span class="sc">~</span> (gamma_00) <span class="sc">+</span> (gamma_10)<span class="sc">*</span>(<span class="fu">exp</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">*</span>alpha<span class="sc">*</span>timescaled)),</span>
-<span id="cb513-17"><a href="14.7-exponential-growth-cortisol.html#cb513-17" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> alpha <span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb513-18"><a href="14.7-exponential-growth-cortisol.html#cb513-18" tabindex="-1"></a>  <span class="at">random =</span> gamma_00 <span class="sc">+</span> gamma_10<span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb513-19"><a href="14.7-exponential-growth-cortisol.html#cb513-19" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
-<span id="cb513-20"><a href="14.7-exponential-growth-cortisol.html#cb513-20" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00=</span><span class="dv">17</span>, <span class="at">gamma_10=</span><span class="sc">-</span><span class="dv">14</span>, <span class="at">alpha=</span><span class="fl">0.5</span>), </span>
-<span id="cb513-21"><a href="14.7-exponential-growth-cortisol.html#cb513-21" tabindex="-1"></a>  <span class="at">data =</span> cortisol_long,</span>
-<span id="cb513-22"><a href="14.7-exponential-growth-cortisol.html#cb513-22" tabindex="-1"></a>  <span class="at">na.action =</span> <span class="st">&quot;na.exclude&quot;</span>,</span>
-<span id="cb513-23"><a href="14.7-exponential-growth-cortisol.html#cb513-23" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
-<span id="cb513-24"><a href="14.7-exponential-growth-cortisol.html#cb513-24" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="14.7-exponential-growth-cortisol.html#cb511-1" tabindex="-1"></a><span class="co"># cort_expo &lt;- nlme(</span></span>
+<span id="cb511-2"><a href="14.7-exponential-growth-cortisol.html#cb511-2" tabindex="-1"></a><span class="co">#   cort ~ (gamma_00 + u_0i) + (gamma_10 + u_1i)*(exp(-1*alpha*timescaled)),</span></span>
+<span id="cb511-3"><a href="14.7-exponential-growth-cortisol.html#cb511-3" tabindex="-1"></a><span class="co">#   fixed = gamma_00 + gamma_10 + alpha ~1,</span></span>
+<span id="cb511-4"><a href="14.7-exponential-growth-cortisol.html#cb511-4" tabindex="-1"></a><span class="co">#   random = u_0i + u_1i~1,</span></span>
+<span id="cb511-5"><a href="14.7-exponential-growth-cortisol.html#cb511-5" tabindex="-1"></a><span class="co">#   group = ~id,</span></span>
+<span id="cb511-6"><a href="14.7-exponential-growth-cortisol.html#cb511-6" tabindex="-1"></a><span class="co">#   start = c(gamma_00=17, gamma_10=-14, alpha=0.5), </span></span>
+<span id="cb511-7"><a href="14.7-exponential-growth-cortisol.html#cb511-7" tabindex="-1"></a><span class="co">#   data = cortisol_long,</span></span>
+<span id="cb511-8"><a href="14.7-exponential-growth-cortisol.html#cb511-8" tabindex="-1"></a><span class="co">#   na.action = &quot;na.exclude&quot;,</span></span>
+<span id="cb511-9"><a href="14.7-exponential-growth-cortisol.html#cb511-9" tabindex="-1"></a><span class="co">#   control = lmeControl(maxIter = 1e8, msMaxIter = 1e8)</span></span>
+<span id="cb511-10"><a href="14.7-exponential-growth-cortisol.html#cb511-10" tabindex="-1"></a><span class="co"># )</span></span>
+<span id="cb511-11"><a href="14.7-exponential-growth-cortisol.html#cb511-11" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb511-12"><a href="14.7-exponential-growth-cortisol.html#cb511-12" tabindex="-1"></a><span class="co"># summary(cort_expo)  </span></span>
+<span id="cb511-13"><a href="14.7-exponential-growth-cortisol.html#cb511-13" tabindex="-1"></a><span class="co"># VarCorr(cort_expo)</span></span>
+<span id="cb511-14"><a href="14.7-exponential-growth-cortisol.html#cb511-14" tabindex="-1"></a></span>
+<span id="cb511-15"><a href="14.7-exponential-growth-cortisol.html#cb511-15" tabindex="-1"></a>cort_expo <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
+<span id="cb511-16"><a href="14.7-exponential-growth-cortisol.html#cb511-16" tabindex="-1"></a>  cort <span class="sc">~</span> (gamma_00) <span class="sc">+</span> (gamma_10)<span class="sc">*</span>(<span class="fu">exp</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">*</span>alpha<span class="sc">*</span>timescaled)),</span>
+<span id="cb511-17"><a href="14.7-exponential-growth-cortisol.html#cb511-17" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> alpha <span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb511-18"><a href="14.7-exponential-growth-cortisol.html#cb511-18" tabindex="-1"></a>  <span class="at">random =</span> gamma_00 <span class="sc">+</span> gamma_10<span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb511-19"><a href="14.7-exponential-growth-cortisol.html#cb511-19" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
+<span id="cb511-20"><a href="14.7-exponential-growth-cortisol.html#cb511-20" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00=</span><span class="dv">17</span>, <span class="at">gamma_10=</span><span class="sc">-</span><span class="dv">14</span>, <span class="at">alpha=</span><span class="fl">0.5</span>), </span>
+<span id="cb511-21"><a href="14.7-exponential-growth-cortisol.html#cb511-21" tabindex="-1"></a>  <span class="at">data =</span> cortisol_long,</span>
+<span id="cb511-22"><a href="14.7-exponential-growth-cortisol.html#cb511-22" tabindex="-1"></a>  <span class="at">na.action =</span> <span class="st">&quot;na.exclude&quot;</span>,</span>
+<span id="cb511-23"><a href="14.7-exponential-growth-cortisol.html#cb511-23" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
+<span id="cb511-24"><a href="14.7-exponential-growth-cortisol.html#cb511-24" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## Warning in nlme.formula(cort ~ (gamma_00) + (gamma_10) * (exp(-1 * alpha * :
 ## Iteration 4, LME step: nlminb() did not converge (code = 1). PORT message:
 ## function evaluation limit reached without convergence (9)</code></pre>
-<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="14.7-exponential-growth-cortisol.html#cb515-1" tabindex="-1"></a><span class="fu">summary</span>(cort_expo)  </span></code></pre></div>
+<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="14.7-exponential-growth-cortisol.html#cb513-1" tabindex="-1"></a><span class="fu">summary</span>(cort_expo)  </span></code></pre></div>
 <pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
 ##   Model: cort ~ (gamma_00) + (gamma_10) * (exp(-1 * alpha * timescaled)) 
 ##   Data: cortisol_long 
@@ -717,7 +717,7 @@ y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time} + u_{0i} + u_{1i}\text{time
 ## 
 ## Number of Observations: 306
 ## Number of Groups: 34</code></pre>
-<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="14.7-exponential-growth-cortisol.html#cb517-1" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_expo)</span></code></pre></div>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="14.7-exponential-growth-cortisol.html#cb515-1" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_expo)</span></code></pre></div>
 <pre><code>## id = pdLogChol(list(gamma_00 ~ 1,gamma_10 ~ 1)) 
 ##          Variance StdDev   Corr  
 ## gamma_00 13.48333 3.671965 gmm_00
@@ -726,24 +726,24 @@ y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time} + u_{0i} + u_{1i}\text{time
 </div>
 <div id="predicted-trajectories-4" class="section level3 hasAnchor" number="14.7.2">
 <h3><span class="header-section-number">14.7.2</span> Predicted Trajectories<a href="14.7-exponential-growth-cortisol.html#predicted-trajectories-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="14.7-exponential-growth-cortisol.html#cb519-1" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
-<span id="cb519-2"><a href="14.7-exponential-growth-cortisol.html#cb519-2" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_expo <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_expo)</span>
-<span id="cb519-3"><a href="14.7-exponential-growth-cortisol.html#cb519-3" tabindex="-1"></a></span>
-<span id="cb519-4"><a href="14.7-exponential-growth-cortisol.html#cb519-4" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
-<span id="cb519-5"><a href="14.7-exponential-growth-cortisol.html#cb519-5" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_expo <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_expo, <span class="at">level=</span><span class="dv">0</span>)</span>
-<span id="cb519-6"><a href="14.7-exponential-growth-cortisol.html#cb519-6" tabindex="-1"></a></span>
-<span id="cb519-7"><a href="14.7-exponential-growth-cortisol.html#cb519-7" tabindex="-1"></a></span>
-<span id="cb519-8"><a href="14.7-exponential-growth-cortisol.html#cb519-8" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
-<span id="cb519-9"><a href="14.7-exponential-growth-cortisol.html#cb519-9" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
-<span id="cb519-10"><a href="14.7-exponential-growth-cortisol.html#cb519-10" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_expo, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb519-11"><a href="14.7-exponential-growth-cortisol.html#cb519-11" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
-<span id="cb519-12"><a href="14.7-exponential-growth-cortisol.html#cb519-12" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb519-13"><a href="14.7-exponential-growth-cortisol.html#cb519-13" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_expo), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb519-14"><a href="14.7-exponential-growth-cortisol.html#cb519-14" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb519-15"><a href="14.7-exponential-growth-cortisol.html#cb519-15" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb519-16"><a href="14.7-exponential-growth-cortisol.html#cb519-16" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb519-17"><a href="14.7-exponential-growth-cortisol.html#cb519-17" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-309-1.png" width="672" /></p>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="14.7-exponential-growth-cortisol.html#cb517-1" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
+<span id="cb517-2"><a href="14.7-exponential-growth-cortisol.html#cb517-2" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_expo <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_expo)</span>
+<span id="cb517-3"><a href="14.7-exponential-growth-cortisol.html#cb517-3" tabindex="-1"></a></span>
+<span id="cb517-4"><a href="14.7-exponential-growth-cortisol.html#cb517-4" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
+<span id="cb517-5"><a href="14.7-exponential-growth-cortisol.html#cb517-5" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_expo <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_expo, <span class="at">level=</span><span class="dv">0</span>)</span>
+<span id="cb517-6"><a href="14.7-exponential-growth-cortisol.html#cb517-6" tabindex="-1"></a></span>
+<span id="cb517-7"><a href="14.7-exponential-growth-cortisol.html#cb517-7" tabindex="-1"></a></span>
+<span id="cb517-8"><a href="14.7-exponential-growth-cortisol.html#cb517-8" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
+<span id="cb517-9"><a href="14.7-exponential-growth-cortisol.html#cb517-9" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
+<span id="cb517-10"><a href="14.7-exponential-growth-cortisol.html#cb517-10" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_expo, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb517-11"><a href="14.7-exponential-growth-cortisol.html#cb517-11" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
+<span id="cb517-12"><a href="14.7-exponential-growth-cortisol.html#cb517-12" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb517-13"><a href="14.7-exponential-growth-cortisol.html#cb517-13" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_expo), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb517-14"><a href="14.7-exponential-growth-cortisol.html#cb517-14" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb517-15"><a href="14.7-exponential-growth-cortisol.html#cb517-15" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb517-16"><a href="14.7-exponential-growth-cortisol.html#cb517-16" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb517-17"><a href="14.7-exponential-growth-cortisol.html#cb517-17" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-308-1.png" width="672" /></p>
 </div>
 <div id="interpretation-6" class="section level3 hasAnchor" number="14.7.3">
 <h3><span class="header-section-number">14.7.3</span> Interpretation<a href="14.7-exponential-growth-cortisol.html#interpretation-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>

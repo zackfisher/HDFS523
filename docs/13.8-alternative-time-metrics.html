@@ -23,7 +23,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2024-03-18" />
+<meta name="date" content="2024-03-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -624,14 +624,14 @@ div.csl-indent {
 <div id="alternative-time-metrics" class="section level2 hasAnchor" number="13.8">
 <h2><span class="header-section-number">13.8</span> Alternative Time Metrics<a href="13.8-alternative-time-metrics.html#alternative-time-metrics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Let’s go back to the simple <em>linear growth model</em>, this time being very explicit about the <em>scaling and centering</em> of the <code>time</code> variable. Time metric = original scores, Grade = 1, 2, 4, 6. Fitting the linear model with grade (as originally coded)</p>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="13.8-alternative-time-metrics.html#cb467-1" tabindex="-1"></a>linear_grade_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
-<span id="cb467-2"><a href="13.8-alternative-time-metrics.html#cb467-2" tabindex="-1"></a>  <span class="at">fixed=</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade, </span>
-<span id="cb467-3"><a href="13.8-alternative-time-metrics.html#cb467-3" tabindex="-1"></a>  <span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade<span class="sc">|</span>id, </span>
-<span id="cb467-4"><a href="13.8-alternative-time-metrics.html#cb467-4" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
-<span id="cb467-5"><a href="13.8-alternative-time-metrics.html#cb467-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
-<span id="cb467-6"><a href="13.8-alternative-time-metrics.html#cb467-6" tabindex="-1"></a>)</span>
-<span id="cb467-7"><a href="13.8-alternative-time-metrics.html#cb467-7" tabindex="-1"></a></span>
-<span id="cb467-8"><a href="13.8-alternative-time-metrics.html#cb467-8" tabindex="-1"></a><span class="fu">summary</span>(linear_grade_fit)</span></code></pre></div>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="13.8-alternative-time-metrics.html#cb465-1" tabindex="-1"></a>linear_grade_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
+<span id="cb465-2"><a href="13.8-alternative-time-metrics.html#cb465-2" tabindex="-1"></a>  <span class="at">fixed=</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade, </span>
+<span id="cb465-3"><a href="13.8-alternative-time-metrics.html#cb465-3" tabindex="-1"></a>  <span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade<span class="sc">|</span>id, </span>
+<span id="cb465-4"><a href="13.8-alternative-time-metrics.html#cb465-4" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
+<span id="cb465-5"><a href="13.8-alternative-time-metrics.html#cb465-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
+<span id="cb465-6"><a href="13.8-alternative-time-metrics.html#cb465-6" tabindex="-1"></a>)</span>
+<span id="cb465-7"><a href="13.8-alternative-time-metrics.html#cb465-7" tabindex="-1"></a></span>
+<span id="cb465-8"><a href="13.8-alternative-time-metrics.html#cb465-8" tabindex="-1"></a><span class="fu">summary</span>(linear_grade_fit)</span></code></pre></div>
 <pre><code>## Linear mixed-effects model fit by REML
 ##   Data: verblong 
 ##        AIC      BIC    logLik
@@ -682,32 +682,32 @@ where<br />
 <h3><span class="header-section-number">13.8.1</span> Recentering time metrics<a href="13.8-alternative-time-metrics.html#recentering-time-metrics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>time_cG1 = Grade centered 0-point = grade 1: time_cG1 = 0, 1, 3, 5</p>
 <p>time_cG6 = Grade centered 0-point = grade 6: time_cG6 = -5, -4, -2, 0</p>
-<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="13.8-alternative-time-metrics.html#cb469-1" tabindex="-1"></a>verblong<span class="sc">$</span>time_cG1 <span class="ot">=</span> (verblong<span class="sc">$</span>grade <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">/</span><span class="dv">1</span></span>
-<span id="cb469-2"><a href="13.8-alternative-time-metrics.html#cb469-2" tabindex="-1"></a>verblong<span class="sc">$</span>time_cG6 <span class="ot">=</span> (verblong<span class="sc">$</span>grade <span class="sc">-</span> <span class="dv">6</span>)<span class="sc">/</span><span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="13.8-alternative-time-metrics.html#cb467-1" tabindex="-1"></a>verblong<span class="sc">$</span>time_cG1 <span class="ot">=</span> (verblong<span class="sc">$</span>grade <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">/</span><span class="dv">1</span></span>
+<span id="cb467-2"><a href="13.8-alternative-time-metrics.html#cb467-2" tabindex="-1"></a>verblong<span class="sc">$</span>time_cG6 <span class="ot">=</span> (verblong<span class="sc">$</span>grade <span class="sc">-</span> <span class="dv">6</span>)<span class="sc">/</span><span class="dv">1</span></span></code></pre></div>
 </div>
 <div id="rescaling-time-metric" class="section level3 hasAnchor" number="13.8.2">
 <h3><span class="header-section-number">13.8.2</span> Rescaling time metric<a href="13.8-alternative-time-metrics.html#rescaling-time-metric" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>time_cG6 = Grade centered 0-point = grade 6: time_cG6rescale = -1.0, -0.8, -0.4, 0.0</p>
-<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="13.8-alternative-time-metrics.html#cb470-1" tabindex="-1"></a>verblong<span class="sc">$</span>time_cG6rescale <span class="ot">=</span> (verblong<span class="sc">$</span>grade <span class="sc">-</span> <span class="dv">6</span>)<span class="sc">/</span><span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="13.8-alternative-time-metrics.html#cb468-1" tabindex="-1"></a>verblong<span class="sc">$</span>time_cG6rescale <span class="ot">=</span> (verblong<span class="sc">$</span>grade <span class="sc">-</span> <span class="dv">6</span>)<span class="sc">/</span><span class="dv">5</span></span></code></pre></div>
 </div>
 <div id="remapping-time" class="section level3 hasAnchor" number="13.8.3">
 <h3><span class="header-section-number">13.8.3</span> Remapping Time<a href="13.8-alternative-time-metrics.html#remapping-time" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We may also want to remap time based on some other metric. For example, if we wanted to look at the number of assessment as indexing time. Here assessment would be the number of assessments youth have been exposed to: (assessment = 1, 2, 3, 4). Note: the way the mapping is done here only works in this case with no missing data. If have missing data, need to remap in a different way.</p>
-<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="13.8-alternative-time-metrics.html#cb471-1" tabindex="-1"></a><span class="co">#remapping using plyr </span></span>
-<span id="cb471-2"><a href="13.8-alternative-time-metrics.html#cb471-2" tabindex="-1"></a>verblong<span class="sc">$</span>assessment <span class="ot">=</span> <span class="fu">mapvalues</span>(verblong<span class="sc">$</span>grade,<span class="at">from=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>),<span class="at">to=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="13.8-alternative-time-metrics.html#cb469-1" tabindex="-1"></a><span class="co">#remapping using plyr </span></span>
+<span id="cb469-2"><a href="13.8-alternative-time-metrics.html#cb469-2" tabindex="-1"></a>verblong<span class="sc">$</span>assessment <span class="ot">=</span> <span class="fu">mapvalues</span>(verblong<span class="sc">$</span>grade,<span class="at">from=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>),<span class="at">to=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>))</span></code></pre></div>
 </div>
 <div id="compare-growth-metrics" class="section level3 hasAnchor" number="13.8.4">
 <h3><span class="header-section-number">13.8.4</span> Compare Growth Metrics<a href="13.8-alternative-time-metrics.html#compare-growth-metrics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s look at the models with different time-metrics.</p>
 <div id="time-metric-grade" class="section level4 hasAnchor" number="13.8.4.1">
 <h4><span class="header-section-number">13.8.4.1</span> Time metric = grade<a href="13.8-alternative-time-metrics.html#time-metric-grade" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="13.8-alternative-time-metrics.html#cb472-1" tabindex="-1"></a>linear_grade_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
-<span id="cb472-2"><a href="13.8-alternative-time-metrics.html#cb472-2" tabindex="-1"></a>  <span class="at">fixed=</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade, </span>
-<span id="cb472-3"><a href="13.8-alternative-time-metrics.html#cb472-3" tabindex="-1"></a>  <span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade<span class="sc">|</span>id, </span>
-<span id="cb472-4"><a href="13.8-alternative-time-metrics.html#cb472-4" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
-<span id="cb472-5"><a href="13.8-alternative-time-metrics.html#cb472-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
-<span id="cb472-6"><a href="13.8-alternative-time-metrics.html#cb472-6" tabindex="-1"></a>)</span>
-<span id="cb472-7"><a href="13.8-alternative-time-metrics.html#cb472-7" tabindex="-1"></a><span class="fu">summary</span>(linear_grade_fit)</span></code></pre></div>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="13.8-alternative-time-metrics.html#cb470-1" tabindex="-1"></a>linear_grade_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
+<span id="cb470-2"><a href="13.8-alternative-time-metrics.html#cb470-2" tabindex="-1"></a>  <span class="at">fixed=</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade, </span>
+<span id="cb470-3"><a href="13.8-alternative-time-metrics.html#cb470-3" tabindex="-1"></a>  <span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade<span class="sc">|</span>id, </span>
+<span id="cb470-4"><a href="13.8-alternative-time-metrics.html#cb470-4" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
+<span id="cb470-5"><a href="13.8-alternative-time-metrics.html#cb470-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
+<span id="cb470-6"><a href="13.8-alternative-time-metrics.html#cb470-6" tabindex="-1"></a>)</span>
+<span id="cb470-7"><a href="13.8-alternative-time-metrics.html#cb470-7" tabindex="-1"></a><span class="fu">summary</span>(linear_grade_fit)</span></code></pre></div>
 <pre><code>## Linear mixed-effects model fit by REML
 ##   Data: verblong 
 ##        AIC      BIC    logLik
@@ -739,13 +739,13 @@ where<br />
 <div id="time-metric-grade_cg1" class="section level4 hasAnchor" number="13.8.4.2">
 <h4><span class="header-section-number">13.8.4.2</span> Time metric = grade_cG1<a href="13.8-alternative-time-metrics.html#time-metric-grade_cg1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>time_cG1 = Grade centered 0-point = grade 1: time_cG1 = 0, 1, 3, 5</p>
-<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="13.8-alternative-time-metrics.html#cb474-1" tabindex="-1"></a>linear_time_cG1_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
-<span id="cb474-2"><a href="13.8-alternative-time-metrics.html#cb474-2" tabindex="-1"></a>  <span class="at">fixed=</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time_cG1, </span>
-<span id="cb474-3"><a href="13.8-alternative-time-metrics.html#cb474-3" tabindex="-1"></a>  <span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time_cG1<span class="sc">|</span>id, </span>
-<span id="cb474-4"><a href="13.8-alternative-time-metrics.html#cb474-4" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
-<span id="cb474-5"><a href="13.8-alternative-time-metrics.html#cb474-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
-<span id="cb474-6"><a href="13.8-alternative-time-metrics.html#cb474-6" tabindex="-1"></a>)</span>
-<span id="cb474-7"><a href="13.8-alternative-time-metrics.html#cb474-7" tabindex="-1"></a><span class="fu">summary</span>(linear_time_cG1_fit)</span></code></pre></div>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="13.8-alternative-time-metrics.html#cb472-1" tabindex="-1"></a>linear_time_cG1_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
+<span id="cb472-2"><a href="13.8-alternative-time-metrics.html#cb472-2" tabindex="-1"></a>  <span class="at">fixed=</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time_cG1, </span>
+<span id="cb472-3"><a href="13.8-alternative-time-metrics.html#cb472-3" tabindex="-1"></a>  <span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time_cG1<span class="sc">|</span>id, </span>
+<span id="cb472-4"><a href="13.8-alternative-time-metrics.html#cb472-4" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
+<span id="cb472-5"><a href="13.8-alternative-time-metrics.html#cb472-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
+<span id="cb472-6"><a href="13.8-alternative-time-metrics.html#cb472-6" tabindex="-1"></a>)</span>
+<span id="cb472-7"><a href="13.8-alternative-time-metrics.html#cb472-7" tabindex="-1"></a><span class="fu">summary</span>(linear_time_cG1_fit)</span></code></pre></div>
 <pre><code>## Linear mixed-effects model fit by REML
 ##   Data: verblong 
 ##        AIC      BIC    logLik
@@ -777,13 +777,13 @@ where<br />
 <div id="time-metric-grade_cg6" class="section level4 hasAnchor" number="13.8.4.3">
 <h4><span class="header-section-number">13.8.4.3</span> Time metric = grade_cG6<a href="13.8-alternative-time-metrics.html#time-metric-grade_cg6" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>time_cG6 = Grade centered 0-point = grade 6: time_cG6 = -5, -4, -2, 0</p>
-<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="13.8-alternative-time-metrics.html#cb476-1" tabindex="-1"></a>linear_time_cG6_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
-<span id="cb476-2"><a href="13.8-alternative-time-metrics.html#cb476-2" tabindex="-1"></a>  <span class="at">fixed=</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time_cG6, </span>
-<span id="cb476-3"><a href="13.8-alternative-time-metrics.html#cb476-3" tabindex="-1"></a>  <span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time_cG6<span class="sc">|</span>id, </span>
-<span id="cb476-4"><a href="13.8-alternative-time-metrics.html#cb476-4" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
-<span id="cb476-5"><a href="13.8-alternative-time-metrics.html#cb476-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
-<span id="cb476-6"><a href="13.8-alternative-time-metrics.html#cb476-6" tabindex="-1"></a>)</span>
-<span id="cb476-7"><a href="13.8-alternative-time-metrics.html#cb476-7" tabindex="-1"></a><span class="fu">summary</span>(linear_time_cG6_fit)</span></code></pre></div>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="13.8-alternative-time-metrics.html#cb474-1" tabindex="-1"></a>linear_time_cG6_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
+<span id="cb474-2"><a href="13.8-alternative-time-metrics.html#cb474-2" tabindex="-1"></a>  <span class="at">fixed=</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time_cG6, </span>
+<span id="cb474-3"><a href="13.8-alternative-time-metrics.html#cb474-3" tabindex="-1"></a>  <span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time_cG6<span class="sc">|</span>id, </span>
+<span id="cb474-4"><a href="13.8-alternative-time-metrics.html#cb474-4" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
+<span id="cb474-5"><a href="13.8-alternative-time-metrics.html#cb474-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
+<span id="cb474-6"><a href="13.8-alternative-time-metrics.html#cb474-6" tabindex="-1"></a>)</span>
+<span id="cb474-7"><a href="13.8-alternative-time-metrics.html#cb474-7" tabindex="-1"></a><span class="fu">summary</span>(linear_time_cG6_fit)</span></code></pre></div>
 <pre><code>## Linear mixed-effects model fit by REML
 ##   Data: verblong 
 ##        AIC      BIC    logLik
@@ -815,13 +815,13 @@ where<br />
 <div id="time-metric-grade_cg6rescale" class="section level4 hasAnchor" number="13.8.4.4">
 <h4><span class="header-section-number">13.8.4.4</span> Time metric = grade_cG6rescale<a href="13.8-alternative-time-metrics.html#time-metric-grade_cg6rescale" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>time_cG6 = Grade centered 0-point = grade 6: time_cG6rescale = -1.0, -0.8, -0.4, 0.0</p>
-<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="13.8-alternative-time-metrics.html#cb478-1" tabindex="-1"></a>linear_time_cG6rescale_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
-<span id="cb478-2"><a href="13.8-alternative-time-metrics.html#cb478-2" tabindex="-1"></a>  <span class="at">fixed=</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time_cG6rescale, </span>
-<span id="cb478-3"><a href="13.8-alternative-time-metrics.html#cb478-3" tabindex="-1"></a>  <span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time_cG6rescale<span class="sc">|</span>id, </span>
-<span id="cb478-4"><a href="13.8-alternative-time-metrics.html#cb478-4" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
-<span id="cb478-5"><a href="13.8-alternative-time-metrics.html#cb478-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
-<span id="cb478-6"><a href="13.8-alternative-time-metrics.html#cb478-6" tabindex="-1"></a>)</span>
-<span id="cb478-7"><a href="13.8-alternative-time-metrics.html#cb478-7" tabindex="-1"></a><span class="fu">summary</span>(linear_time_cG6rescale_fit)</span></code></pre></div>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="13.8-alternative-time-metrics.html#cb476-1" tabindex="-1"></a>linear_time_cG6rescale_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
+<span id="cb476-2"><a href="13.8-alternative-time-metrics.html#cb476-2" tabindex="-1"></a>  <span class="at">fixed=</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time_cG6rescale, </span>
+<span id="cb476-3"><a href="13.8-alternative-time-metrics.html#cb476-3" tabindex="-1"></a>  <span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> time_cG6rescale<span class="sc">|</span>id, </span>
+<span id="cb476-4"><a href="13.8-alternative-time-metrics.html#cb476-4" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
+<span id="cb476-5"><a href="13.8-alternative-time-metrics.html#cb476-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
+<span id="cb476-6"><a href="13.8-alternative-time-metrics.html#cb476-6" tabindex="-1"></a>)</span>
+<span id="cb476-7"><a href="13.8-alternative-time-metrics.html#cb476-7" tabindex="-1"></a><span class="fu">summary</span>(linear_time_cG6rescale_fit)</span></code></pre></div>
 <pre><code>## Linear mixed-effects model fit by REML
 ##   Data: verblong 
 ##        AIC      BIC    logLik
@@ -853,13 +853,13 @@ where<br />
 <div id="time-metric-assessment" class="section level4 hasAnchor" number="13.8.4.5">
 <h4><span class="header-section-number">13.8.4.5</span> Time metric = assessment<a href="13.8-alternative-time-metrics.html#time-metric-assessment" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Assessment = 1, 2, 3, 4</p>
-<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="13.8-alternative-time-metrics.html#cb480-1" tabindex="-1"></a>linear_assessment_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
-<span id="cb480-2"><a href="13.8-alternative-time-metrics.html#cb480-2" tabindex="-1"></a>  <span class="at">fixed=</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> assessment, </span>
-<span id="cb480-3"><a href="13.8-alternative-time-metrics.html#cb480-3" tabindex="-1"></a>  <span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> assessment<span class="sc">|</span>id, </span>
-<span id="cb480-4"><a href="13.8-alternative-time-metrics.html#cb480-4" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
-<span id="cb480-5"><a href="13.8-alternative-time-metrics.html#cb480-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
-<span id="cb480-6"><a href="13.8-alternative-time-metrics.html#cb480-6" tabindex="-1"></a>)</span>
-<span id="cb480-7"><a href="13.8-alternative-time-metrics.html#cb480-7" tabindex="-1"></a><span class="fu">summary</span>(linear_assessment_fit)</span></code></pre></div>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="13.8-alternative-time-metrics.html#cb478-1" tabindex="-1"></a>linear_assessment_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
+<span id="cb478-2"><a href="13.8-alternative-time-metrics.html#cb478-2" tabindex="-1"></a>  <span class="at">fixed=</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> assessment, </span>
+<span id="cb478-3"><a href="13.8-alternative-time-metrics.html#cb478-3" tabindex="-1"></a>  <span class="at">random=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> assessment<span class="sc">|</span>id, </span>
+<span id="cb478-4"><a href="13.8-alternative-time-metrics.html#cb478-4" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
+<span id="cb478-5"><a href="13.8-alternative-time-metrics.html#cb478-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude</span>
+<span id="cb478-6"><a href="13.8-alternative-time-metrics.html#cb478-6" tabindex="-1"></a>)</span>
+<span id="cb478-7"><a href="13.8-alternative-time-metrics.html#cb478-7" tabindex="-1"></a><span class="fu">summary</span>(linear_assessment_fit)</span></code></pre></div>
 <pre><code>## Linear mixed-effects model fit by REML
 ##   Data: verblong 
 ##        AIC      BIC    logLik

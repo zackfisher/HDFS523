@@ -23,7 +23,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2024-03-18" />
+<meta name="date" content="2024-03-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -636,14 +636,14 @@ div.csl-indent {
 <p>Thanks are also given to John Nesselroade, Teresa Seeman, and Marilyn Albert for data collection and inspiration.</p>
 <div id="read-in-cortisol-data" class="section level3 hasAnchor" number="14.3.1">
 <h3><span class="header-section-number">14.3.1</span> Read in Cortisol Data<a href="14.3-example-data-ram-grimm-2007.html#read-in-cortisol-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="14.3-example-data-ram-grimm-2007.html#cb486-1" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
-<span id="cb486-2"><a href="14.3-example-data-ram-grimm-2007.html#cb486-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb486-3"><a href="14.3-example-data-ram-grimm-2007.html#cb486-3" tabindex="-1"></a><span class="fu">library</span>(nlme)</span>
-<span id="cb486-4"><a href="14.3-example-data-ram-grimm-2007.html#cb486-4" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
-<span id="cb486-5"><a href="14.3-example-data-ram-grimm-2007.html#cb486-5" tabindex="-1"></a></span>
-<span id="cb486-6"><a href="14.3-example-data-ram-grimm-2007.html#cb486-6" tabindex="-1"></a>filepath <span class="ot">&lt;-</span> <span class="st">&quot;https://quantdev.ssri.psu.edu/sites/qdev/files/TheCortisolData.csv&quot;</span></span>
-<span id="cb486-7"><a href="14.3-example-data-ram-grimm-2007.html#cb486-7" tabindex="-1"></a>cortisol_wide <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file=</span><span class="fu">url</span>(filepath),<span class="at">header=</span><span class="cn">TRUE</span>)</span>
-<span id="cb486-8"><a href="14.3-example-data-ram-grimm-2007.html#cb486-8" tabindex="-1"></a><span class="fu">head</span>(cortisol_wide,<span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="14.3-example-data-ram-grimm-2007.html#cb484-1" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
+<span id="cb484-2"><a href="14.3-example-data-ram-grimm-2007.html#cb484-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb484-3"><a href="14.3-example-data-ram-grimm-2007.html#cb484-3" tabindex="-1"></a><span class="fu">library</span>(nlme)</span>
+<span id="cb484-4"><a href="14.3-example-data-ram-grimm-2007.html#cb484-4" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb484-5"><a href="14.3-example-data-ram-grimm-2007.html#cb484-5" tabindex="-1"></a></span>
+<span id="cb484-6"><a href="14.3-example-data-ram-grimm-2007.html#cb484-6" tabindex="-1"></a>filepath <span class="ot">&lt;-</span> <span class="st">&quot;https://quantdev.ssri.psu.edu/sites/qdev/files/TheCortisolData.csv&quot;</span></span>
+<span id="cb484-7"><a href="14.3-example-data-ram-grimm-2007.html#cb484-7" tabindex="-1"></a>cortisol_wide <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file=</span><span class="fu">url</span>(filepath),<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb484-8"><a href="14.3-example-data-ram-grimm-2007.html#cb484-8" tabindex="-1"></a><span class="fu">head</span>(cortisol_wide,<span class="dv">6</span>)</span></code></pre></div>
 <pre><code>##   id cort_0 cort_1 cort_2 cort_3 cort_4 cort_5 cort_6 cort_7 cort_8
 ## 1  1    4.2    4.1    9.7   14.0   19.0   18.0   20.0   23.0   24.0
 ## 2  2    5.5    5.6   14.0   16.0   19.0   17.0   18.0   20.0   19.0
@@ -655,22 +655,22 @@ div.csl-indent {
 <div id="reshaping-data" class="section level3 hasAnchor" number="14.3.2">
 <h3><span class="header-section-number">14.3.2</span> Reshaping Data<a href="14.3-example-data-ram-grimm-2007.html#reshaping-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We already have the wide format data. We make a set of long format data.</p>
-<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="14.3-example-data-ram-grimm-2007.html#cb488-1" tabindex="-1"></a>cortisol_long <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
-<span id="cb488-2"><a href="14.3-example-data-ram-grimm-2007.html#cb488-2" tabindex="-1"></a>  <span class="at">data =</span> cortisol_wide, </span>
-<span id="cb488-3"><a href="14.3-example-data-ram-grimm-2007.html#cb488-3" tabindex="-1"></a>  <span class="at">timevar =</span> <span class="fu">c</span>(<span class="st">&quot;time&quot;</span>), </span>
-<span id="cb488-4"><a href="14.3-example-data-ram-grimm-2007.html#cb488-4" tabindex="-1"></a>  <span class="at">idvar =</span> <span class="st">&quot;id&quot;</span>,</span>
-<span id="cb488-5"><a href="14.3-example-data-ram-grimm-2007.html#cb488-5" tabindex="-1"></a>  <span class="at">varying =</span> <span class="fu">c</span>(<span class="st">&quot;cort_0&quot;</span>,<span class="st">&quot;cort_1&quot;</span>,<span class="st">&quot;cort_2&quot;</span>,</span>
-<span id="cb488-6"><a href="14.3-example-data-ram-grimm-2007.html#cb488-6" tabindex="-1"></a>              <span class="st">&quot;cort_3&quot;</span>,<span class="st">&quot;cort_4&quot;</span>,<span class="st">&quot;cort_5&quot;</span>,</span>
-<span id="cb488-7"><a href="14.3-example-data-ram-grimm-2007.html#cb488-7" tabindex="-1"></a>              <span class="st">&quot;cort_6&quot;</span>,<span class="st">&quot;cort_7&quot;</span>,<span class="st">&quot;cort_8&quot;</span>),</span>
-<span id="cb488-8"><a href="14.3-example-data-ram-grimm-2007.html#cb488-8" tabindex="-1"></a>  <span class="at">direction=</span><span class="st">&quot;long&quot;</span>, </span>
-<span id="cb488-9"><a href="14.3-example-data-ram-grimm-2007.html#cb488-9" tabindex="-1"></a>  <span class="at">sep=</span><span class="st">&quot;_&quot;</span></span>
-<span id="cb488-10"><a href="14.3-example-data-ram-grimm-2007.html#cb488-10" tabindex="-1"></a>)</span>
-<span id="cb488-11"><a href="14.3-example-data-ram-grimm-2007.html#cb488-11" tabindex="-1"></a><span class="co"># sorting for easy viewing  order by id and time</span></span>
-<span id="cb488-12"><a href="14.3-example-data-ram-grimm-2007.html#cb488-12" tabindex="-1"></a>cortisol_long <span class="ot">&lt;-</span> cortisol_long[<span class="fu">order</span>(cortisol_long<span class="sc">$</span>id,cortisol_long<span class="sc">$</span>time), ]</span></code></pre></div>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="14.3-example-data-ram-grimm-2007.html#cb486-1" tabindex="-1"></a>cortisol_long <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
+<span id="cb486-2"><a href="14.3-example-data-ram-grimm-2007.html#cb486-2" tabindex="-1"></a>  <span class="at">data =</span> cortisol_wide, </span>
+<span id="cb486-3"><a href="14.3-example-data-ram-grimm-2007.html#cb486-3" tabindex="-1"></a>  <span class="at">timevar =</span> <span class="fu">c</span>(<span class="st">&quot;time&quot;</span>), </span>
+<span id="cb486-4"><a href="14.3-example-data-ram-grimm-2007.html#cb486-4" tabindex="-1"></a>  <span class="at">idvar =</span> <span class="st">&quot;id&quot;</span>,</span>
+<span id="cb486-5"><a href="14.3-example-data-ram-grimm-2007.html#cb486-5" tabindex="-1"></a>  <span class="at">varying =</span> <span class="fu">c</span>(<span class="st">&quot;cort_0&quot;</span>,<span class="st">&quot;cort_1&quot;</span>,<span class="st">&quot;cort_2&quot;</span>,</span>
+<span id="cb486-6"><a href="14.3-example-data-ram-grimm-2007.html#cb486-6" tabindex="-1"></a>              <span class="st">&quot;cort_3&quot;</span>,<span class="st">&quot;cort_4&quot;</span>,<span class="st">&quot;cort_5&quot;</span>,</span>
+<span id="cb486-7"><a href="14.3-example-data-ram-grimm-2007.html#cb486-7" tabindex="-1"></a>              <span class="st">&quot;cort_6&quot;</span>,<span class="st">&quot;cort_7&quot;</span>,<span class="st">&quot;cort_8&quot;</span>),</span>
+<span id="cb486-8"><a href="14.3-example-data-ram-grimm-2007.html#cb486-8" tabindex="-1"></a>  <span class="at">direction=</span><span class="st">&quot;long&quot;</span>, </span>
+<span id="cb486-9"><a href="14.3-example-data-ram-grimm-2007.html#cb486-9" tabindex="-1"></a>  <span class="at">sep=</span><span class="st">&quot;_&quot;</span></span>
+<span id="cb486-10"><a href="14.3-example-data-ram-grimm-2007.html#cb486-10" tabindex="-1"></a>)</span>
+<span id="cb486-11"><a href="14.3-example-data-ram-grimm-2007.html#cb486-11" tabindex="-1"></a><span class="co"># sorting for easy viewing  order by id and time</span></span>
+<span id="cb486-12"><a href="14.3-example-data-ram-grimm-2007.html#cb486-12" tabindex="-1"></a>cortisol_long <span class="ot">&lt;-</span> cortisol_long[<span class="fu">order</span>(cortisol_long<span class="sc">$</span>id,cortisol_long<span class="sc">$</span>time), ]</span></code></pre></div>
 <p>To match the scaling of time used in some of the papers we add an additional time variable that runs from 0 to 1.</p>
-<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="14.3-example-data-ram-grimm-2007.html#cb489-1" tabindex="-1"></a>cortisol_long<span class="sc">$</span>timescaled <span class="ot">&lt;-</span> (cortisol_long<span class="sc">$</span>time <span class="sc">-</span> <span class="dv">0</span>)<span class="sc">/</span><span class="dv">8</span></span></code></pre></div>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="14.3-example-data-ram-grimm-2007.html#cb487-1" tabindex="-1"></a>cortisol_long<span class="sc">$</span>timescaled <span class="ot">&lt;-</span> (cortisol_long<span class="sc">$</span>time <span class="sc">-</span> <span class="dv">0</span>)<span class="sc">/</span><span class="dv">8</span></span></code></pre></div>
 <p>Looking at the top few rows of the long data.</p>
-<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="14.3-example-data-ram-grimm-2007.html#cb490-1" tabindex="-1"></a><span class="fu">head</span>(cortisol_long,<span class="dv">18</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="14.3-example-data-ram-grimm-2007.html#cb488-1" tabindex="-1"></a><span class="fu">head</span>(cortisol_long,<span class="dv">18</span>)</span></code></pre></div>
 <pre><code>##     id time cort timescaled
 ## 1.0  1    0  4.2      0.000
 ## 1.1  1    1  4.1      0.125
@@ -694,8 +694,8 @@ div.csl-indent {
 <div id="descriptives" class="section level3 hasAnchor" number="14.3.3">
 <h3><span class="header-section-number">14.3.3</span> Descriptives<a href="14.3-example-data-ram-grimm-2007.html#descriptives" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Basic descriptives of the 9-occasion data.</p>
-<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="14.3-example-data-ram-grimm-2007.html#cb492-1" tabindex="-1"></a><span class="co">#means, sd, etc.</span></span>
-<span id="cb492-2"><a href="14.3-example-data-ram-grimm-2007.html#cb492-2" tabindex="-1"></a><span class="fu">describe</span>(cortisol_wide)</span></code></pre></div>
+<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="14.3-example-data-ram-grimm-2007.html#cb490-1" tabindex="-1"></a><span class="co">#means, sd, etc.</span></span>
+<span id="cb490-2"><a href="14.3-example-data-ram-grimm-2007.html#cb490-2" tabindex="-1"></a><span class="fu">describe</span>(cortisol_wide)</span></code></pre></div>
 <pre><code>##        vars  n  mean   sd median trimmed   mad min  max range  skew kurtosis
 ## id        1 34 17.50 9.96  17.50   17.50 12.60   1 34.0  33.0  0.00    -1.31
 ## cort_0    2 34  5.25 2.45   5.00    4.90  2.30   2 12.0  10.0  1.18     0.92
@@ -718,41 +718,41 @@ div.csl-indent {
 ## cort_6 0.78
 ## cort_7 0.82
 ## cort_8 0.96</code></pre>
-<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="14.3-example-data-ram-grimm-2007.html#cb494-1" tabindex="-1"></a><span class="co">#boxplot by day</span></span>
-<span id="cb494-2"><a href="14.3-example-data-ram-grimm-2007.html#cb494-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>cortisol_long, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(time), <span class="at">y=</span>cort)) <span class="sc">+</span> </span>
-<span id="cb494-3"><a href="14.3-example-data-ram-grimm-2007.html#cb494-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">notch =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb494-4"><a href="14.3-example-data-ram-grimm-2007.html#cb494-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.y=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">shape=</span><span class="dv">23</span>, <span class="at">size=</span><span class="dv">3</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
-<span id="cb494-5"><a href="14.3-example-data-ram-grimm-2007.html#cb494-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span></span>
-<span id="cb494-6"><a href="14.3-example-data-ram-grimm-2007.html#cb494-6" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-299-1.png" width="672" /></p>
-<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="14.3-example-data-ram-grimm-2007.html#cb495-1" tabindex="-1"></a><span class="co">#pairs plot from the psych library</span></span>
-<span id="cb495-2"><a href="14.3-example-data-ram-grimm-2007.html#cb495-2" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">pairs.panels</span>(</span>
-<span id="cb495-3"><a href="14.3-example-data-ram-grimm-2007.html#cb495-3" tabindex="-1"></a>  cortisol_wide[,<span class="fu">c</span>(</span>
-<span id="cb495-4"><a href="14.3-example-data-ram-grimm-2007.html#cb495-4" tabindex="-1"></a>    <span class="st">&quot;cort_0&quot;</span>,<span class="st">&quot;cort_1&quot;</span>,<span class="st">&quot;cort_2&quot;</span>,</span>
-<span id="cb495-5"><a href="14.3-example-data-ram-grimm-2007.html#cb495-5" tabindex="-1"></a>    <span class="st">&quot;cort_3&quot;</span>,<span class="st">&quot;cort_4&quot;</span>,<span class="st">&quot;cort_5&quot;</span>,</span>
-<span id="cb495-6"><a href="14.3-example-data-ram-grimm-2007.html#cb495-6" tabindex="-1"></a>    <span class="st">&quot;cort_6&quot;</span>,<span class="st">&quot;cort_7&quot;</span>,<span class="st">&quot;cort_8&quot;</span></span>
-<span id="cb495-7"><a href="14.3-example-data-ram-grimm-2007.html#cb495-7" tabindex="-1"></a>),])</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-299-2.png" width="672" /></p>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="14.3-example-data-ram-grimm-2007.html#cb492-1" tabindex="-1"></a><span class="co">#boxplot by day</span></span>
+<span id="cb492-2"><a href="14.3-example-data-ram-grimm-2007.html#cb492-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>cortisol_long, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(time), <span class="at">y=</span>cort)) <span class="sc">+</span> </span>
+<span id="cb492-3"><a href="14.3-example-data-ram-grimm-2007.html#cb492-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">notch =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb492-4"><a href="14.3-example-data-ram-grimm-2007.html#cb492-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.y=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">shape=</span><span class="dv">23</span>, <span class="at">size=</span><span class="dv">3</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb492-5"><a href="14.3-example-data-ram-grimm-2007.html#cb492-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span></span>
+<span id="cb492-6"><a href="14.3-example-data-ram-grimm-2007.html#cb492-6" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-298-1.png" width="672" /></p>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="14.3-example-data-ram-grimm-2007.html#cb493-1" tabindex="-1"></a><span class="co">#pairs plot from the psych library</span></span>
+<span id="cb493-2"><a href="14.3-example-data-ram-grimm-2007.html#cb493-2" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">pairs.panels</span>(</span>
+<span id="cb493-3"><a href="14.3-example-data-ram-grimm-2007.html#cb493-3" tabindex="-1"></a>  cortisol_wide[,<span class="fu">c</span>(</span>
+<span id="cb493-4"><a href="14.3-example-data-ram-grimm-2007.html#cb493-4" tabindex="-1"></a>    <span class="st">&quot;cort_0&quot;</span>,<span class="st">&quot;cort_1&quot;</span>,<span class="st">&quot;cort_2&quot;</span>,</span>
+<span id="cb493-5"><a href="14.3-example-data-ram-grimm-2007.html#cb493-5" tabindex="-1"></a>    <span class="st">&quot;cort_3&quot;</span>,<span class="st">&quot;cort_4&quot;</span>,<span class="st">&quot;cort_5&quot;</span>,</span>
+<span id="cb493-6"><a href="14.3-example-data-ram-grimm-2007.html#cb493-6" tabindex="-1"></a>    <span class="st">&quot;cort_6&quot;</span>,<span class="st">&quot;cort_7&quot;</span>,<span class="st">&quot;cort_8&quot;</span></span>
+<span id="cb493-7"><a href="14.3-example-data-ram-grimm-2007.html#cb493-7" tabindex="-1"></a>),])</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-298-2.png" width="672" /></p>
 </div>
 <div id="density-plots" class="section level3 hasAnchor" number="14.3.4">
 <h3><span class="header-section-number">14.3.4</span> Density Plots<a href="14.3-example-data-ram-grimm-2007.html#density-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="14.3-example-data-ram-grimm-2007.html#cb496-1" tabindex="-1"></a><span class="co">#Density distribution by day</span></span>
-<span id="cb496-2"><a href="14.3-example-data-ram-grimm-2007.html#cb496-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>cortisol_long, <span class="fu">aes</span>(<span class="at">x=</span>cort)) <span class="sc">+</span> </span>
-<span id="cb496-3"><a href="14.3-example-data-ram-grimm-2007.html#cb496-3" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(time), <span class="at">colour=</span><span class="fu">factor</span>(time), <span class="at">fill=</span><span class="fu">factor</span>(time)), <span class="at">alpha=</span><span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb496-4"><a href="14.3-example-data-ram-grimm-2007.html#cb496-4" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-300-1.png" width="672" /></p>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="14.3-example-data-ram-grimm-2007.html#cb494-1" tabindex="-1"></a><span class="co">#Density distribution by day</span></span>
+<span id="cb494-2"><a href="14.3-example-data-ram-grimm-2007.html#cb494-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>cortisol_long, <span class="fu">aes</span>(<span class="at">x=</span>cort)) <span class="sc">+</span> </span>
+<span id="cb494-3"><a href="14.3-example-data-ram-grimm-2007.html#cb494-3" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(time), <span class="at">colour=</span><span class="fu">factor</span>(time), <span class="at">fill=</span><span class="fu">factor</span>(time)), <span class="at">alpha=</span><span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb494-4"><a href="14.3-example-data-ram-grimm-2007.html#cb494-4" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-299-1.png" width="672" /></p>
 </div>
 <div id="individual-level-trajectories" class="section level3 hasAnchor" number="14.3.5">
 <h3><span class="header-section-number">14.3.5</span> Individual-level Trajectories<a href="14.3-example-data-ram-grimm-2007.html#individual-level-trajectories" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="14.3-example-data-ram-grimm-2007.html#cb497-1" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
-<span id="cb497-2"><a href="14.3-example-data-ram-grimm-2007.html#cb497-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> cort, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb497-3"><a href="14.3-example-data-ram-grimm-2007.html#cb497-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb497-4"><a href="14.3-example-data-ram-grimm-2007.html#cb497-4" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb497-5"><a href="14.3-example-data-ram-grimm-2007.html#cb497-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb497-6"><a href="14.3-example-data-ram-grimm-2007.html#cb497-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb497-7"><a href="14.3-example-data-ram-grimm-2007.html#cb497-7" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb497-8"><a href="14.3-example-data-ram-grimm-2007.html#cb497-8" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-301-1.png" width="672" /></p>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="14.3-example-data-ram-grimm-2007.html#cb495-1" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
+<span id="cb495-2"><a href="14.3-example-data-ram-grimm-2007.html#cb495-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> cort, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb495-3"><a href="14.3-example-data-ram-grimm-2007.html#cb495-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb495-4"><a href="14.3-example-data-ram-grimm-2007.html#cb495-4" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb495-5"><a href="14.3-example-data-ram-grimm-2007.html#cb495-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb495-6"><a href="14.3-example-data-ram-grimm-2007.html#cb495-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb495-7"><a href="14.3-example-data-ram-grimm-2007.html#cb495-7" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb495-8"><a href="14.3-example-data-ram-grimm-2007.html#cb495-8" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-300-1.png" width="672" /></p>
 </div>
 </div>
 <h3>References</h3>
