@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>15.8 Data Example 2 | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
+  <meta name="description" content="Course notes for HDFS 523" />
+  <meta name="generator" content="bookdown 0.37.2 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="15.8 Data Example 2 | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/images/image1.png" />
+  <meta property="og:description" content="Course notes for HDFS 523" />
+  <meta name="github-repo" content="zackfisher/HDFS523" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="15.8 Data Example 2 | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  
+  <meta name="twitter:description" content="Course notes for HDFS 523" />
+  <meta name="twitter:image" content="/images/image1.png" />
+
+<meta name="author" content="Zachary F. Fisher" />
+
+
+<meta name="date" content="2024-03-27" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="15.7-data-example.html"/>
+<link rel="next" href="15.9-reference.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="assets/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Course notes for HDFS 523</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1.1-why-this-book.html"><a href="1.1-why-this-book.html"><i class="fa fa-check"></i><b>1.1</b> Why this book?</a></li>
+<li class="chapter" data-level="1.2" data-path="1.2-code-folding.html"><a href="1.2-code-folding.html"><i class="fa fa-check"></i><b>1.2</b> Code Folding</a></li>
+<li class="chapter" data-level="1.3" data-path="1.3-acknowledgements.html"><a href="1.3-acknowledgements.html"><i class="fa fa-check"></i><b>1.3</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="2-chapter-2.html"><a href="2-chapter-2.html"><i class="fa fa-check"></i><b>2</b> Data Cleaning</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2.1-example-data.html"><a href="2.1-example-data.html"><i class="fa fa-check"></i><b>2.1</b> Example Data</a></li>
+<li class="chapter" data-level="2.2" data-path="2.2-reading-in-repeated-measures-data.html"><a href="2.2-reading-in-repeated-measures-data.html"><i class="fa fa-check"></i><b>2.2</b> Reading in Repeated Measures Data</a></li>
+<li class="chapter" data-level="2.3" data-path="2.3-familiarize-yourself-with-the-data.html"><a href="2.3-familiarize-yourself-with-the-data.html"><i class="fa fa-check"></i><b>2.3</b> Familiarize Yourself with the Data</a></li>
+<li class="chapter" data-level="2.4" data-path="2.4-look-for-duplicated-ids.html"><a href="2.4-look-for-duplicated-ids.html"><i class="fa fa-check"></i><b>2.4</b> Look for Duplicated IDs</a></li>
+<li class="chapter" data-level="2.5" data-path="2.5-using-table-to-spot-irregularities.html"><a href="2.5-using-table-to-spot-irregularities.html"><i class="fa fa-check"></i><b>2.5</b> Using <code>table()</code> to Spot Irregularities</a></li>
+<li class="chapter" data-level="2.6" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html"><i class="fa fa-check"></i><b>2.6</b> Missing Data</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#generating-example-data"><i class="fa fa-check"></i><b>2.6.1</b> Generating Example Data</a></li>
+<li class="chapter" data-level="2.6.2" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#recoding-values-with-na"><i class="fa fa-check"></i><b>2.6.2</b> Recoding Values with <code>NA</code></a></li>
+<li class="chapter" data-level="2.6.3" data-path="2.6-missing-data.html"><a href="2.6-missing-data.html#missing-data-visualization"><i class="fa fa-check"></i><b>2.6.3</b> Missing Data Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="2.7-exporting-data.html"><a href="2.7-exporting-data.html"><i class="fa fa-check"></i><b>2.7</b> Exporting Data</a></li>
+<li class="chapter" data-level="2.8" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html"><i class="fa fa-check"></i><b>2.8</b> Reshaping Repeated Measures Data</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html#reshape-wide-to-long"><i class="fa fa-check"></i><b>2.8.1</b> Reshape Wide to Long</a></li>
+<li class="chapter" data-level="2.8.2" data-path="2.8-reshaping-repeated-measures-data.html"><a href="2.8-reshaping-repeated-measures-data.html#reshape-long-to-wide"><i class="fa fa-check"></i><b>2.8.2</b> Reshape Long to Wide</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-chapter-3.html"><a href="3-chapter-3.html"><i class="fa fa-check"></i><b>3</b> Describing Longitudinal Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3.1-example-data-1.html"><a href="3.1-example-data-1.html"><i class="fa fa-check"></i><b>3.1</b> Example Data</a></li>
+<li class="chapter" data-level="3.2" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html"><i class="fa fa-check"></i><b>3.2</b> Describing Means and Variances</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html#verbal-ability-all-persons-and-occasions"><i class="fa fa-check"></i><b>3.2.1</b> Verbal Ability (All Persons and Occasions)</a></li>
+<li class="chapter" data-level="3.2.2" data-path="3.2-describing-means-and-variances.html"><a href="3.2-describing-means-and-variances.html#verbal-ability-across-time"><i class="fa fa-check"></i><b>3.2.2</b> Verbal Ability (Across Time)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="3.3-describing-covariances.html"><a href="3.3-describing-covariances.html"><i class="fa fa-check"></i><b>3.3</b> Describing Covariances</a></li>
+<li class="chapter" data-level="3.4" data-path="3.4-individual-level-descriptives.html"><a href="3.4-individual-level-descriptives.html"><i class="fa fa-check"></i><b>3.4</b> Individual-Level Descriptives</a></li>
+<li class="chapter" data-level="3.5" data-path="3.5-references.html"><a href="3.5-references.html"><i class="fa fa-check"></i><b>3.5</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-chapter-4.html"><a href="4-chapter-4.html"><i class="fa fa-check"></i><b>4</b> Matrix Algebra</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html"><i class="fa fa-check"></i><b>4.1</b> Types of matrices</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#square"><i class="fa fa-check"></i><b>4.1.1</b> Square</a></li>
+<li class="chapter" data-level="4.1.2" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#symmetric"><i class="fa fa-check"></i><b>4.1.2</b> Symmetric</a></li>
+<li class="chapter" data-level="4.1.3" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#diagonal"><i class="fa fa-check"></i><b>4.1.3</b> Diagonal</a></li>
+<li class="chapter" data-level="4.1.4" data-path="4.1-types-of-matrices.html"><a href="4.1-types-of-matrices.html#identity"><i class="fa fa-check"></i><b>4.1.4</b> Identity</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html"><i class="fa fa-check"></i><b>4.2</b> Operations on Matrices</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-transpose"><i class="fa fa-check"></i><b>4.2.1</b> Matrix Transpose</a></li>
+<li class="chapter" data-level="4.2.2" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-trace"><i class="fa fa-check"></i><b>4.2.2</b> Matrix Trace</a></li>
+<li class="chapter" data-level="4.2.3" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#addition"><i class="fa fa-check"></i><b>4.2.3</b> Addition</a></li>
+<li class="chapter" data-level="4.2.4" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#subtraction"><i class="fa fa-check"></i><b>4.2.4</b> Subtraction</a></li>
+<li class="chapter" data-level="4.2.5" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-multiplication"><i class="fa fa-check"></i><b>4.2.5</b> Matrix Multiplication</a></li>
+<li class="chapter" data-level="4.2.6" data-path="4.2-operations-on-matrices.html"><a href="4.2-operations-on-matrices.html#matrix-division"><i class="fa fa-check"></i><b>4.2.6</b> Matrix Division</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="4.3-references-1.html"><a href="4.3-references-1.html"><i class="fa fa-check"></i><b>4.3</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-chapter-5.html"><a href="5-chapter-5.html"><i class="fa fa-check"></i><b>5</b> Ordinary Least Squares</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="5.1-linear-regression-model.html"><a href="5.1-linear-regression-model.html"><i class="fa fa-check"></i><b>5.1</b> Linear Regression Model</a></li>
+<li class="chapter" data-level="5.2" data-path="5.2-ordinary-least-squares-ols.html"><a href="5.2-ordinary-least-squares-ols.html"><i class="fa fa-check"></i><b>5.2</b> Ordinary Least Squares (OLS)</a></li>
+<li class="chapter" data-level="5.3" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html"><i class="fa fa-check"></i><b>5.3</b> Assumptions of OLS</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#assumption-1.-mathbbeepsilon_i-0"><i class="fa fa-check"></i><b>5.3.1</b> Assumption 1. <span class="math inline">\(\mathbb{E}(\epsilon_{i}) = 0\)</span></a></li>
+<li class="chapter" data-level="5.3.2" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#assumption-2.-homoscedasticity"><i class="fa fa-check"></i><b>5.3.2</b> Assumption 2. Homoscedasticity</a></li>
+<li class="chapter" data-level="5.3.3" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#mathbbeepsilon_iepsilon_j-0"><i class="fa fa-check"></i><b>5.3.3</b> 3. <span class="math inline">\(\mathbb{E}(\epsilon_{i}\epsilon_{j}) = 0\)</span></a></li>
+<li class="chapter" data-level="5.3.4" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#no-perfect-collinearity"><i class="fa fa-check"></i><b>5.3.4</b> 4. No Perfect Collinearity</a></li>
+<li class="chapter" data-level="5.3.5" data-path="5.3-assumptions-of-ols.html"><a href="5.3-assumptions-of-ols.html#mathbbcepsilon_ix_ki-0"><i class="fa fa-check"></i><b>5.3.5</b> 5. <span class="math inline">\(\mathbb{C}(\epsilon_{i},x_{ki}) = 0\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html"><i class="fa fa-check"></i><b>5.4</b> Properties of the OLS Estimator</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html#consistentcy-of-boldsymbolbeta"><i class="fa fa-check"></i><b>5.4.1</b> 1. Consistentcy of <span class="math inline">\(\boldsymbol{{\beta}}\)</span></a></li>
+<li class="chapter" data-level="5.4.2" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html#asymptotic-normality"><i class="fa fa-check"></i><b>5.4.2</b> 2. Asymptotic Normality</a></li>
+<li class="chapter" data-level="5.4.3" data-path="5.4-properties-of-the-ols-estimator.html"><a href="5.4-properties-of-the-ols-estimator.html#variance-of-hatbeta"><i class="fa fa-check"></i><b>5.4.3</b> Variance of <span class="math inline">\(\hat{\beta}\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html"><i class="fa fa-check"></i><b>5.5</b> Failure to Meet Assumptions</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html#failure-of-assumption-1."><i class="fa fa-check"></i><b>5.5.1</b> Failure of Assumption 1.</a></li>
+<li class="chapter" data-level="5.5.2" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html#failure-of-assumption-2-or-3."><i class="fa fa-check"></i><b>5.5.2</b> Failure of Assumption 2 or 3.</a></li>
+<li class="chapter" data-level="5.5.3" data-path="5.5-failure-to-meet-assumptions.html"><a href="5.5-failure-to-meet-assumptions.html#failure-of-assumption-5."><i class="fa fa-check"></i><b>5.5.3</b> Failure of Assumption 5.</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html"><i class="fa fa-check"></i><b>5.6</b> Regression and Matrix Notation</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#an-intercept-only-model"><i class="fa fa-check"></i><b>5.6.1</b> An Intercept-Only Model</a></li>
+<li class="chapter" data-level="5.6.2" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#intercept-only-model-in-matrix-form"><i class="fa fa-check"></i><b>5.6.2</b> Intercept-Only Model in Matrix Form</a></li>
+<li class="chapter" data-level="5.6.3" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#simple-regression-in-matrix-form"><i class="fa fa-check"></i><b>5.6.3</b> Simple Regression in Matrix Form</a></li>
+<li class="chapter" data-level="5.6.4" data-path="5.6-regression-and-matrix-notation.html"><a href="5.6-regression-and-matrix-notation.html#multiple-regression-in-matrix-form"><i class="fa fa-check"></i><b>5.6.4</b> Multiple Regression in Matrix Form</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html"><i class="fa fa-check"></i><b>5.7</b> Solving the Regression Equation</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html#matrix-multiplication-and-transpose"><i class="fa fa-check"></i><b>5.7.1</b> Matrix Multiplication and Transpose</a></li>
+<li class="chapter" data-level="5.7.2" data-path="5.7-solving-the-regression-equation.html"><a href="5.7-solving-the-regression-equation.html#matrix-inverse"><i class="fa fa-check"></i><b>5.7.2</b> Matrix Inverse</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html"><i class="fa fa-check"></i><b>5.8</b> The Linear Probability Model</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html#advantages-of-the-lpm"><i class="fa fa-check"></i><b>5.8.1</b> Advantages of the LPM</a></li>
+<li class="chapter" data-level="5.8.2" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html#disadvantages-of-the-lpm"><i class="fa fa-check"></i><b>5.8.2</b> Disadvantages of the LPM</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-chapter-6.html"><a href="6-chapter-6.html"><i class="fa fa-check"></i><b>6</b> Statistical Control</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="6.1-statistical-control.html"><a href="6.1-statistical-control.html"><i class="fa fa-check"></i><b>6.1</b> Statistical Control</a></li>
+<li class="chapter" data-level="6.2" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html"><i class="fa fa-check"></i><b>6.2</b> Directed Acyclic Graphs (DAGs)</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html#introduction-to-dags"><i class="fa fa-check"></i><b>6.2.1</b> Introduction to DAGs</a></li>
+<li class="chapter" data-level="6.2.2" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html#introduction-to-dags-paths"><i class="fa fa-check"></i><b>6.2.2</b> Introduction to DAGs: Paths</a></li>
+<li class="chapter" data-level="6.2.3" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html#introduction-to-dags-chains"><i class="fa fa-check"></i><b>6.2.3</b> Introduction to DAGs: Chains</a></li>
+<li class="chapter" data-level="6.2.4" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html#introduction-to-dags-descendants-and-ancestors"><i class="fa fa-check"></i><b>6.2.4</b> Introduction to DAGs: Descendants and Ancestors</a></li>
+<li class="chapter" data-level="6.2.5" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html#introduction-to-dags-forks"><i class="fa fa-check"></i><b>6.2.5</b> Introduction to DAGs: Forks</a></li>
+<li class="chapter" data-level="6.2.6" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html#introduction-to-dags-inverted-forks"><i class="fa fa-check"></i><b>6.2.6</b> Introduction to DAGs: Inverted Forks</a></li>
+<li class="chapter" data-level="6.2.7" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html#introduction-to-dags-acyclicity"><i class="fa fa-check"></i><b>6.2.7</b> Introduction to DAGs: Acyclicity</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="6.3-statistical-control-done-right.html"><a href="6.3-statistical-control-done-right.html"><i class="fa fa-check"></i><b>6.3</b> Statistical Control Done Right</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="6.3-statistical-control-done-right.html"><a href="6.3-statistical-control-done-right.html#building-a-dag"><i class="fa fa-check"></i><b>6.3.1</b> Building a DAG</a></li>
+<li class="chapter" data-level="6.3.2" data-path="6.3-statistical-control-done-right.html"><a href="6.3-statistical-control-done-right.html#building-a-dag-back-door-paths"><i class="fa fa-check"></i><b>6.3.2</b> Building a DAG: Back-Door Paths</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="6.4-statistical-control-gone-wrong.html"><a href="6.4-statistical-control-gone-wrong.html"><i class="fa fa-check"></i><b>6.4</b> Statistical Control Gone Wrong</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="6.4-statistical-control-gone-wrong.html"><a href="6.4-statistical-control-gone-wrong.html#collider-bias"><i class="fa fa-check"></i><b>6.4.1</b> Collider Bias</a></li>
+<li class="chapter" data-level="6.4.2" data-path="6.4-statistical-control-gone-wrong.html"><a href="6.4-statistical-control-gone-wrong.html#conditioning-on-a-collider"><i class="fa fa-check"></i><b>6.4.2</b> Conditioning on a Collider</a></li>
+<li class="chapter" data-level="6.4.3" data-path="6.4-statistical-control-gone-wrong.html"><a href="6.4-statistical-control-gone-wrong.html#avoiding-collider-bias"><i class="fa fa-check"></i><b>6.4.3</b> Avoiding Collider Bias</a></li>
+<li class="chapter" data-level="6.4.4" data-path="6.4-statistical-control-gone-wrong.html"><a href="6.4-statistical-control-gone-wrong.html#variations-on-collider-bias-nonresponse-bias"><i class="fa fa-check"></i><b>6.4.4</b> Variations on Collider Bias: Nonresponse Bias</a></li>
+<li class="chapter" data-level="6.4.5" data-path="6.4-statistical-control-gone-wrong.html"><a href="6.4-statistical-control-gone-wrong.html#controlling-for-mediators"><i class="fa fa-check"></i><b>6.4.5</b> Controlling for Mediators</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="7-chapter-7.html"><a href="7-chapter-7.html"><i class="fa fa-check"></i><b>7</b> Linear Regression</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="7.1-example-data-2.html"><a href="7.1-example-data-2.html"><i class="fa fa-check"></i><b>7.1</b> Example Data</a></li>
+<li class="chapter" data-level="7.2" data-path="7.2-intercept-only-model.html"><a href="7.2-intercept-only-model.html"><i class="fa fa-check"></i><b>7.2</b> Intercept-Only Model</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="7.2-intercept-only-model.html"><a href="7.2-intercept-only-model.html#intercept-only-equation"><i class="fa fa-check"></i><b>7.2.1</b> Intercept-Only Equation</a></li>
+<li class="chapter" data-level="7.2.2" data-path="7.2-intercept-only-model.html"><a href="7.2-intercept-only-model.html#intercept-only-model-in-r"><i class="fa fa-check"></i><b>7.2.2</b> Intercept-Only Model in R</a></li>
+<li class="chapter" data-level="7.2.3" data-path="7.2-intercept-only-model.html"><a href="7.2-intercept-only-model.html#intercept-as-mean-of-outcome"><i class="fa fa-check"></i><b>7.2.3</b> Intercept as Mean of Outcome</a></li>
+<li class="chapter" data-level="7.2.4" data-path="7.2-intercept-only-model.html"><a href="7.2-intercept-only-model.html#intercept-only-model-r2"><i class="fa fa-check"></i><b>7.2.4</b> Intercept-Only Model <span class="math inline">\(R^2\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="7.3-simple-linear-regression.html"><a href="7.3-simple-linear-regression.html"><i class="fa fa-check"></i><b>7.3</b> Simple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="7.3-simple-linear-regression.html"><a href="7.3-simple-linear-regression.html#regression-equation-and-model-fitting"><i class="fa fa-check"></i><b>7.3.1</b> Regression Equation and Model Fitting</a></li>
+<li class="chapter" data-level="7.3.2" data-path="7.3-simple-linear-regression.html"><a href="7.3-simple-linear-regression.html#path-diagram"><i class="fa fa-check"></i><b>7.3.2</b> Path Diagram</a></li>
+<li class="chapter" data-level="7.3.3" data-path="7.3-simple-linear-regression.html"><a href="7.3-simple-linear-regression.html#interpreting-model-parameters"><i class="fa fa-check"></i><b>7.3.3</b> Interpreting Model Parameters</a></li>
+<li class="chapter" data-level="7.3.4" data-path="7.3-simple-linear-regression.html"><a href="7.3-simple-linear-regression.html#plotting-regression-line"><i class="fa fa-check"></i><b>7.3.4</b> Plotting Regression Line</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="7.4-mean-centering-predictors.html"><a href="7.4-mean-centering-predictors.html"><i class="fa fa-check"></i><b>7.4</b> Mean Centering Predictors</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="7.4-mean-centering-predictors.html"><a href="7.4-mean-centering-predictors.html#interpreting-model-parameters-1"><i class="fa fa-check"></i><b>7.4.1</b> Interpreting Model Parameters</a></li>
+<li class="chapter" data-level="7.4.2" data-path="7.4-mean-centering-predictors.html"><a href="7.4-mean-centering-predictors.html#plotting-regression-line-1"><i class="fa fa-check"></i><b>7.4.2</b> Plotting Regression Line</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="7.5-multiple-linear-regression.html"><a href="7.5-multiple-linear-regression.html"><i class="fa fa-check"></i><b>7.5</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="7.5-multiple-linear-regression.html"><a href="7.5-multiple-linear-regression.html#regression-equation"><i class="fa fa-check"></i><b>7.5.1</b> Regression Equation</a></li>
+<li class="chapter" data-level="7.5.2" data-path="7.5-multiple-linear-regression.html"><a href="7.5-multiple-linear-regression.html#fit-model-in-r"><i class="fa fa-check"></i><b>7.5.2</b> Fit Model in R</a></li>
+<li class="chapter" data-level="7.5.3" data-path="7.5-multiple-linear-regression.html"><a href="7.5-multiple-linear-regression.html#path-diagram-1"><i class="fa fa-check"></i><b>7.5.3</b> Path Diagram</a></li>
+<li class="chapter" data-level="7.5.4" data-path="7.5-multiple-linear-regression.html"><a href="7.5-multiple-linear-regression.html#a-note-on-interpretation"><i class="fa fa-check"></i><b>7.5.4</b> A Note on Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html"><i class="fa fa-check"></i><b>7.6</b> Categorical Variable Interaction</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html#interaction-as-moderation"><i class="fa fa-check"></i><b>7.6.1</b> Interaction as Moderation</a></li>
+<li class="chapter" data-level="7.6.2" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html#moderation-by-categorical-variable"><i class="fa fa-check"></i><b>7.6.2</b> Moderation by Categorical Variable</a></li>
+<li class="chapter" data-level="7.6.3" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html#interpretation"><i class="fa fa-check"></i><b>7.6.3</b> Interpretation</a></li>
+<li class="chapter" data-level="7.6.4" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html#fit-regression-model-in-r"><i class="fa fa-check"></i><b>7.6.4</b> Fit Regression Model in R</a></li>
+<li class="chapter" data-level="7.6.5" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html#path-diagram-2"><i class="fa fa-check"></i><b>7.6.5</b> Path Diagram</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="8-chapter-8.html"><a href="8-chapter-8.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="8.1-categorical-data-in-the-social-sciences.html"><a href="8.1-categorical-data-in-the-social-sciences.html"><i class="fa fa-check"></i><b>8.1</b> Categorical Data in the Social Sciences</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="8.1-categorical-data-in-the-social-sciences.html"><a href="8.1-categorical-data-in-the-social-sciences.html#examples-of-categorical-data"><i class="fa fa-check"></i><b>8.1.1</b> Examples of Categorical Data</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="8.2-introduction-to-glms.html"><a href="8.2-introduction-to-glms.html"><i class="fa fa-check"></i><b>8.2</b> Introduction to GLMs</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="8.2-introduction-to-glms.html"><a href="8.2-introduction-to-glms.html#linear-regression-as-glm"><i class="fa fa-check"></i><b>8.2.1</b> Linear Regression as GLM</a></li>
+<li class="chapter" data-level="8.2.2" data-path="8.2-introduction-to-glms.html"><a href="8.2-introduction-to-glms.html#logistic-regression-as-glm"><i class="fa fa-check"></i><b>8.2.2</b> Logistic Regression as GLM</a></li>
+<li class="chapter" data-level="8.2.3" data-path="8.2-introduction-to-glms.html"><a href="8.2-introduction-to-glms.html#poisson-regression-as-glm"><i class="fa fa-check"></i><b>8.2.3</b> Poisson Regression as GLM</a></li>
+<li class="chapter" data-level="8.2.4" data-path="8.2-introduction-to-glms.html"><a href="8.2-introduction-to-glms.html#additional-remarks"><i class="fa fa-check"></i><b>8.2.4</b> Additional Remarks</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="8.3-binary-logistic-regression.html"><a href="8.3-binary-logistic-regression.html"><i class="fa fa-check"></i><b>8.3</b> Binary Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="8.3-binary-logistic-regression.html"><a href="8.3-binary-logistic-regression.html#overcoming-lpm"><i class="fa fa-check"></i><b>8.3.1</b> Overcoming LPM</a></li>
+<li class="chapter" data-level="8.3.2" data-path="8.3-binary-logistic-regression.html"><a href="8.3-binary-logistic-regression.html#model"><i class="fa fa-check"></i><b>8.3.2</b> Model</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="8.4-example-data-3.html"><a href="8.4-example-data-3.html"><i class="fa fa-check"></i><b>8.4</b> Example Data</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="8.4-example-data-3.html"><a href="8.4-example-data-3.html#variables"><i class="fa fa-check"></i><b>8.4.1</b> Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="8.5-intercept-only-model-1.html"><a href="8.5-intercept-only-model-1.html"><i class="fa fa-check"></i><b>8.5</b> Intercept-Only Model</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="8.5-intercept-only-model-1.html"><a href="8.5-intercept-only-model-1.html#intercept-only-model-in-r-1"><i class="fa fa-check"></i><b>8.5.1</b> Intercept-Only Model in R</a></li>
+<li class="chapter" data-level="8.5.2" data-path="8.5-intercept-only-model-1.html"><a href="8.5-intercept-only-model-1.html#interpretation-1"><i class="fa fa-check"></i><b>8.5.2</b> Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="8.6-single-predictor-model.html"><a href="8.6-single-predictor-model.html"><i class="fa fa-check"></i><b>8.6</b> Single Predictor Model</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="8.6-single-predictor-model.html"><a href="8.6-single-predictor-model.html#overdispersion"><i class="fa fa-check"></i><b>8.6.1</b> Overdispersion</a></li>
+<li class="chapter" data-level="8.6.2" data-path="8.6-single-predictor-model.html"><a href="8.6-single-predictor-model.html#coefficients"><i class="fa fa-check"></i><b>8.6.2</b> Coefficients</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="8.7-marginal-effects.html"><a href="8.7-marginal-effects.html"><i class="fa fa-check"></i><b>8.7</b> Marginal Effects</a>
+<ul>
+<li class="chapter" data-level="8.7.1" data-path="8.7-marginal-effects.html"><a href="8.7-marginal-effects.html#a-definition-of-marginal-effects"><i class="fa fa-check"></i><b>8.7.1</b> A Definition of Marginal Effects</a></li>
+<li class="chapter" data-level="8.7.2" data-path="8.7-marginal-effects.html"><a href="8.7-marginal-effects.html#a-few-observations"><i class="fa fa-check"></i><b>8.7.2</b> A Few Observations</a></li>
+<li class="chapter" data-level="8.7.3" data-path="8.7-marginal-effects.html"><a href="8.7-marginal-effects.html#types-of-marginal-effects"><i class="fa fa-check"></i><b>8.7.3</b> Types of Marginal Effects</a></li>
+<li class="chapter" data-level="8.7.4" data-path="8.7-marginal-effects.html"><a href="8.7-marginal-effects.html#example-model"><i class="fa fa-check"></i><b>8.7.4</b> Example Model</a></li>
+<li class="chapter" data-level="8.7.5" data-path="8.7-marginal-effects.html"><a href="8.7-marginal-effects.html#marginal-effects-at-representative-values-mer"><i class="fa fa-check"></i><b>8.7.5</b> Marginal Effects at Representative Values (MER)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="9-chapter-9.html"><a href="9-chapter-9.html"><i class="fa fa-check"></i><b>9</b> Poisson Regression</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="9.1-poisson-regression.html"><a href="9.1-poisson-regression.html"><i class="fa fa-check"></i><b>9.1</b> Poisson Regression</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="9.1-poisson-regression.html"><a href="9.1-poisson-regression.html#review-of-glm"><i class="fa fa-check"></i><b>9.1.1</b> Review of GLM</a></li>
+<li class="chapter" data-level="9.1.2" data-path="9.1-poisson-regression.html"><a href="9.1-poisson-regression.html#poisson-regression-as-glm-1"><i class="fa fa-check"></i><b>9.1.2</b> Poisson Regression as GLM</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="9.2-poisson-distribution.html"><a href="9.2-poisson-distribution.html"><i class="fa fa-check"></i><b>9.2</b> Poisson Distribution</a></li>
+<li class="chapter" data-level="9.3" data-path="9.3-notes-on-interpretation.html"><a href="9.3-notes-on-interpretation.html"><i class="fa fa-check"></i><b>9.3</b> Notes on Interpretation</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="9.3-notes-on-interpretation.html"><a href="9.3-notes-on-interpretation.html#one-predictor-model"><i class="fa fa-check"></i><b>9.3.1</b> One Predictor Model</a></li>
+<li class="chapter" data-level="9.3.2" data-path="9.3-notes-on-interpretation.html"><a href="9.3-notes-on-interpretation.html#similarity-to-logistic-regression"><i class="fa fa-check"></i><b>9.3.2</b> Similarity to Logistic Regression</a></li>
+<li class="chapter" data-level="9.3.3" data-path="9.3-notes-on-interpretation.html"><a href="9.3-notes-on-interpretation.html#percentchange"><i class="fa fa-check"></i><b>9.3.3</b> Percent Change</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="9.4-example-data-4.html"><a href="9.4-example-data-4.html"><i class="fa fa-check"></i><b>9.4</b> Example Data</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="9.4-example-data-4.html"><a href="9.4-example-data-4.html#dependent-variable"><i class="fa fa-check"></i><b>9.4.1</b> Dependent variable</a></li>
+<li class="chapter" data-level="9.4.2" data-path="9.4-example-data-4.html"><a href="9.4-example-data-4.html#explanatory-variables"><i class="fa fa-check"></i><b>9.4.2</b> Explanatory Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="9.5-single-predictor-model-1.html"><a href="9.5-single-predictor-model-1.html"><i class="fa fa-check"></i><b>9.5</b> Single Predictor Model</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="9.5-single-predictor-model-1.html"><a href="9.5-single-predictor-model-1.html#read-in-data"><i class="fa fa-check"></i><b>9.5.1</b> Read in Data</a></li>
+<li class="chapter" data-level="9.5.2" data-path="9.5-single-predictor-model-1.html"><a href="9.5-single-predictor-model-1.html#single-predictor-model-in-glm"><i class="fa fa-check"></i><b>9.5.2</b> Single Predictor Model in GLM</a></li>
+<li class="chapter" data-level="9.5.3" data-path="9.5-single-predictor-model-1.html"><a href="9.5-single-predictor-model-1.html#deviance-and-goodness-of-fit"><i class="fa fa-check"></i><b>9.5.3</b> Deviance and Goodness of Fit</a></li>
+<li class="chapter" data-level="9.5.4" data-path="9.5-single-predictor-model-1.html"><a href="9.5-single-predictor-model-1.html#overdispersion-1"><i class="fa fa-check"></i><b>9.5.4</b> Overdispersion?</a></li>
+<li class="chapter" data-level="9.5.5" data-path="9.5-single-predictor-model-1.html"><a href="9.5-single-predictor-model-1.html#interpretation-of-single-predictor-model"><i class="fa fa-check"></i><b>9.5.5</b> Interpretation of Single Predictor Model</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="9.6-multiple-predictor-model.html"><a href="9.6-multiple-predictor-model.html"><i class="fa fa-check"></i><b>9.6</b> Multiple Predictor Model</a></li>
+<li class="chapter" data-level="9.7" data-path="9.7-revisisting-overdispersion.html"><a href="9.7-revisisting-overdispersion.html"><i class="fa fa-check"></i><b>9.7</b> Revisisting Overdispersion</a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="9.7-revisisting-overdispersion.html"><a href="9.7-revisisting-overdispersion.html#quassi-poisson-family"><i class="fa fa-check"></i><b>9.7.1</b> Quassi-Poisson Family</a></li>
+<li class="chapter" data-level="9.7.2" data-path="9.7-revisisting-overdispersion.html"><a href="9.7-revisisting-overdispersion.html#marginal-effects-examples"><i class="fa fa-check"></i><b>9.7.2</b> Marginal Effects Examples</a></li>
+<li class="chapter" data-level="9.7.3" data-path="9.7-revisisting-overdispersion.html"><a href="9.7-revisisting-overdispersion.html#references-2"><i class="fa fa-check"></i><b>9.7.3</b> References</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="10-chapter-10.html"><a href="10-chapter-10.html"><i class="fa fa-check"></i><b>10</b> Marginal Effects</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="10.1-reintroducing-marginal-effects.html"><a href="10.1-reintroducing-marginal-effects.html"><i class="fa fa-check"></i><b>10.1</b> Reintroducing Marginal Effects</a></li>
+<li class="chapter" data-level="10.2" data-path="10.2-data-from-ferraro-et-al.-2016.html"><a href="10.2-data-from-ferraro-et-al.-2016.html"><i class="fa fa-check"></i><b>10.2</b> Data from Ferraro et al. (2016)</a></li>
+<li class="chapter" data-level="10.3" data-path="10.3-fitting-a-quasi-poisson-model.html"><a href="10.3-fitting-a-quasi-poisson-model.html"><i class="fa fa-check"></i><b>10.3</b> Fitting a Quasi-Poisson Model</a></li>
+<li class="chapter" data-level="10.4" data-path="10.4-marginaleffects-slopes.html"><a href="10.4-marginaleffects-slopes.html"><i class="fa fa-check"></i><b>10.4</b> <code>marginaleffects: Slopes</code></a></li>
+<li class="chapter" data-level="10.5" data-path="10.5-marginaleffects-predictions.html"><a href="10.5-marginaleffects-predictions.html"><i class="fa fa-check"></i><b>10.5</b> <code>marginaleffects: Predictions</code></a></li>
+<li class="chapter" data-level="10.6" data-path="10.6-references-3.html"><a href="10.6-references-3.html"><i class="fa fa-check"></i><b>10.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="11-chapter-11.html"><a href="11-chapter-11.html"><i class="fa fa-check"></i><b>11</b> Two-Occassion Change</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="11.1-introduction.html"><a href="11.1-introduction.html"><i class="fa fa-check"></i><b>11.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="11.1-introduction.html"><a href="11.1-introduction.html#a-thought-experiment"><i class="fa fa-check"></i><b>11.1.1</b> A Thought Experiment</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="11.2-example-data-i.html"><a href="11.2-example-data-i.html"><i class="fa fa-check"></i><b>11.2</b> Example Data I</a></li>
+<li class="chapter" data-level="11.3" data-path="11.3-two-occassions-of-change.html"><a href="11.3-two-occassions-of-change.html"><i class="fa fa-check"></i><b>11.3</b> Two-Occassions of Change</a></li>
+<li class="chapter" data-level="11.4" data-path="11.4-autoregressive-model.html"><a href="11.4-autoregressive-model.html"><i class="fa fa-check"></i><b>11.4</b> Autoregressive Model</a></li>
+<li class="chapter" data-level="11.5" data-path="11.5-difference-score-model.html"><a href="11.5-difference-score-model.html"><i class="fa fa-check"></i><b>11.5</b> Difference Score Model</a></li>
+<li class="chapter" data-level="11.6" data-path="11.6-critiques-and-comparisons.html"><a href="11.6-critiques-and-comparisons.html"><i class="fa fa-check"></i><b>11.6</b> Critiques and Comparisons</a></li>
+<li class="chapter" data-level="11.7" data-path="11.7-adding-explanatory-variables.html"><a href="11.7-adding-explanatory-variables.html"><i class="fa fa-check"></i><b>11.7</b> Adding Explanatory Variables</a></li>
+<li class="chapter" data-level="11.8" data-path="11.8-lords-paradox.html"><a href="11.8-lords-paradox.html"><i class="fa fa-check"></i><b>11.8</b> Lord’s Paradox</a></li>
+<li class="chapter" data-level="11.9" data-path="11.9-example-data-ii.html"><a href="11.9-example-data-ii.html"><i class="fa fa-check"></i><b>11.9</b> Example Data II</a>
+<ul>
+<li class="chapter" data-level="11.9.1" data-path="11.9-example-data-ii.html"><a href="11.9-example-data-ii.html#generate-some-data-according-to-castro2018"><i class="fa fa-check"></i><b>11.9.1</b> Generate Some Data According to <span class="citation">(Castro-Schilo and Grimm 2018)</span></a></li>
+<li class="chapter" data-level="11.9.2" data-path="11.9-example-data-ii.html"><a href="11.9-example-data-ii.html#plot-data"><i class="fa fa-check"></i><b>11.9.2</b> Plot Data</a></li>
+<li class="chapter" data-level="11.9.3" data-path="11.9-example-data-ii.html"><a href="11.9-example-data-ii.html#fit-residualized-change-model"><i class="fa fa-check"></i><b>11.9.3</b> Fit Residualized Change Model</a></li>
+<li class="chapter" data-level="11.9.4" data-path="11.9-example-data-ii.html"><a href="11.9-example-data-ii.html#fit-difference-score-model"><i class="fa fa-check"></i><b>11.9.4</b> Fit Difference Score Model</a></li>
+</ul></li>
+<li class="chapter" data-level="11.10" data-path="11.10-example-data-iii.html"><a href="11.10-example-data-iii.html"><i class="fa fa-check"></i><b>11.10</b> Example Data III</a>
+<ul>
+<li class="chapter" data-level="11.10.1" data-path="11.10-example-data-iii.html"><a href="11.10-example-data-iii.html#generate-some-data-according-to-castro2018-example-b"><i class="fa fa-check"></i><b>11.10.1</b> Generate Some Data According to <span class="citation">(Castro-Schilo and Grimm 2018)</span> Example B</a></li>
+<li class="chapter" data-level="11.10.2" data-path="11.10-example-data-iii.html"><a href="11.10-example-data-iii.html#plot-data-1"><i class="fa fa-check"></i><b>11.10.2</b> Plot Data</a></li>
+<li class="chapter" data-level="11.10.3" data-path="11.10-example-data-iii.html"><a href="11.10-example-data-iii.html#fit-residualized-change-model-1"><i class="fa fa-check"></i><b>11.10.3</b> Fit Residualized Change Model</a></li>
+<li class="chapter" data-level="11.10.4" data-path="11.10-example-data-iii.html"><a href="11.10-example-data-iii.html#fit-difference-score-model-1"><i class="fa fa-check"></i><b>11.10.4</b> Fit Difference Score Model</a></li>
+</ul></li>
+<li class="chapter" data-level="11.11" data-path="11.11-closing-thoughts.html"><a href="11.11-closing-thoughts.html"><i class="fa fa-check"></i><b>11.11</b> Closing Thoughts</a></li>
+<li class="chapter" data-level="11.12" data-path="11.12-references-4.html"><a href="11.12-references-4.html"><i class="fa fa-check"></i><b>11.12</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="12-chapter-12.html"><a href="12-chapter-12.html"><i class="fa fa-check"></i><b>12</b> Introduction to Growth</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="12.1-introduction-1.html"><a href="12.1-introduction-1.html"><i class="fa fa-check"></i><b>12.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="12.1-introduction-1.html"><a href="12.1-introduction-1.html#what-is-a-multilevel-model"><i class="fa fa-check"></i><b>12.1.1</b> What is a multilevel model?</a></li>
+<li class="chapter" data-level="12.1.2" data-path="12.1-introduction-1.html"><a href="12.1-introduction-1.html#two-faces-of-mlm"><i class="fa fa-check"></i><b>12.1.2</b> Two Faces of MLM</a></li>
+<li class="chapter" data-level="12.1.3" data-path="12.1-introduction-1.html"><a href="12.1-introduction-1.html#two-level-longitudinal-data"><i class="fa fa-check"></i><b>12.1.3</b> Two-Level Longitudinal Data</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="12.2-example-data-5.html"><a href="12.2-example-data-5.html"><i class="fa fa-check"></i><b>12.2</b> Example Data</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="12.2-example-data-5.html"><a href="12.2-example-data-5.html#data-preparation-and-description"><i class="fa fa-check"></i><b>12.2.1</b> Data Preparation and Description</a></li>
+<li class="chapter" data-level="12.2.2" data-path="12.2-example-data-5.html"><a href="12.2-example-data-5.html#sample-moments"><i class="fa fa-check"></i><b>12.2.2</b> Sample Moments</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="12.3-a-general-model.html"><a href="12.3-a-general-model.html"><i class="fa fa-check"></i><b>12.3</b> A General Model</a></li>
+<li class="chapter" data-level="12.4" data-path="12.4-unconditional-means-model.html"><a href="12.4-unconditional-means-model.html"><i class="fa fa-check"></i><b>12.4</b> Unconditional Means Model</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="12.4-unconditional-means-model.html"><a href="12.4-unconditional-means-model.html#level-1"><i class="fa fa-check"></i><b>12.4.1</b> Level 1</a></li>
+<li class="chapter" data-level="12.4.2" data-path="12.4-unconditional-means-model.html"><a href="12.4-unconditional-means-model.html#level-2"><i class="fa fa-check"></i><b>12.4.2</b> Level 2</a></li>
+<li class="chapter" data-level="12.4.3" data-path="12.4-unconditional-means-model.html"><a href="12.4-unconditional-means-model.html#single-equation"><i class="fa fa-check"></i><b>12.4.3</b> Single Equation</a></li>
+<li class="chapter" data-level="12.4.4" data-path="12.4-unconditional-means-model.html"><a href="12.4-unconditional-means-model.html#model-elaboration"><i class="fa fa-check"></i><b>12.4.4</b> Model Elaboration</a></li>
+<li class="chapter" data-level="12.4.5" data-path="12.4-unconditional-means-model.html"><a href="12.4-unconditional-means-model.html#estimated-quantities"><i class="fa fa-check"></i><b>12.4.5</b> Estimated Quantities</a></li>
+<li class="chapter" data-level="12.4.6" data-path="12.4-unconditional-means-model.html"><a href="12.4-unconditional-means-model.html#more-notation"><i class="fa fa-check"></i><b>12.4.6</b> More Notation</a></li>
+<li class="chapter" data-level="12.4.7" data-path="12.4-unconditional-means-model.html"><a href="12.4-unconditional-means-model.html#unconditional-means-model-in-r"><i class="fa fa-check"></i><b>12.4.7</b> Unconditional Means Model in R</a></li>
+<li class="chapter" data-level="12.4.8" data-path="12.4-unconditional-means-model.html"><a href="12.4-unconditional-means-model.html#intra-class-correlation"><i class="fa fa-check"></i><b>12.4.8</b> Intra-Class Correlation</a></li>
+<li class="chapter" data-level="12.4.9" data-path="12.4-unconditional-means-model.html"><a href="12.4-unconditional-means-model.html#model-impled-moments"><i class="fa fa-check"></i><b>12.4.9</b> Model-Impled Moments</a></li>
+<li class="chapter" data-level="12.4.10" data-path="12.4-unconditional-means-model.html"><a href="12.4-unconditional-means-model.html#model-residuals"><i class="fa fa-check"></i><b>12.4.10</b> Model Residuals</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="12.5-repeated-measures-anova.html"><a href="12.5-repeated-measures-anova.html"><i class="fa fa-check"></i><b>12.5</b> Repeated Measures ANOVA</a>
+<ul>
+<li class="chapter" data-level="12.5.1" data-path="12.5-repeated-measures-anova.html"><a href="12.5-repeated-measures-anova.html#intra-class-correlation-1"><i class="fa fa-check"></i><b>12.5.1</b> Intra-Class Correlation</a></li>
+<li class="chapter" data-level="12.5.2" data-path="12.5-repeated-measures-anova.html"><a href="12.5-repeated-measures-anova.html#model-implied-mean-vector"><i class="fa fa-check"></i><b>12.5.2</b> Model-Implied Mean Vector</a></li>
+<li class="chapter" data-level="12.5.3" data-path="12.5-repeated-measures-anova.html"><a href="12.5-repeated-measures-anova.html#model-implied-covariance-matrix-1"><i class="fa fa-check"></i><b>12.5.3</b> Model-Implied Covariance Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="12.6" data-path="12.6-repeated-measures-manova.html"><a href="12.6-repeated-measures-manova.html"><i class="fa fa-check"></i><b>12.6</b> Repeated Measures MANOVA</a>
+<ul>
+<li class="chapter" data-level="12.6.1" data-path="12.6-repeated-measures-manova.html"><a href="12.6-repeated-measures-manova.html#model-implied-mean-vector-1"><i class="fa fa-check"></i><b>12.6.1</b> Model-Implied Mean Vector</a></li>
+<li class="chapter" data-level="12.6.2" data-path="12.6-repeated-measures-manova.html"><a href="12.6-repeated-measures-manova.html#model-implied-covariance-matrix-2"><i class="fa fa-check"></i><b>12.6.2</b> Model-Implied Covariance Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="12.7" data-path="12.7-repeated-measures-manova-unstructured.html"><a href="12.7-repeated-measures-manova-unstructured.html"><i class="fa fa-check"></i><b>12.7</b> Repeated Measures MANOVA (Unstructured)</a>
+<ul>
+<li class="chapter" data-level="12.7.1" data-path="12.7-repeated-measures-manova-unstructured.html"><a href="12.7-repeated-measures-manova-unstructured.html#model-implied-mean-vector-2"><i class="fa fa-check"></i><b>12.7.1</b> Model-Implied Mean Vector</a></li>
+<li class="chapter" data-level="12.7.2" data-path="12.7-repeated-measures-manova-unstructured.html"><a href="12.7-repeated-measures-manova-unstructured.html#model-implied-covariance-matrix-3"><i class="fa fa-check"></i><b>12.7.2</b> Model-Implied Covariance Matrix</a></li>
+<li class="chapter" data-level="12.7.3" data-path="12.7-repeated-measures-manova-unstructured.html"><a href="12.7-repeated-measures-manova-unstructured.html#references-5"><i class="fa fa-check"></i><b>12.7.3</b> References</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="13-chapter-13.html"><a href="13-chapter-13.html"><i class="fa fa-check"></i><b>13</b> Growth Curve Modeling</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="13.1-introduction-2.html"><a href="13.1-introduction-2.html"><i class="fa fa-check"></i><b>13.1</b> Introduction</a></li>
+<li class="chapter" data-level="13.2" data-path="13.2-data-preparation-and-description-1.html"><a href="13.2-data-preparation-and-description-1.html"><i class="fa fa-check"></i><b>13.2</b> Data Preparation and Description</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="13.2-data-preparation-and-description-1.html"><a href="13.2-data-preparation-and-description-1.html#loading-libraries-used-in-this-script."><i class="fa fa-check"></i><b>13.2.1</b> Loading libraries used in this script.</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="13.3-individual-growth-models.html"><a href="13.3-individual-growth-models.html"><i class="fa fa-check"></i><b>13.3</b> Individual Growth Models</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="13.3-individual-growth-models.html"><a href="13.3-individual-growth-models.html#visualizing-individual-change"><i class="fa fa-check"></i><b>13.3.1</b> Visualizing Individual Change</a></li>
+<li class="chapter" data-level="13.3.2" data-path="13.3-individual-growth-models.html"><a href="13.3-individual-growth-models.html#multiple-individuals"><i class="fa fa-check"></i><b>13.3.2</b> Multiple Individuals</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="13.4-unconditional-means-model-1.html"><a href="13.4-unconditional-means-model-1.html"><i class="fa fa-check"></i><b>13.4</b> Unconditional Means Model</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="13.4-unconditional-means-model-1.html"><a href="13.4-unconditional-means-model-1.html#predicted-trajectories"><i class="fa fa-check"></i><b>13.4.1</b> Predicted Trajectories</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="13.5-linear-growth-model.html"><a href="13.5-linear-growth-model.html"><i class="fa fa-check"></i><b>13.5</b> Linear Growth Model</a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="13.5-linear-growth-model.html"><a href="13.5-linear-growth-model.html#random-intercept-model"><i class="fa fa-check"></i><b>13.5.1</b> Random Intercept Model</a></li>
+<li class="chapter" data-level="13.5.2" data-path="13.5-linear-growth-model.html"><a href="13.5-linear-growth-model.html#random-intercept-and-slopes-model"><i class="fa fa-check"></i><b>13.5.2</b> Random Intercept and Slopes Model</a></li>
+<li class="chapter" data-level="13.5.3" data-path="13.5-linear-growth-model.html"><a href="13.5-linear-growth-model.html#model-comparison"><i class="fa fa-check"></i><b>13.5.3</b> Model Comparison</a></li>
+<li class="chapter" data-level="13.5.4" data-path="13.5-linear-growth-model.html"><a href="13.5-linear-growth-model.html#mlm-and-individual-models"><i class="fa fa-check"></i><b>13.5.4</b> MLM and Individual Models</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="13.6-quadratic-growth-model.html"><a href="13.6-quadratic-growth-model.html"><i class="fa fa-check"></i><b>13.6</b> Quadratic Growth Model</a></li>
+<li class="chapter" data-level="13.7" data-path="13.7-conditional-growth-model.html"><a href="13.7-conditional-growth-model.html"><i class="fa fa-check"></i><b>13.7</b> Conditional Growth Model</a>
+<ul>
+<li class="chapter" data-level="13.7.1" data-path="13.7-conditional-growth-model.html"><a href="13.7-conditional-growth-model.html#conditional-growth-equation"><i class="fa fa-check"></i><b>13.7.1</b> Conditional Growth Equation</a></li>
+<li class="chapter" data-level="13.7.2" data-path="13.7-conditional-growth-model.html"><a href="13.7-conditional-growth-model.html#conditional-growth-model-1"><i class="fa fa-check"></i><b>13.7.2</b> Conditional Growth Model 1</a></li>
+<li class="chapter" data-level="13.7.3" data-path="13.7-conditional-growth-model.html"><a href="13.7-conditional-growth-model.html#conditional-growth-model-1-1"><i class="fa fa-check"></i><b>13.7.3</b> Conditional Growth Model 1</a></li>
+</ul></li>
+<li class="chapter" data-level="13.8" data-path="13.8-alternative-time-metrics.html"><a href="13.8-alternative-time-metrics.html"><i class="fa fa-check"></i><b>13.8</b> Alternative Time Metrics</a>
+<ul>
+<li class="chapter" data-level="13.8.1" data-path="13.8-alternative-time-metrics.html"><a href="13.8-alternative-time-metrics.html#recentering-time-metrics"><i class="fa fa-check"></i><b>13.8.1</b> Recentering time metrics</a></li>
+<li class="chapter" data-level="13.8.2" data-path="13.8-alternative-time-metrics.html"><a href="13.8-alternative-time-metrics.html#rescaling-time-metric"><i class="fa fa-check"></i><b>13.8.2</b> Rescaling time metric</a></li>
+<li class="chapter" data-level="13.8.3" data-path="13.8-alternative-time-metrics.html"><a href="13.8-alternative-time-metrics.html#remapping-time"><i class="fa fa-check"></i><b>13.8.3</b> Remapping Time</a></li>
+<li class="chapter" data-level="13.8.4" data-path="13.8-alternative-time-metrics.html"><a href="13.8-alternative-time-metrics.html#compare-growth-metrics"><i class="fa fa-check"></i><b>13.8.4</b> Compare Growth Metrics</a></li>
+</ul></li>
+<li class="chapter" data-level="13.9" data-path="13.9-intperpreting-interactions.html"><a href="13.9-intperpreting-interactions.html"><i class="fa fa-check"></i><b>13.9</b> Intperpreting Interactions</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="14-chapter-14.html"><a href="14-chapter-14.html"><i class="fa fa-check"></i><b>14</b> Nonlinear Growth Curves</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="14.1-review-of-linear-growth.html"><a href="14.1-review-of-linear-growth.html"><i class="fa fa-check"></i><b>14.1</b> Review of Linear Growth</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="14.1-review-of-linear-growth.html"><a href="14.1-review-of-linear-growth.html#theory-of-linear-growth"><i class="fa fa-check"></i><b>14.1.1</b> Theory of Linear Growth</a></li>
+<li class="chapter" data-level="14.1.2" data-path="14.1-review-of-linear-growth.html"><a href="14.1-review-of-linear-growth.html#characteristics-of-linear-growth"><i class="fa fa-check"></i><b>14.1.2</b> Characteristics of Linear Growth</a></li>
+<li class="chapter" data-level="14.1.3" data-path="14.1-review-of-linear-growth.html"><a href="14.1-review-of-linear-growth.html#no-growth-model"><i class="fa fa-check"></i><b>14.1.3</b> No Growth Model</a></li>
+<li class="chapter" data-level="14.1.4" data-path="14.1-review-of-linear-growth.html"><a href="14.1-review-of-linear-growth.html#random-intercept-model-1"><i class="fa fa-check"></i><b>14.1.4</b> Random Intercept Model</a></li>
+<li class="chapter" data-level="14.1.5" data-path="14.1-review-of-linear-growth.html"><a href="14.1-review-of-linear-growth.html#linear-growth-model-1"><i class="fa fa-check"></i><b>14.1.5</b> Linear Growth Model</a></li>
+<li class="chapter" data-level="14.1.6" data-path="14.1-review-of-linear-growth.html"><a href="14.1-review-of-linear-growth.html#quadratic-growth-model-1"><i class="fa fa-check"></i><b>14.1.6</b> Quadratic Growth Model</a></li>
+<li class="chapter" data-level="14.1.7" data-path="14.1-review-of-linear-growth.html"><a href="14.1-review-of-linear-growth.html#quadratic-growth-equations"><i class="fa fa-check"></i><b>14.1.7</b> Quadratic Growth Equations</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="14.2-introducing-nonlinear-growth.html"><a href="14.2-introducing-nonlinear-growth.html"><i class="fa fa-check"></i><b>14.2</b> Introducing Nonlinear Growth</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="14.2-introducing-nonlinear-growth.html"><a href="14.2-introducing-nonlinear-growth.html#types-of-nonlinearity"><i class="fa fa-check"></i><b>14.2.1</b> Types of Nonlinearity</a></li>
+<li class="chapter" data-level="14.2.2" data-path="14.2-introducing-nonlinear-growth.html"><a href="14.2-introducing-nonlinear-growth.html#flexibility-of-nonlinear-growth"><i class="fa fa-check"></i><b>14.2.2</b> Flexibility of Nonlinear Growth</a></li>
+<li class="chapter" data-level="14.2.3" data-path="14.2-introducing-nonlinear-growth.html"><a href="14.2-introducing-nonlinear-growth.html#utility-of-nonlinear-growth"><i class="fa fa-check"></i><b>14.2.3</b> Utility of Nonlinear Growth</a></li>
+<li class="chapter" data-level="14.2.4" data-path="14.2-introducing-nonlinear-growth.html"><a href="14.2-introducing-nonlinear-growth.html#some-nonlinear-growth-models"><i class="fa fa-check"></i><b>14.2.4</b> Some Nonlinear Growth Models</a></li>
+<li class="chapter" data-level="14.2.5" data-path="14.2-introducing-nonlinear-growth.html"><a href="14.2-introducing-nonlinear-growth.html#need-for-nonlinear-models"><i class="fa fa-check"></i><b>14.2.5</b> Need for Nonlinear Models</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="14.3-example-data-ram-grimm-2007.html"><a href="14.3-example-data-ram-grimm-2007.html"><i class="fa fa-check"></i><b>14.3</b> Example Data (Ram &amp; Grimm, 2007)</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="14.3-example-data-ram-grimm-2007.html"><a href="14.3-example-data-ram-grimm-2007.html#read-in-cortisol-data"><i class="fa fa-check"></i><b>14.3.1</b> Read in Cortisol Data</a></li>
+<li class="chapter" data-level="14.3.2" data-path="14.3-example-data-ram-grimm-2007.html"><a href="14.3-example-data-ram-grimm-2007.html#reshaping-data"><i class="fa fa-check"></i><b>14.3.2</b> Reshaping Data</a></li>
+<li class="chapter" data-level="14.3.3" data-path="14.3-example-data-ram-grimm-2007.html"><a href="14.3-example-data-ram-grimm-2007.html#descriptives"><i class="fa fa-check"></i><b>14.3.3</b> Descriptives</a></li>
+<li class="chapter" data-level="14.3.4" data-path="14.3-example-data-ram-grimm-2007.html"><a href="14.3-example-data-ram-grimm-2007.html#density-plots"><i class="fa fa-check"></i><b>14.3.4</b> Density Plots</a></li>
+<li class="chapter" data-level="14.3.5" data-path="14.3-example-data-ram-grimm-2007.html"><a href="14.3-example-data-ram-grimm-2007.html#individual-level-trajectories"><i class="fa fa-check"></i><b>14.3.5</b> Individual-level Trajectories</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="14.4-linear-growth-cortisol.html"><a href="14.4-linear-growth-cortisol.html"><i class="fa fa-check"></i><b>14.4</b> Linear Growth (Cortisol)</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="14.4-linear-growth-cortisol.html"><a href="14.4-linear-growth-cortisol.html#equation"><i class="fa fa-check"></i><b>14.4.1</b> Equation</a></li>
+<li class="chapter" data-level="14.4.2" data-path="14.4-linear-growth-cortisol.html"><a href="14.4-linear-growth-cortisol.html#fit-model"><i class="fa fa-check"></i><b>14.4.2</b> Fit Model</a></li>
+<li class="chapter" data-level="14.4.3" data-path="14.4-linear-growth-cortisol.html"><a href="14.4-linear-growth-cortisol.html#predicted-trajectories-1"><i class="fa fa-check"></i><b>14.4.3</b> Predicted Trajectories</a></li>
+<li class="chapter" data-level="14.4.4" data-path="14.4-linear-growth-cortisol.html"><a href="14.4-linear-growth-cortisol.html#interpretation-3"><i class="fa fa-check"></i><b>14.4.4</b> Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="14.5-quadratic-growth-cortisol.html"><a href="14.5-quadratic-growth-cortisol.html"><i class="fa fa-check"></i><b>14.5</b> Quadratic Growth (Cortisol)</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="14.5-quadratic-growth-cortisol.html"><a href="14.5-quadratic-growth-cortisol.html#equation-1"><i class="fa fa-check"></i><b>14.5.1</b> Equation</a></li>
+<li class="chapter" data-level="14.5.2" data-path="14.5-quadratic-growth-cortisol.html"><a href="14.5-quadratic-growth-cortisol.html#fit-model-1"><i class="fa fa-check"></i><b>14.5.2</b> Fit Model</a></li>
+<li class="chapter" data-level="14.5.3" data-path="14.5-quadratic-growth-cortisol.html"><a href="14.5-quadratic-growth-cortisol.html#predicted-trajectories-2"><i class="fa fa-check"></i><b>14.5.3</b> Predicted Trajectories</a></li>
+<li class="chapter" data-level="14.5.4" data-path="14.5-quadratic-growth-cortisol.html"><a href="14.5-quadratic-growth-cortisol.html#interpretation-4"><i class="fa fa-check"></i><b>14.5.4</b> Interpretation</a></li>
+<li class="chapter" data-level="14.5.5" data-path="14.5-quadratic-growth-cortisol.html"><a href="14.5-quadratic-growth-cortisol.html#interpretational-caution"><i class="fa fa-check"></i><b>14.5.5</b> Interpretational Caution</a></li>
+<li class="chapter" data-level="14.5.6" data-path="14.5-quadratic-growth-cortisol.html"><a href="14.5-quadratic-growth-cortisol.html#nonlinear-or-linear-model"><i class="fa fa-check"></i><b>14.5.6</b> Nonlinear or Linear Model?</a></li>
+</ul></li>
+<li class="chapter" data-level="14.6" data-path="14.6-latent-basis-cortisol.html"><a href="14.6-latent-basis-cortisol.html"><i class="fa fa-check"></i><b>14.6</b> Latent Basis (Cortisol)</a>
+<ul>
+<li class="chapter" data-level="14.6.1" data-path="14.6-latent-basis-cortisol.html"><a href="14.6-latent-basis-cortisol.html#equation-2"><i class="fa fa-check"></i><b>14.6.1</b> Equation</a></li>
+<li class="chapter" data-level="14.6.2" data-path="14.6-latent-basis-cortisol.html"><a href="14.6-latent-basis-cortisol.html#fit-model-2"><i class="fa fa-check"></i><b>14.6.2</b> Fit Model</a></li>
+<li class="chapter" data-level="14.6.3" data-path="14.6-latent-basis-cortisol.html"><a href="14.6-latent-basis-cortisol.html#predicted-trajectories-3"><i class="fa fa-check"></i><b>14.6.3</b> Predicted Trajectories</a></li>
+<li class="chapter" data-level="14.6.4" data-path="14.6-latent-basis-cortisol.html"><a href="14.6-latent-basis-cortisol.html#interpretation-5"><i class="fa fa-check"></i><b>14.6.4</b> Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="14.7" data-path="14.7-exponential-growth-cortisol.html"><a href="14.7-exponential-growth-cortisol.html"><i class="fa fa-check"></i><b>14.7</b> Exponential Growth (Cortisol)</a>
+<ul>
+<li class="chapter" data-level="14.7.1" data-path="14.7-exponential-growth-cortisol.html"><a href="14.7-exponential-growth-cortisol.html#fit-model-3"><i class="fa fa-check"></i><b>14.7.1</b> Fit Model</a></li>
+<li class="chapter" data-level="14.7.2" data-path="14.7-exponential-growth-cortisol.html"><a href="14.7-exponential-growth-cortisol.html#predicted-trajectories-4"><i class="fa fa-check"></i><b>14.7.2</b> Predicted Trajectories</a></li>
+<li class="chapter" data-level="14.7.3" data-path="14.7-exponential-growth-cortisol.html"><a href="14.7-exponential-growth-cortisol.html#interpretation-6"><i class="fa fa-check"></i><b>14.7.3</b> Interpretation</a></li>
+<li class="chapter" data-level="14.7.4" data-path="14.7-exponential-growth-cortisol.html"><a href="14.7-exponential-growth-cortisol.html#nonlinear-or-linear-model-1"><i class="fa fa-check"></i><b>14.7.4</b> Nonlinear or Linear Model?</a></li>
+</ul></li>
+<li class="chapter" data-level="14.8" data-path="14.8-multiphase-growth-cortisol.html"><a href="14.8-multiphase-growth-cortisol.html"><i class="fa fa-check"></i><b>14.8</b> Multiphase Growth (Cortisol)</a>
+<ul>
+<li class="chapter" data-level="14.8.1" data-path="14.8-multiphase-growth-cortisol.html"><a href="14.8-multiphase-growth-cortisol.html#equation-3"><i class="fa fa-check"></i><b>14.8.1</b> Equation</a></li>
+<li class="chapter" data-level="14.8.2" data-path="14.8-multiphase-growth-cortisol.html"><a href="14.8-multiphase-growth-cortisol.html#fit-model-4"><i class="fa fa-check"></i><b>14.8.2</b> Fit Model</a></li>
+<li class="chapter" data-level="14.8.3" data-path="14.8-multiphase-growth-cortisol.html"><a href="14.8-multiphase-growth-cortisol.html#predicted-trajectories-5"><i class="fa fa-check"></i><b>14.8.3</b> Predicted Trajectories</a></li>
+<li class="chapter" data-level="14.8.4" data-path="14.8-multiphase-growth-cortisol.html"><a href="14.8-multiphase-growth-cortisol.html#interpretation-7"><i class="fa fa-check"></i><b>14.8.4</b> Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="14.9" data-path="14.9-bilinear-spline-cortisol.html"><a href="14.9-bilinear-spline-cortisol.html"><i class="fa fa-check"></i><b>14.9</b> Bilinear Spline (Cortisol)</a>
+<ul>
+<li class="chapter" data-level="14.9.1" data-path="14.9-bilinear-spline-cortisol.html"><a href="14.9-bilinear-spline-cortisol.html#equation-4"><i class="fa fa-check"></i><b>14.9.1</b> Equation</a></li>
+<li class="chapter" data-level="14.9.2" data-path="14.9-bilinear-spline-cortisol.html"><a href="14.9-bilinear-spline-cortisol.html#fit-model-5"><i class="fa fa-check"></i><b>14.9.2</b> Fit Model</a></li>
+<li class="chapter" data-level="14.9.3" data-path="14.9-bilinear-spline-cortisol.html"><a href="14.9-bilinear-spline-cortisol.html#predicted-trajectories-6"><i class="fa fa-check"></i><b>14.9.3</b> Predicted Trajectories</a></li>
+<li class="chapter" data-level="14.9.4" data-path="14.9-bilinear-spline-cortisol.html"><a href="14.9-bilinear-spline-cortisol.html#interpretation-8"><i class="fa fa-check"></i><b>14.9.4</b> Interpretation</a></li>
+<li class="chapter" data-level="14.9.5" data-path="14.9-bilinear-spline-cortisol.html"><a href="14.9-bilinear-spline-cortisol.html#fit-model-6"><i class="fa fa-check"></i><b>14.9.5</b> Fit Model</a></li>
+</ul></li>
+<li class="chapter" data-level="14.10" data-path="14.10-references-6.html"><a href="14.10-references-6.html"><i class="fa fa-check"></i><b>14.10</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="15-chapter-15.html"><a href="15-chapter-15.html"><i class="fa fa-check"></i><b>15</b> Dyadic Data Analysis</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="15.1-introduction-3.html"><a href="15.1-introduction-3.html"><i class="fa fa-check"></i><b>15.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="15.1.1" data-path="15.1-introduction-3.html"><a href="15.1-introduction-3.html#interpersonal-phenomena"><i class="fa fa-check"></i><b>15.1.1</b> Interpersonal Phenomena</a></li>
+<li class="chapter" data-level="15.1.2" data-path="15.1-introduction-3.html"><a href="15.1-introduction-3.html#dyadic-measurement"><i class="fa fa-check"></i><b>15.1.2</b> Dyadic Measurement</a></li>
+<li class="chapter" data-level="15.1.3" data-path="15.1-introduction-3.html"><a href="15.1-introduction-3.html#discussion-question"><i class="fa fa-check"></i><b>15.1.3</b> Discussion question</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="15.2-interdependence.html"><a href="15.2-interdependence.html"><i class="fa fa-check"></i><b>15.2</b> Interdependence</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="15.2-interdependence.html"><a href="15.2-interdependence.html#definition"><i class="fa fa-check"></i><b>15.2.1</b> Definition</a></li>
+<li class="chapter" data-level="15.2.2" data-path="15.2-interdependence.html"><a href="15.2-interdependence.html#ignoring-interdependence"><i class="fa fa-check"></i><b>15.2.2</b> Ignoring Interdependence</a></li>
+<li class="chapter" data-level="15.2.3" data-path="15.2-interdependence.html"><a href="15.2-interdependence.html#linkage-types"><i class="fa fa-check"></i><b>15.2.3</b> Linkage Types</a></li>
+<li class="chapter" data-level="15.2.4" data-path="15.2-interdependence.html"><a href="15.2-interdependence.html#sources-of-interdependence"><i class="fa fa-check"></i><b>15.2.4</b> Sources of Interdependence</a></li>
+<li class="chapter" data-level="15.2.5" data-path="15.2-interdependence.html"><a href="15.2-interdependence.html#discussion-question-1"><i class="fa fa-check"></i><b>15.2.5</b> Discussion Question</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="15.3-basic-definitions.html"><a href="15.3-basic-definitions.html"><i class="fa fa-check"></i><b>15.3</b> Basic Definitions</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="15.3-basic-definitions.html"><a href="15.3-basic-definitions.html#distinguishability"><i class="fa fa-check"></i><b>15.3.1</b> Distinguishability</a></li>
+<li class="chapter" data-level="15.3.2" data-path="15.3-basic-definitions.html"><a href="15.3-basic-definitions.html#variable-types"><i class="fa fa-check"></i><b>15.3.2</b> Variable Types</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="15.4-dyadic-designs.html"><a href="15.4-dyadic-designs.html"><i class="fa fa-check"></i><b>15.4</b> Dyadic Designs</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="15.4-dyadic-designs.html"><a href="15.4-dyadic-designs.html#standard-dyadic-design"><i class="fa fa-check"></i><b>15.4.1</b> Standard Dyadic Design</a></li>
+<li class="chapter" data-level="15.4.2" data-path="15.4-dyadic-designs.html"><a href="15.4-dyadic-designs.html#social-relations-model"><i class="fa fa-check"></i><b>15.4.2</b> Social Relations Model</a></li>
+<li class="chapter" data-level="15.4.3" data-path="15.4-dyadic-designs.html"><a href="15.4-dyadic-designs.html#one-with-many-design"><i class="fa fa-check"></i><b>15.4.3</b> One-with-many Design</a></li>
+<li class="chapter" data-level="15.4.4" data-path="15.4-dyadic-designs.html"><a href="15.4-dyadic-designs.html#discussion-question-3"><i class="fa fa-check"></i><b>15.4.4</b> Discussion Question:</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="15.5-actor-partner-interdependence-model-apim.html"><a href="15.5-actor-partner-interdependence-model-apim.html"><i class="fa fa-check"></i><b>15.5</b> Actor Partner Interdependence Model (APIM)</a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="15.5-actor-partner-interdependence-model-apim.html"><a href="15.5-actor-partner-interdependence-model-apim.html#model-1"><i class="fa fa-check"></i><b>15.5.1</b> Model</a></li>
+<li class="chapter" data-level="15.5.2" data-path="15.5-actor-partner-interdependence-model-apim.html"><a href="15.5-actor-partner-interdependence-model-apim.html#conceptual-interpretations"><i class="fa fa-check"></i><b>15.5.2</b> Conceptual Interpretations</a></li>
+<li class="chapter" data-level="15.5.3" data-path="15.5-actor-partner-interdependence-model-apim.html"><a href="15.5-actor-partner-interdependence-model-apim.html#actor-partner-interactions"><i class="fa fa-check"></i><b>15.5.3</b> Actor-Partner Interactions</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="15.6-longitudinal-apim.html"><a href="15.6-longitudinal-apim.html"><i class="fa fa-check"></i><b>15.6</b> Longitudinal APIM</a>
+<ul>
+<li class="chapter" data-level="15.6.1" data-path="15.6-longitudinal-apim.html"><a href="15.6-longitudinal-apim.html#model-2"><i class="fa fa-check"></i><b>15.6.1</b> Model</a></li>
+<li class="chapter" data-level="15.6.2" data-path="15.6-longitudinal-apim.html"><a href="15.6-longitudinal-apim.html#estimated-parameters"><i class="fa fa-check"></i><b>15.6.2</b> Estimated Parameters</a></li>
+<li class="chapter" data-level="15.6.3" data-path="15.6-longitudinal-apim.html"><a href="15.6-longitudinal-apim.html#parameter-covariation"><i class="fa fa-check"></i><b>15.6.3</b> Parameter Covariation</a></li>
+</ul></li>
+<li class="chapter" data-level="15.7" data-path="15.7-data-example.html"><a href="15.7-data-example.html"><i class="fa fa-check"></i><b>15.7</b> Data Example</a>
+<ul>
+<li class="chapter" data-level="15.7.1" data-path="15.7-data-example.html"><a href="15.7-data-example.html#preliminaries"><i class="fa fa-check"></i><b>15.7.1</b> Preliminaries</a></li>
+<li class="chapter" data-level="15.7.2" data-path="15.7-data-example.html"><a href="15.7-data-example.html#modeling-scenario"><i class="fa fa-check"></i><b>15.7.2</b> Modeling Scenario</a></li>
+<li class="chapter" data-level="15.7.3" data-path="15.7-data-example.html"><a href="15.7-data-example.html#descriptives-1"><i class="fa fa-check"></i><b>15.7.3</b> Descriptives</a></li>
+<li class="chapter" data-level="15.7.4" data-path="15.7-data-example.html"><a href="15.7-data-example.html#dyadic-data-prep"><i class="fa fa-check"></i><b>15.7.4</b> Dyadic Data Prep</a></li>
+<li class="chapter" data-level="15.7.5" data-path="15.7-data-example.html"><a href="15.7-data-example.html#apim"><i class="fa fa-check"></i><b>15.7.5</b> APIM</a></li>
+<li class="chapter" data-level="15.7.6" data-path="15.7-data-example.html"><a href="15.7-data-example.html#null-model"><i class="fa fa-check"></i><b>15.7.6</b> Null Model</a></li>
+<li class="chapter" data-level="15.7.7" data-path="15.7-data-example.html"><a href="15.7-data-example.html#full-apim"><i class="fa fa-check"></i><b>15.7.7</b> Full APIM</a></li>
+</ul></li>
+<li class="chapter" data-level="15.8" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html"><i class="fa fa-check"></i><b>15.8</b> Data Example 2</a>
+<ul>
+<li class="chapter" data-level="15.8.1" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#overview"><i class="fa fa-check"></i><b>15.8.1</b> Overview</a></li>
+<li class="chapter" data-level="15.8.2" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#outline"><i class="fa fa-check"></i><b>15.8.2</b> Outline</a></li>
+<li class="chapter" data-level="15.8.3" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#the-modeling-enterprise."><i class="fa fa-check"></i><b>15.8.3</b> The Modeling Enterprise.</a></li>
+<li class="chapter" data-level="15.8.4" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#the-data."><i class="fa fa-check"></i><b>15.8.4</b> The Data.</a></li>
+<li class="chapter" data-level="15.8.5" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#plotting-the-data."><i class="fa fa-check"></i><b>15.8.5</b> Plotting the Data.</a></li>
+<li class="chapter" data-level="15.8.6" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#the-multilevel-model."><i class="fa fa-check"></i><b>15.8.6</b> The Multilevel Model.</a></li>
+<li class="chapter" data-level="15.8.7" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#fit-male-model"><i class="fa fa-check"></i><b>15.8.7</b> Fit Male Model</a></li>
+<li class="chapter" data-level="15.8.8" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#fit-female-model"><i class="fa fa-check"></i><b>15.8.8</b> Fit Female Model</a></li>
+<li class="chapter" data-level="15.8.9" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#fit-full-model"><i class="fa fa-check"></i><b>15.8.9</b> Fit Full Model</a></li>
+<li class="chapter" data-level="15.8.10" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#conclusion"><i class="fa fa-check"></i><b>15.8.10</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="15.9" data-path="15.9-reference.html"><a href="15.9-reference.html"><i class="fa fa-check"></i><b>15.9</b> Reference</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/zackfisher/HDFS523" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">HDFS 523: Strategies for Data Analysis in Developmental Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-example-2" class="section level2 hasAnchor" number="15.8">
+<h2><span class="header-section-number">15.8</span> Data Example 2<a href="15.8-data-example-2.html#data-example-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The following data example is based on a tutorial written by Miriam Brinber and Nilam Ram. You can access the original tutorial at the following link:</p>
+<p><a href="https://quantdev.ssri.psu.edu/tutorials/analysis-experience-sampling-ema-data-chapter-5-part1-dyadic-mlm-intradyad-dynamics" class="uri">https://quantdev.ssri.psu.edu/tutorials/analysis-experience-sampling-ema-data-chapter-5-part1-dyadic-mlm-intradyad-dynamics</a></p>
+<div id="overview" class="section level3 hasAnchor" number="15.8.1">
+<h3><span class="header-section-number">15.8.1</span> Overview<a href="15.8-data-example-2.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Repeated measures data, often obtained from experience sampling or daily diary studies, require analytic methods that accommodate the inherent nesting in the data. One special case of repeated measures data are those from dyad (e.g., couples, parent/child). Dyadic data is structured such that repeated measures are nested within a person, and each person is nested within a dyad. The dyads are assumed to be independently sampled. Non-independece of the members of the dyad and across the repeated occasions are modeled explicitly. <em>Multivariate multilevel modeling</em> is one technique for effectively handling this type of data. Formal names for the dayad-specific model include <em>Actor Partner Interdependence Model (APIM)</em> (see Kenny, Kashy, &amp; Cook, 2006).</p>
+<p>In this tutorial, we will follow the example from Bolger and Laurenceau (2013) <em>Chapter 8: Design and Analysis of Intensive Longitudinal Longitudinal Study of Distingiushable Dyads.</em> Specifically, we will use the simulated dyadic process data set (p. 150). The data were simulated to represent 100 dual-career heterosexual couples where each partner provided diary reports twice daily over the course of 21 consecutive days. The first report is an end-of-workday report that includes (a) the number of stressors that occurred at work, and (b) work dissatisfaction. The data are complete and clean - with Bolger and Laurenceau’s goal being to “create a pedagologically uncomplicated data set.”</p>
+<p>Note that we are using <em>distinguishable</em> dyads in this example. <em>Distinguishability</em> is typically determined conceptually, based upon a stable, differentiating characteristic (e.g., gender, age, role). Note that notions of “dyadic” can be generalized from persons to any reasonable combination of two variables (e.g., emotion and behavior). The next tutorial will illustrate application of the multivariate multilevel model for examination of intraindividual coupling.</p>
+</div>
+<div id="outline" class="section level3 hasAnchor" number="15.8.2">
+<h3><span class="header-section-number">15.8.2</span> Outline<a href="15.8-data-example-2.html#outline" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Introduction to the research questions, model, and data.</li>
+<li>Plotting the data.</li>
+<li>The multilevel model.
+<ul>
+<li>Males only.</li>
+<li>Females only.</li>
+<li>The dyad.</li>
+</ul></li>
+<li>Cautions.</li>
+<li>Conclusion.</li>
+</ol>
+<div id="prelim---loading-libraries-used-in-this-script." class="section level4 hasAnchor" number="15.8.2.1">
+<h4><span class="header-section-number">15.8.2.1</span> Prelim - Loading libraries used in this script.<a href="15.8-data-example-2.html#prelim---loading-libraries-used-in-this-script." class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="15.8-data-example-2.html#cb566-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb566-2"><a href="15.8-data-example-2.html#cb566-2" tabindex="-1"></a><span class="fu">library</span>(nlme)</span>
+<span id="cb566-3"><a href="15.8-data-example-2.html#cb566-3" tabindex="-1"></a><span class="fu">library</span>(psych)</span></code></pre></div>
+</div>
+<div id="the-research-questions." class="section level4 hasAnchor" number="15.8.2.2">
+<h4><span class="header-section-number">15.8.2.2</span> The Research Questions.<a href="15.8-data-example-2.html#the-research-questions." class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We are going to address:</p>
+<ul>
+<li>Is the number of daily work stressors associated with end-of-day relationship satisfaction?
+<ul>
+<li>What is the extent of association for the <em>typical male partner</em> and for the <em>typical female partner</em> (fixed effects)?</li>
+<li>Is there heterogeneity in the strength of the association across male partners in couples and across female partners in couples (random effects)?</li>
+</ul></li>
+</ul>
+<p>Notice that, so far, the questions are stated separately for the two types of dyad members (males and females). The dyadic longitudinal model provides for another type of question - questions related to non-independence.</p>
+<ul>
+<li>Are dyad members’ relationship satisfaction on any given day related, after accounting for other explanatory variables?</li>
+</ul>
+<p>Here, these relations manifest as correlations/covariances between intercepts, slopes, and residuals.</p>
+</div>
+</div>
+<div id="the-modeling-enterprise." class="section level3 hasAnchor" number="15.8.3">
+<h3><span class="header-section-number">15.8.3</span> The Modeling Enterprise.<a href="15.8-data-example-2.html#the-modeling-enterprise." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The basic multilevel model is designed as a model with a univariate outcome. The ability to model multiple outcomes simultaneoulsy used to be a distinguishing feature of structural equation models (SEM). However, researches discovered that the multilevel model can be adapted for examination of multivariate outcomes quite easily. One simply has to “trick” the program into thinking that two (or more) variables are one variable.</p>
+</div>
+<div id="the-data." class="section level3 hasAnchor" number="15.8.4">
+<h3><span class="header-section-number">15.8.4</span> The Data.<a href="15.8-data-example-2.html#the-data." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The data are organized as follows:</p>
+<ul>
+<li><p>There should be <em>N</em> (number of individuals) x measurement occasions rows per dyad in the data set. In this case, we should have a data set with 4,200 rows (100 dyads x 2 persons x 21 occasions).</p></li>
+<li><p>Columns:</p>
+<ul>
+<li><p>Couple ID</p></li>
+<li><p>Person ID (e.g., 1 = partner 1, 2 = partner 2)</p></li>
+<li><p>Time (e.g., day within the daily diary study)</p></li>
+<li><p>Centered version of time (optional)</p></li>
+<li><p>Gender (or whatever feature is distinguishing the dyad; in this case, 0 = male and 1 = female)</p></li>
+<li><p>An indicator variable for each partner (e.g., husband, wife) - dichotomous (0/1)</p></li>
+<li><p>Outcome variable (in this case, “reldis”)</p></li>
+<li><p>Predictor variable (in this case, “wrkstrs”)</p></li>
+<li><p>Centered version of the predictor variable (“wrkstrsc”)</p></li>
+<li><p>Trait component of the predictor variable (“wrkstrsb”)</p></li>
+<li><p>State component of the predictor variable (“wrkstrsw”)</p></li>
+<li><p>for a total of 12 columns in this data set</p></li>
+</ul></li>
+</ul>
+<p>The “trick” is to stack the data so that there are two records for each repeated observation. The data file is twice as long, and we structure the model to “turn on” and “turn off” the double records to invoke parameter estimation for each variable. Bolger &amp; Laurenceau’s example data are already prepared data. Let’s take a look.</p>
+<p>Load data and needed libraries.</p>
+<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="15.8-data-example-2.html#cb567-1" tabindex="-1"></a><span class="co">#set filepath for data file</span></span>
+<span id="cb567-2"><a href="15.8-data-example-2.html#cb567-2" tabindex="-1"></a>filepath <span class="ot">&lt;-</span> <span class="st">&quot;https://quantdev.ssri.psu.edu/sites/qdev/files/B%26Ldyads.csv&quot;</span></span>
+<span id="cb567-3"><a href="15.8-data-example-2.html#cb567-3" tabindex="-1"></a></span>
+<span id="cb567-4"><a href="15.8-data-example-2.html#cb567-4" tabindex="-1"></a></span>
+<span id="cb567-5"><a href="15.8-data-example-2.html#cb567-5" tabindex="-1"></a><span class="co">#read in the .csv file using the url() function</span></span>
+<span id="cb567-6"><a href="15.8-data-example-2.html#cb567-6" tabindex="-1"></a>dyads <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file=</span><span class="fu">url</span>(filepath),<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb567-7"><a href="15.8-data-example-2.html#cb567-7" tabindex="-1"></a></span>
+<span id="cb567-8"><a href="15.8-data-example-2.html#cb567-8" tabindex="-1"></a><span class="co"># Look at the variable names</span></span>
+<span id="cb567-9"><a href="15.8-data-example-2.html#cb567-9" tabindex="-1"></a><span class="fu">names</span>(dyads)</span></code></pre></div>
+<pre><code>##  [1] &quot;coupleid&quot;  &quot;personid&quot;  &quot;time&quot;      &quot;time7c&quot;    &quot;gender&quot;    &quot;female&quot;   
+##  [7] &quot;male&quot;      &quot;reldis&quot;    &quot;wrkstrs&quot;   &quot;wrkstrsc&quot;  &quot;wrkstrscb&quot; &quot;wrkstrscw&quot;</code></pre>
+<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb569-1"><a href="15.8-data-example-2.html#cb569-1" tabindex="-1"></a><span class="co"># Re-ordering for easy viewing</span></span>
+<span id="cb569-2"><a href="15.8-data-example-2.html#cb569-2" tabindex="-1"></a>dyads <span class="ot">&lt;-</span> dyads[<span class="fu">order</span>(dyads<span class="sc">$</span>coupleid, dyads<span class="sc">$</span>time, dyads<span class="sc">$</span>personid),]</span>
+<span id="cb569-3"><a href="15.8-data-example-2.html#cb569-3" tabindex="-1"></a></span>
+<span id="cb569-4"><a href="15.8-data-example-2.html#cb569-4" tabindex="-1"></a><span class="co"># Examine first few rows of the data set</span></span>
+<span id="cb569-5"><a href="15.8-data-example-2.html#cb569-5" tabindex="-1"></a><span class="fu">head</span>(dyads)</span></code></pre></div>
+<pre><code>##    coupleid personid time    time7c gender female male reldis wrkstrs  wrkstrsc
+## 1         1        1    0 -1.500000      1      1    0   3.03       3 0.0095238
+## 22        1        2    0 -1.500000      0      0    1   4.46       3 0.0095238
+## 2         1        1    1 -1.357143      1      1    0   4.62       3 0.0095238
+## 23        1        2    1 -1.357143      0      0    1   4.88       3 0.0095238
+## 3         1        1    2 -1.214286      1      1    0   2.85       3 0.0095238
+## 24        1        2    2 -1.214286      0      0    1   4.58       3 0.0095238
+##     wrkstrscb wrkstrscw
+## 1  -0.3238095 0.3333333
+## 22 -0.1333333 0.1428571
+## 2  -0.3238095 0.3333333
+## 23 -0.1333333 0.1428571
+## 3  -0.3238095 0.3333333
+## 24 -0.1333333 0.1428571</code></pre>
+</div>
+<div id="plotting-the-data." class="section level3 hasAnchor" number="15.8.5">
+<h3><span class="header-section-number">15.8.5</span> Plotting the Data.<a href="15.8-data-example-2.html#plotting-the-data." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before we begin running our models, it is always a good idea to look at our data.</p>
+<p>We start with examining the distribution of our outcome variable end-of-day relationship dissatisfaction, <code>reldis</code>. Let’s look at the histogram by gender.</p>
+<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="15.8-data-example-2.html#cb571-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dyads, <span class="fu">aes</span>(<span class="at">x =</span> reldis)) <span class="sc">+</span></span>
+<span id="cb571-2"><a href="15.8-data-example-2.html#cb571-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb571-3"><a href="15.8-data-example-2.html#cb571-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Relationship Dissatisfaction&quot;</span>) <span class="sc">+</span></span>
+<span id="cb571-4"><a href="15.8-data-example-2.html#cb571-4" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> gender) <span class="co"># creating a separate plot for each gender</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-332-1.png" width="672" /></p>
+<p>The outcome variable for each gender looks approximately normally distributed, which is good news for when we run our models.</p>
+<p>Next, let’s plot a few dyads’ reports of relationship dissatisfaction through the course of the study. Since the the predictor variable has already been split into time-varying (state) and time-invariant (trait) components, we use the time-varying predictor <code>wrkstrscw</code> as the “background” context variable.</p>
+<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb572-1"><a href="15.8-data-example-2.html#cb572-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">subset</span>(dyads, coupleid <span class="sc">&lt;=</span> <span class="dv">9</span>), <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">group =</span> personid), <span class="at">legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb572-2"><a href="15.8-data-example-2.html#cb572-2" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">xmin =</span> time<span class="fl">-.5</span>, <span class="at">xmax =</span> time<span class="fl">+.5</span>, <span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> <span class="dv">10</span>, <span class="at">fill =</span> wrkstrscw), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span> <span class="co"># creating rectangles in the background of the plot colored by work stressors</span></span>
+<span id="cb572-3"><a href="15.8-data-example-2.html#cb572-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> reldis, <span class="at">color =</span> <span class="fu">factor</span>(gender)), <span class="at">shape =</span> <span class="dv">17</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> <span class="co"># creating a different colored point for each gender</span></span>
+<span id="cb572-4"><a href="15.8-data-example-2.html#cb572-4" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> reldis, <span class="at">color =</span> <span class="fu">factor</span>(gender)), <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span> <span class="co"># creating a different colored line for each gender</span></span>
+<span id="cb572-5"><a href="15.8-data-example-2.html#cb572-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb572-6"><a href="15.8-data-example-2.html#cb572-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Relationship Dissatisfaction&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb572-7"><a href="15.8-data-example-2.html#cb572-7" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">20</span>, <span class="at">by =</span> <span class="dv">5</span>)) <span class="sc">+</span> </span>
+<span id="cb572-8"><a href="15.8-data-example-2.html#cb572-8" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> coupleid) <span class="co"># creating a separate plot for each dyad</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-333-1.png" width="672" /></p>
+<p>It looks like there is quite a lot of day-to-day variability!</p>
+<p>Finally, we’ll examine a histogram of the dyad-level (between-dyad) time-invariant variable is <code>wrkstrscb</code></p>
+<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="15.8-data-example-2.html#cb573-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dyads, <span class="fu">aes</span>(<span class="at">x =</span> wrkstrscb)) <span class="sc">+</span></span>
+<span id="cb573-2"><a href="15.8-data-example-2.html#cb573-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb573-3"><a href="15.8-data-example-2.html#cb573-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Work Stress (dyad-level centered)&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-334-1.png" width="672" /></p>
+</div>
+<div id="the-multilevel-model." class="section level3 hasAnchor" number="15.8.6">
+<h3><span class="header-section-number">15.8.6</span> The Multilevel Model.<a href="15.8-data-example-2.html#the-multilevel-model." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We are now ready to start running our models.</p>
+<p>First, we’ll construct a model looking at the within-person and between-person associations of relationship dissatisfaction (<code>reldis</code>) with work stressors (<code>wrkstrs</code> - which is centered and separated into <code>wrkstrscw</code> and <code>wrkdstrscb</code>).</p>
+<p>This multilevel model set-up proceeds as usual; however, we will include a special “dummy” variable indicator as follows:</p>
+<p><span class="math display">\[reldis_{it} = \beta_{0i}dummy_{it} + \beta_{1i}dummy_{it}time7c_{it}+ \beta_{2i}dummy_{it}wrkstrscw_{it} + e_{it}\]</span></p>
+<p>with two random effects, so that
+<span class="math display">\[\beta_{0i} = \gamma_{00} + \gamma_{01}wrkstrscb_{i} + u_{0i}\]</span></p>
+<p><span class="math display">\[\beta_{1i} = \gamma_{10}\]</span></p>
+<p><span class="math display">\[\beta_{2i} = \gamma_{20} + u_{2i}\]</span></p>
+<p>and residual structures of
+where
+<span class="math display">\[e_{it} \sim \mathcal{N}(0,\mathbf{R})\]</span>, and
+<span class="math display">\[\mathbf{U_{i}} \sim \mathcal{N}(0,\mathbf{G})\]</span>.</p>
+<p>where
+<span class="math display">\[\mathbf{R} =
+\mathbf{I}
+\left[\begin{array}
+{r}
+\sigma^2_{e}  
+\end{array}\right]\]</span></p>
+<p>, which with the auto-regressive structure becomes
+<span class="math display">\[\mathbf{R} =
+\sigma^2
+\left[\begin{array}
+{rrrr}
+1 &amp; \phi &amp; \phi^2 &amp; \cdots &amp; \phi^{T-1} \\
+\phi &amp; 1 &amp; \phi &amp; \cdots &amp; \phi^{T-2} \\
+\phi^2 &amp; \phi &amp; 1 &amp; \cdots &amp; \phi^{T-3} \\
+\vdots  &amp; \vdots  &amp; \vdots &amp; \ddots &amp; \vdots \\
+\phi^{T-1} &amp; \phi^{T-2} &amp; \phi^{T-3} &amp; \cdots &amp; 1
+\end{array}\right]\]</span></p>
+<p>and the between-person residuals structure is
+<span class="math display">\[\mathbf{G} =
+\left[\begin{array}
+{rr}
+\sigma^{2}_{u0} &amp; \sigma_{u0u2} \\
+\sigma_{u2u0} &amp; \sigma^{2}_{u2}
+\end{array}\right]\]</span></p>
+<p>Writing out the long equation (after algebraic substitution) we have</p>
+<p><span class="math display">\[
+reldis_{it} = \\
+\gamma_{00}dummy_{it}  + \gamma_{10}dummy_{it}time7c_{it}+ \gamma_{20}dummy_{it}wrkstrscw_{it} + \gamma_{01}dummy_{it}wrkstrscb_{i} + \\
+\left[ u_{0i}dummy_{it} + u_{2i}dummy_{it}wrkstrscw_{it} + e_{it} \right]
+\]</span></p>
+<p>which then is the equation that maps to the <code>lme()</code> or <code>lmer()</code> code.</p>
+</div>
+<div id="fit-male-model" class="section level3 hasAnchor" number="15.8.7">
+<h3><span class="header-section-number">15.8.7</span> Fit Male Model<a href="15.8-data-example-2.html#fit-male-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>First, we run the model for just males. Although not necessary, we use the <span class="math inline">\(dummy_{it}\)</span> variable <code>male</code>.</p>
+<p><em>Note also the coding to remove the default intercept</em> <code>~ -1 ...</code> <em>and for direct specification of interaction terms using colon</em> <code>x:z</code> <strong>This is important.</strong> <em>We are tricking the program, so we have to be very specific about what we want.</em></p>
+<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb574-1"><a href="15.8-data-example-2.html#cb574-1" tabindex="-1"></a>model0male <span class="ot">&lt;-</span> <span class="fu">lme</span>(<span class="at">fixed =</span> reldis <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> male <span class="sc">+</span> male<span class="sc">:</span>time7c <span class="sc">+</span> </span>
+<span id="cb574-2"><a href="15.8-data-example-2.html#cb574-2" tabindex="-1"></a>                          male<span class="sc">:</span>wrkstrscw <span class="sc">+</span> male<span class="sc">:</span>wrkstrscb,</span>
+<span id="cb574-3"><a href="15.8-data-example-2.html#cb574-3" tabindex="-1"></a>                  <span class="at">random =</span> <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> male <span class="sc">+</span> male<span class="sc">:</span>wrkstrscw <span class="sc">|</span> coupleid, </span>
+<span id="cb574-4"><a href="15.8-data-example-2.html#cb574-4" tabindex="-1"></a>                  <span class="at">correlation =</span> <span class="fu">corAR1</span>(), <span class="co"># specifying an lag-1 autoregressive residual structure</span></span>
+<span id="cb574-5"><a href="15.8-data-example-2.html#cb574-5" tabindex="-1"></a>                  <span class="at">data =</span> dyads[<span class="fu">which</span>(dyads<span class="sc">$</span>gender <span class="sc">==</span> <span class="dv">0</span>),], <span class="co"># subsetting to just male</span></span>
+<span id="cb574-6"><a href="15.8-data-example-2.html#cb574-6" tabindex="-1"></a>                  <span class="at">control =</span> <span class="fu">list</span>(<span class="at">maxIter =</span> <span class="dv">1000</span>)) </span>
+<span id="cb574-7"><a href="15.8-data-example-2.html#cb574-7" tabindex="-1"></a></span>
+<span id="cb574-8"><a href="15.8-data-example-2.html#cb574-8" tabindex="-1"></a><span class="fu">summary</span>(model0male)</span></code></pre></div>
+<pre><code>## Linear mixed-effects model fit by REML
+##   Data: dyads[which(dyads$gender == 0), ] 
+##        AIC      BIC    logLik
+##   5806.776 5857.606 -2894.388
+## 
+## Random effects:
+##  Formula: ~-1 + male + male:wrkstrscw | coupleid
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##                StdDev    Corr 
+## male           1.0152924 male 
+## male:wrkstrscw 0.1703982 0.188
+## Residual       0.8726433      
+## 
+## Correlation Structure: AR(1)
+##  Formula: ~1 | coupleid 
+##  Parameter estimate(s):
+##        Phi 
+## 0.01691436 
+## Fixed effects:  reldis ~ -1 + male + male:time7c + male:wrkstrscw + male:wrkstrscb 
+##                    Value Std.Error   DF  t-value p-value
+## male            5.083091 0.1038703 1998 48.93689  0.0000
+## male:time7c     0.011701 0.0225726 1998  0.51835  0.6043
+## male:wrkstrscw  0.109507 0.0257084 1998  4.25958  0.0000
+## male:wrkstrscb -0.027946 0.4552738   98 -0.06138  0.9512
+##  Correlation: 
+##                male   ml:tm7 ml:wrkstrscw
+## male:time7c     0.015                    
+## male:wrkstrscw  0.122 -0.004             
+## male:wrkstrscb -0.098  0.002 -0.004      
+## 
+## Standardized Within-Group Residuals:
+##          Min           Q1          Med           Q3          Max 
+## -3.374483094 -0.641886673  0.001625504  0.648554761  3.000192640 
+## 
+## Number of Observations: 2100
+## Number of Groups: 100</code></pre>
+<p>We see that the average relationship dissatisfaction for males was 5.08.</p>
+<p>There were significant “state” effects, such that on days when a man had one more work stressor than usual, his relationship dissatisfaction increased by 0.11 points. There were no significant trends with time or significant “trait” level effects.</p>
+</div>
+<div id="fit-female-model" class="section level3 hasAnchor" number="15.8.8">
+<h3><span class="header-section-number">15.8.8</span> Fit Female Model<a href="15.8-data-example-2.html#fit-female-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Second, we run the model for just females, with the <span class="math inline">\(dummy_{it}\)</span> variable <code>female</code>.</p>
+<div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb576-1"><a href="15.8-data-example-2.html#cb576-1" tabindex="-1"></a>model0female <span class="ot">&lt;-</span> <span class="fu">lme</span>(<span class="at">fixed =</span> reldis <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> female <span class="sc">+</span> female<span class="sc">:</span>time7c <span class="sc">+</span> </span>
+<span id="cb576-2"><a href="15.8-data-example-2.html#cb576-2" tabindex="-1"></a>                          female<span class="sc">:</span>wrkstrscw <span class="sc">+</span> female<span class="sc">:</span>wrkstrscb,</span>
+<span id="cb576-3"><a href="15.8-data-example-2.html#cb576-3" tabindex="-1"></a>                  <span class="at">random =</span> <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> female <span class="sc">+</span> female<span class="sc">:</span>wrkstrscw <span class="sc">|</span> coupleid, </span>
+<span id="cb576-4"><a href="15.8-data-example-2.html#cb576-4" tabindex="-1"></a>                  <span class="at">correlation=</span><span class="fu">corAR1</span>(), <span class="co"># specifying an lag-1 autoregressive residual structure</span></span>
+<span id="cb576-5"><a href="15.8-data-example-2.html#cb576-5" tabindex="-1"></a>                  <span class="at">data=</span>dyads[<span class="fu">which</span>(dyads<span class="sc">$</span>gender <span class="sc">==</span> <span class="dv">1</span>),], <span class="co"># subsetting to just female</span></span>
+<span id="cb576-6"><a href="15.8-data-example-2.html#cb576-6" tabindex="-1"></a>                  <span class="at">control=</span><span class="fu">list</span>(<span class="at">maxIter=</span><span class="dv">1000</span>)) </span>
+<span id="cb576-7"><a href="15.8-data-example-2.html#cb576-7" tabindex="-1"></a></span>
+<span id="cb576-8"><a href="15.8-data-example-2.html#cb576-8" tabindex="-1"></a><span class="fu">summary</span>(model0female)</span></code></pre></div>
+<pre><code>## Linear mixed-effects model fit by REML
+##   Data: dyads[which(dyads$gender == 1), ] 
+##        AIC      BIC    logLik
+##   6303.436 6354.266 -3142.718
+## 
+## Random effects:
+##  Formula: ~-1 + female + female:wrkstrscw | coupleid
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##                  StdDev    Corr  
+## female           0.9613730 female
+## female:wrkstrscw 0.1271923 0.481 
+## Residual         0.9978968       
+## 
+## Correlation Structure: AR(1)
+##  Formula: ~1 | coupleid 
+##  Parameter estimate(s):
+##         Phi 
+## 0.002610473 
+## Fixed effects:  reldis ~ -1 + female + female:time7c + female:wrkstrscw + female:wrkstrscb 
+##                      Value Std.Error   DF  t-value p-value
+## female            4.650787 0.0991035 1998 46.92859  0.0000
+## female:time7c    -0.023380 0.0253670 1998 -0.92168  0.3568
+## female:wrkstrscw  0.158532 0.0253158 1998  6.26216  0.0000
+## female:wrkstrscb  0.762574 0.4453133   98  1.71244  0.0900
+##  Correlation: 
+##                  female fml:t7 fml:wrkstrscw
+## female:time7c     0.018                     
+## female:wrkstrscw  0.234 -0.014              
+## female:wrkstrscb  0.101 -0.001 -0.003       
+## 
+## Standardized Within-Group Residuals:
+##          Min           Q1          Med           Q3          Max 
+## -3.256748607 -0.648814249 -0.008317617  0.650836521  3.379549731 
+## 
+## Number of Observations: 2100
+## Number of Groups: 100</code></pre>
+<p>We see that the average relationship dissatisfaction for females was 4.65. There were significant “state” effects, such that on days when a woman had one more work stressor than usual, her relationship dissatisfaction increased by 0.16 points. There were no significant trends with time or significant “trait” level effects.</p>
+</div>
+<div id="fit-full-model" class="section level3 hasAnchor" number="15.8.9">
+<h3><span class="header-section-number">15.8.9</span> Fit Full Model<a href="15.8-data-example-2.html#fit-full-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As above, we use the two dummy variables to turn on and off the parameters. The parameters invoked with <span class="math inline">\(dummy1\)</span> are associated with one member of the dyad, and parameters invoked with <span class="math inline">\(dummy2\)</span> are associated with the other member of the dyad.</p>
+<p><span class="math display">\[reldis_{it} = \\
+\gamma_{00}dummy1_{it}  + \gamma_{10}dummy1_{it}time7c_{it}+ \gamma_{20}dummy1_{it}wrkstrscw_{it} + \gamma_{01}dummy1_{it}wrkstrscb_{i} + \left[ u_{0i}dummy1_{it} + u_{2i}dummy1_{it}wrkstrscw_{it} + e1_{it} \right] + \\
+\gamma_{30}dummy2_{it}  + \gamma_{40}dummy2_{it}time7c_{it}+ \gamma_{50}dummy2_{it}wrkstrscw_{it} + \gamma_{31}dummy2_{it}wrkstrscb_{i} + \left[ u_{3i}dummy2_{it} + u_{5i}dummy2_{it}wrkstrscw_{it} + e2_{it} \right]\]</span></p>
+<p>Noting that our random effect matrices also expand,
+<span class="math display">\[\mathbf{R} =
+\left[\begin{array}
+{rr}
+\sigma^2_{e1} &amp; \sigma_{e1e2} \\
+\sigma_{e1e2} &amp; \sigma^2_{e2}
+\end{array}\right]\]</span></p>
+<p>where <span class="math inline">\(\sigma_{e1e2}\)</span> is the residual covariance between male and female relationship dissatisfaction.<br />
+and
+<span class="math display">\[\left[\begin{array}
+{rrrr}
+\sigma^{2}_{u0} &amp; \sigma_{u0u2} &amp; \sigma_{u0u3} &amp; \sigma_{u0u5} \\
+\sigma_{u2u0} &amp; \sigma^{2}_{u2} &amp; \sigma_{u2u3} &amp; \sigma_{u2u5} \\
+\sigma_{u3u0} &amp; \sigma_{u3u2} &amp; \sigma^{2}_{u3} &amp; \sigma_{u3u5} \\
+\sigma_{u5u0} &amp; \sigma_{u5u2} &amp; \sigma_{u5u3} &amp; \sigma^{2}_{u5}
+\end{array}\right]\]</span></p>
+<p>where the matrix is blocks of between-dyad associations, some among males only, some among females anly, and some across genders. <em>These are sample-level, between-dyad relations, and should be interpreted appropriately.</em></p>
+<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="15.8-data-example-2.html#cb578-1" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
+<span id="cb578-2"><a href="15.8-data-example-2.html#cb578-2" tabindex="-1"></a>  <span class="at">fixed =</span> reldis <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> </span>
+<span id="cb578-3"><a href="15.8-data-example-2.html#cb578-3" tabindex="-1"></a>    male <span class="sc">+</span> </span>
+<span id="cb578-4"><a href="15.8-data-example-2.html#cb578-4" tabindex="-1"></a>    male<span class="sc">:</span>time7c <span class="sc">+</span> </span>
+<span id="cb578-5"><a href="15.8-data-example-2.html#cb578-5" tabindex="-1"></a>    male<span class="sc">:</span>wrkstrscw <span class="sc">+</span> male<span class="sc">:</span>wrkstrscb <span class="sc">+</span> </span>
+<span id="cb578-6"><a href="15.8-data-example-2.html#cb578-6" tabindex="-1"></a>    female <span class="sc">+</span> female<span class="sc">:</span>time7c <span class="sc">+</span> </span>
+<span id="cb578-7"><a href="15.8-data-example-2.html#cb578-7" tabindex="-1"></a>    female<span class="sc">:</span>wrkstrscw <span class="sc">+</span> female<span class="sc">:</span>wrkstrscb,</span>
+<span id="cb578-8"><a href="15.8-data-example-2.html#cb578-8" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> male <span class="sc">+</span> </span>
+<span id="cb578-9"><a href="15.8-data-example-2.html#cb578-9" tabindex="-1"></a>    male<span class="sc">:</span>wrkstrscw <span class="sc">+</span> </span>
+<span id="cb578-10"><a href="15.8-data-example-2.html#cb578-10" tabindex="-1"></a>    female <span class="sc">+</span> female<span class="sc">:</span>wrkstrscw <span class="sc">|</span> coupleid, </span>
+<span id="cb578-11"><a href="15.8-data-example-2.html#cb578-11" tabindex="-1"></a>  <span class="co"># this invokes separate sigma^{2}_{e} for each gender</span></span>
+<span id="cb578-12"><a href="15.8-data-example-2.html#cb578-12" tabindex="-1"></a>  <span class="at">weights=</span><span class="fu">varIdent</span>(<span class="at">form =</span> <span class="sc">~</span><span class="dv">1</span> <span class="sc">|</span> gender), </span>
+<span id="cb578-13"><a href="15.8-data-example-2.html#cb578-13" tabindex="-1"></a>  <span class="co"># this invokes the off-diaginal sigma_{e1e2} </span></span>
+<span id="cb578-14"><a href="15.8-data-example-2.html#cb578-14" tabindex="-1"></a>  <span class="at">corr=</span><span class="fu">corCompSymm</span>(<span class="at">form =</span> <span class="sc">~</span><span class="dv">1</span> <span class="sc">|</span> coupleid<span class="sc">/</span>time), </span>
+<span id="cb578-15"><a href="15.8-data-example-2.html#cb578-15" tabindex="-1"></a>  <span class="at">data=</span>dyads,</span>
+<span id="cb578-16"><a href="15.8-data-example-2.html#cb578-16" tabindex="-1"></a>  <span class="at">control=</span><span class="fu">list</span>(<span class="at">maxIter=</span><span class="dv">1000</span>)</span>
+<span id="cb578-17"><a href="15.8-data-example-2.html#cb578-17" tabindex="-1"></a>) </span>
+<span id="cb578-18"><a href="15.8-data-example-2.html#cb578-18" tabindex="-1"></a></span>
+<span id="cb578-19"><a href="15.8-data-example-2.html#cb578-19" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div>
+<pre><code>## Linear mixed-effects model fit by REML
+##   Data: dyads 
+##        AIC      BIC    logLik
+##   12096.16 12229.31 -6027.078
+## 
+## Random effects:
+##  Formula: ~-1 + male + male:wrkstrscw + female + female:wrkstrscw | coupleid
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##                  StdDev    Corr                
+## male             1.0157900 male   female ml:wrk
+## female           0.9600387  0.263              
+## male:wrkstrscw   0.1678971  0.178 -0.019       
+## wrkstrscw:female 0.1250153  0.007  0.485  0.502
+## Residual         0.9981032                     
+## 
+## Correlation Structure: Compound symmetry
+##  Formula: ~1 | coupleid/time 
+##  Parameter estimate(s):
+##        Rho 
+## 0.07320601 
+## Variance function:
+##  Structure: Different standard deviations per stratum
+##  Formula: ~1 | gender 
+##  Parameter estimates:
+##         1         0 
+## 1.0000000 0.8738249 
+## Fixed effects:  reldis ~ -1 + male + male:time7c + male:wrkstrscw + male:wrkstrscb +      female + female:time7c + female:wrkstrscw + female:wrkstrscb 
+##                      Value Std.Error   DF  t-value p-value
+## male              5.085720 0.1038241 4093 48.98398  0.0000
+## female            4.647561 0.0989240 4093 46.98110  0.0000
+## male:time7c       0.011615 0.0222292 4093  0.52251  0.6013
+## male:wrkstrscw    0.109399 0.0255078 4093  4.28883  0.0000
+## male:wrkstrscb   -0.141908 0.4388421 4093 -0.32337  0.7464
+## time7c:female    -0.024921 0.0252925 4093 -0.98532  0.3245
+## wrkstrscw:female  0.159484 0.0251352 4093  6.34506  0.0000
+## wrkstrscb:female  0.623309 0.4276923 4093  1.45738  0.1451
+##  Correlation: 
+##                  male   female ml:tm7 ml:wrkstrscw ml:wrkstrscb tm7c:f
+## female            0.253                                               
+## male:time7c       0.015  0.001                                        
+## male:wrkstrscw    0.115 -0.012 -0.004                                 
+## male:wrkstrscb   -0.095 -0.003  0.002 -0.004                          
+## time7c:female     0.001  0.018  0.071 -0.001        0.001             
+## wrkstrscw:female  0.003  0.234  0.001  0.163        0.001       -0.014
+## wrkstrscb:female  0.003  0.097  0.000  0.001       -0.029       -0.002
+##                  wrkstrscw:
+## female                     
+## male:time7c                
+## male:wrkstrscw             
+## male:wrkstrscb             
+## time7c:female              
+## wrkstrscw:female           
+## wrkstrscb:female -0.004    
+## 
+## Standardized Within-Group Residuals:
+##           Min            Q1           Med            Q3           Max 
+## -3.3784810728 -0.6500707319  0.0004811467  0.6500963650  3.3326678370 
+## 
+## Number of Observations: 4200
+## Number of Groups: 100</code></pre>
+<p><em>Note that the residual structure is not quite the same as in Bolger &amp; Laurenceau (2013).</em> It is not clear exactly how to get <code>lme()</code> structure to match. There is not a straightforward way, but it seems like it is possible. We just haven’t found the exact combination of structures to use yet.</p>
+<p>But, here is another close variant.</p>
+<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="15.8-data-example-2.html#cb580-1" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lme</span>(<span class="at">fixed =</span> reldis <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> </span>
+<span id="cb580-2"><a href="15.8-data-example-2.html#cb580-2" tabindex="-1"></a>                          male <span class="sc">+</span> male<span class="sc">:</span>time7c <span class="sc">+</span> </span>
+<span id="cb580-3"><a href="15.8-data-example-2.html#cb580-3" tabindex="-1"></a>                          male<span class="sc">:</span>wrkstrscw <span class="sc">+</span> male<span class="sc">:</span>wrkstrscb <span class="sc">+</span> </span>
+<span id="cb580-4"><a href="15.8-data-example-2.html#cb580-4" tabindex="-1"></a>                          female <span class="sc">+</span> female<span class="sc">:</span>time7c <span class="sc">+</span> </span>
+<span id="cb580-5"><a href="15.8-data-example-2.html#cb580-5" tabindex="-1"></a>                          female<span class="sc">:</span>wrkstrscw <span class="sc">+</span> female<span class="sc">:</span>wrkstrscb,</span>
+<span id="cb580-6"><a href="15.8-data-example-2.html#cb580-6" tabindex="-1"></a>                  <span class="at">random =</span> <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> </span>
+<span id="cb580-7"><a href="15.8-data-example-2.html#cb580-7" tabindex="-1"></a>                            male <span class="sc">+</span> male<span class="sc">:</span>wrkstrscw <span class="sc">+</span> </span>
+<span id="cb580-8"><a href="15.8-data-example-2.html#cb580-8" tabindex="-1"></a>                            female <span class="sc">+</span> female<span class="sc">:</span>wrkstrscw <span class="sc">|</span> coupleid, </span>
+<span id="cb580-9"><a href="15.8-data-example-2.html#cb580-9" tabindex="-1"></a>                  <span class="at">weights=</span><span class="fu">varIdent</span>(<span class="at">form =</span> <span class="sc">~</span><span class="dv">1</span> <span class="sc">|</span> gender), <span class="co"># this invokes separate sigma^{2}_{e} for each gender</span></span>
+<span id="cb580-10"><a href="15.8-data-example-2.html#cb580-10" tabindex="-1"></a>                  <span class="at">corr=</span><span class="fu">corAR1</span>(<span class="at">form =</span> <span class="sc">~</span><span class="dv">1</span> <span class="sc">|</span> coupleid<span class="sc">/</span>gender<span class="sc">/</span>time), <span class="co"># this invokes an AR structure</span></span>
+<span id="cb580-11"><a href="15.8-data-example-2.html#cb580-11" tabindex="-1"></a>                  <span class="at">data=</span>dyads,</span>
+<span id="cb580-12"><a href="15.8-data-example-2.html#cb580-12" tabindex="-1"></a>                  <span class="at">control=</span><span class="fu">list</span>(<span class="at">maxIter=</span><span class="dv">1000</span>)) </span>
+<span id="cb580-13"><a href="15.8-data-example-2.html#cb580-13" tabindex="-1"></a></span>
+<span id="cb580-14"><a href="15.8-data-example-2.html#cb580-14" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div>
+<pre><code>## Linear mixed-effects model fit by REML
+##   Data: dyads 
+##        AIC      BIC    logLik
+##   12106.53 12239.69 -6032.266
+## 
+## Random effects:
+##  Formula: ~-1 + male + male:wrkstrscw + female + female:wrkstrscw | coupleid
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##                  StdDev    Corr                
+## male             1.0157826 male   female ml:wrk
+## female           0.9600367  0.267              
+## male:wrkstrscw   0.1675384  0.191 -0.004       
+## wrkstrscw:female 0.1287722  0.012  0.470  0.506
+## Residual         0.8722334                     
+## 
+## Correlation Structure: AR(1)
+##  Formula: ~1 | coupleid/gender/time 
+##  Parameter estimate(s):
+## Phi 
+##   0 
+## Variance function:
+##  Structure: Different standard deviations per stratum
+##  Formula: ~1 | gender 
+##  Parameter estimates:
+##        0        1 
+## 1.000000 1.143872 
+## Fixed effects:  reldis ~ -1 + male + male:time7c + male:wrkstrscw + male:wrkstrscb +      female + female:time7c + female:wrkstrscw + female:wrkstrscb 
+##                      Value Std.Error   DF  t-value p-value
+## male              5.085736 0.1038230 4093 48.98468  0.0000
+## female            4.647385 0.0989235 4093 46.97960  0.0000
+## male:time7c       0.011710 0.0222300 4093  0.52678  0.5984
+## male:wrkstrscw    0.108935 0.0255201 4093  4.26858  0.0000
+## male:wrkstrscb   -0.142334 0.4385224 4093 -0.32458  0.7455
+## time7c:female    -0.024775 0.0252913 4093 -0.97960  0.3273
+## wrkstrscw:female  0.160824 0.0253763 4093  6.33757  0.0000
+## wrkstrscb:female  0.614992 0.4283572 4093  1.43570  0.1512
+##  Correlation: 
+##                  male   female ml:tm7 ml:wrkstrscw ml:wrkstrscb tm7c:f
+## female            0.253                                               
+## male:time7c       0.015  0.000                                        
+## male:wrkstrscw    0.123 -0.002 -0.004                                 
+## male:wrkstrscb   -0.095 -0.003  0.002 -0.005                          
+## time7c:female     0.000  0.018 -0.001 -0.001        0.001             
+## wrkstrscw:female  0.006  0.231  0.001  0.168        0.001       -0.014
+## wrkstrscb:female  0.003  0.097  0.000  0.001       -0.029       -0.001
+##                  wrkstrscw:
+## female                     
+## male:time7c                
+## male:wrkstrscw             
+## male:wrkstrscb             
+## time7c:female              
+## wrkstrscw:female           
+## wrkstrscb:female -0.003    
+## 
+## Standardized Within-Group Residuals:
+##          Min           Q1          Med           Q3          Max 
+## -3.379097672 -0.647627755  0.001645523  0.654334289  3.321512474 
+## 
+## Number of Observations: 4200
+## Number of Groups: 100</code></pre>
+<p>Although the structure is not exactly matched to the example in the book, the ones we are fitting are among the structures used in the literature. Across variants, the interpretations do not change in meaningful ways, suggesting that looking across the range of possibilities is fine.</p>
+<div id="brief-interpretation." class="section level4 hasAnchor" number="15.8.9.1">
+<h4><span class="header-section-number">15.8.9.1</span> Brief Interpretation.<a href="15.8-data-example-2.html#brief-interpretation." class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The results for the dyadic model are similar to when the models for males and females were run separately; however, this will not always be the case.</p>
+<p><strong>Fixed effects:</strong> On an average day, males and females relationship dissatisfaction is 5.08 and 4.65, respectively, on a 0 to 10 scale. On days when there is an additional work stressor that usual, relationship dissatisfaction increases by 0.11 and 0.16 for males and females, respectively.</p>
+<p><strong>Random effects:</strong> The deviation around males and females average relationship dissatisfaction is 1.02 and 0.96, respectively. Additionally, males and females relationship dissatisfaction reports are correlated 0.27, indicating that members of the same dyad often have relatively similar reports of relationship dissatisfaction. The deviation around males and females reactivity to work stressors (i.e., slope of work stressors) is 0.17 and 0.13, respectively. The way in which dyad members’ relationship dissatisfaction changes in response to work stressors is quite similar, as indicated by the 0.51 correlation.</p>
+<p>A more thorough interpretation and formal write-up of the results can be found on pages 165 - 171 of Bolger and Laurenceau (2013) <em>Chapter 8: Design and Analysis of Intensive Longitudinal Longitudinal Study of Distingiushable Dyads.</em></p>
+</div>
+<div id="cautions" class="section level4 hasAnchor" number="15.8.9.2">
+<h4><span class="header-section-number">15.8.9.2</span> Cautions<a href="15.8-data-example-2.html#cautions" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>While we only provide a brief description of the multivariate multilevel model for repeated measures dyadic data, we want to a highlight a few consierations when using this model.</p>
+<ol style="list-style-type: decimal">
+<li>The model used here is for <em>distinguishable</em> dyads. The persons within each dyad are separated (and pooled) according to an a priori defined feature (e.g., gender, role).</li>
+<li>The model used here examined the <em>linear</em> association between work stressors and relationship dissatisfaction. Different formualtions are needed to test for non-linear relations.</li>
+<li>Mdel inferences should be done carefully, keeping in mind that that level 2 covariances are between-individual covariances.</li>
+</ol>
+</div>
+</div>
+<div id="conclusion" class="section level3 hasAnchor" number="15.8.10">
+<h3><span class="header-section-number">15.8.10</span> Conclusion<a href="15.8-data-example-2.html#conclusion" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This tutorial is meant to accompany the example provided in <em>Chapter 8: Design and Analysis of Intensive Longitudinal Longitudinal Study of Distingiushable Dyads</em> of Bolger and Laurenceau (2013). We provided brief explanation of (1) the underlying model, (2) the code to run these models in R, and (3) the interpretation of the results. More detailed information about these (and related analyses) can be found in Bolger and Laurenceau (2013), Laurenceau and Bolger (2005), and Kenny, Kashy, and Cook (2006).</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="15.7-data-example.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="15.9-reference.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/zackfisher/HDFS523/edit/master/15_dyadic_data_analysis.Rmd",
+"text": "Suggest an edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+},
+"info": true,
+"output": "html_document2"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

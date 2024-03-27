@@ -1,4 +1,4 @@
-# Dyadic Data Analysis {#chapter-13}
+# Dyadic Data Analysis {#chapter-15}
 
 ```{r, echo = F}
 button <-  "position: relative; 
