@@ -768,7 +768,7 @@ library(psych)
 ```
 
 
-#### The Research Questions. 
+#### The Research Questions
 
 We are going to address:  
 
@@ -782,11 +782,11 @@ Notice that, so far, the questions are stated separately for the two types of dy
     
 Here, these relations manifest as correlations/covariances between intercepts, slopes, and residuals. 
 
-### The Modeling Enterprise.
+### The Modeling Enterprise
 
 The basic multilevel model is designed as a model with a univariate outcome. The ability to model multiple outcomes simultaneoulsy used to be a distinguishing feature of structural equation models (SEM). However, researches discovered that the multilevel model can be adapted for examination of multivariate outcomes quite easily. One simply has to "trick" the program into thinking that two (or more) variables are one variable. 
 
-### The Data.
+### The Data
 
 The data are organized as follows:
 
@@ -809,6 +809,8 @@ The data are organized as follows:
     
 The "trick" is to stack the data so that there are two records for each repeated observation. The data file is twice as long, and we structure the model to "turn on" and "turn off" the double records to invoke parameter estimation for each variable. Bolger & Laurenceau's example data are already prepared data. Let's take a look.
 
+Here predictors are split into “trait” (between-person differences) and “state” (within-person deviations) components. Specifically, the daily variable stress is split into two varaibles: "wrkstrsb" is the sample-mean centered between-person component, and stress_state is the person-centered within-person component.
+
 Load data and needed libraries.
 
 ```{r}
@@ -830,7 +832,7 @@ head(dyads)
 ```
 
 
-### Plotting the Data.
+### Plotting the Data
 
 Before we begin running our models, it is always a good idea to look at our data. 
 
@@ -868,7 +870,7 @@ ggplot(data = dyads, aes(x = wrkstrscb)) +
   labs(x = "Work Stress (dyad-level centered)")
 ```
 
-### The Multilevel Model.
+### The Multilevel Model
 
 We are now ready to start running our models.
 
