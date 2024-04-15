@@ -1,4 +1,4 @@
-# Vector Autoregressive Models {#chapter-15}
+# Vector Autoregressive Models {#chapter-17}
 
 ```{r, echo = F}
 button <-  "position: relative; 
