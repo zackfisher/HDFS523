@@ -1,0 +1,565 @@
+# Statistical Control {#chapter-6}
+
+```{r, echo = F}
+button <-  "position: relative; 
+            top: -25px; 
+            left: 85%;   
+            color: white;
+            font-weight: bold;
+            background: #4B9CD3;
+            border: 1px #3079ED solid;
+            box-shadow: inset 0 1px 0 #80B0FB"
+```
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "show", style = button)
+```
+
+In Chapter 6 we will discuss statistical control. 
+
+- Introduction to DAGs
+- Statistical Control Done Right
+- Statistical Control Gone Wrong
+
+Much of this presentation was drawn directly from Rohrer (2018) (https://journals.sagepub.com/doi/full/10.1177/2515245917745629).
+
+## Statistical Control
+
+
+**Randomized experiments often considered the gold standard in scientific research.However, it is often infeasible, difficult or impossible to manipulate the putative effect of interest**:
+
+
+* cannot randomly resettle individuals into different strata of society
+* cannot assign couples to stay married or get a divorce
+* cannot randomize children to different levels of adversity
+
+
+**Researchers have employed a number of different strategies in response to the limitations of observational data**: 
+
+* surrogate interventions
+    + item the real-life cause of interest cannot be manipulated, often a proxy can be randomized in the lab.
+* avoiding causal language
+    + item write about associations and relationships despite substantive question about causal effects
+* statistical control
+    + include control variables in analysis but choice of variables often difficult and statistical control itself insufficient
+
+
+## Directed Acyclic Graphs (DAGs)
+
+**Directed acyclic graphs (DAGs) are another approach that can be used to examine causal inferences from observational data.**
+
+* They were developed primarily by the computer scientist Judea Pearl 
+* DAGs provide a visual representation of causal assumptions.
+* Some overlap with structural equation models (SEMs).
+
+
+**Importantly, DAGs can provide insights on**
+
+* What variables should be controlled for?
+* What variables should not be controlled for?
+* In what situations might control worsen causal inference?
+
+
+### Introduction to DAGs
+
+**Below is a simple DAG depicting a model in which the relationship between maltreatment externalizing is confounded by a common cause, income.**
+
+
+```{r,echo=FALSE,engine='tikz',fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png'}
+\usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
+\tikzset{
+    -Latex,auto,node distance =1 cm and 1 cm,semithick,
+    state/.style ={ellipse, draw, minimum width = 0.7 cm},
+    point/.style = {circle, draw, inner sep=0.04cm,fill,node contents={}},
+    bidirected/.style={Latex-Latex,dashed},
+    el/.style = {inner sep=2pt, align=left, sloped}
+}
+\begin{tikzpicture}
+    \node[draw, align=center] (1) at (0,0) {Child\\Maltreatment};
+    \node[draw, align=center] (2) at (5,0) {Child's\\Externalizing};
+    \node[draw, align=center] (3) at (2.5,-2) {Family\\Income};
+    \path (1) edge  (2);
+    \path (3) edge (1);
+    \path (3) edge (2);
+\end{tikzpicture}
+```
+
+
+DAGs consist of **nodes** (variables) and **arrows** (edges) between these nodes, which reflect causal relationships.
+
+
+ It is assumed that manipulation of a variable at which an arrow begins (e.g., a manipulation of child maltreatment with income held constant) would change the variable at the end of the arrow (e.g., externalizing).
+ 
+ 
+### Introduction to DAGs: Paths
+ 
+ From these two simple building blocks—**nodes** and **arrows**—one can visualize more complex situations and trace paths from variable to variable:
+ 
+ 
+```{r,echo=FALSE,engine='tikz',fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png'}
+\usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
+\tikzset{
+    -Latex,auto,node distance =1 cm and 1 cm,semithick,
+    state/.style ={ellipse, draw, minimum width = 0.7 cm},
+    point/.style = {circle, draw, inner sep=0.04cm,fill,node contents={}},
+    bidirected/.style={Latex-Latex,dashed},
+    el/.style = {inner sep=2pt, align=left, sloped}
+}
+\begin{tikzpicture}
+    \node[draw, align=center] (1) at (0,0) {Child\\Maltreatment};
+    \node[draw, align=center] (2) at (5,0) {Child's\\Externalizing};
+    \node[draw, align=center] (3) at (2.5,-2) {Family\\Income};
+    \node[draw, align=center] (4) at (0,-1.5) {Family\\Support};
+    \path (1) edge  (2);
+    \path (3) edge (1);
+    \path (3) edge (2);
+    \path (4) edge (1);
+    \path (3) edge (4);
+\end{tikzpicture}
+```
+
+**Paths**
+
+* A simple path leads just from one node to another (income → stress).
+* Paths can also contain multiple nodes:
+    + income → stress → child maltreatment
+* Paths can also travel against the direction indicated by arrows
+    + child maltreatment ← stress ← income → externalizing
+
+
+### Introduction to DAGs: Chains
+
+ 
+```{r,echo=FALSE,engine='tikz',fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png'}
+\usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
+\tikzset{
+    -Latex,auto,node distance =1 cm and 1 cm,semithick,
+    state/.style ={ellipse, draw, minimum width = 0.7 cm},
+    point/.style = {circle, draw, inner sep=0.04cm,fill,node contents={}},
+    bidirected/.style={Latex-Latex,dashed},
+    el/.style = {inner sep=2pt, align=left, sloped}
+}
+\begin{tikzpicture}
+    \node[draw, align=center] (1) at (0,0) {Child\\Maltreatment};
+    \node[draw, align=center] (2) at (5,0) {Child's\\Externalizing};
+    \node[draw, align=center] (3) at (2.5,-2) {Family\\Income};
+    \node[draw, align=center] (4) at (0,-1.5) {Family\\Support};
+    \path[dashed,red] (1) edge  (2);
+    \path[dashed,red] (3) edge (1);
+    \path (3) edge (2);
+    \path (4) edge (1);
+    \path (3) edge (4);
+\end{tikzpicture}
+```
+
+
+**Chains**
+
+* Chains have the structure A → B → C.
+* Chains can transmit an association between the beginning and end nodes. 
+    + If income causally affects child maltreatment, and child maltreatment causally affects externalizing, then income and externalizing can be correlated.
+    
+### Introduction to DAGs: Descendants and Ancestors
+
+ 
+```{r,echo=FALSE,engine='tikz',fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png'}
+\usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
+\tikzset{
+    -Latex,auto,node distance =1 cm and 1 cm,semithick,
+    state/.style ={ellipse, draw, minimum width = 0.7 cm},
+    point/.style = {circle, draw, inner sep=0.04cm,fill,node contents={}},
+    bidirected/.style={Latex-Latex,dashed},
+    el/.style = {inner sep=2pt, align=left, sloped}
+}
+\begin{tikzpicture}
+    \node[draw, align=center] (1) at (0,0) {Child\\Maltreatment};
+    \node[draw, align=center] (2) at (5,0) {Child's\\Externalizing};
+    \node[draw, align=center] (3) at (2.5,-2) {Family\\Income};
+    \node[draw, align=center] (4) at (0,-1.5) {Family\\Support};
+    \path (1) edge  (2);
+    \path (3) edge (1);
+    \path (3) edge (2);
+    \path (4) edge (1);
+    \path (3) edge (4);
+\end{tikzpicture}
+```
+
+
+**Chains: Descendants and Ancestors**
+
+* Along a chain, variables that are directly or indirectly causally affected by a certain variable are called its descendants
+    + externalizing is a descendant of child maltreatment
+* Variables that directly or indirectly affect a certain variable are considered its ancestors.
+    + income is an ancestor of support, child maltreatment and internalizing
+    
+    
+### Introduction to DAGs: Forks
+
+```{r,echo=FALSE,engine='tikz',fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png'}
+\usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
+\tikzset{
+    -Latex,auto,node distance =1 cm and 1 cm,semithick,
+    state/.style ={ellipse, draw, minimum width = 0.7 cm},
+    point/.style = {circle, draw, inner sep=0.04cm,fill,node contents={}},
+    bidirected/.style={Latex-Latex,dashed},
+    el/.style = {inner sep=2pt, align=left, sloped}
+}
+\begin{tikzpicture}
+    \node[draw, align=center] (1) at (0,0) {Child\\Maltreatment};
+    \node[draw, align=center] (2) at (5,0) {Child's\\Externalizing};
+    \node[draw, align=center] (3) at (2.5,-2) {Family\\Income};
+    \node[draw, align=center] (4) at (0,-1.5) {Family\\Support};
+    \path (1) edge  (2);
+    \path[dashed,red] (3) edge (1);
+    \path[dashed,red] (3) edge (2);
+    \path (4) edge (1);
+    \path (3) edge (4);
+\end{tikzpicture}
+```
+
+**Forks**
+
+* Forks have the structure A ← B → C.
+* A fork can transmit an association, but it is not causal.
+    + In isolation, this fork indicates that child maltreatment and externalizing may be correlated because they share a common cause, income.
+* Forks are the causal structure most relevant for the phenomenon of confounding.
+
+
+### Introduction to DAGs: Inverted Forks
+
+```{r,echo=FALSE,engine='tikz',fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png'}
+\usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
+\tikzset{
+    -Latex,auto,node distance =1 cm and 1 cm,semithick,
+    state/.style ={ellipse, draw, minimum width = 0.7 cm},
+    point/.style = {circle, draw, inner sep=0.04cm,fill,node contents={}},
+    bidirected/.style={Latex-Latex,dashed},
+    el/.style = {inner sep=2pt, align=left, sloped}
+}
+\begin{tikzpicture}
+    \node[draw, align=center] (1) at (0,0) {Child\\Maltreatment};
+    \node[draw, align=center] (2) at (5,0) {Child's\\Externalizing};
+    \node[draw, align=center] (3) at (2.5,-2) {Family\\Income};
+    \node[draw, align=center] (4) at (0,-1.5) {Family\\Support};
+    \path[dashed,red] (1) edge  (2);
+    \path (3) edge (1);
+    \path[dashed,red] (3) edge (2);
+    \path (4) edge (1);
+    \path (3) edge (4);
+\end{tikzpicture}
+```
+
+
+**Inverted Forks**
+
+* Inverted forks have the structure A → B ← C.
+* An inverted fork does not transmit an association.
+    + In isolation, If child maltreatment and income both affect externalizing, this does not imply that they are in any way correlated.
+* Inverted forks are relevant to the problem of collider bias.
+
+### Introduction to DAGs: Acyclicity
+
+```{r,echo=FALSE,engine='tikz',fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png'}
+\usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
+\tikzset{
+    -Latex,auto,node distance =1 cm and 1 cm,semithick,
+    state/.style ={ellipse, draw, minimum width = 0.7 cm},
+    point/.style = {circle, draw, inner sep=0.04cm,fill,node contents={}},
+    bidirected/.style={Latex-Latex,dashed},
+    el/.style = {inner sep=2pt, align=left, sloped}
+}
+\begin{tikzpicture}
+    \node[draw, align=center] (1) at (0,0) {Child\\Maltreatment};
+    \node[draw, align=center] (2) at (5,0) {Child's\\Externalizing};
+    \node[draw, align=center] (3) at (2.5,-2) {Family\\Income};
+    \node[draw, align=center] (4) at (0,-1.5) {Family\\Support};
+    \path[dashed,red] (1) edge  (2);
+    \path (3) edge (1);
+    \path[dashed,red] (3) edge (2);
+    \path (4) edge (1);
+    \path (3) edge (4);
+\end{tikzpicture}
+```
+
+
+**Acyclicity**
+
+* DAGs are acyclic because they do not allow for cyclic paths in which variables become their own ancestors.
+    + a variable cannot causally affect itself
+* Developmental systems often contain feedback loops and reciprocal relationships.
+    + Often feedback loops can be modeled in a DAG by taking the temporal order into account and adding nodes for repeated measures.
+
+## Statistical Control Done Right
+
+**The central problem of observational data is confounding**:
+
+* the presence of a common cause that lurks behind the potential cause of interest and the outcome of interest. 
+
+
+**A confounding influence can introduce what is often called a spurious correlation, which ought not to be confused with a causal effect.**
+
+* The extraordinarily influence of randomized experiments in testing causal inferences is based on the simple fact that if the independent variable is randomly assigned—for example, by the flip of a coin—by design it cannot share a common cause with the outcome.
+
+**How can a DAG be used to figure out how to remove all such noncausal associations so that only the true causal effect remains?**
+
+### Building a DAG
+
+**To derive a valid causal conclusion, one must ensure the DAG includes everything that is relevant to the causal effect of interest. What is missing**
+
+
+```{r,echo=FALSE,engine='tikz',fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png'}
+\usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
+\tikzset{
+    -Latex,auto,node distance =1 cm and 1 cm,semithick,
+    state/.style ={ellipse, draw, minimum width = 0.7 cm},
+    point/.style = {circle, draw, inner sep=0.04cm,fill,node contents={}},
+    bidirected/.style={Latex-Latex,dashed},
+    el/.style = {inner sep=2pt, align=left, sloped}
+}
+\begin{tikzpicture}
+    \node[draw, align=center] (1) at (0,0) {Child\\Maltreatment};
+    \node[draw, align=center] (2) at (5,0) {Child's\\Externalizing};
+    \node[draw, align=center] (3) at (2.5,-2) {Family\\Income};
+    \node[draw, align=center] (4) at (0,-1.5) {Family\\Support};
+    \path[dashed,red] (1) edge  (2);
+    \path (3) edge (1);
+    \path[dashed,red] (3) edge (2);
+    \path (4) edge (1);
+    \path (3) edge (4);
+\end{tikzpicture}
+```
+
+
+If we want to derive a valid causal conclusion, we need to build a causal DAG that is complete because it includes all common causes of all pairs of variables that are already included in the DAG (Spirtes, Glymour, & Scheines, 2000). 
+
+That is, any additional variable that either directly or indirectly causally affects at least two variables already included in the DAG should be included.
+
+
+### Building a DAG: Back-Door Paths
+
+**After a DAG is built, back-door paths can be discerned.**
+
+Back-door paths are all paths that start with an arrow pointing to the independent variable and end with an arrow pointing to the dependent variable.
+
+
+```{r,echo=FALSE,engine='tikz',fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png'}
+\usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
+\tikzset{
+    -Latex,auto,node distance =1 cm and 1 cm,semithick,
+    state/.style ={ellipse, draw, minimum width = 0.7 cm},
+    point/.style = {circle, draw, inner sep=0.04cm,fill,node contents={}},
+    bidirected/.style={Latex-Latex,dashed},
+    el/.style = {inner sep=2pt, align=left, sloped}
+}
+\begin{tikzpicture}
+    \node[draw, align=center] (1) at (0,0) {Child\\Maltreatment};
+    \node[draw, align=center] (2) at (5,0) {Child's\\Externalizing};
+    \node[draw, align=center] (3) at (2.5,-2) {Family\\Income};
+    \node[draw, align=center] (4) at (0,-1.5) {Family\\Support};
+    \path (1) edge  (2);
+    \path (3) edge (1);
+    \path (3) edge (2);
+    \path (4) edge (1);
+    \path (3) edge (4);
+\end{tikzpicture}
+```
+
+If we plan to investigate the causal relationship between child maltreatment and internalizing what are the back-door paths in our example DAG?
+
+
+**Back-Door Paths**
+
+* child maltreatment ← support ← income → externalizing
+* child maltreatment ← income → externalizing
+
+**Back-Door Problems**
+
+* Back-door paths are problematic whenever they transmit an association. 
+* In this case, both backdoor paths consist of only chains and forks, thus, these two back-door paths are open, and they can transmit a spurious association.
+
+**Back-Door Solutions**
+
+* The zero-order correlation between child maltreatment and externalizing is a mix of the true causal effect (child maltreatment → externalizing) of interest plus any noncausal association transmitted by the two back-door paths.
+* To remove the undesirable noncausal association, we must block the two back-door paths.
+
+**Blocking Back-Door Paths**
+
+**The purpose of third-variable control is to block open back-door paths.**
+
+* If all back-door paths between the independent and dependent variables can be blocked, then the causal effect connecting the independent and dependent variables can be identified.
+
+* Such a causal effect would be considered identifiable, always under the assumption that the DAG captures the true underlying causal web.
+
+* A back-door path can be blocked by “cutting” the transmission of association at any point in the path by statistically controlling a node.
+
+
+**What variables would we want to control for to identify the causal effect of child maltreatment on externalizing?**
+
+```{r,echo=FALSE,engine='tikz',fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png'}
+\usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
+\tikzset{
+    -Latex,auto,node distance =1 cm and 1 cm,semithick,
+    state/.style ={ellipse, draw, minimum width = 0.7 cm},
+    point/.style = {circle, draw, inner sep=0.04cm,fill,node contents={}},
+    bidirected/.style={Latex-Latex,dashed},
+    el/.style = {inner sep=2pt, align=left, sloped}
+}
+\begin{tikzpicture}
+    \node[draw, align=center] (1) at (0,0) {Child\\Maltreatment};
+    \node[draw, align=center] (2) at (5,0) {Child's\\Externalizing};
+    \node[draw, align=center] (3) at (2.5,-2) {Family\\Income};
+    \node[draw, align=center] (4) at (0,-1.5) {Family\\Support};
+    \path (1) edge  (2);
+    \path (3) edge (1);
+    \path (3) edge (2);
+    \path (4) edge (1);
+    \path (3) edge (4);
+\end{tikzpicture}
+```
+
+## Statistical Control Gone Wrong
+
+In certain fields, it has become common practice to include as many covariates as possible.
+
+Unfortunately, it is not true that simply adding more covariates will improve the estimate of a causal effect. 
+
+**There are two types of variables that researchers should not control for without taking into account potential negative side effects: colliders and mediators.**
+
+Whereas confounders causally affect the independent variable of interest, colliders and mediators are causally affected by the independent variable. 
+
+### Collider Bias
+
+A collider for a certain pair of variables is any variable that is causally influenced by both of them.
+
+**Controlling for, or conditioning analysis on, such a variable (or any of its descendants) can introduce a spurious (i.e., noncausal) association between its causes.**
+
+In DAG terminology, a collider is the variable in the middle of an inverted fork, for example, variable B in A → B ← C.
+
+The collider variable normally blocks the path, but when one controls for it, a spurious association between A and C can arise. 
+
+### Conditioning on a Collider
+
+**Thought Experiment**
+
+Imagine we are interested in the effect of child maltreatment on personality features, such as extroversion.
+
+For this thought experiment, let us assume that there is actually no causal effect of child maltreatment on extroversion.
+
+To investigate the association, we look at all individuals with substantiated claims of maltreatment via CPS.
+
+**We find a sizable negative association: those who experienced more maltreatment show less extroversion and vice versa.**
+
+Suppose we then realize bias might be an issue and conduct a follow-up study on individuals who self-report experiencing maltreatment but do not have CPS involvement.
+
+**Again we find a sizable negative association.**
+
+By assessing substantiated and unsubstantiated cases separately, we have stratified, or conditioned, our analyses by CPS involvement. 
+
+However, let's assume that exposure to child maltreatment and extroversion are likely to be associated with CPS contact.
+
+In the simplest case, both have a positive effect: 
+
+* With increasing child maltreatment, the likelihood of CPS involvement increases.
+* With increasing extroversion, the likelihood of CPS involvement increases. 
+
+
+```{r,echo=FALSE,engine='tikz',fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png'}
+\usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
+\tikzset{
+    -Latex,auto,node distance =1 cm and 1 cm,semithick,
+    state/.style ={ellipse, draw, minimum width = 0.7 cm},
+    point/.style = {circle, draw, inner sep=0.04cm,fill,node contents={}},
+    bidirected/.style={Latex-Latex,dashed},
+    el/.style = {inner sep=2pt, align=left, sloped}
+}
+    
+\begin{tikzpicture}
+    \node[draw, align=center] (1) at (0,0) {Child\\Maltreatment};
+    \node[draw, align=center] (2) at (0,-2) {Extroversion};
+    \node[draw, align=center] (3) at (3,-1) {CPS\\Involvement};
+    \path (1) edge  (2);
+    \path (1) edge (3);
+    \path (2) edge (3);
+\end{tikzpicture}
+```
+
+**In our thought experiment, there is no association between child maltreatment and extroversion if all individuals—with and without CPS involvement—are considered simultaneously without statistical control (of the collider or any descendants)**
+
+![Collider Bias](imgs/collider_bias.jpg)
+
+
+The spurious negative correlation emerges only when the joint outcome of the two variables of interest is controlled for. 
+
+This observation generalizes to similar situations in which selection into a group is based on multiple desirable features: 
+
+* Group membership is a collider variable, and conditioning analysis on it will introduce or exaggerate trade-offs between desirable features.
+
+
+### Avoiding Collider Bias
+
+Avoiding collider bias requires two steps.
+
+* One must be aware of the collider variable, and this may entail using a DAG to identify colliders that exist between and independent variable and outcome.
+
+* One must be able to run analyses that are not conditional on the collider. This entails not controlling for the collider when examining the main effect of interest.
+
+**Thought Experiment**
+
+* In our thought experiment, we must include individuals involved and not involved with CPS
+
+* Outside of thought experiments, one might often be unaware of collider variables or collect data in such a way that collider bias is built in.
+
+
+### Variations on Collider Bias: Nonresponse Bias
+
+Nonresponse bias occurs if, for example, a researcher analyzes only completed questionnaires, and the variables of interest are associated with questionnaire completion.
+
+Assume that we are interested in the association between grit and intelligence, and our assessment ends up being very burdensome.
+
+* Both grit and intelligence make it easier for respondents to push through and complete the assessment.
+* Questionnaire completion is thus a collider between grit and intelligence.
+* Although there might be no association between grit and intelligence in the population, we might find a spurious negative association if we analyze only completed questionnaires.
+    + completers low on intelligence and high levels of grit
+    + completers low on grit and high on intellgence
+    + noncompleter low on both variables less likely to finish 
+
+### Controlling for Mediators
+
+Overcontrol bias is another example of statistical control hurting instead of helping: 
+
+
+* If mediating variables are controlled for, the very processes of interest are controlled away.
+
+Consider our previous example, now slightly modified:
+
+```{r,echo=FALSE,engine='tikz',fig.ext=if (knitr:::is_latex_output()) 'pdf' else 'png'}
+\usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
+\tikzset{
+    -Latex,auto,node distance =1 cm and 1 cm,semithick,
+    state/.style ={ellipse, draw, minimum width = 0.7 cm},
+    point/.style = {circle, draw, inner sep=0.04cm,fill,node contents={}},
+    bidirected/.style={Latex-Latex,dashed},
+    el/.style = {inner sep=2pt, align=left, sloped}
+}
+\begin{tikzpicture}
+    \node[draw, align=center] (1) at (0,0) {Child\\Maltreatment};
+    \node[draw, align=center] (2) at (5,0) {Externalizing};
+    \node[draw, align=center] (3) at (2.5,-2) {Income\\(as Child)};
+    \node[draw, align=center] (4) at (0,-1) {Stress};
+    \node[draw, align=center] (5) at (2.5,2) {Income\\(as Adult)};
+    \node (6) at (6,1) {U};
+    \path (1) edge  (2);
+    \path (3) edge (1);
+    \path (3) edge (2);
+    \path (4) edge (1);
+    \path (3) edge (4);
+     \path (1) edge (5);
+     \path (5) edge (2);
+     \path (6) edge (5);
+     \path (6) edge (2);
+\end{tikzpicture}
+```
+
+
+
+

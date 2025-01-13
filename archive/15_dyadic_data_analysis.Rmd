@@ -1,0 +1,1068 @@
+# Dyadic Data Analysis {#chapter-15}
+
+```{r, echo = F}
+button <-  "position: relative; 
+            top: -25px; 
+            left: 85%;   
+            color: white;
+            font-weight: bold;
+            background: #4B9CD3;
+            border: 1px #3079ED solid;
+            box-shadow: inset 0 1px 0 #80B0FB"
+```
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "show", style = button)
+```
+
+This chapter introduces the concept of nonlinear change. Notes from this chapter borrow heavily from Kashy and Cook (2006), a comprehensive book on dyadic data analysis.
+
+In this chapter we will cover the following topics:
+
+1. **Introduction**
+    - Interpersonal Phenomena
+    - Dyadic Measurement
+    - Discussion Question
+2. **Interdependence**
+    - Definition of Interdependence
+    - Ignoring Interdependence
+    - Linkage Types
+    - Sources of Interdependence
+    - Discussion Question
+3. **Basic Definitions**
+    - Distinguishability
+    - Variable Types
+4. **Dyadic Designs**
+    - Standard Dyadic Design
+    - Social Relations Model
+    - One-with-many Model
+    - Discussion Question
+5. **Actor Partner Interdependence Model (APIM)**
+    - Model
+    - Conceptual Interpretations
+    - Partner-Oriented Interactions
+    - Actor-Partner Interactions
+    - Discussion Question
+6. **Longitudinal APIM**
+    - Model
+    - Estimated Parameters
+    - Parameter Covariation
+7. **Data Example 1**
+    - Preliminaries
+    - Modeling Scenario
+    - Descriptives
+    - Dyadic Data Prep
+    - APIM
+    
+    
+## Introduction 
+
+### Interpersonal Phenomena
+
+Many of the phenomena studied by health, behavioral and social science researchers are implicitly *interpersonal*. 
+
+However, we rarely evaluate or investigate these phenomena outside of the individual that reported it. 
+
+For example, how an individual *feels* about another individual is a function of **(a)** the characteristics of the reporting individual, and **(b)** characteristics of the relationship between the two individuals. In this case, such a measurement would be inherently *dyadic*. 
+
+### Dyadic Measurement
+
+A **dyadic measurement** is a measurement arising from the potentially differential contributions of two individuals. 
+
+Typically, a dyad refers to people, but may describe anything that consists of two elements or parts.
+
+Below are a few examples of dyadic research paradigms provided by Kenny, Kashy and Cook (2006):
+
+-  Members of a romantic relationship evaluating their relationship 
+- Self-disclosures made by two people interacting as a measure of social reciprocity. 
+- Two persons are asked to describe a common target to gauge agreement in their perceptions
+- Family members describe some aspect of their relationships with eachother
+
+### Discussion question
+
+**1.** Given its clear importance, why has academic social science research tended to focus on the individuals while ignoring many of the interpersonal features common to these phenomena? 
+
+**2.** What is an example from your own research where interpersonal features are commonly ignored.
+
+## Interdependence
+
+One of the core concepts in dyadic data analysis is *interdependence*.
+
+### Definition
+
+In the context of dyads, we consider two members of a dyad to be interdependent (or linked) if the data points collected from the dyad are
+
+- more similar than one might expect from two individuals not in that dyad, or
+- more dissimilar than one might expect from two individuals not in that dyad.
+
+### Ignoring Interdependence
+
+Ignoring the interdependence in dyad members’ scores distorts standard significance tests. 
+
+This distortion arises primarily through biases in variances. Their is also a loss in the degrees of freedom due to the potential redundancy of information among dependent pairs. Consider the extreme case of two identical dyad members.
+
+For example, if the correlation between dyad members’ scores is positive, the estimated variance of the observations would be smaller than it should be if all individuals were independent. 
+
+If the correlation were negative, the variances would be larger than they should be.
+
+
+### Linkage Types
+
+Interdependence, or linked scores, can occur in several ways, including the a few common, potentially overlapping, scenarios:
+
+- **Voluntary linkage**: the dependence that arises through a relationship over time. Typical examples are linkages between friends, between members of dating couples. 
+- **Kinship linkage**: the dependence that arises through family relations. Typical examples include family members, siblings, cousins, parents and children. 
+- **Experimental linkage**: the dependence that arises from an artificially contrived relationship for the purpose of study. Typically examples include the prompt for two subjects to get to know eachother.
+- **Yoked linkgage**: the dependence that arises not from interpersonal interactions, but from two subjects being exposed to the same environmental stimuli. 
+
+### Sources of Interdependence
+
+Furthermore, Kenny (1996) and Kenny, Kashy and Cook (2006) elaborate on four sources that may generate interdependence in dyads.
+
+**1. Compositional Effects**
+
+Compositional effects will often occur in naturally occurring dyads, or anytime dyad members are paired together in a nonrandom way. **These are typically factors that induce similarities among dyad members prior to the forming of the dyad.**
+
+For example, compositional effects are to be expected with friends, even before they meet, as friends are typically similar on a wide range of variables, including
+education, age, socioeconomic status, religion, and many other characteristics. *Random pairing of a dyad may alleviate certain types of compositional effects.*
+
+**2. A Partner Effect**
+
+**A partner effect occurs when the behavior (or certain characteristics) of one dyad member affects the behavior (or outcomes) of the partner dyad member.** Typically partner effects occur after the instantiation of the dyad.
+
+For example, the amount of housework that one roommate does may affect the other roommate’s satisfaction level in regard to their living arrangements. This could be considered a partner effect. 
+
+**3. Mutual Influece**
+
+**Mutual influence occurs when both persons’ outcomes directly affect one another.** Typically, mutual influence stipulates a feedback process of some kind. 
+
+
+For example, suppose a research is interested in measuring how much two experimentally linked dyad members like eachoter. How much one person likes their interaction partner can directly impact how much the other partner likes them in return.  
+
+**4. Common Fate**
+
+**Common fate effects occur when both dyad members are exposed to the same causal factors.** 
+
+For example, if two children are exposed to the same neglect growing up, their parental relationships may be similar due to common experiences during childhood.
+
+### Discussion Question
+
+**1.** In light of potential sources of interdependence in your own research identify examples for two of the four sources of interdependence listed above. Discuss and refine these as a group.
+
+## Basic Definitions
+
+### Distinguishability
+
+An important feature of dyadic data is whether or not the dyad members are distinguishable. Note, this is both a theoretical and empirical question to consider.
+
+Importantly, dyad members are indistinguishable if there is no systematic or meaningful way to order the two scores.
+
+*Distinguishability is a critical distinction in dyadic data analysis because it dictates the analytic techniques one can use.* Perhaps unintuitively, it is considerabely easier to analyze dyadic data when the members are distinguishable. 
+
+Note: It is generally not advised to pick some arbitrary feature to make dyad member distinguishable (e.g. randomly selecting the first individual listed in a data file). This decision introduces a component to the data which is not found in reality and may lead to innacurate conclusions. A variable or feature that distinguishes dyad members should be meaningful to the analyses.
+
+**Distinguishable Dyas**
+
+- parent and child
+- patients and careegivers
+- pet owner and pet
+- older and younger siblings
+
+**Indistinguishable Dyas**
+
+- coworkers
+- twins
+- friends
+- archenemies
+
+#### Discussion Question
+
+**1.** Why is the question of distinguishability both an empirical and theoretical question?
+
+### Variable Types
+
+The nature of the predictor variables included in an analysis plays a critical role in choosing the appropriate modeling approach. Here we outline three important classes of predictor variables on might wish to include in an analysis. 
+
+#### Between-Dyads Variables
+
+**Data from a between-dyads variable differs from dyad to dyad, but does not differ within a dyad.** This means each member of the dyad has the same value for a *between-dyads variable*.
+
+For example, in a study on couple's relationship satisfaction the variable *relationship length* would be a between-dyads variable. 
+
+#### Within-Dyads Variables
+
+In contrast to between-dyads variables, within-dyads variables can differ between two members of a dyad. Importantly, when averaged across the two dyad members, all dyads should have the same average score.
+
+Examples of within-dyad variables are family role in a study on different family members (e.g. father and son). Or the experimental role when one person is asked to persuade another person.
+
+Dyad members are *distinguished* by a within-dyads variable, however, whether or not this is a meaningful distinction is a theoretical question.
+
+#### Mixed Variables
+
+The last type of predictor variables are referred to as *mixed* independent variable. Here, variation exists both within and between dyads. 
+
+Age is an example of mixed predictor variable. In a given study, dyad members may have different ages, and certain dyads may be older than other dyads. 
+
+Most predictors and outcomes in dyadic research are mixed. 
+
+
+## Dyadic Designs
+
+Before reviewing some common dyadic designs it is important to provide some  definitions for interpreting the diagrams:
+
+- Persons are designated by uppercase letters such as A, B and C.
+  - Actor refers to the person who generated the data.
+  - Partner refers to the other member of the dyad.
+- An *X* in the A-B position refers to a rating from Person A about Person B.
+- An *X'* in the B-A position refers to a rating from B about A.
+- In a *one-sided* only design, one member of the dyad is measured.
+  - Only *X* or *X'* are collected.
+- In a *two-sided* or *reciprocal* design both members are measured.
+  - Both *X* or *X'* are collected.
+  
+Here we consider three different dyadic designs: **(1)** the standard dyadic design, **(2)** the social relations model (SRM), and **(3)** the one-with-many design.
+
+### Standard Dyadic Design
+
+![Standard Design (Kenny, Kashy & Cook, 2006)](imgs/dyad_standard2.jpg)
+
+In the standard design each individual is a member of only one dyad. Generally the standard design will be reciprocal (i.e. both dyad members are measured).
+
+In the table for the standard design:
+
+- A and B are members of one dyad
+- C and D are members of a second dyad, 
+- E and F are members of a third dyad, and 
+- G and H are the final dyad,
+
+for a total of $n$ dyads over the $2n$ individuals.
+
+
+![Standard Design (Kenny, Kashy & Cook, 2006)](imgs/dyad_standard.jpg)
+
+
+
+### Social Relations Model
+
+![Social Relations Model (Kenny, Kashy & Cook, 2006)](imgs/dyad_srm.jpg)
+
+In the social relations model (SRM) each individual is paired with multiple individuals, and each of these individuals is also paired with multiple individuals. 
+
+#### Round Robin
+
+The prototypical SRM is a *round robin* design in which a group of persons rate or interact with each other. The round-robin design is inherently a *reciprocal* design, 
+
+In the table for the round robin design:
+
+- A and B are members of one dyad
+- A and c are also a dyad, 
+- A and D are also a dyad, and 
+- similarly for B-A, B-C, and B-D.
+
+![Round Robin (Kenny, Kashy & Cook, 2006)](imgs/dyad_robin.jpg)
+
+#### Block Design
+
+The other major SRM design is called the *block design*. In the block design, individuals are divided into groups and individuals interact with other members of their group. In the table below,
+
+- persons A through D form one subgroup, and
+- persons E through H form the other subgroup. 
+
+The block design is reciprocal if both blocks (the $X$ and the $X'$ scores) are gathered. 
+
+A researcher might utilize a block design when there is interest in understanding assymetric dyads. For example, if one wanted to analye how students rate teacher's communication style, and how teachers rate student's communication style, without caring about how teachers or students rate themselves. 
+
+![Block Design (Kenny, Kashy & Cook, 2006)](imgs/dyad_block.jpg)
+
+
+### One-with-many Design
+
+![One-with-many Design (Kenny, Kashy & Cook, 2006)](imgs/dyad_onewithmany2.jpg)
+
+In the one-with-many design each individual is paired with multiple individuals, however, unlike the SRM, these individuals are not paired with any other people. 
+
+One-with many designs can be reciprocal or not, but typically these designs are not reciprocal.
+
+In the table for the round robin design:
+
+- B, C, D, F, G and H gave judgments on A, and
+- A gave judgments on B, C and D, while
+- E gave judgments on F, G, and H.
+
+An example here might be a survey conducted among Uber drivers. Each Uber driver is asked to rate the behavior of other Uber drivers who have at one time been passengers in their car. E has never used Uber himself, but has driven F, G and H to different destinations. A drives quite a bit and has picked up B, C, and D. they have also been picked up by B through G at one time or another. 
+
+![One-with-many Design (Kenny, Kashy & Cook, 2006)](imgs/dyad_onewithmany.jpg)
+
+### Discussion Question:
+
+1. Choose a research design and explain how it might be used to answer a theoretical question in your own research. Discuss and refine. 
+
+## Actor Partner Interdependence Model (APIM)
+
+While some models are appropriate for independent or predictor variables that vary either only between dyads or only within dyads, here we focus on the case of mixed predictor variables. 
+
+Mixed predictor variables can vary both between and within dyads. This means mixed variables can
+
+- vary on average from dyad to dyad, and 
+- vary from person to person within a dyad.
+
+
+The between-dyad variation is characterized by variation in the dyad means, $M_j$, and the within-dyads variation is characterized by variation in the deviations of each individual’s score from their dyad mean, $X_{ij}-M_{j}$.
+
+### Model
+
+As an example, consider the effects of depression on father-son relationships. It may be that a father's depression influences their own relationship satisfaction, while also influencing the relationship satisfaction of their son. These two types of effects can be disentangled as:
+
+- **actor effect**: the effect of a fathers’s depression on their own relationship satisfaction
+- **partner effect**: the effect of a fathers’s depression on their son's relationship satisfaction
+
+So, an **actor effect** occurs when one dyad member's score on a *predictor variable* affects that same member's score on thr outcome variable.
+
+A **partner effect** occurs when a dyad member’s score on a predictor variable affects their partner’s score on an outcome variable.
+
+Below is a graphical depiction of the APIM model. 
+
+- Two dyad members measured on two variables, $X$ and $Y$
+- $X_{1}$ is the $X$ (predictor) score for dyad member 1
+- $X_{2}$ is the $X$ (predictor) score for dyad member 2
+- $Y_{1}$ is the $Y$ (outcome) score for dyad member 1
+- $Y_{2}$ is the $Y$ (outcome) score for dyad member 2
+- $a$ denotes the actor effects
+- $p$ denotes the partner effects
+
+![APIM Model (Kenny, Kashy & Cook, 2006)](imgs/dyad_apim.jpg)
+
+Note, there are two correlations visible in this path diagram.
+
+1. the two $X$ variables are allowed to correlate
+  - this may be due to compositional effects
+2. the equation errors are correlated
+  - this represents the covariation in $Y$ not explained by the APIM
+  - are there systematic ways $X$ does not account for $Y$ within-dyad?
+
+### Conceptual Interpretations
+
+Following Kenny and Cook (1999), four models are highlighted here as having important implications for relationships research:
+
+- *Actor-oriented*: $a ≠ 0, p = 0$
+- *Partner-oriented*: $a = 0, p ≠ 0$
+- *Couple-oriented*: $a = p$
+- *Social comparison*: $a + p = 0$
+
+#### Actor-Oriented
+
+In the **actor-oriented model**, a person’s outcomes are a function of their own characteristics, and they are unaffected by their partner's characteristics.
+
+If the estimated partner effects are shown to be equal to zero, $p=0$, we might conclude that a process is individualistic.
+
+![APIM Model (Kenny, Kashy & Cook, 2006)](imgs/dyad_apim.jpg)
+
+
+#### Partner-Oriented
+
+In the **partner-oriented model** we have a situation where a person's outcome is solely affected by their partner's characteristics. If the estimated actor effects are shown to be equal to zero, $a=0$, we might conclude that a process follows a partner-oriented model.
+
+One example discussed by Kenny, Kashy & Cook (2006), for which there could be partner effects, but not actor effects, is the effect of physical attractiveness on relationship satisfaction.
+
+![APIM Model (Kenny, Kashy & Cook, 2006)](imgs/dyad_apim.jpg)
+
+#### Couple-Oriented
+
+In the **couple-oriented model** the actor and partner effects are equal,$a = p$. This means that a given dyad member is affected as much by their own score on $X$ as they are by their partner's score on $X$.
+
+This pattern may occur if the dyad members are as concerned with their own outcomes as they are with their partner's outcome. 
+
+For example, playing one’s best in couple's trivia could lead one to be satisfied with the outcome of the contest. At the same time, knowing one's partner played their best could also lead to satisfaction. On the other hand, if one's partner has a bad game, one’s own satisfaction may be less, independent of how one played. Such dynamics might give rise to a couple-oriented model.
+
+
+![APIM Model (Kenny, Kashy & Cook, 2006)](imgs/dyad_apim.jpg)
+
+#### Social-Comparison
+
+In the **social comparison model** the actor and partner effects are relatively
+equal in their absolute magnitude but have opposite signs. Typically the actor effect is positive, and the partner effect is negative. 
+
+In contrast to the *couple-oriented case*, in which the partner’s success is valued as
+much as one’s own outcome, the *social comparison* orientation typically involves dissatisfaction with the partner’s success. 
+
+For example, consider a parent child trivia team. The parent might be couple oriented, feeling satisfaction with both the child and parent playing well. On the other hand, the child may not be couple oriented, feeling less satisfied the better the parent plays.
+
+For the child the actor effect (playing well) would be a positive predictor of game satisfaction while the partner effect (parent playing well) would be a negative predictor. This is one example of how a social-comparison model may arise, $a + p = 0$.
+
+![APIM Model (Kenny, Kashy & Cook, 2006)](imgs/dyad_apim.jpg)
+
+```{r, echo=FALSE, eval = FALSE}
+### Partner-Oriented Interactions
+
+Nonzero partner effects $p \neq 0$ indicate an interdependent system. In some cases it can be useful to include interaction terms with the partner effect. 
+
+One common example of a partner-oriented interaction effect arises when researchers want to include a scale, such as a relationship closeness scale, in their model.
+
+By including an interaction term between the scale score and the partner score, it becomes possible to assess whether a given individual 
+
+- *scores near the neutral point of the scale*, and is actor-oriented
+- *scores above the neutral scale point*, and is couple-oriented
+- *scores below the neutral scale point*, and is guided by social comparison
+
+Details on this procedure can be found in Kenny, Kashy and Cook (1960, p. 50).
+```
+
+### Actor-Partner Interactions
+
+Many of the major research question in dyadic analyses involve actor–partner interactions.
+
+Thus, for dyads, the actor-by-partner interaction term would be the product of $X_{1}$ and $X_2$. 
+
+For example, consider two individuals in a relationship. Suppose being an introvert makes you a better listener, but this effect is stronger the more introverted your partner is. This would be an example of an actor-by-partner interaction.
+
+However, it should be noted there are many ways to conceptualize an interaction. Dyadic researchers often conceive of interactions in novel and interesting ways. For example,
+
+- absolute difference between $X_{1}$ and $X_{2}$
+  - an example might include personality differences
+- the max or min of the dyad member's scores
+  - an example might be compensation effects
+
+Although interaction effects can be specified in many different ways it is often difficult to distinguish between them statistically. Many of these interaction terms are highly correlated with one another. This makes it very important to have a strong theoretical argument for one approach over another.
+
+
+## Longitudinal APIM
+
+Longitudinal variants of the APIM are some of the most interesting dyadic models. Here we will consider some aspects of the longitudinal APIM.
+
+### Model
+
+![Longitudinal APIM (Kenny, Kashy & Cook, 2006)](imgs/dyad_apim_time.jpg)
+
+In the longitudinal APIM,
+
+- actor effects are the effects from $Y_{1,t–1}$ to $Y_{1,t}$ ($a_{1i}$) and from $Y_{2,t–1}$ to $Y_{2,t}$ ($a_{2i}$),
+  - actor effects are interpreted as stability effects
+- partner effects are from $Y_{1,t–1}$ to $Y_{2,t}$ ($p_{21i}$) and from $Y_{2,t–1}$ to $Y_{1,t}$ ($p_{12i}$),
+  - partner effects represent cross-partner influence, or reciprocity
+  
+### Estimated Parameters
+
+![Longitudinal APIM (Kenny, Kashy & Cook, 2006)](imgs/dyad_apim_time.jpg)
+
+  Typically in the longitudinal APIM we are interested in estimating the following parameters for each of the $i$ dayds:
+
+- Actor effect for person 1, or $a_{1i}$.
+- Actor effect for person 2, or $a_{2i}$.
+- Partner effect from person 1 to person 2, or $p_{12i}$.
+- Partner effect from person 2 to person 1, or $p_{21i}$.
+- Intercept for person 1, or $c_{1i}$.
+- Intercept for person 2, or $c_{2i}$.
+
+Each of these parameters may also vary across dyads. 
+
+For example, if $a_{1}$ (the average value of dyad member 1's stability value) varies, then for some 1’s, there is more stability than there is for other 1’s. 
+
+Similarly, there might be variance in the partner effects such that individuals in some dyads may be more responsive or reactive to their partners than are individuals in other dyads. 
+
+### Parameter Covariation
+
+These six terms (two actor, two partner, and two intercepts) may also covary with each other. It is helpful to consider some of these correlations and how we might interpret them.
+
+**Correlation between intercepts**
+
+Suppose we measure stress each day for a parent-child dyad. The correlation between the intercepts would measure the extent to which parents who experience more stress overall have children who also experience more stress overall. Thus the unit for the correlation of intercepts is the person.
+
+**Correlation between errors**
+
+Let' say a parent experiences more stress on a particular day. More stress than one would expect given their prior value and their child’s prior value, A positive correlation between the errors would indicate that is likely the child would also experience heightened stress on that day.
+
+## Data Example
+
+This data example for this chapter is based on the APIM tutorial written by Miriam Brinberg and Nilam Ram. The original version is available on the QuantDev website.
+
+This tutorial reviews the Actor-Partner Interdependence Model (APIM; Kashy & Kenny, 2000; Kenny, Kashy, & Cook, 2006), which is often used to examine the association (1) between two constructs for two people using cross-sectional data, or (2) between the same construct from two people across two time points. 
+
+### Preliminaries
+
+Let's begin by loading the neccessary libraries and reading in the data.
+
+```{r, warning = FALSE, message = FALSE}
+library(ggplot2)   #for plotting
+library(nlme)      #for model fitting
+library(psych)     #for general functions
+library(reshape)   #for data management
+filepath <- "https://quantdev.ssri.psu.edu/sites/qdev/files/wisc3raw_gender.csv"
+wisc3raw <- read.csv(file=url(filepath),header=TRUE)
+data <- wisc3raw[, c("id", "verb1", "verb6", "perfo1", "perfo6")]
+head(data)
+```
+
+We'll also make a long version of the data set for later use.
+
+```{r}
+data_long <- reshape(
+  data = data,
+  varying = c("verb1", "verb6","perfo1", "perfo6"),
+  timevar = c("grade"), 
+  idvar = c("id"),
+  direction = "long", sep=""
+)
+data_long <- data_long[order(data_long$id, data_long$grade), ]
+head(data_long)
+```
+
+### Modeling Scenario
+
+In this example, we are going to examine the association between verbal and performance ability using measures from first grade and sixth grade. We are interested in simultaneously examining whether 
+
+1. verbal ability in the first grade is predictive of verbal ability in the sixth grade, 
+2.  performance ability in the first grade is predictive of performance ability in the sixth grade, 
+3. verbal ability in the first grade is predictive of performance ability in the sixth grade, and 
+4. performance ability in the first grade is predictive of verbal ability in the sixth grade.
+
+When working with dyads, the above points 1 and 2 are often referred to as *actor effects* and points 3 and 4 are often referred to as *partner effects*.
+
+While this example is not a "traditional dyad" - i.e., two distinguishable people - the analytic processes demonstrated here for bivariate data are applicable to the examination of dyadic data.
+
+
+### Descriptives 
+
+Before we run our models, it is often useful to get more familiar with the data via plotting and descriptives statistics.
+
+Let's begin with descriptive statistics of our four variables of interest: first grade verbal and performance ability, and sixth grade verbal and performance ability.
+
+```{r}
+describe(data$verb1)
+describe(data$verb6)
+
+describe(data$perfo1)
+describe(data$perfo6)
+```
+
+We can see that both the mean and standard deviation of verbal and performance ability increase from first to sixth grade. *While this is worth noting, the APIM will not be examining changes in mean levels of verbal and performance ability.* 
+
+#### Correlations
+
+Let's also examine the correlations  among the four variables.
+
+```{r}
+#correlations
+cor(data[, 2:5])
+
+#plot
+pairs.panels(data[, c("verb1", "verb6", "perfo1", "perfo6")])
+```
+
+We can see that all four variables are relatively normally distributed. 
+
+We can see there are strong, positive correlations both across time within-construct and between-constructs.
+
+#### Plots
+
+Let's also look at a few individuals to examine the within-person association between verbal and performance ability from the first to sixth grade.  
+
+```{r}
+ggplot(data = subset(data_long, id <= 9), aes(x = grade, group = id), legend = FALSE) +
+  geom_point(aes(x = grade, y = verb), shape = 17, size = 3, color = "purple") + 
+  geom_point(aes(x = grade, y = perfo), shape = 19, size = 3, color = "pink") + 
+  geom_line(aes(x = grade, y = verb), lty = 1, size=1, color = "purple") + 
+  geom_line(aes(x = grade, y = perfo), lty = 1, size=1, color = "pink") + 
+  xlab("Grade") + 
+  ylab("Verbal and Performance Ability") + ylim(0, 80) +
+  scale_x_continuous(breaks=seq(0, 7, by = 1)) + 
+  theme_classic() +
+  facet_wrap( ~ id)
+```
+
+Within these nine participants, there is some inter-individual variability. For example, some participants' verbal and performance ability increase more than others, some participants have higher levels of verbal ability than performance ability (or vice versa) across time. 
+
+### Dyadic Data Prep
+
+We have learned to manipulate data from *wide* to *long*, and vice versa. Dyadic analyses require further manipulation in order to get the data in the correct format. We will walk through the data prep in two steps.
+
+#### Step 1
+
+First, we need to create one column that has the information for both outcome variables - i.e., for each person, the verb6 and perfo6 values will alternate. 
+
+This is almost like repeated measures data, but instead of having multiple time points nested within person, we have multiple (two) variables to nest within person.
+
+```{r}
+data_melt <- reshape::melt(
+  data = data,
+  id.vars = c("id", "verb1", "perfo1"), 
+  na.rm=FALSE
+)
+#rename "variable" and "value" variables 
+colnames(data_melt)[4:5] <- c("grade6_variable", "grade6_outcome")
+data_melt <- data_melt[order(data_melt$id, data_melt$grade6_variable), ]
+
+```
+
+**Old Data**
+```{r}
+head(data)
+```
+
+
+**New Data**
+```{r}
+head(data_melt)
+```
+
+#### Step 2
+
+Second, we need to create two dummy variables (each 0/1) to "turn on/off" a row (more on this later) in our analyses. 
+
+We will create a new variable, `verb_on` that indicates which rows are for the `verb6` outcome, 
+
+We will create a second variable, `perform_on` that indicates which rows are for the `perfo6` outcome. 
+
+```{r}
+data_melt_old <- data_melt
+data_melt$verb_on <- ifelse(data_melt$grade6_variable == "verb6", 1, 0)
+data_melt$perform_on <- ifelse(data_melt$grade6_variable == "perfo6", 1, 0)
+```
+
+**Old Data**
+```{r}
+head(data_melt_old)
+```
+
+**New Data**
+```{r}
+head(data_melt)
+```
+
+There are many alternative ways to prepare dyadic data. For example, see  https://github.com/RandiLGarcia/2day-dyad-workshop/blob/master/Day%201/R%20Code/Day%201-Data%20Restructuring.Rmd). It will depend on how you choose to run your analysis (described further later).
+
+### APIM
+
+Now that we know a bit more about the data we are working with and have the data prepared in a single-outcome (double-entry) format, we can set up our APIM model. 
+
+We'll run this model in the `nlme` package.
+
+Specifically, we'll examine whether:  
+
+- verbal ability in the first grade is predictive of verbal ability in the sixth grade (verbal "actor" effect),  
+- performance ability in the first grade is predictive of performance ability in the sixth grade (performance "actor" effect),  
+- verbal ability in the first grade is predictive of performance ability in the sixth grade (verbal "partner" effect), and  
+- performance ability in the first grade is predictive of verbal ability in the sixth grade (performance "partner" effect).
+
+
+
+### Null Model
+
+Before running this full model, we will examine the empty model to determine how much variability there is within- and between-persons. Specifically,
+
+$$
+Grade6Outcome_{i} = \beta_{0V}VerbOn_{it} + \beta_{0P}PerformOn_{it} + e_{Vi} +e_{Pi}
+$$ 
+
+
+```{r}
+apim_empty <- gls(
+  grade6_outcome ~  -1 +                # turn OFF the intercept 
+                    verb_on +           # intercept for verbal scores
+                    perform_on,         # intercept for performance scores
+  correlation = corSymm(form= ~1|id),
+  weights = varIdent(form= ~1|verb_on), # allows for 2 error terms 
+               data = data_melt,
+               na.action = na.exclude)
+
+summary(apim_empty)
+```
+
+We examine the correlation of the verbal and performance error terms to determine the degree of non-independence in the data. We can see that $\rho = 0.61$, indicating the correlation across dyad members, children who have higher verbal ability tend to also have higher performance ability.
+
+A few other points to note:
+
+- The results for `verb_on` indicate the average or expected verbal score at grade 6 is 43.75.
+- The results for `perform_on` indicate the average or expected performance score at grade 6 is 50.93.
+  - Both these expected values correspond to sample means in the raw data.
+- The grade 6 verbal and performance scores also each have estimated "standard error" values. The estimated standard error for Grade 6 verbal scores is 10.67 and the estimated standard error for Grade 6 performance scores is 12.48 = (1.17*10.67). 
+  - Note that these estimates exactly match the respective standard deviations in the raw data (see descriptives above).
+
+For completeness of representing the data we can get the means and variances of, and correlation between, the two predictors from the raw data. 
+
+### Full APIM
+
+Next, we are going to run our full APIM model using the two-intercept approach. Specifically,
+
+
+$$Grade6Outcome_{it} =  \beta_{0V}VerbOn_{it} + \beta_{1V}VerbOn_{it}*Verb1_{it} + \beta_{2V}VerbOn_{it}*Perform1_{it} + \\  \beta_{0P}PerformOn_{it} + \beta_{1P}PerformOn_{it}*Perform1_{it} + \beta_{2P}PerformOn_{it}*Verb1_{it} + e_{Vi} +e_{Pi}$$ 
+
+So when `verb_on` is equal to 0:
+
+
+$$Grade6Outcome_{it} = \beta_{0P}PerformOn_{it} + \beta_{1P}PerformOn_{it}*Perform1_{it} + \beta_{2P}PerformOn_{it}*Verb1_{it} + e_{Vi} +e_{Pi}$$ 
+
+
+and when `perform_on` is equal to 0:
+
+
+$$Grade6Outcome_{it} = \beta_{0V}VerbOn_{it} + \beta_{1V}VerbOn_{it}*Verb1_{it} + \beta_{2V}VerbOn_{it}*Perform1_{it} + e_{Vi} +e_{Pi}$$ 
+
+```{r}
+apim_full <- gls(grade6_outcome ~  
+    -1 +                # turns OFF intercept 
+    verb_on +           # verbal intercept
+    verb_on:verb1 +     # verbal "actor" effect
+    verb_on:perfo1 +    # performance "partner" effect
+    perform_on +        # performance intercept
+    perform_on:perfo1 + # performance "actor" effect
+    perform_on:verb1,   # verbal "partner" effect
+  correlation = corSymm(form=~1|id),
+  weights = varIdent(form=~1|verb_on), # allows for different error terms 
+  data = data_melt,
+  na.action = na.exclude)
+
+summary(apim_full)
+```
+
+#### Results
+
+- The expected verbal score at grade 6 = 19.87 and the expected performance score at grade 6 = 30.05 when verbal and performance scores at grade 1 are equal to zero. 
+
+**Actor Effects**
+
+- The *actor effect* of verbal ability is 0.81, indicating that every 1.0 point difference in children's verbal ability at Grade 1 is associated with a  0.81 point difference in Grade 6. Stated differently, earlier differences in verbal ability influence later differences in verbal ability.   
+- The *actor effect* of performance ability is 0.96, indicating that every 1.0 point difference in children's performance ability at Grade 1 is associated with a 0.96 point difference in Grade 6. Stated differently, earlier differences in performance ability influence later differences in performance ability. 
+
+
+**Partner Effects**
+
+- The *partner effect* of performance ability on verbal ability is 0.45, indicating that every 1.0 point difference in children's performance ability at Grade 1 is associated with a 0.45 point difference in verbal ability at Grade 6.  Stated differently, earlier differences in performance ability "influence" later differences in verbal ability. 
+
+The *partner effect* of verbal ability on performance ability is not significantly different than zero, indicating that earlier differences in performance ability at Grade 1 do not "influence" later differences in verbal ability at Grade 6.  
+     
+**Additional Info**
+
+- $\rho = 0.31$, indicating the correlation across variables (or dyad members). Here, higher verbal ability scores tend to be paired with higher performance ability scores.
+
+
+## Data Example 2
+
+The following data example is based on a tutorial written by Miriam Brinber and Nilam Ram. You can access the original tutorial at the following link:
+
+https://quantdev.ssri.psu.edu/tutorials/analysis-experience-sampling-ema-data-chapter-5-part1-dyadic-mlm-intradyad-dynamics
+
+###  Overview
+Repeated measures data, often obtained from experience sampling or daily diary studies, require analytic methods that accommodate the inherent nesting in the data. One special case of repeated measures data are those from dyad (e.g., couples, parent/child). Dyadic data is structured such that repeated measures are nested within a person, and each person is nested within a dyad. The dyads are assumed to be independently sampled. Non-independece of the members of the dyad and across the repeated occasions are modeled explicitly. *Multivariate multilevel modeling* is one technique for effectively handling this type of data. Formal names for the dayad-specific model include *Actor Partner Interdependence Model (APIM)* (see Kenny, Kashy, & Cook, 2006).
+
+In this tutorial, we will follow the example from Bolger and Laurenceau (2013) *Chapter 8: Design and Analysis of Intensive Longitudinal Longitudinal Study of Distingiushable Dyads.* Specifically, we will use the simulated dyadic process data set (p. 150). The data were simulated to represent 100 dual-career heterosexual couples where each partner provided diary reports twice daily over the course of 21 consecutive days. The first report is an end-of-workday report that includes (a) the number of stressors that occurred at work, and (b) work dissatisfaction. The data are complete and clean - with Bolger and Laurenceau's goal being to "create a pedagologically uncomplicated data set."
+
+Note that we are using *distinguishable* dyads in this example. *Distinguishability* is typically determined conceptually, based upon a stable, differentiating characteristic (e.g., gender, age, role). Note that notions of "dyadic" can be generalized from persons to any reasonable combination of two variables (e.g., emotion and behavior). The next tutorial will illustrate application of the multivariate multilevel model for examination of intraindividual coupling.
+
+### Outline
+
+1. Introduction to the research questions, model, and data.
+2. Plotting the data.
+3. The multilevel model.  
+    + Males only.
+    + Females only.
+    + The dyad.
+4. Cautions.
+5. Conclusion.
+
+#### Prelim - Loading libraries used in this script.
+
+```{r, warning = FALSE, message = FALSE}
+library(ggplot2)
+library(nlme)
+library(psych)
+```
+
+
+#### The Research Questions
+
+We are going to address:  
+
+* Is the number of daily work stressors associated with end-of-day relationship satisfaction?   
+    + What is the extent of association for the *typical male partner* and for the *typical female partner* (fixed effects)? 
+    + Is there heterogeneity in the strength of the association across male partners in couples and across female partners in couples (random effects)? 
+        
+Notice that, so far, the questions are stated separately for the two types of dyad members (males and females). The dyadic longitudinal model provides for another type of question - questions related to non-independence.  
+
+* Are dyad members' relationship satisfaction on any given day related, after accounting for other explanatory variables?  
+    
+Here, these relations manifest as correlations/covariances between intercepts, slopes, and residuals. 
+
+### The Modeling Enterprise
+
+The basic multilevel model is designed as a model with a univariate outcome. The ability to model multiple outcomes simultaneoulsy used to be a distinguishing feature of structural equation models (SEM). However, researches discovered that the multilevel model can be adapted for examination of multivariate outcomes quite easily. One simply has to "trick" the program into thinking that two (or more) variables are one variable. 
+
+### The Data
+
+The data are organized as follows:
+
+* There should be *N* (number of individuals) x measurement occasions rows per dyad in the data set. In this case, we should have a data set with 4,200 rows (100 dyads x 2 persons x 21 occasions).
+
+* Columns:
+    + Couple ID
+    + Person ID (e.g., 1 = partner 1, 2 = partner 2)
+    + Time (e.g., day within the daily diary study)
+    + Centered version of time (optional)
+    + Gender (or whatever feature is distinguishing the dyad; in this case, 0 = male and 1 = female)
+    + An indicator variable for each partner (e.g., husband, wife) - dichotomous (0/1)
+    + Outcome variable (in this case, "reldis")
+    + Predictor variable (in this case, "wrkstrs")
+    + Centered version of the predictor variable ("wrkstrsc")
+    + Trait component of the predictor variable ("wrkstrsb")
+    + State component of the predictor variable ("wrkstrsw")
+    
+    + for a total of 12 columns in this data set
+    
+The "trick" is to stack the data so that there are two records for each repeated observation. The data file is twice as long, and we structure the model to "turn on" and "turn off" the double records to invoke parameter estimation for each variable. Bolger & Laurenceau's example data are already prepared data. Let's take a look.
+
+Here predictors are split into “trait” (between-person differences) and “state” (within-person deviations) components. Specifically, the daily variable stress is split into two varaibles: "wrkstrsb" is the sample-mean centered between-person component, and stress_state is the person-centered within-person component.
+
+Load data and needed libraries.
+
+```{r}
+#set filepath for data file
+filepath <- "https://quantdev.ssri.psu.edu/sites/qdev/files/B%26Ldyads.csv"
+
+
+#read in the .csv file using the url() function
+dyads <- read.csv(file=url(filepath),header=TRUE)
+
+# Look at the variable names
+names(dyads)
+
+# Re-ordering for easy viewing
+dyads <- dyads[order(dyads$coupleid, dyads$time, dyads$personid),]
+
+# Examine first few rows of the data set
+head(dyads)
+```
+
+
+### Plotting the Data
+
+Before we begin running our models, it is always a good idea to look at our data. 
+
+We start with examining the distribution of our outcome variable end-of-day relationship dissatisfaction, `reldis`. Let's look at the histogram by gender.
+
+```{r, warning = FALSE, message = FALSE}
+ggplot(data = dyads, aes(x = reldis)) +
+  geom_histogram(fill = "white", color = "black") + 
+  labs(x = "Relationship Dissatisfaction") +
+  facet_grid(. ~ gender) # creating a separate plot for each gender
+```
+
+The outcome variable for each gender looks approximately normally distributed, which is good news for when we run our models.
+
+Next, let's plot a few dyads' reports of relationship dissatisfaction through the course of the study. Since the the predictor variable has already been split into time-varying (state) and time-invariant (trait) components, we use the time-varying predictor `wrkstrscw` as the "background" context variable.
+
+```{r}
+ggplot(data = subset(dyads, coupleid <= 9), aes(x = time, group = personid), legend = FALSE) +
+  geom_rect(mapping = aes(xmin = time-.5, xmax = time+.5, ymin = 0, ymax = 10, fill = wrkstrscw), alpha = 0.6) + # creating rectangles in the background of the plot colored by work stressors
+  geom_point(aes(x = time, y = reldis, color = factor(gender)), shape = 17, size = 3) + # creating a different colored point for each gender
+  geom_line(aes(x = time, y = reldis, color = factor(gender)), lty = 1, size=1) + # creating a different colored line for each gender
+  xlab("Time") + 
+  ylab("Relationship Dissatisfaction") + ylim(0, 10) +
+  scale_x_continuous(breaks=seq(0, 20, by = 5)) + 
+  facet_wrap( ~ coupleid) # creating a separate plot for each dyad
+```
+
+It looks like there is quite a lot of day-to-day variability!
+
+Finally, we'll examine a histogram of the dyad-level (between-dyad) time-invariant variable is `wrkstrscb`
+
+```{r, warning = FALSE, message = FALSE}
+ggplot(data = dyads, aes(x = wrkstrscb)) +
+  geom_histogram(fill = "white", color = "black") + 
+  labs(x = "Work Stress (dyad-level centered)")
+```
+
+### The Multilevel Model
+
+We are now ready to start running our models.
+
+First, we'll construct a model looking at the within-person and between-person associations of relationship dissatisfaction (`reldis`) with work stressors (`wrkstrs` - which is centered and separated into `wrkstrscw` and `wrkdstrscb`).
+
+This multilevel model set-up proceeds as usual; however, we will include a special "dummy" variable indicator as follows:
+
+$$reldis_{it} = \beta_{0i}dummy_{it} + \beta_{1i}dummy_{it}time7c_{it}+ \beta_{2i}dummy_{it}wrkstrscw_{it} + e_{it}$$
+
+with two random effects, so that 
+$$\beta_{0i} = \gamma_{00} + \gamma_{01}wrkstrscb_{i} + u_{0i}$$
+
+$$\beta_{1i} = \gamma_{10}$$
+
+$$\beta_{2i} = \gamma_{20} + u_{2i}$$
+
+and residual structures of 
+where 
+$$e_{it} \sim \mathcal{N}(0,\mathbf{R})$$, and 
+$$\mathbf{U_{i}} \sim \mathcal{N}(0,\mathbf{G})$$. 
+
+where
+$$\mathbf{R} =
+\mathbf{I}
+\left[\begin{array}
+{r}
+\sigma^2_{e}  
+\end{array}\right]$$
+
+, which with the auto-regressive structure becomes
+$$\mathbf{R} =
+\sigma^2
+\left[\begin{array}
+{rrrr}
+1 & \phi & \phi^2 & \cdots & \phi^{T-1} \\
+\phi & 1 & \phi & \cdots & \phi^{T-2} \\
+\phi^2 & \phi & 1 & \cdots & \phi^{T-3} \\
+\vdots  & \vdots  & \vdots & \ddots & \vdots \\
+\phi^{T-1} & \phi^{T-2} & \phi^{T-3} & \cdots & 1
+\end{array}\right]$$
+
+
+and the between-person residuals structure is
+$$\mathbf{G} =
+\left[\begin{array}
+{rr}
+\sigma^{2}_{u0} & \sigma_{u0u2} \\
+\sigma_{u2u0} & \sigma^{2}_{u2}
+\end{array}\right]$$
+
+Writing out the long equation (after algebraic substitution) we have 
+
+$$
+reldis_{it} = \\
+\gamma_{00}dummy_{it}  + \gamma_{10}dummy_{it}time7c_{it}+ \gamma_{20}dummy_{it}wrkstrscw_{it} + \gamma_{01}dummy_{it}wrkstrscb_{i} + \\
+\left[ u_{0i}dummy_{it} + u_{2i}dummy_{it}wrkstrscw_{it} + e_{it} \right]
+$$
+
+
+which then is the equation that maps to the `lme()` or `lmer()` code.
+
+### Fit Male Model
+
+First, we run the model for just males. Although not necessary, we use the $dummy_{it}$ variable `male`.
+
+*Note also the coding to remove the default intercept* `~ -1 ...` *and for direct specification of interaction terms using colon* `x:z` **This is important.** *We are tricking the program, so we have to be very specific about what we want.*
+
+```{r}
+model0male <- lme(fixed = reldis ~ -1 + male + male:time7c + 
+                          male:wrkstrscw + male:wrkstrscb,
+                  random = ~ -1 + male + male:wrkstrscw | coupleid, 
+                  correlation = corAR1(), # specifying an lag-1 autoregressive residual structure
+                  data = dyads[which(dyads$gender == 0),], # subsetting to just male
+                  control = list(maxIter = 1000)) 
+
+summary(model0male)
+```
+
+We see that the average relationship dissatisfaction for males was 5.08. 
+
+There were significant "state" effects, such that on days when a man had one more work stressor than usual, his relationship dissatisfaction increased by 0.11 points. There were no significant trends with time or significant "trait" level effects.
+
+### Fit Female Model
+
+Second, we run the model for just females, with the $dummy_{it}$ variable `female`.
+```{r}
+model0female <- lme(fixed = reldis ~ -1 + female + female:time7c + 
+                          female:wrkstrscw + female:wrkstrscb,
+                  random = ~ -1 + female + female:wrkstrscw | coupleid, 
+                  correlation=corAR1(), # specifying an lag-1 autoregressive residual structure
+                  data=dyads[which(dyads$gender == 1),], # subsetting to just female
+                  control=list(maxIter=1000)) 
+
+summary(model0female)
+```
+
+We see that the average relationship dissatisfaction for females was 4.65. There were significant "state" effects, such that on days when a woman had one more work stressor than usual, her relationship dissatisfaction increased by 0.16 points. There were no significant trends with time or significant "trait" level effects.
+
+### Fit Full Model
+
+As above, we use the two dummy variables to turn on and off the parameters. The parameters invoked with $dummy1$ are associated with one member of the dyad, and parameters invoked with $dummy2$ are associated with the other member of the dyad.
+
+$$reldis_{it} = \\
+\gamma_{00}dummy1_{it}  + \gamma_{10}dummy1_{it}time7c_{it}+ \gamma_{20}dummy1_{it}wrkstrscw_{it} + \gamma_{01}dummy1_{it}wrkstrscb_{i} + \left[ u_{0i}dummy1_{it} + u_{2i}dummy1_{it}wrkstrscw_{it} + e1_{it} \right] + \\
+\gamma_{30}dummy2_{it}  + \gamma_{40}dummy2_{it}time7c_{it}+ \gamma_{50}dummy2_{it}wrkstrscw_{it} + \gamma_{31}dummy2_{it}wrkstrscb_{i} + \left[ u_{3i}dummy2_{it} + u_{5i}dummy2_{it}wrkstrscw_{it} + e2_{it} \right]$$
+
+Noting that our random effect matrices also expand, 
+$$\mathbf{R} =
+\left[\begin{array}
+{rr}
+\sigma^2_{e1} & \sigma_{e1e2} \\
+\sigma_{e1e2} & \sigma^2_{e2} 
+\end{array}\right]$$
+
+where $\sigma_{e1e2}$ is the residual covariance between male and female relationship dissatisfaction.   
+and 
+$$\left[\begin{array}
+{rrrr}
+\sigma^{2}_{u0} & \sigma_{u0u2} & \sigma_{u0u3} & \sigma_{u0u5} \\
+\sigma_{u2u0} & \sigma^{2}_{u2} & \sigma_{u2u3} & \sigma_{u2u5} \\
+\sigma_{u3u0} & \sigma_{u3u2} & \sigma^{2}_{u3} & \sigma_{u3u5} \\
+\sigma_{u5u0} & \sigma_{u5u2} & \sigma_{u5u3} & \sigma^{2}_{u5}
+\end{array}\right]$$
+
+where the matrix is blocks of between-dyad associations, some among males only, some among females anly, and some across genders. *These are sample-level, between-dyad relations, and should be interpreted appropriately.*    
+
+```{r, cache=TRUE}
+model1 <- lme(
+  fixed = reldis ~ -1 + 
+    male + 
+    male:time7c + 
+    male:wrkstrscw + male:wrkstrscb + 
+    female + female:time7c + 
+    female:wrkstrscw + female:wrkstrscb,
+  random = ~ -1 + male + 
+    male:wrkstrscw + 
+    female + female:wrkstrscw | coupleid, 
+  # this invokes separate sigma^{2}_{e} for each gender
+  weights=varIdent(form = ~1 | gender), 
+  # this invokes the off-diaginal sigma_{e1e2} 
+  corr=corCompSymm(form = ~1 | coupleid/time), 
+  data=dyads,
+  control=list(maxIter=1000)
+) 
+
+summary(model1)
+```
+
+*Note that the residual structure is not quite the same as in Bolger & Laurenceau (2013).* It is not clear exactly how to get `lme()` structure to match. There is not a straightforward way, but it seems like it is possible. We just haven't found the exact combination of structures to use yet. 
+
+But, here is another close variant.
+```{r, cache=TRUE}
+model2 <- lme(fixed = reldis ~ -1 + 
+                          male + male:time7c + 
+                          male:wrkstrscw + male:wrkstrscb + 
+                          female + female:time7c + 
+                          female:wrkstrscw + female:wrkstrscb,
+                  random = ~ -1 + 
+                            male + male:wrkstrscw + 
+                            female + female:wrkstrscw | coupleid, 
+                  weights=varIdent(form = ~1 | gender), # this invokes separate sigma^{2}_{e} for each gender
+                  corr=corAR1(form = ~1 | coupleid/gender/time), # this invokes an AR structure
+                  data=dyads,
+                  control=list(maxIter=1000)) 
+
+summary(model2)
+```
+
+Although the structure is not exactly matched to the example in the book, the ones we are fitting are among the structures used in the literature. Across variants, the interpretations do not change in meaningful ways, suggesting that looking across the range of possibilities is fine. 
+
+#### Brief Interpretation.
+
+The results for the dyadic model are similar to when the models for males and females were run separately; however, this will not always be the case.
+
+**Fixed effects:** On an average day, males and females relationship dissatisfaction is 5.08 and 4.65, respectively, on a 0 to 10 scale. On days when there is an additional work stressor that usual, relationship dissatisfaction increases by 0.11 and 0.16 for males and females, respectively. 
+
+**Random effects:** The deviation around males and females average relationship dissatisfaction is 1.02 and 0.96, respectively. Additionally, males and females relationship dissatisfaction reports are correlated 0.27, indicating that members of the same dyad often have relatively similar reports of relationship dissatisfaction. The deviation around males and females reactivity to work stressors (i.e., slope of work stressors) is 0.17 and 0.13, respectively. The way in which dyad members' relationship dissatisfaction changes in response to work stressors is quite similar, as indicated by the 0.51 correlation. 
+
+A more thorough interpretation and formal write-up of the results can be found on pages 165 - 171 of Bolger and Laurenceau (2013) *Chapter 8: Design and Analysis of Intensive Longitudinal Longitudinal Study of Distingiushable Dyads.*
+
+#### Cautions
+
+While we only provide a brief description of the multivariate multilevel model for repeated measures dyadic data, we want to a highlight a few consierations when using this model.
+
+1. The model used here is for *distinguishable* dyads. The persons within each dyad are separated (and pooled) according to an a priori defined feature (e.g., gender,  role). 
+2. The model used here examined the *linear* association between work stressors and relationship dissatisfaction. Different formualtions are needed to test for non-linear relations.
+3. Mdel inferences should be done carefully, keeping in mind that that level 2 covariances are between-individual covariances. 
+
+### Conclusion
+
+This tutorial is meant to accompany the example provided in *Chapter 8: Design and Analysis of Intensive Longitudinal Longitudinal Study of Distingiushable Dyads* of Bolger and Laurenceau (2013). We provided brief explanation of (1) the underlying model, (2) the code to run these models in R, and (3) the interpretation of the results. More detailed information about these (and related analyses) can be found in Bolger and Laurenceau (2013), Laurenceau and Bolger (2005), and Kenny, Kashy, and Cook (2006).
+
+
+
+## Reference
