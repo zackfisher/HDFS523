@@ -1,4 +1,4 @@
-# Linear Regression {#chapter-7}
+# Linear Regression {#chapter-6}
 
 ```{r, echo = F}
 button <-  "position: relative; 
@@ -15,7 +15,7 @@ button <-  "position: relative;
 codefolder::bookdown(init = "show", style = button)
 ```
 
-In Chapter 7 we will demonstrate how to estimate the linear regression model in R with an eye towards the longitudinal modeling to follow.
+In Chapter 6 we will demonstrate how to estimate the linear regression model in R with an eye towards the longitudinal modeling to follow.
 
 ## Example Data
 

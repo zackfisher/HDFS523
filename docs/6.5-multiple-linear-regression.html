@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.5 Multiple Linear Regression | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
   <meta name="description" content="Course notes for HDFS 523" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.5 Multiple Linear Regression | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2024-01-30" />
+<meta name="date" content="2025-02-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,7 +56,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -123,8 +123,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 </style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="assets/style.css" type="text/css" />
 </head>
 
 <body>
@@ -278,6 +301,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.6.5" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#path-diagram-2"><i class="fa fa-check"></i><b>6.6.5</b> Path Diagram</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="7-chapter-7.html"><a href="7-chapter-7.html"><i class="fa fa-check"></i><b>7</b> Statistical Control</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="7.1-statistical-control.html"><a href="7.1-statistical-control.html"><i class="fa fa-check"></i><b>7.1</b> Statistical Control</a></li>
+<li class="chapter" data-level="7.2" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html"><i class="fa fa-check"></i><b>7.2</b> Directed Acyclic Graphs (DAGs)</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags"><i class="fa fa-check"></i><b>7.2.1</b> Introduction to DAGs</a></li>
+<li class="chapter" data-level="7.2.2" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-paths"><i class="fa fa-check"></i><b>7.2.2</b> Introduction to DAGs: Paths</a></li>
+<li class="chapter" data-level="7.2.3" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-chains"><i class="fa fa-check"></i><b>7.2.3</b> Introduction to DAGs: Chains</a></li>
+<li class="chapter" data-level="7.2.4" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-descendants-and-ancestors"><i class="fa fa-check"></i><b>7.2.4</b> Introduction to DAGs: Descendants and Ancestors</a></li>
+<li class="chapter" data-level="7.2.5" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-forks"><i class="fa fa-check"></i><b>7.2.5</b> Introduction to DAGs: Forks</a></li>
+<li class="chapter" data-level="7.2.6" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-inverted-forks"><i class="fa fa-check"></i><b>7.2.6</b> Introduction to DAGs: Inverted Forks</a></li>
+<li class="chapter" data-level="7.2.7" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-acyclicity"><i class="fa fa-check"></i><b>7.2.7</b> Introduction to DAGs: Acyclicity</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="7.3-statistical-control-done-right.html"><a href="7.3-statistical-control-done-right.html"><i class="fa fa-check"></i><b>7.3</b> Statistical Control Done Right</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="7.3-statistical-control-done-right.html"><a href="7.3-statistical-control-done-right.html#building-a-dag"><i class="fa fa-check"></i><b>7.3.1</b> Building a DAG</a></li>
+<li class="chapter" data-level="7.3.2" data-path="7.3-statistical-control-done-right.html"><a href="7.3-statistical-control-done-right.html#building-a-dag-back-door-paths"><i class="fa fa-check"></i><b>7.3.2</b> Building a DAG: Back-Door Paths</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html"><i class="fa fa-check"></i><b>7.4</b> Statistical Control Gone Wrong</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#collider-bias"><i class="fa fa-check"></i><b>7.4.1</b> Collider Bias</a></li>
+<li class="chapter" data-level="7.4.2" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#conditioning-on-a-collider"><i class="fa fa-check"></i><b>7.4.2</b> Conditioning on a Collider</a></li>
+<li class="chapter" data-level="7.4.3" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#avoiding-collider-bias"><i class="fa fa-check"></i><b>7.4.3</b> Avoiding Collider Bias</a></li>
+<li class="chapter" data-level="7.4.4" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#variations-on-collider-bias-nonresponse-bias"><i class="fa fa-check"></i><b>7.4.4</b> Variations on Collider Bias: Nonresponse Bias</a></li>
+<li class="chapter" data-level="7.4.5" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#controlling-for-mediators"><i class="fa fa-check"></i><b>7.4.5</b> Controlling for Mediators</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/zackfisher/HDFS523" target="blank">Published with bookdown</a></li>
 
@@ -301,25 +351,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="multiple-linear-regression" class="section level2 hasAnchor" number="6.5">
 <h2><span class="header-section-number">6.5</span> Multiple Linear Regression<a href="6.5-multiple-linear-regression.html#multiple-linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Now, let’s include a second predictor. We have information on the number of years of education for the children’s fathers, variable <code>daded</code>. The values in <code>daded</code> indicate the number of years of education each father completed. First, let’s take a look at the distribution of this new predictor variable.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="6.5-multiple-linear-regression.html#cb25-1" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(wiscsub<span class="sc">$</span>daded)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="6.5-multiple-linear-regression.html#cb78-1" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(wiscsub<span class="sc">$</span>daded)</span></code></pre></div>
 <pre><code>##    vars   n  mean  sd median trimmed  mad min max range  skew kurtosis   se
 ## X1    1 204 10.81 2.7   11.5      11 2.97 5.5  18  12.5 -0.36     0.01 0.19</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="6.5-multiple-linear-regression.html#cb27-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wiscsub, <span class="fu">aes</span>(<span class="at">x=</span>daded)) <span class="sc">+</span> </span>
-<span id="cb27-2"><a href="6.5-multiple-linear-regression.html#cb27-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">2.5</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>, <span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb27-3"><a href="6.5-multiple-linear-regression.html#cb27-3" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">20</span>) <span class="sc">+</span></span>
-<span id="cb27-4"><a href="6.5-multiple-linear-regression.html#cb27-4" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Number of Years of Father&#39;s Education&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb27-5"><a href="6.5-multiple-linear-regression.html#cb27-5" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Count&quot;</span>) <span class="sc">+</span></span>
-<span id="cb27-6"><a href="6.5-multiple-linear-regression.html#cb27-6" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<pre><code>## Warning: Removed 2 rows containing missing values (`geom_bar()`).</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="6.5-multiple-linear-regression.html#cb80-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wiscsub, <span class="fu">aes</span>(<span class="at">x=</span>daded)) <span class="sc">+</span> </span>
+<span id="cb80-2"><a href="6.5-multiple-linear-regression.html#cb80-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">2.5</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>, <span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb80-3"><a href="6.5-multiple-linear-regression.html#cb80-3" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb80-4"><a href="6.5-multiple-linear-regression.html#cb80-4" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Number of Years of Father&#39;s Education&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb80-5"><a href="6.5-multiple-linear-regression.html#cb80-5" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Count&quot;</span>) <span class="sc">+</span></span>
+<span id="cb80-6"><a href="6.5-multiple-linear-regression.html#cb80-6" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<pre><code>## Warning: Removed 2 rows containing missing values or values outside the scale range
+## (`geom_bar()`).</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-61-1.png" width="672" />
 And the relation between Grade 2 verbal scores and daded.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="6.5-multiple-linear-regression.html#cb29-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wiscsub, <span class="fu">aes</span>(<span class="at">x=</span>daded, <span class="at">y =</span> verb2)) <span class="sc">+</span> </span>
-<span id="cb29-2"><a href="6.5-multiple-linear-regression.html#cb29-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb29-3"><a href="6.5-multiple-linear-regression.html#cb29-3" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">20</span>) <span class="sc">+</span> </span>
-<span id="cb29-4"><a href="6.5-multiple-linear-regression.html#cb29-4" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">50</span>) <span class="sc">+</span></span>
-<span id="cb29-5"><a href="6.5-multiple-linear-regression.html#cb29-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Father&#39;s Education (Years)&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Verbal Ability Grade 2&quot;</span>) <span class="sc">+</span></span>
-<span id="cb29-6"><a href="6.5-multiple-linear-regression.html#cb29-6" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="6.5-multiple-linear-regression.html#cb82-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wiscsub, <span class="fu">aes</span>(<span class="at">x=</span>daded, <span class="at">y =</span> verb2)) <span class="sc">+</span> </span>
+<span id="cb82-2"><a href="6.5-multiple-linear-regression.html#cb82-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb82-3"><a href="6.5-multiple-linear-regression.html#cb82-3" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">20</span>) <span class="sc">+</span> </span>
+<span id="cb82-4"><a href="6.5-multiple-linear-regression.html#cb82-4" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">50</span>) <span class="sc">+</span></span>
+<span id="cb82-5"><a href="6.5-multiple-linear-regression.html#cb82-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Father&#39;s Education (Years)&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Verbal Ability Grade 2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb82-6"><a href="6.5-multiple-linear-regression.html#cb82-6" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
 <div id="regression-equation" class="section level3 hasAnchor" number="6.5.1">
 <h3><span class="header-section-number">6.5.1</span> Regression Equation<a href="6.5-multiple-linear-regression.html#regression-equation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Our model now becomes</p>
@@ -327,15 +378,15 @@ And the relation between Grade 2 verbal scores and daded.</p>
 <p>where <span class="math inline">\(verb^{*}_{1i}\)</span> is the sample-centered version of <span class="math inline">\(verb_{1i}\)</span>, and <span class="math inline">\(daded^{*}_{i}\)</span> is the sample-centered version of <span class="math inline">\(daded_{i}\)</span>.</p>
 <p>The slope, <span class="math inline">\(b_2\)</span> is the expected difference in grade 2 verbal score for each 1 year difference in father’s education.</p>
 <p>We can also center the <code>daded</code> variable.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="6.5-multiple-linear-regression.html#cb30-1" tabindex="-1"></a><span class="co"># Calculate mean-centered version of father&#39;s education variable</span></span>
-<span id="cb30-2"><a href="6.5-multiple-linear-regression.html#cb30-2" tabindex="-1"></a>wiscsub<span class="sc">$</span>daded_star <span class="ot">&lt;-</span> wiscsub<span class="sc">$</span>daded <span class="sc">-</span> <span class="fu">mean</span>(wiscsub<span class="sc">$</span>daded)</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="6.5-multiple-linear-regression.html#cb83-1" tabindex="-1"></a><span class="co"># Calculate mean-centered version of father&#39;s education variable</span></span>
+<span id="cb83-2"><a href="6.5-multiple-linear-regression.html#cb83-2" tabindex="-1"></a>wiscsub<span class="sc">$</span>daded_star <span class="ot">&lt;-</span> wiscsub<span class="sc">$</span>daded <span class="sc">-</span> <span class="fu">mean</span>(wiscsub<span class="sc">$</span>daded)</span></code></pre></div>
 </div>
 <div id="fit-model-in-r" class="section level3 hasAnchor" number="6.5.2">
 <h3><span class="header-section-number">6.5.2</span> Fit Model in R<a href="6.5-multiple-linear-regression.html#fit-model-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="6.5-multiple-linear-regression.html#cb31-1" tabindex="-1"></a>model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(verb2 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> verb1_star <span class="sc">+</span> daded_star,</span>
-<span id="cb31-2"><a href="6.5-multiple-linear-regression.html#cb31-2" tabindex="-1"></a>              <span class="at">data =</span> wiscsub,</span>
-<span id="cb31-3"><a href="6.5-multiple-linear-regression.html#cb31-3" tabindex="-1"></a>              <span class="at">na.action =</span> na.exclude)</span>
-<span id="cb31-4"><a href="6.5-multiple-linear-regression.html#cb31-4" tabindex="-1"></a><span class="fu">summary</span>(model4)</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="6.5-multiple-linear-regression.html#cb84-1" tabindex="-1"></a>model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(verb2 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> verb1_star <span class="sc">+</span> daded_star,</span>
+<span id="cb84-2"><a href="6.5-multiple-linear-regression.html#cb84-2" tabindex="-1"></a>              <span class="at">data =</span> wiscsub,</span>
+<span id="cb84-3"><a href="6.5-multiple-linear-regression.html#cb84-3" tabindex="-1"></a>              <span class="at">na.action =</span> na.exclude)</span>
+<span id="cb84-4"><a href="6.5-multiple-linear-regression.html#cb84-4" tabindex="-1"></a><span class="fu">summary</span>(model4)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = verb2 ~ 1 + verb1_star + daded_star, data = wiscsub, 
@@ -360,8 +411,8 @@ And the relation between Grade 2 verbal scores and daded.</p>
 </div>
 <div id="path-diagram-1" class="section level3 hasAnchor" number="6.5.3">
 <h3><span class="header-section-number">6.5.3</span> Path Diagram<a href="6.5-multiple-linear-regression.html#path-diagram-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="6.5-multiple-linear-regression.html#cb33-1" tabindex="-1"></a>semPlot<span class="sc">::</span><span class="fu">semPaths</span>(model4, <span class="at">what =</span> <span class="st">&quot;paths&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="6.5-multiple-linear-regression.html#cb86-1" tabindex="-1"></a>semPlot<span class="sc">::</span><span class="fu">semPaths</span>(model4, <span class="at">what =</span> <span class="st">&quot;paths&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
 <div id="interpreting-model-parameters-2" class="section level4 hasAnchor" number="6.5.3.1">
 <h4><span class="header-section-number">6.5.3.1</span> Interpreting Model Parameters<a href="6.5-multiple-linear-regression.html#interpreting-model-parameters-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><span class="math inline">\(b_0\)</span> is the expected value of the outcome variable when all other variables are 0. Therefore, in this case, <span class="math inline">\(b_0\)</span> is the expected Grade 2 verbal score for a child with an average Grade 1 verbal score (i.e. <span class="math inline">\(verb^{*}_{1i}\)</span> = 0) <em>and</em> whose father had an average education (i.e. <span class="math inline">\(daded^{*}_{i}\)</span> = 0, <span class="math inline">\(\bar{daded_{i}}\)</span> = 10.81 years of education.</p>
@@ -375,12 +426,12 @@ And the relation between Grade 2 verbal scores and daded.</p>
 <p>Interpretation only needs to specify which variable is changing, by how much, and that other variables are being held constant.</p>
 <p>In regard to our last example, years of father’s education does impact the relationship between Grade 1 and 2 verbal scores. Likewise, the effect of father’s education on Grade 1 verbal scores does not depend on Grade 1 verbal scores. Said in a different way, no matter what a child’s Grade 1 verbal score was, the effect of father’s education on Grade 2 verbal scores is the same.</p>
 <p>Consider another model with categorical and continuous predictors, <code>grad</code> and <code>verb1_star</code>, respectively.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="6.5-multiple-linear-regression.html#cb34-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;ggiraphExtra&quot;</span>)</span>
-<span id="cb34-2"><a href="6.5-multiple-linear-regression.html#cb34-2" tabindex="-1"></a>model4b <span class="ot">&lt;-</span> <span class="fu">lm</span>(verb2 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> verb1_star <span class="sc">+</span> grad,</span>
-<span id="cb34-3"><a href="6.5-multiple-linear-regression.html#cb34-3" tabindex="-1"></a>              <span class="at">data =</span> wiscsub,</span>
-<span id="cb34-4"><a href="6.5-multiple-linear-regression.html#cb34-4" tabindex="-1"></a>              <span class="at">na.action =</span> na.exclude)</span>
-<span id="cb34-5"><a href="6.5-multiple-linear-regression.html#cb34-5" tabindex="-1"></a><span class="fu">ggPredict</span>(model4b,<span class="at">se=</span><span class="cn">TRUE</span>,<span class="at">interactive=</span><span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="6.5-multiple-linear-regression.html#cb87-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;ggiraphExtra&quot;</span>)</span>
+<span id="cb87-2"><a href="6.5-multiple-linear-regression.html#cb87-2" tabindex="-1"></a>model4b <span class="ot">&lt;-</span> <span class="fu">lm</span>(verb2 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> verb1_star <span class="sc">+</span> grad,</span>
+<span id="cb87-3"><a href="6.5-multiple-linear-regression.html#cb87-3" tabindex="-1"></a>              <span class="at">data =</span> wiscsub,</span>
+<span id="cb87-4"><a href="6.5-multiple-linear-regression.html#cb87-4" tabindex="-1"></a>              <span class="at">na.action =</span> na.exclude)</span>
+<span id="cb87-5"><a href="6.5-multiple-linear-regression.html#cb87-5" tabindex="-1"></a><span class="fu">ggPredict</span>(model4b,<span class="at">se=</span><span class="cn">TRUE</span>,<span class="at">interactive=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
 <p>Notice in the plot, whether a student’s father graduated HS does not impact the relationship between Grade 1 and 2 verbal scores. Differences in Grade 1 and 2 verbal scores are not dependent on whether or not the father graduated HS.</p>
 <p><strong>Most importantly, using the coefficients themselves we can easily interpret the model parameters.</strong></p>
 </div>
@@ -431,7 +482,8 @@ gitbook.start({
 "toc": {
 "collapse": "section"
 },
-"info": true
+"info": true,
+"output": "html_document2"
 });
 });
 </script>

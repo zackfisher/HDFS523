@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.1 Example Data | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
   <meta name="description" content="Course notes for HDFS 523" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.1 Example Data | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2024-01-30" />
+<meta name="date" content="2025-02-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,7 +56,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -123,8 +123,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 </style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="assets/style.css" type="text/css" />
 </head>
 
 <body>
@@ -278,6 +301,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.6.5" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#path-diagram-2"><i class="fa fa-check"></i><b>6.6.5</b> Path Diagram</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="7-chapter-7.html"><a href="7-chapter-7.html"><i class="fa fa-check"></i><b>7</b> Statistical Control</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="7.1-statistical-control.html"><a href="7.1-statistical-control.html"><i class="fa fa-check"></i><b>7.1</b> Statistical Control</a></li>
+<li class="chapter" data-level="7.2" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html"><i class="fa fa-check"></i><b>7.2</b> Directed Acyclic Graphs (DAGs)</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags"><i class="fa fa-check"></i><b>7.2.1</b> Introduction to DAGs</a></li>
+<li class="chapter" data-level="7.2.2" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-paths"><i class="fa fa-check"></i><b>7.2.2</b> Introduction to DAGs: Paths</a></li>
+<li class="chapter" data-level="7.2.3" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-chains"><i class="fa fa-check"></i><b>7.2.3</b> Introduction to DAGs: Chains</a></li>
+<li class="chapter" data-level="7.2.4" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-descendants-and-ancestors"><i class="fa fa-check"></i><b>7.2.4</b> Introduction to DAGs: Descendants and Ancestors</a></li>
+<li class="chapter" data-level="7.2.5" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-forks"><i class="fa fa-check"></i><b>7.2.5</b> Introduction to DAGs: Forks</a></li>
+<li class="chapter" data-level="7.2.6" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-inverted-forks"><i class="fa fa-check"></i><b>7.2.6</b> Introduction to DAGs: Inverted Forks</a></li>
+<li class="chapter" data-level="7.2.7" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-acyclicity"><i class="fa fa-check"></i><b>7.2.7</b> Introduction to DAGs: Acyclicity</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="7.3-statistical-control-done-right.html"><a href="7.3-statistical-control-done-right.html"><i class="fa fa-check"></i><b>7.3</b> Statistical Control Done Right</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="7.3-statistical-control-done-right.html"><a href="7.3-statistical-control-done-right.html#building-a-dag"><i class="fa fa-check"></i><b>7.3.1</b> Building a DAG</a></li>
+<li class="chapter" data-level="7.3.2" data-path="7.3-statistical-control-done-right.html"><a href="7.3-statistical-control-done-right.html#building-a-dag-back-door-paths"><i class="fa fa-check"></i><b>7.3.2</b> Building a DAG: Back-Door Paths</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html"><i class="fa fa-check"></i><b>7.4</b> Statistical Control Gone Wrong</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#collider-bias"><i class="fa fa-check"></i><b>7.4.1</b> Collider Bias</a></li>
+<li class="chapter" data-level="7.4.2" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#conditioning-on-a-collider"><i class="fa fa-check"></i><b>7.4.2</b> Conditioning on a Collider</a></li>
+<li class="chapter" data-level="7.4.3" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#avoiding-collider-bias"><i class="fa fa-check"></i><b>7.4.3</b> Avoiding Collider Bias</a></li>
+<li class="chapter" data-level="7.4.4" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#variations-on-collider-bias-nonresponse-bias"><i class="fa fa-check"></i><b>7.4.4</b> Variations on Collider Bias: Nonresponse Bias</a></li>
+<li class="chapter" data-level="7.4.5" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#controlling-for-mediators"><i class="fa fa-check"></i><b>7.4.5</b> Controlling for Mediators</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/zackfisher/HDFS523" target="blank">Published with bookdown</a></li>
 
@@ -301,28 +351,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="example-data-2" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Example Data<a href="6.1-example-data-2.html#example-data-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Chapter 6 make use of the same WISC data used in Chapter 3. Here we again read in, subset, and provide descriptives for the WISC data. We will also add a simulated variable <code>childgrad</code> indicating whether the student graduated highschool.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="6.1-example-data-2.html#cb1-1" tabindex="-1"></a>filepath <span class="ot">&lt;-</span> <span class="st">&quot;https://quantdev.ssri.psu.edu/sites/qdev/files/wisc3raw.csv&quot;</span></span>
-<span id="cb1-2"><a href="6.1-example-data-2.html#cb1-2" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="6.1-example-data-2.html#cb1-3" tabindex="-1"></a>wisc3raw <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file=</span><span class="fu">url</span>(filepath),<span class="at">header=</span><span class="cn">TRUE</span>)</span>
-<span id="cb1-4"><a href="6.1-example-data-2.html#cb1-4" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="6.1-example-data-2.html#cb1-5" tabindex="-1"></a><span class="fu">colnames</span>(wisc3raw) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb1-6"><a href="6.1-example-data-2.html#cb1-6" tabindex="-1"></a>  <span class="st">&quot;id&quot;</span>, <span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb2&quot;</span>, <span class="st">&quot;verb4&quot;</span>, <span class="st">&quot;verb6&quot;</span>, <span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo2&quot;</span>, </span>
-<span id="cb1-7"><a href="6.1-example-data-2.html#cb1-7" tabindex="-1"></a>  <span class="st">&quot;perfo4&quot;</span>, <span class="st">&quot;perfo6&quot;</span>, <span class="st">&quot;info1&quot;</span>, <span class="st">&quot;comp1&quot;</span>, <span class="st">&quot;simu1&quot;</span>, <span class="st">&quot;voca1&quot;</span>, <span class="st">&quot;info6&quot;</span>, </span>
-<span id="cb1-8"><a href="6.1-example-data-2.html#cb1-8" tabindex="-1"></a>  <span class="st">&quot;comp6&quot;</span>, <span class="st">&quot;simu6&quot;</span>, <span class="st">&quot;voca6&quot;</span>, <span class="st">&quot;daded&quot;</span>, <span class="st">&quot;grad&quot;</span>, <span class="st">&quot;constant&quot;</span></span>
-<span id="cb1-9"><a href="6.1-example-data-2.html#cb1-9" tabindex="-1"></a>)</span>
-<span id="cb1-10"><a href="6.1-example-data-2.html#cb1-10" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="6.1-example-data-2.html#cb1-11" tabindex="-1"></a>var_names_sub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb1-12"><a href="6.1-example-data-2.html#cb1-12" tabindex="-1"></a>  <span class="st">&quot;id&quot;</span>, <span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb2&quot;</span>, <span class="st">&quot;verb4&quot;</span>, <span class="st">&quot;verb6&quot;</span>,</span>
-<span id="cb1-13"><a href="6.1-example-data-2.html#cb1-13" tabindex="-1"></a>  <span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo2&quot;</span>, <span class="st">&quot;perfo4&quot;</span>, <span class="st">&quot;perfo6&quot;</span>,</span>
-<span id="cb1-14"><a href="6.1-example-data-2.html#cb1-14" tabindex="-1"></a>  <span class="st">&quot;daded&quot;</span>, <span class="st">&quot;grad&quot;</span></span>
-<span id="cb1-15"><a href="6.1-example-data-2.html#cb1-15" tabindex="-1"></a>)</span>
-<span id="cb1-16"><a href="6.1-example-data-2.html#cb1-16" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="6.1-example-data-2.html#cb1-17" tabindex="-1"></a>wiscsub <span class="ot">&lt;-</span> wisc3raw[,var_names_sub]</span>
-<span id="cb1-18"><a href="6.1-example-data-2.html#cb1-18" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="6.1-example-data-2.html#cb1-19" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb1-20"><a href="6.1-example-data-2.html#cb1-20" tabindex="-1"></a>wiscsub<span class="sc">$</span>childgrad <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">replace=</span><span class="cn">TRUE</span>, <span class="at">size=</span><span class="fu">nrow</span>(wiscsub))</span>
-<span id="cb1-21"><a href="6.1-example-data-2.html#cb1-21" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="6.1-example-data-2.html#cb1-22" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(wiscsub)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="6.1-example-data-2.html#cb54-1" tabindex="-1"></a>filepath <span class="ot">&lt;-</span> <span class="st">&quot;https://quantdev.ssri.psu.edu/sites/qdev/files/wisc3raw.csv&quot;</span></span>
+<span id="cb54-2"><a href="6.1-example-data-2.html#cb54-2" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="6.1-example-data-2.html#cb54-3" tabindex="-1"></a>wisc3raw <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file=</span><span class="fu">url</span>(filepath),<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb54-4"><a href="6.1-example-data-2.html#cb54-4" tabindex="-1"></a></span>
+<span id="cb54-5"><a href="6.1-example-data-2.html#cb54-5" tabindex="-1"></a><span class="fu">colnames</span>(wisc3raw) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb54-6"><a href="6.1-example-data-2.html#cb54-6" tabindex="-1"></a>  <span class="st">&quot;id&quot;</span>, <span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb2&quot;</span>, <span class="st">&quot;verb4&quot;</span>, <span class="st">&quot;verb6&quot;</span>, <span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo2&quot;</span>, </span>
+<span id="cb54-7"><a href="6.1-example-data-2.html#cb54-7" tabindex="-1"></a>  <span class="st">&quot;perfo4&quot;</span>, <span class="st">&quot;perfo6&quot;</span>, <span class="st">&quot;info1&quot;</span>, <span class="st">&quot;comp1&quot;</span>, <span class="st">&quot;simu1&quot;</span>, <span class="st">&quot;voca1&quot;</span>, <span class="st">&quot;info6&quot;</span>, </span>
+<span id="cb54-8"><a href="6.1-example-data-2.html#cb54-8" tabindex="-1"></a>  <span class="st">&quot;comp6&quot;</span>, <span class="st">&quot;simu6&quot;</span>, <span class="st">&quot;voca6&quot;</span>, <span class="st">&quot;daded&quot;</span>, <span class="st">&quot;grad&quot;</span>, <span class="st">&quot;constant&quot;</span></span>
+<span id="cb54-9"><a href="6.1-example-data-2.html#cb54-9" tabindex="-1"></a>)</span>
+<span id="cb54-10"><a href="6.1-example-data-2.html#cb54-10" tabindex="-1"></a></span>
+<span id="cb54-11"><a href="6.1-example-data-2.html#cb54-11" tabindex="-1"></a>var_names_sub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb54-12"><a href="6.1-example-data-2.html#cb54-12" tabindex="-1"></a>  <span class="st">&quot;id&quot;</span>, <span class="st">&quot;verb1&quot;</span>, <span class="st">&quot;verb2&quot;</span>, <span class="st">&quot;verb4&quot;</span>, <span class="st">&quot;verb6&quot;</span>,</span>
+<span id="cb54-13"><a href="6.1-example-data-2.html#cb54-13" tabindex="-1"></a>  <span class="st">&quot;perfo1&quot;</span>, <span class="st">&quot;perfo2&quot;</span>, <span class="st">&quot;perfo4&quot;</span>, <span class="st">&quot;perfo6&quot;</span>,</span>
+<span id="cb54-14"><a href="6.1-example-data-2.html#cb54-14" tabindex="-1"></a>  <span class="st">&quot;daded&quot;</span>, <span class="st">&quot;grad&quot;</span></span>
+<span id="cb54-15"><a href="6.1-example-data-2.html#cb54-15" tabindex="-1"></a>)</span>
+<span id="cb54-16"><a href="6.1-example-data-2.html#cb54-16" tabindex="-1"></a></span>
+<span id="cb54-17"><a href="6.1-example-data-2.html#cb54-17" tabindex="-1"></a>wiscsub <span class="ot">&lt;-</span> wisc3raw[,var_names_sub]</span>
+<span id="cb54-18"><a href="6.1-example-data-2.html#cb54-18" tabindex="-1"></a></span>
+<span id="cb54-19"><a href="6.1-example-data-2.html#cb54-19" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb54-20"><a href="6.1-example-data-2.html#cb54-20" tabindex="-1"></a>wiscsub<span class="sc">$</span>childgrad <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">replace=</span><span class="cn">TRUE</span>, <span class="at">size=</span><span class="fu">nrow</span>(wiscsub))</span>
+<span id="cb54-21"><a href="6.1-example-data-2.html#cb54-21" tabindex="-1"></a></span>
+<span id="cb54-22"><a href="6.1-example-data-2.html#cb54-22" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(wiscsub)</span></code></pre></div>
 <pre><code>##           vars   n   mean    sd median trimmed   mad   min    max  range  skew
 ## id           1 204 102.50 59.03 102.50  102.50 75.61  1.00 204.00 203.00  0.00
 ## verb1        2 204  19.59  5.81  19.34   19.50  5.41  3.33  35.15  31.82  0.13
@@ -396,7 +446,8 @@ gitbook.start({
 "toc": {
 "collapse": "section"
 },
-"info": true
+"info": true,
+"output": "html_document2"
 });
 });
 </script>

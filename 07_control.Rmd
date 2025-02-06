@@ -1,4 +1,4 @@
-# Statistical Control {#chapter-6}
+# Statistical Control {#chapter-7}
 
 ```{r, echo = F}
 button <-  "position: relative; 
@@ -15,7 +15,7 @@ button <-  "position: relative;
 codefolder::bookdown(init = "show", style = button)
 ```
 
-In Chapter 6 we will discuss statistical control. 
+In Chapter 7 we will discuss statistical control. 
 
 - Introduction to DAGs
 - Statistical Control Done Right

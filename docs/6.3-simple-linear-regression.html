@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.3 Simple Linear Regression | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
   <meta name="description" content="Course notes for HDFS 523" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.3 Simple Linear Regression | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2024-01-30" />
+<meta name="date" content="2025-02-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,7 +56,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -123,8 +123,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 </style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="assets/style.css" type="text/css" />
 </head>
 
 <body>
@@ -278,6 +301,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.6.5" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#path-diagram-2"><i class="fa fa-check"></i><b>6.6.5</b> Path Diagram</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="7-chapter-7.html"><a href="7-chapter-7.html"><i class="fa fa-check"></i><b>7</b> Statistical Control</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="7.1-statistical-control.html"><a href="7.1-statistical-control.html"><i class="fa fa-check"></i><b>7.1</b> Statistical Control</a></li>
+<li class="chapter" data-level="7.2" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html"><i class="fa fa-check"></i><b>7.2</b> Directed Acyclic Graphs (DAGs)</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags"><i class="fa fa-check"></i><b>7.2.1</b> Introduction to DAGs</a></li>
+<li class="chapter" data-level="7.2.2" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-paths"><i class="fa fa-check"></i><b>7.2.2</b> Introduction to DAGs: Paths</a></li>
+<li class="chapter" data-level="7.2.3" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-chains"><i class="fa fa-check"></i><b>7.2.3</b> Introduction to DAGs: Chains</a></li>
+<li class="chapter" data-level="7.2.4" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-descendants-and-ancestors"><i class="fa fa-check"></i><b>7.2.4</b> Introduction to DAGs: Descendants and Ancestors</a></li>
+<li class="chapter" data-level="7.2.5" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-forks"><i class="fa fa-check"></i><b>7.2.5</b> Introduction to DAGs: Forks</a></li>
+<li class="chapter" data-level="7.2.6" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-inverted-forks"><i class="fa fa-check"></i><b>7.2.6</b> Introduction to DAGs: Inverted Forks</a></li>
+<li class="chapter" data-level="7.2.7" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-acyclicity"><i class="fa fa-check"></i><b>7.2.7</b> Introduction to DAGs: Acyclicity</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="7.3-statistical-control-done-right.html"><a href="7.3-statistical-control-done-right.html"><i class="fa fa-check"></i><b>7.3</b> Statistical Control Done Right</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="7.3-statistical-control-done-right.html"><a href="7.3-statistical-control-done-right.html#building-a-dag"><i class="fa fa-check"></i><b>7.3.1</b> Building a DAG</a></li>
+<li class="chapter" data-level="7.3.2" data-path="7.3-statistical-control-done-right.html"><a href="7.3-statistical-control-done-right.html#building-a-dag-back-door-paths"><i class="fa fa-check"></i><b>7.3.2</b> Building a DAG: Back-Door Paths</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html"><i class="fa fa-check"></i><b>7.4</b> Statistical Control Gone Wrong</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#collider-bias"><i class="fa fa-check"></i><b>7.4.1</b> Collider Bias</a></li>
+<li class="chapter" data-level="7.4.2" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#conditioning-on-a-collider"><i class="fa fa-check"></i><b>7.4.2</b> Conditioning on a Collider</a></li>
+<li class="chapter" data-level="7.4.3" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#avoiding-collider-bias"><i class="fa fa-check"></i><b>7.4.3</b> Avoiding Collider Bias</a></li>
+<li class="chapter" data-level="7.4.4" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#variations-on-collider-bias-nonresponse-bias"><i class="fa fa-check"></i><b>7.4.4</b> Variations on Collider Bias: Nonresponse Bias</a></li>
+<li class="chapter" data-level="7.4.5" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#controlling-for-mediators"><i class="fa fa-check"></i><b>7.4.5</b> Controlling for Mediators</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/zackfisher/HDFS523" target="blank">Published with bookdown</a></li>
 
@@ -301,31 +351,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="simple-linear-regression" class="section level2 hasAnchor" number="6.3">
 <h2><span class="header-section-number">6.3</span> Simple Linear Regression<a href="6.3-simple-linear-regression.html#simple-linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Let’s build up the model further. For example, we could attempt to explain some of the <em>between-person variance</em> in the Grade 2 verbal score from the Grade 1 verbal scores. But, before we do, let’s examine the distribution of the <em>between-person differences</em> in the Grade 1 verbal scores.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="6.3-simple-linear-regression.html#cb12-1" tabindex="-1"></a><span class="fu">ggplot</span>(wiscsub, <span class="fu">aes</span>(<span class="at">x=</span>verb1)) <span class="sc">+</span> </span>
-<span id="cb12-2"><a href="6.3-simple-linear-regression.html#cb12-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">2.5</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>, <span class="at">color=</span><span class="st">&quot;black&quot;</span>, <span class="at">boundary=</span><span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb12-3"><a href="6.3-simple-linear-regression.html#cb12-3" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Ability Grade 1&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb12-4"><a href="6.3-simple-linear-regression.html#cb12-4" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Count&quot;</span>) <span class="sc">+</span></span>
-<span id="cb12-5"><a href="6.3-simple-linear-regression.html#cb12-5" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">50</span>) <span class="sc">+</span></span>
-<span id="cb12-6"><a href="6.3-simple-linear-regression.html#cb12-6" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="6.3-simple-linear-regression.html#cb65-1" tabindex="-1"></a><span class="fu">ggplot</span>(wiscsub, <span class="fu">aes</span>(<span class="at">x=</span>verb1)) <span class="sc">+</span> </span>
+<span id="cb65-2"><a href="6.3-simple-linear-regression.html#cb65-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="fl">2.5</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>, <span class="at">color=</span><span class="st">&quot;black&quot;</span>, <span class="at">boundary=</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb65-3"><a href="6.3-simple-linear-regression.html#cb65-3" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Ability Grade 1&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb65-4"><a href="6.3-simple-linear-regression.html#cb65-4" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Count&quot;</span>) <span class="sc">+</span></span>
+<span id="cb65-5"><a href="6.3-simple-linear-regression.html#cb65-5" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">50</span>) <span class="sc">+</span></span>
+<span id="cb65-6"><a href="6.3-simple-linear-regression.html#cb65-6" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-53-1.png" width="672" />
 And the relation between the Grade 2 and Grade 1 verbal ability scores.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="6.3-simple-linear-regression.html#cb13-1" tabindex="-1"></a><span class="fu">ggplot</span>(wiscsub, <span class="fu">aes</span>(<span class="at">x=</span>verb1, <span class="at">y =</span> verb2)) <span class="sc">+</span> </span>
-<span id="cb13-2"><a href="6.3-simple-linear-regression.html#cb13-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb13-3"><a href="6.3-simple-linear-regression.html#cb13-3" tabindex="-1"></a>  <span class="fu">stat_ellipse</span>(<span class="at">color=</span><span class="st">&quot;blue&quot;</span>, <span class="at">alpha=</span>.<span class="dv">7</span>) <span class="sc">+</span></span>
-<span id="cb13-4"><a href="6.3-simple-linear-regression.html#cb13-4" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Ability Grade 1&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb13-5"><a href="6.3-simple-linear-regression.html#cb13-5" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Verbal Ability Grade 2&quot;</span>) <span class="sc">+</span></span>
-<span id="cb13-6"><a href="6.3-simple-linear-regression.html#cb13-6" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">45</span>) <span class="sc">+</span> </span>
-<span id="cb13-7"><a href="6.3-simple-linear-regression.html#cb13-7" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">45</span>) <span class="sc">+</span></span>
-<span id="cb13-8"><a href="6.3-simple-linear-regression.html#cb13-8" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="6.3-simple-linear-regression.html#cb66-1" tabindex="-1"></a><span class="fu">ggplot</span>(wiscsub, <span class="fu">aes</span>(<span class="at">x=</span>verb1, <span class="at">y =</span> verb2)) <span class="sc">+</span> </span>
+<span id="cb66-2"><a href="6.3-simple-linear-regression.html#cb66-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb66-3"><a href="6.3-simple-linear-regression.html#cb66-3" tabindex="-1"></a>  <span class="fu">stat_ellipse</span>(<span class="at">color=</span><span class="st">&quot;blue&quot;</span>, <span class="at">alpha=</span>.<span class="dv">7</span>) <span class="sc">+</span></span>
+<span id="cb66-4"><a href="6.3-simple-linear-regression.html#cb66-4" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Verbal Ability Grade 1&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb66-5"><a href="6.3-simple-linear-regression.html#cb66-5" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Verbal Ability Grade 2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb66-6"><a href="6.3-simple-linear-regression.html#cb66-6" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">45</span>) <span class="sc">+</span> </span>
+<span id="cb66-7"><a href="6.3-simple-linear-regression.html#cb66-7" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">45</span>) <span class="sc">+</span></span>
+<span id="cb66-8"><a href="6.3-simple-linear-regression.html#cb66-8" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 <div id="regression-equation-and-model-fitting" class="section level3 hasAnchor" number="6.3.1">
 <h3><span class="header-section-number">6.3.1</span> Regression Equation and Model Fitting<a href="6.3-simple-linear-regression.html#regression-equation-and-model-fitting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Our regression model becomes
 <span class="math display">\[ verb_{2i} = b_01_i + b_1verb_{1i} + \epsilon_{i}\]</span></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="6.3-simple-linear-regression.html#cb14-1" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(verb2 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> verb1,</span>
-<span id="cb14-2"><a href="6.3-simple-linear-regression.html#cb14-2" tabindex="-1"></a>              <span class="at">data =</span> wiscsub,</span>
-<span id="cb14-3"><a href="6.3-simple-linear-regression.html#cb14-3" tabindex="-1"></a>              <span class="at">na.action =</span> na.exclude)</span>
-<span id="cb14-4"><a href="6.3-simple-linear-regression.html#cb14-4" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="6.3-simple-linear-regression.html#cb67-1" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(verb2 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> verb1,</span>
+<span id="cb67-2"><a href="6.3-simple-linear-regression.html#cb67-2" tabindex="-1"></a>              <span class="at">data =</span> wiscsub,</span>
+<span id="cb67-3"><a href="6.3-simple-linear-regression.html#cb67-3" tabindex="-1"></a>              <span class="at">na.action =</span> na.exclude)</span>
+<span id="cb67-4"><a href="6.3-simple-linear-regression.html#cb67-4" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = verb2 ~ 1 + verb1, data = wiscsub, na.action = na.exclude)
@@ -348,8 +398,8 @@ And the relation between the Grade 2 and Grade 1 verbal ability scores.</p>
 <div id="path-diagram" class="section level3 hasAnchor" number="6.3.2">
 <h3><span class="header-section-number">6.3.2</span> Path Diagram<a href="6.3-simple-linear-regression.html#path-diagram" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We might also be interested in a graphical depiction of our model. This can be accomplished with the <code>semPaths</code> package.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="6.3-simple-linear-regression.html#cb16-1" tabindex="-1"></a>semPlot<span class="sc">::</span><span class="fu">semPaths</span>(model2, <span class="at">what =</span> <span class="st">&quot;paths&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="6.3-simple-linear-regression.html#cb69-1" tabindex="-1"></a>semPlot<span class="sc">::</span><span class="fu">semPaths</span>(model2, <span class="at">what =</span> <span class="st">&quot;paths&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
 </div>
 <div id="interpreting-model-parameters" class="section level3 hasAnchor" number="6.3.3">
 <h3><span class="header-section-number">6.3.3</span> Interpreting Model Parameters<a href="6.3-simple-linear-regression.html#interpreting-model-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -360,31 +410,31 @@ And the relation between the Grade 2 and Grade 1 verbal ability scores.</p>
 <div id="plotting-regression-line" class="section level3 hasAnchor" number="6.3.4">
 <h3><span class="header-section-number">6.3.4</span> Plotting Regression Line<a href="6.3-simple-linear-regression.html#plotting-regression-line" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We can plot the relation between ‘verb1’ and ‘verb2’, and include the predicted line from the analysis.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="6.3-simple-linear-regression.html#cb17-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wiscsub, <span class="fu">aes</span>(<span class="at">x=</span>verb1,<span class="at">y=</span>verb2)) <span class="sc">+</span></span>
-<span id="cb17-2"><a href="6.3-simple-linear-regression.html#cb17-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">shape=</span><span class="dv">19</span>) <span class="sc">+</span></span>
-<span id="cb17-3"><a href="6.3-simple-linear-regression.html#cb17-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm,<span class="at">se=</span><span class="cn">TRUE</span>,<span class="at">fullrange=</span><span class="cn">TRUE</span>,<span class="at">colour=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb17-4"><a href="6.3-simple-linear-regression.html#cb17-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">&quot;Verbal Ability Grade 1&quot;</span>, <span class="at">y=</span> <span class="st">&quot;Verbal Ability Grade 2&quot;</span>) <span class="sc">+</span></span>
-<span id="cb17-5"><a href="6.3-simple-linear-regression.html#cb17-5" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">50</span>) <span class="sc">+</span></span>
-<span id="cb17-6"><a href="6.3-simple-linear-regression.html#cb17-6" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">50</span>) <span class="sc">+</span></span>
-<span id="cb17-7"><a href="6.3-simple-linear-regression.html#cb17-7" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb17-8"><a href="6.3-simple-linear-regression.html#cb17-8" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb17-9"><a href="6.3-simple-linear-regression.html#cb17-9" tabindex="-1"></a>    <span class="at">plot.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb17-10"><a href="6.3-simple-linear-regression.html#cb17-10" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb17-11"><a href="6.3-simple-linear-regression.html#cb17-11" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb17-12"><a href="6.3-simple-linear-regression.html#cb17-12" tabindex="-1"></a>    <span class="at">panel.border =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb17-13"><a href="6.3-simple-linear-regression.html#cb17-13" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb17-14"><a href="6.3-simple-linear-regression.html#cb17-14" tabindex="-1"></a>  <span class="co">#draws x and y axis line</span></span>
-<span id="cb17-15"><a href="6.3-simple-linear-regression.html#cb17-15" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&#39;black&#39;</span>)) <span class="sc">+</span></span>
-<span id="cb17-16"><a href="6.3-simple-linear-regression.html#cb17-16" tabindex="-1"></a>  <span class="co">#set size of axis labels and titles</span></span>
-<span id="cb17-17"><a href="6.3-simple-linear-regression.html#cb17-17" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">12</span>),</span>
-<span id="cb17-18"><a href="6.3-simple-linear-regression.html#cb17-18" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="6.3-simple-linear-regression.html#cb70-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>wiscsub, <span class="fu">aes</span>(<span class="at">x=</span>verb1,<span class="at">y=</span>verb2)) <span class="sc">+</span></span>
+<span id="cb70-2"><a href="6.3-simple-linear-regression.html#cb70-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">shape=</span><span class="dv">19</span>) <span class="sc">+</span></span>
+<span id="cb70-3"><a href="6.3-simple-linear-regression.html#cb70-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm,<span class="at">se=</span><span class="cn">TRUE</span>,<span class="at">fullrange=</span><span class="cn">TRUE</span>,<span class="at">colour=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb70-4"><a href="6.3-simple-linear-regression.html#cb70-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">&quot;Verbal Ability Grade 1&quot;</span>, <span class="at">y=</span> <span class="st">&quot;Verbal Ability Grade 2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb70-5"><a href="6.3-simple-linear-regression.html#cb70-5" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">50</span>) <span class="sc">+</span></span>
+<span id="cb70-6"><a href="6.3-simple-linear-regression.html#cb70-6" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">50</span>) <span class="sc">+</span></span>
+<span id="cb70-7"><a href="6.3-simple-linear-regression.html#cb70-7" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb70-8"><a href="6.3-simple-linear-regression.html#cb70-8" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb70-9"><a href="6.3-simple-linear-regression.html#cb70-9" tabindex="-1"></a>    <span class="at">plot.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb70-10"><a href="6.3-simple-linear-regression.html#cb70-10" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb70-11"><a href="6.3-simple-linear-regression.html#cb70-11" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb70-12"><a href="6.3-simple-linear-regression.html#cb70-12" tabindex="-1"></a>    <span class="at">panel.border =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb70-13"><a href="6.3-simple-linear-regression.html#cb70-13" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb70-14"><a href="6.3-simple-linear-regression.html#cb70-14" tabindex="-1"></a>  <span class="co">#draws x and y axis line</span></span>
+<span id="cb70-15"><a href="6.3-simple-linear-regression.html#cb70-15" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&#39;black&#39;</span>)) <span class="sc">+</span></span>
+<span id="cb70-16"><a href="6.3-simple-linear-regression.html#cb70-16" tabindex="-1"></a>  <span class="co">#set size of axis labels and titles</span></span>
+<span id="cb70-17"><a href="6.3-simple-linear-regression.html#cb70-17" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">12</span>),</span>
+<span id="cb70-18"><a href="6.3-simple-linear-regression.html#cb70-18" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>))</span></code></pre></div>
 <pre><code>## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 ## ℹ Please use `linewidth` instead.
 ## This warning is displayed once every 8 hours.
 ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
 ## generated.</code></pre>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
 </div>
 </div>
             </section>
@@ -433,7 +483,8 @@ gitbook.start({
 "toc": {
 "collapse": "section"
 },
-"info": true
+"info": true,
+"output": "html_document2"
 });
 });
 </script>
