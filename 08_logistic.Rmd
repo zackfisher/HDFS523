@@ -261,7 +261,7 @@ summary(model10)
 
 ### Overdispersion
 
-A quick digression. In the binary logistic regression model *overdispersion* occurs when the observed variance is larger than what the binomial distribution would predict. For example, if $Y \sim \mathrm{Binomial}(n_{i},\pi_{i})$, the mean is $\u_{i}=n_{i}\pi_{i}$ and the variance is $n_{i}\pi_{i}(1-\pi_{i})$. Since both of these moments rely on $\pi_{i}$, it can be overly restrictive, and if overdispersion is present inferences can become distorted. We will talk about this more later. 
+A quick digression. In the binary logistic regression model *overdispersion* occurs when the observed variance is larger than what the binomial distribution would predict. For example, if $Y \sim \mathrm{Binomial}(n_{i},\pi_{i})$, the mean is $u_{i}=n_{i}\pi_{i}$ and the variance is $n_{i}\pi_{i}(1-\pi_{i})$. Since both of these moments rely on $\pi_{i}$, it can be overly restrictive, and if overdispersion is present inferences can become distorted. We will talk about this more later. 
 
 ### Coefficients
 
@@ -394,19 +394,19 @@ summary(model11)
 For example, let's look at the impact of `Income` on the probability of being happy.
 
 ```{r}
-marginaleffects::plot_cap(model11, condition = c("Income"), conf.int = TRUE)
+marginaleffects::plot_predictions(model11, condition = c("Income"), conf.int = TRUE)
 ```
 
 What if we were interested in the relationship between `Income` and `PersonalSpending` on the probability of being happy.
 
 ```{r}
-marginaleffects::plot_cap(model11, condition = c("PersonalSpending","Income"))
+marginaleffects::plot_predictions(model11, condition = c("PersonalSpending","Income"))
 ```
 
 What if we were interested in the relationship between `Income` and `ProsocialSpending` on the probability of being happy.
 
 ```{r}
-marginaleffects::plot_cap(model11, condition = c("ProsocialSpending","Income"))
+marginaleffects::plot_predictions(model11, condition = c("ProsocialSpending","Income"))
 ```
 
 In nonlinear, the marginal effect of one variable is conditional on the value of the other variable. This function draws a plot of the marginal effect of the effect variable for different values of the condition variable.
@@ -414,11 +414,11 @@ In nonlinear, the marginal effect of one variable is conditional on the value of
 Let's look at the effect of `PersonalSpending` on the relationship between `ProsocialSpending` and `Happy`.
 
 ```{r}
-marginaleffects::plot_cme(model11, variables = "ProsocialSpending", condition = "PersonalSpending")
+marginaleffects::plot_slopes(model11, variables = "ProsocialSpending", condition = "PersonalSpending")
 ```
 
 In addition, we can look at the effect of `PersonalSpending` on the relationship between `PersonalSpending` and `Happy`.
 
 ```{r}
-marginaleffects::plot_cme(model11, variables = "PersonalSpending", condition = "ProsocialSpending")
+marginaleffects::plot_slopes(model11, variables = "PersonalSpending", condition = "ProsocialSpending")
 ```
