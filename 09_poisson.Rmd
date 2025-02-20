@@ -295,7 +295,7 @@ catregs::list.coef(model1)
 Let's turn to the `marginaleffects` [@bundock] package to look at the marginal effects of income on health. 
 
 ```{r}
-marginaleffects::plot_cap(model1, condition = c("income_star"), conf.int = TRUE)
+marginaleffects::plot_predictions(model1, condition = c("income_star"), conf.int = TRUE)
 ```
 
 ## Multiple Predictor Model
