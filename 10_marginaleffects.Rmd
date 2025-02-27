@@ -85,7 +85,7 @@ There are generally three types of *marginal effects* people consider:
 
 - **Average Marginal Effects (AME)**
 - Marginal Effects at the Means (MEM)
-- Marginal Effects at Representative Values (MEM)
+- Marginal Effects at Representative Values (MER)
 
 We won't dive into the nuances of these differences here, but interested parties should take a look at the amazing [Marginalia Website](https://www.andrewheiss.com/blog/2022/05/20/marginalia/)  from Andrew Heiss.
 

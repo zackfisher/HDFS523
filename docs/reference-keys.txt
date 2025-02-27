@@ -170,3 +170,10 @@ revisisting-overdispersion
 quassi-poisson-family
 marginal-effects-examples
 references-2
+chapter-10
+reintroducing-marginal-effects
+data-from-ferraro-et-al.-2016
+fitting-a-quasi-poisson-model
+marginaleffects-slopes
+marginaleffects-predictions
+references-3
