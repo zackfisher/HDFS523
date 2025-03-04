@@ -1,4 +1,4 @@
-# Two-Occassion Change {#chapter-11}
+# Two-Occasion Change {#chapter-11}
 
 ```{r, echo = F}
 button <-  "position: relative; 
