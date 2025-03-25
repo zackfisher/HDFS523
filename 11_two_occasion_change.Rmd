@@ -690,6 +690,10 @@ summary (mylml)
 # difference model
 mylm2 = lm(diff ~ cohabit, data = data_A)
 summary(mylm2)
+
+# difference model
+mylm3 = lm(diff ~ cohabit + score1, data = data_A)
+summary(mylm3)
 ```
 
 In contrast, when we fit the difference score model to the same data, less than 1% of the variance in the outcome is explained by the model, and results suggested that cohabitation did not have an effect on relationship satisfaction change. As expected, the inferences from these models are strikingly different, which is an example of Lord’s paradox and can be attributed to the differences in baseline scores across couples who cohabit and those who do not.

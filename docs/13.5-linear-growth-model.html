@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>13.5 Linear Growth Model | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
   <meta name="description" content="Course notes for HDFS 523" />
-  <meta name="generator" content="bookdown 0.37.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="13.5 Linear Growth Model | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2024-04-15" />
+<meta name="date" content="2025-03-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,7 +56,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -128,6 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -262,69 +263,69 @@ div.csl-indent {
 <li class="chapter" data-level="5.8.2" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html#disadvantages-of-the-lpm"><i class="fa fa-check"></i><b>5.8.2</b> Disadvantages of the LPM</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="6-chapter-6.html"><a href="6-chapter-6.html"><i class="fa fa-check"></i><b>6</b> Statistical Control</a>
+<li class="chapter" data-level="6" data-path="6-chapter-6.html"><a href="6-chapter-6.html"><i class="fa fa-check"></i><b>6</b> Linear Regression</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="6.1-statistical-control.html"><a href="6.1-statistical-control.html"><i class="fa fa-check"></i><b>6.1</b> Statistical Control</a></li>
-<li class="chapter" data-level="6.2" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html"><i class="fa fa-check"></i><b>6.2</b> Directed Acyclic Graphs (DAGs)</a>
+<li class="chapter" data-level="6.1" data-path="6.1-example-data-2.html"><a href="6.1-example-data-2.html"><i class="fa fa-check"></i><b>6.1</b> Example Data</a></li>
+<li class="chapter" data-level="6.2" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html"><i class="fa fa-check"></i><b>6.2</b> Intercept-Only Model</a>
 <ul>
-<li class="chapter" data-level="6.2.1" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html#introduction-to-dags"><i class="fa fa-check"></i><b>6.2.1</b> Introduction to DAGs</a></li>
-<li class="chapter" data-level="6.2.2" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html#introduction-to-dags-paths"><i class="fa fa-check"></i><b>6.2.2</b> Introduction to DAGs: Paths</a></li>
-<li class="chapter" data-level="6.2.3" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html#introduction-to-dags-chains"><i class="fa fa-check"></i><b>6.2.3</b> Introduction to DAGs: Chains</a></li>
-<li class="chapter" data-level="6.2.4" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html#introduction-to-dags-descendants-and-ancestors"><i class="fa fa-check"></i><b>6.2.4</b> Introduction to DAGs: Descendants and Ancestors</a></li>
-<li class="chapter" data-level="6.2.5" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html#introduction-to-dags-forks"><i class="fa fa-check"></i><b>6.2.5</b> Introduction to DAGs: Forks</a></li>
-<li class="chapter" data-level="6.2.6" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html#introduction-to-dags-inverted-forks"><i class="fa fa-check"></i><b>6.2.6</b> Introduction to DAGs: Inverted Forks</a></li>
-<li class="chapter" data-level="6.2.7" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html#introduction-to-dags-acyclicity"><i class="fa fa-check"></i><b>6.2.7</b> Introduction to DAGs: Acyclicity</a></li>
+<li class="chapter" data-level="6.2.1" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-equation"><i class="fa fa-check"></i><b>6.2.1</b> Intercept-Only Equation</a></li>
+<li class="chapter" data-level="6.2.2" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-model-in-r"><i class="fa fa-check"></i><b>6.2.2</b> Intercept-Only Model in R</a></li>
+<li class="chapter" data-level="6.2.3" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-as-mean-of-outcome"><i class="fa fa-check"></i><b>6.2.3</b> Intercept as Mean of Outcome</a></li>
+<li class="chapter" data-level="6.2.4" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-model-r2"><i class="fa fa-check"></i><b>6.2.4</b> Intercept-Only Model <span class="math inline">\(R^2\)</span></a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="6.3-statistical-control-done-right.html"><a href="6.3-statistical-control-done-right.html"><i class="fa fa-check"></i><b>6.3</b> Statistical Control Done Right</a>
+<li class="chapter" data-level="6.3" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html"><i class="fa fa-check"></i><b>6.3</b> Simple Linear Regression</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="6.3-statistical-control-done-right.html"><a href="6.3-statistical-control-done-right.html#building-a-dag"><i class="fa fa-check"></i><b>6.3.1</b> Building a DAG</a></li>
-<li class="chapter" data-level="6.3.2" data-path="6.3-statistical-control-done-right.html"><a href="6.3-statistical-control-done-right.html#building-a-dag-back-door-paths"><i class="fa fa-check"></i><b>6.3.2</b> Building a DAG: Back-Door Paths</a></li>
+<li class="chapter" data-level="6.3.1" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#regression-equation-and-model-fitting"><i class="fa fa-check"></i><b>6.3.1</b> Regression Equation and Model Fitting</a></li>
+<li class="chapter" data-level="6.3.2" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#path-diagram"><i class="fa fa-check"></i><b>6.3.2</b> Path Diagram</a></li>
+<li class="chapter" data-level="6.3.3" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#interpreting-model-parameters"><i class="fa fa-check"></i><b>6.3.3</b> Interpreting Model Parameters</a></li>
+<li class="chapter" data-level="6.3.4" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#plotting-regression-line"><i class="fa fa-check"></i><b>6.3.4</b> Plotting Regression Line</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="6.4-statistical-control-gone-wrong.html"><a href="6.4-statistical-control-gone-wrong.html"><i class="fa fa-check"></i><b>6.4</b> Statistical Control Gone Wrong</a>
+<li class="chapter" data-level="6.4" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html"><i class="fa fa-check"></i><b>6.4</b> Mean Centering Predictors</a>
 <ul>
-<li class="chapter" data-level="6.4.1" data-path="6.4-statistical-control-gone-wrong.html"><a href="6.4-statistical-control-gone-wrong.html#collider-bias"><i class="fa fa-check"></i><b>6.4.1</b> Collider Bias</a></li>
-<li class="chapter" data-level="6.4.2" data-path="6.4-statistical-control-gone-wrong.html"><a href="6.4-statistical-control-gone-wrong.html#conditioning-on-a-collider"><i class="fa fa-check"></i><b>6.4.2</b> Conditioning on a Collider</a></li>
-<li class="chapter" data-level="6.4.3" data-path="6.4-statistical-control-gone-wrong.html"><a href="6.4-statistical-control-gone-wrong.html#avoiding-collider-bias"><i class="fa fa-check"></i><b>6.4.3</b> Avoiding Collider Bias</a></li>
-<li class="chapter" data-level="6.4.4" data-path="6.4-statistical-control-gone-wrong.html"><a href="6.4-statistical-control-gone-wrong.html#variations-on-collider-bias-nonresponse-bias"><i class="fa fa-check"></i><b>6.4.4</b> Variations on Collider Bias: Nonresponse Bias</a></li>
-<li class="chapter" data-level="6.4.5" data-path="6.4-statistical-control-gone-wrong.html"><a href="6.4-statistical-control-gone-wrong.html#controlling-for-mediators"><i class="fa fa-check"></i><b>6.4.5</b> Controlling for Mediators</a></li>
+<li class="chapter" data-level="6.4.1" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html#interpreting-model-parameters-1"><i class="fa fa-check"></i><b>6.4.1</b> Interpreting Model Parameters</a></li>
+<li class="chapter" data-level="6.4.2" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html#plotting-regression-line-1"><i class="fa fa-check"></i><b>6.4.2</b> Plotting Regression Line</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html"><i class="fa fa-check"></i><b>6.5</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#regression-equation"><i class="fa fa-check"></i><b>6.5.1</b> Regression Equation</a></li>
+<li class="chapter" data-level="6.5.2" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#fit-model-in-r"><i class="fa fa-check"></i><b>6.5.2</b> Fit Model in R</a></li>
+<li class="chapter" data-level="6.5.3" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#path-diagram-1"><i class="fa fa-check"></i><b>6.5.3</b> Path Diagram</a></li>
+<li class="chapter" data-level="6.5.4" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#a-note-on-interpretation"><i class="fa fa-check"></i><b>6.5.4</b> A Note on Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html"><i class="fa fa-check"></i><b>6.6</b> Categorical Variable Interaction</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#interaction-as-moderation"><i class="fa fa-check"></i><b>6.6.1</b> Interaction as Moderation</a></li>
+<li class="chapter" data-level="6.6.2" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#moderation-by-categorical-variable"><i class="fa fa-check"></i><b>6.6.2</b> Moderation by Categorical Variable</a></li>
+<li class="chapter" data-level="6.6.3" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#interpretation"><i class="fa fa-check"></i><b>6.6.3</b> Interpretation</a></li>
+<li class="chapter" data-level="6.6.4" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#fit-regression-model-in-r"><i class="fa fa-check"></i><b>6.6.4</b> Fit Regression Model in R</a></li>
+<li class="chapter" data-level="6.6.5" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#path-diagram-2"><i class="fa fa-check"></i><b>6.6.5</b> Path Diagram</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="7-chapter-7.html"><a href="7-chapter-7.html"><i class="fa fa-check"></i><b>7</b> Linear Regression</a>
+<li class="chapter" data-level="7" data-path="7-chapter-7.html"><a href="7-chapter-7.html"><i class="fa fa-check"></i><b>7</b> Statistical Control</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="7.1-example-data-2.html"><a href="7.1-example-data-2.html"><i class="fa fa-check"></i><b>7.1</b> Example Data</a></li>
-<li class="chapter" data-level="7.2" data-path="7.2-intercept-only-model.html"><a href="7.2-intercept-only-model.html"><i class="fa fa-check"></i><b>7.2</b> Intercept-Only Model</a>
+<li class="chapter" data-level="7.1" data-path="7.1-statistical-control.html"><a href="7.1-statistical-control.html"><i class="fa fa-check"></i><b>7.1</b> Statistical Control</a></li>
+<li class="chapter" data-level="7.2" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html"><i class="fa fa-check"></i><b>7.2</b> Directed Acyclic Graphs (DAGs)</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="7.2-intercept-only-model.html"><a href="7.2-intercept-only-model.html#intercept-only-equation"><i class="fa fa-check"></i><b>7.2.1</b> Intercept-Only Equation</a></li>
-<li class="chapter" data-level="7.2.2" data-path="7.2-intercept-only-model.html"><a href="7.2-intercept-only-model.html#intercept-only-model-in-r"><i class="fa fa-check"></i><b>7.2.2</b> Intercept-Only Model in R</a></li>
-<li class="chapter" data-level="7.2.3" data-path="7.2-intercept-only-model.html"><a href="7.2-intercept-only-model.html#intercept-as-mean-of-outcome"><i class="fa fa-check"></i><b>7.2.3</b> Intercept as Mean of Outcome</a></li>
-<li class="chapter" data-level="7.2.4" data-path="7.2-intercept-only-model.html"><a href="7.2-intercept-only-model.html#intercept-only-model-r2"><i class="fa fa-check"></i><b>7.2.4</b> Intercept-Only Model <span class="math inline">\(R^2\)</span></a></li>
+<li class="chapter" data-level="7.2.1" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags"><i class="fa fa-check"></i><b>7.2.1</b> Introduction to DAGs</a></li>
+<li class="chapter" data-level="7.2.2" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-paths"><i class="fa fa-check"></i><b>7.2.2</b> Introduction to DAGs: Paths</a></li>
+<li class="chapter" data-level="7.2.3" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-chains"><i class="fa fa-check"></i><b>7.2.3</b> Introduction to DAGs: Chains</a></li>
+<li class="chapter" data-level="7.2.4" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-descendants-and-ancestors"><i class="fa fa-check"></i><b>7.2.4</b> Introduction to DAGs: Descendants and Ancestors</a></li>
+<li class="chapter" data-level="7.2.5" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-forks"><i class="fa fa-check"></i><b>7.2.5</b> Introduction to DAGs: Forks</a></li>
+<li class="chapter" data-level="7.2.6" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-inverted-forks"><i class="fa fa-check"></i><b>7.2.6</b> Introduction to DAGs: Inverted Forks</a></li>
+<li class="chapter" data-level="7.2.7" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-acyclicity"><i class="fa fa-check"></i><b>7.2.7</b> Introduction to DAGs: Acyclicity</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="7.3-simple-linear-regression.html"><a href="7.3-simple-linear-regression.html"><i class="fa fa-check"></i><b>7.3</b> Simple Linear Regression</a>
+<li class="chapter" data-level="7.3" data-path="7.3-statistical-control-done-right.html"><a href="7.3-statistical-control-done-right.html"><i class="fa fa-check"></i><b>7.3</b> Statistical Control Done Right</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="7.3-simple-linear-regression.html"><a href="7.3-simple-linear-regression.html#regression-equation-and-model-fitting"><i class="fa fa-check"></i><b>7.3.1</b> Regression Equation and Model Fitting</a></li>
-<li class="chapter" data-level="7.3.2" data-path="7.3-simple-linear-regression.html"><a href="7.3-simple-linear-regression.html#path-diagram"><i class="fa fa-check"></i><b>7.3.2</b> Path Diagram</a></li>
-<li class="chapter" data-level="7.3.3" data-path="7.3-simple-linear-regression.html"><a href="7.3-simple-linear-regression.html#interpreting-model-parameters"><i class="fa fa-check"></i><b>7.3.3</b> Interpreting Model Parameters</a></li>
-<li class="chapter" data-level="7.3.4" data-path="7.3-simple-linear-regression.html"><a href="7.3-simple-linear-regression.html#plotting-regression-line"><i class="fa fa-check"></i><b>7.3.4</b> Plotting Regression Line</a></li>
+<li class="chapter" data-level="7.3.1" data-path="7.3-statistical-control-done-right.html"><a href="7.3-statistical-control-done-right.html#building-a-dag"><i class="fa fa-check"></i><b>7.3.1</b> Building a DAG</a></li>
+<li class="chapter" data-level="7.3.2" data-path="7.3-statistical-control-done-right.html"><a href="7.3-statistical-control-done-right.html#building-a-dag-back-door-paths"><i class="fa fa-check"></i><b>7.3.2</b> Building a DAG: Back-Door Paths</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="7.4-mean-centering-predictors.html"><a href="7.4-mean-centering-predictors.html"><i class="fa fa-check"></i><b>7.4</b> Mean Centering Predictors</a>
+<li class="chapter" data-level="7.4" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html"><i class="fa fa-check"></i><b>7.4</b> Statistical Control Gone Wrong</a>
 <ul>
-<li class="chapter" data-level="7.4.1" data-path="7.4-mean-centering-predictors.html"><a href="7.4-mean-centering-predictors.html#interpreting-model-parameters-1"><i class="fa fa-check"></i><b>7.4.1</b> Interpreting Model Parameters</a></li>
-<li class="chapter" data-level="7.4.2" data-path="7.4-mean-centering-predictors.html"><a href="7.4-mean-centering-predictors.html#plotting-regression-line-1"><i class="fa fa-check"></i><b>7.4.2</b> Plotting Regression Line</a></li>
-</ul></li>
-<li class="chapter" data-level="7.5" data-path="7.5-multiple-linear-regression.html"><a href="7.5-multiple-linear-regression.html"><i class="fa fa-check"></i><b>7.5</b> Multiple Linear Regression</a>
-<ul>
-<li class="chapter" data-level="7.5.1" data-path="7.5-multiple-linear-regression.html"><a href="7.5-multiple-linear-regression.html#regression-equation"><i class="fa fa-check"></i><b>7.5.1</b> Regression Equation</a></li>
-<li class="chapter" data-level="7.5.2" data-path="7.5-multiple-linear-regression.html"><a href="7.5-multiple-linear-regression.html#fit-model-in-r"><i class="fa fa-check"></i><b>7.5.2</b> Fit Model in R</a></li>
-<li class="chapter" data-level="7.5.3" data-path="7.5-multiple-linear-regression.html"><a href="7.5-multiple-linear-regression.html#path-diagram-1"><i class="fa fa-check"></i><b>7.5.3</b> Path Diagram</a></li>
-<li class="chapter" data-level="7.5.4" data-path="7.5-multiple-linear-regression.html"><a href="7.5-multiple-linear-regression.html#a-note-on-interpretation"><i class="fa fa-check"></i><b>7.5.4</b> A Note on Interpretation</a></li>
-</ul></li>
-<li class="chapter" data-level="7.6" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html"><i class="fa fa-check"></i><b>7.6</b> Categorical Variable Interaction</a>
-<ul>
-<li class="chapter" data-level="7.6.1" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html#interaction-as-moderation"><i class="fa fa-check"></i><b>7.6.1</b> Interaction as Moderation</a></li>
-<li class="chapter" data-level="7.6.2" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html#moderation-by-categorical-variable"><i class="fa fa-check"></i><b>7.6.2</b> Moderation by Categorical Variable</a></li>
-<li class="chapter" data-level="7.6.3" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html#interpretation"><i class="fa fa-check"></i><b>7.6.3</b> Interpretation</a></li>
-<li class="chapter" data-level="7.6.4" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html#fit-regression-model-in-r"><i class="fa fa-check"></i><b>7.6.4</b> Fit Regression Model in R</a></li>
-<li class="chapter" data-level="7.6.5" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html#path-diagram-2"><i class="fa fa-check"></i><b>7.6.5</b> Path Diagram</a></li>
+<li class="chapter" data-level="7.4.1" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#collider-bias"><i class="fa fa-check"></i><b>7.4.1</b> Collider Bias</a></li>
+<li class="chapter" data-level="7.4.2" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#conditioning-on-a-collider"><i class="fa fa-check"></i><b>7.4.2</b> Conditioning on a Collider</a></li>
+<li class="chapter" data-level="7.4.3" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#avoiding-collider-bias"><i class="fa fa-check"></i><b>7.4.3</b> Avoiding Collider Bias</a></li>
+<li class="chapter" data-level="7.4.4" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#variations-on-collider-bias-nonresponse-bias"><i class="fa fa-check"></i><b>7.4.4</b> Variations on Collider Bias: Nonresponse Bias</a></li>
+<li class="chapter" data-level="7.4.5" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#controlling-for-mediators"><i class="fa fa-check"></i><b>7.4.5</b> Controlling for Mediators</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="8-chapter-8.html"><a href="8-chapter-8.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a>
@@ -412,7 +413,7 @@ div.csl-indent {
 <li class="chapter" data-level="10.5" data-path="10.5-marginaleffects-predictions.html"><a href="10.5-marginaleffects-predictions.html"><i class="fa fa-check"></i><b>10.5</b> <code>marginaleffects: Predictions</code></a></li>
 <li class="chapter" data-level="10.6" data-path="10.6-references-3.html"><a href="10.6-references-3.html"><i class="fa fa-check"></i><b>10.6</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="11-chapter-11.html"><a href="11-chapter-11.html"><i class="fa fa-check"></i><b>11</b> Two-Occassion Change</a>
+<li class="chapter" data-level="11" data-path="11-chapter-11.html"><a href="11-chapter-11.html"><i class="fa fa-check"></i><b>11</b> Two-Occasion Change</a>
 <ul>
 <li class="chapter" data-level="11.1" data-path="11.1-introduction.html"><a href="11.1-introduction.html"><i class="fa fa-check"></i><b>11.1</b> Introduction</a>
 <ul>
@@ -526,221 +527,6 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="13.9" data-path="13.9-intperpreting-interactions.html"><a href="13.9-intperpreting-interactions.html"><i class="fa fa-check"></i><b>13.9</b> Intperpreting Interactions</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="14-chapter-14.html"><a href="14-chapter-14.html"><i class="fa fa-check"></i><b>14</b> Nonlinear Growth Curves</a>
-<ul>
-<li class="chapter" data-level="14.1" data-path="14.1-review-of-linear-growth.html"><a href="14.1-review-of-linear-growth.html"><i class="fa fa-check"></i><b>14.1</b> Review of Linear Growth</a>
-<ul>
-<li class="chapter" data-level="14.1.1" data-path="14.1-review-of-linear-growth.html"><a href="14.1-review-of-linear-growth.html#theory-of-linear-growth"><i class="fa fa-check"></i><b>14.1.1</b> Theory of Linear Growth</a></li>
-<li class="chapter" data-level="14.1.2" data-path="14.1-review-of-linear-growth.html"><a href="14.1-review-of-linear-growth.html#characteristics-of-linear-growth"><i class="fa fa-check"></i><b>14.1.2</b> Characteristics of Linear Growth</a></li>
-<li class="chapter" data-level="14.1.3" data-path="14.1-review-of-linear-growth.html"><a href="14.1-review-of-linear-growth.html#no-growth-model"><i class="fa fa-check"></i><b>14.1.3</b> No Growth Model</a></li>
-<li class="chapter" data-level="14.1.4" data-path="14.1-review-of-linear-growth.html"><a href="14.1-review-of-linear-growth.html#random-intercept-model-1"><i class="fa fa-check"></i><b>14.1.4</b> Random Intercept Model</a></li>
-<li class="chapter" data-level="14.1.5" data-path="14.1-review-of-linear-growth.html"><a href="14.1-review-of-linear-growth.html#linear-growth-model-1"><i class="fa fa-check"></i><b>14.1.5</b> Linear Growth Model</a></li>
-<li class="chapter" data-level="14.1.6" data-path="14.1-review-of-linear-growth.html"><a href="14.1-review-of-linear-growth.html#quadratic-growth-model-1"><i class="fa fa-check"></i><b>14.1.6</b> Quadratic Growth Model</a></li>
-<li class="chapter" data-level="14.1.7" data-path="14.1-review-of-linear-growth.html"><a href="14.1-review-of-linear-growth.html#quadratic-growth-equations"><i class="fa fa-check"></i><b>14.1.7</b> Quadratic Growth Equations</a></li>
-</ul></li>
-<li class="chapter" data-level="14.2" data-path="14.2-introducing-nonlinear-growth.html"><a href="14.2-introducing-nonlinear-growth.html"><i class="fa fa-check"></i><b>14.2</b> Introducing Nonlinear Growth</a>
-<ul>
-<li class="chapter" data-level="14.2.1" data-path="14.2-introducing-nonlinear-growth.html"><a href="14.2-introducing-nonlinear-growth.html#types-of-nonlinearity"><i class="fa fa-check"></i><b>14.2.1</b> Types of Nonlinearity</a></li>
-<li class="chapter" data-level="14.2.2" data-path="14.2-introducing-nonlinear-growth.html"><a href="14.2-introducing-nonlinear-growth.html#flexibility-of-nonlinear-growth"><i class="fa fa-check"></i><b>14.2.2</b> Flexibility of Nonlinear Growth</a></li>
-<li class="chapter" data-level="14.2.3" data-path="14.2-introducing-nonlinear-growth.html"><a href="14.2-introducing-nonlinear-growth.html#utility-of-nonlinear-growth"><i class="fa fa-check"></i><b>14.2.3</b> Utility of Nonlinear Growth</a></li>
-<li class="chapter" data-level="14.2.4" data-path="14.2-introducing-nonlinear-growth.html"><a href="14.2-introducing-nonlinear-growth.html#some-nonlinear-growth-models"><i class="fa fa-check"></i><b>14.2.4</b> Some Nonlinear Growth Models</a></li>
-<li class="chapter" data-level="14.2.5" data-path="14.2-introducing-nonlinear-growth.html"><a href="14.2-introducing-nonlinear-growth.html#need-for-nonlinear-models"><i class="fa fa-check"></i><b>14.2.5</b> Need for Nonlinear Models</a></li>
-</ul></li>
-<li class="chapter" data-level="14.3" data-path="14.3-example-data-ram-grimm-2007.html"><a href="14.3-example-data-ram-grimm-2007.html"><i class="fa fa-check"></i><b>14.3</b> Example Data (Ram &amp; Grimm, 2007)</a>
-<ul>
-<li class="chapter" data-level="14.3.1" data-path="14.3-example-data-ram-grimm-2007.html"><a href="14.3-example-data-ram-grimm-2007.html#read-in-cortisol-data"><i class="fa fa-check"></i><b>14.3.1</b> Read in Cortisol Data</a></li>
-<li class="chapter" data-level="14.3.2" data-path="14.3-example-data-ram-grimm-2007.html"><a href="14.3-example-data-ram-grimm-2007.html#reshaping-data"><i class="fa fa-check"></i><b>14.3.2</b> Reshaping Data</a></li>
-<li class="chapter" data-level="14.3.3" data-path="14.3-example-data-ram-grimm-2007.html"><a href="14.3-example-data-ram-grimm-2007.html#descriptives"><i class="fa fa-check"></i><b>14.3.3</b> Descriptives</a></li>
-<li class="chapter" data-level="14.3.4" data-path="14.3-example-data-ram-grimm-2007.html"><a href="14.3-example-data-ram-grimm-2007.html#density-plots"><i class="fa fa-check"></i><b>14.3.4</b> Density Plots</a></li>
-<li class="chapter" data-level="14.3.5" data-path="14.3-example-data-ram-grimm-2007.html"><a href="14.3-example-data-ram-grimm-2007.html#individual-level-trajectories"><i class="fa fa-check"></i><b>14.3.5</b> Individual-level Trajectories</a></li>
-</ul></li>
-<li class="chapter" data-level="14.4" data-path="14.4-linear-growth-cortisol.html"><a href="14.4-linear-growth-cortisol.html"><i class="fa fa-check"></i><b>14.4</b> Linear Growth (Cortisol)</a>
-<ul>
-<li class="chapter" data-level="14.4.1" data-path="14.4-linear-growth-cortisol.html"><a href="14.4-linear-growth-cortisol.html#equation"><i class="fa fa-check"></i><b>14.4.1</b> Equation</a></li>
-<li class="chapter" data-level="14.4.2" data-path="14.4-linear-growth-cortisol.html"><a href="14.4-linear-growth-cortisol.html#fit-model"><i class="fa fa-check"></i><b>14.4.2</b> Fit Model</a></li>
-<li class="chapter" data-level="14.4.3" data-path="14.4-linear-growth-cortisol.html"><a href="14.4-linear-growth-cortisol.html#predicted-trajectories-1"><i class="fa fa-check"></i><b>14.4.3</b> Predicted Trajectories</a></li>
-<li class="chapter" data-level="14.4.4" data-path="14.4-linear-growth-cortisol.html"><a href="14.4-linear-growth-cortisol.html#interpretation-3"><i class="fa fa-check"></i><b>14.4.4</b> Interpretation</a></li>
-</ul></li>
-<li class="chapter" data-level="14.5" data-path="14.5-quadratic-growth-cortisol.html"><a href="14.5-quadratic-growth-cortisol.html"><i class="fa fa-check"></i><b>14.5</b> Quadratic Growth (Cortisol)</a>
-<ul>
-<li class="chapter" data-level="14.5.1" data-path="14.5-quadratic-growth-cortisol.html"><a href="14.5-quadratic-growth-cortisol.html#equation-1"><i class="fa fa-check"></i><b>14.5.1</b> Equation</a></li>
-<li class="chapter" data-level="14.5.2" data-path="14.5-quadratic-growth-cortisol.html"><a href="14.5-quadratic-growth-cortisol.html#fit-model-1"><i class="fa fa-check"></i><b>14.5.2</b> Fit Model</a></li>
-<li class="chapter" data-level="14.5.3" data-path="14.5-quadratic-growth-cortisol.html"><a href="14.5-quadratic-growth-cortisol.html#predicted-trajectories-2"><i class="fa fa-check"></i><b>14.5.3</b> Predicted Trajectories</a></li>
-<li class="chapter" data-level="14.5.4" data-path="14.5-quadratic-growth-cortisol.html"><a href="14.5-quadratic-growth-cortisol.html#interpretation-4"><i class="fa fa-check"></i><b>14.5.4</b> Interpretation</a></li>
-<li class="chapter" data-level="14.5.5" data-path="14.5-quadratic-growth-cortisol.html"><a href="14.5-quadratic-growth-cortisol.html#interpretational-caution"><i class="fa fa-check"></i><b>14.5.5</b> Interpretational Caution</a></li>
-<li class="chapter" data-level="14.5.6" data-path="14.5-quadratic-growth-cortisol.html"><a href="14.5-quadratic-growth-cortisol.html#nonlinear-or-linear-model"><i class="fa fa-check"></i><b>14.5.6</b> Nonlinear or Linear Model?</a></li>
-</ul></li>
-<li class="chapter" data-level="14.6" data-path="14.6-latent-basis-cortisol.html"><a href="14.6-latent-basis-cortisol.html"><i class="fa fa-check"></i><b>14.6</b> Latent Basis (Cortisol)</a>
-<ul>
-<li class="chapter" data-level="14.6.1" data-path="14.6-latent-basis-cortisol.html"><a href="14.6-latent-basis-cortisol.html#equation-2"><i class="fa fa-check"></i><b>14.6.1</b> Equation</a></li>
-<li class="chapter" data-level="14.6.2" data-path="14.6-latent-basis-cortisol.html"><a href="14.6-latent-basis-cortisol.html#fit-model-2"><i class="fa fa-check"></i><b>14.6.2</b> Fit Model</a></li>
-<li class="chapter" data-level="14.6.3" data-path="14.6-latent-basis-cortisol.html"><a href="14.6-latent-basis-cortisol.html#predicted-trajectories-3"><i class="fa fa-check"></i><b>14.6.3</b> Predicted Trajectories</a></li>
-<li class="chapter" data-level="14.6.4" data-path="14.6-latent-basis-cortisol.html"><a href="14.6-latent-basis-cortisol.html#interpretation-5"><i class="fa fa-check"></i><b>14.6.4</b> Interpretation</a></li>
-</ul></li>
-<li class="chapter" data-level="14.7" data-path="14.7-exponential-growth-cortisol.html"><a href="14.7-exponential-growth-cortisol.html"><i class="fa fa-check"></i><b>14.7</b> Exponential Growth (Cortisol)</a>
-<ul>
-<li class="chapter" data-level="14.7.1" data-path="14.7-exponential-growth-cortisol.html"><a href="14.7-exponential-growth-cortisol.html#fit-model-3"><i class="fa fa-check"></i><b>14.7.1</b> Fit Model</a></li>
-<li class="chapter" data-level="14.7.2" data-path="14.7-exponential-growth-cortisol.html"><a href="14.7-exponential-growth-cortisol.html#predicted-trajectories-4"><i class="fa fa-check"></i><b>14.7.2</b> Predicted Trajectories</a></li>
-<li class="chapter" data-level="14.7.3" data-path="14.7-exponential-growth-cortisol.html"><a href="14.7-exponential-growth-cortisol.html#interpretation-6"><i class="fa fa-check"></i><b>14.7.3</b> Interpretation</a></li>
-<li class="chapter" data-level="14.7.4" data-path="14.7-exponential-growth-cortisol.html"><a href="14.7-exponential-growth-cortisol.html#nonlinear-or-linear-model-1"><i class="fa fa-check"></i><b>14.7.4</b> Nonlinear or Linear Model?</a></li>
-</ul></li>
-<li class="chapter" data-level="14.8" data-path="14.8-multiphase-growth-cortisol.html"><a href="14.8-multiphase-growth-cortisol.html"><i class="fa fa-check"></i><b>14.8</b> Multiphase Growth (Cortisol)</a>
-<ul>
-<li class="chapter" data-level="14.8.1" data-path="14.8-multiphase-growth-cortisol.html"><a href="14.8-multiphase-growth-cortisol.html#equation-3"><i class="fa fa-check"></i><b>14.8.1</b> Equation</a></li>
-<li class="chapter" data-level="14.8.2" data-path="14.8-multiphase-growth-cortisol.html"><a href="14.8-multiphase-growth-cortisol.html#fit-model-4"><i class="fa fa-check"></i><b>14.8.2</b> Fit Model</a></li>
-<li class="chapter" data-level="14.8.3" data-path="14.8-multiphase-growth-cortisol.html"><a href="14.8-multiphase-growth-cortisol.html#predicted-trajectories-5"><i class="fa fa-check"></i><b>14.8.3</b> Predicted Trajectories</a></li>
-<li class="chapter" data-level="14.8.4" data-path="14.8-multiphase-growth-cortisol.html"><a href="14.8-multiphase-growth-cortisol.html#interpretation-7"><i class="fa fa-check"></i><b>14.8.4</b> Interpretation</a></li>
-</ul></li>
-<li class="chapter" data-level="14.9" data-path="14.9-bilinear-spline-cortisol.html"><a href="14.9-bilinear-spline-cortisol.html"><i class="fa fa-check"></i><b>14.9</b> Bilinear Spline (Cortisol)</a>
-<ul>
-<li class="chapter" data-level="14.9.1" data-path="14.9-bilinear-spline-cortisol.html"><a href="14.9-bilinear-spline-cortisol.html#equation-4"><i class="fa fa-check"></i><b>14.9.1</b> Equation</a></li>
-<li class="chapter" data-level="14.9.2" data-path="14.9-bilinear-spline-cortisol.html"><a href="14.9-bilinear-spline-cortisol.html#fit-model-5"><i class="fa fa-check"></i><b>14.9.2</b> Fit Model</a></li>
-<li class="chapter" data-level="14.9.3" data-path="14.9-bilinear-spline-cortisol.html"><a href="14.9-bilinear-spline-cortisol.html#predicted-trajectories-6"><i class="fa fa-check"></i><b>14.9.3</b> Predicted Trajectories</a></li>
-<li class="chapter" data-level="14.9.4" data-path="14.9-bilinear-spline-cortisol.html"><a href="14.9-bilinear-spline-cortisol.html#interpretation-8"><i class="fa fa-check"></i><b>14.9.4</b> Interpretation</a></li>
-<li class="chapter" data-level="14.9.5" data-path="14.9-bilinear-spline-cortisol.html"><a href="14.9-bilinear-spline-cortisol.html#fit-model-6"><i class="fa fa-check"></i><b>14.9.5</b> Fit Model</a></li>
-</ul></li>
-<li class="chapter" data-level="14.10" data-path="14.10-references-6.html"><a href="14.10-references-6.html"><i class="fa fa-check"></i><b>14.10</b> References</a></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="15-chapter-15.html"><a href="15-chapter-15.html"><i class="fa fa-check"></i><b>15</b> Dyadic Data Analysis</a>
-<ul>
-<li class="chapter" data-level="15.1" data-path="15.1-introduction-3.html"><a href="15.1-introduction-3.html"><i class="fa fa-check"></i><b>15.1</b> Introduction</a>
-<ul>
-<li class="chapter" data-level="15.1.1" data-path="15.1-introduction-3.html"><a href="15.1-introduction-3.html#interpersonal-phenomena"><i class="fa fa-check"></i><b>15.1.1</b> Interpersonal Phenomena</a></li>
-<li class="chapter" data-level="15.1.2" data-path="15.1-introduction-3.html"><a href="15.1-introduction-3.html#dyadic-measurement"><i class="fa fa-check"></i><b>15.1.2</b> Dyadic Measurement</a></li>
-<li class="chapter" data-level="15.1.3" data-path="15.1-introduction-3.html"><a href="15.1-introduction-3.html#discussion-question"><i class="fa fa-check"></i><b>15.1.3</b> Discussion question</a></li>
-</ul></li>
-<li class="chapter" data-level="15.2" data-path="15.2-interdependence.html"><a href="15.2-interdependence.html"><i class="fa fa-check"></i><b>15.2</b> Interdependence</a>
-<ul>
-<li class="chapter" data-level="15.2.1" data-path="15.2-interdependence.html"><a href="15.2-interdependence.html#definition"><i class="fa fa-check"></i><b>15.2.1</b> Definition</a></li>
-<li class="chapter" data-level="15.2.2" data-path="15.2-interdependence.html"><a href="15.2-interdependence.html#ignoring-interdependence"><i class="fa fa-check"></i><b>15.2.2</b> Ignoring Interdependence</a></li>
-<li class="chapter" data-level="15.2.3" data-path="15.2-interdependence.html"><a href="15.2-interdependence.html#linkage-types"><i class="fa fa-check"></i><b>15.2.3</b> Linkage Types</a></li>
-<li class="chapter" data-level="15.2.4" data-path="15.2-interdependence.html"><a href="15.2-interdependence.html#sources-of-interdependence"><i class="fa fa-check"></i><b>15.2.4</b> Sources of Interdependence</a></li>
-<li class="chapter" data-level="15.2.5" data-path="15.2-interdependence.html"><a href="15.2-interdependence.html#discussion-question-1"><i class="fa fa-check"></i><b>15.2.5</b> Discussion Question</a></li>
-</ul></li>
-<li class="chapter" data-level="15.3" data-path="15.3-basic-definitions.html"><a href="15.3-basic-definitions.html"><i class="fa fa-check"></i><b>15.3</b> Basic Definitions</a>
-<ul>
-<li class="chapter" data-level="15.3.1" data-path="15.3-basic-definitions.html"><a href="15.3-basic-definitions.html#distinguishability"><i class="fa fa-check"></i><b>15.3.1</b> Distinguishability</a></li>
-<li class="chapter" data-level="15.3.2" data-path="15.3-basic-definitions.html"><a href="15.3-basic-definitions.html#variable-types"><i class="fa fa-check"></i><b>15.3.2</b> Variable Types</a></li>
-</ul></li>
-<li class="chapter" data-level="15.4" data-path="15.4-dyadic-designs.html"><a href="15.4-dyadic-designs.html"><i class="fa fa-check"></i><b>15.4</b> Dyadic Designs</a>
-<ul>
-<li class="chapter" data-level="15.4.1" data-path="15.4-dyadic-designs.html"><a href="15.4-dyadic-designs.html#standard-dyadic-design"><i class="fa fa-check"></i><b>15.4.1</b> Standard Dyadic Design</a></li>
-<li class="chapter" data-level="15.4.2" data-path="15.4-dyadic-designs.html"><a href="15.4-dyadic-designs.html#social-relations-model"><i class="fa fa-check"></i><b>15.4.2</b> Social Relations Model</a></li>
-<li class="chapter" data-level="15.4.3" data-path="15.4-dyadic-designs.html"><a href="15.4-dyadic-designs.html#one-with-many-design"><i class="fa fa-check"></i><b>15.4.3</b> One-with-many Design</a></li>
-<li class="chapter" data-level="15.4.4" data-path="15.4-dyadic-designs.html"><a href="15.4-dyadic-designs.html#discussion-question-3"><i class="fa fa-check"></i><b>15.4.4</b> Discussion Question:</a></li>
-</ul></li>
-<li class="chapter" data-level="15.5" data-path="15.5-actor-partner-interdependence-model-apim.html"><a href="15.5-actor-partner-interdependence-model-apim.html"><i class="fa fa-check"></i><b>15.5</b> Actor Partner Interdependence Model (APIM)</a>
-<ul>
-<li class="chapter" data-level="15.5.1" data-path="15.5-actor-partner-interdependence-model-apim.html"><a href="15.5-actor-partner-interdependence-model-apim.html#model-1"><i class="fa fa-check"></i><b>15.5.1</b> Model</a></li>
-<li class="chapter" data-level="15.5.2" data-path="15.5-actor-partner-interdependence-model-apim.html"><a href="15.5-actor-partner-interdependence-model-apim.html#conceptual-interpretations"><i class="fa fa-check"></i><b>15.5.2</b> Conceptual Interpretations</a></li>
-<li class="chapter" data-level="15.5.3" data-path="15.5-actor-partner-interdependence-model-apim.html"><a href="15.5-actor-partner-interdependence-model-apim.html#actor-partner-interactions"><i class="fa fa-check"></i><b>15.5.3</b> Actor-Partner Interactions</a></li>
-</ul></li>
-<li class="chapter" data-level="15.6" data-path="15.6-longitudinal-apim.html"><a href="15.6-longitudinal-apim.html"><i class="fa fa-check"></i><b>15.6</b> Longitudinal APIM</a>
-<ul>
-<li class="chapter" data-level="15.6.1" data-path="15.6-longitudinal-apim.html"><a href="15.6-longitudinal-apim.html#model-2"><i class="fa fa-check"></i><b>15.6.1</b> Model</a></li>
-<li class="chapter" data-level="15.6.2" data-path="15.6-longitudinal-apim.html"><a href="15.6-longitudinal-apim.html#estimated-parameters"><i class="fa fa-check"></i><b>15.6.2</b> Estimated Parameters</a></li>
-<li class="chapter" data-level="15.6.3" data-path="15.6-longitudinal-apim.html"><a href="15.6-longitudinal-apim.html#parameter-covariation"><i class="fa fa-check"></i><b>15.6.3</b> Parameter Covariation</a></li>
-</ul></li>
-<li class="chapter" data-level="15.7" data-path="15.7-data-example.html"><a href="15.7-data-example.html"><i class="fa fa-check"></i><b>15.7</b> Data Example</a>
-<ul>
-<li class="chapter" data-level="15.7.1" data-path="15.7-data-example.html"><a href="15.7-data-example.html#preliminaries"><i class="fa fa-check"></i><b>15.7.1</b> Preliminaries</a></li>
-<li class="chapter" data-level="15.7.2" data-path="15.7-data-example.html"><a href="15.7-data-example.html#modeling-scenario"><i class="fa fa-check"></i><b>15.7.2</b> Modeling Scenario</a></li>
-<li class="chapter" data-level="15.7.3" data-path="15.7-data-example.html"><a href="15.7-data-example.html#descriptives-1"><i class="fa fa-check"></i><b>15.7.3</b> Descriptives</a></li>
-<li class="chapter" data-level="15.7.4" data-path="15.7-data-example.html"><a href="15.7-data-example.html#dyadic-data-prep"><i class="fa fa-check"></i><b>15.7.4</b> Dyadic Data Prep</a></li>
-<li class="chapter" data-level="15.7.5" data-path="15.7-data-example.html"><a href="15.7-data-example.html#apim"><i class="fa fa-check"></i><b>15.7.5</b> APIM</a></li>
-<li class="chapter" data-level="15.7.6" data-path="15.7-data-example.html"><a href="15.7-data-example.html#null-model"><i class="fa fa-check"></i><b>15.7.6</b> Null Model</a></li>
-<li class="chapter" data-level="15.7.7" data-path="15.7-data-example.html"><a href="15.7-data-example.html#full-apim"><i class="fa fa-check"></i><b>15.7.7</b> Full APIM</a></li>
-</ul></li>
-<li class="chapter" data-level="15.8" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html"><i class="fa fa-check"></i><b>15.8</b> Data Example 2</a>
-<ul>
-<li class="chapter" data-level="15.8.1" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#overview"><i class="fa fa-check"></i><b>15.8.1</b> Overview</a></li>
-<li class="chapter" data-level="15.8.2" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#outline"><i class="fa fa-check"></i><b>15.8.2</b> Outline</a></li>
-<li class="chapter" data-level="15.8.3" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#the-modeling-enterprise"><i class="fa fa-check"></i><b>15.8.3</b> The Modeling Enterprise</a></li>
-<li class="chapter" data-level="15.8.4" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#the-data"><i class="fa fa-check"></i><b>15.8.4</b> The Data</a></li>
-<li class="chapter" data-level="15.8.5" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#plotting-the-data"><i class="fa fa-check"></i><b>15.8.5</b> Plotting the Data</a></li>
-<li class="chapter" data-level="15.8.6" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#the-multilevel-model"><i class="fa fa-check"></i><b>15.8.6</b> The Multilevel Model</a></li>
-<li class="chapter" data-level="15.8.7" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#fit-male-model"><i class="fa fa-check"></i><b>15.8.7</b> Fit Male Model</a></li>
-<li class="chapter" data-level="15.8.8" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#fit-female-model"><i class="fa fa-check"></i><b>15.8.8</b> Fit Female Model</a></li>
-<li class="chapter" data-level="15.8.9" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#fit-full-model"><i class="fa fa-check"></i><b>15.8.9</b> Fit Full Model</a></li>
-<li class="chapter" data-level="15.8.10" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#conclusion"><i class="fa fa-check"></i><b>15.8.10</b> Conclusion</a></li>
-</ul></li>
-<li class="chapter" data-level="15.9" data-path="15.9-reference.html"><a href="15.9-reference.html"><i class="fa fa-check"></i><b>15.9</b> Reference</a></li>
-</ul></li>
-<li class="chapter" data-level="16" data-path="16-chapter-16.html"><a href="16-chapter-16.html"><i class="fa fa-check"></i><b>16</b> Cluster Analysis</a>
-<ul>
-<li class="chapter" data-level="16.1" data-path="16.1-introduction-4.html"><a href="16.1-introduction-4.html"><i class="fa fa-check"></i><b>16.1</b> Introduction</a>
-<ul>
-<li class="chapter" data-level="16.1.1" data-path="16.1-introduction-4.html"><a href="16.1-introduction-4.html#supervised-learning"><i class="fa fa-check"></i><b>16.1.1</b> Supervised Learning</a></li>
-<li class="chapter" data-level="16.1.2" data-path="16.1-introduction-4.html"><a href="16.1-introduction-4.html#unsupervised-learning"><i class="fa fa-check"></i><b>16.1.2</b> Unsupervised Learning</a></li>
-</ul></li>
-<li class="chapter" data-level="16.2" data-path="16.2-cluster-analysis.html"><a href="16.2-cluster-analysis.html"><i class="fa fa-check"></i><b>16.2</b> Cluster Analysis</a></li>
-<li class="chapter" data-level="16.3" data-path="16.3-clustering-algorithms.html"><a href="16.3-clustering-algorithms.html"><i class="fa fa-check"></i><b>16.3</b> Clustering Algorithms</a></li>
-<li class="chapter" data-level="16.4" data-path="16.4-hierarchical-clustering-1.html"><a href="16.4-hierarchical-clustering-1.html"><i class="fa fa-check"></i><b>16.4</b> Hierarchical Clustering</a>
-<ul>
-<li class="chapter" data-level="16.4.1" data-path="16.4-hierarchical-clustering-1.html"><a href="16.4-hierarchical-clustering-1.html#distances"><i class="fa fa-check"></i><b>16.4.1</b> Distances</a></li>
-<li class="chapter" data-level="16.4.2" data-path="16.4-hierarchical-clustering-1.html"><a href="16.4-hierarchical-clustering-1.html#distance-between-clusters"><i class="fa fa-check"></i><b>16.4.2</b> Distance Between Clusters</a></li>
-<li class="chapter" data-level="16.4.3" data-path="16.4-hierarchical-clustering-1.html"><a href="16.4-hierarchical-clustering-1.html#linkages-applied-example"><i class="fa fa-check"></i><b>16.4.3</b> Linkages Applied Example</a></li>
-<li class="chapter" data-level="16.4.4" data-path="16.4-hierarchical-clustering-1.html"><a href="16.4-hierarchical-clustering-1.html#dendograms"><i class="fa fa-check"></i><b>16.4.4</b> Dendograms</a></li>
-</ul></li>
-<li class="chapter" data-level="16.5" data-path="16.5-k-means-clustering-1.html"><a href="16.5-k-means-clustering-1.html"><i class="fa fa-check"></i><b>16.5</b> K-Means Clustering</a>
-<ul>
-<li class="chapter" data-level="16.5.1" data-path="16.5-k-means-clustering-1.html"><a href="16.5-k-means-clustering-1.html#within-cluster-variation"><i class="fa fa-check"></i><b>16.5.1</b> Within-Cluster Variation</a></li>
-<li class="chapter" data-level="16.5.2" data-path="16.5-k-means-clustering-1.html"><a href="16.5-k-means-clustering-1.html#k-means-algorithm"><i class="fa fa-check"></i><b>16.5.2</b> K-Means Algorithm</a></li>
-<li class="chapter" data-level="16.5.3" data-path="16.5-k-means-clustering-1.html"><a href="16.5-k-means-clustering-1.html#k-means-example"><i class="fa fa-check"></i><b>16.5.3</b> K-means Example</a></li>
-<li class="chapter" data-level="16.5.4" data-path="16.5-k-means-clustering-1.html"><a href="16.5-k-means-clustering-1.html#choosing-k"><i class="fa fa-check"></i><b>16.5.4</b> Choosing K</a></li>
-</ul></li>
-<li class="chapter" data-level="16.6" data-path="16.6-dbscan.html"><a href="16.6-dbscan.html"><i class="fa fa-check"></i><b>16.6</b> DBSCAN</a>
-<ul>
-<li class="chapter" data-level="16.6.1" data-path="16.6-dbscan.html"><a href="16.6-dbscan.html#example-of-dbscan"><i class="fa fa-check"></i><b>16.6.1</b> Example of DBSCAN</a></li>
-</ul></li>
-<li class="chapter" data-level="16.7" data-path="16.7-issues-in-clustering.html"><a href="16.7-issues-in-clustering.html"><i class="fa fa-check"></i><b>16.7</b> Issues in Clustering</a>
-<ul>
-<li class="chapter" data-level="16.7.1" data-path="16.7-issues-in-clustering.html"><a href="16.7-issues-in-clustering.html#recommendations"><i class="fa fa-check"></i><b>16.7.1</b> Recommendations</a></li>
-</ul></li>
-<li class="chapter" data-level="16.8" data-path="16.8-applied-examples.html"><a href="16.8-applied-examples.html"><i class="fa fa-check"></i><b>16.8</b> Applied Examples</a>
-<ul>
-<li class="chapter" data-level="16.8.1" data-path="16.8-applied-examples.html"><a href="16.8-applied-examples.html#preliminaries-1"><i class="fa fa-check"></i><b>16.8.1</b> Preliminaries</a></li>
-<li class="chapter" data-level="16.8.2" data-path="16.8-applied-examples.html"><a href="16.8-applied-examples.html#preparing-data"><i class="fa fa-check"></i><b>16.8.2</b> Preparing Data</a></li>
-<li class="chapter" data-level="16.8.3" data-path="16.8-applied-examples.html"><a href="16.8-applied-examples.html#scaling"><i class="fa fa-check"></i><b>16.8.3</b> Scaling</a></li>
-<li class="chapter" data-level="16.8.4" data-path="16.8-applied-examples.html"><a href="16.8-applied-examples.html#plotting"><i class="fa fa-check"></i><b>16.8.4</b> Plotting</a></li>
-<li class="chapter" data-level="16.8.5" data-path="16.8-applied-examples.html"><a href="16.8-applied-examples.html#distances-1"><i class="fa fa-check"></i><b>16.8.5</b> Distances</a></li>
-<li class="chapter" data-level="16.8.6" data-path="16.8-applied-examples.html"><a href="16.8-applied-examples.html#k-means"><i class="fa fa-check"></i><b>16.8.6</b> K-Means</a></li>
-<li class="chapter" data-level="16.8.7" data-path="16.8-applied-examples.html"><a href="16.8-applied-examples.html#hierarchical-clustering-2"><i class="fa fa-check"></i><b>16.8.7</b> Hierarchical Clustering</a></li>
-<li class="chapter" data-level="16.8.8" data-path="16.8-applied-examples.html"><a href="16.8-applied-examples.html#two-step-approach"><i class="fa fa-check"></i><b>16.8.8</b> Two-step Approach</a></li>
-<li class="chapter" data-level="16.8.9" data-path="16.8-applied-examples.html"><a href="16.8-applied-examples.html#final-thoughts"><i class="fa fa-check"></i><b>16.8.9</b> Final Thoughts</a></li>
-</ul></li>
-<li class="chapter" data-level="16.9" data-path="16.9-reference-1.html"><a href="16.9-reference-1.html"><i class="fa fa-check"></i><b>16.9</b> Reference</a></li>
-</ul></li>
-<li class="chapter" data-level="17" data-path="17-chapter-17.html"><a href="17-chapter-17.html"><i class="fa fa-check"></i><b>17</b> Vector Autoregressive Models</a>
-<ul>
-<li class="chapter" data-level="17.1" data-path="17.1-introduction-5.html"><a href="17.1-introduction-5.html"><i class="fa fa-check"></i><b>17.1</b> Introduction</a></li>
-<li class="chapter" data-level="17.2" data-path="17.2-the-n1-ar-model.html"><a href="17.2-the-n1-ar-model.html"><i class="fa fa-check"></i><b>17.2</b> The N=1 AR Model</a>
-<ul>
-<li class="chapter" data-level="17.2.1" data-path="17.2-the-n1-ar-model.html"><a href="17.2-the-n1-ar-model.html#random-shocks"><i class="fa fa-check"></i><b>17.2.1</b> Random Shocks</a></li>
-<li class="chapter" data-level="17.2.2" data-path="17.2-the-n1-ar-model.html"><a href="17.2-the-n1-ar-model.html#autoregressive-parameter"><i class="fa fa-check"></i><b>17.2.2</b> Autoregressive Parameter</a></li>
-<li class="chapter" data-level="17.2.3" data-path="17.2-the-n1-ar-model.html"><a href="17.2-the-n1-ar-model.html#ar1-model-example"><i class="fa fa-check"></i><b>17.2.3</b> AR(1) Model Example</a></li>
-<li class="chapter" data-level="17.2.4" data-path="17.2-the-n1-ar-model.html"><a href="17.2-the-n1-ar-model.html#fitting-a-ar1-model-in-r"><i class="fa fa-check"></i><b>17.2.4</b> Fitting a AR(1) Model in R</a></li>
-<li class="chapter" data-level="17.2.5" data-path="17.2-the-n1-ar-model.html"><a href="17.2-the-n1-ar-model.html#ar-coefficients-example"><i class="fa fa-check"></i><b>17.2.5</b> AR Coefficients Example</a></li>
-</ul></li>
-<li class="chapter" data-level="17.3" data-path="17.3-the-n1-var-model.html"><a href="17.3-the-n1-var-model.html"><i class="fa fa-check"></i><b>17.3</b> The N=1 VAR Model</a>
-<ul>
-<li class="chapter" data-level="17.3.1" data-path="17.3-the-n1-var-model.html"><a href="17.3-the-n1-var-model.html#fitting-an-var1-model-in-r"><i class="fa fa-check"></i><b>17.3.1</b> Fitting an VAR(1) Model in R</a></li>
-<li class="chapter" data-level="17.3.2" data-path="17.3-the-n1-var-model.html"><a href="17.3-the-n1-var-model.html#stationarity-and-non-stationarity"><i class="fa fa-check"></i><b>17.3.2</b> Stationarity and Non-Stationarity</a></li>
-<li class="chapter" data-level="17.3.3" data-path="17.3-the-n1-var-model.html"><a href="17.3-the-n1-var-model.html#a-note-on-path-diagrams"><i class="fa fa-check"></i><b>17.3.3</b> A Note on path Diagrams</a></li>
-</ul></li>
-<li class="chapter" data-level="17.4" data-path="17.4-introducing-the-multi-level-var.html"><a href="17.4-introducing-the-multi-level-var.html"><i class="fa fa-check"></i><b>17.4</b> Introducing the Multi-level VAR</a>
-<ul>
-<li class="chapter" data-level="17.4.1" data-path="17.4-introducing-the-multi-level-var.html"><a href="17.4-introducing-the-multi-level-var.html#model-3"><i class="fa fa-check"></i><b>17.4.1</b> Model</a></li>
-</ul></li>
-<li class="chapter" data-level="17.5" data-path="17.5-applied-example.html"><a href="17.5-applied-example.html"><i class="fa fa-check"></i><b>17.5</b> Applied Example</a>
-<ul>
-<li class="chapter" data-level="17.5.1" data-path="17.5-applied-example.html"><a href="17.5-applied-example.html#loading-data"><i class="fa fa-check"></i><b>17.5.1</b> Loading Data</a></li>
-<li class="chapter" data-level="17.5.2" data-path="17.5-applied-example.html"><a href="17.5-applied-example.html#temporal-effects"><i class="fa fa-check"></i><b>17.5.2</b> Temporal Effects</a></li>
-<li class="chapter" data-level="17.5.3" data-path="17.5-applied-example.html"><a href="17.5-applied-example.html#contemporaneous-effects"><i class="fa fa-check"></i><b>17.5.3</b> Contemporaneous Effects</a></li>
-<li class="chapter" data-level="17.5.4" data-path="17.5-applied-example.html"><a href="17.5-applied-example.html#between-subjects-effects"><i class="fa fa-check"></i><b>17.5.4</b> Between-Subjects Effects</a></li>
-</ul></li>
-<li class="chapter" data-level="17.6" data-path="17.6-reference-2.html"><a href="17.6-reference-2.html"><i class="fa fa-check"></i><b>17.6</b> Reference</a></li>
-</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/zackfisher/HDFS523" target="blank">Published with bookdown</a></li>
 
@@ -767,14 +553,14 @@ div.csl-indent {
 <div id="random-intercept-model" class="section level3 hasAnchor" number="13.5.1">
 <h3><span class="header-section-number">13.5.1</span> Random Intercept Model<a href="13.5-linear-growth-model.html#random-intercept-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>My naming convention for objects here is: fixed linear (fl) and random intercept (ri)</p>
-<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="13.5-linear-growth-model.html#cb403-1" tabindex="-1"></a>fl_ri_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
-<span id="cb403-2"><a href="13.5-linear-growth-model.html#cb403-2" tabindex="-1"></a>  <span class="at">fixed =</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade, </span>
-<span id="cb403-3"><a href="13.5-linear-growth-model.html#cb403-3" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span><span class="sc">|</span>id, </span>
-<span id="cb403-4"><a href="13.5-linear-growth-model.html#cb403-4" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
-<span id="cb403-5"><a href="13.5-linear-growth-model.html#cb403-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude,</span>
-<span id="cb403-6"><a href="13.5-linear-growth-model.html#cb403-6" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;ML&quot;</span></span>
-<span id="cb403-7"><a href="13.5-linear-growth-model.html#cb403-7" tabindex="-1"></a>)</span>
-<span id="cb403-8"><a href="13.5-linear-growth-model.html#cb403-8" tabindex="-1"></a><span class="fu">summary</span>(fl_ri_fit)</span></code></pre></div>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="13.5-linear-growth-model.html#cb400-1" tabindex="-1"></a>fl_ri_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
+<span id="cb400-2"><a href="13.5-linear-growth-model.html#cb400-2" tabindex="-1"></a>  <span class="at">fixed =</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade, </span>
+<span id="cb400-3"><a href="13.5-linear-growth-model.html#cb400-3" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span><span class="sc">|</span>id, </span>
+<span id="cb400-4"><a href="13.5-linear-growth-model.html#cb400-4" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
+<span id="cb400-5"><a href="13.5-linear-growth-model.html#cb400-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude,</span>
+<span id="cb400-6"><a href="13.5-linear-growth-model.html#cb400-6" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;ML&quot;</span></span>
+<span id="cb400-7"><a href="13.5-linear-growth-model.html#cb400-7" tabindex="-1"></a>)</span>
+<span id="cb400-8"><a href="13.5-linear-growth-model.html#cb400-8" tabindex="-1"></a><span class="fu">summary</span>(fl_ri_fit)</span></code></pre></div>
 <pre><code>## Linear mixed-effects model fit by maximum likelihood
 ##   Data: verblong 
 ##        AIC     BIC    logLik
@@ -800,35 +586,35 @@ div.csl-indent {
 ## Number of Observations: 816
 ## Number of Groups: 204</code></pre>
 <p>Let’s look at the predicted trajectories from this model</p>
-<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="13.5-linear-growth-model.html#cb405-1" tabindex="-1"></a><span class="co">#Place individual predictions and residuals into the dataframe</span></span>
-<span id="cb405-2"><a href="13.5-linear-growth-model.html#cb405-2" tabindex="-1"></a>verblong<span class="sc">$</span>pred_fl_ri <span class="ot">&lt;-</span> <span class="fu">predict</span>(fl_ri_fit)</span>
-<span id="cb405-3"><a href="13.5-linear-growth-model.html#cb405-3" tabindex="-1"></a>verblong<span class="sc">$</span>resid_fl_ri <span class="ot">&lt;-</span> <span class="fu">residuals</span>(fl_ri_fit)</span>
-<span id="cb405-4"><a href="13.5-linear-growth-model.html#cb405-4" tabindex="-1"></a><span class="co">#Create a function for the mean trajectory</span></span>
-<span id="cb405-5"><a href="13.5-linear-growth-model.html#cb405-5" tabindex="-1"></a>fun_fl_ri <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { <span class="fl">15.15099</span> <span class="sc">+</span> <span class="fl">4.67339</span><span class="sc">*</span>x }</span>
-<span id="cb405-6"><a href="13.5-linear-growth-model.html#cb405-6" tabindex="-1"></a></span>
-<span id="cb405-7"><a href="13.5-linear-growth-model.html#cb405-7" tabindex="-1"></a><span class="co">#plotting PREDICTED intraindividual change</span></span>
-<span id="cb405-8"><a href="13.5-linear-growth-model.html#cb405-8" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> pred_fl_ri, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb405-9"><a href="13.5-linear-growth-model.html#cb405-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Fixed Linear, Random Intercept&quot;</span>) <span class="sc">+</span></span>
-<span id="cb405-10"><a href="13.5-linear-growth-model.html#cb405-10" tabindex="-1"></a>  <span class="co">#  geom_point() + </span></span>
-<span id="cb405-11"><a href="13.5-linear-growth-model.html#cb405-11" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb405-12"><a href="13.5-linear-growth-model.html#cb405-12" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb405-13"><a href="13.5-linear-growth-model.html#cb405-13" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;PREDICTED WISC Verbal Score&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="sc">+</span></span>
-<span id="cb405-14"><a href="13.5-linear-growth-model.html#cb405-14" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb405-15"><a href="13.5-linear-growth-model.html#cb405-15" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>fun_fl_ri, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb405-16"><a href="13.5-linear-growth-model.html#cb405-16" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="13.5-linear-growth-model.html#cb402-1" tabindex="-1"></a><span class="co">#Place individual predictions and residuals into the dataframe</span></span>
+<span id="cb402-2"><a href="13.5-linear-growth-model.html#cb402-2" tabindex="-1"></a>verblong<span class="sc">$</span>pred_fl_ri <span class="ot">&lt;-</span> <span class="fu">predict</span>(fl_ri_fit)</span>
+<span id="cb402-3"><a href="13.5-linear-growth-model.html#cb402-3" tabindex="-1"></a>verblong<span class="sc">$</span>resid_fl_ri <span class="ot">&lt;-</span> <span class="fu">residuals</span>(fl_ri_fit)</span>
+<span id="cb402-4"><a href="13.5-linear-growth-model.html#cb402-4" tabindex="-1"></a><span class="co">#Create a function for the mean trajectory</span></span>
+<span id="cb402-5"><a href="13.5-linear-growth-model.html#cb402-5" tabindex="-1"></a>fun_fl_ri <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { <span class="fl">15.15099</span> <span class="sc">+</span> <span class="fl">4.67339</span><span class="sc">*</span>x }</span>
+<span id="cb402-6"><a href="13.5-linear-growth-model.html#cb402-6" tabindex="-1"></a></span>
+<span id="cb402-7"><a href="13.5-linear-growth-model.html#cb402-7" tabindex="-1"></a><span class="co">#plotting PREDICTED intraindividual change</span></span>
+<span id="cb402-8"><a href="13.5-linear-growth-model.html#cb402-8" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> pred_fl_ri, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb402-9"><a href="13.5-linear-growth-model.html#cb402-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Fixed Linear, Random Intercept&quot;</span>) <span class="sc">+</span></span>
+<span id="cb402-10"><a href="13.5-linear-growth-model.html#cb402-10" tabindex="-1"></a>  <span class="co">#  geom_point() + </span></span>
+<span id="cb402-11"><a href="13.5-linear-growth-model.html#cb402-11" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb402-12"><a href="13.5-linear-growth-model.html#cb402-12" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb402-13"><a href="13.5-linear-growth-model.html#cb402-13" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;PREDICTED WISC Verbal Score&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="sc">+</span></span>
+<span id="cb402-14"><a href="13.5-linear-growth-model.html#cb402-14" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb402-15"><a href="13.5-linear-growth-model.html#cb402-15" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>fun_fl_ri, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb402-16"><a href="13.5-linear-growth-model.html#cb402-16" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
 <pre><code>## Warning: Multiple drawing groups in `geom_function()`
 ## ℹ Did you use the correct group, colour, or fill aesthetics?</code></pre>
 <p><img src="_main_files/figure-html/unnamed-chunk-249-1.png" width="672" /></p>
 <p>Note how all the lines are parallel. This imples individual variability in starting point <em>but</em> a constant rate of change over time.</p>
 <p>Let’s look at the residuals.</p>
-<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="13.5-linear-growth-model.html#cb407-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> resid_fl_ri, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb407-2"><a href="13.5-linear-growth-model.html#cb407-2" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Fixed Linear, Random Intercept&quot;</span>) <span class="sc">+</span></span>
-<span id="cb407-3"><a href="13.5-linear-growth-model.html#cb407-3" tabindex="-1"></a>  <span class="co">#  geom_point() + </span></span>
-<span id="cb407-4"><a href="13.5-linear-growth-model.html#cb407-4" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb407-5"><a href="13.5-linear-growth-model.html#cb407-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb407-6"><a href="13.5-linear-growth-model.html#cb407-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;RESIDUAL WISC Verbal Score&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb407-7"><a href="13.5-linear-growth-model.html#cb407-7" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb407-8"><a href="13.5-linear-growth-model.html#cb407-8" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="13.5-linear-growth-model.html#cb404-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> resid_fl_ri, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb404-2"><a href="13.5-linear-growth-model.html#cb404-2" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Fixed Linear, Random Intercept&quot;</span>) <span class="sc">+</span></span>
+<span id="cb404-3"><a href="13.5-linear-growth-model.html#cb404-3" tabindex="-1"></a>  <span class="co">#  geom_point() + </span></span>
+<span id="cb404-4"><a href="13.5-linear-growth-model.html#cb404-4" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb404-5"><a href="13.5-linear-growth-model.html#cb404-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb404-6"><a href="13.5-linear-growth-model.html#cb404-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;RESIDUAL WISC Verbal Score&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb404-7"><a href="13.5-linear-growth-model.html#cb404-7" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb404-8"><a href="13.5-linear-growth-model.html#cb404-8" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-250-1.png" width="672" /></p>
 <p>Note the differences in variance.</p>
 </div>
@@ -838,14 +624,14 @@ div.csl-indent {
 <img src="imgs/model02.jpg" alt="Linear Growth Model" />
 <div class="figcaption">Linear Growth Model</div>
 </div>
-<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="13.5-linear-growth-model.html#cb408-1" tabindex="-1"></a>fl_rl_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
-<span id="cb408-2"><a href="13.5-linear-growth-model.html#cb408-2" tabindex="-1"></a>  <span class="at">fixed =</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade, </span>
-<span id="cb408-3"><a href="13.5-linear-growth-model.html#cb408-3" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade<span class="sc">|</span>id, </span>
-<span id="cb408-4"><a href="13.5-linear-growth-model.html#cb408-4" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
-<span id="cb408-5"><a href="13.5-linear-growth-model.html#cb408-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude,</span>
-<span id="cb408-6"><a href="13.5-linear-growth-model.html#cb408-6" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;ML&quot;</span></span>
-<span id="cb408-7"><a href="13.5-linear-growth-model.html#cb408-7" tabindex="-1"></a>)</span>
-<span id="cb408-8"><a href="13.5-linear-growth-model.html#cb408-8" tabindex="-1"></a><span class="fu">summary</span>(fl_rl_fit)</span></code></pre></div>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="13.5-linear-growth-model.html#cb405-1" tabindex="-1"></a>fl_rl_fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(</span>
+<span id="cb405-2"><a href="13.5-linear-growth-model.html#cb405-2" tabindex="-1"></a>  <span class="at">fixed =</span> verb <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade, </span>
+<span id="cb405-3"><a href="13.5-linear-growth-model.html#cb405-3" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> grade<span class="sc">|</span>id, </span>
+<span id="cb405-4"><a href="13.5-linear-growth-model.html#cb405-4" tabindex="-1"></a>  <span class="at">data=</span>verblong,</span>
+<span id="cb405-5"><a href="13.5-linear-growth-model.html#cb405-5" tabindex="-1"></a>  <span class="at">na.action =</span> na.exclude,</span>
+<span id="cb405-6"><a href="13.5-linear-growth-model.html#cb405-6" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;ML&quot;</span></span>
+<span id="cb405-7"><a href="13.5-linear-growth-model.html#cb405-7" tabindex="-1"></a>)</span>
+<span id="cb405-8"><a href="13.5-linear-growth-model.html#cb405-8" tabindex="-1"></a><span class="fu">summary</span>(fl_rl_fit)</span></code></pre></div>
 <pre><code>## Linear mixed-effects model fit by maximum likelihood
 ##   Data: verblong 
 ##        AIC      BIC    logLik
@@ -861,7 +647,7 @@ div.csl-indent {
 ## 
 ## Fixed effects:  verb ~ 1 + grade 
 ##                Value Std.Error  DF  t-value p-value
-## (Intercept) 15.15099 0.3681979 611 41.14905       0
+## (Intercept) 15.15099 0.3681978 611 41.14905       0
 ## grade        4.67339 0.1085687 611 43.04546       0
 ##  Correlation: 
 ##       (Intr)
@@ -869,59 +655,59 @@ div.csl-indent {
 ## 
 ## Standardized Within-Group Residuals:
 ##         Min          Q1         Med          Q3         Max 
-## -2.61515106 -0.54356124 -0.02857258  0.52294874  3.17283557 
+## -2.61515107 -0.54356125 -0.02857262  0.52294871  3.17283564 
 ## 
 ## Number of Observations: 816
 ## Number of Groups: 204</code></pre>
 <p>We can take a look at the ICCs to see if we are doing any better explaining the within-person variance.</p>
-<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="13.5-linear-growth-model.html#cb410-1" tabindex="-1"></a>RandomEffects <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">VarCorr</span>(fl_rl_fit)[,<span class="dv">1</span>])</span>
-<span id="cb410-2"><a href="13.5-linear-growth-model.html#cb410-2" tabindex="-1"></a>ICC_between <span class="ot">&lt;-</span> <span class="fu">sum</span>(RandomEffects[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])<span class="sc">/</span><span class="fu">sum</span>(RandomEffects) </span>
-<span id="cb410-3"><a href="13.5-linear-growth-model.html#cb410-3" tabindex="-1"></a>ICC_between</span></code></pre></div>
-<pre><code>## [1] 0.5659289</code></pre>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="13.5-linear-growth-model.html#cb407-1" tabindex="-1"></a>RandomEffects <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">VarCorr</span>(fl_rl_fit)[,<span class="dv">1</span>])</span>
+<span id="cb407-2"><a href="13.5-linear-growth-model.html#cb407-2" tabindex="-1"></a>ICC_between <span class="ot">&lt;-</span> <span class="fu">sum</span>(RandomEffects[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])<span class="sc">/</span><span class="fu">sum</span>(RandomEffects) </span>
+<span id="cb407-3"><a href="13.5-linear-growth-model.html#cb407-3" tabindex="-1"></a>ICC_between</span></code></pre></div>
+<pre><code>## [1] 0.5659288</code></pre>
 <p>Let’s look at the predicted trajectories from this model. We can start by saving the predicted trajectories and residuals into our dataframe.</p>
-<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="13.5-linear-growth-model.html#cb412-1" tabindex="-1"></a>verblong<span class="sc">$</span>pred_fl_rl <span class="ot">&lt;-</span> <span class="fu">predict</span>(fl_rl_fit)</span>
-<span id="cb412-2"><a href="13.5-linear-growth-model.html#cb412-2" tabindex="-1"></a>verblong<span class="sc">$</span>resid_fl_rl <span class="ot">&lt;-</span> <span class="fu">residuals</span>(fl_rl_fit)</span></code></pre></div>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="13.5-linear-growth-model.html#cb409-1" tabindex="-1"></a>verblong<span class="sc">$</span>pred_fl_rl <span class="ot">&lt;-</span> <span class="fu">predict</span>(fl_rl_fit)</span>
+<span id="cb409-2"><a href="13.5-linear-growth-model.html#cb409-2" tabindex="-1"></a>verblong<span class="sc">$</span>resid_fl_rl <span class="ot">&lt;-</span> <span class="fu">residuals</span>(fl_rl_fit)</span></code></pre></div>
 <p>Next, we make a small function to plot the mean trajectory. Now we use the <code>fixedf()</code> function directly rather than type the numbers manually from the output.</p>
-<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="13.5-linear-growth-model.html#cb413-1" tabindex="-1"></a><span class="co">#Create a function for the prototype</span></span>
-<span id="cb413-2"><a href="13.5-linear-growth-model.html#cb413-2" tabindex="-1"></a><span class="co">#fun_fl_rl &lt;- function(x) {</span></span>
-<span id="cb413-3"><a href="13.5-linear-growth-model.html#cb413-3" tabindex="-1"></a><span class="co">#  15.15099 + 4.67339*x</span></span>
-<span id="cb413-4"><a href="13.5-linear-growth-model.html#cb413-4" tabindex="-1"></a><span class="co">#}</span></span>
-<span id="cb413-5"><a href="13.5-linear-growth-model.html#cb413-5" tabindex="-1"></a></span>
-<span id="cb413-6"><a href="13.5-linear-growth-model.html#cb413-6" tabindex="-1"></a>fun_fl_rl <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb413-7"><a href="13.5-linear-growth-model.html#cb413-7" tabindex="-1"></a>  <span class="fu">fixef</span>(fl_rl_fit)[[<span class="dv">1</span>]] <span class="sc">+</span> <span class="fu">fixef</span>(fl_rl_fit)[[<span class="dv">2</span>]]<span class="sc">*</span>x</span>
-<span id="cb413-8"><a href="13.5-linear-growth-model.html#cb413-8" tabindex="-1"></a>}</span>
-<span id="cb413-9"><a href="13.5-linear-growth-model.html#cb413-9" tabindex="-1"></a></span>
-<span id="cb413-10"><a href="13.5-linear-growth-model.html#cb413-10" tabindex="-1"></a><span class="co">#plotting PREDICTED intraindividual change</span></span>
-<span id="cb413-11"><a href="13.5-linear-growth-model.html#cb413-11" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> pred_fl_rl, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb413-12"><a href="13.5-linear-growth-model.html#cb413-12" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Fixed Linear, Random Linear&quot;</span>) <span class="sc">+</span></span>
-<span id="cb413-13"><a href="13.5-linear-growth-model.html#cb413-13" tabindex="-1"></a>  <span class="co">#  geom_point() + </span></span>
-<span id="cb413-14"><a href="13.5-linear-growth-model.html#cb413-14" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb413-15"><a href="13.5-linear-growth-model.html#cb413-15" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb413-16"><a href="13.5-linear-growth-model.html#cb413-16" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;PREDICTED WISC Verbal Score&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="sc">+</span></span>
-<span id="cb413-17"><a href="13.5-linear-growth-model.html#cb413-17" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb413-18"><a href="13.5-linear-growth-model.html#cb413-18" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>fun_fl_rl, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb413-19"><a href="13.5-linear-growth-model.html#cb413-19" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="13.5-linear-growth-model.html#cb410-1" tabindex="-1"></a><span class="co">#Create a function for the prototype</span></span>
+<span id="cb410-2"><a href="13.5-linear-growth-model.html#cb410-2" tabindex="-1"></a><span class="co">#fun_fl_rl &lt;- function(x) {</span></span>
+<span id="cb410-3"><a href="13.5-linear-growth-model.html#cb410-3" tabindex="-1"></a><span class="co">#  15.15099 + 4.67339*x</span></span>
+<span id="cb410-4"><a href="13.5-linear-growth-model.html#cb410-4" tabindex="-1"></a><span class="co">#}</span></span>
+<span id="cb410-5"><a href="13.5-linear-growth-model.html#cb410-5" tabindex="-1"></a></span>
+<span id="cb410-6"><a href="13.5-linear-growth-model.html#cb410-6" tabindex="-1"></a>fun_fl_rl <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb410-7"><a href="13.5-linear-growth-model.html#cb410-7" tabindex="-1"></a>  <span class="fu">fixef</span>(fl_rl_fit)[[<span class="dv">1</span>]] <span class="sc">+</span> <span class="fu">fixef</span>(fl_rl_fit)[[<span class="dv">2</span>]]<span class="sc">*</span>x</span>
+<span id="cb410-8"><a href="13.5-linear-growth-model.html#cb410-8" tabindex="-1"></a>}</span>
+<span id="cb410-9"><a href="13.5-linear-growth-model.html#cb410-9" tabindex="-1"></a></span>
+<span id="cb410-10"><a href="13.5-linear-growth-model.html#cb410-10" tabindex="-1"></a><span class="co">#plotting PREDICTED intraindividual change</span></span>
+<span id="cb410-11"><a href="13.5-linear-growth-model.html#cb410-11" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> pred_fl_rl, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb410-12"><a href="13.5-linear-growth-model.html#cb410-12" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Fixed Linear, Random Linear&quot;</span>) <span class="sc">+</span></span>
+<span id="cb410-13"><a href="13.5-linear-growth-model.html#cb410-13" tabindex="-1"></a>  <span class="co">#  geom_point() + </span></span>
+<span id="cb410-14"><a href="13.5-linear-growth-model.html#cb410-14" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb410-15"><a href="13.5-linear-growth-model.html#cb410-15" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb410-16"><a href="13.5-linear-growth-model.html#cb410-16" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;PREDICTED WISC Verbal Score&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="sc">+</span></span>
+<span id="cb410-17"><a href="13.5-linear-growth-model.html#cb410-17" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb410-18"><a href="13.5-linear-growth-model.html#cb410-18" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>fun_fl_rl, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb410-19"><a href="13.5-linear-growth-model.html#cb410-19" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
 <pre><code>## Warning: Multiple drawing groups in `geom_function()`
 ## ℹ Did you use the correct group, colour, or fill aesthetics?</code></pre>
 <p><img src="_main_files/figure-html/unnamed-chunk-254-1.png" width="672" /></p>
 <p>Note how the lines are no longer parallel. We now have a model that implies individual variability in the starting point and rate of change.</p>
 <p>We can also plot the residuals.</p>
-<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="13.5-linear-growth-model.html#cb415-1" tabindex="-1"></a><span class="co">#plotting RESIDUAL intraindividual change</span></span>
-<span id="cb415-2"><a href="13.5-linear-growth-model.html#cb415-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> resid_fl_rl, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb415-3"><a href="13.5-linear-growth-model.html#cb415-3" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Fixed Linear, Random Linear&quot;</span>) <span class="sc">+</span></span>
-<span id="cb415-4"><a href="13.5-linear-growth-model.html#cb415-4" tabindex="-1"></a>  <span class="co">#  geom_point() + </span></span>
-<span id="cb415-5"><a href="13.5-linear-growth-model.html#cb415-5" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb415-6"><a href="13.5-linear-growth-model.html#cb415-6" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb415-7"><a href="13.5-linear-growth-model.html#cb415-7" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;RESIDUAL WISC Verbal Score&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb415-8"><a href="13.5-linear-growth-model.html#cb415-8" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb415-9"><a href="13.5-linear-growth-model.html#cb415-9" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="13.5-linear-growth-model.html#cb412-1" tabindex="-1"></a><span class="co">#plotting RESIDUAL intraindividual change</span></span>
+<span id="cb412-2"><a href="13.5-linear-growth-model.html#cb412-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> resid_fl_rl, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb412-3"><a href="13.5-linear-growth-model.html#cb412-3" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Fixed Linear, Random Linear&quot;</span>) <span class="sc">+</span></span>
+<span id="cb412-4"><a href="13.5-linear-growth-model.html#cb412-4" tabindex="-1"></a>  <span class="co">#  geom_point() + </span></span>
+<span id="cb412-5"><a href="13.5-linear-growth-model.html#cb412-5" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb412-6"><a href="13.5-linear-growth-model.html#cb412-6" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb412-7"><a href="13.5-linear-growth-model.html#cb412-7" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;RESIDUAL WISC Verbal Score&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb412-8"><a href="13.5-linear-growth-model.html#cb412-8" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb412-9"><a href="13.5-linear-growth-model.html#cb412-9" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-255-1.png" width="672" /></p>
 <p>This model did a bit better on getting the residual variances similar at all grades (in line with assumptions).</p>
 </div>
 <div id="model-comparison" class="section level3 hasAnchor" number="13.5.3">
 <h3><span class="header-section-number">13.5.3</span> Model Comparison<a href="13.5-linear-growth-model.html#model-comparison" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s test the significance of having random slopes. We compare models by applying <code>anova()</code> function to examine difference in fit between the two nested models.</p>
-<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="13.5-linear-growth-model.html#cb416-1" tabindex="-1"></a><span class="fu">anova</span>(fl_ri_fit, fl_rl_fit)</span></code></pre></div>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="13.5-linear-growth-model.html#cb413-1" tabindex="-1"></a><span class="fu">anova</span>(fl_ri_fit, fl_rl_fit)</span></code></pre></div>
 <pre><code>##           Model df      AIC      BIC    logLik   Test  L.Ratio p-value
 ## fl_ri_fit     1  4 5225.662 5244.480 -2608.831                        
 ## fl_rl_fit     2  6 5050.844 5079.071 -2519.422 1 vs 2 178.8176  &lt;.0001</code></pre>
@@ -930,7 +716,7 @@ div.csl-indent {
 <div id="mlm-and-individual-models" class="section level3 hasAnchor" number="13.5.4">
 <h3><span class="header-section-number">13.5.4</span> MLM and Individual Models<a href="13.5-linear-growth-model.html#mlm-and-individual-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Remember, earlier, we ran individual-level regressions.</p>
-<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="13.5-linear-growth-model.html#cb418-1" tabindex="-1"></a><span class="fu">head</span>(indiv_reg_data,<span class="dv">12</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="13.5-linear-growth-model.html#cb415-1" tabindex="-1"></a><span class="fu">head</span>(indiv_reg_data,<span class="dv">12</span>) </span></code></pre></div>
 <pre><code>##    id reg_1.(Intercept) reg_1.grade
 ## 1   1         15.940169    6.376102
 ## 2   2          5.232712    5.047627
@@ -945,36 +731,36 @@ div.csl-indent {
 ## 11 11         16.319661    6.437797
 ## 12 12         12.089661    3.667797</code></pre>
 <p>Let’s also obtain individual-level <em>estimates</em> from the MLM model.</p>
-<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="13.5-linear-growth-model.html#cb420-1" tabindex="-1"></a>FE <span class="ot">&lt;-</span> <span class="fu">fixef</span>(fl_rl_fit) <span class="co"># fixed effects</span></span>
-<span id="cb420-2"><a href="13.5-linear-growth-model.html#cb420-2" tabindex="-1"></a>FE</span></code></pre></div>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="13.5-linear-growth-model.html#cb417-1" tabindex="-1"></a>FE <span class="ot">&lt;-</span> <span class="fu">fixef</span>(fl_rl_fit) <span class="co"># fixed effects</span></span>
+<span id="cb417-2"><a href="13.5-linear-growth-model.html#cb417-2" tabindex="-1"></a>FE</span></code></pre></div>
 <pre><code>## (Intercept)       grade 
 ##    15.15099     4.67339</code></pre>
-<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="13.5-linear-growth-model.html#cb422-1" tabindex="-1"></a>RE <span class="ot">&lt;-</span> <span class="fu">ranef</span>(fl_rl_fit) <span class="co"># random effects</span></span>
-<span id="cb422-2"><a href="13.5-linear-growth-model.html#cb422-2" tabindex="-1"></a><span class="fu">head</span>(RE)</span></code></pre></div>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="13.5-linear-growth-model.html#cb419-1" tabindex="-1"></a>RE <span class="ot">&lt;-</span> <span class="fu">ranef</span>(fl_rl_fit) <span class="co"># random effects</span></span>
+<span id="cb419-2"><a href="13.5-linear-growth-model.html#cb419-2" tabindex="-1"></a><span class="fu">head</span>(RE)</span></code></pre></div>
 <pre><code>##   (Intercept)       grade
 ## 1    2.112943  1.23363573
-## 2   -5.539719 -0.61673143
-## 3    5.640184  0.09800766
-## 4    2.526637  0.34162935
-## 5    5.399309  2.49279591
-## 6   -1.607547  0.06056861</code></pre>
+## 2   -5.539718 -0.61673154
+## 3    5.640183  0.09800779
+## 4    2.526637  0.34162940
+## 5    5.399309  2.49279594
+## 6   -1.607547  0.06056857</code></pre>
 <p>We add the fixed effect and random effect parameters together to get analogues of the individual-level parameters.</p>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="13.5-linear-growth-model.html#cb424-1" tabindex="-1"></a><span class="co">#Individual intercepts (MLM model based)</span></span>
-<span id="cb424-2"><a href="13.5-linear-growth-model.html#cb424-2" tabindex="-1"></a>MLM_intercept <span class="ot">&lt;-</span> FE[<span class="dv">1</span>] <span class="sc">+</span> RE[,<span class="dv">1</span>]</span>
-<span id="cb424-3"><a href="13.5-linear-growth-model.html#cb424-3" tabindex="-1"></a><span class="co">#Individual slopes (MLM model based)</span></span>
-<span id="cb424-4"><a href="13.5-linear-growth-model.html#cb424-4" tabindex="-1"></a>MLM_grade <span class="ot">&lt;-</span> FE[<span class="dv">2</span>] <span class="sc">+</span> RE[,<span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="13.5-linear-growth-model.html#cb421-1" tabindex="-1"></a><span class="co">#Individual intercepts (MLM model based)</span></span>
+<span id="cb421-2"><a href="13.5-linear-growth-model.html#cb421-2" tabindex="-1"></a>MLM_intercept <span class="ot">&lt;-</span> FE[<span class="dv">1</span>] <span class="sc">+</span> RE[,<span class="dv">1</span>]</span>
+<span id="cb421-3"><a href="13.5-linear-growth-model.html#cb421-3" tabindex="-1"></a><span class="co">#Individual slopes (MLM model based)</span></span>
+<span id="cb421-4"><a href="13.5-linear-growth-model.html#cb421-4" tabindex="-1"></a>MLM_grade <span class="ot">&lt;-</span> FE[<span class="dv">2</span>] <span class="sc">+</span> RE[,<span class="dv">2</span>]</span></code></pre></div>
 <p>Let’s combine the individual regression intercepts and slopes and the model based intercepts and slopes together in order to compare.</p>
-<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="13.5-linear-growth-model.html#cb425-1" tabindex="-1"></a>indiv_parm_combined <span class="ot">&lt;-</span> <span class="fu">cbind</span>(MLM_intercept,MLM_grade,indiv_reg_data[,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>])</span>
-<span id="cb425-2"><a href="13.5-linear-growth-model.html#cb425-2" tabindex="-1"></a><span class="fu">head</span>(indiv_parm_combined)</span></code></pre></div>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="13.5-linear-growth-model.html#cb422-1" tabindex="-1"></a>indiv_parm_combined <span class="ot">&lt;-</span> <span class="fu">cbind</span>(MLM_intercept,MLM_grade,indiv_reg_data[,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>])</span>
+<span id="cb422-2"><a href="13.5-linear-growth-model.html#cb422-2" tabindex="-1"></a><span class="fu">head</span>(indiv_parm_combined)</span></code></pre></div>
 <pre><code>##   MLM_intercept MLM_grade reg_1.(Intercept) reg_1.grade
 ## 1     17.263936  5.907026         15.940169    6.376102
-## 2      9.611274  4.056658          5.232712    5.047627
-## 3     20.791176  4.771397         26.838136    3.312881
-## 4     17.677630  5.015019         19.493729    4.614237
+## 2      9.611275  4.056658          5.232712    5.047627
+## 3     20.791176  4.771398         26.838136    3.312881
+## 4     17.677629  5.015019         19.493729    4.614237
 ## 5     20.550302  7.166186         19.145424    7.805254
 ## 6     13.543446  4.733958         11.554576    5.224746</code></pre>
 <p>Look at the descriptives statistics.</p>
-<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="13.5-linear-growth-model.html#cb427-1" tabindex="-1"></a><span class="fu">describe</span>(indiv_parm_combined)</span></code></pre></div>
+<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="13.5-linear-growth-model.html#cb424-1" tabindex="-1"></a><span class="fu">describe</span>(indiv_parm_combined)</span></code></pre></div>
 <pre><code>##                   vars   n  mean   sd median trimmed  mad  min   max range
 ## MLM_intercept        1 204 15.15 3.26  15.35   15.12 3.25 4.69 23.78 19.09
 ## MLM_grade            2 204  4.67 1.09   4.56    4.64 1.09 2.15  7.69  5.54
@@ -985,37 +771,37 @@ div.csl-indent {
 ## MLM_grade          0.26    -0.31 0.08
 ## reg_1.(Intercept) -0.08     0.06 0.37
 ## reg_1.grade        0.38     0.02 0.11</code></pre>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="13.5-linear-growth-model.html#cb429-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(indiv_parm_combined),<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="13.5-linear-growth-model.html#cb426-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(indiv_parm_combined),<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##                   MLM_intercept MLM_grade reg_1.(Intercept) reg_1.grade
 ## MLM_intercept              1.00      0.68              0.89        0.31
 ## MLM_grade                  0.68      1.00              0.27        0.91
 ## reg_1.(Intercept)          0.89      0.27              1.00       -0.16
 ## reg_1.grade                0.31      0.91             -0.16        1.00</code></pre>
-<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="13.5-linear-growth-model.html#cb431-1" tabindex="-1"></a><span class="fu">pairs.panels</span>(indiv_parm_combined)</span></code></pre></div>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="13.5-linear-growth-model.html#cb428-1" tabindex="-1"></a><span class="fu">pairs.panels</span>(indiv_parm_combined)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-261-1.png" width="672" /></p>
 <p>Let’s compare the two predictions. What do you notice?</p>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="13.5-linear-growth-model.html#cb432-1" tabindex="-1"></a><span class="fu">library</span>(see)</span>
-<span id="cb432-2"><a href="13.5-linear-growth-model.html#cb432-2" tabindex="-1"></a><span class="co">#plotting PREDICTED intraindividual change</span></span>
-<span id="cb432-3"><a href="13.5-linear-growth-model.html#cb432-3" tabindex="-1"></a>GCMpred <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> pred_fl_rl, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb432-4"><a href="13.5-linear-growth-model.html#cb432-4" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Fixed Linear, Random Linear&quot;</span>) <span class="sc">+</span></span>
-<span id="cb432-5"><a href="13.5-linear-growth-model.html#cb432-5" tabindex="-1"></a>  <span class="co">#  geom_point() + </span></span>
-<span id="cb432-6"><a href="13.5-linear-growth-model.html#cb432-6" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb432-7"><a href="13.5-linear-growth-model.html#cb432-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb432-8"><a href="13.5-linear-growth-model.html#cb432-8" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;PREDICTED WISC Verbal Score&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="sc">+</span></span>
-<span id="cb432-9"><a href="13.5-linear-growth-model.html#cb432-9" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb432-10"><a href="13.5-linear-growth-model.html#cb432-10" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>fun_fl_rl, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb432-11"><a href="13.5-linear-growth-model.html#cb432-11" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb432-12"><a href="13.5-linear-growth-model.html#cb432-12" tabindex="-1"></a></span>
-<span id="cb432-13"><a href="13.5-linear-growth-model.html#cb432-13" tabindex="-1"></a><span class="co">#making intraindividual change plot</span></span>
-<span id="cb432-14"><a href="13.5-linear-growth-model.html#cb432-14" tabindex="-1"></a>IndPred <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> verb, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb432-15"><a href="13.5-linear-growth-model.html#cb432-15" tabindex="-1"></a>   <span class="fu">ggtitle</span>(<span class="st">&quot;Individual level regressions only&quot;</span>) <span class="sc">+</span></span>
-<span id="cb432-16"><a href="13.5-linear-growth-model.html#cb432-16" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm,<span class="at">se=</span><span class="cn">FALSE</span>,<span class="at">colour=</span><span class="st">&quot;black&quot;</span>, <span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb432-17"><a href="13.5-linear-growth-model.html#cb432-17" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb432-18"><a href="13.5-linear-growth-model.html#cb432-18" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;WISC Verbal Score&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="sc">+</span></span>
-<span id="cb432-19"><a href="13.5-linear-growth-model.html#cb432-19" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb432-20"><a href="13.5-linear-growth-model.html#cb432-20" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb432-21"><a href="13.5-linear-growth-model.html#cb432-21" tabindex="-1"></a></span>
-<span id="cb432-22"><a href="13.5-linear-growth-model.html#cb432-22" tabindex="-1"></a><span class="fu">plots</span>(GCMpred, IndPred)</span></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="13.5-linear-growth-model.html#cb429-1" tabindex="-1"></a><span class="fu">library</span>(see)</span>
+<span id="cb429-2"><a href="13.5-linear-growth-model.html#cb429-2" tabindex="-1"></a><span class="co">#plotting PREDICTED intraindividual change</span></span>
+<span id="cb429-3"><a href="13.5-linear-growth-model.html#cb429-3" tabindex="-1"></a>GCMpred <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> pred_fl_rl, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb429-4"><a href="13.5-linear-growth-model.html#cb429-4" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Fixed Linear, Random Linear&quot;</span>) <span class="sc">+</span></span>
+<span id="cb429-5"><a href="13.5-linear-growth-model.html#cb429-5" tabindex="-1"></a>  <span class="co">#  geom_point() + </span></span>
+<span id="cb429-6"><a href="13.5-linear-growth-model.html#cb429-6" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb429-7"><a href="13.5-linear-growth-model.html#cb429-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb429-8"><a href="13.5-linear-growth-model.html#cb429-8" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;PREDICTED WISC Verbal Score&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="sc">+</span></span>
+<span id="cb429-9"><a href="13.5-linear-growth-model.html#cb429-9" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb429-10"><a href="13.5-linear-growth-model.html#cb429-10" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>fun_fl_rl, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb429-11"><a href="13.5-linear-growth-model.html#cb429-11" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb429-12"><a href="13.5-linear-growth-model.html#cb429-12" tabindex="-1"></a></span>
+<span id="cb429-13"><a href="13.5-linear-growth-model.html#cb429-13" tabindex="-1"></a><span class="co">#making intraindividual change plot</span></span>
+<span id="cb429-14"><a href="13.5-linear-growth-model.html#cb429-14" tabindex="-1"></a>IndPred <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data =</span> verblong, <span class="fu">aes</span>(<span class="at">x =</span> grade, <span class="at">y =</span> verb, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb429-15"><a href="13.5-linear-growth-model.html#cb429-15" tabindex="-1"></a>   <span class="fu">ggtitle</span>(<span class="st">&quot;Individual level regressions only&quot;</span>) <span class="sc">+</span></span>
+<span id="cb429-16"><a href="13.5-linear-growth-model.html#cb429-16" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm,<span class="at">se=</span><span class="cn">FALSE</span>,<span class="at">colour=</span><span class="st">&quot;black&quot;</span>, <span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb429-17"><a href="13.5-linear-growth-model.html#cb429-17" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Grade&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb429-18"><a href="13.5-linear-growth-model.html#cb429-18" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;WISC Verbal Score&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">100</span>) <span class="sc">+</span></span>
+<span id="cb429-19"><a href="13.5-linear-growth-model.html#cb429-19" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb429-20"><a href="13.5-linear-growth-model.html#cb429-20" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb429-21"><a href="13.5-linear-growth-model.html#cb429-21" tabindex="-1"></a></span>
+<span id="cb429-22"><a href="13.5-linear-growth-model.html#cb429-22" tabindex="-1"></a><span class="fu">plots</span>(GCMpred, IndPred)</span></code></pre></div>
 <pre><code>## Warning: Multiple drawing groups in `geom_function()`
 ## ℹ Did you use the correct group, colour, or fill aesthetics?</code></pre>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
