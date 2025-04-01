@@ -1248,7 +1248,7 @@ cort_spline <- nlme(
   fixed = g_00 + g_10 + g_20 ~1,
   random = g_00 + g_10 + g_20 ~1,
   groups =~ id,
-  start = c(5,5,-5),
+  start = c(5,4,-5),
   na.action = na.exclude,
   control = lmeControl(maxIter = 1e8, msMaxIter = 1e8)
 )

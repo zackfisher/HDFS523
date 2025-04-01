@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>14.6 Latent Basis (Cortisol) | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
   <meta name="description" content="Course notes for HDFS 523" />
-  <meta name="generator" content="bookdown 0.37.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="14.6 Latent Basis (Cortisol) | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Zachary F. Fisher" />
 
 
-<meta name="date" content="2024-04-15" />
+<meta name="date" content="2025-04-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,7 +56,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -128,6 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -262,69 +263,69 @@ div.csl-indent {
 <li class="chapter" data-level="5.8.2" data-path="5.8-the-linear-probability-model.html"><a href="5.8-the-linear-probability-model.html#disadvantages-of-the-lpm"><i class="fa fa-check"></i><b>5.8.2</b> Disadvantages of the LPM</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="6-chapter-6.html"><a href="6-chapter-6.html"><i class="fa fa-check"></i><b>6</b> Statistical Control</a>
+<li class="chapter" data-level="6" data-path="6-chapter-6.html"><a href="6-chapter-6.html"><i class="fa fa-check"></i><b>6</b> Linear Regression</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="6.1-statistical-control.html"><a href="6.1-statistical-control.html"><i class="fa fa-check"></i><b>6.1</b> Statistical Control</a></li>
-<li class="chapter" data-level="6.2" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html"><i class="fa fa-check"></i><b>6.2</b> Directed Acyclic Graphs (DAGs)</a>
+<li class="chapter" data-level="6.1" data-path="6.1-example-data-2.html"><a href="6.1-example-data-2.html"><i class="fa fa-check"></i><b>6.1</b> Example Data</a></li>
+<li class="chapter" data-level="6.2" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html"><i class="fa fa-check"></i><b>6.2</b> Intercept-Only Model</a>
 <ul>
-<li class="chapter" data-level="6.2.1" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html#introduction-to-dags"><i class="fa fa-check"></i><b>6.2.1</b> Introduction to DAGs</a></li>
-<li class="chapter" data-level="6.2.2" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html#introduction-to-dags-paths"><i class="fa fa-check"></i><b>6.2.2</b> Introduction to DAGs: Paths</a></li>
-<li class="chapter" data-level="6.2.3" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html#introduction-to-dags-chains"><i class="fa fa-check"></i><b>6.2.3</b> Introduction to DAGs: Chains</a></li>
-<li class="chapter" data-level="6.2.4" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html#introduction-to-dags-descendants-and-ancestors"><i class="fa fa-check"></i><b>6.2.4</b> Introduction to DAGs: Descendants and Ancestors</a></li>
-<li class="chapter" data-level="6.2.5" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html#introduction-to-dags-forks"><i class="fa fa-check"></i><b>6.2.5</b> Introduction to DAGs: Forks</a></li>
-<li class="chapter" data-level="6.2.6" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html#introduction-to-dags-inverted-forks"><i class="fa fa-check"></i><b>6.2.6</b> Introduction to DAGs: Inverted Forks</a></li>
-<li class="chapter" data-level="6.2.7" data-path="6.2-directed-acyclic-graphs-dags.html"><a href="6.2-directed-acyclic-graphs-dags.html#introduction-to-dags-acyclicity"><i class="fa fa-check"></i><b>6.2.7</b> Introduction to DAGs: Acyclicity</a></li>
+<li class="chapter" data-level="6.2.1" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-equation"><i class="fa fa-check"></i><b>6.2.1</b> Intercept-Only Equation</a></li>
+<li class="chapter" data-level="6.2.2" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-model-in-r"><i class="fa fa-check"></i><b>6.2.2</b> Intercept-Only Model in R</a></li>
+<li class="chapter" data-level="6.2.3" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-as-mean-of-outcome"><i class="fa fa-check"></i><b>6.2.3</b> Intercept as Mean of Outcome</a></li>
+<li class="chapter" data-level="6.2.4" data-path="6.2-intercept-only-model.html"><a href="6.2-intercept-only-model.html#intercept-only-model-r2"><i class="fa fa-check"></i><b>6.2.4</b> Intercept-Only Model <span class="math inline">\(R^2\)</span></a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="6.3-statistical-control-done-right.html"><a href="6.3-statistical-control-done-right.html"><i class="fa fa-check"></i><b>6.3</b> Statistical Control Done Right</a>
+<li class="chapter" data-level="6.3" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html"><i class="fa fa-check"></i><b>6.3</b> Simple Linear Regression</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="6.3-statistical-control-done-right.html"><a href="6.3-statistical-control-done-right.html#building-a-dag"><i class="fa fa-check"></i><b>6.3.1</b> Building a DAG</a></li>
-<li class="chapter" data-level="6.3.2" data-path="6.3-statistical-control-done-right.html"><a href="6.3-statistical-control-done-right.html#building-a-dag-back-door-paths"><i class="fa fa-check"></i><b>6.3.2</b> Building a DAG: Back-Door Paths</a></li>
+<li class="chapter" data-level="6.3.1" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#regression-equation-and-model-fitting"><i class="fa fa-check"></i><b>6.3.1</b> Regression Equation and Model Fitting</a></li>
+<li class="chapter" data-level="6.3.2" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#path-diagram"><i class="fa fa-check"></i><b>6.3.2</b> Path Diagram</a></li>
+<li class="chapter" data-level="6.3.3" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#interpreting-model-parameters"><i class="fa fa-check"></i><b>6.3.3</b> Interpreting Model Parameters</a></li>
+<li class="chapter" data-level="6.3.4" data-path="6.3-simple-linear-regression.html"><a href="6.3-simple-linear-regression.html#plotting-regression-line"><i class="fa fa-check"></i><b>6.3.4</b> Plotting Regression Line</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="6.4-statistical-control-gone-wrong.html"><a href="6.4-statistical-control-gone-wrong.html"><i class="fa fa-check"></i><b>6.4</b> Statistical Control Gone Wrong</a>
+<li class="chapter" data-level="6.4" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html"><i class="fa fa-check"></i><b>6.4</b> Mean Centering Predictors</a>
 <ul>
-<li class="chapter" data-level="6.4.1" data-path="6.4-statistical-control-gone-wrong.html"><a href="6.4-statistical-control-gone-wrong.html#collider-bias"><i class="fa fa-check"></i><b>6.4.1</b> Collider Bias</a></li>
-<li class="chapter" data-level="6.4.2" data-path="6.4-statistical-control-gone-wrong.html"><a href="6.4-statistical-control-gone-wrong.html#conditioning-on-a-collider"><i class="fa fa-check"></i><b>6.4.2</b> Conditioning on a Collider</a></li>
-<li class="chapter" data-level="6.4.3" data-path="6.4-statistical-control-gone-wrong.html"><a href="6.4-statistical-control-gone-wrong.html#avoiding-collider-bias"><i class="fa fa-check"></i><b>6.4.3</b> Avoiding Collider Bias</a></li>
-<li class="chapter" data-level="6.4.4" data-path="6.4-statistical-control-gone-wrong.html"><a href="6.4-statistical-control-gone-wrong.html#variations-on-collider-bias-nonresponse-bias"><i class="fa fa-check"></i><b>6.4.4</b> Variations on Collider Bias: Nonresponse Bias</a></li>
-<li class="chapter" data-level="6.4.5" data-path="6.4-statistical-control-gone-wrong.html"><a href="6.4-statistical-control-gone-wrong.html#controlling-for-mediators"><i class="fa fa-check"></i><b>6.4.5</b> Controlling for Mediators</a></li>
+<li class="chapter" data-level="6.4.1" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html#interpreting-model-parameters-1"><i class="fa fa-check"></i><b>6.4.1</b> Interpreting Model Parameters</a></li>
+<li class="chapter" data-level="6.4.2" data-path="6.4-mean-centering-predictors.html"><a href="6.4-mean-centering-predictors.html#plotting-regression-line-1"><i class="fa fa-check"></i><b>6.4.2</b> Plotting Regression Line</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html"><i class="fa fa-check"></i><b>6.5</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#regression-equation"><i class="fa fa-check"></i><b>6.5.1</b> Regression Equation</a></li>
+<li class="chapter" data-level="6.5.2" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#fit-model-in-r"><i class="fa fa-check"></i><b>6.5.2</b> Fit Model in R</a></li>
+<li class="chapter" data-level="6.5.3" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#path-diagram-1"><i class="fa fa-check"></i><b>6.5.3</b> Path Diagram</a></li>
+<li class="chapter" data-level="6.5.4" data-path="6.5-multiple-linear-regression.html"><a href="6.5-multiple-linear-regression.html#a-note-on-interpretation"><i class="fa fa-check"></i><b>6.5.4</b> A Note on Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html"><i class="fa fa-check"></i><b>6.6</b> Categorical Variable Interaction</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#interaction-as-moderation"><i class="fa fa-check"></i><b>6.6.1</b> Interaction as Moderation</a></li>
+<li class="chapter" data-level="6.6.2" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#moderation-by-categorical-variable"><i class="fa fa-check"></i><b>6.6.2</b> Moderation by Categorical Variable</a></li>
+<li class="chapter" data-level="6.6.3" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#interpretation"><i class="fa fa-check"></i><b>6.6.3</b> Interpretation</a></li>
+<li class="chapter" data-level="6.6.4" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#fit-regression-model-in-r"><i class="fa fa-check"></i><b>6.6.4</b> Fit Regression Model in R</a></li>
+<li class="chapter" data-level="6.6.5" data-path="6.6-categorical-variable-interaction.html"><a href="6.6-categorical-variable-interaction.html#path-diagram-2"><i class="fa fa-check"></i><b>6.6.5</b> Path Diagram</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="7-chapter-7.html"><a href="7-chapter-7.html"><i class="fa fa-check"></i><b>7</b> Linear Regression</a>
+<li class="chapter" data-level="7" data-path="7-chapter-7.html"><a href="7-chapter-7.html"><i class="fa fa-check"></i><b>7</b> Statistical Control</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="7.1-example-data-2.html"><a href="7.1-example-data-2.html"><i class="fa fa-check"></i><b>7.1</b> Example Data</a></li>
-<li class="chapter" data-level="7.2" data-path="7.2-intercept-only-model.html"><a href="7.2-intercept-only-model.html"><i class="fa fa-check"></i><b>7.2</b> Intercept-Only Model</a>
+<li class="chapter" data-level="7.1" data-path="7.1-statistical-control.html"><a href="7.1-statistical-control.html"><i class="fa fa-check"></i><b>7.1</b> Statistical Control</a></li>
+<li class="chapter" data-level="7.2" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html"><i class="fa fa-check"></i><b>7.2</b> Directed Acyclic Graphs (DAGs)</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="7.2-intercept-only-model.html"><a href="7.2-intercept-only-model.html#intercept-only-equation"><i class="fa fa-check"></i><b>7.2.1</b> Intercept-Only Equation</a></li>
-<li class="chapter" data-level="7.2.2" data-path="7.2-intercept-only-model.html"><a href="7.2-intercept-only-model.html#intercept-only-model-in-r"><i class="fa fa-check"></i><b>7.2.2</b> Intercept-Only Model in R</a></li>
-<li class="chapter" data-level="7.2.3" data-path="7.2-intercept-only-model.html"><a href="7.2-intercept-only-model.html#intercept-as-mean-of-outcome"><i class="fa fa-check"></i><b>7.2.3</b> Intercept as Mean of Outcome</a></li>
-<li class="chapter" data-level="7.2.4" data-path="7.2-intercept-only-model.html"><a href="7.2-intercept-only-model.html#intercept-only-model-r2"><i class="fa fa-check"></i><b>7.2.4</b> Intercept-Only Model <span class="math inline">\(R^2\)</span></a></li>
+<li class="chapter" data-level="7.2.1" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags"><i class="fa fa-check"></i><b>7.2.1</b> Introduction to DAGs</a></li>
+<li class="chapter" data-level="7.2.2" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-paths"><i class="fa fa-check"></i><b>7.2.2</b> Introduction to DAGs: Paths</a></li>
+<li class="chapter" data-level="7.2.3" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-chains"><i class="fa fa-check"></i><b>7.2.3</b> Introduction to DAGs: Chains</a></li>
+<li class="chapter" data-level="7.2.4" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-descendants-and-ancestors"><i class="fa fa-check"></i><b>7.2.4</b> Introduction to DAGs: Descendants and Ancestors</a></li>
+<li class="chapter" data-level="7.2.5" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-forks"><i class="fa fa-check"></i><b>7.2.5</b> Introduction to DAGs: Forks</a></li>
+<li class="chapter" data-level="7.2.6" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-inverted-forks"><i class="fa fa-check"></i><b>7.2.6</b> Introduction to DAGs: Inverted Forks</a></li>
+<li class="chapter" data-level="7.2.7" data-path="7.2-directed-acyclic-graphs-dags.html"><a href="7.2-directed-acyclic-graphs-dags.html#introduction-to-dags-acyclicity"><i class="fa fa-check"></i><b>7.2.7</b> Introduction to DAGs: Acyclicity</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="7.3-simple-linear-regression.html"><a href="7.3-simple-linear-regression.html"><i class="fa fa-check"></i><b>7.3</b> Simple Linear Regression</a>
+<li class="chapter" data-level="7.3" data-path="7.3-statistical-control-done-right.html"><a href="7.3-statistical-control-done-right.html"><i class="fa fa-check"></i><b>7.3</b> Statistical Control Done Right</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="7.3-simple-linear-regression.html"><a href="7.3-simple-linear-regression.html#regression-equation-and-model-fitting"><i class="fa fa-check"></i><b>7.3.1</b> Regression Equation and Model Fitting</a></li>
-<li class="chapter" data-level="7.3.2" data-path="7.3-simple-linear-regression.html"><a href="7.3-simple-linear-regression.html#path-diagram"><i class="fa fa-check"></i><b>7.3.2</b> Path Diagram</a></li>
-<li class="chapter" data-level="7.3.3" data-path="7.3-simple-linear-regression.html"><a href="7.3-simple-linear-regression.html#interpreting-model-parameters"><i class="fa fa-check"></i><b>7.3.3</b> Interpreting Model Parameters</a></li>
-<li class="chapter" data-level="7.3.4" data-path="7.3-simple-linear-regression.html"><a href="7.3-simple-linear-regression.html#plotting-regression-line"><i class="fa fa-check"></i><b>7.3.4</b> Plotting Regression Line</a></li>
+<li class="chapter" data-level="7.3.1" data-path="7.3-statistical-control-done-right.html"><a href="7.3-statistical-control-done-right.html#building-a-dag"><i class="fa fa-check"></i><b>7.3.1</b> Building a DAG</a></li>
+<li class="chapter" data-level="7.3.2" data-path="7.3-statistical-control-done-right.html"><a href="7.3-statistical-control-done-right.html#building-a-dag-back-door-paths"><i class="fa fa-check"></i><b>7.3.2</b> Building a DAG: Back-Door Paths</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="7.4-mean-centering-predictors.html"><a href="7.4-mean-centering-predictors.html"><i class="fa fa-check"></i><b>7.4</b> Mean Centering Predictors</a>
+<li class="chapter" data-level="7.4" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html"><i class="fa fa-check"></i><b>7.4</b> Statistical Control Gone Wrong</a>
 <ul>
-<li class="chapter" data-level="7.4.1" data-path="7.4-mean-centering-predictors.html"><a href="7.4-mean-centering-predictors.html#interpreting-model-parameters-1"><i class="fa fa-check"></i><b>7.4.1</b> Interpreting Model Parameters</a></li>
-<li class="chapter" data-level="7.4.2" data-path="7.4-mean-centering-predictors.html"><a href="7.4-mean-centering-predictors.html#plotting-regression-line-1"><i class="fa fa-check"></i><b>7.4.2</b> Plotting Regression Line</a></li>
-</ul></li>
-<li class="chapter" data-level="7.5" data-path="7.5-multiple-linear-regression.html"><a href="7.5-multiple-linear-regression.html"><i class="fa fa-check"></i><b>7.5</b> Multiple Linear Regression</a>
-<ul>
-<li class="chapter" data-level="7.5.1" data-path="7.5-multiple-linear-regression.html"><a href="7.5-multiple-linear-regression.html#regression-equation"><i class="fa fa-check"></i><b>7.5.1</b> Regression Equation</a></li>
-<li class="chapter" data-level="7.5.2" data-path="7.5-multiple-linear-regression.html"><a href="7.5-multiple-linear-regression.html#fit-model-in-r"><i class="fa fa-check"></i><b>7.5.2</b> Fit Model in R</a></li>
-<li class="chapter" data-level="7.5.3" data-path="7.5-multiple-linear-regression.html"><a href="7.5-multiple-linear-regression.html#path-diagram-1"><i class="fa fa-check"></i><b>7.5.3</b> Path Diagram</a></li>
-<li class="chapter" data-level="7.5.4" data-path="7.5-multiple-linear-regression.html"><a href="7.5-multiple-linear-regression.html#a-note-on-interpretation"><i class="fa fa-check"></i><b>7.5.4</b> A Note on Interpretation</a></li>
-</ul></li>
-<li class="chapter" data-level="7.6" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html"><i class="fa fa-check"></i><b>7.6</b> Categorical Variable Interaction</a>
-<ul>
-<li class="chapter" data-level="7.6.1" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html#interaction-as-moderation"><i class="fa fa-check"></i><b>7.6.1</b> Interaction as Moderation</a></li>
-<li class="chapter" data-level="7.6.2" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html#moderation-by-categorical-variable"><i class="fa fa-check"></i><b>7.6.2</b> Moderation by Categorical Variable</a></li>
-<li class="chapter" data-level="7.6.3" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html#interpretation"><i class="fa fa-check"></i><b>7.6.3</b> Interpretation</a></li>
-<li class="chapter" data-level="7.6.4" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html#fit-regression-model-in-r"><i class="fa fa-check"></i><b>7.6.4</b> Fit Regression Model in R</a></li>
-<li class="chapter" data-level="7.6.5" data-path="7.6-categorical-variable-interaction.html"><a href="7.6-categorical-variable-interaction.html#path-diagram-2"><i class="fa fa-check"></i><b>7.6.5</b> Path Diagram</a></li>
+<li class="chapter" data-level="7.4.1" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#collider-bias"><i class="fa fa-check"></i><b>7.4.1</b> Collider Bias</a></li>
+<li class="chapter" data-level="7.4.2" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#conditioning-on-a-collider"><i class="fa fa-check"></i><b>7.4.2</b> Conditioning on a Collider</a></li>
+<li class="chapter" data-level="7.4.3" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#avoiding-collider-bias"><i class="fa fa-check"></i><b>7.4.3</b> Avoiding Collider Bias</a></li>
+<li class="chapter" data-level="7.4.4" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#variations-on-collider-bias-nonresponse-bias"><i class="fa fa-check"></i><b>7.4.4</b> Variations on Collider Bias: Nonresponse Bias</a></li>
+<li class="chapter" data-level="7.4.5" data-path="7.4-statistical-control-gone-wrong.html"><a href="7.4-statistical-control-gone-wrong.html#controlling-for-mediators"><i class="fa fa-check"></i><b>7.4.5</b> Controlling for Mediators</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="8-chapter-8.html"><a href="8-chapter-8.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression</a>
@@ -412,7 +413,7 @@ div.csl-indent {
 <li class="chapter" data-level="10.5" data-path="10.5-marginaleffects-predictions.html"><a href="10.5-marginaleffects-predictions.html"><i class="fa fa-check"></i><b>10.5</b> <code>marginaleffects: Predictions</code></a></li>
 <li class="chapter" data-level="10.6" data-path="10.6-references-3.html"><a href="10.6-references-3.html"><i class="fa fa-check"></i><b>10.6</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="11-chapter-11.html"><a href="11-chapter-11.html"><i class="fa fa-check"></i><b>11</b> Two-Occassion Change</a>
+<li class="chapter" data-level="11" data-path="11-chapter-11.html"><a href="11-chapter-11.html"><i class="fa fa-check"></i><b>11</b> Two-Occasion Change</a>
 <ul>
 <li class="chapter" data-level="11.1" data-path="11.1-introduction.html"><a href="11.1-introduction.html"><i class="fa fa-check"></i><b>11.1</b> Introduction</a>
 <ul>
@@ -601,146 +602,6 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="14.10" data-path="14.10-references-6.html"><a href="14.10-references-6.html"><i class="fa fa-check"></i><b>14.10</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="15-chapter-15.html"><a href="15-chapter-15.html"><i class="fa fa-check"></i><b>15</b> Dyadic Data Analysis</a>
-<ul>
-<li class="chapter" data-level="15.1" data-path="15.1-introduction-3.html"><a href="15.1-introduction-3.html"><i class="fa fa-check"></i><b>15.1</b> Introduction</a>
-<ul>
-<li class="chapter" data-level="15.1.1" data-path="15.1-introduction-3.html"><a href="15.1-introduction-3.html#interpersonal-phenomena"><i class="fa fa-check"></i><b>15.1.1</b> Interpersonal Phenomena</a></li>
-<li class="chapter" data-level="15.1.2" data-path="15.1-introduction-3.html"><a href="15.1-introduction-3.html#dyadic-measurement"><i class="fa fa-check"></i><b>15.1.2</b> Dyadic Measurement</a></li>
-<li class="chapter" data-level="15.1.3" data-path="15.1-introduction-3.html"><a href="15.1-introduction-3.html#discussion-question"><i class="fa fa-check"></i><b>15.1.3</b> Discussion question</a></li>
-</ul></li>
-<li class="chapter" data-level="15.2" data-path="15.2-interdependence.html"><a href="15.2-interdependence.html"><i class="fa fa-check"></i><b>15.2</b> Interdependence</a>
-<ul>
-<li class="chapter" data-level="15.2.1" data-path="15.2-interdependence.html"><a href="15.2-interdependence.html#definition"><i class="fa fa-check"></i><b>15.2.1</b> Definition</a></li>
-<li class="chapter" data-level="15.2.2" data-path="15.2-interdependence.html"><a href="15.2-interdependence.html#ignoring-interdependence"><i class="fa fa-check"></i><b>15.2.2</b> Ignoring Interdependence</a></li>
-<li class="chapter" data-level="15.2.3" data-path="15.2-interdependence.html"><a href="15.2-interdependence.html#linkage-types"><i class="fa fa-check"></i><b>15.2.3</b> Linkage Types</a></li>
-<li class="chapter" data-level="15.2.4" data-path="15.2-interdependence.html"><a href="15.2-interdependence.html#sources-of-interdependence"><i class="fa fa-check"></i><b>15.2.4</b> Sources of Interdependence</a></li>
-<li class="chapter" data-level="15.2.5" data-path="15.2-interdependence.html"><a href="15.2-interdependence.html#discussion-question-1"><i class="fa fa-check"></i><b>15.2.5</b> Discussion Question</a></li>
-</ul></li>
-<li class="chapter" data-level="15.3" data-path="15.3-basic-definitions.html"><a href="15.3-basic-definitions.html"><i class="fa fa-check"></i><b>15.3</b> Basic Definitions</a>
-<ul>
-<li class="chapter" data-level="15.3.1" data-path="15.3-basic-definitions.html"><a href="15.3-basic-definitions.html#distinguishability"><i class="fa fa-check"></i><b>15.3.1</b> Distinguishability</a></li>
-<li class="chapter" data-level="15.3.2" data-path="15.3-basic-definitions.html"><a href="15.3-basic-definitions.html#variable-types"><i class="fa fa-check"></i><b>15.3.2</b> Variable Types</a></li>
-</ul></li>
-<li class="chapter" data-level="15.4" data-path="15.4-dyadic-designs.html"><a href="15.4-dyadic-designs.html"><i class="fa fa-check"></i><b>15.4</b> Dyadic Designs</a>
-<ul>
-<li class="chapter" data-level="15.4.1" data-path="15.4-dyadic-designs.html"><a href="15.4-dyadic-designs.html#standard-dyadic-design"><i class="fa fa-check"></i><b>15.4.1</b> Standard Dyadic Design</a></li>
-<li class="chapter" data-level="15.4.2" data-path="15.4-dyadic-designs.html"><a href="15.4-dyadic-designs.html#social-relations-model"><i class="fa fa-check"></i><b>15.4.2</b> Social Relations Model</a></li>
-<li class="chapter" data-level="15.4.3" data-path="15.4-dyadic-designs.html"><a href="15.4-dyadic-designs.html#one-with-many-design"><i class="fa fa-check"></i><b>15.4.3</b> One-with-many Design</a></li>
-<li class="chapter" data-level="15.4.4" data-path="15.4-dyadic-designs.html"><a href="15.4-dyadic-designs.html#discussion-question-3"><i class="fa fa-check"></i><b>15.4.4</b> Discussion Question:</a></li>
-</ul></li>
-<li class="chapter" data-level="15.5" data-path="15.5-actor-partner-interdependence-model-apim.html"><a href="15.5-actor-partner-interdependence-model-apim.html"><i class="fa fa-check"></i><b>15.5</b> Actor Partner Interdependence Model (APIM)</a>
-<ul>
-<li class="chapter" data-level="15.5.1" data-path="15.5-actor-partner-interdependence-model-apim.html"><a href="15.5-actor-partner-interdependence-model-apim.html#model-1"><i class="fa fa-check"></i><b>15.5.1</b> Model</a></li>
-<li class="chapter" data-level="15.5.2" data-path="15.5-actor-partner-interdependence-model-apim.html"><a href="15.5-actor-partner-interdependence-model-apim.html#conceptual-interpretations"><i class="fa fa-check"></i><b>15.5.2</b> Conceptual Interpretations</a></li>
-<li class="chapter" data-level="15.5.3" data-path="15.5-actor-partner-interdependence-model-apim.html"><a href="15.5-actor-partner-interdependence-model-apim.html#actor-partner-interactions"><i class="fa fa-check"></i><b>15.5.3</b> Actor-Partner Interactions</a></li>
-</ul></li>
-<li class="chapter" data-level="15.6" data-path="15.6-longitudinal-apim.html"><a href="15.6-longitudinal-apim.html"><i class="fa fa-check"></i><b>15.6</b> Longitudinal APIM</a>
-<ul>
-<li class="chapter" data-level="15.6.1" data-path="15.6-longitudinal-apim.html"><a href="15.6-longitudinal-apim.html#model-2"><i class="fa fa-check"></i><b>15.6.1</b> Model</a></li>
-<li class="chapter" data-level="15.6.2" data-path="15.6-longitudinal-apim.html"><a href="15.6-longitudinal-apim.html#estimated-parameters"><i class="fa fa-check"></i><b>15.6.2</b> Estimated Parameters</a></li>
-<li class="chapter" data-level="15.6.3" data-path="15.6-longitudinal-apim.html"><a href="15.6-longitudinal-apim.html#parameter-covariation"><i class="fa fa-check"></i><b>15.6.3</b> Parameter Covariation</a></li>
-</ul></li>
-<li class="chapter" data-level="15.7" data-path="15.7-data-example.html"><a href="15.7-data-example.html"><i class="fa fa-check"></i><b>15.7</b> Data Example</a>
-<ul>
-<li class="chapter" data-level="15.7.1" data-path="15.7-data-example.html"><a href="15.7-data-example.html#preliminaries"><i class="fa fa-check"></i><b>15.7.1</b> Preliminaries</a></li>
-<li class="chapter" data-level="15.7.2" data-path="15.7-data-example.html"><a href="15.7-data-example.html#modeling-scenario"><i class="fa fa-check"></i><b>15.7.2</b> Modeling Scenario</a></li>
-<li class="chapter" data-level="15.7.3" data-path="15.7-data-example.html"><a href="15.7-data-example.html#descriptives-1"><i class="fa fa-check"></i><b>15.7.3</b> Descriptives</a></li>
-<li class="chapter" data-level="15.7.4" data-path="15.7-data-example.html"><a href="15.7-data-example.html#dyadic-data-prep"><i class="fa fa-check"></i><b>15.7.4</b> Dyadic Data Prep</a></li>
-<li class="chapter" data-level="15.7.5" data-path="15.7-data-example.html"><a href="15.7-data-example.html#apim"><i class="fa fa-check"></i><b>15.7.5</b> APIM</a></li>
-<li class="chapter" data-level="15.7.6" data-path="15.7-data-example.html"><a href="15.7-data-example.html#null-model"><i class="fa fa-check"></i><b>15.7.6</b> Null Model</a></li>
-<li class="chapter" data-level="15.7.7" data-path="15.7-data-example.html"><a href="15.7-data-example.html#full-apim"><i class="fa fa-check"></i><b>15.7.7</b> Full APIM</a></li>
-</ul></li>
-<li class="chapter" data-level="15.8" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html"><i class="fa fa-check"></i><b>15.8</b> Data Example 2</a>
-<ul>
-<li class="chapter" data-level="15.8.1" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#overview"><i class="fa fa-check"></i><b>15.8.1</b> Overview</a></li>
-<li class="chapter" data-level="15.8.2" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#outline"><i class="fa fa-check"></i><b>15.8.2</b> Outline</a></li>
-<li class="chapter" data-level="15.8.3" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#the-modeling-enterprise"><i class="fa fa-check"></i><b>15.8.3</b> The Modeling Enterprise</a></li>
-<li class="chapter" data-level="15.8.4" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#the-data"><i class="fa fa-check"></i><b>15.8.4</b> The Data</a></li>
-<li class="chapter" data-level="15.8.5" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#plotting-the-data"><i class="fa fa-check"></i><b>15.8.5</b> Plotting the Data</a></li>
-<li class="chapter" data-level="15.8.6" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#the-multilevel-model"><i class="fa fa-check"></i><b>15.8.6</b> The Multilevel Model</a></li>
-<li class="chapter" data-level="15.8.7" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#fit-male-model"><i class="fa fa-check"></i><b>15.8.7</b> Fit Male Model</a></li>
-<li class="chapter" data-level="15.8.8" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#fit-female-model"><i class="fa fa-check"></i><b>15.8.8</b> Fit Female Model</a></li>
-<li class="chapter" data-level="15.8.9" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#fit-full-model"><i class="fa fa-check"></i><b>15.8.9</b> Fit Full Model</a></li>
-<li class="chapter" data-level="15.8.10" data-path="15.8-data-example-2.html"><a href="15.8-data-example-2.html#conclusion"><i class="fa fa-check"></i><b>15.8.10</b> Conclusion</a></li>
-</ul></li>
-<li class="chapter" data-level="15.9" data-path="15.9-reference.html"><a href="15.9-reference.html"><i class="fa fa-check"></i><b>15.9</b> Reference</a></li>
-</ul></li>
-<li class="chapter" data-level="16" data-path="16-chapter-16.html"><a href="16-chapter-16.html"><i class="fa fa-check"></i><b>16</b> Cluster Analysis</a>
-<ul>
-<li class="chapter" data-level="16.1" data-path="16.1-introduction-4.html"><a href="16.1-introduction-4.html"><i class="fa fa-check"></i><b>16.1</b> Introduction</a>
-<ul>
-<li class="chapter" data-level="16.1.1" data-path="16.1-introduction-4.html"><a href="16.1-introduction-4.html#supervised-learning"><i class="fa fa-check"></i><b>16.1.1</b> Supervised Learning</a></li>
-<li class="chapter" data-level="16.1.2" data-path="16.1-introduction-4.html"><a href="16.1-introduction-4.html#unsupervised-learning"><i class="fa fa-check"></i><b>16.1.2</b> Unsupervised Learning</a></li>
-</ul></li>
-<li class="chapter" data-level="16.2" data-path="16.2-cluster-analysis.html"><a href="16.2-cluster-analysis.html"><i class="fa fa-check"></i><b>16.2</b> Cluster Analysis</a></li>
-<li class="chapter" data-level="16.3" data-path="16.3-clustering-algorithms.html"><a href="16.3-clustering-algorithms.html"><i class="fa fa-check"></i><b>16.3</b> Clustering Algorithms</a></li>
-<li class="chapter" data-level="16.4" data-path="16.4-hierarchical-clustering-1.html"><a href="16.4-hierarchical-clustering-1.html"><i class="fa fa-check"></i><b>16.4</b> Hierarchical Clustering</a>
-<ul>
-<li class="chapter" data-level="16.4.1" data-path="16.4-hierarchical-clustering-1.html"><a href="16.4-hierarchical-clustering-1.html#distances"><i class="fa fa-check"></i><b>16.4.1</b> Distances</a></li>
-<li class="chapter" data-level="16.4.2" data-path="16.4-hierarchical-clustering-1.html"><a href="16.4-hierarchical-clustering-1.html#distance-between-clusters"><i class="fa fa-check"></i><b>16.4.2</b> Distance Between Clusters</a></li>
-<li class="chapter" data-level="16.4.3" data-path="16.4-hierarchical-clustering-1.html"><a href="16.4-hierarchical-clustering-1.html#linkages-applied-example"><i class="fa fa-check"></i><b>16.4.3</b> Linkages Applied Example</a></li>
-<li class="chapter" data-level="16.4.4" data-path="16.4-hierarchical-clustering-1.html"><a href="16.4-hierarchical-clustering-1.html#dendograms"><i class="fa fa-check"></i><b>16.4.4</b> Dendograms</a></li>
-</ul></li>
-<li class="chapter" data-level="16.5" data-path="16.5-k-means-clustering-1.html"><a href="16.5-k-means-clustering-1.html"><i class="fa fa-check"></i><b>16.5</b> K-Means Clustering</a>
-<ul>
-<li class="chapter" data-level="16.5.1" data-path="16.5-k-means-clustering-1.html"><a href="16.5-k-means-clustering-1.html#within-cluster-variation"><i class="fa fa-check"></i><b>16.5.1</b> Within-Cluster Variation</a></li>
-<li class="chapter" data-level="16.5.2" data-path="16.5-k-means-clustering-1.html"><a href="16.5-k-means-clustering-1.html#k-means-algorithm"><i class="fa fa-check"></i><b>16.5.2</b> K-Means Algorithm</a></li>
-<li class="chapter" data-level="16.5.3" data-path="16.5-k-means-clustering-1.html"><a href="16.5-k-means-clustering-1.html#k-means-example"><i class="fa fa-check"></i><b>16.5.3</b> K-means Example</a></li>
-<li class="chapter" data-level="16.5.4" data-path="16.5-k-means-clustering-1.html"><a href="16.5-k-means-clustering-1.html#choosing-k"><i class="fa fa-check"></i><b>16.5.4</b> Choosing K</a></li>
-</ul></li>
-<li class="chapter" data-level="16.6" data-path="16.6-dbscan.html"><a href="16.6-dbscan.html"><i class="fa fa-check"></i><b>16.6</b> DBSCAN</a>
-<ul>
-<li class="chapter" data-level="16.6.1" data-path="16.6-dbscan.html"><a href="16.6-dbscan.html#example-of-dbscan"><i class="fa fa-check"></i><b>16.6.1</b> Example of DBSCAN</a></li>
-</ul></li>
-<li class="chapter" data-level="16.7" data-path="16.7-issues-in-clustering.html"><a href="16.7-issues-in-clustering.html"><i class="fa fa-check"></i><b>16.7</b> Issues in Clustering</a>
-<ul>
-<li class="chapter" data-level="16.7.1" data-path="16.7-issues-in-clustering.html"><a href="16.7-issues-in-clustering.html#recommendations"><i class="fa fa-check"></i><b>16.7.1</b> Recommendations</a></li>
-</ul></li>
-<li class="chapter" data-level="16.8" data-path="16.8-applied-examples.html"><a href="16.8-applied-examples.html"><i class="fa fa-check"></i><b>16.8</b> Applied Examples</a>
-<ul>
-<li class="chapter" data-level="16.8.1" data-path="16.8-applied-examples.html"><a href="16.8-applied-examples.html#preliminaries-1"><i class="fa fa-check"></i><b>16.8.1</b> Preliminaries</a></li>
-<li class="chapter" data-level="16.8.2" data-path="16.8-applied-examples.html"><a href="16.8-applied-examples.html#preparing-data"><i class="fa fa-check"></i><b>16.8.2</b> Preparing Data</a></li>
-<li class="chapter" data-level="16.8.3" data-path="16.8-applied-examples.html"><a href="16.8-applied-examples.html#scaling"><i class="fa fa-check"></i><b>16.8.3</b> Scaling</a></li>
-<li class="chapter" data-level="16.8.4" data-path="16.8-applied-examples.html"><a href="16.8-applied-examples.html#plotting"><i class="fa fa-check"></i><b>16.8.4</b> Plotting</a></li>
-<li class="chapter" data-level="16.8.5" data-path="16.8-applied-examples.html"><a href="16.8-applied-examples.html#distances-1"><i class="fa fa-check"></i><b>16.8.5</b> Distances</a></li>
-<li class="chapter" data-level="16.8.6" data-path="16.8-applied-examples.html"><a href="16.8-applied-examples.html#k-means"><i class="fa fa-check"></i><b>16.8.6</b> K-Means</a></li>
-<li class="chapter" data-level="16.8.7" data-path="16.8-applied-examples.html"><a href="16.8-applied-examples.html#hierarchical-clustering-2"><i class="fa fa-check"></i><b>16.8.7</b> Hierarchical Clustering</a></li>
-<li class="chapter" data-level="16.8.8" data-path="16.8-applied-examples.html"><a href="16.8-applied-examples.html#two-step-approach"><i class="fa fa-check"></i><b>16.8.8</b> Two-step Approach</a></li>
-<li class="chapter" data-level="16.8.9" data-path="16.8-applied-examples.html"><a href="16.8-applied-examples.html#final-thoughts"><i class="fa fa-check"></i><b>16.8.9</b> Final Thoughts</a></li>
-</ul></li>
-<li class="chapter" data-level="16.9" data-path="16.9-reference-1.html"><a href="16.9-reference-1.html"><i class="fa fa-check"></i><b>16.9</b> Reference</a></li>
-</ul></li>
-<li class="chapter" data-level="17" data-path="17-chapter-17.html"><a href="17-chapter-17.html"><i class="fa fa-check"></i><b>17</b> Vector Autoregressive Models</a>
-<ul>
-<li class="chapter" data-level="17.1" data-path="17.1-introduction-5.html"><a href="17.1-introduction-5.html"><i class="fa fa-check"></i><b>17.1</b> Introduction</a></li>
-<li class="chapter" data-level="17.2" data-path="17.2-the-n1-ar-model.html"><a href="17.2-the-n1-ar-model.html"><i class="fa fa-check"></i><b>17.2</b> The N=1 AR Model</a>
-<ul>
-<li class="chapter" data-level="17.2.1" data-path="17.2-the-n1-ar-model.html"><a href="17.2-the-n1-ar-model.html#random-shocks"><i class="fa fa-check"></i><b>17.2.1</b> Random Shocks</a></li>
-<li class="chapter" data-level="17.2.2" data-path="17.2-the-n1-ar-model.html"><a href="17.2-the-n1-ar-model.html#autoregressive-parameter"><i class="fa fa-check"></i><b>17.2.2</b> Autoregressive Parameter</a></li>
-<li class="chapter" data-level="17.2.3" data-path="17.2-the-n1-ar-model.html"><a href="17.2-the-n1-ar-model.html#ar1-model-example"><i class="fa fa-check"></i><b>17.2.3</b> AR(1) Model Example</a></li>
-<li class="chapter" data-level="17.2.4" data-path="17.2-the-n1-ar-model.html"><a href="17.2-the-n1-ar-model.html#fitting-a-ar1-model-in-r"><i class="fa fa-check"></i><b>17.2.4</b> Fitting a AR(1) Model in R</a></li>
-<li class="chapter" data-level="17.2.5" data-path="17.2-the-n1-ar-model.html"><a href="17.2-the-n1-ar-model.html#ar-coefficients-example"><i class="fa fa-check"></i><b>17.2.5</b> AR Coefficients Example</a></li>
-</ul></li>
-<li class="chapter" data-level="17.3" data-path="17.3-the-n1-var-model.html"><a href="17.3-the-n1-var-model.html"><i class="fa fa-check"></i><b>17.3</b> The N=1 VAR Model</a>
-<ul>
-<li class="chapter" data-level="17.3.1" data-path="17.3-the-n1-var-model.html"><a href="17.3-the-n1-var-model.html#fitting-an-var1-model-in-r"><i class="fa fa-check"></i><b>17.3.1</b> Fitting an VAR(1) Model in R</a></li>
-<li class="chapter" data-level="17.3.2" data-path="17.3-the-n1-var-model.html"><a href="17.3-the-n1-var-model.html#stationarity-and-non-stationarity"><i class="fa fa-check"></i><b>17.3.2</b> Stationarity and Non-Stationarity</a></li>
-<li class="chapter" data-level="17.3.3" data-path="17.3-the-n1-var-model.html"><a href="17.3-the-n1-var-model.html#a-note-on-path-diagrams"><i class="fa fa-check"></i><b>17.3.3</b> A Note on path Diagrams</a></li>
-</ul></li>
-<li class="chapter" data-level="17.4" data-path="17.4-introducing-the-multi-level-var.html"><a href="17.4-introducing-the-multi-level-var.html"><i class="fa fa-check"></i><b>17.4</b> Introducing the Multi-level VAR</a>
-<ul>
-<li class="chapter" data-level="17.4.1" data-path="17.4-introducing-the-multi-level-var.html"><a href="17.4-introducing-the-multi-level-var.html#model-3"><i class="fa fa-check"></i><b>17.4.1</b> Model</a></li>
-</ul></li>
-<li class="chapter" data-level="17.5" data-path="17.5-applied-example.html"><a href="17.5-applied-example.html"><i class="fa fa-check"></i><b>17.5</b> Applied Example</a>
-<ul>
-<li class="chapter" data-level="17.5.1" data-path="17.5-applied-example.html"><a href="17.5-applied-example.html#loading-data"><i class="fa fa-check"></i><b>17.5.1</b> Loading Data</a></li>
-<li class="chapter" data-level="17.5.2" data-path="17.5-applied-example.html"><a href="17.5-applied-example.html#temporal-effects"><i class="fa fa-check"></i><b>17.5.2</b> Temporal Effects</a></li>
-<li class="chapter" data-level="17.5.3" data-path="17.5-applied-example.html"><a href="17.5-applied-example.html#contemporaneous-effects"><i class="fa fa-check"></i><b>17.5.3</b> Contemporaneous Effects</a></li>
-<li class="chapter" data-level="17.5.4" data-path="17.5-applied-example.html"><a href="17.5-applied-example.html#between-subjects-effects"><i class="fa fa-check"></i><b>17.5.4</b> Between-Subjects Effects</a></li>
-</ul></li>
-<li class="chapter" data-level="17.6" data-path="17.6-reference-2.html"><a href="17.6-reference-2.html"><i class="fa fa-check"></i><b>17.6</b> Reference</a></li>
-</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/zackfisher/HDFS523" target="blank">Published with bookdown</a></li>
 
@@ -795,40 +656,40 @@ y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time}_{LB} + u_{0i} + u_{1i}\text
 </div>
 <div id="fit-model-2" class="section level3 hasAnchor" number="14.6.2">
 <h3><span class="header-section-number">14.6.2</span> Fit Model<a href="14.6-latent-basis-cortisol.html#fit-model-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="14.6-latent-basis-cortisol.html#cb506-1" tabindex="-1"></a><span class="co">#creating time-dummy variables</span></span>
-<span id="cb506-2"><a href="14.6-latent-basis-cortisol.html#cb506-2" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time0 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb506-3"><a href="14.6-latent-basis-cortisol.html#cb506-3" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time1 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb506-4"><a href="14.6-latent-basis-cortisol.html#cb506-4" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb506-5"><a href="14.6-latent-basis-cortisol.html#cb506-5" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time3 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb506-6"><a href="14.6-latent-basis-cortisol.html#cb506-6" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time4 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb506-7"><a href="14.6-latent-basis-cortisol.html#cb506-7" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time5 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb506-8"><a href="14.6-latent-basis-cortisol.html#cb506-8" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time6 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb506-9"><a href="14.6-latent-basis-cortisol.html#cb506-9" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time7 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb506-10"><a href="14.6-latent-basis-cortisol.html#cb506-10" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time8 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb506-11"><a href="14.6-latent-basis-cortisol.html#cb506-11" tabindex="-1"></a></span>
-<span id="cb506-12"><a href="14.6-latent-basis-cortisol.html#cb506-12" tabindex="-1"></a><span class="co">#latent basis model</span></span>
-<span id="cb506-13"><a href="14.6-latent-basis-cortisol.html#cb506-13" tabindex="-1"></a>cort_latentb <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
-<span id="cb506-14"><a href="14.6-latent-basis-cortisol.html#cb506-14" tabindex="-1"></a>  cort <span class="sc">~</span> gamma_00 <span class="sc">+</span> time0<span class="sc">*</span>(gamma_10<span class="sc">*</span><span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb506-15"><a href="14.6-latent-basis-cortisol.html#cb506-15" tabindex="-1"></a>         time1<span class="sc">*</span>(gamma_10<span class="sc">*</span>a1) <span class="sc">+</span></span>
-<span id="cb506-16"><a href="14.6-latent-basis-cortisol.html#cb506-16" tabindex="-1"></a>         time2<span class="sc">*</span>(gamma_10<span class="sc">*</span>a2) <span class="sc">+</span></span>
-<span id="cb506-17"><a href="14.6-latent-basis-cortisol.html#cb506-17" tabindex="-1"></a>         time3<span class="sc">*</span>(gamma_10<span class="sc">*</span>a3) <span class="sc">+</span></span>
-<span id="cb506-18"><a href="14.6-latent-basis-cortisol.html#cb506-18" tabindex="-1"></a>         time4<span class="sc">*</span>(gamma_10<span class="sc">*</span>a4) <span class="sc">+</span></span>
-<span id="cb506-19"><a href="14.6-latent-basis-cortisol.html#cb506-19" tabindex="-1"></a>         time5<span class="sc">*</span>(gamma_10<span class="sc">*</span>a5) <span class="sc">+</span></span>
-<span id="cb506-20"><a href="14.6-latent-basis-cortisol.html#cb506-20" tabindex="-1"></a>         time6<span class="sc">*</span>(gamma_10<span class="sc">*</span>a6) <span class="sc">+</span></span>
-<span id="cb506-21"><a href="14.6-latent-basis-cortisol.html#cb506-21" tabindex="-1"></a>         time7<span class="sc">*</span>(gamma_10<span class="sc">*</span>a7) <span class="sc">+</span></span>
-<span id="cb506-22"><a href="14.6-latent-basis-cortisol.html#cb506-22" tabindex="-1"></a>         time8<span class="sc">*</span>(gamma_10<span class="sc">*</span><span class="dv">1</span>),</span>
-<span id="cb506-23"><a href="14.6-latent-basis-cortisol.html#cb506-23" tabindex="-1"></a>   <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> a1 <span class="sc">+</span> a2 <span class="sc">+</span> a3 <span class="sc">+</span> a4 <span class="sc">+</span> a5 <span class="sc">+</span> a6 <span class="sc">+</span> a7 <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb506-24"><a href="14.6-latent-basis-cortisol.html#cb506-24" tabindex="-1"></a>   <span class="at">random =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb506-25"><a href="14.6-latent-basis-cortisol.html#cb506-25" tabindex="-1"></a>   <span class="at">groups =</span><span class="sc">~</span> id,</span>
-<span id="cb506-26"><a href="14.6-latent-basis-cortisol.html#cb506-26" tabindex="-1"></a>   <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00=</span><span class="fl">5.5</span>,<span class="at">gamma_10=</span><span class="fl">11.5</span>,<span class="at">a1=</span>.<span class="dv">3</span>, </span>
-<span id="cb506-27"><a href="14.6-latent-basis-cortisol.html#cb506-27" tabindex="-1"></a>             <span class="at">a2=</span>.<span class="dv">4</span>, <span class="at">a3=</span>.<span class="dv">5</span>, <span class="at">a4=</span>.<span class="dv">6</span>, </span>
-<span id="cb506-28"><a href="14.6-latent-basis-cortisol.html#cb506-28" tabindex="-1"></a>             <span class="at">a5=</span>.<span class="dv">7</span>, <span class="at">a6=</span>.<span class="dv">8</span>, <span class="at">a7=</span>.<span class="dv">9</span>),</span>
-<span id="cb506-29"><a href="14.6-latent-basis-cortisol.html#cb506-29" tabindex="-1"></a>   <span class="at">data =</span> cortisol_long,</span>
-<span id="cb506-30"><a href="14.6-latent-basis-cortisol.html#cb506-30" tabindex="-1"></a>   <span class="at">na.action =</span> na.exclude,</span>
-<span id="cb506-31"><a href="14.6-latent-basis-cortisol.html#cb506-31" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
-<span id="cb506-32"><a href="14.6-latent-basis-cortisol.html#cb506-32" tabindex="-1"></a>) </span>
-<span id="cb506-33"><a href="14.6-latent-basis-cortisol.html#cb506-33" tabindex="-1"></a></span>
-<span id="cb506-34"><a href="14.6-latent-basis-cortisol.html#cb506-34" tabindex="-1"></a><span class="fu">summary</span>(cort_latentb)</span></code></pre></div>
+<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="14.6-latent-basis-cortisol.html#cb503-1" tabindex="-1"></a><span class="co">#creating time-dummy variables</span></span>
+<span id="cb503-2"><a href="14.6-latent-basis-cortisol.html#cb503-2" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time0 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb503-3"><a href="14.6-latent-basis-cortisol.html#cb503-3" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time1 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb503-4"><a href="14.6-latent-basis-cortisol.html#cb503-4" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb503-5"><a href="14.6-latent-basis-cortisol.html#cb503-5" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time3 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb503-6"><a href="14.6-latent-basis-cortisol.html#cb503-6" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time4 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb503-7"><a href="14.6-latent-basis-cortisol.html#cb503-7" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time5 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb503-8"><a href="14.6-latent-basis-cortisol.html#cb503-8" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time6 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb503-9"><a href="14.6-latent-basis-cortisol.html#cb503-9" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time7 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb503-10"><a href="14.6-latent-basis-cortisol.html#cb503-10" tabindex="-1"></a>cortisol_long<span class="sc">$</span>time8 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(cortisol_long<span class="sc">$</span>time <span class="sc">==</span><span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb503-11"><a href="14.6-latent-basis-cortisol.html#cb503-11" tabindex="-1"></a></span>
+<span id="cb503-12"><a href="14.6-latent-basis-cortisol.html#cb503-12" tabindex="-1"></a><span class="co">#latent basis model</span></span>
+<span id="cb503-13"><a href="14.6-latent-basis-cortisol.html#cb503-13" tabindex="-1"></a>cort_latentb <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
+<span id="cb503-14"><a href="14.6-latent-basis-cortisol.html#cb503-14" tabindex="-1"></a>  cort <span class="sc">~</span> gamma_00 <span class="sc">+</span> time0<span class="sc">*</span>(gamma_10<span class="sc">*</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb503-15"><a href="14.6-latent-basis-cortisol.html#cb503-15" tabindex="-1"></a>         time1<span class="sc">*</span>(gamma_10<span class="sc">*</span>a1) <span class="sc">+</span></span>
+<span id="cb503-16"><a href="14.6-latent-basis-cortisol.html#cb503-16" tabindex="-1"></a>         time2<span class="sc">*</span>(gamma_10<span class="sc">*</span>a2) <span class="sc">+</span></span>
+<span id="cb503-17"><a href="14.6-latent-basis-cortisol.html#cb503-17" tabindex="-1"></a>         time3<span class="sc">*</span>(gamma_10<span class="sc">*</span>a3) <span class="sc">+</span></span>
+<span id="cb503-18"><a href="14.6-latent-basis-cortisol.html#cb503-18" tabindex="-1"></a>         time4<span class="sc">*</span>(gamma_10<span class="sc">*</span>a4) <span class="sc">+</span></span>
+<span id="cb503-19"><a href="14.6-latent-basis-cortisol.html#cb503-19" tabindex="-1"></a>         time5<span class="sc">*</span>(gamma_10<span class="sc">*</span>a5) <span class="sc">+</span></span>
+<span id="cb503-20"><a href="14.6-latent-basis-cortisol.html#cb503-20" tabindex="-1"></a>         time6<span class="sc">*</span>(gamma_10<span class="sc">*</span>a6) <span class="sc">+</span></span>
+<span id="cb503-21"><a href="14.6-latent-basis-cortisol.html#cb503-21" tabindex="-1"></a>         time7<span class="sc">*</span>(gamma_10<span class="sc">*</span>a7) <span class="sc">+</span></span>
+<span id="cb503-22"><a href="14.6-latent-basis-cortisol.html#cb503-22" tabindex="-1"></a>         time8<span class="sc">*</span>(gamma_10<span class="sc">*</span><span class="dv">1</span>),</span>
+<span id="cb503-23"><a href="14.6-latent-basis-cortisol.html#cb503-23" tabindex="-1"></a>   <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> a1 <span class="sc">+</span> a2 <span class="sc">+</span> a3 <span class="sc">+</span> a4 <span class="sc">+</span> a5 <span class="sc">+</span> a6 <span class="sc">+</span> a7 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb503-24"><a href="14.6-latent-basis-cortisol.html#cb503-24" tabindex="-1"></a>   <span class="at">random =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb503-25"><a href="14.6-latent-basis-cortisol.html#cb503-25" tabindex="-1"></a>   <span class="at">groups =</span><span class="sc">~</span> id,</span>
+<span id="cb503-26"><a href="14.6-latent-basis-cortisol.html#cb503-26" tabindex="-1"></a>   <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00=</span><span class="fl">5.5</span>,<span class="at">gamma_10=</span><span class="fl">11.5</span>,<span class="at">a1=</span>.<span class="dv">3</span>, </span>
+<span id="cb503-27"><a href="14.6-latent-basis-cortisol.html#cb503-27" tabindex="-1"></a>             <span class="at">a2=</span>.<span class="dv">4</span>, <span class="at">a3=</span>.<span class="dv">5</span>, <span class="at">a4=</span>.<span class="dv">6</span>, </span>
+<span id="cb503-28"><a href="14.6-latent-basis-cortisol.html#cb503-28" tabindex="-1"></a>             <span class="at">a5=</span>.<span class="dv">7</span>, <span class="at">a6=</span>.<span class="dv">8</span>, <span class="at">a7=</span>.<span class="dv">9</span>),</span>
+<span id="cb503-29"><a href="14.6-latent-basis-cortisol.html#cb503-29" tabindex="-1"></a>   <span class="at">data =</span> cortisol_long,</span>
+<span id="cb503-30"><a href="14.6-latent-basis-cortisol.html#cb503-30" tabindex="-1"></a>   <span class="at">na.action =</span> na.exclude,</span>
+<span id="cb503-31"><a href="14.6-latent-basis-cortisol.html#cb503-31" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
+<span id="cb503-32"><a href="14.6-latent-basis-cortisol.html#cb503-32" tabindex="-1"></a>) </span>
+<span id="cb503-33"><a href="14.6-latent-basis-cortisol.html#cb503-33" tabindex="-1"></a></span>
+<span id="cb503-34"><a href="14.6-latent-basis-cortisol.html#cb503-34" tabindex="-1"></a><span class="fu">summary</span>(cort_latentb)</span></code></pre></div>
 <pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
 ##   Model: cort ~ gamma_00 + time0 * (gamma_10 * 0) + time1 * (gamma_10 *      a1) + time2 * (gamma_10 * a2) + time3 * (gamma_10 * a3) +      time4 * (gamma_10 * a4) + time5 * (gamma_10 * a5) + time6 *      (gamma_10 * a6) + time7 * (gamma_10 * a7) + time8 * (gamma_10 *      1) 
 ##   Data: cortisol_long 
@@ -845,16 +706,16 @@ y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time}_{LB} + u_{0i} + u_{1i}\text
 ## Residual 2.529224       
 ## 
 ## Fixed effects:  gamma_00 + gamma_10 + a1 + a2 + a3 + a4 + a5 + a6 + a7 ~ 1 
-##              Value Std.Error  DF  t-value p-value
-## gamma_00  5.342011 0.5207451 264 10.25840  0.0000
-## gamma_10 10.447225 0.7660285 264 13.63817  0.0000
-## a1       -0.041829 0.0582607 264 -0.71796  0.4734
-## a2        0.522586 0.0500425 264 10.44285  0.0000
-## a3        1.118113 0.0611387 264 18.28813  0.0000
-## a4        1.336652 0.0689221 264 19.39364  0.0000
-## a5        1.081029 0.0599665 264 18.02722  0.0000
-## a6        0.951968 0.0562971 264 16.90972  0.0000
-## a7        1.008691 0.0578269 264 17.44327  0.0000
+##              Value Std.Error  DF   t-value p-value
+## gamma_00  5.342011 0.5207451 264 10.258399  0.0000
+## gamma_10 10.447225 0.7660285 264 13.638168  0.0000
+## a1       -0.041829 0.0582607 264 -0.717961  0.4734
+## a2        0.522586 0.0500425 264 10.442847  0.0000
+## a3        1.118113 0.0611387 264 18.288132  0.0000
+## a4        1.336652 0.0689221 264 19.393645  0.0000
+## a5        1.081029 0.0599665 264 18.027218  0.0000
+## a6        0.951968 0.0562971 264 16.909722  0.0000
+## a7        1.008691 0.0578269 264 17.443266  0.0000
 ##  Correlation: 
 ##          gmm_00 gmm_10 a1     a2     a3     a4     a5     a6    
 ## gamma_10 -0.455                                                 
@@ -872,7 +733,7 @@ y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time}_{LB} + u_{0i} + u_{1i}\text
 ## 
 ## Number of Observations: 306
 ## Number of Groups: 34</code></pre>
-<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="14.6-latent-basis-cortisol.html#cb508-1" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_latentb)</span></code></pre></div>
+<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="14.6-latent-basis-cortisol.html#cb505-1" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_latentb)</span></code></pre></div>
 <pre><code>## id = pdLogChol(list(gamma_00 ~ 1,gamma_10 ~ 1)) 
 ##          Variance StdDev   Corr  
 ## gamma_00 2.885168 1.698578 gmm_00
@@ -881,23 +742,23 @@ y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time}_{LB} + u_{0i} + u_{1i}\text
 </div>
 <div id="predicted-trajectories-3" class="section level3 hasAnchor" number="14.6.3">
 <h3><span class="header-section-number">14.6.3</span> Predicted Trajectories<a href="14.6-latent-basis-cortisol.html#predicted-trajectories-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="14.6-latent-basis-cortisol.html#cb510-1" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
-<span id="cb510-2"><a href="14.6-latent-basis-cortisol.html#cb510-2" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_latentb <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_latentb)</span>
-<span id="cb510-3"><a href="14.6-latent-basis-cortisol.html#cb510-3" tabindex="-1"></a></span>
-<span id="cb510-4"><a href="14.6-latent-basis-cortisol.html#cb510-4" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
-<span id="cb510-5"><a href="14.6-latent-basis-cortisol.html#cb510-5" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_latentb <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_latentb, <span class="at">level=</span><span class="dv">0</span>)</span>
-<span id="cb510-6"><a href="14.6-latent-basis-cortisol.html#cb510-6" tabindex="-1"></a></span>
-<span id="cb510-7"><a href="14.6-latent-basis-cortisol.html#cb510-7" tabindex="-1"></a></span>
-<span id="cb510-8"><a href="14.6-latent-basis-cortisol.html#cb510-8" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
-<span id="cb510-9"><a href="14.6-latent-basis-cortisol.html#cb510-9" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
-<span id="cb510-10"><a href="14.6-latent-basis-cortisol.html#cb510-10" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_latentb, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb510-11"><a href="14.6-latent-basis-cortisol.html#cb510-11" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
-<span id="cb510-12"><a href="14.6-latent-basis-cortisol.html#cb510-12" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb510-13"><a href="14.6-latent-basis-cortisol.html#cb510-13" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_latentb), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb510-14"><a href="14.6-latent-basis-cortisol.html#cb510-14" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb510-15"><a href="14.6-latent-basis-cortisol.html#cb510-15" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb510-16"><a href="14.6-latent-basis-cortisol.html#cb510-16" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb510-17"><a href="14.6-latent-basis-cortisol.html#cb510-17" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="14.6-latent-basis-cortisol.html#cb507-1" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
+<span id="cb507-2"><a href="14.6-latent-basis-cortisol.html#cb507-2" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_latentb <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_latentb)</span>
+<span id="cb507-3"><a href="14.6-latent-basis-cortisol.html#cb507-3" tabindex="-1"></a></span>
+<span id="cb507-4"><a href="14.6-latent-basis-cortisol.html#cb507-4" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
+<span id="cb507-5"><a href="14.6-latent-basis-cortisol.html#cb507-5" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_latentb <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_latentb, <span class="at">level=</span><span class="dv">0</span>)</span>
+<span id="cb507-6"><a href="14.6-latent-basis-cortisol.html#cb507-6" tabindex="-1"></a></span>
+<span id="cb507-7"><a href="14.6-latent-basis-cortisol.html#cb507-7" tabindex="-1"></a></span>
+<span id="cb507-8"><a href="14.6-latent-basis-cortisol.html#cb507-8" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
+<span id="cb507-9"><a href="14.6-latent-basis-cortisol.html#cb507-9" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
+<span id="cb507-10"><a href="14.6-latent-basis-cortisol.html#cb507-10" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_latentb, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb507-11"><a href="14.6-latent-basis-cortisol.html#cb507-11" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
+<span id="cb507-12"><a href="14.6-latent-basis-cortisol.html#cb507-12" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb507-13"><a href="14.6-latent-basis-cortisol.html#cb507-13" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_latentb), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb507-14"><a href="14.6-latent-basis-cortisol.html#cb507-14" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb507-15"><a href="14.6-latent-basis-cortisol.html#cb507-15" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb507-16"><a href="14.6-latent-basis-cortisol.html#cb507-16" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb507-17"><a href="14.6-latent-basis-cortisol.html#cb507-17" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-306-1.png" width="672" /></p>
 </div>
 <div id="interpretation-5" class="section level3 hasAnchor" number="14.6.4">
