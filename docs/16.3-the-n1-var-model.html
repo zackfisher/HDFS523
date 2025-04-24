@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>14.7 Exponential Growth (Cortisol) | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
+  <title>16.3 The N=1 VAR Model | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
   <meta name="description" content="Course notes for HDFS 523" />
   <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="14.7 Exponential Growth (Cortisol) | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta property="og:title" content="16.3 The N=1 VAR Model | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for HDFS 523" />
   <meta name="github-repo" content="zackfisher/HDFS523" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="14.7 Exponential Growth (Cortisol) | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta name="twitter:title" content="16.3 The N=1 VAR Model | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   
   <meta name="twitter:description" content="Course notes for HDFS 523" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="14.6-latent-basis-cortisol.html"/>
-<link rel="next" href="14.8-multiphase-growth-cortisol.html"/>
+<link rel="prev" href="16.2-the-n1-ar-model.html"/>
+<link rel="next" href="16.4-introducing-the-multi-level-var.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -717,148 +717,124 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exponential-growth-cortisol" class="section level2 hasAnchor" number="14.7">
-<h2><span class="header-section-number">14.7</span> Exponential Growth (Cortisol)<a href="14.7-exponential-growth-cortisol.html#exponential-growth-cortisol" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Now let’s consider a model that is nonlinear in the parameters (Type II), the exponential growth model. This is a nonlinear model that also produces a nonlinear trajectory.</p>
-<p><span class="math display">\[\begin{align}
-y_{ti}  = &amp; \beta_{0i} + \beta_{1i}(1-e^{-\alpha\text{time}}) + e_{ti}, &amp; e_{ti} \sim \mathcal{N}(0,\sigma^{2}_{e}) &amp;&amp; \: [\text{Level 1}] \\
-\beta_{0i}  = &amp; \gamma_{00} + u_{0i}, &amp; u_{0i} \sim \mathcal{N}(0,\sigma^{2}_{u0}) &amp;&amp; \: [\text{Level 2}] \\
-\beta_{1i}  = &amp; \gamma_{10} + u_{1i}, &amp; u_{1i} \sim \mathcal{N}(0,\sigma^{2}_{u1}) &amp;&amp; \:  \\
-y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time} + u_{0i} + u_{1i}\text{time} + e_{ti}, &amp;  &amp;&amp; \: [\text{Combined}]
-\end{align}\]</span></p>
-<p>where</p>
-<p><span class="math display">\[\begin{align}
-\text{time} = &amp; \{0/8, 1/8, 2/8, 3/8, 4/8, 5/8, 6/8, 7/8, 8/8\}\\
-= &amp; \{0.000, 0.125, 0.250, 0.375, 0.500, 0.625, 0.750, 0.875, 1.000\}
-\end{align}\]</span></p>
-<p>and</p>
+<div id="the-n1-var-model" class="section level2 hasAnchor" number="16.3">
+<h2><span class="header-section-number">16.3</span> The N=1 VAR Model<a href="16.3-the-n1-var-model.html#the-n1-var-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Consider extending our AR(1) model to include hours measurements of concentration (<span class="math inline">\(y_{1}\)</span>) and fatigue (<span class="math inline">\(y_{1}\)</span>). We now have a VAR(1) model where we are interested in two constructs, and their relation to eachother, across time.</p>
+<div class="float">
+<img src="imgs/path_var.jpg" alt="N = 1 VAR Model" />
+<div class="figcaption">N = 1 VAR Model</div>
+</div>
+<p>Our interpretation of the AR parameter remains the same except now we also have cross-regressive parameters to consider (e.g. <span class="math inline">\(\alpha_{12}\)</span> and <span class="math inline">\(\alpha_{21}\)</span>).</p>
+<p><strong>Interpretation of Directed Paths</strong></p>
 <ul>
-<li><span class="math inline">\(y_{ti}\)</span> is the repeated measures score for individual <span class="math inline">\(i\)</span> at time <span class="math inline">\(t\)</span></li>
-<li><span class="math inline">\(\beta_{0i}\)</span> is the random intercept for individual <span class="math inline">\(i\)</span>
+<li>Auto-regressive paths (e.g. <span class="math inline">\(Attention_{t-1}\)</span> -&gt; <span class="math inline">\(Attention_{t}\)</span> or <span class="math inline">\(\alpha_{11}\)</span>)
 <ul>
-<li>individual <span class="math inline">\(i\)</span>’s asymptotic level or the limit of individual capacity for cortisol</li>
-<li>note in this model, the intercept represents individual performance toward the end of observation period</li>
+<li>AR parameters can be interpreted as a measure of inertia, stability or regulatory weakness.</li>
 </ul></li>
-<li><span class="math inline">\(\beta_{1i}\)</span> is the amount of change from the intercept to the asymptotic level for individual <span class="math inline">\(i\)</span>
+<li>Cross-regressive paths (e.g. <span class="math inline">\(Attention_{t-1}\)</span> -&gt; <span class="math inline">\(Fatigue_{t}\)</span>or <span class="math inline">\(\alpha_{21}\)</span>)
 <ul>
-<li><span class="math inline">\(\beta_{1i}\)</span> represents an individual’s potential for change from his or her initial level</li>
+<li>cross-regressive paths indicate cross-construct influence, or buffering</li>
 </ul></li>
-<li><span class="math inline">\(\beta_{0i}+\beta_{1i}\)</span> represents the baseline level for individual <span class="math inline">\(i\)</span></li>
-<li><span class="math inline">\(\alpha\)</span> is an estimated parameter that represents the rate of approach to the asymptotic level</li>
-<li><span class="math inline">\(\text{time}\)</span> represents the measurement occasion</li>
-<li><span class="math inline">\(e_{it}\)</span> is the time-specific residual score</li>
-<li><span class="math inline">\(\gamma_{00}\)</span> is the fixed-effect for the intercept</li>
-<li><span class="math inline">\(\gamma_{10}\)</span> is the fixed-effect for the rate of change</li>
-<li><span class="math inline">\(u_{0i}\)</span> is individual <span class="math inline">\(i\)</span>’s deviation from the intercept fixed effect</li>
-<li><span class="math inline">\(u_{1i}\)</span> is individual <span class="math inline">\(i\)</span>’s deviation from the shape fixed effect</li>
 </ul>
-<div id="fit-model-3" class="section level3 hasAnchor" number="14.7.1">
-<h3><span class="header-section-number">14.7.1</span> Fit Model<a href="14.7-exponential-growth-cortisol.html#fit-model-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="14.7-exponential-growth-cortisol.html#cb508-1" tabindex="-1"></a><span class="co"># cort_expo &lt;- nlme(</span></span>
-<span id="cb508-2"><a href="14.7-exponential-growth-cortisol.html#cb508-2" tabindex="-1"></a><span class="co">#   cort ~ (gamma_00 + u_0i) + (gamma_10 + u_1i)*(exp(-1*alpha*timescaled)),</span></span>
-<span id="cb508-3"><a href="14.7-exponential-growth-cortisol.html#cb508-3" tabindex="-1"></a><span class="co">#   fixed = gamma_00 + gamma_10 + alpha ~1,</span></span>
-<span id="cb508-4"><a href="14.7-exponential-growth-cortisol.html#cb508-4" tabindex="-1"></a><span class="co">#   random = u_0i + u_1i~1,</span></span>
-<span id="cb508-5"><a href="14.7-exponential-growth-cortisol.html#cb508-5" tabindex="-1"></a><span class="co">#   group = ~id,</span></span>
-<span id="cb508-6"><a href="14.7-exponential-growth-cortisol.html#cb508-6" tabindex="-1"></a><span class="co">#   start = c(gamma_00=17, gamma_10=-14, alpha=0.5), </span></span>
-<span id="cb508-7"><a href="14.7-exponential-growth-cortisol.html#cb508-7" tabindex="-1"></a><span class="co">#   data = cortisol_long,</span></span>
-<span id="cb508-8"><a href="14.7-exponential-growth-cortisol.html#cb508-8" tabindex="-1"></a><span class="co">#   na.action = &quot;na.exclude&quot;,</span></span>
-<span id="cb508-9"><a href="14.7-exponential-growth-cortisol.html#cb508-9" tabindex="-1"></a><span class="co">#   control = lmeControl(maxIter = 1e8, msMaxIter = 1e8)</span></span>
-<span id="cb508-10"><a href="14.7-exponential-growth-cortisol.html#cb508-10" tabindex="-1"></a><span class="co"># )</span></span>
-<span id="cb508-11"><a href="14.7-exponential-growth-cortisol.html#cb508-11" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb508-12"><a href="14.7-exponential-growth-cortisol.html#cb508-12" tabindex="-1"></a><span class="co"># summary(cort_expo)  </span></span>
-<span id="cb508-13"><a href="14.7-exponential-growth-cortisol.html#cb508-13" tabindex="-1"></a><span class="co"># VarCorr(cort_expo)</span></span>
-<span id="cb508-14"><a href="14.7-exponential-growth-cortisol.html#cb508-14" tabindex="-1"></a></span>
-<span id="cb508-15"><a href="14.7-exponential-growth-cortisol.html#cb508-15" tabindex="-1"></a>cort_expo <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
-<span id="cb508-16"><a href="14.7-exponential-growth-cortisol.html#cb508-16" tabindex="-1"></a>  cort <span class="sc">~</span> (gamma_00) <span class="sc">+</span> (gamma_10)<span class="sc">*</span>(<span class="fu">exp</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">*</span>alpha<span class="sc">*</span>timescaled)),</span>
-<span id="cb508-17"><a href="14.7-exponential-growth-cortisol.html#cb508-17" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> alpha <span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb508-18"><a href="14.7-exponential-growth-cortisol.html#cb508-18" tabindex="-1"></a>  <span class="at">random =</span> gamma_00 <span class="sc">+</span> gamma_10<span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb508-19"><a href="14.7-exponential-growth-cortisol.html#cb508-19" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
-<span id="cb508-20"><a href="14.7-exponential-growth-cortisol.html#cb508-20" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00=</span><span class="dv">17</span>, <span class="at">gamma_10=</span><span class="sc">-</span><span class="dv">14</span>, <span class="at">alpha=</span><span class="fl">0.5</span>), </span>
-<span id="cb508-21"><a href="14.7-exponential-growth-cortisol.html#cb508-21" tabindex="-1"></a>  <span class="at">data =</span> cortisol_long,</span>
-<span id="cb508-22"><a href="14.7-exponential-growth-cortisol.html#cb508-22" tabindex="-1"></a>  <span class="at">na.action =</span> <span class="st">&quot;na.exclude&quot;</span>,</span>
-<span id="cb508-23"><a href="14.7-exponential-growth-cortisol.html#cb508-23" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
-<span id="cb508-24"><a href="14.7-exponential-growth-cortisol.html#cb508-24" tabindex="-1"></a>)</span></code></pre></div>
-<pre><code>## Warning in nlme.formula(cort ~ (gamma_00) + (gamma_10) * (exp(-1 * alpha * :
-## Iteration 4, LME step: nlminb() did not converge (code = 1). PORT message:
-## function evaluation limit reached without convergence (9)</code></pre>
-<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="14.7-exponential-growth-cortisol.html#cb510-1" tabindex="-1"></a><span class="fu">summary</span>(cort_expo)  </span></code></pre></div>
-<pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
-##   Model: cort ~ (gamma_00) + (gamma_10) * (exp(-1 * alpha * timescaled)) 
-##   Data: cortisol_long 
-##        AIC      BIC    logLik
-##   1730.241 1756.306 -858.1203
-## 
-## Random effects:
-##  Formula: list(gamma_00 ~ 1, gamma_10 ~ 1)
-##  Level: id
-##  Structure: General positive-definite, Log-Cholesky parametrization
-##          StdDev   Corr  
-## gamma_00 3.671940 gmm_00
-## gamma_10 3.984773 -1    
-## Residual 3.594813       
-## 
-## Fixed effects:  gamma_00 + gamma_10 + alpha ~ 1 
-##               Value Std.Error  DF   t-value p-value
-## gamma_00  17.202377 0.7688426 270  22.37438       0
-## gamma_10 -13.735027 0.9550594 270 -14.38133       0
-## alpha      4.110241 0.4853610 270   8.46842       0
-##  Correlation: 
-##          gmm_00 gmm_10
-## gamma_10 -0.788       
-## alpha    -0.442  0.077
-## 
-## Standardized Within-Group Residuals:
-##         Min          Q1         Med          Q3         Max 
-## -2.06791703 -0.69558253 -0.03451498  0.60588520  2.72990814 
-## 
-## Number of Observations: 306
-## Number of Groups: 34</code></pre>
-<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="14.7-exponential-growth-cortisol.html#cb512-1" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_expo)</span></code></pre></div>
-<pre><code>## id = pdLogChol(list(gamma_00 ~ 1,gamma_10 ~ 1)) 
-##          Variance StdDev   Corr  
-## gamma_00 13.48314 3.671940 gmm_00
-## gamma_10 15.87841 3.984773 -1    
-## Residual 12.92268 3.594813</code></pre>
+<p><strong>The Vector Autoregressive (VAR) Model</strong></p>
+<p>In Economics widespread adoption of VAR models in the mid-1980s marked the beginning of a sea change in modeling and forecasting practice (Allen et al., 2006).</p>
+<p><strong>Advantages of the Unrestricted VAR Model</strong></p>
+<ul>
+<li>Offers a concise interpretation of inter-variable relations</li>
+<li>Visualized easily using path or network connection diagrams</li>
+<li>Allow for the inclusion of many potentially relevant variables</li>
+</ul>
+<p>Finally, we can extend the VAR model to handle additional variables we might think are related to our process of interest.</p>
+<div class="float">
+<img src="imgs/var1_alone.jpg" alt="N = 1 VAR Model" />
+<div class="figcaption">N = 1 VAR Model</div>
 </div>
-<div id="predicted-trajectories-4" class="section level3 hasAnchor" number="14.7.2">
-<h3><span class="header-section-number">14.7.2</span> Predicted Trajectories<a href="14.7-exponential-growth-cortisol.html#predicted-trajectories-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="14.7-exponential-growth-cortisol.html#cb514-1" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
-<span id="cb514-2"><a href="14.7-exponential-growth-cortisol.html#cb514-2" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_expo <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_expo)</span>
-<span id="cb514-3"><a href="14.7-exponential-growth-cortisol.html#cb514-3" tabindex="-1"></a></span>
-<span id="cb514-4"><a href="14.7-exponential-growth-cortisol.html#cb514-4" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
-<span id="cb514-5"><a href="14.7-exponential-growth-cortisol.html#cb514-5" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_expo <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_expo, <span class="at">level=</span><span class="dv">0</span>)</span>
-<span id="cb514-6"><a href="14.7-exponential-growth-cortisol.html#cb514-6" tabindex="-1"></a></span>
-<span id="cb514-7"><a href="14.7-exponential-growth-cortisol.html#cb514-7" tabindex="-1"></a></span>
-<span id="cb514-8"><a href="14.7-exponential-growth-cortisol.html#cb514-8" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
-<span id="cb514-9"><a href="14.7-exponential-growth-cortisol.html#cb514-9" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
-<span id="cb514-10"><a href="14.7-exponential-growth-cortisol.html#cb514-10" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_expo, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb514-11"><a href="14.7-exponential-growth-cortisol.html#cb514-11" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
-<span id="cb514-12"><a href="14.7-exponential-growth-cortisol.html#cb514-12" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb514-13"><a href="14.7-exponential-growth-cortisol.html#cb514-13" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_expo), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb514-14"><a href="14.7-exponential-growth-cortisol.html#cb514-14" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb514-15"><a href="14.7-exponential-growth-cortisol.html#cb514-15" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb514-16"><a href="14.7-exponential-growth-cortisol.html#cb514-16" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb514-17"><a href="14.7-exponential-growth-cortisol.html#cb514-17" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-308-1.png" width="672" /></p>
+<div id="fitting-an-var1-model-in-r" class="section level3 hasAnchor" number="16.3.1">
+<h3><span class="header-section-number">16.3.1</span> Fitting an VAR(1) Model in R<a href="16.3-the-n1-var-model.html#fitting-an-var1-model-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now, let’s use the <code>concentrate</code> and <code>fatigue</code> variables.</p>
+<div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb592-1"><a href="16.3-the-n1-var-model.html#cb592-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> data[,<span class="fu">c</span>(<span class="st">&quot;concentrate&quot;</span>,<span class="st">&quot;fatigue&quot;</span>), drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span></code></pre></div>
+<p>Many software routines won’t require us to lag our data before prior to the analysis because this is done within the program itself. However, the process to lag our data for a multiple variable VAR model follows directly from the AR code.</p>
+<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb593-1"><a href="16.3-the-n1-var-model.html#cb593-1" tabindex="-1"></a>first           <span class="ot">&lt;-</span> df[<span class="dv">1</span><span class="sc">:</span>(<span class="fu">nrow</span>(df)<span class="sc">-</span><span class="dv">1</span>), ]</span>
+<span id="cb593-2"><a href="16.3-the-n1-var-model.html#cb593-2" tabindex="-1"></a>second          <span class="ot">&lt;-</span> df[<span class="dv">2</span><span class="sc">:</span>(<span class="fu">nrow</span>(df)  ), ]</span>
+<span id="cb593-3"><a href="16.3-the-n1-var-model.html#cb593-3" tabindex="-1"></a>lagged_df       <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(first, second)</span>
+<span id="cb593-4"><a href="16.3-the-n1-var-model.html#cb593-4" tabindex="-1"></a><span class="fu">colnames</span>(lagged_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste0</span>(<span class="fu">colnames</span>(df), <span class="st">&quot;lag&quot;</span>), <span class="fu">colnames</span>(df))</span>
+<span id="cb593-5"><a href="16.3-the-n1-var-model.html#cb593-5" tabindex="-1"></a><span class="fu">head</span>(lagged_df)</span></code></pre></div>
+<pre><code>##   concentratelag fatiguelag concentrate fatigue
+## 1             33         62          31      50
+## 2             31         50          30      36
+## 3             30         36          33      39
+## 4             33         39          34      71
+## 5             34         71          22      47
+## 6             22         47          27      43</code></pre>
+<p>Now, we can use the <code>vars</code> package to fit a VAR(1) model for this single individual.</p>
+<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="16.3-the-n1-var-model.html#cb595-1" tabindex="-1"></a>fit <span class="ot">&lt;-</span> vars<span class="sc">::</span><span class="fu">VAR</span>(df[<span class="fu">complete.cases</span>(df),], <span class="at">p =</span> <span class="dv">1</span>, <span class="at">type =</span> <span class="st">&quot;const&quot;</span>) <span class="co"># p is the lag</span></span>
+<span id="cb595-2"><a href="16.3-the-n1-var-model.html#cb595-2" tabindex="-1"></a><span class="fu">coef</span>(fit)</span></code></pre></div>
+<pre><code>## $concentrate
+##                   Estimate Std. Error    t value     Pr(&gt;|t|)
+## concentrate.l1  0.02448290 0.09686611  0.2527499 8.009375e-01
+## fatigue.l1     -0.01819429 0.08733041 -0.2083386 8.353534e-01
+## const          38.00889080 4.87657767  7.7941732 4.109929e-12
+## 
+## $fatigue
+##                  Estimate Std. Error  t value     Pr(&gt;|t|)
+## concentrate.l1  0.1142125 0.09895499 1.154186 0.2509481959
+## fatigue.l1      0.3522671 0.08921366 3.948579 0.0001396888
+## const          19.2844903 4.98173908 3.871036 0.0001850659</code></pre>
+<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="16.3-the-n1-var-model.html#cb597-1" tabindex="-1"></a>transition_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>,<span class="fu">lapply</span>(<span class="fu">seq_along</span>(<span class="fu">colnames</span>(df)), <span class="cf">function</span>(x) {</span>
+<span id="cb597-2"><a href="16.3-the-n1-var-model.html#cb597-2" tabindex="-1"></a>  fit<span class="sc">$</span>varresult[[x]]<span class="sc">$</span>coefficients</span>
+<span id="cb597-3"><a href="16.3-the-n1-var-model.html#cb597-3" tabindex="-1"></a>})))</span>
+<span id="cb597-4"><a href="16.3-the-n1-var-model.html#cb597-4" tabindex="-1"></a><span class="fu">rownames</span>(transition_mat) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(df)</span>
+<span id="cb597-5"><a href="16.3-the-n1-var-model.html#cb597-5" tabindex="-1"></a>transition_mat</span></code></pre></div>
+<pre><code>##             concentrate.l1  fatigue.l1    const
+## concentrate      0.0244829 -0.01819429 38.00889
+## fatigue          0.1142125  0.35226713 19.28449</code></pre>
 </div>
-<div id="interpretation-6" class="section level3 hasAnchor" number="14.7.3">
-<h3><span class="header-section-number">14.7.3</span> Interpretation<a href="14.7-exponential-growth-cortisol.html#interpretation-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Fitted to our example data, we articulate a theory wherein individuals enter the testing situation at some baseline level of cortisol (which on average is given by mean of <span class="math inline">\(beta_{0}\)</span>, <span class="math inline">\(17.2\)</span>, plus the mean of <span class="math inline">\(\beta_{1}\)</span>, <span class="math inline">\(-13.7\)</span>, which equals <span class="math inline">\(3.5\)</span>).</p>
-<p>After beginning the simulator cortisol levels are driven at the exponential rate of <span class="math inline">\(\alpha=4.1\)</span> to some personal limit or asymptote (with the average limit being <span class="math inline">\(17.2\)</span>).</p>
+<div id="stationarity-and-non-stationarity" class="section level3 hasAnchor" number="16.3.2">
+<h3><span class="header-section-number">16.3.2</span> Stationarity and Non-Stationarity<a href="16.3-the-n1-var-model.html#stationarity-and-non-stationarity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Consider a multivariate time series, <span class="math inline">\(\{\mathbf{X}_{t}\}_{t \in \mathbb{Z}} = \{(X_{j,t})_{j=1,\dots,d}\}\)</span>, that follows a vector autoregressive model of order <span class="math inline">\(p\)</span>,
+<span class="math display">\[
+\label{varp1}
+\mathbf{X}_{t} =
+  \boldsymbol{\Phi}_{1} \mathbf{X}_{t-1} +
+  \ldots +
+  \boldsymbol{\Phi}_{p} \mathbf{X}_{t-p} +
+  \boldsymbol{\varepsilon}_{t}, \quad t \in \mathbb{Z}.
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\boldsymbol{\Phi}_{1}, \dots, \boldsymbol{\Phi}_{p}\)</span> are <span class="math inline">\(d \times d\)</span> transition matrices.</li>
+<li><span class="math inline">\(\boldsymbol{\varepsilon}_{t}\)</span> is a white noise series, <span class="math inline">\(\{\boldsymbol{\varepsilon}_{t}\}_{t \in \mathbb{Z}} \sim \text{WN}(\mathbf{0}, \boldsymbol{\Sigma}_{\boldsymbol{\varepsilon}})\)</span> with <span class="math inline">\(\mathbb{E}(\boldsymbol{\varepsilon}_{t})=0\)</span>, <span class="math inline">\(\mathbb{E}(\boldsymbol{\varepsilon}_{t}\boldsymbol{\varepsilon}_{s}^{&#39;})=0\)</span> for <span class="math inline">\(s \neq t\)</span>.</li>
+<li>For simplicity we assume <span class="math inline">\(\mathbf{X}_{t}\)</span> is of zero mean and <span class="math inline">\(\eqref{varp1}\)</span> satisfies the stability conditions discussed earlier.</li>
+</ul>
+<p>As we showed earlier it is common to estimate <span class="math inline">\(\eqref{varp1}\)</span> using ordinary least-squares (OLS) regression,
+<span class="math display">\[
+(\widehat{\boldsymbol{\Phi}}_1,\ldots,\widehat{\boldsymbol{\Phi}}_p) = \argmin_{\boldsymbol{\Phi}_1,\ldots,\boldsymbol{\Phi}_p} \sum_{t=p+1}^T  \| \mathbf{X}_t - \boldsymbol{\Phi}_1 \mathbf{X}_{t-1} - \ldots - \boldsymbol{\Phi}_p \mathbf{X}_{t-p}\|_{2}^2.
+\]</span>
+where a unique stationary solution can be found when the eigenvalues of <span class="math inline">\(\boldsymbol{\Phi}\)</span> are smaller than one in absolute value.</p>
+<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb599-1"><a href="16.3-the-n1-var-model.html#cb599-1" tabindex="-1"></a>non_stationary_AR <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb599-2"><a href="16.3-the-n1-var-model.html#cb599-2" tabindex="-1"></a>stationary_AR     <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(.<span class="dv">1</span>,.<span class="dv">2</span>,.<span class="dv">3</span>,.<span class="dv">4</span>), <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb599-3"><a href="16.3-the-n1-var-model.html#cb599-3" tabindex="-1"></a></span>
+<span id="cb599-4"><a href="16.3-the-n1-var-model.html#cb599-4" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">abs</span>(<span class="fu">eigen</span>(non_stationary_AR)<span class="sc">$</span>values)) <span class="sc">&lt;</span> <span class="dv">1</span></span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb601-1"><a href="16.3-the-n1-var-model.html#cb601-1" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">abs</span>(<span class="fu">eigen</span>(stationary_AR)<span class="sc">$</span>values)) <span class="sc">&lt;</span> <span class="dv">1</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Perhaps more importantly, what do stationary and non-stationary series look like? Here are some simplistic examples</p>
+<div class="float">
+<img src="imgs/nonstation.jpg" alt="Examples of (Non)-Stationarity" />
+<div class="figcaption">Examples of (Non)-Stationarity</div>
 </div>
-<div id="nonlinear-or-linear-model-1" class="section level3 hasAnchor" number="14.7.4">
-<h3><span class="header-section-number">14.7.4</span> Nonlinear or Linear Model?<a href="14.7-exponential-growth-cortisol.html#nonlinear-or-linear-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>What about the exponential model. Here is is why a exponential model is formally a <em>nonlinear model</em></p>
-<p><span class="math display">\[\begin{align}
-y_{ti}  = &amp; \beta_{0i} + \beta_{1i}(1-e^{-\alpha\text{time}}) + e_{ti}
-\end{align}\]</span></p>
-<p>If we take derivatives of <span class="math inline">\(y\)</span> with respect to parameters <span class="math inline">\(\beta_{0i}, \beta_{1i}, \alpha\)</span> we get</p>
-<p><span class="math display">\[\begin{align}
-\frac{\partial y}{\partial \beta_{0}} = &amp; 1 \\
-\frac{\partial y}{\partial \beta_{1}} = &amp; (1-e^{-\alpha\text{time}}) \\
-\frac{\partial y}{\partial \alpha} = &amp; \beta_{1} \text{time}(1-e^{-\alpha\text{time}})
-\end{align}\]</span></p>
-<p>The derivatives depend on non-constant (or estimated coefficients). This model is multiplicative nonlinear it its parameters. A nonlinear model that produces a nonlinear trajectory.</p>
+</div>
+<div id="a-note-on-path-diagrams" class="section level3 hasAnchor" number="16.3.3">
+<h3><span class="header-section-number">16.3.3</span> A Note on path Diagrams<a href="16.3-the-n1-var-model.html#a-note-on-path-diagrams" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Both examples below represent bivariate VAR(1) models. It is important to be comfortable with both representations as they are each commonly presented in the literature. Note the two diagrams primarily difer in how they represent the autorgressive and cross-regressive effects. In Path Diagram 1, both are illustrated using directed arrows. In Path Diagram 2, autoregressive paths are indicated by directed self-loops, while cross-regressive paths are indicated by directed arrows.</p>
+<div class="float">
+<img src="imgs/path_var.jpg" alt="Alternative Path Diagram 1" />
+<div class="figcaption">Alternative Path Diagram 1</div>
+</div>
+<div class="float">
+<img src="imgs/var_path2.jpg" alt="Alternative Path Diagram 2" />
+<div class="figcaption">Alternative Path Diagram 2</div>
+</div>
+<p>Note that Path Diagram 1 does not include information about the means (intercepts), which is indicated by the triangles in Path Diagram 2. Likewise, Path Diagram 2 does not include a visual depiction of the errors, indicated by <span class="math inline">\(z_{1}\)</span> and <span class="math inline">\(z_{2}\)</span> in Path Diagram 1.</p>
 </div>
 </div>
             </section>
@@ -866,8 +842,8 @@ y_{ti}  = &amp; \beta_{0i} + \beta_{1i}(1-e^{-\alpha\text{time}}) + e_{ti}
           </div>
         </div>
       </div>
-<a href="14.6-latent-basis-cortisol.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="14.8-multiphase-growth-cortisol.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="16.2-the-n1-ar-model.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="16.4-introducing-the-multi-level-var.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -888,7 +864,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/zackfisher/HDFS523/edit/master/14_nonlinear_growth_curves.Rmd",
+"link": "https://github.com/zackfisher/HDFS523/edit/master/17_multivariate_var.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

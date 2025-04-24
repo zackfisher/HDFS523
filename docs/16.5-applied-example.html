@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>14.7 Exponential Growth (Cortisol) | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
+  <title>16.5 Applied Example | HDFS 523: Strategies for Data Analysis in Developmental Research</title>
   <meta name="description" content="Course notes for HDFS 523" />
   <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="14.7 Exponential Growth (Cortisol) | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta property="og:title" content="16.5 Applied Example | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for HDFS 523" />
   <meta name="github-repo" content="zackfisher/HDFS523" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="14.7 Exponential Growth (Cortisol) | HDFS 523: Strategies for Data Analysis in Developmental Research" />
+  <meta name="twitter:title" content="16.5 Applied Example | HDFS 523: Strategies for Data Analysis in Developmental Research" />
   
   <meta name="twitter:description" content="Course notes for HDFS 523" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="14.6-latent-basis-cortisol.html"/>
-<link rel="next" href="14.8-multiphase-growth-cortisol.html"/>
+<link rel="prev" href="16.4-introducing-the-multi-level-var.html"/>
+<link rel="next" href="16.6-reference-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -717,148 +717,199 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exponential-growth-cortisol" class="section level2 hasAnchor" number="14.7">
-<h2><span class="header-section-number">14.7</span> Exponential Growth (Cortisol)<a href="14.7-exponential-growth-cortisol.html#exponential-growth-cortisol" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Now let’s consider a model that is nonlinear in the parameters (Type II), the exponential growth model. This is a nonlinear model that also produces a nonlinear trajectory.</p>
-<p><span class="math display">\[\begin{align}
-y_{ti}  = &amp; \beta_{0i} + \beta_{1i}(1-e^{-\alpha\text{time}}) + e_{ti}, &amp; e_{ti} \sim \mathcal{N}(0,\sigma^{2}_{e}) &amp;&amp; \: [\text{Level 1}] \\
-\beta_{0i}  = &amp; \gamma_{00} + u_{0i}, &amp; u_{0i} \sim \mathcal{N}(0,\sigma^{2}_{u0}) &amp;&amp; \: [\text{Level 2}] \\
-\beta_{1i}  = &amp; \gamma_{10} + u_{1i}, &amp; u_{1i} \sim \mathcal{N}(0,\sigma^{2}_{u1}) &amp;&amp; \:  \\
-y_{ti}  = &amp; \gamma_{00} + \gamma_{10}\text{time} + u_{0i} + u_{1i}\text{time} + e_{ti}, &amp;  &amp;&amp; \: [\text{Combined}]
-\end{align}\]</span></p>
-<p>where</p>
-<p><span class="math display">\[\begin{align}
-\text{time} = &amp; \{0/8, 1/8, 2/8, 3/8, 4/8, 5/8, 6/8, 7/8, 8/8\}\\
-= &amp; \{0.000, 0.125, 0.250, 0.375, 0.500, 0.625, 0.750, 0.875, 1.000\}
-\end{align}\]</span></p>
-<p>and</p>
+<div id="applied-example" class="section level2 hasAnchor" number="16.5">
+<h2><span class="header-section-number">16.5</span> Applied Example<a href="16.5-applied-example.html#applied-example" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="loading-data" class="section level3 hasAnchor" number="16.5.1">
+<h3><span class="header-section-number">16.5.1</span> Loading Data<a href="16.5-applied-example.html#loading-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For the multi-level VAR example we will use the AMIB data available on the QuantDev server. Here, subjects provided self-report data eight times per day, for 21 days, on average. Variable included in the dataset are listed below.</p>
 <ul>
-<li><span class="math inline">\(y_{ti}\)</span> is the repeated measures score for individual <span class="math inline">\(i\)</span> at time <span class="math inline">\(t\)</span></li>
-<li><span class="math inline">\(\beta_{0i}\)</span> is the random intercept for individual <span class="math inline">\(i\)</span>
-<ul>
-<li>individual <span class="math inline">\(i\)</span>’s asymptotic level or the limit of individual capacity for cortisol</li>
-<li>note in this model, the intercept represents individual performance toward the end of observation period</li>
-</ul></li>
-<li><span class="math inline">\(\beta_{1i}\)</span> is the amount of change from the intercept to the asymptotic level for individual <span class="math inline">\(i\)</span>
-<ul>
-<li><span class="math inline">\(\beta_{1i}\)</span> represents an individual’s potential for change from his or her initial level</li>
-</ul></li>
-<li><span class="math inline">\(\beta_{0i}+\beta_{1i}\)</span> represents the baseline level for individual <span class="math inline">\(i\)</span></li>
-<li><span class="math inline">\(\alpha\)</span> is an estimated parameter that represents the rate of approach to the asymptotic level</li>
-<li><span class="math inline">\(\text{time}\)</span> represents the measurement occasion</li>
-<li><span class="math inline">\(e_{it}\)</span> is the time-specific residual score</li>
-<li><span class="math inline">\(\gamma_{00}\)</span> is the fixed-effect for the intercept</li>
-<li><span class="math inline">\(\gamma_{10}\)</span> is the fixed-effect for the rate of change</li>
-<li><span class="math inline">\(u_{0i}\)</span> is individual <span class="math inline">\(i\)</span>’s deviation from the intercept fixed effect</li>
-<li><span class="math inline">\(u_{1i}\)</span> is individual <span class="math inline">\(i\)</span>’s deviation from the shape fixed effect</li>
+<li><code>id</code>: person index</li>
+<li><code>day</code>: time indices (1-21)</li>
+<li><code>interaction</code>: (1-168)</li>
+<li><code>igaff</code>: interpersonal affection</li>
+<li><code>igdom</code>: interpersonal dominance</li>
+<li><code>agval</code>: affect valence</li>
+<li><code>agarous</code>: affect arousal</li>
+<li><code>stress</code>: stress</li>
+<li><code>health</code>: self-reported health[reverse coded]</li>
 </ul>
-<div id="fit-model-3" class="section level3 hasAnchor" number="14.7.1">
-<h3><span class="header-section-number">14.7.1</span> Fit Model<a href="14.7-exponential-growth-cortisol.html#fit-model-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="14.7-exponential-growth-cortisol.html#cb508-1" tabindex="-1"></a><span class="co"># cort_expo &lt;- nlme(</span></span>
-<span id="cb508-2"><a href="14.7-exponential-growth-cortisol.html#cb508-2" tabindex="-1"></a><span class="co">#   cort ~ (gamma_00 + u_0i) + (gamma_10 + u_1i)*(exp(-1*alpha*timescaled)),</span></span>
-<span id="cb508-3"><a href="14.7-exponential-growth-cortisol.html#cb508-3" tabindex="-1"></a><span class="co">#   fixed = gamma_00 + gamma_10 + alpha ~1,</span></span>
-<span id="cb508-4"><a href="14.7-exponential-growth-cortisol.html#cb508-4" tabindex="-1"></a><span class="co">#   random = u_0i + u_1i~1,</span></span>
-<span id="cb508-5"><a href="14.7-exponential-growth-cortisol.html#cb508-5" tabindex="-1"></a><span class="co">#   group = ~id,</span></span>
-<span id="cb508-6"><a href="14.7-exponential-growth-cortisol.html#cb508-6" tabindex="-1"></a><span class="co">#   start = c(gamma_00=17, gamma_10=-14, alpha=0.5), </span></span>
-<span id="cb508-7"><a href="14.7-exponential-growth-cortisol.html#cb508-7" tabindex="-1"></a><span class="co">#   data = cortisol_long,</span></span>
-<span id="cb508-8"><a href="14.7-exponential-growth-cortisol.html#cb508-8" tabindex="-1"></a><span class="co">#   na.action = &quot;na.exclude&quot;,</span></span>
-<span id="cb508-9"><a href="14.7-exponential-growth-cortisol.html#cb508-9" tabindex="-1"></a><span class="co">#   control = lmeControl(maxIter = 1e8, msMaxIter = 1e8)</span></span>
-<span id="cb508-10"><a href="14.7-exponential-growth-cortisol.html#cb508-10" tabindex="-1"></a><span class="co"># )</span></span>
-<span id="cb508-11"><a href="14.7-exponential-growth-cortisol.html#cb508-11" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb508-12"><a href="14.7-exponential-growth-cortisol.html#cb508-12" tabindex="-1"></a><span class="co"># summary(cort_expo)  </span></span>
-<span id="cb508-13"><a href="14.7-exponential-growth-cortisol.html#cb508-13" tabindex="-1"></a><span class="co"># VarCorr(cort_expo)</span></span>
-<span id="cb508-14"><a href="14.7-exponential-growth-cortisol.html#cb508-14" tabindex="-1"></a></span>
-<span id="cb508-15"><a href="14.7-exponential-growth-cortisol.html#cb508-15" tabindex="-1"></a>cort_expo <span class="ot">&lt;-</span> <span class="fu">nlme</span>(</span>
-<span id="cb508-16"><a href="14.7-exponential-growth-cortisol.html#cb508-16" tabindex="-1"></a>  cort <span class="sc">~</span> (gamma_00) <span class="sc">+</span> (gamma_10)<span class="sc">*</span>(<span class="fu">exp</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">*</span>alpha<span class="sc">*</span>timescaled)),</span>
-<span id="cb508-17"><a href="14.7-exponential-growth-cortisol.html#cb508-17" tabindex="-1"></a>  <span class="at">fixed =</span> gamma_00 <span class="sc">+</span> gamma_10 <span class="sc">+</span> alpha <span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb508-18"><a href="14.7-exponential-growth-cortisol.html#cb508-18" tabindex="-1"></a>  <span class="at">random =</span> gamma_00 <span class="sc">+</span> gamma_10<span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb508-19"><a href="14.7-exponential-growth-cortisol.html#cb508-19" tabindex="-1"></a>  <span class="at">group =</span> <span class="sc">~</span>id,</span>
-<span id="cb508-20"><a href="14.7-exponential-growth-cortisol.html#cb508-20" tabindex="-1"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="at">gamma_00=</span><span class="dv">17</span>, <span class="at">gamma_10=</span><span class="sc">-</span><span class="dv">14</span>, <span class="at">alpha=</span><span class="fl">0.5</span>), </span>
-<span id="cb508-21"><a href="14.7-exponential-growth-cortisol.html#cb508-21" tabindex="-1"></a>  <span class="at">data =</span> cortisol_long,</span>
-<span id="cb508-22"><a href="14.7-exponential-growth-cortisol.html#cb508-22" tabindex="-1"></a>  <span class="at">na.action =</span> <span class="st">&quot;na.exclude&quot;</span>,</span>
-<span id="cb508-23"><a href="14.7-exponential-growth-cortisol.html#cb508-23" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmeControl</span>(<span class="at">maxIter =</span> <span class="fl">1e8</span>, <span class="at">msMaxIter =</span> <span class="fl">1e8</span>)</span>
-<span id="cb508-24"><a href="14.7-exponential-growth-cortisol.html#cb508-24" tabindex="-1"></a>)</span></code></pre></div>
-<pre><code>## Warning in nlme.formula(cort ~ (gamma_00) + (gamma_10) * (exp(-1 * alpha * :
-## Iteration 4, LME step: nlminb() did not converge (code = 1). PORT message:
-## function evaluation limit reached without convergence (9)</code></pre>
-<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="14.7-exponential-growth-cortisol.html#cb510-1" tabindex="-1"></a><span class="fu">summary</span>(cort_expo)  </span></code></pre></div>
-<pre><code>## Nonlinear mixed-effects model fit by maximum likelihood
-##   Model: cort ~ (gamma_00) + (gamma_10) * (exp(-1 * alpha * timescaled)) 
-##   Data: cortisol_long 
-##        AIC      BIC    logLik
-##   1730.241 1756.306 -858.1203
+<p>Let’s take a look at the <em>health</em>,<em>stress</em>, <em>affect valence</em> and <em>interpersonal affection</em> variables.</p>
+<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb603-1"><a href="16.5-applied-example.html#cb603-1" tabindex="-1"></a>filepath <span class="ot">&lt;-</span> <span class="st">&quot;https://quantdev.ssri.psu.edu/sites/qdev/files/AMIBshare_phase2_interaction_2019_0501.csv&quot;</span></span>
+<span id="cb603-2"><a href="16.5-applied-example.html#cb603-2" tabindex="-1"></a><span class="co">#read in the .csv file using the url() function</span></span>
+<span id="cb603-3"><a href="16.5-applied-example.html#cb603-3" tabindex="-1"></a>AMIB_interactionP2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file=</span><span class="fu">url</span>(filepath),<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb603-4"><a href="16.5-applied-example.html#cb603-4" tabindex="-1"></a></span>
+<span id="cb603-5"><a href="16.5-applied-example.html#cb603-5" tabindex="-1"></a><span class="co">#subsetting to vaiables of interest</span></span>
+<span id="cb603-6"><a href="16.5-applied-example.html#cb603-6" tabindex="-1"></a>AMIB_interactionP2 <span class="ot">&lt;-</span> AMIB_interactionP2[ ,<span class="fu">c</span>(<span class="st">&quot;id&quot;</span>,<span class="st">&quot;day&quot;</span>,<span class="st">&quot;health&quot;</span>,<span class="st">&quot;interaction&quot;</span>,</span>
+<span id="cb603-7"><a href="16.5-applied-example.html#cb603-7" tabindex="-1"></a>                                             <span class="st">&quot;igaff&quot;</span>,<span class="st">&quot;stress&quot;</span>,<span class="st">&quot;agval&quot;</span>)]</span>
+<span id="cb603-8"><a href="16.5-applied-example.html#cb603-8" tabindex="-1"></a><span class="fu">describe</span>(AMIB_interactionP2)</span></code></pre></div>
+<pre><code>##             vars    n   mean    sd median trimmed    mad min max range  skew
+## id             1 4200 310.36 77.12    321  308.40 121.57 203 439   236  0.07
+## day            2 4200  10.57  5.99     10   10.50   7.41   1  21    20  0.09
+## health         3 4192   1.08  1.17      1    0.93   1.48   0   5     5  0.88
+## interaction    4 4200  73.88 45.18     71   72.32  54.86   1 168   167  0.23
+## igaff          5 4190   7.39  1.78      8    7.69   1.48   1   9     8 -1.43
+## stress         6 4191   1.22  1.38      1    1.02   1.48   0   5     5  0.97
+## agval          7 4189   6.80  2.09      7    7.08   2.22   1   9     8 -0.93
+##             kurtosis   se
+## id             -1.21 1.19
+## day            -1.16 0.09
+## health          0.00 0.02
+## interaction    -1.00 0.70
+## igaff           2.01 0.03
+## stress          0.02 0.02
+## agval           0.13 0.03</code></pre>
+<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb605-1"><a href="16.5-applied-example.html#cb605-1" tabindex="-1"></a><span class="co">#plotting intraindividual change </span></span>
+<span id="cb605-2"><a href="16.5-applied-example.html#cb605-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> AMIB_interactionP2,</span>
+<span id="cb605-3"><a href="16.5-applied-example.html#cb605-3" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> interaction, <span class="at">group=</span> id)) <span class="sc">+</span></span>
+<span id="cb605-4"><a href="16.5-applied-example.html#cb605-4" tabindex="-1"></a>  <span class="co">#first variable</span></span>
+<span id="cb605-5"><a href="16.5-applied-example.html#cb605-5" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>igaff), <span class="at">color=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb605-6"><a href="16.5-applied-example.html#cb605-6" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>agval), <span class="at">color=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb605-7"><a href="16.5-applied-example.html#cb605-7" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>health), <span class="at">color=</span><span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb605-8"><a href="16.5-applied-example.html#cb605-8" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>stress), <span class="at">color=</span><span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb605-9"><a href="16.5-applied-example.html#cb605-9" tabindex="-1"></a>  <span class="co">#plot layouts</span></span>
+<span id="cb605-10"><a href="16.5-applied-example.html#cb605-10" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name=</span><span class="st">&quot;Interaction#&quot;</span>) <span class="sc">+</span></span>
+<span id="cb605-11"><a href="16.5-applied-example.html#cb605-11" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name=</span><span class="st">&quot;Raw Values&quot;</span>) <span class="sc">+</span>  </span>
+<span id="cb605-12"><a href="16.5-applied-example.html#cb605-12" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb605-13"><a href="16.5-applied-example.html#cb605-13" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>),</span>
+<span id="cb605-14"><a href="16.5-applied-example.html#cb605-14" tabindex="-1"></a>        <span class="at">axis.text=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>),</span>
+<span id="cb605-15"><a href="16.5-applied-example.html#cb605-15" tabindex="-1"></a>        <span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>, <span class="at">hjust=</span>.<span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb605-16"><a href="16.5-applied-example.html#cb605-16" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>id, <span class="at">ncol=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb605-17"><a href="16.5-applied-example.html#cb605-17" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;AMIB Phase 2 Data (6 vars)&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-352-1.png" width="672" /></p>
+<p>Now, let’s fit our model in the <code>mlVAR</code> package as follows:</p>
+<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="16.5-applied-example.html#cb606-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;mlVAR&quot;</span>)</span>
+<span id="cb606-2"><a href="16.5-applied-example.html#cb606-2" tabindex="-1"></a></span>
+<span id="cb606-3"><a href="16.5-applied-example.html#cb606-3" tabindex="-1"></a>mlvar_all <span class="ot">&lt;-</span> <span class="fu">mlVAR</span>(</span>
+<span id="cb606-4"><a href="16.5-applied-example.html#cb606-4" tabindex="-1"></a>  <span class="at">data =</span> AMIB_interactionP2, </span>
+<span id="cb606-5"><a href="16.5-applied-example.html#cb606-5" tabindex="-1"></a>  <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">&quot;igaff&quot;</span>,  <span class="st">&quot;stress&quot;</span>, <span class="st">&quot;agval&quot;</span>, <span class="st">&quot;health&quot;</span>),</span>
+<span id="cb606-6"><a href="16.5-applied-example.html#cb606-6" tabindex="-1"></a>  <span class="at">idvar =</span> <span class="st">&quot;id&quot;</span>,</span>
+<span id="cb606-7"><a href="16.5-applied-example.html#cb606-7" tabindex="-1"></a>  <span class="at">lags =</span> <span class="dv">1</span>, </span>
+<span id="cb606-8"><a href="16.5-applied-example.html#cb606-8" tabindex="-1"></a>  <span class="at">dayvar =</span> <span class="st">&quot;day&quot;</span> </span>
+<span id="cb606-9"><a href="16.5-applied-example.html#cb606-9" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## &#39;estimator&#39; argument set to &#39;lmer&#39;</code></pre>
+<pre><code>## &#39;temporal&#39; argument set to &#39;correlated&#39;</code></pre>
+<pre><code>## &#39;contemporaneous&#39; argument set to &#39;correlated&#39;</code></pre>
+<pre><code>## Estimating temporal and between-subjects effects</code></pre>
+<pre><code>##   |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%</code></pre>
+<pre><code>## Estimating contemporaneous effects</code></pre>
+<pre><code>##   |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%</code></pre>
+<pre><code>## Computing random effects</code></pre>
+<pre><code>##   |                                                                              |                                                                      |   0%  |                                                                              |==                                                                    |   3%  |                                                                              |=====                                                                 |   7%  |                                                                              |=======                                                               |  10%  |                                                                              |=========                                                             |  13%  |                                                                              |============                                                          |  17%  |                                                                              |==============                                                        |  20%  |                                                                              |================                                                      |  23%  |                                                                              |===================                                                   |  27%  |                                                                              |=====================                                                 |  30%  |                                                                              |=======================                                               |  33%  |                                                                              |==========================                                            |  37%  |                                                                              |============================                                          |  40%  |                                                                              |==============================                                        |  43%  |                                                                              |=================================                                     |  47%  |                                                                              |===================================                                   |  50%  |                                                                              |=====================================                                 |  53%  |                                                                              |========================================                              |  57%  |                                                                              |==========================================                            |  60%  |                                                                              |============================================                          |  63%  |                                                                              |===============================================                       |  67%  |                                                                              |=================================================                     |  70%  |                                                                              |===================================================                   |  73%  |                                                                              |======================================================                |  77%  |                                                                              |========================================================              |  80%  |                                                                              |==========================================================            |  83%  |                                                                              |=============================================================         |  87%  |                                                                              |===============================================================       |  90%  |                                                                              |=================================================================     |  93%  |                                                                              |====================================================================  |  97%  |                                                                              |======================================================================| 100%</code></pre>
+<p>Note, the <code>dayvar</code> argument is simply used to ensure the first measurement of a day is not regressed on the last measurement of the previous day. This argument should only be included in your model if there are multiple observations per day.</p>
+<p>Let’s take a look at our results:</p>
+<div class="sourceCode" id="cb616"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb616-1"><a href="16.5-applied-example.html#cb616-1" tabindex="-1"></a><span class="fu">summary</span>(mlvar_all)</span></code></pre></div>
+<pre><code>## 
+## mlVAR estimation completed. Input was:
+##      - Variables: igaff stress agval health 
+##      - Lags: 1 
+##      - Estimator: lmer 
+##      - Temporal: correlated
 ## 
-## Random effects:
-##  Formula: list(gamma_00 ~ 1, gamma_10 ~ 1)
-##  Level: id
-##  Structure: General positive-definite, Log-Cholesky parametrization
-##          StdDev   Corr  
-## gamma_00 3.671940 gmm_00
-## gamma_10 3.984773 -1    
-## Residual 3.594813       
+## Information indices:
+##     var      aic      bic
+##   igaff 9535.038 9683.264
+##  stress 6582.570 6730.796
+##   agval 8787.170 8935.397
+##  health 5750.630 5898.856
 ## 
-## Fixed effects:  gamma_00 + gamma_10 + alpha ~ 1 
-##               Value Std.Error  DF   t-value p-value
-## gamma_00  17.202377 0.7688426 270  22.37438       0
-## gamma_10 -13.735027 0.9550594 270 -14.38133       0
-## alpha      4.110241 0.4853610 270   8.46842       0
-##  Correlation: 
-##          gmm_00 gmm_10
-## gamma_10 -0.788       
-## alpha    -0.442  0.077
 ## 
-## Standardized Within-Group Residuals:
-##         Min          Q1         Med          Q3         Max 
-## -2.06791703 -0.69558253 -0.03451498  0.60588520  2.72990814 
+## Temporal effects:
+##    from     to lag  fixed    SE     P ran_SD
+##   igaff  igaff   1  0.047 0.026 0.069  0.087
+##   igaff stress   1  0.024 0.020 0.239  0.077
+##   igaff  agval   1 -0.018 0.018 0.304  0.021
+##   igaff health   1  0.029 0.011 0.009  0.008
+##  stress  igaff   1 -0.078 0.023 0.001  0.032
+##  stress stress   1  0.641 0.042 0.000  0.209
+##  stress  agval   1 -0.174 0.031 0.000  0.124
+##  stress health   1  0.056 0.016 0.001  0.050
+##   agval  igaff   1 -0.013 0.025 0.595  0.063
+##   agval stress   1  0.027 0.016 0.103  0.036
+##   agval  agval   1  0.140 0.033 0.000  0.133
+##   agval health   1  0.005 0.014 0.705  0.025
+##  health  igaff   1 -0.008 0.030 0.793  0.106
+##  health stress   1  0.073 0.020 0.000  0.069
+##  health  agval   1 -0.053 0.026 0.040  0.088
+##  health health   1  0.653 0.038 0.000  0.186
 ## 
-## Number of Observations: 306
-## Number of Groups: 34</code></pre>
-<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="14.7-exponential-growth-cortisol.html#cb512-1" tabindex="-1"></a><span class="fu">VarCorr</span>(cort_expo)</span></code></pre></div>
-<pre><code>## id = pdLogChol(list(gamma_00 ~ 1,gamma_10 ~ 1)) 
-##          Variance StdDev   Corr  
-## gamma_00 13.48314 3.671940 gmm_00
-## gamma_10 15.87841 3.984773 -1    
-## Residual 12.92268 3.594813</code></pre>
+## 
+## Contemporaneous effects (posthoc estimated):
+##      v1     v2 P 1-&gt;2 P 1&lt;-2   pcor ran_SD_pcor    cor ran_SD_cor
+##  stress  igaff  0.022  0.129 -0.054       0.082 -0.250      0.142
+##   agval  igaff  0.000  0.000  0.413       0.154  0.470      0.153
+##   agval stress  0.000  0.000 -0.353       0.150 -0.441      0.168
+##  health  igaff  0.855  0.605  0.006       0.005 -0.097      0.115
+##  health stress  0.000  0.001  0.177       0.210  0.244      0.219
+##  health  agval  0.000  0.000 -0.100       0.062 -0.200      0.145
+## 
+## 
+## Between-subject effects:
+##      v1     v2 P 1-&gt;2 P 1&lt;-2   pcor    cor
+##  stress  igaff  0.637  0.215  0.140 -0.418
+##   agval  igaff  0.000  0.000  0.747  0.816
+##   agval stress  0.044  0.168 -0.269 -0.561
+##  health  igaff  0.446  0.454 -0.126 -0.503
+##  health stress  0.000  0.000  0.587  0.717
+##  health  agval  0.624  0.384 -0.115 -0.585</code></pre>
 </div>
-<div id="predicted-trajectories-4" class="section level3 hasAnchor" number="14.7.2">
-<h3><span class="header-section-number">14.7.2</span> Predicted Trajectories<a href="14.7-exponential-growth-cortisol.html#predicted-trajectories-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="14.7-exponential-growth-cortisol.html#cb514-1" tabindex="-1"></a><span class="co">#obtaining predicted scores for individuals</span></span>
-<span id="cb514-2"><a href="14.7-exponential-growth-cortisol.html#cb514-2" tabindex="-1"></a>cortisol_long<span class="sc">$</span>pred_expo <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_expo)</span>
-<span id="cb514-3"><a href="14.7-exponential-growth-cortisol.html#cb514-3" tabindex="-1"></a></span>
-<span id="cb514-4"><a href="14.7-exponential-growth-cortisol.html#cb514-4" tabindex="-1"></a><span class="co">#obtaining predicted scores for prototype</span></span>
-<span id="cb514-5"><a href="14.7-exponential-growth-cortisol.html#cb514-5" tabindex="-1"></a>cortisol_long<span class="sc">$</span>proto_expo <span class="ot">&lt;-</span> <span class="fu">predict</span>(cort_expo, <span class="at">level=</span><span class="dv">0</span>)</span>
-<span id="cb514-6"><a href="14.7-exponential-growth-cortisol.html#cb514-6" tabindex="-1"></a></span>
-<span id="cb514-7"><a href="14.7-exponential-growth-cortisol.html#cb514-7" tabindex="-1"></a></span>
-<span id="cb514-8"><a href="14.7-exponential-growth-cortisol.html#cb514-8" tabindex="-1"></a><span class="co">#plotting predicted trajectories</span></span>
-<span id="cb514-9"><a href="14.7-exponential-growth-cortisol.html#cb514-9" tabindex="-1"></a><span class="co">#intraindividual change trajetories</span></span>
-<span id="cb514-10"><a href="14.7-exponential-growth-cortisol.html#cb514-10" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cortisol_long, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> pred_expo, <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb514-11"><a href="14.7-exponential-growth-cortisol.html#cb514-11" tabindex="-1"></a>  <span class="co">#geom_point(color=&quot;black&quot;) + </span></span>
-<span id="cb514-12"><a href="14.7-exponential-growth-cortisol.html#cb514-12" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb514-13"><a href="14.7-exponential-growth-cortisol.html#cb514-13" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> proto_expo), <span class="at">color=</span><span class="st">&quot;red&quot;</span>,<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb514-14"><a href="14.7-exponential-growth-cortisol.html#cb514-14" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb514-15"><a href="14.7-exponential-growth-cortisol.html#cb514-15" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Cortisol&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb514-16"><a href="14.7-exponential-growth-cortisol.html#cb514-16" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,<span class="at">by=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb514-17"><a href="14.7-exponential-growth-cortisol.html#cb514-17" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-308-1.png" width="672" /></p>
+<div id="temporal-effects" class="section level3 hasAnchor" number="16.5.2">
+<h3><span class="header-section-number">16.5.2</span> Temporal Effects<a href="16.5-applied-example.html#temporal-effects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb618"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb618-1"><a href="16.5-applied-example.html#cb618-1" tabindex="-1"></a>Temporal effects<span class="sc">:</span></span>
+<span id="cb618-2"><a href="16.5-applied-example.html#cb618-2" tabindex="-1"></a>   from     to lag  fixed    SE     P ran_SD</span>
+<span id="cb618-3"><a href="16.5-applied-example.html#cb618-3" tabindex="-1"></a>  igaff  agval   <span class="dv">1</span> <span class="sc">-</span><span class="fl">0.015</span> <span class="fl">0.019</span> <span class="fl">0.432</span>  <span class="fl">0.041</span></span>
+<span id="cb618-4"><a href="16.5-applied-example.html#cb618-4" tabindex="-1"></a>  igaff health   <span class="dv">1</span>  <span class="fl">0.029</span> <span class="fl">0.011</span> <span class="fl">0.009</span>  <span class="fl">0.008</span></span>
+<span id="cb618-5"><a href="16.5-applied-example.html#cb618-5" tabindex="-1"></a> stress  igaff   <span class="dv">1</span> <span class="sc">-</span><span class="fl">0.078</span> <span class="fl">0.023</span> <span class="fl">0.001</span>  <span class="fl">0.032</span></span>
+<span id="cb618-6"><a href="16.5-applied-example.html#cb618-6" tabindex="-1"></a> stress health   <span class="dv">1</span>  <span class="fl">0.056</span> <span class="fl">0.016</span> <span class="fl">0.001</span>  <span class="fl">0.050</span></span>
+<span id="cb618-7"><a href="16.5-applied-example.html#cb618-7" tabindex="-1"></a>  agval stress   <span class="dv">1</span>  <span class="fl">0.027</span> <span class="fl">0.016</span> <span class="fl">0.103</span>  <span class="fl">0.036</span></span>
+<span id="cb618-8"><a href="16.5-applied-example.html#cb618-8" tabindex="-1"></a>  agval  agval   <span class="dv">1</span>  <span class="fl">0.138</span> <span class="fl">0.032</span> <span class="fl">0.000</span>  <span class="fl">0.125</span></span>
+<span id="cb618-9"><a href="16.5-applied-example.html#cb618-9" tabindex="-1"></a>  agval health   <span class="dv">1</span>  <span class="fl">0.005</span> <span class="fl">0.014</span> <span class="fl">0.705</span>  <span class="fl">0.025</span></span></code></pre></div>
+<p>For the prototypical person, only affect valence exhibited an autoregressive effect, meaning affect valence tended to persist over time. In addition, affect valence appears to have a small time-dependent deleterious effect on stress levels and health. Likewise, stress appears to have a deleterious effect on health and interpersonal affection. On the other hand, interpersonal affection tended to have a buffering effect on affect valence and health.</p>
+<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb619-1"><a href="16.5-applied-example.html#cb619-1" tabindex="-1"></a><span class="co"># Plot temporal relations:</span></span>
+<span id="cb619-2"><a href="16.5-applied-example.html#cb619-2" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb619-3"><a href="16.5-applied-example.html#cb619-3" tabindex="-1"></a>  mlvar_all, <span class="st">&quot;temporal&quot;</span>, </span>
+<span id="cb619-4"><a href="16.5-applied-example.html#cb619-4" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Within-person temporal (lag-1) relations&quot;</span>, </span>
+<span id="cb619-5"><a href="16.5-applied-example.html#cb619-5" tabindex="-1"></a>  <span class="at">layout =</span> <span class="st">&quot;circle&quot;</span>, </span>
+<span id="cb619-6"><a href="16.5-applied-example.html#cb619-6" tabindex="-1"></a>  <span class="at">nonsig =</span> <span class="st">&quot;hide&quot;</span></span>
+<span id="cb619-7"><a href="16.5-applied-example.html#cb619-7" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-356-1.png" width="672" /></p>
 </div>
-<div id="interpretation-6" class="section level3 hasAnchor" number="14.7.3">
-<h3><span class="header-section-number">14.7.3</span> Interpretation<a href="14.7-exponential-growth-cortisol.html#interpretation-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Fitted to our example data, we articulate a theory wherein individuals enter the testing situation at some baseline level of cortisol (which on average is given by mean of <span class="math inline">\(beta_{0}\)</span>, <span class="math inline">\(17.2\)</span>, plus the mean of <span class="math inline">\(\beta_{1}\)</span>, <span class="math inline">\(-13.7\)</span>, which equals <span class="math inline">\(3.5\)</span>).</p>
-<p>After beginning the simulator cortisol levels are driven at the exponential rate of <span class="math inline">\(\alpha=4.1\)</span> to some personal limit or asymptote (with the average limit being <span class="math inline">\(17.2\)</span>).</p>
+<div id="contemporaneous-effects" class="section level3 hasAnchor" number="16.5.3">
+<h3><span class="header-section-number">16.5.3</span> Contemporaneous Effects<a href="16.5-applied-example.html#contemporaneous-effects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb620"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb620-1"><a href="16.5-applied-example.html#cb620-1" tabindex="-1"></a>Contemporaneous <span class="fu">effects</span> (posthoc estimated)<span class="sc">:</span></span>
+<span id="cb620-2"><a href="16.5-applied-example.html#cb620-2" tabindex="-1"></a>     v1     v2 P <span class="dv">1</span><span class="ot">-&gt;</span><span class="dv">2</span> P <span class="dv">1</span><span class="ot">&lt;-</span><span class="dv">2</span>   pcor ran_SD_pcor    cor ran_SD_cor</span>
+<span id="cb620-3"><a href="16.5-applied-example.html#cb620-3" tabindex="-1"></a> stress  igaff  <span class="fl">0.022</span>  <span class="fl">0.127</span> <span class="sc">-</span><span class="fl">0.054</span>       <span class="fl">0.081</span> <span class="sc">-</span><span class="fl">0.251</span>      <span class="fl">0.146</span></span>
+<span id="cb620-4"><a href="16.5-applied-example.html#cb620-4" tabindex="-1"></a>  agval  igaff  <span class="fl">0.000</span>  <span class="fl">0.000</span>  <span class="fl">0.413</span>       <span class="fl">0.154</span>  <span class="fl">0.471</span>      <span class="fl">0.154</span></span>
+<span id="cb620-5"><a href="16.5-applied-example.html#cb620-5" tabindex="-1"></a>  agval stress  <span class="fl">0.000</span>  <span class="fl">0.000</span> <span class="sc">-</span><span class="fl">0.353</span>       <span class="fl">0.150</span> <span class="sc">-</span><span class="fl">0.441</span>      <span class="fl">0.169</span></span>
+<span id="cb620-6"><a href="16.5-applied-example.html#cb620-6" tabindex="-1"></a> health  igaff  <span class="fl">0.851</span>  <span class="fl">0.967</span>  <span class="fl">0.002</span>       <span class="fl">0.015</span> <span class="sc">-</span><span class="fl">0.101</span>      <span class="fl">0.122</span></span>
+<span id="cb620-7"><a href="16.5-applied-example.html#cb620-7" tabindex="-1"></a> health stress  <span class="fl">0.000</span>  <span class="fl">0.001</span>  <span class="fl">0.177</span>       <span class="fl">0.210</span>  <span class="fl">0.244</span>      <span class="fl">0.219</span></span>
+<span id="cb620-8"><a href="16.5-applied-example.html#cb620-8" tabindex="-1"></a> health  agval  <span class="fl">0.000</span>  <span class="fl">0.000</span> <span class="sc">-</span><span class="fl">0.098</span>       <span class="fl">0.068</span> <span class="sc">-</span><span class="fl">0.200</span>      <span class="fl">0.145</span></span></code></pre></div>
+<p>For the prototypical person, contemporaneous stress levels and affect valence were negatively correlated, while interpersonal affection and affect valence were positive correlated.</p>
+<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb621-1"><a href="16.5-applied-example.html#cb621-1" tabindex="-1"></a><span class="fu">plot</span>(mlvar_all, </span>
+<span id="cb621-2"><a href="16.5-applied-example.html#cb621-2" tabindex="-1"></a>     <span class="st">&quot;contemporaneous&quot;</span>, </span>
+<span id="cb621-3"><a href="16.5-applied-example.html#cb621-3" tabindex="-1"></a>     <span class="at">title =</span> <span class="st">&quot;Within-person contemporaneous relations&quot;</span>,</span>
+<span id="cb621-4"><a href="16.5-applied-example.html#cb621-4" tabindex="-1"></a>     <span class="at">layout =</span> <span class="st">&quot;circle&quot;</span>, </span>
+<span id="cb621-5"><a href="16.5-applied-example.html#cb621-5" tabindex="-1"></a>     <span class="at">nonsig =</span> <span class="st">&quot;hide&quot;</span></span>
+<span id="cb621-6"><a href="16.5-applied-example.html#cb621-6" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-358-1.png" width="672" /></p>
 </div>
-<div id="nonlinear-or-linear-model-1" class="section level3 hasAnchor" number="14.7.4">
-<h3><span class="header-section-number">14.7.4</span> Nonlinear or Linear Model?<a href="14.7-exponential-growth-cortisol.html#nonlinear-or-linear-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>What about the exponential model. Here is is why a exponential model is formally a <em>nonlinear model</em></p>
-<p><span class="math display">\[\begin{align}
-y_{ti}  = &amp; \beta_{0i} + \beta_{1i}(1-e^{-\alpha\text{time}}) + e_{ti}
-\end{align}\]</span></p>
-<p>If we take derivatives of <span class="math inline">\(y\)</span> with respect to parameters <span class="math inline">\(\beta_{0i}, \beta_{1i}, \alpha\)</span> we get</p>
-<p><span class="math display">\[\begin{align}
-\frac{\partial y}{\partial \beta_{0}} = &amp; 1 \\
-\frac{\partial y}{\partial \beta_{1}} = &amp; (1-e^{-\alpha\text{time}}) \\
-\frac{\partial y}{\partial \alpha} = &amp; \beta_{1} \text{time}(1-e^{-\alpha\text{time}})
-\end{align}\]</span></p>
-<p>The derivatives depend on non-constant (or estimated coefficients). This model is multiplicative nonlinear it its parameters. A nonlinear model that produces a nonlinear trajectory.</p>
+<div id="between-subjects-effects" class="section level3 hasAnchor" number="16.5.4">
+<h3><span class="header-section-number">16.5.4</span> Between-Subjects Effects<a href="16.5-applied-example.html#between-subjects-effects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="16.5-applied-example.html#cb622-1" tabindex="-1"></a>Between<span class="sc">-</span>subject effects<span class="sc">:</span></span>
+<span id="cb622-2"><a href="16.5-applied-example.html#cb622-2" tabindex="-1"></a>     v1     v2 P <span class="dv">1</span><span class="ot">-&gt;</span><span class="dv">2</span> P <span class="dv">1</span><span class="ot">&lt;-</span><span class="dv">2</span>   pcor    cor</span>
+<span id="cb622-3"><a href="16.5-applied-example.html#cb622-3" tabindex="-1"></a> stress  igaff  <span class="fl">0.637</span>  <span class="fl">0.215</span>  <span class="fl">0.140</span> <span class="sc">-</span><span class="fl">0.386</span></span>
+<span id="cb622-4"><a href="16.5-applied-example.html#cb622-4" tabindex="-1"></a>  agval  igaff  <span class="fl">0.000</span>  <span class="fl">0.000</span>  <span class="fl">0.739</span>  <span class="fl">0.804</span></span>
+<span id="cb622-5"><a href="16.5-applied-example.html#cb622-5" tabindex="-1"></a>  agval stress  <span class="fl">0.045</span>  <span class="fl">0.239</span> <span class="sc">-</span><span class="fl">0.251</span> <span class="sc">-</span><span class="fl">0.531</span></span>
+<span id="cb622-6"><a href="16.5-applied-example.html#cb622-6" tabindex="-1"></a> health  igaff  <span class="fl">0.446</span>  <span class="fl">0.454</span> <span class="sc">-</span><span class="fl">0.126</span> <span class="sc">-</span><span class="fl">0.485</span></span>
+<span id="cb622-7"><a href="16.5-applied-example.html#cb622-7" tabindex="-1"></a> health stress  <span class="fl">0.000</span>  <span class="fl">0.000</span>  <span class="fl">0.587</span>  <span class="fl">0.706</span></span>
+<span id="cb622-8"><a href="16.5-applied-example.html#cb622-8" tabindex="-1"></a> health  agval  <span class="fl">0.532</span>  <span class="fl">0.384</span> <span class="sc">-</span><span class="fl">0.123</span> <span class="sc">-</span><span class="fl">0.569</span></span></code></pre></div>
+<div class="sourceCode" id="cb623"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb623-1"><a href="16.5-applied-example.html#cb623-1" tabindex="-1"></a><span class="fu">plot</span>(mlvar_all, </span>
+<span id="cb623-2"><a href="16.5-applied-example.html#cb623-2" tabindex="-1"></a>     <span class="st">&quot;between&quot;</span>, </span>
+<span id="cb623-3"><a href="16.5-applied-example.html#cb623-3" tabindex="-1"></a>     <span class="at">title =</span> <span class="st">&quot;Between-person relations&quot;</span>, </span>
+<span id="cb623-4"><a href="16.5-applied-example.html#cb623-4" tabindex="-1"></a>     <span class="at">layout =</span> <span class="st">&quot;circle&quot;</span>, </span>
+<span id="cb623-5"><a href="16.5-applied-example.html#cb623-5" tabindex="-1"></a>     <span class="at">nonsig =</span> <span class="st">&quot;hide&quot;</span></span>
+<span id="cb623-6"><a href="16.5-applied-example.html#cb623-6" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-360-1.png" width="672" /></p>
+<p>In the between-subjects network, we see a strong relationship between interpersonal affection and affect valence, meaning people who, on average, felt more interpersonal affection felt, on average, more affect valence. In addition we see people who, on average, felt more stressed also felt, on average, less health. Furthermore, we see a small negative between-person association between stress and emotional valence, with those who on average felt more stressed, feeling less emotional valence.</p>
 </div>
 </div>
             </section>
@@ -866,8 +917,8 @@ y_{ti}  = &amp; \beta_{0i} + \beta_{1i}(1-e^{-\alpha\text{time}}) + e_{ti}
           </div>
         </div>
       </div>
-<a href="14.6-latent-basis-cortisol.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="14.8-multiphase-growth-cortisol.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="16.4-introducing-the-multi-level-var.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="16.6-reference-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -888,7 +939,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/zackfisher/HDFS523/edit/master/14_nonlinear_growth_curves.Rmd",
+"link": "https://github.com/zackfisher/HDFS523/edit/master/17_multivariate_var.Rmd",
 "text": "Suggest an edit"
 },
 "history": {
